@@ -21,8 +21,8 @@ export default {
         'walmart-divider': '#E3E4E5',
       },
       fontFamily: {
-        'everyday-sans': ['"Everyday Sans UI"', '-apple-system', 'Roboto', 'Helvetica', 'sans-serif'],
-        'bogle': ['Bogle', '-apple-system', 'Roboto', 'Helvetica', 'sans-serif'],
+        'everyday-sans': ['"Inter"', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', 'Helvetica', 'Arial', 'sans-serif'],
+        'bogle': ['"Inter"', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', 'Helvetica', 'Arial', 'sans-serif'],
       },
       fontSize: {
         'caption': ['12px', { lineHeight: '16px' }],
