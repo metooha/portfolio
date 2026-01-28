@@ -28,9 +28,9 @@ function App() {
   const subscribedPrice = countOptions[selectedCount].subscribedPrice
 
   return (
-    <div className="min-h-screen bg-white font-everyday-sans">
+    <div className="min-h-screen bg-white font-everyday-sans max-w-[480px] mx-auto relative shadow-lg">
       {/* Header */}
-      <header className="bg-walmart-blue text-white shadow-walmart">
+      <header className="bg-walmart-blue text-white shadow-walmart max-w-[480px] mx-auto">
         {/* Status Bar */}
         <div className="h-8 bg-walmart-blue flex items-center justify-between px-8">
           <span className="text-[15px] font-bold">9:41</span>
