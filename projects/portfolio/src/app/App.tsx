@@ -15,9 +15,9 @@ export default function App() {
   return (
     <BrowserRouter>
       <div className="min-h-screen">
-        <div className="w-full h-full py-12 px-4 md:px-[68px]">
+        <div className="w-full min-h-full py-12">
           <Header />
-          <main className="flex-1">
+          <main className="flex-1 w-full max-w-full">
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/case-study" element={<CaseStudy />} />

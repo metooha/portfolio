@@ -35,7 +35,7 @@ const getRandomColor = () => accessibleColors[Math.floor(Math.random() * accessi
 
 export function Home() {
   return (
-    <div className="min-h-screen pt-[0px] pb-[100px] pr-[0px] pl-[0px]">
+    <div className="min-h-screen pt-[0px] pb-[100px] px-4 md:px-[68px]">
       {/* Hero Header */}
       <div className="py-8 mx-[0px] my-[40px] mt-[40px] mr-[0px] mb-[4px] ml-[0px] pt-[0px] pr-[0px] pb-[32px] pl-[0px]">
         <p className="flex flex-wrap items-center gap-3 text-[90px] leading-[1.1] w-full">
@@ -111,77 +111,80 @@ export function Home() {
 
       {/* Case Studies Section */}
       <div className="space-y-16">
-        {/* Case Studies 01 & 02 - Side by Side Row */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* Case Study 01 - WM.com Rebrand */}
+        {/* Case Study 01 - WM.com Rebrand (separate block) */}
+        <div className="w-full">
           {(() => {
             const color1 = getRandomColor();
             const color2 = getRandomColor();
             const color3 = getRandomColor();
             const color4 = getRandomColor();
             return (
-          <Link to="/case-study/1" className="block">
-            <div className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300">
-              <div className="relative aspect-[16/9] group">
-                <img
-                  src={wmNewImage}
-                  alt="WM.com Rebrand"
-                  className="w-full h-full object-cover transition-all duration-300"
-                />
-                <div className="absolute inset-0 bg-green-500 opacity-0 group-hover:opacity-40 transition-opacity duration-300"></div>
-              </div>
-              <div className="bg-[rgb(241,241,241)] p-8 w-full h-full flex flex-col justify-between">
-                <p className="text-xs uppercase tracking-wider mb-2 text-gray-600">CASE STUDY 01</p>
-                <h2 className="text-3xl font-bold mb-2">
-                  WM.com Rebrand: <span className="font-normal">Re-branding WM.com</span>
-                </h2>
-                <p className="text-gray-700 mb-4">
-                  with a new design system and 40+ AEM componentsto support <span className="font-bold">migration of 1000+ localized pages, ecommerce site, marketing, and educational resources </span> in the US, France, and Mexico markets.
-                </p>
-                <div className="flex gap-2">
-                  <span className="px-3 py-1 rounded-full text-xs uppercase tracking-wide" style={{ backgroundColor: color1.bg, color: color1.text }}>WEB</span>
-                  <span className="px-3 py-1 rounded-full text-xs uppercase tracking-wide" style={{ backgroundColor: color2.bg, color: color2.text }}>Mobile App</span>
-                  <span className="px-3 py-1 rounded-full text-xs uppercase tracking-wide" style={{ backgroundColor: color3.bg, color: color3.text }}>Design System</span>
-                  <span className="px-3 py-1 rounded-full text-xs uppercase tracking-wide" style={{ backgroundColor: color4.bg, color: color4.text }}>Branding</span>
+              <Link to="/case-study/1" className="block">
+                <div className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300">
+                  <div className="relative aspect-[16/9] group">
+                    <img
+                      src={wmNewImage}
+                      alt="WM.com Rebrand"
+                      className="w-full h-full object-cover transition-all duration-300"
+                    />
+                    <div className="absolute inset-0 bg-green-500 opacity-0 group-hover:opacity-40 transition-opacity duration-300"></div>
+                  </div>
+                  <div className="bg-[rgb(241,241,241)] p-8 w-full h-full flex flex-col justify-between">
+                    <p className="text-xs uppercase tracking-wider mb-2 text-gray-600">CASE STUDY 01</p>
+                    <h2 className="text-3xl font-bold mb-2">
+                      WM.com Rebrand: <span className="font-normal">Re-branding WM.com</span>
+                    </h2>
+                    <p className="text-gray-700 mb-4">
+                      with a new design system and 40+ AEM componentsto support <span className="font-bold">migration of 1000+ localized pages, ecommerce site, marketing, and educational resources </span> in the US, France, and Mexico markets.
+                    </p>
+                    <div className="flex gap-2">
+                      <span className="px-3 py-1 rounded-full text-xs uppercase tracking-wide" style={{ backgroundColor: color1.bg, color: color1.text }}>WEB</span>
+                      <span className="px-3 py-1 rounded-full text-xs uppercase tracking-wide" style={{ backgroundColor: color2.bg, color: color2.text }}>Mobile App</span>
+                      <span className="px-3 py-1 rounded-full text-xs uppercase tracking-wide" style={{ backgroundColor: color3.bg, color: color3.text }}>Design System</span>
+                      <span className="px-3 py-1 rounded-full text-xs uppercase tracking-wide" style={{ backgroundColor: color4.bg, color: color4.text }}>Branding</span>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-          </Link>
-          )})()}
+              </Link>
+            );
+          })()}
+        </div>
 
-          {/* Case Study 02 - WM Digital Toolkit */}
+        {/* Case Study 02 - WM Digital Toolkit (separate block) */}
+        <div className="w-full">
           {(() => {
             const color1 = getRandomColor();
             const color2 = getRandomColor();
             const color3 = getRandomColor();
             return (
-          <Link to="/case-study/2" className="block">
-            <div className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300">
-              <div className="relative aspect-[16/9] group">
-                <img
-                  src={wmEmailBlocksImage}
-                  alt="WM Digital Toolkit - Email Blocks"
-                  className="w-full h-full object-cover transition-all duration-300"
-                />
-                <div className="absolute inset-0 bg-pink-500 opacity-0 group-hover:opacity-40 transition-opacity duration-300"></div>
-              </div>
-              <div className="bg-[#F1F1F2] p-8">
-                <p className="text-xs uppercase tracking-wider mb-2 text-gray-600">CASE STUDY 02</p>
-                <h2 className="text-3xl font-bold mb-2">
-                  WM Digital Toolkit: <span className="font-normal">Redesigned Waste Management emails </span>
-                </h2>
-                <p className="text-gray-700 mb-4">
-                  With the new branding guidelines, <span className="font-bold">we created a modular system of components</span> to increase engagement, traffic to wm.com, and defined usage of more concise copy to reduce bounce rates.
-                </p>
-                <div className="flex gap-2 mt-4">
-                  <span className="px-3 py-1 rounded-full text-xs uppercase tracking-wide" style={{ backgroundColor: color1.bg, color: color1.text }}>Email Tool Kit</span>
-                  <span className="px-3 py-1 rounded-full text-xs uppercase tracking-wide" style={{ backgroundColor: color2.bg, color: color2.text }}>Branding</span>
-                  <span className="px-3 py-1 rounded-full text-xs uppercase tracking-wide" style={{ backgroundColor: color3.bg, color: color3.text }}>Modular Coded Templates</span>
+              <Link to="/case-study/2" className="block">
+                <div className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300">
+                  <div className="relative aspect-[16/9] group">
+                    <img
+                      src={wmEmailBlocksImage}
+                      alt="WM Digital Toolkit - Email Blocks"
+                      className="w-full h-full object-cover transition-all duration-300"
+                    />
+                    <div className="absolute inset-0 bg-pink-500 opacity-0 group-hover:opacity-40 transition-opacity duration-300"></div>
+                  </div>
+                  <div className="bg-[#F1F1F2] p-8">
+                    <p className="text-xs uppercase tracking-wider mb-2 text-gray-600">CASE STUDY 02</p>
+                    <h2 className="text-3xl font-bold mb-2">
+                      WM Digital Toolkit: <span className="font-normal">Redesigned Waste Management emails </span>
+                    </h2>
+                    <p className="text-gray-700 mb-4">
+                      With the new branding guidelines, <span className="font-bold">we created a modular system of components</span> to increase engagement, traffic to wm.com, and defined usage of more concise copy to reduce bounce rates.
+                    </p>
+                    <div className="flex gap-2 mt-4">
+                      <span className="px-3 py-1 rounded-full text-xs uppercase tracking-wide" style={{ backgroundColor: color1.bg, color: color1.text }}>Email Tool Kit</span>
+                      <span className="px-3 py-1 rounded-full text-xs uppercase tracking-wide" style={{ backgroundColor: color2.bg, color: color2.text }}>Branding</span>
+                      <span className="px-3 py-1 rounded-full text-xs uppercase tracking-wide" style={{ backgroundColor: color3.bg, color: color3.text }}>Modular Coded Templates</span>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-          </Link>
-          )})()}
+              </Link>
+            );
+          })()}
         </div>
 
         {/* Case Study 03 - Xense Biotech */}

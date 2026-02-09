@@ -1,11 +1,12 @@
-import WmDesignSystem2026 from '../../imports/WmDesignSystem2026';
+import WmDesignSystem2026 from "../../imports/WmDesignSystem2026";
 
 export function CaseStudy() {
-  // This component is specifically for Case Study #1 (Waste Management)
-  // It's rendered via the hardcoded route /case-study/1
+  // Case Study #1 (Waste Management) - responsive layout per Figma
   return (
-    <div className="min-h-screen bg-white -mx-4 md:-mx-[68px] -my-12">
-      <WmDesignSystem2026 />
+    <div className="min-h-screen bg-white w-full overflow-x-hidden -my-12">
+      <div className="w-full min-w-0">
+        <WmDesignSystem2026 />
+      </div>
     </div>
   );
 }

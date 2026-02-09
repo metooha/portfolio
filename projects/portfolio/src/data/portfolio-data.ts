@@ -1,3 +1,8 @@
+import hobby1Image from "@/assets/10d0cda067425d00b1609b442126311a8c2ef767.png"
+import hobby2Image from "@/assets/10d0cda067425d00b1609b442126311a8c2ef767.png"
+import hobby5Image from "@/assets/567818549e99611135158f0a0441ebe5b9e55fbc.png"
+import hobby7Image from "@/assets/c159c06a416c7949298dd8b48d728f465f8a4227.png"
+
 export interface CaseStudy {
   id: string;
   title: string;
@@ -203,14 +208,14 @@ export const hobbies: Hobby[] = [
     name: "Countries Visited",
     metric: "32+",
     description: "Countries explored across 6 continents",
-    image: "figma:asset/45ef906eb23a4c2a2f3b0e23ddfad19e1c93a4de.png"
+    image: hobby1Image
   },
   {
     id: "2",
     name: "Distance Ridden",
     metric: "4,345 mi.",
     description: "Mountain biking trails conquered",
-    image: "figma:asset/10d0cda067425d00b1609b442126311a8c2ef767.png"
+    image: hobby2Image
   },
   {
     id: "3",
@@ -231,7 +236,7 @@ export const hobbies: Hobby[] = [
     name: "Wipe Outs",
     metric: "100+",
     description: "Snowboarding crashes survived",
-    image: "figma:asset/567818549e99611135158f0a0441ebe5b9e55fbc.png"
+    image: hobby5Image
   },
   {
     id: "6",
@@ -245,7 +250,7 @@ export const hobbies: Hobby[] = [
     name: "Board Games",
     metric: "32",
     description: "Board games in collection",
-    image: "figma:asset/c159c06a416c7949298dd8b48d728f465f8a4227.png"
+    image: hobby7Image
   },
   {
     id: "8",

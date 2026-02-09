@@ -1,3 +1,5 @@
+import React, { useRef, useState } from "react";
+import { motion } from "motion/react";
 import svgPaths from "./svg-wznnermhqa";
 import imgDesign from "figma:asset/840e6895ac600c62a54c6dbd6cbb35a7f6faa2e0.png";
 import imgRectangle1189 from "figma:asset/e5eea785a9075e6a9a782597f2df6c7e9f7ba229.png";
@@ -14,9 +16,13 @@ import imgFormFields2X1 from "figma:asset/5691cc81eac26fa1c9bc5c2f84aa345d81085f
 import imgButtonsDesktop1X from "figma:asset/c499e23cadaabdca183d8aa30b87f93bbbddcd5c.png";
 import imgFrame1618872760 from "figma:asset/c9423276beed31b68e1be0c284a45ffd1e0089b3.png";
 import imgImage44 from "figma:asset/e9a68d34a7854ac9adc0b232ac95fbd522f56fb1.png";
-import imgScreencaptureWastemanagementAtlassianNetWikiSpacesTdcPages1427669170Sprint12Items202201171359312 from "figma:asset/1543b1584f9a55c881d0df49d6028a48eb6d3dbc.png";
+import imgConfluenceSprint from "@/assets/confluence_2-3fe677da-8b94-4efa-b24e-4b4757270117.png";
+import imgVisualGrid from "@/assets/Visual_Grid-7c6d6221-a0b3-4106-8126-55307f393b4d.png";
 import imgDesignToolKit from "figma:asset/5c2294758c15bcb4844e7e2b628586263ba4f5b3.png";
 import imgScreencaptureWmUsEnBusinessBusinessWasteRecyclingPickup202108181424591 from "figma:asset/ed2ae4141ab5561496c0a6c107ed18d5e102b7dd.png";
+import imgRecyclingTruck from "@/assets/recycling-truck.png";
+import imgJimFish from "@/assets/jim-fish.png";
+import imgRollOffDumpster from "@/assets/roll-off-dumpster.png";
 import imgScreencaptureWmUsEnInsideWmSustainabilityForum202110131155041 from "figma:asset/6bbca4fd1a566acd674aaec181de0fd2fc086952.png";
 import imgScreencaptureWmUsEn202108041502201 from "figma:asset/27952ada7f25975e51134a2f048edb0959107527.png";
 import imgBusinessNew1 from "figma:asset/c2a3fc3ff0661c4fa7b34f0e4bde6261049f911a.png";
@@ -61,14 +67,59 @@ import imgImage111 from "figma:asset/f09a309a527da9a2a05dbe94b77f41b60519965f.pn
 import { imgScreencaptureWastemanagementAtlassianNetWikiSpacesTdcPages1427669170Sprint12Items202201171359311 } from "./svg-bny7f";
 
 function Heading() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [parallax, setParallax] = useState({ x: 0, y: 0 });
+  const PARALLAX_STRENGTH = 12;
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const el = containerRef.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    const x = (e.clientX - centerX) / rect.width;
+    const y = (e.clientY - centerY) / rect.height;
+    setParallax({
+      x: x * PARALLAX_STRENGTH,
+      y: y * PARALLAX_STRENGTH,
+    });
+  };
+
+  const handleMouseLeave = () => setParallax({ x: 0, y: 0 });
+
   return (
-    <div className="h-[870px] relative shrink-0 w-full" data-name="Heading">
-      <div className="flex flex-col items-center justify-center size-full">
-        <div className="content-stretch flex flex-col gap-[10px] isolate items-center justify-center px-[250px] py-[294px] relative size-full">
-          <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[normal] not-italic relative shrink-0 text-[#143526] text-[140px] text-center z-[2]">Waste Management</p>
-          <div className="absolute inset-0 z-[1]" data-name="design">
-            <img alt="" className="block max-w-none size-full" height="870" src={imgDesign} width="1740" />
-          </div>
+    <div
+      ref={containerRef}
+      className="h-[280px] sm:h-[400px] md:h-[560px] lg:h-[670px] xl:h-[870px] relative shrink-0 w-full overflow-hidden"
+      data-name="Heading"
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+    >
+      <div
+        className="absolute inset-0 z-[1] transition-transform duration-300 ease-out"
+        data-name="design"
+        aria-hidden="true"
+        style={{
+          transform: `translate(${parallax.x}px, ${parallax.y}px) scale(1.08)`,
+        }}
+      >
+        <img alt="" className="block w-full h-full min-h-full min-w-full object-cover object-center" src={imgDesign} />
+      </div>
+      <div className="relative z-[2] flex flex-col items-center justify-center size-full pointer-events-none">
+        <div className="content-stretch flex flex-col gap-[10px] isolate items-center justify-center px-4 sm:px-8 md:px-16 lg:px-32 xl:px-[250px] py-12 sm:py-20 md:py-32 lg:py-40 xl:py-[294px] size-full pointer-events-auto">
+          <motion.p
+            className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-tight not-italic relative shrink-0 text-[#143526] text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-[140px] text-center"
+            initial={{ opacity: 0, y: -80 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              type: "spring",
+              stiffness: 180,
+              damping: 14,
+              mass: 0.8,
+            }}
+          >
+            Waste Management
+          </motion.p>
         </div>
       </div>
     </div>
@@ -179,7 +230,7 @@ function SideNavigation() {
 
 function PageNavigation() {
   return (
-    <div className="content-stretch flex flex-col gap-[58px] items-start pl-[68px] pr-[20px] relative shrink-0" data-name="page navigation">
+    <div className="content-stretch flex flex-col gap-[58px] items-start pl-4 sm:pl-6 md:pl-12 lg:pl-[68px] pr-4 sm:pr-5 relative shrink-0 w-full md:w-auto" data-name="page navigation">
       <TextLinkBack />
       <SideNavigation />
     </div>
@@ -213,10 +264,10 @@ function Frame44() {
 
 function PageTitle() {
   return (
-    <div className="content-stretch flex flex-col gap-[36px] items-start relative shrink-0 w-full" data-name="Page Title">
+    <div className="content-stretch flex flex-col gap-6 md:gap-9 items-start relative shrink-0 w-full" data-name="Page Title">
       <Frame44 />
-      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[111px] min-w-full not-italic relative shrink-0 text-[84px] text-black w-[min-content] whitespace-pre-wrap">Designing a scalable system for a digital rebrand</p>
-      <p className="font-['Inter:Regular',sans-serif] font-normal leading-[36px] max-w-[1200px] min-w-full not-italic relative shrink-0 text-[26px] text-black w-[min-content] whitespace-pre-wrap">In 2021, Waste Management launched a company-wide rebrand alongside a broader digital transformation focused on improving customer self-service. I worked with the branding agency and led the systems work behind the rebrand, treating it as an opportunity to establish shared UX infrastructure rather than redesign individual pages.</p>
+      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-tight md:leading-[1.2] not-italic relative shrink-0 text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-[84px] text-black w-full max-w-[1200px]">Designing a scalable system for a digital rebrand</p>
+      <p className="font-['Inter:Regular',sans-serif] font-normal leading-snug md:leading-[36px] max-w-[1200px] not-italic relative shrink-0 text-base sm:text-lg md:text-xl lg:text-2xl xl:text-[26px] text-black w-full">In 2021, Waste Management launched a company-wide rebrand alongside a broader digital transformation focused on improving customer self-service. I worked with the branding agency and led the systems work behind the rebrand, treating it as an opportunity to establish shared UX infrastructure rather than redesign individual pages.</p>
     </div>
   );
 }
@@ -249,8 +300,8 @@ function ValueProp1() {
 
 function Row1() {
   return (
-    <div className="content-stretch flex gap-[141px] items-center relative shrink-0 w-full" data-name="Row 1">
-      <div className="flex flex-[1_0_0] flex-row items-center self-stretch">
+    <div className="content-stretch flex flex-col sm:flex-row gap-6 sm:gap-8 md:gap-12 lg:gap-[141px] items-start sm:items-center relative shrink-0 w-full" data-name="Row 1">
+      <div className="flex flex-1 flex-row items-center self-stretch min-w-0">
         <ValueProp />
       </div>
       <ValueProp1 />
@@ -276,7 +327,7 @@ function MetricsAndLinks() {
 
 function Content() {
   return (
-    <div className="content-stretch flex flex-[1_0_0] flex-col gap-[36px] items-start min-h-px min-w-[1046px] pt-[100px] relative" data-name="content">
+    <div className="content-stretch flex flex-1 flex-col gap-6 md:gap-9 items-start min-h-px min-w-0 w-full max-w-4xl lg:max-w-[1046px] pt-8 md:pt-16 lg:pt-[100px] relative" data-name="content">
       <PageTitle />
       <MetricsAndLinks />
     </div>
@@ -286,7 +337,7 @@ function Content() {
 function ProjectDetails() {
   return (
     <div className="relative shrink-0 w-full" data-name="project details">
-      <div className="content-stretch flex gap-[48px] items-start pr-[280px] relative w-full">
+      <div className="content-stretch flex flex-col lg:flex-row gap-8 lg:gap-12 items-start pr-4 sm:pr-6 md:pr-8 lg:pr-16 xl:pr-[280px] relative w-full">
         <PageNavigation />
         <Content />
       </div>
@@ -296,12 +347,12 @@ function ProjectDetails() {
 
 function Row2() {
   return (
-    <div className="content-stretch flex flex-col h-[576px] items-start relative shrink-0 w-full" data-name="Row 1">
-      <div className="flex-[1_0_0] min-h-px min-w-px relative rounded-[16px] w-full" data-name="Image 1">
-        <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[16px]">
-          <div className="absolute bg-[#2c6740] inset-0 rounded-[16px]" />
-          <div className="absolute inset-0 overflow-hidden rounded-[16px]">
-            <img alt="" className="absolute h-full left-[0.01%] max-w-none top-0 w-[146.5%]" src={imgImage1} />
+    <div className="content-stretch flex flex-col min-h-[240px] sm:min-h-[320px] md:min-h-[400px] lg:min-h-[500px] xl:h-[576px] items-start relative shrink-0 w-full" data-name="Row 1">
+      <div className="flex-1 min-h-[200px] min-w-0 relative rounded-xl md:rounded-[16px] w-full overflow-hidden" data-name="Image 1">
+        <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-xl md:rounded-[16px]">
+          <div className="absolute bg-[#2c6740] inset-0 rounded-xl md:rounded-[16px]" />
+          <div className="absolute inset-0 overflow-hidden rounded-xl md:rounded-[16px]">
+            <img alt="" className="absolute h-full left-0 max-w-none top-0 w-full object-cover md:w-[146.5%] md:left-0" src={imgImage1} />
           </div>
         </div>
       </div>
@@ -828,7 +879,7 @@ function ValueProp4() {
 
 function Frame53() {
   return (
-    <div className="content-center flex flex-wrap gap-[16px] items-center pt-[16px] relative shrink-0 w-full">
+    <div className="content-center flex flex-wrap gap-[16px] items-start pt-[16px] relative shrink-0 w-full">
       <ValueProp2 />
       <ValueProp3 />
       <ValueProp4 />
@@ -998,7 +1049,7 @@ function BodyBulletPoint2() {
 
 function ValueProp5() {
   return (
-    <div className="content-stretch flex flex-col gap-[32px] items-start pl-[24px] py-[24px] relative shrink-0 w-[574px]" data-name="Value Prop">
+    <div className="flex flex-col gap-[32px] items-start pl-[24px] py-[24px] relative min-w-0 flex-1 max-w-[574px] w-full h-auto" data-name="Value Prop">
       <SectionHeadingVertical1 />
       <BodyBulletPoint />
       <BodyBulletPoint1 />
@@ -1028,19 +1079,17 @@ function Group20() {
 
 function MaskGroup() {
   return (
-    <div className="absolute contents inset-[34.13%_30.48%_-25.4%_0]" data-name="Mask Group">
-      <div className="absolute inset-[34.13%_30.48%_-273.66%_0] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[0px_0px] mask-size-[387.923px_417.064px]" data-name="screencapture-wastemanagement-atlassian-net-wiki-spaces-TDC-pages-1427669170-Sprint-1-2-Items-2022-01-17-13_59_31 1" style={{ maskImage: `url('${imgScreencaptureWastemanagementAtlassianNetWikiSpacesTdcPages1427669170Sprint12Items202201171359311}')` }}>
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <img alt="" className="absolute h-[105.12%] left-0 max-w-none top-[0.04%] w-[100.07%]" src={imgScreencaptureWastemanagementAtlassianNetWikiSpacesTdcPages1427669170Sprint12Items202201171359312} />
-        </div>
-      </div>
-    </div>
+    <img
+      alt="Sprint 1-2 Items - WM.com Atlassian tracker view (AEM Components timeline and Sprint 1-2 Items)"
+      className="absolute inset-0 w-full h-full object-contain object-center rounded-[8px] pointer-events-none"
+      src={imgConfluenceSprint}
+    />
   );
 }
 
 function Audit() {
   return (
-    <div className="aspect-[613/502] flex-[1_0_0] min-h-px min-w-px overflow-clip relative" data-name="audit">
+    <div className="aspect-[613/502] flex-[1_0_0] min-h-px min-w-px overflow-clip relative" data-name="audit" style={{ color: 'rgba(248, 248, 248, 1)' }}>
       <Group20 />
       <MaskGroup />
     </div>
@@ -1136,7 +1185,7 @@ function Points() {
 
 function ValueProp6() {
   return (
-    <div className="content-stretch flex flex-col gap-[40px] items-start pl-[24px] py-[24px] relative shrink-0 w-[574px]" data-name="Value Prop">
+    <div className="flex flex-col gap-[40px] items-start pl-[24px] py-[24px] relative min-w-0 flex-1 max-w-[574px] w-full h-auto" data-name="Value Prop">
       <SectionHeadingVertical2 />
       <Points />
     </div>
@@ -1289,7 +1338,7 @@ function Frame92() {
 
 function Frame111() {
   return (
-    <div className="content-stretch flex flex-[1_0_0] flex-col gap-[41px] items-center min-h-px min-w-px relative">
+    <div className="content-stretch flex flex-[1_0_0] flex-col gap-[40px] items-center min-h-px min-w-px relative">
       <Image1 />
       <Frame89 />
       <Frame92 />
@@ -1348,7 +1397,7 @@ function Frame91() {
 
 function Frame110() {
   return (
-    <div className="content-stretch flex flex-[1_0_0] flex-col gap-[62px] items-center min-h-px min-w-px relative">
+    <div className="content-stretch flex flex-[1_0_0] flex-col gap-[40px] items-center min-h-px min-w-px relative">
       <Image2 />
       <Frame91 />
     </div>
@@ -1426,7 +1475,7 @@ function Frame95() {
 
 function Frame109() {
   return (
-    <div className="content-stretch flex flex-[1_0_0] flex-col gap-[53px] items-center min-h-px min-w-px relative">
+    <div className="content-stretch flex flex-[1_0_0] flex-col gap-[40px] items-center min-h-px min-w-px relative">
       <Image3 />
       <Frame90 />
       <Frame95 />
@@ -1456,8 +1505,8 @@ function VisualGrid1() {
 
 function ElementButtonPrimaryCenteredAllDefault() {
   return (
-    <div className="bg-[#1c8200] content-stretch flex h-[48px] items-center justify-center pb-[12px] pt-[16px] px-[49px] relative rounded-[48px] shadow-[0px_0px_1.5px_0px_rgba(0,0,0,0.1),0px_6px_6px_0px_rgba(0,0,0,0.2)] shrink-0 w-[150px]" data-name="element/button/primary/centered-all/default">
-      <div className="flex flex-col font-['Maax:Bold',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[16px] text-center text-white whitespace-nowrap">
+    <div className="bg-[#1c8200] content-stretch flex items-center justify-center min-h-[48px] py-3 px-[49px] relative rounded-[48px] shadow-[0px_0px_1.5px_0px_rgba(0,0,0,0.1),0px_6px_6px_0px_rgba(0,0,0,0.2)] shrink-0 w-[150px]" data-name="element/button/primary/centered-all/default">
+      <div className="flex flex-col font-['Maax:Bold',sans-serif] font-bold justify-center leading-[0] not-italic relative shrink-0 text-[16px] text-center text-white whitespace-nowrap">
         <p className="leading-[normal]">Button</p>
       </div>
     </div>
@@ -1466,12 +1515,10 @@ function ElementButtonPrimaryCenteredAllDefault() {
 
 function Image4() {
   return (
-    <div className="h-[320px] relative rounded-[8px] shrink-0 w-[357px]" data-name="Image">
+    <div className="flex-1 min-w-0 min-h-0 aspect-[357/320] relative rounded-[8px]" data-name="Image">
       <div className="overflow-clip relative rounded-[inherit] size-full">
-        <div className="absolute h-[335px] left-0 top-0 w-[357px]" data-name="Business new 1">
-          <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            <img alt="" className="absolute h-[351.65%] left-0 max-w-none top-0 w-[99.9%]" src={imgBusinessNew1} />
-          </div>
+        <div className="absolute inset-0 overflow-hidden" data-name="Business new 1">
+          <img alt="" className="absolute inset-0 w-full h-full min-w-0 min-h-0 object-cover object-center pointer-events-none" src={imgBusinessNew1} />
         </div>
       </div>
       <div aria-hidden="true" className="absolute border border-[#ccc] border-solid inset-[-0.5px] pointer-events-none rounded-[8.5px] shadow-[0px_1.769px_7.077px_0px_rgba(0,0,0,0.1)]" />
@@ -1481,17 +1528,15 @@ function Image4() {
 
 function Frame96() {
   return (
-    <div className="absolute h-[320px] left-0 overflow-clip top-0 w-[387px]">
-      <div className="absolute h-[1015px] left-0 top-0 w-[357px]" data-name="D.SF.1 - Landing 2">
-        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgDSf1Landing2} />
-      </div>
+    <div className="absolute inset-0 overflow-hidden" data-name="D.SF.1 - Landing 2">
+      <img alt="" className="absolute inset-0 w-full h-full min-w-0 min-h-0 object-cover object-center pointer-events-none" src={imgDSf1Landing2} />
     </div>
   );
 }
 
 function Image5() {
   return (
-    <div className="h-[320px] relative rounded-[8px] shrink-0 w-[357px]" data-name="Image">
+    <div className="flex-1 min-w-0 min-h-0 aspect-[357/320] relative rounded-[8px]" data-name="Image">
       <div className="overflow-clip relative rounded-[inherit] size-full">
         <Frame96 />
       </div>
@@ -1502,12 +1547,10 @@ function Image5() {
 
 function Image6() {
   return (
-    <div className="h-[320px] relative rounded-[8px] shrink-0 w-[357px]" data-name="Image">
+    <div className="flex-1 min-w-0 min-h-0 aspect-[357/320] relative rounded-[8px]" data-name="Image">
       <div className="overflow-clip relative rounded-[inherit] size-full">
-        <div className="absolute h-[1143.197px] left-0 top-0 w-[356.63px]" data-name="landing page 1">
-          <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            <img alt="" className="absolute h-[100.6%] left-[-1.02%] max-w-none top-[-0.21%] w-[102.04%]" src={imgLandingPage1} />
-          </div>
+        <div className="absolute inset-0 overflow-hidden" data-name="landing page 1">
+          <img alt="" className="absolute inset-0 w-full h-full min-w-0 min-h-0 object-cover object-center pointer-events-none" src={imgLandingPage1} />
         </div>
         <div className="-translate-x-1/2 absolute h-[28px] left-1/2 top-0 w-[387px]" data-name="screencapture-wm-us-en-inside-wm-sustainability-forum-2021-10-13-11_55_04 1">
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -1522,7 +1565,7 @@ function Image6() {
 
 function Frame113() {
   return (
-    <div className="content-stretch flex gap-[24px] items-center relative shrink-0 w-full">
+    <div className="flex gap-[24px] items-stretch relative w-full min-w-0">
       <Image4 />
       <Image5 />
       <Image6 />
@@ -1532,13 +1575,12 @@ function Frame113() {
 
 function VisualGrid2() {
   return (
-    <div className="bg-[#f8f8f8] relative rounded-[16px] shrink-0 w-full" data-name="Visual Grid">
-      <div className="flex flex-col items-center size-full">
-        <div className="content-stretch flex flex-col gap-[126px] items-center px-[30px] py-[36px] relative w-full">
-          <ElementButtonPrimaryCenteredAllDefault />
-          <Frame113 />
-        </div>
-      </div>
+    <div className="bg-[#f8f8f8] relative rounded-[16px] shrink-0 w-full overflow-hidden" data-name="Visual Grid">
+      <img
+        alt="Button component with Primary Green and Primary Yellow paths to page templates: Business Waste & Recycling, Sustainability Forum, Modern Landfills"
+        className="block w-full h-auto object-contain object-center"
+        src={imgVisualGrid}
+      />
     </div>
   );
 }
@@ -1563,10 +1605,10 @@ function Count9() {
 
 function SectionHeadingVertical4() {
   return (
-    <div className="content-stretch flex flex-col gap-[8px] items-start justify-center relative shrink-0 w-full" data-name="Section Heading / Vertical">
+    <div className="content-stretch flex flex-col gap-[8px] items-start justify-center relative shrink-0 w-fit max-w-[375px]" data-name="Section Heading / Vertical">
       <Count9 />
-      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[normal] min-w-full not-italic relative shrink-0 text-[20px] text-black w-[min-content] whitespace-pre-wrap">{`Tokens & Foundations`}</p>
-      <p className="font-['Inter:Regular',sans-serif] font-normal leading-[24px] max-w-[800px] min-w-full not-italic relative shrink-0 text-[#4e4f4e] text-[16px] w-[min-content] whitespace-pre-wrap">
+      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[normal] not-italic relative shrink-0 text-[20px] text-black w-full min-w-0">{`Tokens & Foundations`}</p>
+      <p className="font-['Inter:Regular',sans-serif] font-normal leading-[24px] not-italic relative shrink-0 text-[#4e4f4e] text-[16px] w-full min-w-0">
         {`Our branding foundations and hierarchy are built on a mix of primitive and semantic tokens. `}
         <br aria-hidden="true" />
         <br aria-hidden="true" />
@@ -1578,7 +1620,7 @@ function SectionHeadingVertical4() {
 
 function ValueProp8() {
   return (
-    <div className="content-stretch flex flex-col items-start pb-[24px] relative shrink-0 w-[574px]" data-name="Value Prop">
+    <div className="content-stretch flex w-full min-w-0 max-w-[350px] flex-1 flex-col items-start pb-[24px] relative shrink" data-name="Value Prop">
       <SectionHeadingVertical4 />
     </div>
   );
@@ -1843,7 +1885,7 @@ function Tokens() {
 
 function Image7() {
   return (
-    <div className="content-stretch flex items-center pl-[16px] py-[16px] relative shrink-0 w-[574px]" data-name="Image">
+    <div className="content-stretch flex min-w-0 max-w-[574px] flex-1 items-center pl-[16px] py-[16px] relative shrink" data-name="Image">
       <Tokens />
     </div>
   );
@@ -1851,7 +1893,7 @@ function Image7() {
 
 function Row7() {
   return (
-    <div className="content-start flex flex-wrap gap-[32px] items-start justify-end relative shrink-0 w-full" data-name="Row 1">
+    <div className="content-start flex flex-nowrap gap-[24px] items-start justify-start relative min-w-0 w-full" data-name="Row 1">
       <ValueProp8 />
       <Image7 />
     </div>
@@ -2187,17 +2229,77 @@ function Button() {
   );
 }
 
-function ReskinCardTypeBasic() {
+function HoverRevealCard({
+  frontContent,
+  backContent,
+  dataName,
+}: {
+  frontContent: React.ReactNode;
+  backContent: React.ReactNode;
+  dataName: string;
+}) {
+  const [isFlipped, setIsFlipped] = useState(false);
   return (
-    <div className="bg-white flex-[1_0_0] h-[334.709px] min-h-px min-w-px relative rounded-[8px]" data-name="Reskin Card type / Basic">
-      <div aria-hidden="true" className="absolute border-2 border-[#023625] border-solid inset-0 pointer-events-none rounded-[8px]" />
-      <div className="content-stretch flex flex-col gap-[8px] items-start p-[16px] relative size-full">
+    <div
+      className="flex min-h-0 min-w-0 flex-[1_0_0] relative [perspective:1000px] self-stretch"
+      data-name={dataName}
+      onMouseEnter={() => setIsFlipped(true)}
+      onMouseLeave={() => setIsFlipped(false)}
+    >
+      <div
+        className={`relative h-full w-full transition-transform duration-500 [transform-style:preserve-3d] ${isFlipped ? "[transform:rotateY(180deg)]" : ""}`}
+      >
+        {/* Front - wireframe (first image) */}
+        <div className="absolute inset-0 [backface-visibility:hidden]">
+          <div className="size-full">{frontContent}</div>
+        </div>
+        {/* Back - real design (second image) */}
+        <div className="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(180deg)] [transform-style:preserve-3d]">
+          <div className="size-full">{backContent}</div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ReskinCardTypeBasicContent() {
+  return (
+    <div className="bg-white border-2 border-[#023625] border-solid rounded-[8px] overflow-hidden size-full min-h-0 min-w-0 relative">
+      <div className="content-stretch flex flex-col gap-[8px] items-start p-[16px] relative size-full min-h-0">
         <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[24px] min-w-full not-italic relative shrink-0 text-[16px] text-black w-[min-content] whitespace-pre-wrap">Basic Info</p>
         <Image8 />
         <TextLine />
         <Button />
       </div>
     </div>
+  );
+}
+
+function ReskinCardTypeBasicBack() {
+  return (
+    <div className="bg-white size-full min-h-0 min-w-0 relative rounded-[8px] overflow-hidden shadow-[0px_2px_8px_rgba(0,0,0,0.08)]">
+      <div className="content-stretch flex flex-col size-full">
+        <div className="relative h-[140px] min-h-[140px] w-full shrink-0 overflow-hidden bg-[#e5e7e5]">
+          <img alt="Recycling" className="absolute inset-0 size-full object-cover object-center" src={imgRecyclingTruck} />
+        </div>
+        <div className="content-stretch flex flex-col gap-[4px] items-start p-[16px] relative flex-1 min-h-0">
+          <p className="font-['Inter:Bold',sans-serif] font-bold leading-[18px] not-italic text-[#1d890a] text-[13px] tracking-widest uppercase">Recycling</p>
+          <p className="font-['Inter:Bold',sans-serif] font-bold leading-[27px] not-italic text-[#4e4f58] text-[20px] w-full">The Dangers of &quot;Wishcycling&quot;</p>
+          <p className="font-['Inter:Regular',sans-serif] font-normal leading-[18px] not-italic text-[#67696d] text-[14px] line-clamp-2 w-full">By Susan Robinson, Director of P...</p>
+          <p className="font-['Inter:Regular',sans-serif] font-normal leading-[24px] not-italic text-[#1d890a] text-[16px] underline decoration-solid [text-decoration-skip-ink:none]">Keep Reading</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ReskinCardTypeBasic() {
+  return (
+    <HoverRevealCard
+      frontContent={<ReskinCardTypeBasicContent />}
+      backContent={<ReskinCardTypeBasicBack />}
+      dataName="Reskin Card type / Basic"
+    />
   );
 }
 
@@ -2227,7 +2329,7 @@ function Text() {
 
 function Button2() {
   return (
-    <div className="bg-[#eba900] content-stretch flex h-[33.664px] items-center justify-center px-[9px] py-[7px] relative shrink-0 w-[103.689px]" data-name="button 2">
+    <div className="bg-[#eba900] content-stretch flex min-w-0 h-[33.664px] flex-1 items-center justify-center px-[9px] py-[7px] relative" data-name="button 2">
       <div className="flex flex-col font-['Inter:Semi_Bold',sans-serif] font-semibold justify-center leading-[0] not-italic relative shrink-0 text-[14px] text-black text-center whitespace-nowrap">
         <p className="leading-[20px]">Learn More</p>
       </div>
@@ -2237,7 +2339,7 @@ function Button2() {
 
 function Button1() {
   return (
-    <div className="bg-[#eba900] content-stretch flex h-[33.664px] items-center justify-center px-[9px] py-[7px] relative shrink-0 w-[103.689px]" data-name="button 1">
+    <div className="bg-[#eba900] content-stretch flex min-w-0 h-[33.664px] flex-1 items-center justify-center px-[9px] py-[7px] relative" data-name="button 1">
       <div className="flex flex-col font-['Inter:Semi_Bold',sans-serif] font-semibold justify-center leading-[0] not-italic relative shrink-0 text-[14px] text-black text-center whitespace-nowrap">
         <p className="leading-[20px]">View Video</p>
       </div>
@@ -2247,24 +2349,50 @@ function Button1() {
 
 function Buttons() {
   return (
-    <div className="content-stretch flex gap-[10px] items-start relative shrink-0" data-name="buttons">
+    <div className="content-stretch flex min-w-0 w-full gap-[10px] items-stretch relative" data-name="buttons">
       <Button2 />
       <Button1 />
     </div>
   );
 }
 
-function ReskinCardTypeProfile() {
+function ReskinCardTypeProfileContent() {
   return (
-    <div className="bg-white flex-[1_0_0] h-[350.657px] min-h-px min-w-px relative rounded-[8px]" data-name="Reskin Card type / Profile">
-      <div aria-hidden="true" className="absolute border-2 border-[#023625] border-solid inset-0 pointer-events-none rounded-[8px]" />
-      <div className="content-stretch flex flex-col gap-[8px] items-start p-[16px] relative size-full">
+    <div className="bg-white border-2 border-[#023625] border-solid rounded-[8px] overflow-hidden size-full min-h-0 min-w-0 relative">
+      <div className="content-stretch flex flex-col gap-[8px] items-start p-[16px] relative size-full min-h-0">
         <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[24px] not-italic relative shrink-0 text-[16px] text-black w-[226.82px] whitespace-pre-wrap">Profile</p>
         <Image9 />
         <Text />
         <Buttons />
       </div>
     </div>
+  );
+}
+
+function ReskinCardTypeProfileBack() {
+  return (
+    <div className="bg-white size-full min-h-0 min-w-0 relative rounded-[8px] overflow-hidden shadow-[0px_2px_8px_rgba(0,0,0,0.08)]">
+      <div className="content-stretch flex flex-col size-full">
+        <div className="relative h-[140px] min-h-[140px] w-full shrink-0 overflow-hidden bg-[#e5e5e5]">
+          <img alt="Jim Fish" className="absolute inset-0 size-full object-cover object-center" src={imgJimFish} />
+        </div>
+        <div className="content-stretch flex flex-col gap-[4px] items-start p-[16px] relative flex-1 min-h-0">
+          <p className="font-['Inter:Bold',sans-serif] font-bold leading-[27px] not-italic text-[#4e4f58] text-[20px] w-full">Jim Fish</p>
+          <p className="font-['Inter:Regular',sans-serif] font-normal leading-[24px] not-italic text-[#67696d] text-[16px] w-full line-clamp-2">Prospects, technology and the new HR...</p>
+          <p className="font-['Inter:Regular',sans-serif] font-normal leading-[24px] not-italic text-[#1d890a] text-[16px] underline decoration-solid [text-decoration-skip-ink:none]">Listen Now</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ReskinCardTypeProfile() {
+  return (
+    <HoverRevealCard
+      frontContent={<ReskinCardTypeProfileContent />}
+      backContent={<ReskinCardTypeProfileBack />}
+      dataName="Reskin Card type / Profile"
+    />
   );
 }
 
@@ -2294,16 +2422,41 @@ function Text1() {
   );
 }
 
-function ReskinCardTypeProduct() {
+function ReskinCardTypeProductContent() {
   return (
-    <div className="aspect-[300/390] bg-white flex-[1_0_0] min-h-px min-w-px relative rounded-[10px]" data-name="Reskin Card type / Product">
-      <div aria-hidden="true" className="absolute border-2 border-[#023625] border-solid inset-0 pointer-events-none rounded-[10px]" />
-      <div className="content-stretch flex flex-col gap-[7px] items-start p-[16px] relative size-full">
+    <div className="bg-white border-2 border-[#023625] border-solid rounded-[8px] overflow-hidden size-full min-h-0 min-w-0 relative">
+      <div className="content-stretch flex flex-col gap-[7px] items-start p-[16px] relative size-full min-h-0">
         <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[24px] not-italic relative shrink-0 text-[16px] text-black w-full whitespace-pre-wrap">Product Info</p>
         <Image10 />
         <Text1 />
       </div>
     </div>
+  );
+}
+
+function ReskinCardTypeProductBack() {
+  return (
+    <div className="bg-white size-full min-h-0 min-w-0 relative rounded-[8px] overflow-hidden shadow-[0px_2px_8px_rgba(0,0,0,0.08)]">
+      <div className="content-stretch flex flex-col size-full">
+        <div className="relative h-[140px] min-h-[140px] w-full shrink-0 overflow-hidden bg-white">
+          <img alt="Roll-off dumpster" className="absolute inset-0 size-full object-contain object-center" src={imgRollOffDumpster} />
+        </div>
+        <div className="content-stretch flex flex-col gap-[4px] items-start p-[16px] relative flex-1 min-h-0">
+          <p className="font-['Inter:Bold',sans-serif] font-bold leading-[27px] not-italic text-[#4e4f58] text-[20px] w-full">Temporary Roll-Off Dumpster</p>
+          <p className="font-['Inter:Regular',sans-serif] font-normal leading-[20px] not-italic text-[#67696d] text-[14px] w-full line-clamp-3">Temporary roll-off dumpsters are ideal for home renovations, construction sites, office cleanup...</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ReskinCardTypeProduct() {
+  return (
+    <HoverRevealCard
+      frontContent={<ReskinCardTypeProductContent />}
+      backContent={<ReskinCardTypeProductBack />}
+      dataName="Reskin Card type / Product"
+    />
   );
 }
 
@@ -2331,11 +2484,10 @@ function Button3() {
   );
 }
 
-function ReskinCardTypeDownload() {
+function ReskinCardTypeDownloadContent() {
   return (
-    <div className="aspect-[300/390] bg-white flex-[1_0_0] min-h-px min-w-px relative rounded-[10px]" data-name="Reskin Card type / Download">
-      <div aria-hidden="true" className="absolute border-2 border-[#023625] border-solid inset-0 pointer-events-none rounded-[10px]" />
-      <div className="content-stretch flex flex-col gap-[8px] items-start p-[16px] relative size-full">
+    <div className="bg-white border-2 border-[#023625] border-solid rounded-[8px] overflow-hidden size-full min-h-0 min-w-0 relative">
+      <div className="content-stretch flex flex-col gap-[8px] items-start p-[16px] relative size-full min-h-0">
         <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[24px] not-italic relative shrink-0 text-[16px] text-black w-[229.369px] whitespace-pre-wrap">Download</p>
         <Text2 />
         <Button3 />
@@ -2344,9 +2496,37 @@ function ReskinCardTypeDownload() {
   );
 }
 
+function ReskinCardTypeDownloadBack() {
+  return (
+    <div className="bg-white size-full min-h-0 min-w-0 relative rounded-[8px] overflow-hidden shadow-[0px_2px_8px_rgba(0,0,0,0.08)]">
+      <div className="content-stretch flex flex-col gap-[4px] items-start p-[16px] relative size-full">
+        <p className="font-['Inter:Bold',sans-serif] font-bold leading-[18px] not-italic text-[#1d890a] text-[13px] tracking-widest uppercase">Download</p>
+        <p className="font-['Inter:Bold',sans-serif] font-bold leading-[27px] not-italic text-[#4e4f58] text-[20px] w-full">Our Position on Plastic</p>
+        <p className="font-['Inter:Regular',sans-serif] font-normal leading-[20px] not-italic text-[#67696d] text-[14px] w-full flex-1 min-h-0">Learn how Waste Management is responding to recent shifts in the global plastics market.</p>
+        <p className="font-['Inter:Regular',sans-serif] font-normal leading-[24px] not-italic text-[#1d890a] text-[16px] underline decoration-solid [text-decoration-skip-ink:none] inline-flex items-center gap-[6px]">
+          Download PDF
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="shrink-0" aria-hidden>
+            <path d="M8 11V3M8 11L5 8M8 11L11 8M3 13h10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function ReskinCardTypeDownload() {
+  return (
+    <HoverRevealCard
+      frontContent={<ReskinCardTypeDownloadContent />}
+      backContent={<ReskinCardTypeDownloadBack />}
+      dataName="Reskin Card type / Download"
+    />
+  );
+}
+
 function Frame114() {
   return (
-    <div className="content-stretch flex flex-[1_0_0] gap-[16px] items-center min-h-px min-w-px relative">
+    <div className="flex min-h-0 min-w-0 flex-1 flex-row gap-[16px] items-stretch">
       <ReskinCardTypeBasic />
       <ReskinCardTypeProfile />
       <ReskinCardTypeProduct />
@@ -2357,9 +2537,9 @@ function Frame114() {
 
 function CardTypes() {
   return (
-    <div className="bg-[#f8f8f8] relative rounded-[8px] shrink-0 w-full" data-name="Card types 2">
-      <div className="flex flex-row items-center size-full">
-        <div className="content-stretch flex items-center p-[32px] relative w-full">
+    <div className="bg-[#f8f8f8] relative h-[400px] min-h-[400px] rounded-[8px] shrink-0 w-full" data-name="Card types 2">
+      <div className="flex h-full w-full flex-row items-stretch">
+        <div className="flex min-h-0 min-w-0 flex-1 flex-col items-stretch overflow-hidden p-[32px]">
           <Frame114 />
         </div>
       </div>
@@ -7599,7 +7779,7 @@ function Component2Colums() {
 
 function Frame52() {
   return (
-    <div className="content-stretch flex flex-[1_0_0] flex-col gap-[80px] items-center min-h-px min-w-px relative">
+    <div className="content-stretch flex flex-1 flex-col gap-12 md:gap-16 lg:gap-[80px] items-center min-h-px w-full max-w-full min-w-0 relative">
       <VisualGrid />
       <Section />
       <SectionCards />
@@ -7616,9 +7796,9 @@ function Frame52() {
 
 function Frame88() {
   return (
-    <div className="relative shrink-0 w-full">
-      <div className="flex flex-row items-center justify-center size-full">
-        <div className="content-stretch flex items-center justify-center px-[280px] relative w-full">
+    <div className="relative shrink-0 w-full overflow-x-hidden">
+      <div className="flex flex-row items-center justify-center w-full">
+        <div className="content-stretch flex items-center justify-center px-4 sm:px-6 md:px-12 lg:px-24 xl:px-[280px] relative w-full max-w-full">
           <Frame52 />
         </div>
       </div>
@@ -7636,7 +7816,7 @@ function Button11() {
 
 export default function WmDesignSystem() {
   return (
-    <div className="bg-white content-stretch flex flex-col gap-[80px] items-center justify-center pb-[100px] relative size-full" data-name="WM Design System 2026">
+    <div className="bg-white w-full max-w-full overflow-x-hidden flex flex-col gap-12 sm:gap-16 md:gap-20 lg:gap-[80px] items-center justify-center pb-12 md:pb-16 lg:pb-[100px] relative" data-name="WM Design System 2026">
       <Heading />
       <ProjectDetails />
       <Frame88 />
