@@ -42,7 +42,5 @@ export default defineConfig({
   preview: {
     host: true,
   },
-  base: '/portfolio/',   // same as your repo name
-  // ... rest of config
-})
+  base: '/portfolio/',
 })

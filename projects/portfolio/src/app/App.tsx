@@ -13,7 +13,7 @@ import { Contact } from "@/app/pages/contact";
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/portfolio">
       <div className="min-h-screen">
         <div className="w-full min-h-full py-12">
           <Header />
