@@ -1,0 +1,89 @@
+/* Google Fonts - Inter */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* Font family definitions for Figma imports */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Inter'), local('Inter Regular');
+}
+
+@font-face {
+  font-family: 'Inter:Regular';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Inter'), local('Inter Regular');
+}
+
+@font-face {
+  font-family: 'Inter:Medium';
+  font-style: normal;
+  font-weight: 500;
+  src: local('Inter Medium'), local('Inter-Medium');
+}
+
+@font-face {
+  font-family: 'Inter:Semi_Bold';
+  font-style: normal;
+  font-weight: 600;
+  src: local('Inter SemiBold'), local('Inter-SemiBold');
+}
+
+@font-face {
+  font-family: 'Inter:Bold';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Inter Bold'), local('Inter-Bold');
+}
+
+/* Calibre fallback to system fonts */
+@font-face {
+  font-family: 'Calibre-R';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Helvetica Neue'), local('Helvetica'), local('Arial');
+}
+
+@font-face {
+  font-family: 'Calibre-R:Regular';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Helvetica Neue'), local('Helvetica'), local('Arial');
+}
+
+@font-face {
+  font-family: 'Calibre-R:Medium';
+  font-style: normal;
+  font-weight: 500;
+  src: local('Helvetica Neue Medium'), local('Helvetica'), local('Arial');
+}
+
+@font-face {
+  font-family: 'Calibre-R:Semibold';
+  font-style: normal;
+  font-weight: 600;
+  src: local('Helvetica Neue Bold'), local('Helvetica Bold'), local('Arial');
+}
+
+/* DIN_OT fallback to system fonts */
+@font-face {
+  font-family: 'DIN_OT';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Helvetica Neue'), local('Helvetica'), local('Arial');
+}
+
+@font-face {
+  font-family: 'DIN_OT:Medium';
+  font-style: normal;
+  font-weight: 500;
+  src: local('Helvetica Neue Medium'), local('Helvetica'), local('Arial');
+}
+
+@font-face {
+  font-family: 'DIN_OT:Bold';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Helvetica Neue Bold'), local('Helvetica Bold'), local('Arial');
+}
