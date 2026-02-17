@@ -1210,7 +1210,7 @@ function Frame66() {
 
 function PageTemplates() {
   return (
-    <div className="content-start flex flex-wrap gap-[24px_695.88px] items-start pb-[32px] relative shrink-0 w-full" data-name="page templates">
+    <div className="content-start flex flex-1 min-w-0 w-full flex-wrap gap-[24px_695.88px] items-stretch pb-[32px] relative" data-name="page templates">
       <Frame64 />
       <div className="h-0 relative shrink-0 w-[1171.641px]">
         <div className="absolute inset-[-7.36px_-0.09%]">

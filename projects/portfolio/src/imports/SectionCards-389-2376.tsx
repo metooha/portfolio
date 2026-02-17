@@ -2258,7 +2258,7 @@ function Specimen() {
   return (
     <div className="bg-[#024731] flex-[1_0_0] min-h-px min-w-px relative rounded-[12px] w-full" data-name="specimen">
       <div className="flex flex-col items-center justify-center overflow-clip rounded-[inherit] size-full">
-        <div className="content-stretch flex flex-col items-center justify-center p-[32px] relative size-full">
+        <div className="content-stretch flex flex-col items-center justify-center p-[32px] relative size-full font-medium">
           <ComponentsNewSp103ProductCarouselServiceCardTablet />
         </div>
       </div>

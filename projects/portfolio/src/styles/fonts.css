@@ -66,24 +66,84 @@
   src: local('Helvetica Neue Bold'), local('Helvetica Bold'), local('Arial');
 }
 
-/* DIN_OT fallback to system fonts */
+/* Maax */
+@font-face {
+  font-family: 'Maax';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../assets/fonts/maax/Maax.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Maax:Regular';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../assets/fonts/maax/Maax.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Maax:Medium';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('../assets/fonts/maax/Maax-Medium.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Maax:Bold';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../assets/fonts/maax/Maax-Black.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Maax:Black';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url('../assets/fonts/maax/Maax-Black.ttf') format('truetype');
+}
+
+/* DIN_OT */
 @font-face {
   font-family: 'DIN_OT';
   font-style: normal;
   font-weight: 400;
-  src: local('Helvetica Neue'), local('Helvetica'), local('Arial');
+  font-display: swap;
+  src: url('../assets/fonts/din/DINOT.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'DIN_OT:Regular';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../assets/fonts/din/DINOT.otf') format('opentype');
 }
 
 @font-face {
   font-family: 'DIN_OT:Medium';
   font-style: normal;
   font-weight: 500;
-  src: local('Helvetica Neue Medium'), local('Helvetica'), local('Arial');
+  font-display: swap;
+  src: url('../assets/fonts/din/DINOT-Medium.otf') format('opentype');
 }
 
 @font-face {
   font-family: 'DIN_OT:Bold';
   font-style: normal;
   font-weight: 700;
-  src: local('Helvetica Neue Bold'), local('Helvetica Bold'), local('Arial');
+  font-display: swap;
+  src: url('../assets/fonts/din/DINOT-Bold.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'DIN_OT:Black';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url('../assets/fonts/din/DINOT-Black.otf') format('opentype');
 }

@@ -2286,7 +2286,7 @@ function ReskinCardTypeBasicBack() {
           <p className="font-['Inter:Bold',sans-serif] font-bold leading-[18px] not-italic text-[#1d890a] text-[13px] tracking-widest uppercase">Recycling</p>
           <p className="font-['Inter:Bold',sans-serif] font-bold leading-[27px] not-italic text-[#4e4f58] text-[20px] w-full">The Dangers of &quot;Wishcycling&quot;</p>
           <p className="font-['Inter:Regular',sans-serif] font-normal leading-[18px] not-italic text-[#67696d] text-[14px] line-clamp-2 w-full">By Susan Robinson, Director of P...</p>
-          <p className="font-['Inter:Regular',sans-serif] font-normal leading-[24px] not-italic text-[#1d890a] text-[16px] underline decoration-solid [text-decoration-skip-ink:none]">Keep Reading</p>
+          <p className="font-['Inter:Regular',sans-serif] font-normal leading-[24px] not-italic text-[#1d890a] text-[12px] underline decoration-solid [text-decoration-skip-ink:none]">Keep Reading</p>
         </div>
       </div>
     </div>
@@ -2379,7 +2379,7 @@ function ReskinCardTypeProfileBack() {
         <div className="content-stretch flex flex-col gap-[4px] items-start p-[16px] relative flex-1 min-h-0">
           <p className="font-['Inter:Bold',sans-serif] font-bold leading-[27px] not-italic text-[#4e4f58] text-[20px] w-full">Jim Fish</p>
           <p className="font-['Inter:Regular',sans-serif] font-normal leading-[24px] not-italic text-[#67696d] text-[16px] w-full line-clamp-2">Prospects, technology and the new HR...</p>
-          <p className="font-['Inter:Regular',sans-serif] font-normal leading-[24px] not-italic text-[#1d890a] text-[16px] underline decoration-solid [text-decoration-skip-ink:none]">Listen Now</p>
+          <p className="font-['Inter:Regular',sans-serif] font-normal leading-[24px] not-italic text-[#1d890a] text-[12px] underline decoration-solid [text-decoration-skip-ink:none]">Listen Now</p>
         </div>
       </div>
     </div>
@@ -2503,7 +2503,7 @@ function ReskinCardTypeDownloadBack() {
         <p className="font-['Inter:Bold',sans-serif] font-bold leading-[18px] not-italic text-[#1d890a] text-[13px] tracking-widest uppercase">Download</p>
         <p className="font-['Inter:Bold',sans-serif] font-bold leading-[27px] not-italic text-[#4e4f58] text-[20px] w-full">Our Position on Plastic</p>
         <p className="font-['Inter:Regular',sans-serif] font-normal leading-[20px] not-italic text-[#67696d] text-[14px] w-full flex-1 min-h-0">Learn how Waste Management is responding to recent shifts in the global plastics market.</p>
-        <p className="font-['Inter:Regular',sans-serif] font-normal leading-[24px] not-italic text-[#1d890a] text-[16px] underline decoration-solid [text-decoration-skip-ink:none] inline-flex items-center gap-[6px]">
+        <p className="font-['Inter:Regular',sans-serif] font-normal leading-[24px] not-italic text-[#1d890a] text-[12px] underline decoration-solid [text-decoration-skip-ink:none] inline-flex items-center gap-[6px]">
           Download PDF
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="shrink-0" aria-hidden>
             <path d="M8 11V3M8 11L5 8M8 11L11 8M3 13h10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -2775,22 +2775,20 @@ function NewCardTypeContentCard() {
 
 function Frame115() {
   return (
-    <div className="content-stretch flex flex-[1_0_0] gap-[16px] items-center min-h-px min-w-px relative">
-      <div className="flex flex-[1_0_0] flex-row items-center self-stretch">
-        <NewCardTypeSolution />
-      </div>
-      <NewCardTypeService />
-      <NewCardTypeFaq />
-      <NewCardTypeContentCard />
+    <div className="flex min-h-0 min-w-0 flex-1 flex-row gap-[16px] items-stretch">
+      <ReskinCardTypeBasic />
+      <ReskinCardTypeProfile />
+      <ReskinCardTypeProduct />
+      <ReskinCardTypeDownload />
     </div>
   );
 }
 
 function CardTypes1() {
   return (
-    <div className="bg-[#f8f8f8] relative rounded-[8px] shrink-0 w-full" data-name="Card types 3">
-      <div className="flex flex-row items-center size-full">
-        <div className="content-stretch flex items-center p-[32px] relative w-full">
+    <div className="bg-[#f8f8f8] relative h-[400px] min-h-[400px] rounded-[8px] shrink-0 w-full" data-name="Card types 3">
+      <div className="flex h-full w-full flex-row items-stretch">
+        <div className="flex min-h-0 min-w-0 flex-1 flex-col items-stretch overflow-hidden p-[32px]">
           <Frame115 />
         </div>
       </div>
@@ -2927,9 +2925,9 @@ function ComponentsNewSp103ProductCarouselServiceCardTablet() {
 
 function Specimen() {
   return (
-    <div className="bg-[#024731] flex-[1_0_0] min-h-px min-w-px relative rounded-[12px] w-full" data-name="specimen">
+    <div className="bg-[#024731] relative rounded-[12px] w-full max-w-[426px] aspect-[300/390] mx-auto z-[1]" data-name="specimen">
       <div className="flex flex-col items-center justify-center overflow-clip rounded-[inherit] size-full">
-        <div className="content-stretch flex flex-col items-center justify-center p-[32px] relative size-full">
+        <div className="content-stretch flex flex-col items-center justify-center p-[32px] relative size-full font-medium">
           <ComponentsNewSp103ProductCarouselServiceCardTablet />
         </div>
       </div>
@@ -2940,7 +2938,7 @@ function Specimen() {
 
 function Props() {
   return (
-    <div className="content-stretch flex flex-col h-[720px] items-start mr-[-100px] relative shrink-0 w-[563px]" data-name="props">
+    <div className="content-stretch flex flex-none flex-col items-center justify-center min-h-[640px] min-w-0 relative w-[400px] pl-0" data-name="props">
       <Specimen />
     </div>
   );
@@ -3614,7 +3612,7 @@ function Props2() {
 
 function DesignPanelProperties() {
   return (
-    <div className="-translate-x-1/2 absolute bg-white content-stretch flex flex-col gap-[16px] items-start left-[calc(50%-137px)] overflow-clip p-[24px] rounded-[8px] shadow-[0px_12px_10px_0px_rgba(0,0,0,0.1),0px_5px_10px_3px_rgba(0,0,0,0.15)] top-0 w-[426px]" data-name="Design Panel: Properties">
+    <div className="absolute left-0 top-0 bg-white content-stretch flex flex-col gap-[16px] items-start overflow-clip p-[24px] rounded-[8px] shadow-[0px_12px_10px_0px_rgba(0,0,0,0.1),0px_5px_10px_3px_rgba(0,0,0,0.15)] w-full max-w-[426px] z-[2]" data-name="Design Panel: Properties">
       <NameDescription />
       <Props2 />
     </div>
@@ -3681,7 +3679,7 @@ function Content5() {
 
 function SpecCallout3() {
   return (
-    <div className="absolute content-stretch flex h-[76px] items-center left-[406px] top-[106px] w-[301px]" data-name="🛠️ Spec Callout">
+    <div className="absolute content-stretch flex h-[76px] items-center left-full ml-[24px] top-[106px] w-[301px]" data-name="🛠️ Spec Callout">
       <Pointer3 />
       <Content5 />
     </div>
@@ -3748,7 +3746,7 @@ function Content6() {
 
 function SpecCallout4() {
   return (
-    <div className="absolute content-stretch flex h-[76px] items-center left-[406px] top-[239px] w-[301px]" data-name="🛠️ Spec Callout">
+    <div className="absolute content-stretch flex h-[76px] items-center left-full ml-[24px] top-[239px] w-[301px]" data-name="🛠️ Spec Callout">
       <Pointer4 />
       <Content6 />
     </div>
@@ -3814,7 +3812,7 @@ function Content7() {
 
 function SpecCallout5() {
   return (
-    <div className="absolute content-stretch flex items-center left-[406px] top-[390px] w-[301px]" data-name="🛠️ Spec Callout">
+    <div className="absolute content-stretch flex items-center left-full ml-[24px] top-[390px] w-[301px]" data-name="🛠️ Spec Callout">
       <Pointer5 />
       <Content7 />
     </div>
@@ -3880,7 +3878,7 @@ function Content8() {
 
 function SpecCallout6() {
   return (
-    <div className="absolute content-stretch flex items-center left-[406px] top-[192px] w-[301px]" data-name="🛠️ Spec Callout">
+    <div className="absolute content-stretch flex items-center left-full ml-[24px] top-[192px] w-[301px]" data-name="🛠️ Spec Callout">
       <Pointer6 />
       <Content8 />
     </div>
@@ -3946,7 +3944,7 @@ function Content9() {
 
 function SpecCallout7() {
   return (
-    <div className="absolute content-stretch flex items-center left-[406px] top-[476px] w-[301px]" data-name="🛠️ Spec Callout">
+    <div className="absolute content-stretch flex items-center left-full ml-[24px] top-[476px] w-[301px]" data-name="🛠️ Spec Callout">
       <Pointer7 />
       <Content9 />
     </div>
@@ -3955,7 +3953,7 @@ function SpecCallout7() {
 
 function Props1() {
   return (
-    <div className="h-[528px] mr-[-100px] relative shrink-0 w-[700px]" data-name="props">
+    <div className="flex-1 min-w-0 relative w-fit min-h-[640px] overflow-visible pr-0" data-name="props">
       <DesignPanelProperties />
       <SpecCallout3 />
       <SpecCallout4 />
@@ -3968,7 +3966,7 @@ function Props1() {
 
 function ComponentProps() {
   return (
-    <div className="content-center flex flex-wrap gap-0 items-center pr-[100px] relative shrink-0 w-full" data-name="Component props">
+    <div className="flex flex-1 min-w-0 w-full gap-[32px] items-stretch lg:flex-row lg:items-start relative" data-name="Component props">
       <Props />
       <Props1 />
     </div>
@@ -4826,7 +4824,7 @@ function SitemapWm() {
       <Group12 />
       <Group13 />
       <Group8 />
-      <p className="absolute font-['Inter:Semi_Bold',sans-serif] font-semibold inset-[16.89%_41.78%_80.1%_53.47%] leading-[15.076px] not-italic text-[#006937] text-[11px] text-center">Inside WM</p>
+      <p className="absolute font-['Inter:Semi_Bold',sans-serif] font-semibold inset-[16.89%_41.78%_80.1%_53.47%] leading-[15.076px] not-italic text-[#006937] text-[11px] text-center whitespace-nowrap">Inside WM</p>
       <p className="absolute font-['Inter:Semi_Bold',sans-serif] font-semibold inset-[16.89%_26%_80.1%_67.82%] leading-[15.076px] not-italic text-[#006937] text-[11px] text-center">Sustainability</p>
       <div className="absolute inset-[8.76%_17.46%_4.18%_1.4%]" data-name="Union">
         <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 957.429 462.275">
@@ -5191,7 +5189,7 @@ function Column7() {
 
 function Frame102() {
   return (
-    <div className="content-stretch flex flex-[1_0_0] gap-[16px] items-start min-h-px min-w-px relative">
+    <div className="content-stretch flex flex-[1_0_0] gap-[16px] items-start min-h-px min-w-px relative w-full">
       <Column3 />
       <Column4 />
       <Column5 />
@@ -5203,11 +5201,11 @@ function Frame102() {
 
 function PageTemplates() {
   return (
-    <div className="content-start flex flex-wrap gap-[24px_695.88px] items-start pb-[32px] relative shrink-0 w-full" data-name="page templates">
+    <div className="content-start flex flex-1 min-w-0 w-full flex-wrap gap-[24px_695.88px] items-stretch pb-[32px] relative" data-name="page templates">
       <Frame99 />
-      <div className="h-0 relative shrink-0 w-[1171.641px]">
+      <div className="h-0 relative shrink-0 w-full">
         <div className="absolute inset-[-7.36px_-0.09%]">
-          <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 1173.64 14.7279">
+          <svg className="block size-full w-full" fill="none" preserveAspectRatio="none" viewBox="0 0 1173.64 14.7279">
             <path d={svgPaths.p2a075dc0} fill="var(--stroke-0, #006937)" id="Vector 12" />
           </svg>
         </div>
@@ -5238,9 +5236,13 @@ function SectionCards3() {
   );
 }
 
-function Left() {
+function Left({ scrollRef }: { scrollRef: React.RefObject<HTMLDivElement | null> }) {
   return (
-    <div className="absolute h-[3366px] overflow-x-clip overflow-y-auto right-0 top-[-0.47px] w-[1184px]" data-name="Left">
+    <div
+      ref={scrollRef}
+      className="absolute h-[3366px] overflow-x-clip overflow-y-auto right-0 top-[-0.47px] w-[1184px] scroll-smooth"
+      data-name="Left"
+    >
       <div className="absolute h-[3368px] right-[-0.3px] top-0 w-[1184.352px]" data-name="D.SF.1 - Landing 2">
         <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgDSf1Landing2} />
       </div>
@@ -5248,25 +5250,25 @@ function Left() {
   );
 }
 
-function Image15() {
+function Image15({ scrollRef }: { scrollRef: React.RefObject<HTMLDivElement | null> }) {
   return (
     <div className="absolute h-[2623px] left-px right-[-1px] top-[1.47px]" data-name="Image 2">
-      <Left />
+      <Left scrollRef={scrollRef} />
     </div>
   );
 }
 
 function Slot() {
   return (
-    <div className="absolute content-stretch flex flex-col items-start left-0 top-[-53px] w-[154px]" data-name="Slot">
-      <div className="h-[40px] shrink-0 w-full" data-name="slot" />
+    <div className="absolute content-stretch flex flex-col items-start left-0 top-[-53px] w-[154px] opacity-0 transition-opacity duration-200 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto" data-name="Slot">
+      <div className="h-[40px] shrink-0 w-full rounded-lg bg-white px-3 py-2 shadow-md border border-[#e8e8e8] flex items-center text-[#4e4f4e] text-[14px] font-['Inter:Regular',sans-serif]" data-name="slot">Callout 1</div>
     </div>
   );
 }
 
 function Pin1() {
   return (
-    <div className="absolute right-0 size-[22px] top-[15px]" data-name="Pin">
+    <div className="absolute right-0 size-[22px] top-[15px] cursor-pointer z-10" data-name="Pin">
       <div className="absolute bg-[rgba(239,242,255,0.6)] inset-0 rounded-[1000px]" />
       <div className="absolute bg-[rgba(0,38,255,0.9)] inset-[22.73%] rounded-[1000px]" />
     </div>
@@ -5275,7 +5277,7 @@ function Pin1() {
 
 function Callout() {
   return (
-    <div className="absolute h-[50px] left-[229.85px] top-[481px] w-[154px]" data-name="Callout 1">
+    <div className="group absolute h-[50px] left-[229.85px] top-[481px] w-[154px]" data-name="Callout 1">
       <Slot />
       <Pin1 />
     </div>
@@ -5284,15 +5286,15 @@ function Callout() {
 
 function Slot1() {
   return (
-    <div className="absolute content-stretch flex flex-col items-start left-0 top-[-53px] w-[154px]" data-name="Slot">
-      <div className="h-[40px] shrink-0 w-full" data-name="slot" />
+    <div className="absolute content-stretch flex flex-col items-start left-0 top-[-53px] w-[154px] opacity-0 transition-opacity duration-200 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto" data-name="Slot">
+      <div className="h-[40px] shrink-0 w-full rounded-lg bg-white px-3 py-2 shadow-md border border-[#e8e8e8] flex items-center text-[#4e4f4e] text-[14px] font-['Inter:Regular',sans-serif]" data-name="slot">Callout 2</div>
     </div>
   );
 }
 
 function Pin2() {
   return (
-    <div className="absolute right-0 size-[22px] top-[15px]" data-name="Pin">
+    <div className="absolute right-0 size-[22px] top-[15px] cursor-pointer z-10" data-name="Pin">
       <div className="absolute bg-[rgba(239,242,255,0.6)] inset-0 rounded-[1000px]" />
       <div className="absolute bg-[rgba(0,38,255,0.9)] inset-[22.73%] rounded-[1000px]" />
     </div>
@@ -5301,7 +5303,7 @@ function Pin2() {
 
 function Callout1() {
   return (
-    <div className="absolute h-[53px] left-[261.85px] top-[850px] w-[154px]" data-name="Callout 2">
+    <div className="group absolute h-[53px] left-[261.85px] top-[850px] w-[154px]" data-name="Callout 2">
       <Slot1 />
       <Pin2 />
     </div>
@@ -5310,7 +5312,7 @@ function Callout1() {
 
 function Pin3() {
   return (
-    <div className="-translate-y-1/2 absolute left-0 size-[22px] top-1/2" data-name="Pin">
+    <div className="-translate-y-1/2 absolute left-0 size-[22px] top-1/2 cursor-pointer z-10" data-name="Pin">
       <div className="absolute bg-[rgba(239,242,255,0.6)] inset-0 rounded-[1000px]" />
       <div className="absolute bg-[rgba(0,38,255,0.9)] inset-[22.73%] rounded-[1000px]" />
     </div>
@@ -5319,7 +5321,11 @@ function Pin3() {
 
 function Callout2() {
   return (
-    <div className="absolute h-[230px] left-[95.85px] top-[1368px] w-[764px]" data-name="Callout 3">
+    <div className="group absolute h-[230px] left-[95.85px] top-[1368px] w-[764px]" data-name="Callout 3">
+      <div className="absolute inset-0 left-[30px] top-1/2 -translate-y-1/2 w-[300px] rounded-lg bg-white p-4 shadow-lg border border-[#e8e8e8] opacity-0 transition-opacity duration-200 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto flex flex-col gap-2">
+        <p className="font-['Inter:Medium',sans-serif] font-medium text-[#2e2f32] text-[16px]">Callout 3</p>
+        <p className="font-['Inter:Regular',sans-serif] text-[14px] text-[#4e4f4e]">Content for this callout.</p>
+      </div>
       <Pin3 />
     </div>
   );
@@ -5327,7 +5333,7 @@ function Callout2() {
 
 function Pin4() {
   return (
-    <div className="absolute bottom-0 right-[281px] size-[22px]" data-name="Pin">
+    <div className="absolute bottom-0 right-[281px] size-[22px] cursor-pointer z-10" data-name="Pin">
       <div className="absolute bg-[rgba(239,242,255,0.6)] inset-0 rounded-[1000px]" />
       <div className="absolute bg-[rgba(0,38,255,0.9)] inset-[22.73%] rounded-[1000px]" />
     </div>
@@ -5336,7 +5342,11 @@ function Pin4() {
 
 function Callout3() {
   return (
-    <div className="absolute h-[101px] right-[61.15px] top-[1903px] w-[350px]" data-name="Callout 4">
+    <div className="group absolute h-[101px] right-[61.15px] top-[1903px] w-[350px]" data-name="Callout 4">
+      <div className="absolute bottom-full left-0 mb-2 w-[280px] rounded-lg bg-white p-4 shadow-lg border border-[#e8e8e8] opacity-0 transition-opacity duration-200 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto flex flex-col gap-2">
+        <p className="font-['Inter:Medium',sans-serif] font-medium text-[#2e2f32] text-[16px]">Callout 4</p>
+        <p className="font-['Inter:Regular',sans-serif] text-[14px] text-[#4e4f4e]">Content for this callout.</p>
+      </div>
       <Pin4 />
     </div>
   );
@@ -5369,32 +5379,80 @@ function Frame97() {
   );
 }
 
-function CircleCaretLeft() {
+function CircleCaretLeft({ onDrag }: { onDrag: (deltaX: number) => void }) {
+  const dragStart = useRef<{ x: number; scrollTop: number } | null>(null);
+
+  const onPointerDown = (e: React.PointerEvent) => {
+    e.preventDefault();
+    (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
+    dragStart.current = { x: e.clientX, scrollTop: 0 };
+  };
+
+  const onPointerMove = (e: React.PointerEvent) => {
+    if (dragStart.current === null) return;
+    const deltaX = e.clientX - dragStart.current.x;
+    dragStart.current = { x: e.clientX, scrollTop: dragStart.current.scrollTop };
+    onDrag(deltaX);
+  };
+
+  const onPointerUp = (e: React.PointerEvent) => {
+    (e.currentTarget as HTMLElement).releasePointerCapture(e.pointerId);
+    dragStart.current = null;
+  };
+
   return (
-    <div className="absolute bg-[rgba(25,25,25,0.4)] right-[-40px] rounded-[1000px] size-[80px] top-[270.34px]" data-name="circleCaret/left">
+    <div
+      role="button"
+      tabIndex={0}
+      className="absolute bg-[rgba(25,25,25,0.4)] right-[-40px] rounded-[1000px] size-[80px] top-[270.34px] cursor-grab active:cursor-grabbing touch-none select-none"
+      data-name="circleCaret/left"
+      onPointerDown={onPointerDown}
+      onPointerMove={onPointerMove}
+      onPointerUp={onPointerUp}
+      onPointerCancel={onPointerUp}
+      onKeyDown={(e) => {
+        if (e.key === "ArrowRight") {
+          e.preventDefault();
+          onDrag(40);
+        } else if (e.key === "ArrowLeft") {
+          e.preventDefault();
+          onDrag(-40);
+        }
+      }}
+      aria-label="Drag left or right to scroll image"
+    >
       <div aria-hidden="true" className="absolute border border-[#f8f8f8] border-solid inset-[-0.5px] pointer-events-none rounded-[1000.5px] shadow-[0px_2px_8px_0px_rgba(0,0,0,0.1)]" />
       <Frame97 />
-      <div className="absolute border border-[#e8e8e8] border-solid inset-0 rounded-[100px]" data-name="border" />
+      <div className="absolute border border-[#e8e8e8] border-solid inset-0 rounded-[100px] pointer-events-none" data-name="border" />
     </div>
   );
 }
 
-function RightImage() {
+function RightImage({ onDrag }: { onDrag: (deltaX: number) => void }) {
   return (
     <div className="absolute content-stretch flex h-[3366px] items-center left-0 top-px" data-name="Right Image">
       <Image16 />
       <div className="bg-[#023625] h-[1144px] shrink-0 w-[2px]" data-name="Line" />
-      <CircleCaretLeft />
+      <CircleCaretLeft onDrag={onDrag} />
     </div>
   );
 }
 
 function Comparison() {
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const handleCaretDrag = (deltaX: number) => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const maxScroll = el.scrollHeight - el.clientHeight;
+    el.scrollTop = Math.max(0, Math.min(maxScroll, el.scrollTop + deltaX));
+  };
+
   return (
     <div className="h-[3369px] relative rounded-[16px] shrink-0 w-[1180px]" data-name="Comparison">
       <div className="overflow-clip relative rounded-[inherit] size-full">
-        <Image15 />
-        <RightImage />
+        <Image15 scrollRef={scrollRef} />
+        <RightImage onDrag={handleCaretDrag} />
       </div>
       <div aria-hidden="true" className="absolute border border-[#ccc] border-solid inset-0 pointer-events-none rounded-[16px]" />
     </div>
