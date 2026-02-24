@@ -2625,8 +2625,8 @@ function Button4() {
 
 function NewCardTypeSolution() {
   return (
-    <div className="bg-white flex-[1_0_0] h-full min-h-px min-w-px relative rounded-[8px]" data-name="New Card type / Solution">
-      <div aria-hidden="true" className="absolute border-2 border-[#023625] border-solid inset-0 pointer-events-none rounded-[8px]" />
+    <div className="bg-white flex-1 min-w-0 h-full min-h-0 relative rounded-[10px]" data-name="New Card type / Solution">
+      <div aria-hidden="true" className="absolute border-2 border-[#023625] border-solid inset-0 pointer-events-none rounded-[10px]" />
       <div className="content-stretch flex flex-col gap-[8px] items-start p-[16px] relative size-full">
         <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[24px] not-italic relative shrink-0 text-[16px] text-black w-[226.82px] whitespace-pre-wrap">Solution</p>
         <Image11 />
@@ -2673,7 +2673,7 @@ function Button5() {
 
 function NewCardTypeService() {
   return (
-    <div className="aspect-[300/390] bg-white flex-[1_0_0] min-h-px min-w-px relative rounded-[10px]" data-name="New Card type / Service">
+    <div className="bg-white flex-1 min-w-0 h-full min-h-0 relative rounded-[10px]" data-name="New Card type / Service">
       <div aria-hidden="true" className="absolute border-2 border-[#023625] border-solid inset-0 pointer-events-none rounded-[10px]" />
       <div className="content-stretch flex flex-col gap-[8px] items-start p-[16px] relative size-full">
         <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[24px] not-italic relative shrink-0 text-[16px] text-black w-[226.82px] whitespace-pre-wrap">Service</p>
@@ -2715,7 +2715,7 @@ function Button6() {
 
 function NewCardTypeFaq() {
   return (
-    <div className="aspect-[300/390] bg-white flex-[1_0_0] min-h-px min-w-px relative rounded-[10px]" data-name="New Card type / FAQ">
+    <div className="bg-white flex-1 min-w-0 h-full min-h-0 relative rounded-[10px]" data-name="New Card type / FAQ">
       <div aria-hidden="true" className="absolute border-2 border-[#023625] border-solid inset-0 pointer-events-none rounded-[10px]" />
       <div className="content-stretch flex flex-col gap-[8px] items-start p-[16px] relative size-full">
         <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[24px] not-italic relative shrink-0 text-[16px] text-black w-[229.369px] whitespace-pre-wrap">FAQ</p>
@@ -2761,7 +2761,7 @@ function Button7() {
 
 function NewCardTypeContentCard() {
   return (
-    <div className="aspect-[300/390] bg-white flex-[1_0_0] min-h-px min-w-px relative rounded-[10px]" data-name="New Card type / Content Card">
+    <div className="bg-white flex-1 min-w-0 h-full min-h-0 relative rounded-[10px]" data-name="New Card type / Content Card">
       <div aria-hidden="true" className="absolute border-2 border-[#023625] border-solid inset-0 pointer-events-none rounded-[10px]" />
       <div className="content-stretch flex flex-col gap-[8px] items-start p-[16px] relative size-full">
         <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[24px] not-italic relative shrink-0 text-[16px] text-black w-[229.369px] whitespace-pre-wrap">Content Card</p>
@@ -2776,10 +2776,10 @@ function NewCardTypeContentCard() {
 function Frame115() {
   return (
     <div className="flex min-h-0 min-w-0 flex-1 flex-row gap-[16px] items-stretch">
-      <ReskinCardTypeBasic />
-      <ReskinCardTypeProfile />
-      <ReskinCardTypeProduct />
-      <ReskinCardTypeDownload />
+      <NewCardTypeSolution />
+      <NewCardTypeService />
+      <NewCardTypeFaq />
+      <NewCardTypeContentCard />
     </div>
   );
 }
@@ -2925,7 +2925,7 @@ function ComponentsNewSp103ProductCarouselServiceCardTablet() {
 
 function Specimen() {
   return (
-    <div className="bg-[#024731] relative rounded-[12px] w-full max-w-[426px] aspect-[300/390] mx-auto z-[1]" data-name="specimen">
+    <div className="bg-[#024731] relative rounded-[12px] w-full max-w-[426px] lg:max-w-[500px] xl:max-w-[560px] 2xl:max-w-[640px] aspect-[300/390] mx-auto z-[1]" data-name="specimen">
       <div className="flex flex-col items-center justify-center overflow-clip rounded-[inherit] size-full">
         <div className="content-stretch flex flex-col items-center justify-center p-[32px] relative size-full font-medium">
           <ComponentsNewSp103ProductCarouselServiceCardTablet />
@@ -2938,7 +2938,7 @@ function Specimen() {
 
 function Props() {
   return (
-    <div className="content-stretch flex flex-none flex-col items-center justify-center min-h-[640px] min-w-0 relative w-[400px] pl-0" data-name="props">
+    <div className="content-stretch flex flex-1 flex-col items-center justify-center min-h-[640px] min-w-0 max-w-[426px] lg:max-w-[500px] xl:max-w-[560px] 2xl:max-w-[640px] relative w-full pl-0" data-name="props">
       <Specimen />
     </div>
   );
@@ -3953,7 +3953,7 @@ function SpecCallout7() {
 
 function Props1() {
   return (
-    <div className="flex-1 min-w-0 relative w-fit min-h-[640px] overflow-visible pr-0" data-name="props">
+    <div className="flex-1 relative w-fit min-h-[640px] max-w-[425px] overflow-visible pr-0" data-name="props">
       <DesignPanelProperties />
       <SpecCallout3 />
       <SpecCallout4 />
@@ -3966,7 +3966,7 @@ function Props1() {
 
 function ComponentProps() {
   return (
-    <div className="flex flex-1 min-w-0 w-full gap-[32px] items-stretch lg:flex-row lg:items-start relative" data-name="Component props">
+    <div className="flex flex-1 min-w-0 w-full gap-0 items-stretch lg:flex-row lg:items-start relative" data-name="Component props">
       <Props />
       <Props1 />
     </div>
@@ -5236,24 +5236,30 @@ function SectionCards3() {
   );
 }
 
-function Left({ scrollRef }: { scrollRef: React.RefObject<HTMLDivElement | null> }) {
+const COMPARISON_FRAME_H = 700;
+const COMPARISON_CONTENT_H = 3368;
+const scrollbarHide = "[scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden";
+
+function Left({ scrollRef, onScroll }: { scrollRef: React.RefObject<HTMLDivElement | null>; onScroll: () => void }) {
   return (
     <div
       ref={scrollRef}
-      className="absolute h-[3366px] overflow-x-clip overflow-y-auto right-0 top-[-0.47px] w-[1184px] scroll-smooth"
+      className={`absolute overflow-y-auto overflow-x-hidden right-0 top-0 w-[1184px] scroll-smooth ${scrollbarHide}`}
+      style={{ height: COMPARISON_FRAME_H }}
+      onScroll={onScroll}
       data-name="Left"
     >
-      <div className="absolute h-[3368px] right-[-0.3px] top-0 w-[1184.352px]" data-name="D.SF.1 - Landing 2">
-        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgDSf1Landing2} />
+      <div className="relative right-[-0.3px] top-0 w-[1184.352px]" style={{ height: COMPARISON_CONTENT_H }} data-name="D.SF.1 - Landing 2">
+        <img alt="Design" className="absolute inset-0 max-w-none object-cover object-top pointer-events-none size-full" src={imgDSf1Landing2} />
       </div>
     </div>
   );
 }
 
-function Image15({ scrollRef }: { scrollRef: React.RefObject<HTMLDivElement | null> }) {
+function Image15({ scrollRef, onScroll }: { scrollRef: React.RefObject<HTMLDivElement | null>; onScroll: () => void }) {
   return (
-    <div className="absolute h-[2623px] left-px right-[-1px] top-[1.47px]" data-name="Image 2">
-      <Left scrollRef={scrollRef} />
+    <div className="absolute left-px right-[-1px] top-0" style={{ height: COMPARISON_FRAME_H }} data-name="Image 2">
+      <Left scrollRef={scrollRef} onScroll={onScroll} />
     </div>
   );
 }
@@ -5352,11 +5358,16 @@ function Callout3() {
   );
 }
 
-function Image16() {
+function Image16({ className, scrollRef, onScroll }: { className?: string; scrollRef?: React.RefObject<HTMLDivElement | null>; onScroll?: () => void }) {
   return (
-    <div className="bg-[#f4f4f4] h-full overflow-x-clip overflow-y-auto relative shrink-0 w-[587px]" data-name="Image 1">
-      <div className="absolute h-[3368px] left-[0.15px] top-0 w-[1185px]" data-name="Wireframe 1">
-        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgWireframe1} />
+    <div
+      ref={scrollRef}
+      onScroll={onScroll}
+      className={`${className ?? "bg-[#f4f4f4] h-full overflow-x-clip overflow-y-auto relative shrink-0 w-[587px]"} ${scrollbarHide} scroll-smooth`}
+      data-name="Image 1"
+    >
+      <div className="absolute left-[0.15px] top-0 w-[1185px]" style={{ height: COMPARISON_CONTENT_H }} data-name="Wireframe 1">
+        <img alt="" className="absolute inset-0 max-w-none object-cover object-top pointer-events-none size-full" src={imgWireframe1} />
       </div>
       <Callout />
       <Callout1 />
@@ -5379,19 +5390,19 @@ function Frame97() {
   );
 }
 
-function CircleCaretLeft({ onDrag }: { onDrag: (deltaX: number) => void }) {
-  const dragStart = useRef<{ x: number; scrollTop: number } | null>(null);
+function CircleCaretLeft({ onDrag, splitX }: { onDrag: (deltaX: number) => void; splitX: number }) {
+  const dragStart = useRef<{ x: number } | null>(null);
 
   const onPointerDown = (e: React.PointerEvent) => {
     e.preventDefault();
     (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
-    dragStart.current = { x: e.clientX, scrollTop: 0 };
+    dragStart.current = { x: e.clientX };
   };
 
   const onPointerMove = (e: React.PointerEvent) => {
     if (dragStart.current === null) return;
     const deltaX = e.clientX - dragStart.current.x;
-    dragStart.current = { x: e.clientX, scrollTop: dragStart.current.scrollTop };
+    dragStart.current = { x: e.clientX };
     onDrag(deltaX);
   };
 
@@ -5401,10 +5412,10 @@ function CircleCaretLeft({ onDrag }: { onDrag: (deltaX: number) => void }) {
   };
 
   return (
-    <div
-      role="button"
-      tabIndex={0}
-      className="absolute bg-[rgba(25,25,25,0.4)] right-[-40px] rounded-[1000px] size-[80px] top-[270.34px] cursor-grab active:cursor-grabbing touch-none select-none"
+    <button
+      type="button"
+      className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 z-10 bg-[rgba(25,25,25,0.4)] rounded-[1000px] size-[80px] cursor-grab active:cursor-grabbing touch-none select-none border-0 p-0 appearance-none focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[rgba(25,25,25,0.4)]"
+      style={{ left: splitX + 1 }}
       data-name="circleCaret/left"
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
@@ -5413,46 +5424,76 @@ function CircleCaretLeft({ onDrag }: { onDrag: (deltaX: number) => void }) {
       onKeyDown={(e) => {
         if (e.key === "ArrowRight") {
           e.preventDefault();
-          onDrag(40);
+          onDrag(150);
         } else if (e.key === "ArrowLeft") {
           e.preventDefault();
-          onDrag(-40);
+          onDrag(-150);
         }
       }}
-      aria-label="Drag left or right to scroll image"
+      aria-label="Drag left to hide the wireframe, drag right to show it"
     >
       <div aria-hidden="true" className="absolute border border-[#f8f8f8] border-solid inset-[-0.5px] pointer-events-none rounded-[1000.5px] shadow-[0px_2px_8px_0px_rgba(0,0,0,0.1)]" />
       <Frame97 />
       <div className="absolute border border-[#e8e8e8] border-solid inset-0 rounded-[100px] pointer-events-none" data-name="border" />
-    </div>
+    </button>
   );
 }
 
-function RightImage({ onDrag }: { onDrag: (deltaX: number) => void }) {
+const COMPARISON_WIDTH = 1180;
+const LEFT_PANEL_MAX_WIDTH = COMPARISON_WIDTH;
+
+function RightImage({
+  leftPanelWidth,
+  onDrag,
+  leftScrollRef,
+  onLeftScroll,
+}: {
+  leftPanelWidth: number;
+  onDrag: (deltaX: number) => void;
+  leftScrollRef: React.RefObject<HTMLDivElement | null>;
+  onLeftScroll: () => void;
+}) {
   return (
-    <div className="absolute content-stretch flex h-[3366px] items-center left-0 top-px" data-name="Right Image">
-      <Image16 />
-      <div className="bg-[#023625] h-[1144px] shrink-0 w-[2px]" data-name="Line" />
-      <CircleCaretLeft onDrag={onDrag} />
+    <div className="absolute content-stretch flex items-center left-0 top-0 h-[700px]" style={{ height: COMPARISON_FRAME_H }} data-name="Right Image">
+      <div className="h-full overflow-hidden shrink-0 transition-[width] duration-75" style={{ width: leftPanelWidth }}>
+        <Image16 className="bg-[#f4f4f4] h-full overflow-x-clip overflow-y-auto relative w-full min-w-0" scrollRef={leftScrollRef} onScroll={onLeftScroll} />
+      </div>
+      <div className="bg-[#023625] h-full shrink-0 w-[2px]" data-name="Line" />
+      <CircleCaretLeft onDrag={onDrag} splitX={leftPanelWidth} />
     </div>
   );
 }
 
 function Comparison() {
-  const scrollRef = useRef<HTMLDivElement>(null);
+  const [leftPanelWidth, setLeftPanelWidth] = useState(LEFT_PANEL_MAX_WIDTH);
+  const leftScrollRef = useRef<HTMLDivElement>(null);
+  const rightScrollRef = useRef<HTMLDivElement>(null);
+  const isSyncingScroll = useRef(false);
+
+  const syncScrollFromLeft = () => {
+    if (isSyncingScroll.current || !leftScrollRef.current || !rightScrollRef.current) return;
+    isSyncingScroll.current = true;
+    rightScrollRef.current.scrollTop = leftScrollRef.current.scrollTop;
+    requestAnimationFrame(() => { isSyncingScroll.current = false; });
+  };
+
+  const syncScrollFromRight = () => {
+    if (isSyncingScroll.current || !leftScrollRef.current || !rightScrollRef.current) return;
+    isSyncingScroll.current = true;
+    leftScrollRef.current.scrollTop = rightScrollRef.current.scrollTop;
+    requestAnimationFrame(() => { isSyncingScroll.current = false; });
+  };
 
   const handleCaretDrag = (deltaX: number) => {
-    const el = scrollRef.current;
-    if (!el) return;
-    const maxScroll = el.scrollHeight - el.clientHeight;
-    el.scrollTop = Math.max(0, Math.min(maxScroll, el.scrollTop + deltaX));
+    const step = Math.sign(deltaX) * Math.min(Math.abs(deltaX) * 1.8, 400);
+    setLeftPanelWidth((prev) => Math.max(0, Math.min(LEFT_PANEL_MAX_WIDTH, prev + step)));
   };
 
   return (
-    <div className="h-[3369px] relative rounded-[16px] shrink-0 w-[1180px]" data-name="Comparison">
+    <div className="relative rounded-[16px] shrink-0 w-[1180px]" style={{ height: COMPARISON_FRAME_H }} data-name="Comparison">
       <div className="overflow-clip relative rounded-[inherit] size-full">
-        <Image15 scrollRef={scrollRef} />
-        <RightImage onDrag={handleCaretDrag} />
+        <Image15 scrollRef={rightScrollRef} onScroll={syncScrollFromRight} />
+        <RightImage leftPanelWidth={leftPanelWidth} onDrag={handleCaretDrag} leftScrollRef={leftScrollRef} onLeftScroll={syncScrollFromLeft} />
       </div>
       <div aria-hidden="true" className="absolute border border-[#ccc] border-solid inset-0 pointer-events-none rounded-[16px]" />
     </div>
