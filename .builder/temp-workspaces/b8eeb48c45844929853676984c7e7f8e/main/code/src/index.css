@@ -1,38 +1,56 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+@import "tailwindcss";
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@theme {
+  --color-walmart-blue: #0053E2;
+  --color-walmart-blue-100: #0053E2;
+  --color-walmart-warning: #FFC220;
+  --color-walmart-green: #2A8703;
+  --color-walmart-text: #2E2F32;
+  --color-walmart-text-subtle: #74767C;
+  --color-walmart-text-inverse: #FFFFFF;
+  --color-walmart-bg: #FFFFFF;
+  --color-walmart-bg-subtle: #F8F8F8;
+  --color-walmart-border: #BABBBE;
+  --color-walmart-border-activated: #0053E2;
+  --color-walmart-divider: #E3E4E5;
+  --color-walmart-surface-brand: #E9F1FE;
 
-/* Walmart Everyday Sans UI font - using system fallback for now */
-@layer base {
-  :root {
-    --walmart-blue: #0053E2;
-    --walmart-blue-100: #0053E2;
-    --walmart-warning: #FFC220;
-    --walmart-green: #2A8703;
-    --walmart-text: #2E2F32;
-    --walmart-text-subtle: #74767C;
-    --walmart-text-inverse: #FFFFFF;
-    --walmart-bg: #FFFFFF;
-    --walmart-bg-subtle: #F8F8F8;
-    --walmart-border: #BABBBE;
-    --walmart-border-activated: #0053E2;
-    --walmart-divider: #E3E4E5;
-  }
+  --font-family-everyday-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-family-bogle: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 
-  body {
-    margin: 0;
-    min-width: 320px;
-    min-height: 100vh;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    background-color: var(--walmart-bg);
-    color: var(--walmart-text);
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
+  --font-size-caption: 12px;
+  --font-size-body-small: 14px;
+  --font-size-body-medium: 16px;
+  --font-size-body-large: 18px;
+  --font-size-heading-small: 18px;
+  --font-size-heading-large: 24px;
 
-  * {
-    box-sizing: border-box;
-  }
+  --line-height-caption: 16px;
+  --line-height-body-small: 20px;
+  --line-height-body-medium: 24px;
+  --line-height-heading-small: 24px;
+  --line-height-heading-large: 32px;
+
+  --radius-walmart: 4px;
+  --radius-walmart-lg: 8px;
+  --radius-walmart-round: 1000px;
+
+  --shadow-walmart: 0 -1px 2px 0 rgba(0, 0, 0, 0.10), 0 1px 2px 1px rgba(0, 0, 0, 0.15);
+  --shadow-walmart-button: 0 1px 2px 0 rgba(0, 0, 0, 0.15), 0 -1px 2px 0 rgba(0, 0, 0, 0.10);
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  font-family: var(--font-family-everyday-sans);
+  background-color: #FFFFFF;
+  color: #2E2F32;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
 }

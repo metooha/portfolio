@@ -1,22 +1,29 @@
 function Header() {
   return (
-    <header className="bg-walmart-blue px-4 py-3 flex items-center justify-between">
+    <header className="bg-walmart-blue px-4 pt-[3px] pb-3 flex items-center gap-3">
       {/* Back button */}
       <button className="w-8 h-8 flex items-center justify-center">
-        <svg width="14" height="24" viewBox="0 0 14 24" fill="none">
-          <path d="M0.332 16.7537L12.6165 28L14 26.4927L2.5387 16L14 5.50732L12.6165 4L0.332 15.2463C0.1204 15.44 0 15.7134 0 16C0 16.2866 0.1204 16.56 0.332 16.7537Z" fill="white"/>
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+          <path d="M10.332 16.7537L22.6165 28L24 26.4927L12.5387 16L24 5.50732L22.6165 4L10.332 15.2463C10.1204 15.44 10 15.7134 10 16C10 16.2866 10.1204 16.56 10.332 16.7537Z" fill="white"/>
         </svg>
       </button>
 
       {/* Title */}
       <h1 className="flex-1 text-center text-white text-lg font-bold">Review Order</h1>
 
-      {/* Cart icon */}
-      <div className="w-8 h-10 flex items-center justify-center relative">
-        <svg width="21" height="18" viewBox="0 0 21 18" fill="none">
-          <path d="M20.3284 3.23047L18.8955 12.9668C18.7275 14.1191 17.6953 15 16.5264 15H4.47363C3.30469 15 2.27246 14.1191 2.10449 12.9668L0.671631 3.23047C0.587891 2.66602 1.01953 2.16797 1.58398 2.16797H19.416C19.9805 2.16797 20.4121 2.66602 20.3284 3.23047ZM7.33594 6.83594C7.33594 6.41602 6.99609 6.07617 6.57617 6.07617C6.15625 6.07617 5.81641 6.41602 5.81641 6.83594V10.6055C5.81641 11.0254 6.15625 11.3652 6.57617 11.3652C6.99609 11.3652 7.33594 11.0254 7.33594 10.6055V6.83594ZM11.2598 6.83594C11.2598 6.41602 10.9199 6.07617 10.5 6.07617C10.0801 6.07617 9.74023 6.41602 9.74023 6.83594V10.6055C9.74023 11.0254 10.0801 11.3652 10.5 11.3652C10.9199 11.3652 11.2598 11.0254 11.2598 10.6055V6.83594ZM15.1836 6.83594C15.1836 6.41602 14.8438 6.07617 14.4238 6.07617C14.0039 6.07617 13.6641 6.41602 13.6641 6.83594V10.6055C13.6641 11.0254 14.0039 11.3652 14.4238 11.3652C14.8438 11.3652 15.1836 11.0254 15.1836 10.6055V6.83594Z" fill="white"/>
-          <path d="M7.5 0.75C7.08984 0.75 6.75 1.08984 6.75 1.5V2.16797H14.25V1.5C14.25 1.08984 13.9102 0.75 13.5 0.75H7.5Z" fill="white"/>
-        </svg>
+      {/* Cart icon with badge */}
+      <div className="w-[34px] h-10 relative flex flex-col items-center">
+        <div className="relative">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M20.6 5.2L19.4 14.8C19.3 15.6 18.6 16.2 17.8 16.2H6.2C5.4 16.2 4.7 15.6 4.6 14.8L3.4 5.2C3.3 4.8 3.6 4.4 4 4.4H20C20.4 4.4 20.7 4.8 20.6 5.2Z" fill="white"/>
+            <path d="M9 2C8.4 2 8 2.4 8 3V4.4H16V3C16 2.4 15.6 2 15 2H9Z" fill="white"/>
+          </svg>
+          {/* Badge */}
+          <div className="absolute -top-1 -right-1.5 w-4 h-4 bg-walmart-yellow rounded-full border border-[#662B0D] flex items-center justify-center">
+            <span className="text-walmart-text text-xs font-bold leading-none">0</span>
+          </div>
+        </div>
+        <span className="text-white text-xs leading-4 mt-0.5">$0.00</span>
       </div>
     </header>
   )
