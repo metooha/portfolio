@@ -66,33 +66,35 @@ export function About() {
     <div className="min-h-screen [&::-webkit-scrollbar]:w-[2px] [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300">
       {/* Hero Section with Purple Background */}
       <div className="relative bg-gradient-to-br from-indigo-600 to-purple-700 text-white overflow-hidden -mx-4 md:-mx-[68px]">
-        <div className="w-full pt-24 pb-32 px-4 md:px-[68px]">
-          {/* H1 at the top */}
-          <h1 className="text-5xl md:text-6xl font-bold text-[48px] mb-12">Principal UX Designer at Walmart - Platform & Design Systems, Architect</h1>
-          
-          {/* Body text and image side by side */}
-          <div className="grid md:grid-cols-2 gap-12 items-start w-full">
-            {/* Left side - Text content */}
-            <div className="space-y-6">
-              <p className="text-lg leading-relaxed">
-                I'm Amy and I work at the platform and systems level, focused on building enterprise-scale design infrastructure rather than one-off features. 
-              </p>
-              <p className="text-lg leading-relaxed">
-              At Walmart, I own design systems as production infrastructure — spanning information architecture, visual language, tokens, automation, and design-to-code workflows that support internal tools, B2B platforms, and consumer products at massive scale. I'm especially interested in self-serve systems, AI-driven workflows, and the balance between evolving visual language and long-term system stability. I enjoy partnering closely with engineering and design leadership to shape platform strategy and build systems that create real organizational leverage.
-              </p>
-              <p className="text-lg leading-relaxed">
-                Outside of work I enjoy traveling, hiking, and biking (mountain and
-                gravel). I have a lot of hobbies like gardening, boardgames, collecting plants and building aquascapes.
-              </p>
-            </div>
+        <div className="w-full pt-24 pb-32 pl-0 pr-4 md:pl-[68px] md:pr-[68px]">
+          <div className="w-full px-[100px]">
+            {/* H1 at the top */}
+            <h1 className="text-5xl md:text-6xl font-bold text-[48px] mb-12">Principal UX Designer at Walmart - Platform & Design Systems, Architect</h1>
 
-            {/* Right side - Garden image */}
-            <div className="rounded-2xl overflow-hidden relative z-10 flex items-start justify-center">
-              <img
-                src={gardenImage}
-                alt="Garden with fountain"
-                className="w-[600px] h-auto object-cover rounded-[24px]"
-              />
+            {/* Body text and image side by side */}
+            <div className="grid md:grid-cols-2 gap-12 items-start w-full">
+              {/* Left side - Text content */}
+              <div className="space-y-6">
+                <p className="text-lg leading-relaxed">
+                  I'm Amy and I work at the platform and systems level, focused on building enterprise-scale design infrastructure rather than one-off features.
+                </p>
+                <p className="text-lg leading-relaxed">
+                  At Walmart, I own design systems as production infrastructure — spanning information architecture, visual language, tokens, automation, and design-to-code workflows that support internal tools, B2B platforms, and consumer products at massive scale. I'm especially interested in self-serve systems, AI-driven workflows, and the balance between evolving visual language and long-term system stability. I enjoy partnering closely with engineering and design leadership to shape platform strategy and build systems that create real organizational leverage.
+                </p>
+                <p className="text-lg leading-relaxed">
+                  Outside of work I enjoy traveling, hiking, and biking (mountain and
+                  gravel). I have a lot of hobbies like gardening, boardgames, collecting plants and building aquascapes.
+                </p>
+              </div>
+
+              {/* Right side - Garden image */}
+              <div className="rounded-2xl overflow-hidden relative z-10 flex items-start justify-center">
+                <img
+                  src={gardenImage}
+                  alt="Garden with fountain"
+                  className="w-[600px] h-auto object-cover rounded-[24px]"
+                />
+              </div>
             </div>
           </div>
         </div>

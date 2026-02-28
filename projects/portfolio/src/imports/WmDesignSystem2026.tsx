@@ -1605,7 +1605,7 @@ function Count9() {
 
 function SectionHeadingVertical4() {
   return (
-    <div className="content-stretch flex flex-col gap-[8px] items-start justify-center relative shrink-0 w-fit max-w-[375px]" data-name="Section Heading / Vertical">
+    <div className="content-stretch flex flex-col gap-[8px] items-start justify-center relative shrink-0 w-full max-w-[375px]" data-name="Section Heading / Vertical">
       <Count9 />
       <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[normal] not-italic relative shrink-0 text-[20px] text-black w-full min-w-0">{`Tokens & Foundations`}</p>
       <p className="font-['Inter:Regular',sans-serif] font-normal leading-[24px] not-italic relative shrink-0 text-[#4e4f4e] text-[16px] w-full min-w-0">
@@ -1620,7 +1620,7 @@ function SectionHeadingVertical4() {
 
 function ValueProp8() {
   return (
-    <div className="content-stretch flex w-full min-w-0 max-w-[350px] flex-1 flex-col items-start pb-[24px] relative shrink" data-name="Value Prop">
+    <div className="content-stretch flex w-fit min-w-0 flex-1 flex-col items-start pb-[24px] relative shrink" data-name="Value Prop">
       <SectionHeadingVertical4 />
     </div>
   );
@@ -2439,7 +2439,7 @@ function ReskinCardTypeProductBack() {
     <div className="bg-white size-full min-h-0 min-w-0 relative rounded-[8px] overflow-hidden shadow-[0px_2px_8px_rgba(0,0,0,0.08)]">
       <div className="content-stretch flex flex-col size-full">
         <div className="relative h-[140px] min-h-[140px] w-full shrink-0 overflow-hidden bg-white">
-          <img alt="Roll-off dumpster" className="absolute inset-0 size-full object-contain object-center" src={imgRollOffDumpster} />
+          <img alt="Roll-off dumpster" className="absolute inset-0 size-full object-cover object-center" src={imgRollOffDumpster} />
         </div>
         <div className="content-stretch flex flex-col gap-[4px] items-start p-[16px] relative flex-1 min-h-0">
           <p className="font-['Inter:Bold',sans-serif] font-bold leading-[27px] not-italic text-[#4e4f58] text-[20px] w-full">Temporary Roll-Off Dumpster</p>
@@ -3612,7 +3612,7 @@ function Props2() {
 
 function DesignPanelProperties() {
   return (
-    <div className="absolute left-0 top-0 bg-white content-stretch flex flex-col gap-[16px] items-start overflow-clip p-[24px] rounded-[8px] shadow-[0px_12px_10px_0px_rgba(0,0,0,0.1),0px_5px_10px_3px_rgba(0,0,0,0.15)] w-full max-w-[426px] z-[2]" data-name="Design Panel: Properties">
+    <div className="absolute -left-10 top-0 bg-white content-stretch flex flex-col gap-[16px] items-start overflow-clip p-[24px] rounded-[8px] shadow-[0px_12px_10px_0px_rgba(0,0,0,0.1),0px_5px_10px_3px_rgba(0,0,0,0.15)] w-full max-w-[426px] z-[2]" data-name="Design Panel: Properties">
       <NameDescription />
       <Props2 />
     </div>
@@ -5366,7 +5366,7 @@ function Image16({ className, scrollRef, onScroll }: { className?: string; scrol
       className={`${className ?? "bg-[#f4f4f4] h-full overflow-x-clip overflow-y-auto relative shrink-0 w-[587px]"} ${scrollbarHide} scroll-smooth`}
       data-name="Image 1"
     >
-      <div className="absolute left-[0.15px] top-0 w-[1185px]" style={{ height: COMPARISON_CONTENT_H }} data-name="Wireframe 1">
+      <div className="absolute left-0 top-0 w-full min-h-full" style={{ minHeight: COMPARISON_CONTENT_H }} data-name="Wireframe 1">
         <img alt="" className="absolute inset-0 max-w-none object-cover object-top pointer-events-none size-full" src={imgWireframe1} />
       </div>
       <Callout />
@@ -5639,8 +5639,8 @@ function Frame100() {
 
 function RecycleRightRight() {
   return (
-    <div className="absolute h-[3366px] overflow-clip right-0 top-[-0.47px] w-[1184px]" data-name="Recycle right right">
-      <div className="absolute h-[4062.103px] left-0 top-0 w-[1183.127px]" data-name="D.Recycling 101 1">
+    <div className="absolute inset-0 overflow-clip" data-name="Recycle right right">
+      <div className="absolute inset-0 w-full h-full" data-name="D.Recycling 101 1">
         <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgDRecycling1011} />
       </div>
       <div className="absolute bg-[#f7f8f2] h-[58.335px] left-0 top-[3406.43px] w-[105.167px]" />
@@ -5654,7 +5654,7 @@ function RecycleRightRight() {
 
 function Image17() {
   return (
-    <div className="absolute h-[2623px] left-px right-[-1px] top-[1.47px]" data-name="Image 2">
+    <div className="absolute inset-0" data-name="Image 2">
       <RecycleRightRight />
     </div>
   );
