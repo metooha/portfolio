@@ -1,5 +1,7 @@
 import React, { useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import { CaseStudyHero } from "@/app/components/CaseStudyHero";
+import { CaseStudyTemplate } from "@/app/components/CaseStudyTemplate";
 import { CaseStudyPageNav } from "@/app/components/CaseStudyPageNav";
 import { CaseStudyMeta } from "@/app/components/CaseStudyMeta";
 import { SectionHeading } from "@/app/components/SectionHeading";
@@ -76,6 +78,7 @@ import imgImage18 from "figma:asset/2d9e1526d7ce7129379c711b4d0f2eb469038272.png
 import imgGrid4 from "figma:asset/32a2d36ebb137b59f3791578c76908934bea604d.png";
 import imgImage111 from "figma:asset/f09a309a527da9a2a05dbe94b77f41b60519965f.png";
 import { imgScreencaptureWastemanagementAtlassianNetWikiSpacesTdcPages1427669170Sprint12Items202201171359311 } from "./svg-bny7f";
+import { getAdjacentCaseStudies } from "@/data/case-studies-config";
 
 function Heading() {
   return <CaseStudyHero image={imgDesign} title="Waste Management" titleColor="#143526" />;
@@ -90,77 +93,6 @@ const WM_NAV_SECTIONS = [
   { label: "Information Architecture", href: "#information-architecture" },
   { label: "Compromises", href: "#compromises" },
 ];
-
-function PageNavigation({ onVisibleChange }: { onVisibleChange?: (v: boolean) => void }) {
-  return <CaseStudyPageNav sections={WM_NAV_SECTIONS} accentColor="#207442" onVisibleChange={onVisibleChange} />;
-}
-
-function Frame43() {
-  return (
-    <div className="content-stretch flex flex-col gap-[6px] h-[49px] items-start leading-[normal] not-italic relative shrink-0">
-      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold relative shrink-0 text-[20px] text-black">Waste Management</p>
-      <p className="font-['Inter:Regular',sans-serif] font-normal relative shrink-0 text-[#4e4f4e] text-[16px]">Design Systems, Branding</p>
-    </div>
-  );
-}
-
-function Frame44() {
-  return (
-    <div className="content-stretch flex gap-[12px] items-start relative shrink-0">
-      <div className="relative rounded-[16px] shrink-0 size-[48px]">
-        <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[16px]">
-          <div className="absolute bg-[#d9d9d9] inset-0 rounded-[16px]" />
-          <div className="absolute inset-0 overflow-hidden rounded-[16px]">
-            <img alt="" className="absolute h-[146.99%] left-[-176.91%] max-w-none top-[-18.98%] w-[316.82%]" src={imgRectangle1189} />
-          </div>
-        </div>
-      </div>
-      <Frame43 />
-    </div>
-  );
-}
-
-function PageTitle() {
-  return (
-    <div className="content-stretch flex flex-col gap-6 md:gap-9 items-start relative shrink-0 w-full" data-name="Page Title">
-      <Frame44 />
-      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-tight md:leading-[1.2] not-italic relative shrink-0 text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-[84px] text-black w-full max-w-[1200px]">Designing a scalable system for a digital rebrand</p>
-      <p className="font-['Inter:Regular',sans-serif] font-normal leading-snug md:leading-[36px] max-w-[1200px] not-italic relative shrink-0 text-base sm:text-lg md:text-xl lg:text-2xl xl:text-[26px] text-black w-full">In 2021, Waste Management launched a company-wide rebrand alongside a broader digital transformation focused on improving customer self-service. I worked with the branding agency and led the systems work behind the rebrand, treating it as an opportunity to establish shared UX infrastructure rather than redesign individual pages.</p>
-    </div>
-  );
-}
-
-function MetricsAndLinks() {
-  return (
-    <CaseStudyMeta
-      items={[
-        { label: "Role", value: "Principal Product Designer" },
-        { label: "Team", value: "Partnered with product, engineering, and brand leadership" },
-        { label: "Scope", value: "Company-wide rebrand across web platforms" },
-        { label: "Focus", value: "Platform UX patterns, information architecture, and shared systems" },
-      ]}
-    />
-  );
-}
-
-function Content() {
-  return (
-    <div className="content-stretch flex flex-1 flex-col gap-6 md:gap-9 items-start min-h-px min-w-0 w-full max-w-4xl lg:max-w-[1046px] pt-8 md:pt-16 lg:pt-[100px] relative" data-name="content">
-      <PageTitle />
-      <MetricsAndLinks />
-    </div>
-  );
-}
-
-function ProjectDetails() {
-  return (
-    <div id="overview" className="relative shrink-0 w-full" data-name="project details">
-      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-12 lg:px-[68px]">
-        <Content />
-      </div>
-    </div>
-  );
-}
 
 function Row2() {
   return (
@@ -179,7 +111,7 @@ function Row2() {
 
 function Column() {
   return (
-    <div className="content-stretch flex flex-[1_0_0] flex-col gap-[17px] h-full items-start min-h-px min-w-px relative" data-name="Column 1">
+    <div className="content-stretch flex flex-[1_0_0] flex-col gap-[17px] h-full items-start min-h-px min-w-0 relative" data-name="Column 1">
       <div className="flex-[1_0_0] min-h-px min-w-px relative rounded-[16px] w-full" data-name="Image 2">
         <div className="absolute inset-0 overflow-hidden pointer-events-none rounded-[16px]">
           <img alt="" className="absolute h-[121.71%] left-[-0.1%] max-w-none top-[-5.13%] w-[99.65%]" src={imgImage2} />
@@ -197,7 +129,7 @@ function Column() {
 
 function Column1() {
   return (
-    <div className="content-stretch flex flex-[1_0_0] h-full items-center min-h-px min-w-px relative" data-name="Column 2">
+    <div className="content-stretch flex flex-[1_0_0] h-full items-center min-h-px min-w-0 relative" data-name="Column 2">
       <div className="aspect-[324/551] flex-[1_0_0] min-h-px min-w-px relative rounded-[16px]" data-name="Image 4">
         <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[16px] size-full" src={imgImage4} />
       </div>
@@ -207,7 +139,7 @@ function Column1() {
 
 function Column2() {
   return (
-    <div className="content-stretch flex flex-[1_0_0] flex-col gap-[19px] h-full items-start min-h-px min-w-px relative" data-name="Column 3">
+    <div className="content-stretch flex flex-[1_0_0] flex-col gap-[19px] h-full items-start min-h-px min-w-0 relative" data-name="Column 3">
       <div className="flex-[1_0_0] min-h-px min-w-px relative rounded-[16px] w-full" data-name="Image 5">
         <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[16px]">
           <div className="absolute bg-[#ecedea] inset-0 rounded-[16px]" />
@@ -223,14 +155,14 @@ function Column2() {
 
 function Row3() {
   return (
-    <div className="content-stretch flex gap-[16px] items-center relative shrink-0 w-full" data-name="Row 2">
-      <div className="flex flex-[1_0_0] flex-row items-center self-stretch">
+    <div className="grid gap-[16px] items-stretch relative shrink-0 w-full min-w-0 grid-cols-[repeat(3,minmax(250px,316px))]" data-name="Row 2">
+      <div className="flex flex-row items-center self-stretch min-w-0">
         <Column />
       </div>
-      <div className="flex flex-[1_0_0] flex-row items-center self-stretch">
+      <div className="flex flex-row items-center self-stretch min-w-0">
         <Column1 />
       </div>
-      <div className="flex flex-[1_0_0] flex-row items-center self-stretch">
+      <div className="flex flex-row items-center self-stretch min-w-0">
         <Column2 />
       </div>
     </div>
@@ -764,7 +696,7 @@ function Audit() {
 
 function Iamge() {
   return (
-    <div className="content-stretch flex min-w-[280px] flex-1 max-w-full items-center pl-[16px] py-[16px] relative" data-name="iamge">
+    <div className="content-stretch flex min-w-0 w-full md:min-w-[280px] md:w-auto flex-1 max-w-full items-center pl-[16px] py-[16px] relative" data-name="iamge">
       <Audit />
     </div>
   );
@@ -772,7 +704,7 @@ function Iamge() {
 
 function Row4() {
   return (
-    <div className="bg-[#f8f8f8] content-start flex flex-wrap gap-[32px] items-start justify-end relative rounded-[16px] shrink-0 w-full" data-name="Row 2">
+    <div className="bg-[#f8f8f8] content-start flex flex-wrap gap-[32px] items-start justify-start md:justify-end relative rounded-[16px] shrink-0 w-full" data-name="Row 2">
       <ValueProp5 />
       <Iamge />
     </div>
@@ -868,7 +800,7 @@ function DesignToolKit() {
 
 function Image() {
   return (
-    <div className="content-stretch flex min-w-[280px] flex-1 max-w-full items-center pl-[16px] py-[16px] relative" data-name="image">
+    <div className="content-stretch flex min-w-0 w-full md:min-w-[280px] md:w-auto flex-1 max-w-full items-center pl-[16px] py-[16px] relative" data-name="image">
       <DesignToolKit />
     </div>
   );
@@ -1608,9 +1540,9 @@ function Title9() {
 
 function SectionHeadingFull9() {
   return (
-    <div className="content-start flex flex-wrap gap-[32px] items-start relative shrink-0 w-full" data-name="Section Heading / Full">
+    <div className="content-start flex flex-col md:flex-row flex-wrap gap-[32px] items-start relative shrink-0 w-full min-w-0" data-name="Section Heading / Full">
       <Title9 />
-      <p className="flex-[1_0_0] font-['Inter:Regular',sans-serif] font-normal leading-[24px] min-h-px min-w-px not-italic relative text-[#4e4f4e] text-[16px] whitespace-pre-wrap">Created with reuse in mind rather than customization, our components are organized to assist content designers. This structure helps users easily understand calls to action and how to interact with the pages.</p>
+      <p className="min-w-0 flex-1 font-['Inter:Regular',sans-serif] font-normal leading-[24px] min-h-px not-italic relative text-[#4e4f4e] text-[16px] whitespace-pre-wrap">Created with reuse in mind rather than customization, our components are organized to assist content designers. This structure helps users easily understand calls to action and how to interact with the pages.</p>
     </div>
   );
 }
@@ -1821,9 +1753,9 @@ function Title10() {
 
 function SectionHeadingFull10() {
   return (
-    <div className="content-start flex flex-wrap gap-[32px] items-start relative shrink-0 w-full" data-name="Section Heading / Full">
+    <div className="content-start flex flex-col md:flex-row flex-wrap gap-[32px] items-start relative shrink-0 w-full min-w-0" data-name="Section Heading / Full">
       <Title10 />
-      <p className="flex-[1_0_0] font-['Inter:Regular',sans-serif] font-normal leading-[24px] min-h-px min-w-px not-italic relative text-[#4e4f4e] text-[16px] whitespace-pre-wrap">We recognized that cards are essential, but there was a lack of consistent rules or patterns across various designs. We aimed to collaborate with the agency to clarify how cards should be used for the different paths a customer might take.</p>
+      <p className="min-w-0 flex-1 font-['Inter:Regular',sans-serif] font-normal leading-[24px] min-h-px not-italic relative text-[#4e4f4e] text-[16px] whitespace-pre-wrap">We recognized that cards are essential, but there was a lack of consistent rules or patterns across various designs. We aimed to collaborate with the agency to clarify how cards should be used for the different paths a customer might take.</p>
     </div>
   );
 }
@@ -1907,7 +1839,7 @@ function HoverRevealCard({
   const [isFlipped, setIsFlipped] = useState(false);
   return (
     <div
-      className="flex min-h-0 min-w-0 flex-[1_0_0] relative [perspective:1000px] self-stretch"
+      className="flex min-h-[300px] min-w-[200px] flex-1 relative [perspective:1000px] self-stretch"
       data-name={dataName}
       onMouseEnter={() => setIsFlipped(true)}
       onMouseLeave={() => setIsFlipped(false)}
@@ -2236,7 +2168,7 @@ function ShowcaseCardDownload() {
 
 function Frame114() {
   return (
-    <div className="flex min-h-0 min-w-0 flex-1 flex-row gap-[16px] items-stretch">
+    <div className="flex min-h-0 min-w-0 flex-1 flex-row flex-wrap gap-[16px] items-stretch">
       <ReskinCardTypeBasic />
       <ReskinCardTypeProfile />
       <ReskinCardTypeProduct />
@@ -2247,9 +2179,9 @@ function Frame114() {
 
 function CardTypes() {
   return (
-    <div className="bg-[#f8f8f8] relative h-[400px] min-h-[400px] rounded-[8px] shrink-0 w-full" data-name="Card types 2">
-      <div className="flex h-full w-full flex-row items-stretch">
-        <div className="flex min-h-0 min-w-0 flex-1 w-full flex-col items-stretch overflow-hidden p-[32px]">
+    <div className="bg-[#f8f8f8] relative min-h-[400px] rounded-[8px] shrink-0 w-full" data-name="Card types 2">
+      <div className="flex min-h-[400px] w-full flex-row items-stretch">
+        <div className="flex min-h-0 min-w-0 flex-1 w-full flex-col items-stretch overflow-visible p-[32px]">
           <Frame114 />
         </div>
       </div>
@@ -2748,7 +2680,7 @@ function NewCardTypeContentCardFlip() {
 
 function Frame115() {
   return (
-    <div className="flex min-h-0 min-w-0 flex-1 flex-row gap-[16px] items-stretch">
+    <div className="flex min-h-0 min-w-0 flex-1 flex-row flex-wrap gap-[16px] items-stretch">
       <NewCardTypeSolutionFlip />
       <NewCardTypeServiceFlip />
       <NewCardTypeFaqFlip />
@@ -2759,9 +2691,9 @@ function Frame115() {
 
 function CardTypes1() {
   return (
-    <div className="bg-[#f8f8f8] relative h-[400px] min-h-[400px] rounded-[8px] shrink-0 w-full" data-name="Card types 3">
-      <div className="flex h-full w-full flex-row items-stretch">
-        <div className="flex min-h-0 min-w-0 flex-1 w-full flex-col items-stretch overflow-hidden p-[32px]">
+    <div className="bg-[#f8f8f8] relative min-h-[400px] rounded-[8px] shrink-0 w-full" data-name="Card types 3">
+      <div className="flex min-h-[400px] w-full flex-row items-stretch">
+        <div className="flex min-h-0 min-w-0 flex-1 w-full flex-col items-stretch overflow-visible p-[32px]">
           <Frame115 />
         </div>
       </div>
@@ -3993,9 +3925,9 @@ function Title14() {
 
 function SectionHeadingFull14() {
   return (
-    <div className="content-start flex flex-wrap gap-[32px] items-start relative shrink-0 w-full min-w-0" data-name="Section Heading / Full">
+    <div className="content-start flex flex-col md:flex-row flex-wrap gap-[32px] items-start relative shrink-0 w-full min-w-0" data-name="Section Heading / Full">
       <Title14 />
-      <p className="min-w-[200px] flex-1 font-['Inter:Regular',sans-serif] font-normal leading-[24px] min-h-px not-italic relative text-[#4e4f4e] text-[16px] line-clamp-2 min-w-0 overflow-hidden">Rather than designing pages individually, I defined a flexible information architecture that supported multiple content types and use cases. This abstraction allowed the system to scale without redesigning layouts for each new scenario.</p>
+      <p className="min-w-0 md:min-w-[200px] flex-1 font-['Inter:Regular',sans-serif] font-normal leading-[24px] min-h-px not-italic relative text-[#4e4f4e] text-[16px] line-clamp-2 overflow-hidden">Rather than designing pages individually, I defined a flexible information architecture that supported multiple content types and use cases. This abstraction allowed the system to scale without redesigning layouts for each new scenario.</p>
     </div>
   );
 }
@@ -4037,7 +3969,7 @@ function SectionHeadingVertical5() {
 
 function ValueProp9() {
   return (
-    <div className="content-stretch flex min-w-[280px] flex-1 flex-col items-start min-h-px max-w-full pb-[24px] relative" data-name="Value Prop">
+    <div className="content-stretch flex min-w-0 w-full md:min-w-[280px] md:w-auto flex-1 flex-col items-start min-h-px max-w-full pb-[24px] relative" data-name="Value Prop">
       <SectionHeadingVertical5 />
     </div>
   );
@@ -4045,7 +3977,7 @@ function ValueProp9() {
 
 function ImageSlot() {
   return (
-    <div className="flex-1 min-h-[260px] max-h-[300px] min-w-[320px] w-[400px] max-w-full aspect-[4/5] relative" data-name="Image slot">
+    <div className="flex-1 min-h-[260px] max-h-[300px] min-w-0 w-full md:min-w-[320px] md:w-[400px] max-w-full aspect-[4/5] relative" data-name="Image slot">
       <div className="absolute inset-0 min-h-[260px] rounded-[16px] flex flex-col justify-end" data-name="Image 1">
         <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[16px]">
           <div className="absolute bg-[#efefe4] inset-0 rounded-[16px]" />
@@ -4060,7 +3992,7 @@ function ImageSlot() {
 
 function Ia() {
   return (
-    <div className="content-stretch flex min-h-[240px] min-w-[280px] max-w-[647px] flex-1 items-center pl-[16px] py-[16px] relative" data-name="IA 1">
+    <div className="content-stretch flex min-h-[240px] min-w-0 w-full md:min-w-[280px] md:w-auto max-w-[647px] flex-1 items-center pl-[16px] py-[16px] relative" data-name="IA 1">
       <ImageSlot />
     </div>
   );
@@ -4068,7 +4000,7 @@ function Ia() {
 
 function Row10() {
   return (
-    <div className="content-stretch flex flex-wrap gap-[32px] items-start justify-end min-w-0 relative w-full" data-name="Row 1">
+    <div className="content-stretch flex flex-wrap gap-[32px] items-start justify-start md:justify-end min-w-0 relative w-full" data-name="Row 1">
       <ValueProp9 />
       <Ia />
     </div>
@@ -4099,7 +4031,7 @@ function SectionHeadingVertical6() {
 
 function ValueProp10() {
   return (
-    <div className="content-stretch flex min-w-[280px] flex-1 flex-col items-start min-h-px max-w-full pb-[24px] relative" data-name="Value Prop">
+    <div className="content-stretch flex min-w-0 w-full md:min-w-[280px] md:w-auto flex-1 flex-col items-start min-h-px max-w-full pb-[24px] relative" data-name="Value Prop">
       <SectionHeadingVertical6 />
     </div>
   );
@@ -4107,7 +4039,7 @@ function ValueProp10() {
 
 function ImageSlot1() {
   return (
-    <div className="flex-1 min-h-[260px] max-h-[300px] min-w-[320px] w-[400px] max-w-full aspect-[4/5] relative" data-name="Image slot">
+    <div className="flex-1 min-h-[260px] max-h-[300px] min-w-0 w-full md:min-w-[320px] md:w-[400px] max-w-full aspect-[4/5] relative" data-name="Image slot">
       <div className="absolute inset-0 min-h-[260px] rounded-[16px] flex flex-col justify-end" data-name="Image 1">
         <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[16px]">
           <div className="absolute bg-[#efefe4] inset-0 rounded-[16px]" />
@@ -4122,7 +4054,7 @@ function ImageSlot1() {
 
 function Ia1() {
   return (
-    <div className="content-stretch flex min-h-[240px] min-w-[280px] max-w-[647px] flex-1 items-center pl-[16px] py-[16px] relative" data-name="IA 2">
+    <div className="content-stretch flex min-h-[240px] min-w-0 w-full md:min-w-[280px] md:w-auto max-w-[647px] flex-1 items-center pl-[16px] py-[16px] relative" data-name="IA 2">
       <ImageSlot1 />
     </div>
   );
@@ -4130,7 +4062,7 @@ function Ia1() {
 
 function Row11() {
   return (
-    <div className="content-stretch flex flex-wrap gap-[32px] items-start justify-end min-w-0 relative w-full" data-name="Row 2">
+    <div className="content-stretch flex flex-wrap gap-[32px] items-start justify-start md:justify-end min-w-0 relative w-full" data-name="Row 2">
       <ValueProp10 />
       <Ia1 />
     </div>
@@ -4173,9 +4105,9 @@ function Title15() {
 
 function SectionHeadingFull15() {
   return (
-    <div className="content-start flex flex-wrap gap-[32px] items-start relative shrink-0 w-full min-w-0" data-name="Section Heading / Full">
+    <div className="content-start flex flex-col md:flex-row flex-wrap gap-[32px] items-start relative shrink-0 w-full min-w-0" data-name="Section Heading / Full">
       <Title15 />
-      <p className="min-w-[200px] flex-1 font-['Inter:Regular',sans-serif] font-normal leading-[24px] min-h-px not-italic relative text-[#4e4f4e] text-[16px] line-clamp-2 min-w-0 overflow-hidden">{`We kick off our rebranding journey by analyzing our page templates' hierarchy to create a strategic site map that identifies key areas for impactful branded pages and outlines the necessary components to improve each template.`}</p>
+      <p className="min-w-0 md:min-w-[200px] flex-1 font-['Inter:Regular',sans-serif] font-normal leading-[24px] min-h-px not-italic relative text-[#4e4f4e] text-[16px] line-clamp-2 overflow-hidden">{`We kick off our rebranding journey by analyzing our page templates' hierarchy to create a strategic site map that identifies key areas for impactful branded pages and outlines the necessary components to improve each template.`}</p>
     </div>
   );
 }
@@ -4184,7 +4116,7 @@ function Frame10() {
   return (
     <div className="absolute bg-white content-stretch flex inset-[0.06%_86.12%_91.52%_0] items-center justify-center p-[16px] rounded-[2.5px]">
       <div aria-hidden="true" className="absolute border-[#006937] border-[1.256px] border-solid inset-[-1.256px] pointer-events-none rounded-[3.7560000000000002px]" />
-      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[15.076px] not-italic relative shrink-0 text-[#006937] text-[11px] text-center">WM Homepage</p>
+      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-tight not-italic relative min-w-0 max-w-full text-[#006937] text-center text-[clamp(8px,1.2vw,11px)] break-words line-clamp-2">WM Homepage</p>
     </div>
   );
 }
@@ -4193,7 +4125,7 @@ function Frame11() {
   return (
     <div className="absolute bg-white content-stretch flex inset-[16.05%_85.48%_75.54%_0.63%] items-center justify-center p-[16px] rounded-[2.5px]">
       <div aria-hidden="true" className="absolute border-[#006937] border-[1.256px] border-solid inset-[-1.256px] pointer-events-none rounded-[3.7560000000000002px]" />
-      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[15.076px] not-italic relative shrink-0 text-[#006937] text-[11px] text-center">Services for Home</p>
+      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-tight not-italic relative min-w-0 max-w-full text-[#006937] text-center text-[clamp(8px,1.2vw,11px)] break-words line-clamp-2">Services for Home</p>
     </div>
   );
 }
@@ -4202,7 +4134,7 @@ function Frame12() {
   return (
     <div className="absolute bg-white content-stretch flex inset-[16.05%_69.77%_75.54%_16.35%] items-center justify-center p-[16px] rounded-[2.5px]">
       <div aria-hidden="true" className="absolute border-[#006937] border-[1.256px] border-solid inset-[-1.256px] pointer-events-none rounded-[3.7560000000000002px]" />
-      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[15.076px] not-italic relative shrink-0 text-[#006937] text-[11px] text-center">Services for Business</p>
+      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-tight not-italic relative min-w-0 max-w-full text-[#006937] text-center text-[clamp(8px,1.2vw,11px)] break-words line-clamp-2">Services for Business</p>
     </div>
   );
 }
@@ -4211,7 +4143,7 @@ function Frame13() {
   return (
     <div className="absolute bg-white content-stretch flex inset-[16.05%_54.06%_75.54%_32.06%] items-center justify-center p-[16px] rounded-[2.5px]">
       <div aria-hidden="true" className="absolute border-[#006937] border-[1.256px] border-solid inset-[-1.256px] pointer-events-none rounded-[3.7560000000000002px]" />
-      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[15.076px] not-italic relative shrink-0 text-[#006937] text-[11px] text-center">Recycle Right</p>
+      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-tight not-italic relative min-w-0 max-w-full text-[#006937] text-center text-[clamp(8px,1.2vw,11px)] break-words line-clamp-2">Recycle Right</p>
     </div>
   );
 }
@@ -4220,7 +4152,7 @@ function Frame14() {
   return (
     <div className="absolute bg-white content-stretch flex inset-[27.83%_53.49%_63.76%_33.89%] items-center justify-center p-[16px] rounded-[2.5px]">
       <div aria-hidden="true" className="absolute border-[#006937] border-[1.256px] border-solid inset-[-1.256px] pointer-events-none rounded-[3.7560000000000002px]" />
-      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[15.076px] not-italic relative shrink-0 text-[#006937] text-[11px] text-center">Recycle 101</p>
+      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-tight not-italic relative min-w-0 max-w-full text-[#006937] text-center text-[clamp(8px,1.2vw,11px)] break-words line-clamp-2">Recycle 101</p>
     </div>
   );
 }
@@ -4229,7 +4161,7 @@ function Frame15() {
   return (
     <div className="absolute bg-white content-stretch flex inset-[39.05%_53.49%_52.54%_33.89%] items-center justify-center p-[16px] rounded-[2.5px]">
       <div aria-hidden="true" className="absolute border-[#006937] border-[1.256px] border-solid inset-[-1.256px] pointer-events-none rounded-[3.7560000000000002px]" />
-      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[15.076px] not-italic relative shrink-0 text-[#006937] text-[11px] text-center">Recycle 101</p>
+      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-tight not-italic relative min-w-0 max-w-full text-[#006937] text-center text-[clamp(8px,1.2vw,11px)] break-words line-clamp-2">Recycle 101</p>
     </div>
   );
 }
@@ -4238,7 +4170,7 @@ function Frame16() {
   return (
     <div className="absolute bg-white content-stretch flex inset-[50.27%_53.49%_41.32%_33.89%] items-center justify-center p-[16px] rounded-[2.5px]">
       <div aria-hidden="true" className="absolute border-[#006937] border-[1.256px] border-solid inset-[-1.256px] pointer-events-none rounded-[3.7560000000000002px]" />
-      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[15.076px] not-italic relative shrink-0 text-[#006937] text-[11px] text-center">Recycling Resources</p>
+      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-tight not-italic relative min-w-0 max-w-full text-[#006937] text-center text-[clamp(8px,1.2vw,11px)] break-words line-clamp-2">Recycling Resources</p>
     </div>
   );
 }
@@ -4247,7 +4179,7 @@ function Frame24() {
   return (
     <div className="absolute bg-white content-stretch flex inset-[16.05%_8%_75.54%_78.12%] items-center justify-center p-[16px] rounded-[2.5px]">
       <div aria-hidden="true" className="absolute border-[#006937] border-[1.256px] border-solid inset-[-1.256px] pointer-events-none rounded-[3.7560000000000002px]" />
-      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[15.076px] not-italic relative shrink-0 text-[#006937] text-[11px] text-center">Support</p>
+      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-tight not-italic relative min-w-0 max-w-full text-[#006937] text-center text-[clamp(8px,1.2vw,11px)] break-words line-clamp-2">Support</p>
     </div>
   );
 }
@@ -4256,7 +4188,7 @@ function Frame25() {
   return (
     <div className="absolute bg-white content-stretch flex inset-[0.06%_40.94%_91.52%_49.6%] items-center justify-center p-[16px] rounded-[2.5px]">
       <div aria-hidden="true" className="absolute border-[#006937] border-[1.256px] border-solid inset-[-1.256px] pointer-events-none rounded-[3.7560000000000002px]" />
-      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[15.076px] not-italic relative shrink-0 text-[#006937] text-[11px] text-center">Pay My Bill</p>
+      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-tight not-italic relative min-w-0 max-w-full text-[#006937] text-center text-[clamp(8px,1.2vw,11px)] break-words line-clamp-2">Pay My Bill</p>
     </div>
   );
 }
@@ -4265,7 +4197,7 @@ function Frame26() {
   return (
     <div className="absolute bg-white content-stretch flex inset-[0.06%_29.96%_91.52%_60.58%] items-center justify-center p-[16px] rounded-[2.5px]">
       <div aria-hidden="true" className="absolute border-[#006937] border-[1.256px] border-solid inset-[-1.256px] pointer-events-none rounded-[3.7560000000000002px]" />
-      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[15.076px] not-italic relative shrink-0 text-[#006937] text-[11px] text-center">Drop Off Locations</p>
+      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-tight not-italic relative min-w-0 max-w-full text-[#006937] text-center text-[clamp(8px,1.2vw,11px)] break-words line-clamp-2">Drop Off Locations</p>
     </div>
   );
 }
@@ -4274,7 +4206,7 @@ function Frame27() {
   return (
     <div className="absolute bg-white content-stretch flex inset-[0.06%_18.98%_91.52%_71.56%] items-center justify-center p-[16px] rounded-[2.5px]">
       <div aria-hidden="true" className="absolute border-[#006937] border-[1.256px] border-solid inset-[-1.256px] pointer-events-none rounded-[3.7560000000000002px]" />
-      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[15.076px] not-italic relative shrink-0 text-[#006937] text-[11px] text-center">Notifications</p>
+      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-tight not-italic relative min-w-0 max-w-full text-[#006937] text-center text-[clamp(8px,1.2vw,11px)] break-words line-clamp-2">Notifications</p>
     </div>
   );
 }
@@ -4283,7 +4215,7 @@ function Frame28() {
   return (
     <div className="absolute bg-white content-stretch flex inset-[0.06%_8%_91.52%_82.54%] items-center justify-center p-[16px] rounded-[2.5px]">
       <div aria-hidden="true" className="absolute border-[#006937] border-[1.256px] border-solid inset-[-1.256px] pointer-events-none rounded-[3.7560000000000002px]" />
-      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[15.076px] not-italic relative shrink-0 text-[#006937] text-[11px] text-center">Log In</p>
+      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-tight not-italic relative min-w-0 max-w-full text-[#006937] text-center text-[clamp(8px,1.2vw,11px)] break-words line-clamp-2">Log In</p>
     </div>
   );
 }
@@ -4292,7 +4224,7 @@ function Frame17() {
   return (
     <div className="absolute bg-white content-stretch flex inset-[24.18%_38.22%_67.4%_49.16%] items-center justify-center p-[16px] rounded-[2.5px]">
       <div aria-hidden="true" className="absolute border-[#006937] border-[1.256px] border-dashed inset-[-1.256px] pointer-events-none rounded-[3.7560000000000002px]" />
-      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[15.076px] not-italic relative shrink-0 text-[#006937] text-[11px] text-center">Who We Are</p>
+      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-tight not-italic relative min-w-0 max-w-full text-[#006937] text-center text-[clamp(8px,1.2vw,11px)] break-words line-clamp-2">Who We Are</p>
     </div>
   );
 }
@@ -4301,7 +4233,7 @@ function Frame18() {
   return (
     <div className="absolute bg-white content-stretch flex inset-[35.4%_38.22%_56.18%_49.16%] items-center justify-center p-[16px] rounded-[2.5px]">
       <div aria-hidden="true" className="absolute border-[#006937] border-[1.256px] border-dashed inset-[-1.256px] pointer-events-none rounded-[3.7560000000000002px]" />
-      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[15.076px] not-italic relative shrink-0 text-[#006937] text-[11px] text-center">Our Story</p>
+      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-tight not-italic relative min-w-0 max-w-full text-[#006937] text-center text-[clamp(8px,1.2vw,11px)] break-words line-clamp-2">Our Story</p>
     </div>
   );
 }
@@ -4310,7 +4242,7 @@ function Frame19() {
   return (
     <div className="absolute bg-white content-stretch flex inset-[46.62%_38.22%_44.96%_49.16%] items-center justify-center p-[16px] rounded-[2.5px]">
       <div aria-hidden="true" className="absolute border-[#006937] border-[1.256px] border-dashed inset-[-1.256px] pointer-events-none rounded-[3.7560000000000002px]" />
-      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[15.076px] not-italic relative shrink-0 text-[#006937] text-[11px] text-center">Our Leadership</p>
+      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-tight not-italic relative min-w-0 max-w-full text-[#006937] text-center text-[clamp(8px,1.2vw,11px)] break-words line-clamp-2">Our Leadership</p>
     </div>
   );
 }
@@ -4319,10 +4251,7 @@ function Frame20() {
   return (
     <div className="absolute bg-white content-stretch flex inset-[24.18%_23.27%_67.4%_64.11%] items-center justify-center p-[16px] rounded-[2.5px]">
       <div aria-hidden="true" className="absolute border-[#006937] border-[1.256px] border-dashed inset-[-1.256px] pointer-events-none rounded-[3.7560000000000002px]" />
-      <div className="flex flex-col font-['Inter:Semi_Bold',sans-serif] font-semibold justify-center leading-[15.076px] not-italic relative shrink-0 text-[#006937] text-[11px] text-center whitespace-nowrap">
-        <p className="mb-0">{`Environmental `}</p>
-        <p>Stewardship</p>
-      </div>
+      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-tight not-italic relative min-w-0 max-w-full text-[#006937] text-center text-[clamp(8px,1.2vw,11px)] break-words line-clamp-2">Environmental Stewardship</p>
     </div>
   );
 }
@@ -4331,7 +4260,7 @@ function Frame21() {
   return (
     <div className="absolute bg-white content-stretch flex inset-[35.4%_23.27%_56.18%_64.11%] items-center justify-center p-[16px] rounded-[2.5px]">
       <div aria-hidden="true" className="absolute border-[#006937] border-[1.256px] border-dashed inset-[-1.256px] pointer-events-none rounded-[3.7560000000000002px]" />
-      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[15.076px] not-italic relative shrink-0 text-[#006937] text-[11px] text-center">Social Impact</p>
+      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-tight not-italic relative min-w-0 max-w-full text-[#006937] text-center text-[clamp(8px,1.2vw,11px)] break-words line-clamp-2">Social Impact</p>
     </div>
   );
 }
@@ -4340,7 +4269,7 @@ function Frame22() {
   return (
     <div className="absolute bg-white content-stretch flex inset-[46.62%_23.27%_44.96%_64.11%] items-center justify-center p-[16px] rounded-[2.5px]">
       <div aria-hidden="true" className="absolute border-[#006937] border-[1.256px] border-dashed inset-[-1.256px] pointer-events-none rounded-[3.7560000000000002px]" />
-      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[15.076px] not-italic relative shrink-0 text-[#006937] text-[11px] text-center">Sustainable Technology</p>
+      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-tight not-italic relative min-w-0 max-w-full text-[#006937] text-center text-[clamp(8px,1.2vw,11px)] break-words line-clamp-2">Sustainable Technology</p>
     </div>
   );
 }
@@ -4349,7 +4278,7 @@ function Frame23() {
   return (
     <div className="absolute bg-white content-stretch flex inset-[57.84%_23.27%_33.74%_64.11%] items-center justify-center p-[16px] rounded-[2.5px]">
       <div aria-hidden="true" className="absolute border-[#006937] border-[1.256px] border-dashed inset-[-1.256px] pointer-events-none rounded-[3.7560000000000002px]" />
-      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[15.076px] not-italic relative shrink-0 text-[#006937] text-[11px] text-center">Sustainable Reporting</p>
+      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-tight not-italic relative min-w-0 max-w-full text-[#006937] text-center text-[clamp(8px,1.2vw,11px)] break-words line-clamp-2">Sustainable Reporting</p>
     </div>
   );
 }
@@ -4358,7 +4287,7 @@ function Frame29() {
   return (
     <div className="absolute bg-white content-stretch flex inset-[69.06%_23.27%_22.53%_64.11%] items-center justify-center p-[16px] rounded-[2.5px]">
       <div aria-hidden="true" className="absolute border-[#006937] border-[1.256px] border-solid inset-[-1.256px] pointer-events-none rounded-[3.7560000000000002px]" />
-      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[15.076px] not-italic relative shrink-0 text-[#006937] text-[11px] text-center">WM Sustainability Forum</p>
+      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-tight not-italic relative min-w-0 max-w-full text-[#006937] text-center text-[clamp(8px,1.2vw,11px)] break-words line-clamp-2">WM Sustainability Forum</p>
     </div>
   );
 }
@@ -4367,7 +4296,7 @@ function Frame30() {
   return (
     <div className="absolute bg-white content-stretch flex inset-[80.28%_23.27%_11.31%_64.11%] items-center justify-center p-[16px] rounded-[2.5px]">
       <div aria-hidden="true" className="absolute border-[#006937] border-[1.256px] border-solid inset-[-1.256px] pointer-events-none rounded-[3.7560000000000002px]" />
-      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[15.076px] not-italic relative shrink-0 text-[#006937] text-[11px] text-center">WM Phoenix Open</p>
+      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-tight not-italic relative min-w-0 max-w-full text-[#006937] text-center text-[clamp(8px,1.2vw,11px)] break-words line-clamp-2">WM Phoenix Open</p>
     </div>
   );
 }
@@ -4376,7 +4305,7 @@ function Frame31() {
   return (
     <div className="absolute bg-white content-stretch flex inset-[57.84%_38.22%_33.74%_49.16%] items-center justify-center p-[16px] rounded-[2.5px]">
       <div aria-hidden="true" className="absolute border-[#006937] border-[1.256px] border-dashed inset-[-1.256px] pointer-events-none rounded-[3.7560000000000002px]" />
-      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[15.076px] not-italic relative shrink-0 text-[#006937] text-[11px] text-center">{`Inclusion & Diversity `}</p>
+      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-tight not-italic relative min-w-0 max-w-full text-[#006937] text-center text-[clamp(8px,1.2vw,11px)] break-words line-clamp-2">{`Inclusion & Diversity `}</p>
     </div>
   );
 }
@@ -4385,7 +4314,7 @@ function Frame32() {
   return (
     <div className="absolute bg-white content-stretch flex inset-[69.06%_38.22%_22.53%_49.16%] items-center justify-center p-[16px] rounded-[2.5px]">
       <div aria-hidden="true" className="absolute border-[#006937] border-[1.256px] border-solid inset-[-1.256px] pointer-events-none rounded-[3.7560000000000002px]" />
-      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[15.076px] not-italic relative shrink-0 text-[#006937] text-[11px] text-center">{`Careers `}</p>
+      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-tight not-italic relative min-w-0 max-w-full text-[#006937] text-center text-[clamp(8px,1.2vw,11px)] break-words line-clamp-2">{`Careers `}</p>
     </div>
   );
 }
@@ -4394,7 +4323,7 @@ function Frame33() {
   return (
     <div className="absolute bg-white content-stretch flex inset-[80.28%_38.22%_11.31%_49.16%] items-center justify-center p-[16px] rounded-[2.5px]">
       <div aria-hidden="true" className="absolute border-[#006937] border-[1.256px] border-solid inset-[-1.256px] pointer-events-none rounded-[3.7560000000000002px]" />
-      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[15.076px] not-italic relative shrink-0 text-[#006937] text-[11px] text-center">Investors</p>
+      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-tight not-italic relative min-w-0 max-w-full text-[#006937] text-center text-[clamp(8px,1.2vw,11px)] break-words line-clamp-2">Investors</p>
     </div>
   );
 }
@@ -4403,7 +4332,7 @@ function Frame34() {
   return (
     <div className="absolute bg-white content-stretch flex inset-[91.5%_38.22%_0.09%_49.16%] items-center justify-center p-[16px] rounded-[2.5px]">
       <div aria-hidden="true" className="absolute border-[#006937] border-[1.256px] border-solid inset-[-1.256px] pointer-events-none rounded-[3.7560000000000002px]" />
-      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[15.076px] not-italic relative shrink-0 text-[#006937] text-[11px] text-center">Media Room</p>
+      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-tight not-italic relative min-w-0 max-w-full text-[#006937] text-center text-[clamp(8px,1.2vw,11px)] break-words line-clamp-2">Media Room</p>
     </div>
   );
 }
@@ -4428,7 +4357,7 @@ function Frame37() {
   return (
     <div className="absolute bg-white content-stretch flex inset-[27.27%_86.02%_66.68%_2.46%] items-center justify-center p-[16px] rounded-[2.5px]">
       <div aria-hidden="true" className="absolute border-[#006937] border-[1.256px] border-solid inset-[-1.256px] pointer-events-none rounded-[3.7560000000000002px]" />
-      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[15.076px] not-italic relative shrink-0 text-[#006937] text-[11px] text-center">Services</p>
+      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-tight not-italic relative min-w-0 max-w-full text-[#006937] text-center text-[clamp(8px,1.2vw,11px)] break-words line-clamp-2">Services</p>
     </div>
   );
 }
@@ -4463,7 +4392,7 @@ function Frame40() {
   return (
     <div className="absolute bg-white content-stretch flex inset-[27.27%_70.41%_66.68%_18.11%] items-center justify-center p-[16px] rounded-[2.5px]">
       <div aria-hidden="true" className="absolute border-[#006937] border-[1.256px] border-solid inset-[-1.256px] pointer-events-none rounded-[3.7560000000000002px]" />
-      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[15.076px] not-italic relative shrink-0 text-[#006937] text-[11px] text-center">Services</p>
+      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-tight not-italic relative min-w-0 max-w-full text-[#006937] text-center text-[clamp(8px,1.2vw,11px)] break-words line-clamp-2">Services</p>
     </div>
   );
 }
@@ -4498,7 +4427,7 @@ function Frame48() {
   return (
     <div className="absolute bg-white content-stretch flex inset-[38.49%_70.41%_55.46%_18.11%] items-center justify-center p-[16px] rounded-[2.5px]">
       <div aria-hidden="true" className="absolute border-[#006937] border-[1.256px] border-solid inset-[-1.256px] pointer-events-none rounded-[3.7560000000000002px]" />
-      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[15.076px] not-italic relative shrink-0 text-[#006937] text-[11px] text-center">Solutions</p>
+      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-tight not-italic relative min-w-0 max-w-full text-[#006937] text-center text-[clamp(8px,1.2vw,11px)] break-words line-clamp-2">Solutions</p>
     </div>
   );
 }
@@ -4533,7 +4462,7 @@ function Frame51() {
   return (
     <div className="absolute bg-white content-stretch flex inset-[27.83%_8.77%_66.12%_79.76%] items-center justify-center p-[16px] rounded-[2.5px]">
       <div aria-hidden="true" className="absolute border-[#006937] border-[1.256px] border-solid inset-[-1.256px] pointer-events-none rounded-[3.7560000000000002px]" />
-      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[15.076px] not-italic relative shrink-0 text-[#006937] text-[11px] text-center">Topics</p>
+      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-tight not-italic relative min-w-0 max-w-full text-[#006937] text-center text-[clamp(8px,1.2vw,11px)] break-words line-clamp-2">Topics</p>
     </div>
   );
 }
@@ -4568,7 +4497,7 @@ function Frame56() {
   return (
     <div className="absolute bg-white content-stretch flex inset-[49.71%_69.29%_44.24%_21.14%] items-center justify-center p-[16px] rounded-[2.5px]">
       <div aria-hidden="true" className="absolute border-[#006937] border-[1.256px] border-dashed inset-[-1.256px] pointer-events-none rounded-[3.7560000000000002px]" />
-      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[15.076px] not-italic relative shrink-0 text-[#006937] text-[11px] text-center">Services</p>
+      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-tight not-italic relative min-w-0 max-w-full text-[#006937] text-center text-[clamp(8px,1.2vw,11px)] break-words line-clamp-2">Services</p>
     </div>
   );
 }
@@ -4603,7 +4532,7 @@ function Frame59() {
   return (
     <div className="absolute bg-white content-stretch flex inset-[39.05%_7.89%_54.9%_82.54%] items-center justify-center p-[16px] rounded-[2.5px]">
       <div aria-hidden="true" className="absolute border-[#006937] border-[1.256px] border-dashed inset-[-1.256px] pointer-events-none rounded-[3.7560000000000002px]" />
-      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[15.076px] not-italic relative shrink-0 text-[#006937] text-[11px] text-center">FAQs</p>
+      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-tight not-italic relative min-w-0 max-w-full text-[#006937] text-center text-[clamp(8px,1.2vw,11px)] break-words line-clamp-2">FAQs</p>
     </div>
   );
 }
@@ -4638,7 +4567,7 @@ function Frame62() {
   return (
     <div className="absolute bg-white content-stretch flex inset-[60.79%_0.95%_33.16%_89.48%] items-center justify-center p-[16px] rounded-[2.5px]">
       <div aria-hidden="true" className="absolute border-[#006937] border-[1.256px] border-dashed inset-[-1.256px] pointer-events-none rounded-[3.7560000000000002px]" />
-      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[15.076px] not-italic relative shrink-0 text-[#006937] text-[11px] text-center">Campaigns</p>
+      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-tight not-italic relative min-w-0 max-w-full text-[#006937] text-center text-[clamp(8px,1.2vw,11px)] break-words line-clamp-2">Campaigns</p>
     </div>
   );
 }
@@ -4673,7 +4602,7 @@ function Frame65() {
   return (
     <div className="absolute bg-white content-stretch flex inset-[72.57%_0.95%_21.38%_89.48%] items-center justify-center p-[16px] rounded-[2.5px]">
       <div aria-hidden="true" className="absolute border-[#006937] border-[1.256px] border-dashed inset-[-1.256px] pointer-events-none rounded-[3.7560000000000002px]" />
-      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[15.076px] not-italic relative shrink-0 text-[#006937] text-[11px] text-center">Local Pages</p>
+      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-tight not-italic relative min-w-0 max-w-full text-[#006937] text-center text-[clamp(8px,1.2vw,11px)] break-words line-clamp-2">Local Pages</p>
     </div>
   );
 }
@@ -4708,7 +4637,7 @@ function Frame68() {
   return (
     <div className="absolute bg-white content-stretch flex inset-[84.35%_0.95%_9.6%_89.48%] items-center justify-center p-[16px] rounded-[2.5px]">
       <div aria-hidden="true" className="absolute border-[#006937] border-[1.256px] border-solid inset-[-1.256px] pointer-events-none rounded-[3.7560000000000002px]" />
-      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[15.076px] not-italic relative shrink-0 text-[#006937] text-[11px] text-center">Footer Links</p>
+      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-tight not-italic relative min-w-0 max-w-full text-[#006937] text-center text-[clamp(8px,1.2vw,11px)] break-words line-clamp-2">Footer Links</p>
     </div>
   );
 }
@@ -4743,7 +4672,7 @@ function Frame71() {
   return (
     <div className="absolute bg-white content-stretch flex inset-[60.93%_69.29%_33.02%_21.14%] items-center justify-center p-[16px] rounded-[2.5px]">
       <div aria-hidden="true" className="absolute border-[#006937] border-[1.256px] border-dashed inset-[-1.256px] pointer-events-none rounded-[3.7560000000000002px]" />
-      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[15.076px] not-italic relative shrink-0 text-[#006937] text-[11px] text-center">Solutions</p>
+      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-tight not-italic relative min-w-0 max-w-full text-[#006937] text-center text-[clamp(8px,1.2vw,11px)] break-words line-clamp-2">Solutions</p>
     </div>
   );
 }
@@ -4797,8 +4726,8 @@ function SitemapWm() {
       <Group12 />
       <Group13 />
       <Group8 />
-      <p className="absolute font-['Inter:Semi_Bold',sans-serif] font-semibold inset-[16.89%_41.78%_80.1%_53.47%] leading-[15.076px] not-italic text-[#006937] text-[11px] text-center whitespace-nowrap">Inside WM</p>
-      <p className="absolute font-['Inter:Semi_Bold',sans-serif] font-semibold inset-[16.89%_26%_80.1%_67.82%] leading-[15.076px] not-italic text-[#006937] text-[11px] text-center">Sustainability</p>
+      <p className="absolute font-['Inter:Semi_Bold',sans-serif] font-semibold inset-[16.89%_41.78%_80.1%_53.47%] leading-tight not-italic min-w-0 max-w-full text-[#006937] text-center text-[clamp(8px,1.2vw,11px)] break-words line-clamp-2">Inside WM</p>
+      <p className="absolute font-['Inter:Semi_Bold',sans-serif] font-semibold inset-[16.89%_26%_80.1%_67.82%] leading-tight not-italic min-w-0 max-w-full text-[#006937] text-center text-[clamp(8px,1.2vw,11px)] break-words line-clamp-2">Sustainability</p>
       <div className="absolute inset-[8.76%_17.46%_4.18%_1.4%]" data-name="Union">
         <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 957.429 462.275">
           <path d={svgPaths.p2f8c8f00} fill="var(--fill-0, #006937)" id="Union" />
@@ -4853,10 +4782,10 @@ function Frame99() {
 
 function Row() {
   return (
-    <div className="bg-[#dae4e1] min-h-[50px] relative rounded-[2.5px] shrink-0 w-full" data-name="row">
+    <div className="bg-[#dae4e1] min-h-[50px] min-w-0 relative rounded-[2.5px] shrink-0 w-full" data-name="row">
       <div className="flex flex-row items-center justify-center min-h-[inherit] size-full">
-        <div className="content-stretch flex items-center justify-center min-h-[inherit] px-[16.718px] py-[8px] relative w-full">
-          <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[normal] not-italic relative shrink-0 text-[#006937] text-[11px] text-center">Logged in Pages</p>
+        <div className="content-stretch flex items-center justify-center min-h-[inherit] min-w-0 px-[16.718px] py-[8px] relative w-full">
+          <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-tight not-italic relative shrink-0 text-[#006937] text-[11px] text-center break-words w-full line-clamp-3">Logged in Pages</p>
         </div>
       </div>
     </div>
@@ -4865,10 +4794,10 @@ function Row() {
 
 function Frame72() {
   return (
-    <div className="bg-[#dae4e1] min-h-[50px] relative rounded-[2.5px] shrink-0 w-full">
+    <div className="bg-[#dae4e1] min-h-[50px] min-w-0 relative rounded-[2.5px] shrink-0 w-full">
       <div className="flex flex-row items-center justify-center min-h-[inherit] size-full">
-        <div className="content-stretch flex items-center justify-center min-h-[inherit] px-[16.718px] py-[8px] relative w-full">
-          <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[normal] not-italic relative shrink-0 text-[#006937] text-[11px] text-center">{`Support Landing `}</p>
+        <div className="content-stretch flex items-center justify-center min-h-[inherit] min-w-0 px-[16.718px] py-[8px] relative w-full">
+          <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-tight not-italic relative shrink-0 text-[#006937] text-[11px] text-center break-words w-full line-clamp-3">{`Support Landing `}</p>
         </div>
       </div>
     </div>
@@ -4877,10 +4806,10 @@ function Frame72() {
 
 function Frame73() {
   return (
-    <div className="bg-[#dae4e1] min-h-[50px] relative rounded-[2.5px] shrink-0 w-full">
+    <div className="bg-[#dae4e1] min-h-[50px] min-w-0 relative rounded-[2.5px] shrink-0 w-full">
       <div className="flex flex-row items-center justify-center min-h-[inherit] size-full">
-        <div className="content-stretch flex items-center justify-center min-h-[inherit] px-[16.718px] py-[8px] relative w-full">
-          <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[normal] not-italic relative shrink-0 text-[#006937] text-[11px] text-center">Support Detail</p>
+        <div className="content-stretch flex items-center justify-center min-h-[inherit] min-w-0 px-[16.718px] py-[8px] relative w-full">
+          <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-tight not-italic relative shrink-0 text-[#006937] text-[11px] text-center break-words w-full line-clamp-3">Support Detail</p>
         </div>
       </div>
     </div>
@@ -4889,7 +4818,7 @@ function Frame73() {
 
 function Row12() {
   return (
-    <div className="relative rounded-[16px] shrink-0 w-full" data-name="row">
+    <div className="relative rounded-[16px] min-w-0 shrink-0 w-full" data-name="row">
       <div aria-hidden="true" className="absolute border-2 border-[#006937] border-solid inset-[-1px] pointer-events-none rounded-[17px]" />
       <div className="content-stretch flex flex-col gap-[16px] items-start p-[16px] relative w-full">
         <Frame72 />
@@ -4901,7 +4830,7 @@ function Row12() {
 
 function Column3() {
   return (
-    <div className="content-stretch flex flex-[1_0_0] flex-col gap-[16px] items-start min-h-px min-w-px relative" data-name="column 1">
+    <div className="content-stretch flex w-full md:w-[250px] shrink-0 flex-col gap-[16px] items-start min-h-px relative" data-name="column 1">
       <Row />
       <Row12 />
     </div>
@@ -4910,13 +4839,10 @@ function Column3() {
 
 function Frame74() {
   return (
-    <div className="bg-[#dae4e1] min-h-[50px] relative rounded-[2.5px] shrink-0 w-full">
+    <div className="bg-[#dae4e1] min-h-[50px] min-w-0 relative rounded-[2.5px] shrink-0 w-full">
       <div className="flex flex-row items-center justify-center min-h-[inherit] size-full">
-        <div className="content-stretch flex items-center justify-center min-h-[inherit] px-[16.718px] py-[8px] relative w-full">
-          <div className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[normal] not-italic relative shrink-0 text-[#006937] text-[11px] text-center whitespace-nowrap">
-            <p className="mb-0">{`Service & Solutions `}</p>
-            <p>{`Landing `}</p>
-          </div>
+        <div className="content-stretch flex items-center justify-center min-h-[inherit] min-w-0 px-[16.718px] py-[8px] relative w-full">
+          <div className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-tight not-italic relative shrink-0 text-[#006937] text-[11px] text-center break-words w-full line-clamp-3">{`Service & Solutions Landing`}</div>
         </div>
       </div>
     </div>
@@ -4925,14 +4851,10 @@ function Frame74() {
 
 function Frame75() {
   return (
-    <div className="bg-[#dae4e1] flex-[1_0_0] min-h-[50px] min-w-px relative rounded-[2.5px]">
+    <div className="bg-[#dae4e1] flex-[1_0_0] min-h-[50px] min-w-0 relative rounded-[2.5px]">
       <div className="flex flex-row items-center justify-center min-h-[inherit] size-full">
-        <div className="content-stretch flex items-center justify-center min-h-[inherit] px-[16.718px] py-[8px] relative w-full">
-          <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[normal] not-italic relative shrink-0 text-[#006937] text-[11px] text-center">
-            Solution
-            <br aria-hidden="true" />
-            Detail
-          </p>
+        <div className="content-stretch flex items-center justify-center min-h-[inherit] min-w-0 px-[16.718px] py-[8px] relative w-full">
+          <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-tight not-italic relative shrink-0 text-[#006937] text-[11px] text-center break-words w-full line-clamp-3">Solution Detail</p>
         </div>
       </div>
     </div>
@@ -4941,13 +4863,10 @@ function Frame75() {
 
 function Frame76() {
   return (
-    <div className="bg-[#dae4e1] flex-[1_0_0] min-h-[50px] min-w-px relative rounded-[2.5px]">
+    <div className="bg-[#dae4e1] flex-[1_0_0] min-h-[50px] min-w-0 relative rounded-[2.5px]">
       <div className="flex flex-row items-center justify-center min-h-[inherit] size-full">
-        <div className="content-stretch flex items-center justify-center min-h-[inherit] px-[16.718px] py-[8px] relative w-full">
-          <div className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[normal] not-italic relative shrink-0 text-[#006937] text-[11px] text-center whitespace-nowrap">
-            <p className="mb-0">Service</p>
-            <p>Detail</p>
-          </div>
+        <div className="content-stretch flex items-center justify-center min-h-[inherit] min-w-0 px-[16.718px] py-[8px] relative w-full">
+          <div className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-tight not-italic relative shrink-0 text-[#006937] text-[11px] text-center break-words w-full line-clamp-3">Service Detail</div>
         </div>
       </div>
     </div>
@@ -4956,7 +4875,7 @@ function Frame76() {
 
 function Frame101() {
   return (
-    <div className="content-stretch flex gap-[16px] items-center relative shrink-0 w-full">
+    <div className="content-stretch flex gap-[16px] items-center min-w-0 relative shrink-0 w-full">
       <Frame75 />
       <Frame76 />
     </div>
@@ -4965,7 +4884,7 @@ function Frame101() {
 
 function Row13() {
   return (
-    <div className="relative rounded-[16px] shrink-0 w-full" data-name="row">
+    <div className="relative rounded-[16px] min-w-0 shrink-0 w-full" data-name="row">
       <div aria-hidden="true" className="absolute border-2 border-[#006937] border-solid inset-[-1px] pointer-events-none rounded-[17px]" />
       <div className="content-stretch flex flex-col gap-[16px] items-start p-[16px] relative w-full">
         <Frame74 />
@@ -4977,13 +4896,10 @@ function Row13() {
 
 function Frame77() {
   return (
-    <div className="bg-[#dae4e1] flex-[1_0_0] min-h-[50px] min-w-px relative rounded-[2.5px] self-stretch">
+    <div className="bg-[#dae4e1] flex-[1_0_0] min-h-[50px] min-w-0 relative rounded-[2.5px] self-stretch">
       <div className="flex flex-row items-center justify-center min-h-[inherit] size-full">
-        <div className="content-stretch flex items-center justify-center min-h-[inherit] px-[16.718px] py-[8px] relative size-full">
-          <div className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[normal] not-italic relative shrink-0 text-[#006937] text-[11px] text-center whitespace-nowrap">
-            <p className="mb-0">Campaign</p>
-            <p>Landing</p>
-          </div>
+        <div className="content-stretch flex items-center justify-center min-h-[inherit] min-w-0 px-[16.718px] py-[8px] relative size-full">
+          <div className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-tight not-italic relative shrink-0 text-[#006937] text-[11px] text-center break-words w-full line-clamp-3">Campaign Landing</div>
         </div>
       </div>
     </div>
@@ -4992,14 +4908,10 @@ function Frame77() {
 
 function Frame78() {
   return (
-    <div className="bg-[#dae4e1] flex-[1_0_0] min-h-[50px] min-w-px relative rounded-[2.5px]">
+    <div className="bg-[#dae4e1] flex-[1_0_0] min-h-[50px] min-w-0 relative rounded-[2.5px]">
       <div className="flex flex-row items-center justify-center min-h-[inherit] size-full">
-        <div className="content-stretch flex items-center justify-center min-h-[inherit] px-[16.718px] py-[8px] relative w-full">
-          <div className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[normal] not-italic relative shrink-0 text-[#006937] text-[11px] text-center whitespace-nowrap">
-            <p className="mb-0">{`Local & `}</p>
-            <p className="mb-0">{`Franchise `}</p>
-            <p>Landing</p>
-          </div>
+        <div className="content-stretch flex items-center justify-center min-h-[inherit] min-w-0 px-[16.718px] py-[8px] relative w-full">
+          <div className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-tight not-italic relative shrink-0 text-[#006937] text-[11px] text-center break-words w-full line-clamp-3">{`Local & Franchise Landing`}</div>
         </div>
       </div>
     </div>
@@ -5008,7 +4920,7 @@ function Frame78() {
 
 function Frame116() {
   return (
-    <div className="content-stretch flex gap-[16px] items-start relative shrink-0 w-full">
+    <div className="content-stretch flex gap-[16px] items-start min-w-0 relative shrink-0 w-full">
       <Frame77 />
       <Frame78 />
     </div>
@@ -5017,7 +4929,7 @@ function Frame116() {
 
 function Column4() {
   return (
-    <div className="content-stretch flex flex-[1_0_0] flex-col gap-[16px] items-start min-h-px min-w-px relative" data-name="column 2">
+    <div className="content-stretch flex w-full md:w-[250px] shrink-0 flex-col gap-[16px] items-start min-h-px relative" data-name="column 2">
       <Row13 />
       <Frame116 />
     </div>
@@ -5028,11 +4940,8 @@ function Row14() {
   return (
     <div className="bg-[#dae4e1] min-h-[50px] relative rounded-[2.5px] shrink-0 w-full" data-name="row">
       <div className="flex flex-row items-center justify-center min-h-[inherit] size-full">
-        <div className="content-stretch flex items-center justify-center min-h-[inherit] px-[16.718px] py-[8px] relative w-full">
-          <div className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[normal] not-italic relative shrink-0 text-[#006937] text-[11px] text-center whitespace-nowrap">
-            <p className="mb-0">Locator</p>
-            <p>Landing</p>
-          </div>
+        <div className="content-stretch flex items-center justify-center min-h-[inherit] min-w-0 px-[16.718px] py-[8px] relative w-full">
+          <div className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-tight not-italic relative shrink-0 text-[#006937] text-[11px] text-center break-words w-full line-clamp-3">Locator Landing</div>
         </div>
       </div>
     </div>
@@ -5043,11 +4952,8 @@ function Row15() {
   return (
     <div className="bg-[#dae4e1] min-h-[50px] relative rounded-[2.5px] shrink-0 w-full" data-name="row">
       <div className="flex flex-row items-center justify-center min-h-[inherit] size-full">
-        <div className="content-stretch flex items-center justify-center min-h-[inherit] px-[16.718px] py-[8px] relative w-full">
-          <div className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[normal] not-italic relative shrink-0 text-[#006937] text-[11px] text-center whitespace-nowrap">
-            <p className="mb-0">Location</p>
-            <p>Detail</p>
-          </div>
+        <div className="content-stretch flex items-center justify-center min-h-[inherit] min-w-0 px-[16.718px] py-[8px] relative w-full">
+          <div className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-tight not-italic relative shrink-0 text-[#006937] text-[11px] text-center break-words w-full line-clamp-3">Location Detail</div>
         </div>
       </div>
     </div>
@@ -5056,7 +4962,7 @@ function Row15() {
 
 function Column5() {
   return (
-    <div className="content-stretch flex flex-col gap-[16px] items-start py-[16px] relative self-stretch shrink-0 w-[125px]" data-name="column 3">
+    <div className="content-stretch flex w-full md:w-[150px] shrink-0 flex-col gap-[16px] items-start py-[16px] relative self-stretch" data-name="column 3">
       <Row14 />
       <Row15 />
     </div>
@@ -5067,8 +4973,8 @@ function Row16() {
   return (
     <div className="bg-[#dae4e1] min-h-[50px] relative rounded-[2.5px] shrink-0 w-full" data-name="row">
       <div className="flex flex-row items-center justify-center min-h-[inherit] size-full">
-        <div className="content-stretch flex items-center justify-center min-h-[inherit] px-[16.718px] py-[8px] relative w-full">
-          <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[normal] not-italic relative shrink-0 text-[#006937] text-[11px] text-center">Homepage</p>
+        <div className="content-stretch flex items-center justify-center min-h-[inherit] min-w-0 px-[16.718px] py-[8px] relative w-full">
+          <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-tight not-italic relative shrink-0 text-[#006937] text-[11px] text-center break-words w-full line-clamp-3">Homepage</p>
         </div>
       </div>
     </div>
@@ -5079,11 +4985,8 @@ function Row17() {
   return (
     <div className="bg-[#dae4e1] min-h-[50px] relative rounded-[2.5px] shrink-0 w-full" data-name="row">
       <div className="flex flex-row items-center justify-center min-h-[inherit] size-full">
-        <div className="content-stretch flex items-center justify-center min-h-[inherit] px-[16.718px] py-[8px] relative w-full">
-          <div className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[normal] not-italic relative shrink-0 text-[#006937] text-[11px] text-center whitespace-nowrap">
-            <p className="mb-0">Blank</p>
-            <p>Template</p>
-          </div>
+        <div className="content-stretch flex items-center justify-center min-h-[inherit] min-w-0 px-[16.718px] py-[8px] relative w-full">
+          <div className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-tight not-italic relative shrink-0 text-[#006937] text-[11px] text-center break-words w-full line-clamp-3">Blank Template</div>
         </div>
       </div>
     </div>
@@ -5092,7 +4995,7 @@ function Row17() {
 
 function Column6() {
   return (
-    <div className="content-stretch flex flex-col gap-[16px] items-start py-[16px] relative self-stretch shrink-0 w-[125px]" data-name="column 4">
+    <div className="content-stretch flex w-full md:w-[150px] shrink-0 flex-col gap-[16px] items-start py-[16px] relative self-stretch" data-name="column 4">
       <Row16 />
       <Row17 />
     </div>
@@ -5101,13 +5004,10 @@ function Column6() {
 
 function Frame79() {
   return (
-    <div className="bg-[#dae4e1] flex-[1_0_0] min-h-[50px] min-w-px relative rounded-[2.5px]">
+    <div className="bg-[#dae4e1] flex-[1_0_0] min-h-[50px] min-w-0 relative rounded-[2.5px]">
       <div className="flex flex-row items-center justify-center min-h-[inherit] size-full">
-        <div className="content-stretch flex items-center justify-center min-h-[inherit] px-[16.718px] py-[8px] relative w-full">
-          <div className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[normal] not-italic relative shrink-0 text-[#006937] text-[11px] text-center whitespace-nowrap">
-            <p className="mb-0">Immersive</p>
-            <p>Story Telling Landing</p>
-          </div>
+        <div className="content-stretch flex items-center justify-center min-h-[inherit] min-w-0 px-[16.718px] py-[8px] relative w-full">
+          <div className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-tight not-italic relative shrink-0 text-[#006937] text-[11px] text-center break-words w-full line-clamp-3">Immersive Story Telling Landing</div>
         </div>
       </div>
     </div>
@@ -5116,13 +5016,10 @@ function Frame79() {
 
 function Frame80() {
   return (
-    <div className="bg-[#dae4e1] flex-[1_0_0] min-h-[50px] min-w-px relative rounded-[2.5px]">
+    <div className="bg-[#dae4e1] flex-[1_0_0] min-h-[50px] min-w-0 relative rounded-[2.5px]">
       <div className="flex flex-row items-center justify-center min-h-[inherit] size-full">
-        <div className="content-stretch flex items-center justify-center min-h-[inherit] px-[16.718px] py-[8px] relative w-full">
-          <div className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[normal] not-italic relative shrink-0 text-[#006937] text-[11px] text-center whitespace-nowrap">
-            <p className="mb-0">Educational</p>
-            <p>Landing</p>
-          </div>
+        <div className="content-stretch flex items-center justify-center min-h-[inherit] min-w-0 px-[16.718px] py-[8px] relative w-full">
+          <div className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-tight not-italic relative shrink-0 text-[#006937] text-[11px] text-center break-words w-full line-clamp-3">Educational Landing</div>
         </div>
       </div>
     </div>
@@ -5142,8 +5039,8 @@ function Row19() {
   return (
     <div className="bg-[#dae4e1] min-h-[50px] relative rounded-[2.5px] shrink-0 w-full" data-name="row">
       <div className="flex flex-row items-center justify-center min-h-[inherit] size-full">
-        <div className="content-stretch flex items-center justify-center min-h-[inherit] px-[16.718px] py-[8px] relative w-full">
-          <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[normal] not-italic relative shrink-0 text-[#006937] text-[11px] text-center">General Detail Page</p>
+        <div className="content-stretch flex items-center justify-center min-h-[inherit] min-w-0 px-[16.718px] py-[8px] relative w-full">
+          <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-tight not-italic relative shrink-0 text-[#006937] text-[11px] text-center break-words w-full line-clamp-3">General Detail Page</p>
         </div>
       </div>
     </div>
@@ -5152,7 +5049,7 @@ function Row19() {
 
 function Column7() {
   return (
-    <div className="content-stretch flex flex-col gap-[16px] items-start p-[16px] relative rounded-[16px] shrink-0 w-[349px]" data-name="column 5">
+    <div className="content-stretch flex w-full md:w-[180px] shrink-0 flex-col gap-[16px] items-start p-[16px] relative rounded-[16px]" data-name="column 5">
       <div aria-hidden="true" className="absolute border-2 border-[#006937] border-solid inset-[-1px] pointer-events-none rounded-[17px]" />
       <Row18 />
       <Row19 />
@@ -5160,13 +5057,21 @@ function Column7() {
   );
 }
 
-function Frame102() {
+function Column5And6() {
   return (
-    <div className="content-stretch flex flex-[1_0_0] gap-[16px] items-start min-h-px min-w-px relative w-full">
-      <Column3 />
-      <Column4 />
+    <div className="content-stretch flex w-full md:w-[316px] shrink-0 flex-col md:flex-row gap-[16px] items-stretch relative" data-name="column 3 & 4 group">
       <Column5 />
       <Column6 />
+    </div>
+  );
+}
+
+function Frame102() {
+  return (
+    <div className="content-stretch flex flex-[1_0_0] flex-wrap gap-[16px] items-start justify-center min-h-[500px] min-w-0 relative w-full">
+      <Column3 />
+      <Column4 />
+      <Column5And6 />
       <Column7 />
     </div>
   );
@@ -5289,7 +5194,7 @@ function DesignCallout({
   if (direction === "up") {
     /* Vertical dashed line going up on the left, card aligned to its bottom */
     return (
-      <div className={`flex items-end gap-2 text-left ${className ?? ""}`} data-name={dataName}>
+      <div className={`flex min-h-[500px] items-start justify-center gap-2 text-left ${className ?? ""}`} data-name={dataName}>
         <div className="flex flex-col items-center shrink-0" aria-hidden>
           <svg width="14" height="8" viewBox="0 0 14 8" fill="none" className="shrink-0">
             <path d="M1 7L7 1L13 7" stroke="#0026FF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -5329,25 +5234,25 @@ function DesignCallout({
   );
 }
 
-/* Callout 1 — Clear Sub-navigation (top of wireframe, subnav area) */
+/* Callout 1 — The Main Story (top of wireframe, subnav area) */
 function Callout() {
   return (
     <div className="absolute left-[360px] top-[425px] z-10" data-name="Callout 1">
       <DesignCallout
-        title="Clear Sub-navigation"
-        text="It's possible that a story will take more than one page. The subnav is meant to be placed beneath the hero and to stay on scroll. Not as an anchor link, but as a link to a different page."
+        title="The Main Story"
+        text="There's lots of room to build the story you want to tell by combining current and new components. "
         data-name="Callout 1"
       />
     </div>
   );
 }
 
-/* Callout 2 — Primary CTA (Reserve Your Spot section, button area) */
+/* Callout 2 — Main story (Reserve Your Spot section, button area) */
 function Callout1() {
   return (
     <div className="absolute left-[390px] top-[815px] z-10" data-name="Callout 2">
       <DesignCallout
-        title="Primary CTA"
+        title="Main story"
         text="When these tales contain an action that you want users to do, make it easy for them to identify and understand the action."
         data-name="Callout 2"
       />
@@ -7971,7 +7876,7 @@ function Component2Colums() {
   );
 }
 
-function Frame52() {
+function Frame52Content() {
   return (
     <div className="content-stretch flex flex-1 flex-col gap-12 md:gap-16 lg:gap-[80px] items-center min-h-px w-full max-w-full min-w-0 relative">
       <VisualGrid />
@@ -7983,7 +7888,6 @@ function Frame52() {
       <SectionHeadingFull19 />
       <Frame108 />
       <SectionHeadingFull20 />
-      <Component2Colums />
     </div>
   );
 }
@@ -7993,41 +7897,44 @@ function Frame88() {
     <div className="relative shrink-0 w-full overflow-x-hidden">
       <div className="flex flex-row items-center justify-center w-full">
         <div className="content-stretch flex items-center justify-center w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-12 lg:px-[68px] relative">
-          <Frame52 />
+          <Frame52Content />
         </div>
       </div>
     </div>
   );
 }
 
-function Button11() {
+function WmOverviewLogo() {
   return (
-    <div className="bg-[#1c8200] content-stretch flex items-center justify-center px-[24px] py-[16px] relative rounded-[1000px] shrink-0" data-name="button">
-      <p className="font-['Inter:Bold',sans-serif] font-bold leading-[24px] not-italic relative shrink-0 text-[16px] text-white">All Projects</p>
+    <div className="relative rounded-[16px] shrink-0 size-[48px] overflow-hidden">
+      <img alt="" className="absolute h-[146.99%] left-[-176.91%] max-w-none top-[-18.98%] w-[316.82%] object-cover" src={imgRectangle1189} />
     </div>
   );
 }
 
 export default function WmDesignSystem() {
-  const [navVisible, setNavVisible] = useState(false);
+  const { prev: prevProject, next: nextProject } = getAdjacentCaseStudies("1");
 
   return (
-    <div className="bg-white w-full max-w-full overflow-x-hidden flex flex-col gap-12 sm:gap-16 md:gap-20 lg:gap-[80px] items-center justify-center pb-12 md:pb-16 lg:pb-[100px] relative" data-name="WM Design System 2026">
-      {/* Nav slides in when user hovers the left edge past the hero */}
-      <PageNavigation onVisibleChange={setNavVisible} />
-      <Heading />
-      {/* Push wrapper: shifts content right to clear the nav panel when visible */}
-      <div
-        className="w-full flex flex-col gap-12 sm:gap-16 md:gap-20 lg:gap-[80px]"
-        style={{
-          paddingLeft: navVisible ? "240px" : "0px",
-          transition: "padding-left 400ms cubic-bezier(0.4,0,0.2,1)",
-        }}
-      >
-        <ProjectDetails />
-        <Frame88 />
-        <Button11 />
-      </div>
-    </div>
+    <CaseStudyTemplate
+      hero={<Heading />}
+      overviewLogo={<WmOverviewLogo />}
+      overviewClient="Waste Management"
+      overviewCategory="Design Systems, Branding"
+      overviewTitle="Designing a scalable system for a digital rebrand"
+      overviewDescription="In 2021, Waste Management launched a company-wide rebrand alongside a broader digital transformation focused on improving customer self-service. I worked with the branding agency and led the systems work behind the rebrand, treating it as an opportunity to establish shared UX infrastructure rather than redesign individual pages."
+      metaItems={[
+        { label: "Role", value: "Principal Product Designer" },
+        { label: "Team", value: "Partnered with product, engineering, and brand leadership" },
+        { label: "Scope", value: "Company-wide rebrand across web platforms" },
+        { label: "Focus", value: "Platform UX patterns, information architecture, and shared systems" },
+      ]}
+      navSections={WM_NAV_SECTIONS}
+      navAccentColor="#207442"
+      prevProject={prevProject}
+      nextProject={nextProject}
+    >
+      <Frame88 />
+    </CaseStudyTemplate>
   );
 }
