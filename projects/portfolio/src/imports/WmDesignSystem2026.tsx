@@ -7698,7 +7698,7 @@ function SectionHeadingFull19() {
 function Grid() {
   return (
     <div className="flex flex-1 min-w-0 relative" data-name="grid 1">
-      <div className="w-full aspect-[1/2] relative rounded-[16px]" data-name="Image 4">
+      <div className="w-full aspect-[2/3] relative rounded-[16px]" data-name="Image 4">
         <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[16px]">
           <div className="absolute bg-[#e3f233] inset-0 rounded-[16px]" />
           <div className="absolute inset-0 overflow-hidden rounded-[16px]">
@@ -7713,7 +7713,7 @@ function Grid() {
 function Grid1() {
   return (
     <div className="flex flex-1 min-w-0 relative" data-name="grid 2">
-      <div className="w-full aspect-[1/2] relative rounded-[16px]" data-name="Image 4">
+      <div className="w-full aspect-[2/3] relative rounded-[16px]" data-name="Image 4">
         <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[16px]">
           <div className="absolute bg-[#3c8a2e] inset-0 rounded-[16px]" />
           <div className="absolute inset-0 overflow-hidden rounded-[16px]">
@@ -7728,7 +7728,7 @@ function Grid1() {
 function Grid2() {
   return (
     <div className="flex flex-1 min-w-0 relative" data-name="grid 3">
-      <div className="w-full aspect-[1/2] relative rounded-[16px]" data-name="Image 4">
+      <div className="w-full aspect-[2/3] relative rounded-[16px]" data-name="Image 4">
         <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[16px]">
           <div className="absolute bg-[#1c4632] inset-0 rounded-[16px]" />
           <div className="absolute inset-0 overflow-hidden rounded-[16px]">
