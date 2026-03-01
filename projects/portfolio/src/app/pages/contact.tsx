@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Instagram, Mail, Linkedin } from "lucide-react";
+import { PageContainer, TwoColumnSection } from "@/app/components/layout";
 import coffeeIllustration from "figma:asset/733a7871df6fcaf7034192ea656e0879f5c27768.png";
 import adplistMentoringCard from "figma:asset/63aea3b2da685ce0ef7648fe601ae56278215c72.png";
 import adplistLogo from "figma:asset/5d3134de39e2cf7445d5e9cecaff1acd831f6e84.png";
@@ -39,8 +40,8 @@ export function Contact() {
 
   return (
     <div className="min-h-screen pt-16">
-      <div className="w-full h-full py-12 px-4 md:px-[68px]">
-        <div className="grid md:grid-cols-2 gap-16 max-w-7xl mx-auto">
+      <PageContainer className="py-12" maxWidth="max-w-7xl">
+        <TwoColumnSection gap="gap-16">
           {/* Left side - Contact Info */}
           <div className="space-y-6">
             <div className="flex items-center gap-3">
@@ -109,7 +110,7 @@ export function Contact() {
           </div>
 
           {/* Right side - Contact Form */}
-          <div>
+          <div className="min-w-0">
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Name fields */}
               <div>
@@ -185,8 +186,8 @@ export function Contact() {
               </button>
             </form>
           </div>
-        </div>
-      </div>
+        </TwoColumnSection>
+      </PageContainer>
     </div>
   );
 }

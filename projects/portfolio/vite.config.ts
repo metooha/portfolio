@@ -14,8 +14,14 @@ function figmaAssetPlugin() {
     resolveId(id: string) {
       if (!id.startsWith('figma:asset/')) return null
       const filename = id.slice('figma:asset/'.length)
-      const resolved = path.resolve(assetsDir, filename)
+      let resolved = path.resolve(assetsDir, filename)
       if (fs.existsSync(resolved)) return resolved
+      // Optional @2x: if requesting xxx@2x.png and it's missing, fall back to xxx.png
+      if (filename.endsWith('@2x.png')) {
+        const baseFilename = filename.replace('@2x.png', '.png')
+        resolved = path.resolve(assetsDir, baseFilename)
+        if (fs.existsSync(resolved)) return resolved
+      }
       return fallbackAsset
     },
   }
@@ -52,13 +58,13 @@ export default defineConfig(({ command }) => ({
     },
   },
   server: {
-    host: true,
+    host: 'localhost',
     port: 5173,
     hmr: true,
     open: true,
   },
   preview: {
-    host: true,
+    host: 'localhost',
     port: 5173,
   },
   // Use root base in dev so Cursor browser can open http://localhost:5173

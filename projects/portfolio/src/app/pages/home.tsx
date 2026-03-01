@@ -14,6 +14,7 @@ import smileyIllustration from "figma:asset/c4148cce376a0d6238affeede96c2415696c
 import pixelEmojiIllustration from "figma:asset/ef7f42724cb7196ae5428abc2d8d64ad71405f94.png";
 import Xense from "@/imports/Xense";
 import Academy from "@/imports/Academy";
+import { PageContainer } from "@/app/components/layout";
 import { useState, useEffect } from "react";
 
 const alienIllustration = "https://images.unsplash.com/photo-1768726455596-6b55886a5862?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwaXhlbCUyMGFydCUyMHJvYm90JTIwYWxpZW58ZW58MXx8fHwxNzY4ODYwODczfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral";
@@ -35,22 +36,23 @@ const getRandomColor = () => accessibleColors[Math.floor(Math.random() * accessi
 
 export function Home() {
   return (
-    <div className="min-h-screen pt-[0px] pb-[100px] px-4 md:px-[68px]">
+    <div className="min-h-screen">
+      <PageContainer className="pt-0 pb-16 md:pb-24" maxWidth="max-w-7xl">
       {/* Hero Header */}
-      <div className="py-8 mx-[0px] my-[40px] mt-[40px] mr-[0px] mb-[4px] ml-[0px] pt-[0px] pr-[0px] pb-[32px] pl-[0px]">
-        <p className="flex flex-wrap items-center gap-3 text-[90px] leading-[1.1] w-full">
-          <span className="text-black text-[80px]">Hello, there.</span>
-          <img src={sparklesIllustration} alt="" className="w-10 h-10 inline-block hidden md:inline-block" />
-          <span className="text-black text-[80px]">I'm Amy, a</span>
-          <span className="text-indigo-600 font-bold text-[80px]">Principal Product Designer,</span>
-          <img src={pencilIllustration} alt="" className="w-12 h-12 inline-block hidden md:inline-block" />
-          <span className="text-black text-[80px]">who builds scalable products, with a focus on branding, usability, and workflow integrations.</span>
+      <div className="py-6 md:py-8 mt-8 md:mt-10 mb-1 pb-8 md:pb-10">
+        <p className="flex flex-wrap items-center gap-2 md:gap-3 text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl leading-[1.15] w-full">
+          <span className="text-black">Hello, there.</span>
+          <img src={sparklesIllustration} alt="" className="w-8 h-8 md:w-10 md:h-10 inline-block hidden md:inline-block shrink-0" />
+          <span className="text-black">I'm Amy, a</span>
+          <span className="text-indigo-600 font-bold">Principal Product Designer,</span>
+          <img src={pencilIllustration} alt="" className="w-8 h-8 md:w-12 md:h-12 inline-block hidden md:inline-block shrink-0" />
+          <span className="text-black">who builds scalable products, with a focus on branding, usability, and workflow integrations.</span>
         </p>
       </div>
 
       {/* Skills Section */}
       <div className="mb-16">
-        <h2 className="text-4xl font-bold mb-8 text-[28px] mx-[0px] my-[32px] font-normal">with my skills in:</h2>
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 md:mb-8 my-6 md:my-8 font-normal">with my skills in:</h2>
         <div className="flex flex-wrap justify-start items-center gap-2 w-full">
           {/* Skill pills - uniform size and straight alignment */}
           
@@ -265,6 +267,7 @@ export function Home() {
           />
         </svg>
       </div>
+      </PageContainer>
     </div>
   );
 }

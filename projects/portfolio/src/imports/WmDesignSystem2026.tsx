@@ -1,5 +1,11 @@
 import React, { useRef, useState } from "react";
-import { motion } from "motion/react";
+import { CaseStudyHero } from "@/app/components/CaseStudyHero";
+import { CaseStudyPageNav } from "@/app/components/CaseStudyPageNav";
+import { CaseStudyMeta } from "@/app/components/CaseStudyMeta";
+import { SectionHeading } from "@/app/components/SectionHeading";
+import { BulletList } from "@/app/components/BulletList";
+import { ValuePropCard, ValuePropGrid } from "@/app/components/ValuePropCard";
+import { ComparisonSlider } from "@/app/components/ComparisonSlider";
 import svgPaths from "./svg-wznnermhqa";
 import imgDesign from "figma:asset/840e6895ac600c62a54c6dbd6cbb35a7f6faa2e0.png";
 import imgRectangle1189 from "figma:asset/e5eea785a9075e6a9a782597f2df6c7e9f7ba229.png";
@@ -30,11 +36,16 @@ import imgDSf1Landing2 from "figma:asset/31b8b3e4fb39d82564f6b9432163b6a147e6ef8
 import imgLandingPage1 from "figma:asset/75d4befc59540d329e85044451d2144c400cc32a.png";
 import imgNaming from "figma:asset/2cce581fef4169a4e0ea0db9ad19572ac3d13045.png";
 import img from "figma:asset/8034724294787bdbafe3c9f198ba11eacf27626e.png";
+import imgSolutionCardBg from "@/assets/2520a03a24b3b9c3e1724419117e04d643ad9734.png";
+import imgJimFishCircle from "@/assets/8556d4d0c62cc9d48200a04aa20b6d7db121d22f.png";
+import imgCircleBorder from "figma:asset/18782c96349dcd46770f565e630c297434016fa9.svg";
 import imgImage10 from "figma:asset/c8b74e9dddd7b7bb51f4d8c7fb37719ff3f56b02.png";
 import imgImage11 from "figma:asset/6d8490c5183c0f00dd0e14e2c5f615c1a10ffef3.png";
 import imgWireframe1 from "figma:asset/8f0e182098872906bfe1ae2e5c8753c973347910.png";
+import imgWireframe1_2x from "figma:asset/8f0e182098872906bfe1ae2e5c8753c973347910@2x.png";
 import imgImage12 from "figma:asset/c7c28a598ab9b54ce9056e3326c89c874fab8870.png";
 import imgDRecycling1011 from "figma:asset/5a6597134fabb5047bbb0740a11b4501bad4cc42.png";
+import imgDRecycling1011_2x from "figma:asset/5a6597134fabb5047bbb0740a11b4501bad4cc42@2x.png";
 import imgMedia from "figma:asset/2ac7dac262dd37996c65dea9244a9411494e14e9.png";
 import img1 from "figma:asset/d95d6128004dd523fdf9c574a7aef72ec05e8edb.png";
 import img2 from "figma:asset/e69489dc678588d3e807ed0c7f48c08b04428f4f.png";
@@ -67,174 +78,21 @@ import imgImage111 from "figma:asset/f09a309a527da9a2a05dbe94b77f41b60519965f.pn
 import { imgScreencaptureWastemanagementAtlassianNetWikiSpacesTdcPages1427669170Sprint12Items202201171359311 } from "./svg-bny7f";
 
 function Heading() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [parallax, setParallax] = useState({ x: 0, y: 0 });
-  const PARALLAX_STRENGTH = 12;
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const el = containerRef.current;
-    if (!el) return;
-    const rect = el.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-    const x = (e.clientX - centerX) / rect.width;
-    const y = (e.clientY - centerY) / rect.height;
-    setParallax({
-      x: x * PARALLAX_STRENGTH,
-      y: y * PARALLAX_STRENGTH,
-    });
-  };
-
-  const handleMouseLeave = () => setParallax({ x: 0, y: 0 });
-
-  return (
-    <div
-      ref={containerRef}
-      className="h-[280px] sm:h-[400px] md:h-[560px] lg:h-[670px] xl:h-[870px] relative shrink-0 w-full overflow-hidden"
-      data-name="Heading"
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-    >
-      <div
-        className="absolute inset-0 z-[1] transition-transform duration-300 ease-out"
-        data-name="design"
-        aria-hidden="true"
-        style={{
-          transform: `translate(${parallax.x}px, ${parallax.y}px) scale(1.08)`,
-        }}
-      >
-        <img alt="" className="block w-full h-full min-h-full min-w-full object-cover object-center" src={imgDesign} />
-      </div>
-      <div className="relative z-[2] flex flex-col items-center justify-center size-full pointer-events-none">
-        <div className="content-stretch flex flex-col gap-[10px] isolate items-center justify-center px-4 sm:px-8 md:px-16 lg:px-32 xl:px-[250px] py-12 sm:py-20 md:py-32 lg:py-40 xl:py-[294px] size-full pointer-events-auto">
-          <motion.p
-            className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-tight not-italic relative shrink-0 text-[#143526] text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-[140px] text-center"
-            initial={{ opacity: 0, y: -80 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{
-              type: "spring",
-              stiffness: 180,
-              damping: 14,
-              mass: 0.8,
-            }}
-          >
-            Waste Management
-          </motion.p>
-        </div>
-      </div>
-    </div>
-  );
+  return <CaseStudyHero image={imgDesign} title="Waste Management" titleColor="#143526" />;
 }
 
-function ArrowLeft() {
-  return (
-    <div className="relative shrink-0 size-[16px]" data-name="arrow/left">
-      <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 16 16">
-        <g id="arrow/left">
-          <path d={svgPaths.p652cc80} fill="var(--fill-0, #4E4F4E)" id="arrowLeft" />
-        </g>
-      </svg>
-    </div>
-  );
-}
+const WM_NAV_SECTIONS = [
+  { label: "Overview", href: "#overview" },
+  { label: "Problem Space", href: "#problem-space" },
+  { label: "Our Goals", href: "#our-goals" },
+  { label: "Approach", href: "#approach" },
+  { label: "System Audit", href: "#system-audit" },
+  { label: "Information Architecture", href: "#information-architecture" },
+  { label: "Compromises", href: "#compromises" },
+];
 
-function TextLinkBack() {
-  return (
-    <div className="content-stretch flex gap-[6px] items-center relative shrink-0" data-name="Text Link / Back">
-      <ArrowLeft />
-      <p className="font-['Inter:Regular',sans-serif] font-normal leading-[36px] not-italic relative shrink-0 text-[#4e4f4e] text-[16px]">Back</p>
-    </div>
-  );
-}
-
-function SideNav() {
-  return (
-    <div className="content-stretch flex gap-[6px] items-center relative shrink-0 w-full" data-name="Side Nav">
-      <div className="bg-[#207442] h-[22px] shrink-0 w-[3px]" />
-      <p className="font-['Inter:Regular',sans-serif] font-normal leading-[36px] not-italic relative shrink-0 text-[#4e4f4e] text-[16px]">Overview</p>
-    </div>
-  );
-}
-
-function SideNav1() {
-  return (
-    <div className="content-stretch flex gap-[6px] items-center relative shrink-0 w-full" data-name="Side Nav">
-      <div className="h-[22px] shrink-0 w-[3px]" />
-      <p className="font-['Inter:Regular',sans-serif] font-normal leading-[36px] not-italic relative shrink-0 text-[#4e4f4e] text-[16px]">Problem Space</p>
-    </div>
-  );
-}
-
-function SideNav2() {
-  return (
-    <div className="content-stretch flex gap-[6px] items-center relative shrink-0 w-full" data-name="Side Nav">
-      <div className="h-[22px] shrink-0 w-[3px]" />
-      <p className="font-['Inter:Regular',sans-serif] font-normal leading-[36px] not-italic relative shrink-0 text-[#4e4f4e] text-[16px]">Our Goals</p>
-    </div>
-  );
-}
-
-function SideNav3() {
-  return (
-    <div className="content-stretch flex gap-[6px] items-center relative shrink-0 w-full" data-name="Side Nav">
-      <div className="h-[22px] shrink-0 w-[3px]" />
-      <p className="font-['Inter:Regular',sans-serif] font-normal leading-[36px] not-italic relative shrink-0 text-[#4e4f4e] text-[16px]">Approach</p>
-    </div>
-  );
-}
-
-function SideNav4() {
-  return (
-    <div className="content-stretch flex gap-[6px] items-center relative shrink-0 w-full" data-name="Side Nav">
-      <div className="h-[22px] shrink-0 w-[3px]" />
-      <p className="font-['Inter:Regular',sans-serif] font-normal leading-[36px] not-italic relative shrink-0 text-[#4e4f4e] text-[16px]">System Audit</p>
-    </div>
-  );
-}
-
-function SideNav5() {
-  return (
-    <div className="content-stretch flex gap-[6px] items-center relative shrink-0 w-full" data-name="Side Nav">
-      <div className="h-[22px] shrink-0 w-[3px]" />
-      <p className="font-['Inter:Regular',sans-serif] font-normal leading-[36px] not-italic relative shrink-0 text-[#4e4f4e] text-[16px]">
-        {`Information `}
-        <br aria-hidden="true" />
-        Architecture
-      </p>
-    </div>
-  );
-}
-
-function SideNav6() {
-  return (
-    <div className="content-stretch flex gap-[6px] items-center relative shrink-0 w-full" data-name="Side Nav">
-      <div className="h-[22px] shrink-0 w-[3px]" />
-      <p className="font-['Inter:Regular',sans-serif] font-normal leading-[36px] not-italic relative shrink-0 text-[#4e4f4e] text-[16px]">Compromises</p>
-    </div>
-  );
-}
-
-function SideNavigation() {
-  return (
-    <div className="content-stretch flex flex-col items-start relative shrink-0" data-name="Side Navigation">
-      <SideNav />
-      <SideNav1 />
-      <SideNav2 />
-      <SideNav3 />
-      <SideNav4 />
-      <SideNav5 />
-      <SideNav6 />
-    </div>
-  );
-}
-
-function PageNavigation() {
-  return (
-    <div className="content-stretch flex flex-col gap-[58px] items-start pl-4 sm:pl-6 md:pl-12 lg:pl-[68px] pr-4 sm:pr-5 relative shrink-0 w-full md:w-auto" data-name="page navigation">
-      <TextLinkBack />
-      <SideNavigation />
-    </div>
-  );
+function PageNavigation({ onVisibleChange }: { onVisibleChange?: (v: boolean) => void }) {
+  return <CaseStudyPageNav sections={WM_NAV_SECTIONS} accentColor="#207442" onVisibleChange={onVisibleChange} />;
 }
 
 function Frame43() {
@@ -272,56 +130,16 @@ function PageTitle() {
   );
 }
 
-function ValueProp() {
-  return (
-    <div className="content-stretch flex flex-[1_0_0] flex-col font-['Inter:Regular',sans-serif] font-normal gap-[24px] h-full items-start min-h-px min-w-px not-italic relative text-[#4e4f4e] text-[16px] whitespace-pre-wrap" data-name="Value Prop">
-      <p className="leading-[normal] relative shrink-0 w-full">{`Role: Principal Product Designer `}</p>
-      <p className="leading-[20px] relative shrink-0 w-full">
-        {`Team: Partnered with product, engineering, `}
-        <br aria-hidden="true" />
-        and brand leadership
-      </p>
-    </div>
-  );
-}
-
-function ValueProp1() {
-  return (
-    <div className="content-stretch flex flex-[1_0_0] flex-col font-['Inter:Regular',sans-serif] font-normal gap-[24px] items-start min-h-px min-w-px not-italic relative text-[#4e4f4e] text-[16px] whitespace-pre-wrap" data-name="Value Prop">
-      <p className="leading-[normal] relative shrink-0 w-full">Scope: Company-wide rebrand across web platforms</p>
-      <p className="leading-[20px] relative shrink-0 w-full">
-        {`Focus: Platform UX patterns, information architecture, `}
-        <br aria-hidden="true" />
-        and shared systems
-      </p>
-    </div>
-  );
-}
-
-function Row1() {
-  return (
-    <div className="content-stretch flex flex-col sm:flex-row gap-6 sm:gap-8 md:gap-12 lg:gap-[141px] items-start sm:items-center relative shrink-0 w-full" data-name="Row 1">
-      <div className="flex flex-1 flex-row items-center self-stretch min-w-0">
-        <ValueProp />
-      </div>
-      <ValueProp1 />
-    </div>
-  );
-}
-
-function Metrics() {
-  return (
-    <div className="content-stretch flex flex-[1_0_0] flex-col gap-[24px] items-start min-h-px min-w-px relative" data-name="metrics">
-      <Row1 />
-    </div>
-  );
-}
-
 function MetricsAndLinks() {
   return (
-    <div className="content-stretch flex items-start justify-between relative shrink-0 w-full" data-name="Metrics and Links">
-      <Metrics />
-    </div>
+    <CaseStudyMeta
+      items={[
+        { label: "Role", value: "Principal Product Designer" },
+        { label: "Team", value: "Partnered with product, engineering, and brand leadership" },
+        { label: "Scope", value: "Company-wide rebrand across web platforms" },
+        { label: "Focus", value: "Platform UX patterns, information architecture, and shared systems" },
+      ]}
+    />
   );
 }
 
@@ -336,9 +154,8 @@ function Content() {
 
 function ProjectDetails() {
   return (
-    <div className="relative shrink-0 w-full" data-name="project details">
-      <div className="content-stretch flex flex-col lg:flex-row gap-8 lg:gap-12 items-start pr-4 sm:pr-6 md:pr-8 lg:pr-16 xl:pr-[280px] relative w-full">
-        <PageNavigation />
+    <div id="overview" className="relative shrink-0 w-full" data-name="project details">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-12 lg:px-[68px]">
         <Content />
       </div>
     </div>
@@ -431,10 +248,11 @@ function VisualGrid() {
 
 function SectionHeadingVertical() {
   return (
-    <div className="content-stretch flex flex-col gap-[16px] items-start justify-center not-italic relative shrink-0 w-full whitespace-pre-wrap" data-name="Section Heading / Vertical">
-      <p className="font-['Inter:Medium',sans-serif] font-medium leading-[normal] relative shrink-0 text-[40px] text-black w-full">Problem Space</p>
-      <p className="font-['Inter:Regular',sans-serif] font-normal leading-[24px] max-w-[800px] relative shrink-0 text-[#4e4f4e] text-[16px] w-full">Waste Management’s digital products had grown through rapid, project-based development, resulting in fragmented UI patterns, inconsistent information architecture, and limited reuse across teams. As self-service experiences expanded, these inconsistencies created friction for users and increased maintenance costs for the organization.</p>
-    </div>
+    <SectionHeading
+      layout="vertical"
+      title="Problem Space"
+      description="Waste Management’s digital products had grown through rapid, project-based development, resulting in fragmented UI patterns, inconsistent information architecture, and limited reuse across teams. As self-service experiences expanded, these inconsistencies created friction for users and increased maintenance costs for the organization."
+    />
   );
 }
 
@@ -809,89 +627,31 @@ function Frame45() {
   );
 }
 
-function ValueProp2() {
-  return (
-    <div className="content-stretch flex flex-[1_0_0] flex-col gap-[12px] items-start min-h-px min-w-px relative" data-name="Value Prop">
-      <Pin />
-      <Frame45 />
-    </div>
-  );
-}
-
-function Star() {
-  return (
-    <div className="h-[44px] relative shrink-0 w-[48px]" data-name="star">
-      <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 48 44">
-        <g id="star">
-          <path clipRule="evenodd" d={svgPaths.p2d858e00} fill="var(--fill-0, #E8A73A)" fillRule="evenodd" id="icon color" />
-        </g>
-      </svg>
-    </div>
-  );
-}
-
-function Frame46() {
-  return (
-    <div className="content-stretch flex flex-col gap-[6px] items-start relative shrink-0 w-full">
-      <p className="font-['Inter:Regular',sans-serif] font-normal leading-[normal] not-italic relative shrink-0 text-[#4e4f4e] text-[16px] w-full whitespace-pre-wrap">Establish a guiding framework and scalable system that accelerates our market entry.</p>
-    </div>
-  );
-}
-
-function ValueProp3() {
-  return (
-    <div className="content-stretch flex flex-[1_0_0] flex-col gap-[12px] h-[150px] items-start min-h-px min-w-px relative" data-name="Value Prop">
-      <Star />
-      <Frame46 />
-    </div>
-  );
-}
-
-function Chat() {
-  return (
-    <div className="h-[44.34px] relative shrink-0 w-[48px]" data-name="chat">
-      <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 48 44.3408">
-        <g id="chat">
-          <path d={svgPaths.p15d40980} fill="var(--fill-0, #8ABF00)" id="Chat" />
-          <path d={svgPaths.p2038b100} fill="var(--fill-0, #003F2E)" id="Combined Shape" />
-        </g>
-      </svg>
-    </div>
-  );
-}
-
-function Frame47() {
-  return (
-    <div className="content-stretch flex flex-col gap-[6px] items-start relative shrink-0 w-full">
-      <p className="font-['Inter:Regular',sans-serif] font-normal leading-[normal] not-italic relative shrink-0 text-[#4e4f4e] text-[16px] w-full whitespace-pre-wrap">Collaborate and execute with our product, brand, design, and engineering teams.</p>
-    </div>
-  );
-}
-
-function ValueProp4() {
-  return (
-    <div className="content-stretch flex flex-[1_0_0] flex-col gap-[12px] h-[150px] items-start min-h-px min-w-px relative" data-name="Value Prop">
-      <Chat />
-      <Frame47 />
-    </div>
-  );
-}
-
-function Frame53() {
-  return (
-    <div className="content-center flex flex-wrap gap-[16px] items-start pt-[16px] relative shrink-0 w-full">
-      <ValueProp2 />
-      <ValueProp3 />
-      <ValueProp4 />
-    </div>
-  );
-}
-
 function SectionCardsWithValueProps() {
   return (
-    <div className="content-stretch flex flex-col gap-[32px] items-start relative shrink-0 w-full" data-name="Section Cards / With Value Props">
-      <Frame53 />
-    </div>
+    <ValuePropGrid>
+      <ValuePropCard
+        icon={<Pin />}
+        description="Align on brand principles, UX pattern strategy, and IA to guide the system architecture."
+      />
+      <ValuePropCard
+        icon={
+          <svg width="48" height="44" fill="none" viewBox="0 0 48 44" aria-hidden="true">
+            <path clipRule="evenodd" d={svgPaths.p2d858e00} fill="#E8A73A" fillRule="evenodd" />
+          </svg>
+        }
+        description="Establish a guiding framework and scalable system that accelerates our market entry."
+      />
+      <ValuePropCard
+        icon={
+          <svg width="48" height="44.34" fill="none" viewBox="0 0 48 44.3408" aria-hidden="true">
+            <path d={svgPaths.p15d40980} fill="#8ABF00" />
+            <path d={svgPaths.p2038b100} fill="#003F2E" />
+          </svg>
+        }
+        description="Collaborate and execute with our product, brand, design, and engineering teams."
+      />
+    </ValuePropGrid>
   );
 }
 
@@ -927,7 +687,7 @@ function DsPages() {
 
 function Frame103() {
   return (
-    <div className="content-stretch flex flex-col gap-[32px] items-start relative shrink-0 w-full">
+    <div id="our-goals" className="content-stretch flex flex-col gap-[32px] items-start relative shrink-0 w-full">
       <SectionHeadingFull6 />
       <SectionCardsWithValueProps />
       <DsPages />
@@ -937,7 +697,7 @@ function Frame103() {
 
 function Section() {
   return (
-    <div className="content-stretch flex flex-col gap-[32px] items-start relative shrink-0 w-full" data-name="Section">
+    <div id="problem-space" className="content-stretch flex flex-col gap-[32px] items-start relative shrink-0 w-full" data-name="Section">
       <SectionHeadingVertical />
       <DesignSystemsOverviewDiagram />
       <Frame103 />
@@ -945,115 +705,21 @@ function Section() {
   );
 }
 
-function Count() {
-  return (
-    <div className="bg-[#e9f722] content-stretch flex flex-col items-center justify-center min-h-[48px] min-w-[48px] overflow-clip p-[12px] relative rounded-[100px] shrink-0 w-[48px]" data-name="Count">
-      <p className="font-['Inter:Regular',sans-serif] font-normal leading-[normal] not-italic relative shrink-0 text-[16px] text-black text-center w-full whitespace-pre-wrap">1.0</p>
-    </div>
-  );
-}
-
-function CountTitle7() {
-  return (
-    <div className="content-stretch flex gap-[16px] items-center relative shrink-0" data-name="Count + Title">
-      <Count />
-      <p className="font-['Inter:Medium',sans-serif] font-medium leading-[normal] not-italic relative shrink-0 text-[40px] text-black">Approach</p>
-    </div>
-  );
-}
-
-function Title7() {
-  return (
-    <div className="content-stretch flex flex-[1_0_0] h-[72px] items-center min-h-px min-w-px relative" data-name="title">
-      <CountTitle7 />
-    </div>
-  );
-}
-
 function SectionHeadingFull7() {
-  return (
-    <div className="content-start flex flex-wrap gap-[32px] items-start relative shrink-0 w-full" data-name="Section Heading / Full">
-      <Title7 />
-    </div>
-  );
-}
-
-function SectionHeadingVertical1() {
-  return (
-    <div className="content-stretch flex flex-col gap-[8px] items-start justify-center relative shrink-0 w-full" data-name="Section Heading / Vertical">
-      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[normal] not-italic relative shrink-0 text-[20px] text-black">{`Internal Audit & Alignment `}</p>
-    </div>
-  );
-}
-
-function Count1() {
-  return (
-    <div className="bg-[#207442] content-stretch flex flex-col items-center justify-center min-h-[32px] min-w-[32px] overflow-clip p-[6px] relative rounded-[100px] shrink-0" data-name="Count">
-      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[normal] not-italic relative shrink-0 text-[12px] text-center text-white">1</p>
-    </div>
-  );
-}
-
-function BodyBulletPoint() {
-  return (
-    <div className="content-stretch flex gap-[16px] items-start relative shrink-0 w-full" data-name="Body / Bullet Point">
-      <Count1 />
-      <p className="flex-[1_0_0] font-['Inter:Regular',sans-serif] font-normal leading-[20px] min-h-px min-w-px not-italic relative text-[#4e4f4e] text-[16px] whitespace-pre-wrap">
-        Ranked, story pointed, and aligned on level of effort for each component
-        <br aria-hidden="true" />
-        <br aria-hidden="true" />
-        Created a cataloging system to enable us to scale to new components
-      </p>
-    </div>
-  );
-}
-
-function Count2() {
-  return (
-    <div className="bg-[#207442] content-stretch flex flex-col items-center justify-center min-h-[32px] min-w-[32px] overflow-clip p-[6px] relative rounded-[100px] shrink-0" data-name="Count">
-      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[normal] not-italic relative shrink-0 text-[12px] text-center text-white">2</p>
-    </div>
-  );
-}
-
-function BodyBulletPoint1() {
-  return (
-    <div className="content-stretch flex gap-[16px] items-start relative shrink-0 w-full" data-name="Body / Bullet Point">
-      <Count2 />
-      <p className="flex-[1_0_0] font-['Inter:Regular',sans-serif] font-normal leading-[20px] min-h-px min-w-px not-italic relative text-[#4e4f4e] text-[16px] whitespace-pre-wrap">Defined requirements and technical constraints and how our design system integrates with the AEM platform with eng team</p>
-    </div>
-  );
-}
-
-function Count3() {
-  return (
-    <div className="bg-[#207442] content-stretch flex flex-col items-center justify-center min-h-[32px] min-w-[32px] overflow-clip p-[6px] relative rounded-[100px] shrink-0" data-name="Count">
-      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[normal] not-italic relative shrink-0 text-[12px] text-center text-white">3</p>
-    </div>
-  );
-}
-
-function BodyBulletPoint2() {
-  return (
-    <div className="content-stretch flex gap-[16px] items-start relative shrink-0 w-full" data-name="Body / Bullet Point">
-      <Count3 />
-      <p className="flex-[1_0_0] font-['Inter:Regular',sans-serif] font-normal leading-[20px] min-h-px min-w-px not-italic relative text-[#4e4f4e] text-[16px] whitespace-pre-wrap">
-        Organized sprint planning and outlined the design and development tasks
-        <br aria-hidden="true" />
-        <br aria-hidden="true" />
-        Collaborated with the business, prioritized scope, and migration roadmap
-      </p>
-    </div>
-  );
+  return <SectionHeading badge="1.0" badgeColor="yellow" title="Approach" />;
 }
 
 function ValueProp5() {
   return (
-    <div className="flex flex-col gap-[32px] items-start pl-[24px] py-[24px] relative min-w-0 flex-1 max-w-[574px] w-full h-auto" data-name="Value Prop">
-      <SectionHeadingVertical1 />
-      <BodyBulletPoint />
-      <BodyBulletPoint1 />
-      <BodyBulletPoint2 />
+    <div className="flex flex-col gap-8 items-start pl-6 py-6 relative min-w-0 flex-1 max-w-[574px] w-full h-auto" data-name="Value Prop">
+      <SectionHeading layout="vertical" titleSize="md" title="Internal Audit &amp; Alignment" />
+      <BulletList
+        items={[
+          { text: "Ranked, story pointed, and aligned on level of effort for each component\n\nCreated a cataloging system to enable us to scale to new components" },
+          { text: "Defined requirements and technical constraints and how our design system integrates with the AEM platform with eng team" },
+          { text: "Organized sprint planning and outlined the design and development tasks\n\nCollaborated with the business, prioritized scope, and migration roadmap" },
+        ]}
+      />
     </div>
   );
 }
@@ -1098,7 +764,7 @@ function Audit() {
 
 function Iamge() {
   return (
-    <div className="content-stretch flex items-center pl-[16px] py-[16px] relative shrink-0 w-[574px]" data-name="iamge">
+    <div className="content-stretch flex min-w-[280px] flex-1 max-w-full items-center pl-[16px] py-[16px] relative" data-name="iamge">
       <Audit />
     </div>
   );
@@ -1202,7 +868,7 @@ function DesignToolKit() {
 
 function Image() {
   return (
-    <div className="content-stretch flex items-center pl-[16px] py-[16px] relative shrink-0 w-[574px]" data-name="image">
+    <div className="content-stretch flex min-w-[280px] flex-1 max-w-full items-center pl-[16px] py-[16px] relative" data-name="image">
       <DesignToolKit />
     </div>
   );
@@ -1620,7 +1286,7 @@ function SectionHeadingVertical4() {
 
 function ValueProp8() {
   return (
-    <div className="content-stretch flex w-fit min-w-0 flex-1 flex-col items-start pb-[24px] relative shrink" data-name="Value Prop">
+    <div className="content-stretch flex min-w-[280px] flex-1 flex-col items-start pb-[24px] relative shrink" data-name="Value Prop">
       <SectionHeadingVertical4 />
     </div>
   );
@@ -1893,7 +1559,7 @@ function Image7() {
 
 function Row7() {
   return (
-    <div className="content-start flex flex-nowrap gap-[24px] items-start justify-start relative min-w-0 w-full" data-name="Row 1">
+    <div className="content-start flex flex-wrap gap-[24px] items-start justify-start relative min-w-0 w-full" data-name="Row 1">
       <ValueProp8 />
       <Image7 />
     </div>
@@ -1902,7 +1568,7 @@ function Row7() {
 
 function SectionCardsVertical() {
   return (
-    <div className="content-stretch flex flex-col gap-[32px] items-start relative shrink-0 w-full" data-name="Section Cards / Vertical">
+    <div id="system-audit" className="content-stretch flex flex-col gap-[32px] items-start relative shrink-0 w-full" data-name="Section Cards / Vertical">
       <SectionHeadingFull8 />
       <Row6 />
       <Row7 />
@@ -2277,16 +1943,16 @@ function ReskinCardTypeBasicContent() {
 
 function ReskinCardTypeBasicBack() {
   return (
-    <div className="bg-white size-full min-h-0 min-w-0 relative rounded-[8px] overflow-hidden shadow-[0px_2px_8px_rgba(0,0,0,0.08)]">
+    <div className="bg-white size-full min-h-0 min-w-0 relative rounded-[8px] overflow-hidden shadow-[0px_4px_4px_rgba(0,0,0,0.25)]">
       <div className="content-stretch flex flex-col size-full">
         <div className="relative h-[140px] min-h-[140px] w-full shrink-0 overflow-hidden bg-[#e5e7e5]">
           <img alt="Recycling" className="absolute inset-0 size-full object-cover object-center" src={imgRecyclingTruck} />
         </div>
         <div className="content-stretch flex flex-col gap-[4px] items-start p-[16px] relative flex-1 min-h-0">
-          <p className="font-['Inter:Bold',sans-serif] font-bold leading-[18px] not-italic text-[#1d890a] text-[13px] tracking-widest uppercase">Recycling</p>
-          <p className="font-['Inter:Bold',sans-serif] font-bold leading-[27px] not-italic text-[#4e4f58] text-[20px] w-full">The Dangers of &quot;Wishcycling&quot;</p>
-          <p className="font-['Inter:Regular',sans-serif] font-normal leading-[18px] not-italic text-[#67696d] text-[14px] line-clamp-2 w-full">By Susan Robinson, Director of P...</p>
-          <p className="font-['Inter:Regular',sans-serif] font-normal leading-[24px] not-italic text-[#1d890a] text-[12px] underline decoration-solid [text-decoration-skip-ink:none]">Keep Reading</p>
+          <p className="font-['Maax:Bold',sans-serif] font-bold leading-[18px] not-italic text-[#024731] text-[13px] tracking-[1.4px] uppercase">Recycling</p>
+          <p className="font-['Maax:Bold',sans-serif] font-bold leading-[27px] not-italic text-[#4e4f58] text-[20px] w-full tracking-[-0.2px]">The Dangers of &quot;Wishcycling&quot;</p>
+          <p className="font-['Maax:Regular',sans-serif] font-normal leading-[18px] not-italic text-[#4f4f59] text-[14px] line-clamp-2 w-full">By Susan Robinson, Director of P...</p>
+          <p className="font-['Maax:Regular',sans-serif] font-normal leading-[20px] not-italic text-[#024731] text-[14px] underline decoration-solid [text-decoration-skip-ink:none]">Learn More →</p>
         </div>
       </div>
     </div>
@@ -2371,15 +2037,16 @@ function ReskinCardTypeProfileContent() {
 
 function ReskinCardTypeProfileBack() {
   return (
-    <div className="bg-white size-full min-h-0 min-w-0 relative rounded-[8px] overflow-hidden shadow-[0px_2px_8px_rgba(0,0,0,0.08)]">
+    <div className="bg-white size-full min-h-0 min-w-0 relative rounded-[8px] overflow-hidden shadow-[0px_4px_4px_rgba(0,0,0,0.25)]">
       <div className="content-stretch flex flex-col size-full">
         <div className="relative h-[140px] min-h-[140px] w-full shrink-0 overflow-hidden bg-[#e5e5e5]">
-          <img alt="Jim Fish" className="absolute inset-0 size-full object-cover object-center" src={imgJimFish} />
+          <img alt="James C. Fish Jr." className="absolute inset-0 size-full object-cover object-center" src={imgJimFish} />
         </div>
         <div className="content-stretch flex flex-col gap-[4px] items-start p-[16px] relative flex-1 min-h-0">
-          <p className="font-['Inter:Bold',sans-serif] font-bold leading-[27px] not-italic text-[#4e4f58] text-[20px] w-full">Jim Fish</p>
-          <p className="font-['Inter:Regular',sans-serif] font-normal leading-[24px] not-italic text-[#67696d] text-[16px] w-full line-clamp-2">Prospects, technology and the new HR...</p>
-          <p className="font-['Inter:Regular',sans-serif] font-normal leading-[24px] not-italic text-[#1d890a] text-[12px] underline decoration-solid [text-decoration-skip-ink:none]">Listen Now</p>
+          <p className="font-['Maax:Bold',sans-serif] font-bold leading-[27px] not-italic text-[#4e4f58] text-[20px] w-full tracking-[-0.2px]">James C. Fish Jr.</p>
+          <p className="font-['Maax:Bold',sans-serif] font-bold leading-[18px] not-italic text-[#024731] text-[13px] tracking-[1.4px] uppercase">President &amp; CEO</p>
+          <p className="font-['Maax:Regular',sans-serif] font-normal leading-[20px] not-italic text-[#4f4f59] text-[14px] w-full line-clamp-2">Talent comes to Waste Management from all areas and walks of life. It isn&apos;t too often, ho...</p>
+          <p className="font-['Maax:Regular',sans-serif] font-normal leading-[20px] not-italic text-[#024731] text-[14px] underline decoration-solid [text-decoration-skip-ink:none]">Read Now →</p>
         </div>
       </div>
     </div>
@@ -2436,14 +2103,16 @@ function ReskinCardTypeProductContent() {
 
 function ReskinCardTypeProductBack() {
   return (
-    <div className="bg-white size-full min-h-0 min-w-0 relative rounded-[8px] overflow-hidden shadow-[0px_2px_8px_rgba(0,0,0,0.08)]">
+    <div className="bg-white size-full min-h-0 min-w-0 relative rounded-[8px] overflow-hidden shadow-[0px_4px_4px_rgba(0,0,0,0.25)]">
       <div className="content-stretch flex flex-col size-full">
         <div className="relative h-[140px] min-h-[140px] w-full shrink-0 overflow-hidden bg-white">
           <img alt="Roll-off dumpster" className="absolute inset-0 size-full object-cover object-center" src={imgRollOffDumpster} />
         </div>
         <div className="content-stretch flex flex-col gap-[4px] items-start p-[16px] relative flex-1 min-h-0">
-          <p className="font-['Inter:Bold',sans-serif] font-bold leading-[27px] not-italic text-[#4e4f58] text-[20px] w-full">Temporary Roll-Off Dumpster</p>
-          <p className="font-['Inter:Regular',sans-serif] font-normal leading-[20px] not-italic text-[#67696d] text-[14px] w-full line-clamp-3">Temporary roll-off dumpsters are ideal for home renovations, construction sites, office cleanup...</p>
+          <p className="font-['Maax:Bold',sans-serif] font-bold leading-[18px] not-italic text-[#024731] text-[13px] tracking-[1.4px] uppercase">Service</p>
+          <p className="font-['Maax:Bold',sans-serif] font-bold leading-[27px] not-italic text-[#4e4f58] text-[20px] w-full tracking-[-0.2px]">Home Waste &amp; Recycling</p>
+          <p className="font-['Maax:Regular',sans-serif] font-normal leading-[20px] not-italic text-[#4f4f59] text-[14px] w-full line-clamp-3">Get free account setup and container delivery to help you manage your residential waste and recycling.</p>
+          <p className="font-['Maax:Regular',sans-serif] font-normal leading-[20px] not-italic text-[#024731] text-[14px] underline decoration-solid [text-decoration-skip-ink:none]">Learn More →</p>
         </div>
       </div>
     </div>
@@ -2498,12 +2167,12 @@ function ReskinCardTypeDownloadContent() {
 
 function ReskinCardTypeDownloadBack() {
   return (
-    <div className="bg-white size-full min-h-0 min-w-0 relative rounded-[8px] overflow-hidden shadow-[0px_2px_8px_rgba(0,0,0,0.08)]">
+    <div className="bg-white size-full min-h-0 min-w-0 relative rounded-[8px] overflow-hidden shadow-[0px_4px_4px_rgba(0,0,0,0.25)]">
       <div className="content-stretch flex flex-col gap-[4px] items-start p-[16px] relative size-full">
-        <p className="font-['Inter:Bold',sans-serif] font-bold leading-[18px] not-italic text-[#1d890a] text-[13px] tracking-widest uppercase">Download</p>
-        <p className="font-['Inter:Bold',sans-serif] font-bold leading-[27px] not-italic text-[#4e4f58] text-[20px] w-full">Our Position on Plastic</p>
-        <p className="font-['Inter:Regular',sans-serif] font-normal leading-[20px] not-italic text-[#67696d] text-[14px] w-full flex-1 min-h-0">Learn how Waste Management is responding to recent shifts in the global plastics market.</p>
-        <p className="font-['Inter:Regular',sans-serif] font-normal leading-[24px] not-italic text-[#1d890a] text-[12px] underline decoration-solid [text-decoration-skip-ink:none] inline-flex items-center gap-[6px]">
+        <p className="font-['Maax:Bold',sans-serif] font-bold leading-[18px] not-italic text-[#024731] text-[13px] tracking-[1.4px] uppercase">Downloads</p>
+        <p className="font-['Maax:Bold',sans-serif] font-bold leading-[27px] not-italic text-[#4e4f58] text-[20px] w-full tracking-[-0.2px]">Our Position on Plastic</p>
+        <p className="font-['Maax:Regular',sans-serif] font-normal leading-[20px] not-italic text-[#4f4f59] text-[14px] w-full flex-1 min-h-0">Learn how Waste Management is responding to recent shifts in the global plastics market.</p>
+        <p className="font-['Maax:Regular',sans-serif] font-normal leading-[20px] not-italic text-[#024731] text-[14px] underline decoration-solid [text-decoration-skip-ink:none] inline-flex items-center gap-[6px]">
           Download PDF
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="shrink-0" aria-hidden>
             <path d="M8 11V3M8 11L5 8M8 11L11 8M3 13h10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -2524,6 +2193,47 @@ function ReskinCardTypeDownload() {
   );
 }
 
+// Showcase variants for CardTypes1: flip direction so the “designed” Maax-based cards are on the front
+function ShowcaseCardBasic() {
+  return (
+    <HoverRevealCard
+      frontContent={<ReskinCardTypeBasicBack />}
+      backContent={<ReskinCardTypeBasicContent />}
+      dataName="Reskin Card type / Basic (showcase)"
+    />
+  );
+}
+
+function ShowcaseCardProfile() {
+  return (
+    <HoverRevealCard
+      frontContent={<ReskinCardTypeProfileBack />}
+      backContent={<ReskinCardTypeProfileContent />}
+      dataName="Reskin Card type / Profile (showcase)"
+    />
+  );
+}
+
+function ShowcaseCardProduct() {
+  return (
+    <HoverRevealCard
+      frontContent={<ReskinCardTypeProductBack />}
+      backContent={<ReskinCardTypeProductContent />}
+      dataName="Reskin Card type / Product (showcase)"
+    />
+  );
+}
+
+function ShowcaseCardDownload() {
+  return (
+    <HoverRevealCard
+      frontContent={<ReskinCardTypeDownloadBack />}
+      backContent={<ReskinCardTypeDownloadContent />}
+      dataName="Reskin Card type / Download (showcase)"
+    />
+  );
+}
+
 function Frame114() {
   return (
     <div className="flex min-h-0 min-w-0 flex-1 flex-row gap-[16px] items-stretch">
@@ -2539,7 +2249,7 @@ function CardTypes() {
   return (
     <div className="bg-[#f8f8f8] relative h-[400px] min-h-[400px] rounded-[8px] shrink-0 w-full" data-name="Card types 2">
       <div className="flex h-full w-full flex-row items-stretch">
-        <div className="flex min-h-0 min-w-0 flex-1 flex-col items-stretch overflow-hidden p-[32px]">
+        <div className="flex min-h-0 min-w-0 flex-1 w-full flex-col items-stretch overflow-hidden p-[32px]">
           <Frame114 />
         </div>
       </div>
@@ -2615,7 +2325,7 @@ function Text3() {
 
 function Button4() {
   return (
-    <div className="bg-[#eba900] content-stretch flex h-[33.664px] items-center justify-center px-[9px] py-[7px] relative shrink-0" data-name="button">
+    <div className="bg-[#eba900] content-stretch flex h-[33.664px] items-center justify-center px-[9px] py-[7px] relative shrink-0 w-full" data-name="button">
       <div className="flex flex-col font-['Inter:Semi_Bold',sans-serif] font-semibold justify-center leading-[0] not-italic relative shrink-0 text-[14px] text-black text-center whitespace-nowrap">
         <p className="leading-[20px]">Read More</p>
       </div>
@@ -2625,10 +2335,9 @@ function Button4() {
 
 function NewCardTypeSolution() {
   return (
-    <div className="bg-white flex-1 min-w-0 h-full min-h-0 relative rounded-[10px]" data-name="New Card type / Solution">
-      <div aria-hidden="true" className="absolute border-2 border-[#023625] border-solid inset-0 pointer-events-none rounded-[10px]" />
-      <div className="content-stretch flex flex-col gap-[8px] items-start p-[16px] relative size-full">
-        <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[24px] not-italic relative shrink-0 text-[16px] text-black w-[226.82px] whitespace-pre-wrap">Solution</p>
+    <div className="flex flex-col items-start p-0 w-[267px] min-w-[267px] h-[350px] flex-none flex-grow self-stretch bg-white rounded-[8px] shadow-[0px_4px_4px_rgba(0,0,0,0.25)] overflow-hidden" data-name="New Card type / Solution">
+      <div className="content-stretch flex flex-col gap-[8px] items-start p-4 relative size-full min-h-0">
+        <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[24px] not-italic relative shrink-0 text-[16px] text-black w-full whitespace-pre-wrap">Solution</p>
         <Image11 />
         <Text3 />
         <Button4 />
@@ -2651,7 +2360,7 @@ function Image12() {
 
 function Text4() {
   return (
-    <div className="content-stretch flex flex-col gap-[4px] items-start relative shrink-0 w-[238px]" data-name="text">
+    <div className="content-stretch flex flex-col gap-[4px] items-start relative shrink-0 w-full" data-name="text">
       <div className="bg-[#ccc] h-[13.346px] shrink-0 w-[120px]" data-name="text" />
       <div className="bg-[#eba900] h-[20.716px] shrink-0 w-full" data-name="text" />
       <div className="bg-[#ccc] h-[12.948px] shrink-0 w-full" data-name="text" />
@@ -2663,7 +2372,7 @@ function Text4() {
 
 function Button5() {
   return (
-    <div className="bg-[#eba900] content-stretch flex h-[33.664px] items-center justify-center px-[9px] py-[7px] relative shrink-0 w-[103.689px]" data-name="button">
+    <div className="bg-[#eba900] content-stretch flex h-[33.664px] items-center justify-center px-[9px] py-[7px] relative shrink-0 w-full" data-name="button">
       <div className="flex flex-col font-['Inter:Semi_Bold',sans-serif] font-semibold justify-center leading-[0] not-italic relative shrink-0 text-[14px] text-black text-center whitespace-nowrap">
         <p className="leading-[20px]">Learn More</p>
       </div>
@@ -2673,10 +2382,9 @@ function Button5() {
 
 function NewCardTypeService() {
   return (
-    <div className="bg-white flex-1 min-w-0 h-full min-h-0 relative rounded-[10px]" data-name="New Card type / Service">
-      <div aria-hidden="true" className="absolute border-2 border-[#023625] border-solid inset-0 pointer-events-none rounded-[10px]" />
-      <div className="content-stretch flex flex-col gap-[8px] items-start p-[16px] relative size-full">
-        <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[24px] not-italic relative shrink-0 text-[16px] text-black w-[226.82px] whitespace-pre-wrap">Service</p>
+    <div className="flex flex-col items-center p-0 w-[267px] min-w-[267px] h-[350px] flex-none flex-grow isolate rounded-[8px] [filter:drop-shadow(0px_4px_4px_rgba(0,0,0,0.25))] overflow-hidden bg-white" data-name="New Card type / Service">
+      <div className="content-stretch flex flex-col gap-[8px] items-start p-4 relative size-full min-h-0">
+        <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[24px] not-italic relative shrink-0 text-[16px] text-black w-full whitespace-pre-wrap">Service</p>
         <Image12 />
         <Text4 />
         <Button5 />
@@ -2705,8 +2413,8 @@ function Text5() {
 
 function Button6() {
   return (
-    <div className="bg-[#eba900] content-stretch flex h-[33.955px] items-center justify-center px-[9px] py-[7px] relative shrink-0 w-[104.854px]" data-name="button">
-      <div className="flex flex-col font-['Inter:Semi_Bold',sans-serif] font-semibold h-[19.59px] justify-center leading-[0] not-italic relative shrink-0 text-[14px] text-black text-center w-[86.505px]">
+    <div className="bg-[#eba900] content-stretch flex h-[33.955px] items-center justify-center px-[9px] py-[7px] relative shrink-0 w-full" data-name="button">
+      <div className="flex flex-col font-['Inter:Semi_Bold',sans-serif] font-semibold h-[19.59px] justify-center leading-[0] not-italic relative shrink-0 text-[14px] text-black text-center w-full">
         <p className="leading-[20px] whitespace-pre-wrap">Learn More</p>
       </div>
     </div>
@@ -2715,10 +2423,9 @@ function Button6() {
 
 function NewCardTypeFaq() {
   return (
-    <div className="bg-white flex-1 min-w-0 h-full min-h-0 relative rounded-[10px]" data-name="New Card type / FAQ">
-      <div aria-hidden="true" className="absolute border-2 border-[#023625] border-solid inset-0 pointer-events-none rounded-[10px]" />
-      <div className="content-stretch flex flex-col gap-[8px] items-start p-[16px] relative size-full">
-        <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[24px] not-italic relative shrink-0 text-[16px] text-black w-[229.369px] whitespace-pre-wrap">FAQ</p>
+    <div className="flex flex-col items-center p-0 w-[267px] min-w-[267px] h-[350px] flex-none flex-grow isolate rounded-[8px] [filter:drop-shadow(0px_4px_4px_rgba(0,0,0,0.25))] overflow-hidden bg-white" data-name="New Card type / FAQ">
+      <div className="content-stretch flex flex-col gap-[8px] items-start p-4 relative size-full min-h-0">
+        <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[24px] not-italic relative shrink-0 text-[16px] text-black w-full whitespace-pre-wrap">FAQ</p>
         <Text5 />
         <Button6 />
       </div>
@@ -2751,8 +2458,8 @@ function Text6() {
 
 function Button7() {
   return (
-    <div className="bg-[#eba900] content-stretch flex h-[33.955px] items-center justify-center px-[9px] py-[7px] relative shrink-0 w-[104.854px]" data-name="button">
-      <div className="flex flex-col font-['Inter:Semi_Bold',sans-serif] font-semibold h-[19.59px] justify-center leading-[0] not-italic relative shrink-0 text-[14px] text-black text-center w-[86.505px]">
+    <div className="bg-[#eba900] content-stretch flex h-[33.955px] items-center justify-center px-[9px] py-[7px] relative shrink-0 w-full" data-name="button">
+      <div className="flex flex-col font-['Inter:Semi_Bold',sans-serif] font-semibold h-[19.59px] justify-center leading-[0] not-italic relative shrink-0 text-[14px] text-black text-center w-full">
         <p className="leading-[20px] whitespace-pre-wrap">Download</p>
       </div>
     </div>
@@ -2761,25 +2468,291 @@ function Button7() {
 
 function NewCardTypeContentCard() {
   return (
-    <div className="bg-white flex-1 min-w-0 h-full min-h-0 relative rounded-[10px]" data-name="New Card type / Content Card">
-      <div aria-hidden="true" className="absolute border-2 border-[#023625] border-solid inset-0 pointer-events-none rounded-[10px]" />
-      <div className="content-stretch flex flex-col gap-[8px] items-start p-[16px] relative size-full">
-        <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[24px] not-italic relative shrink-0 text-[16px] text-black w-[229.369px] whitespace-pre-wrap">Content Card</p>
+    <div className="flex flex-col items-start p-4 gap-4 w-[267px] min-w-[267px] h-[350px] flex-none flex-grow bg-white border border-[#F8F8F8] rounded-[8px] shadow-[0px_4px_4px_rgba(0,0,0,0.25)] overflow-hidden" data-name="New Card type / Content Card">
+      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[24px] not-italic relative shrink-0 text-[16px] text-black w-full whitespace-pre-wrap">Content Card</p>
+      <Image13 />
+      <Text6 />
+      <Button7 />
+    </div>
+  );
+}
+
+// ─── Shared "designed" card back — accepts props, no hardcoded content ────────
+interface DesignedCardBackProps {
+  image?: string;
+  imageAlt?: string;
+  imageBg?: string;
+  category: string;
+  title: string;
+  body: string;
+  cta: string;
+}
+
+function DesignedCardBack({
+  image,
+  imageAlt = "",
+  imageBg = "#e5e7e5",
+  category,
+  title,
+  body,
+  cta,
+}: DesignedCardBackProps) {
+  return (
+    <div className="bg-white size-full min-h-0 min-w-0 relative rounded-[8px] overflow-hidden shadow-[0px_4px_4px_rgba(0,0,0,0.25)]">
+      <div className="content-stretch flex flex-col size-full min-h-0">
+        {image && (
+          <div className="relative h-[140px] min-h-[140px] w-full shrink-0 overflow-hidden" style={{ background: imageBg }}>
+            <img alt={imageAlt} className="absolute inset-0 size-full object-cover object-center" src={image} />
+          </div>
+        )}
+        <div className="content-stretch flex flex-col gap-[4px] items-start p-[16px] relative flex-1 min-h-0">
+          <p className="font-['Maax:Bold',sans-serif] font-bold leading-[18px] not-italic text-[#024731] text-[13px] tracking-[1.4px] uppercase">{category}</p>
+          <p className="font-['Maax:Bold',sans-serif] font-bold leading-[27px] not-italic text-[#4e4f58] text-[20px] w-full tracking-[-0.2px]">{title}</p>
+          <p className="font-['Maax:Regular',sans-serif] font-normal leading-[20px] not-italic text-[#4f4f59] text-[14px] w-full flex-1 min-h-0 line-clamp-3">{body}</p>
+          <p className="font-['Maax:Regular',sans-serif] font-normal leading-[20px] not-italic text-[#024731] text-[14px] underline decoration-solid [text-decoration-skip-ink:none]">{cta}</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── size-full "content" variants of each front wireframe (for HoverRevealCard) ─
+function NewCardTypeSolutionContent() {
+  return (
+    <div className="bg-white size-full min-h-0 min-w-0 rounded-[8px] border-2 border-[#023625] border-solid overflow-hidden">
+      <div className="content-stretch flex flex-col gap-[8px] items-start p-4 size-full min-h-0">
+        <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[24px] not-italic shrink-0 text-[16px] text-black w-full">Solution</p>
+        <Image11 />
+        <Text3 />
+        <Button4 />
+      </div>
+    </div>
+  );
+}
+
+function NewCardTypeServiceContent() {
+  return (
+    <div className="bg-white size-full min-h-0 min-w-0 rounded-[8px] overflow-hidden border-2 border-[#023625] border-solid">
+      <div className="content-stretch flex flex-col gap-[8px] items-start p-4 size-full min-h-0">
+        <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[24px] not-italic shrink-0 text-[16px] text-black w-full">Service</p>
+        <Image12 />
+        <Text4 />
+        <Button5 />
+      </div>
+    </div>
+  );
+}
+
+function NewCardTypeFaqContent() {
+  return (
+    <div className="bg-white size-full min-h-0 min-w-0 rounded-[8px] overflow-hidden border-2 border-[#023625] border-solid">
+      <div className="content-stretch flex flex-col gap-[8px] items-start p-4 size-full min-h-0">
+        <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[24px] not-italic shrink-0 text-[16px] text-black w-full">FAQ</p>
+        <Text5 />
+        <Button6 />
+      </div>
+    </div>
+  );
+}
+
+function NewCardTypeContentCardContent() {
+  return (
+    <div className="bg-white size-full min-h-0 min-w-0 rounded-[8px] border-2 border-[#023625] border-solid overflow-hidden">
+      <div className="content-stretch flex flex-col gap-4 items-start p-4 size-full min-h-0">
+        <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[24px] not-italic shrink-0 text-[16px] text-black w-full">Content Card</p>
         <Image13 />
-        <Text6 />
+        <div className="flex-1 min-h-0 overflow-hidden w-full"><Text6 /></div>
         <Button7 />
       </div>
     </div>
   );
 }
 
+// ─── Arrow helper (shared by card backs) ─────────────────────────────────────
+function CardArrowRight({ color = "#024731" }: { color?: string }) {
+  return (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="shrink-0" aria-hidden>
+      <path d="M6 12l4-4-4-4" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+// ─── Card 1 back: Recycling article with full-width header image ──────────────
+function NewCardTypeSolutionBack() {
+  return (
+    <div className="bg-white size-full min-h-0 min-w-0 flex flex-col items-start relative rounded-[8px] overflow-hidden shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)]">
+      {/* Header image – 175px, cropped from center */}
+      <div className="relative h-[175px] min-h-[175px] shrink-0 w-full overflow-hidden">
+        <div className="-translate-x-1/2 absolute aspect-[267/175] bottom-0 left-[calc(50%+0.5px)] top-0 w-full">
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <img alt="Recycling article" className="absolute h-[157.71%] left-[-48.22%] max-w-none top-[-45.77%] w-[155.81%]" src={imgSolutionCardBg} />
+          </div>
+        </div>
+      </div>
+      {/* Divider */}
+      <div className="bg-[#024731] h-px shrink-0 w-full" />
+      {/* Text */}
+      <div className="flex flex-1 flex-col gap-[4px] items-start min-h-0 min-w-0 p-[16px] w-full">
+        <p className="font-['Maax:Bold',sans-serif] font-bold leading-[20px] shrink-0 text-[#006937] text-[14px] tracking-[1.4px] uppercase">Recycling</p>
+        <p className="font-['Maax:Bold',sans-serif] font-bold leading-[28px] shrink-0 text-[20px] text-black tracking-[-0.96px] w-full">The Dangers of &ldquo;Wishcycling&rdquo;</p>
+        <p className="flex-1 font-['Inter:Regular',sans-serif] font-normal leading-[18px] min-h-0 overflow-hidden text-[#4e4f4e] text-[14px] text-ellipsis w-full line-clamp-3">By Susan Robinson, Director of Public Affairs for Waste Management</p>
+        <div className="flex gap-[4px] items-center shrink-0">
+          <p className="font-['Maax:Bold',sans-serif] font-bold leading-[24px] text-[#006937] text-[16px] tracking-[-0.16px]">Learn More</p>
+          <CardArrowRight color="#006937" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── Card 2 back: Profile – circular photo overlapping white card body ────────
+function NewCardTypeServiceBack() {
+  return (
+    <div className="flex flex-col isolate items-center overflow-clip pb-[30px] relative rounded-[8px] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] size-full">
+      {/* Circular photo – floats above the white body via negative margin */}
+      <div className="mb-[-30px] overflow-clip relative rounded-full shrink-0 size-[150px] z-[2]">
+        <div className="absolute inset-[2.5%]">
+          <img alt="" className="absolute block max-w-none size-full" src={imgCircleBorder} />
+        </div>
+        <img alt="James C. Fish Jr." className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgJimFishCircle} />
+      </div>
+      {/* White body – pt-[64px] clears the circular image overlap */}
+      <div className="bg-white flex flex-[1_0_0] flex-col items-start justify-between mb-[-30px] min-h-0 min-w-0 overflow-clip pb-[24px] pt-[64px] px-[16px] relative shadow-[-5px_4px_4px_0px_rgba(0,0,0,0.25)] w-full z-[1]">
+        <div className="flex flex-[1_0_0] flex-col gap-[4px] items-start min-h-0 min-w-0 w-full">
+          <div className="flex flex-col font-['Maax:Bold',sans-serif] gap-[4px] items-start shrink-0 w-full">
+            <p className="leading-[28px] text-[20px] text-black tracking-[-0.96px] w-full">James C. Fish Jr.</p>
+            <p className="leading-[20px] text-[#024731] text-[14px] tracking-[1.4px] uppercase">President &amp; CEO</p>
+          </div>
+          <div className="flex flex-[1_0_0] flex-col gap-[6px] items-start min-h-0 min-w-0 w-full">
+            <p className="font-['Inter:Regular',sans-serif] font-normal leading-[18px] flex-1 min-h-0 overflow-hidden text-[#67696d] text-[14px] w-full line-clamp-4">Talent comes to Waste Management from all areas and walks of life. It isn&apos;t too often, however, that one of our great employees gets traded to us from the world of Major League Baseball.</p>
+            <div className="flex gap-[4px] items-center shrink-0">
+              <p className="font-['Maax:Bold',sans-serif] font-bold leading-[24px] text-[#024731] text-[16px] tracking-[-0.16px]">Read Now</p>
+              <CardArrowRight />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── Card 3 back: Circular product icon + Home Waste service card ─────────────
+function NewCardTypeFaqBack() {
+  return (
+    <div className="content-stretch flex flex-col isolate items-center overflow-clip pb-[30px] relative rounded-[8px] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] size-full">
+      {/* Circular product image – cream circle background with centered trash can */}
+      <div className="mb-[-30px] relative shrink-0 size-[150px] z-[2]">
+        {/* Cream circle background */}
+        <div className="absolute inset-[2.5%]">
+          <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 155.8 155.8">
+            <circle cx="77.9" cy="77.9" fill="#EFEFE4" r="77.9" />
+          </svg>
+        </div>
+        {/* Trash-can centered inside circle */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
+          <img alt="" className="size-[69.79%] max-w-none" src={img} />
+        </div>
+      </div>
+      {/* White body – mb-[-30px] matches the image pull, pt-[32px] clears the circle overlap */}
+      <div className="bg-white content-stretch flex flex-[1_0_0] flex-col items-start mb-[-30px] min-h-px min-w-px overflow-clip pb-[16px] pt-[32px] px-[16px] relative w-full z-[1]">
+        <div className="content-stretch flex flex-[1_0_0] flex-col gap-[8px] items-start min-h-px min-w-px relative w-full">
+          {/* Title block */}
+          <div className="content-stretch flex flex-col font-['Maax:Bold',sans-serif] gap-[4px] items-start not-italic relative shrink-0 w-full">
+            <p className="leading-[20px] relative shrink-0 text-[#024731] text-[14px] tracking-[1.4px] uppercase">Service</p>
+            <p className="leading-[28px] min-w-full relative shrink-0 text-[20px] text-black tracking-[-0.96px] w-[min-content] whitespace-pre-wrap">Home Waste &amp; Recycling</p>
+          </div>
+          {/* Body */}
+          <p className="flex-[1_0_0] font-['Inter:Regular',sans-serif] font-normal leading-[18px] min-h-px min-w-px not-italic overflow-hidden relative text-[#67696d] text-[14px] text-ellipsis w-full whitespace-pre-wrap">Get free account setup and container delivery to help you manage your residential waste and recycling.</p>
+          {/* Tag + CTA */}
+          <div className="content-stretch flex flex-col gap-[8px] items-start relative shrink-0 w-full">
+            {/* "Home" tag */}
+            <div className="content-stretch flex items-start relative shrink-0 w-full">
+              <div className="h-[24px] relative shrink-0 w-[54px]">
+                <div className="absolute inset-0 overflow-clip">
+                  <p className="absolute font-['Maax:Regular',sans-serif] leading-[16px] left-[13.11%] not-italic right-[14.75%] text-[#024731] text-[14px] top-[calc(50%-8px)]">Home</p>
+                  <div className="absolute border border-[#7ab800] border-solid inset-0 rounded-[4px]" />
+                </div>
+              </div>
+            </div>
+            {/* CTA – right-aligned */}
+            <div className="content-stretch flex gap-[4px] items-center justify-end relative shrink-0 w-full">
+              <p className="font-['Maax:Bold',sans-serif] leading-[24px] not-italic relative shrink-0 text-[#024731] text-[16px] tracking-[-0.16px]">Learn More</p>
+              <CardArrowRight />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── Card 4 back: Downloads – text only, no image ────────────────────────────
+function NewCardTypeContentCardBack() {
+  return (
+    <div className="bg-white border border-[#f8f8f8] border-solid flex flex-col items-start p-[16px] relative rounded-[8px] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] size-full">
+      <div className="flex flex-col gap-[4px] items-start w-full">
+        <p className="font-['Maax:Bold',sans-serif] font-bold leading-[20px] shrink-0 text-[#024731] text-[14px] tracking-[1.4px] uppercase">Downloads</p>
+        <p className="font-['Maax:Bold',sans-serif] font-bold leading-[28px] shrink-0 text-[20px] text-black tracking-[-0.96px] w-full">Our Position on Plastic</p>
+        <p className="font-['Inter:Regular',sans-serif] font-normal leading-[24px] shrink-0 text-[#67696d] text-[14px] w-full">Learn how Waste Management is responding to recent shifts in the global plastics market.</p>
+        <div className="flex gap-[10px] items-center shrink-0 w-full mt-[4px]">
+          <p className="font-['Maax:Bold',sans-serif] font-bold leading-[24px] text-[#024731] text-[16px]">Download PDF</p>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="shrink-0" aria-hidden>
+            <path d="M8 11V3M8 11L5 8M8 11L11 8M3 13h10" stroke="#024731" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── Flip wrappers: wireframe front → real designed card back ────────────────
+function NewCardTypeSolutionFlip() {
+  return (
+    <HoverRevealCard
+      frontContent={<NewCardTypeSolutionContent />}
+      backContent={<NewCardTypeSolutionBack />}
+      dataName="New Card type / Solution (flip)"
+    />
+  );
+}
+
+function NewCardTypeServiceFlip() {
+  return (
+    <HoverRevealCard
+      frontContent={<NewCardTypeServiceContent />}
+      backContent={<NewCardTypeServiceBack />}
+      dataName="New Card type / Service (flip)"
+    />
+  );
+}
+
+function NewCardTypeFaqFlip() {
+  return (
+    <HoverRevealCard
+      frontContent={<NewCardTypeFaqContent />}
+      backContent={<NewCardTypeFaqBack />}
+      dataName="New Card type / FAQ (flip)"
+    />
+  );
+}
+
+function NewCardTypeContentCardFlip() {
+  return (
+    <HoverRevealCard
+      frontContent={<NewCardTypeContentCardContent />}
+      backContent={<NewCardTypeContentCardBack />}
+      dataName="New Card type / Content Card (flip)"
+    />
+  );
+}
+
 function Frame115() {
   return (
     <div className="flex min-h-0 min-w-0 flex-1 flex-row gap-[16px] items-stretch">
-      <NewCardTypeSolution />
-      <NewCardTypeService />
-      <NewCardTypeFaq />
-      <NewCardTypeContentCard />
+      <NewCardTypeSolutionFlip />
+      <NewCardTypeServiceFlip />
+      <NewCardTypeFaqFlip />
+      <NewCardTypeContentCardFlip />
     </div>
   );
 }
@@ -2788,7 +2761,7 @@ function CardTypes1() {
   return (
     <div className="bg-[#f8f8f8] relative h-[400px] min-h-[400px] rounded-[8px] shrink-0 w-full" data-name="Card types 3">
       <div className="flex h-full w-full flex-row items-stretch">
-        <div className="flex min-h-0 min-w-0 flex-1 flex-col items-stretch overflow-hidden p-[32px]">
+        <div className="flex min-h-0 min-w-0 flex-1 w-full flex-col items-stretch overflow-hidden p-[32px]">
           <Frame115 />
         </div>
       </div>
@@ -2874,8 +2847,8 @@ function Image14() {
           <circle cx="77.9" cy="77.9" fill="var(--fill-0, #EFEFE4)" id="container" r="77.9" />
         </svg>
       </div>
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <img alt="" className="absolute left-0 max-w-none size-[69.79%] top-0" src={img} />
+      <div className="absolute inset-0 overflow-hidden pointer-events-none flex items-center justify-center">
+        <img alt="" className="size-[69.79%] max-w-none" src={img} />
       </div>
     </div>
   );
@@ -3984,7 +3957,7 @@ function ComponetProps() {
 
 function SectionCards() {
   return (
-    <div className="content-stretch flex flex-col gap-[57px] items-start pt-[32px] relative shrink-0 w-full" data-name="Section Cards">
+    <div id="approach" className="content-stretch flex flex-col gap-[57px] items-start pt-[32px] relative shrink-0 w-full" data-name="Section Cards">
       <Frame94 />
       <SectionCardsVertical />
       <ComponentGroups />
@@ -4003,9 +3976,9 @@ function Count15() {
 
 function CountTitle14() {
   return (
-    <div className="content-stretch flex gap-[16px] items-center relative shrink-0" data-name="Count + Title">
+    <div className="content-stretch flex gap-[16px] items-center relative shrink-0 min-w-0" data-name="Count + Title">
       <Count15 />
-      <p className="font-['Inter:Medium',sans-serif] font-medium leading-[normal] not-italic relative shrink-0 text-[40px] text-black">Information Architecture</p>
+      <p className="font-['Inter:Medium',sans-serif] font-medium leading-[normal] not-italic relative shrink-0 text-[40px] text-black line-clamp-2 min-w-0 overflow-hidden">Information Architecture</p>
     </div>
   );
 }
@@ -4020,9 +3993,9 @@ function Title14() {
 
 function SectionHeadingFull14() {
   return (
-    <div className="content-start flex flex-wrap gap-[32px] items-start relative shrink-0 w-full" data-name="Section Heading / Full">
+    <div className="content-start flex flex-wrap gap-[32px] items-start relative shrink-0 w-full min-w-0" data-name="Section Heading / Full">
       <Title14 />
-      <p className="flex-[1_0_0] font-['Inter:Regular',sans-serif] font-normal leading-[24px] min-h-px min-w-px not-italic relative text-[#4e4f4e] text-[16px] whitespace-pre-wrap">Rather than designing pages individually, I defined a flexible information architecture that supported multiple content types and use cases. This abstraction allowed the system to scale without redesigning layouts for each new scenario.</p>
+      <p className="min-w-[200px] flex-1 font-['Inter:Regular',sans-serif] font-normal leading-[24px] min-h-px not-italic relative text-[#4e4f4e] text-[16px] line-clamp-2 min-w-0 overflow-hidden">Rather than designing pages individually, I defined a flexible information architecture that supported multiple content types and use cases. This abstraction allowed the system to scale without redesigning layouts for each new scenario.</p>
     </div>
   );
 }
@@ -4037,10 +4010,10 @@ function Count16() {
 
 function SectionHeadingVertical5() {
   return (
-    <div className="content-stretch flex flex-col gap-[8px] items-start justify-center relative shrink-0 w-full" data-name="Section Heading / Vertical">
+    <div className="content-stretch flex flex-col gap-[8px] items-start justify-center relative shrink-0 w-full min-w-0" data-name="Section Heading / Vertical">
       <Count16 />
-      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[normal] not-italic relative shrink-0 text-[20px] text-black">Function over form</p>
-      <div className="font-['Inter:Regular',sans-serif] font-normal leading-[0] max-w-[800px] min-w-full not-italic relative shrink-0 text-[#4e4f4e] text-[16px] w-[min-content] whitespace-pre-wrap">
+      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[normal] not-italic relative shrink-0 text-[20px] text-black line-clamp-2 min-w-0 overflow-hidden">Function over form</p>
+      <div className="font-['Inter:Regular',sans-serif] font-normal leading-[0] max-w-[800px] min-w-0 w-full not-italic relative shrink-0 text-[#4e4f4e] text-[16px] line-clamp-2 overflow-hidden">
         <p className="leading-[24px] mb-0">The site itself is simple and as basic information, but hard to navigate to information like recycling, self-service needs, and it’s more branded pages live externally on a different website.</p>
         <p className="leading-[24px] mb-0">&nbsp;</p>
         <ul className="list-disc">
@@ -4064,7 +4037,7 @@ function SectionHeadingVertical5() {
 
 function ValueProp9() {
   return (
-    <div className="content-stretch flex flex-[1_0_0] flex-col h-full items-start min-h-px min-w-px pb-[24px] relative" data-name="Value Prop">
+    <div className="content-stretch flex min-w-[280px] flex-1 flex-col items-start min-h-px max-w-full pb-[24px] relative" data-name="Value Prop">
       <SectionHeadingVertical5 />
     </div>
   );
@@ -4072,12 +4045,12 @@ function ValueProp9() {
 
 function ImageSlot() {
   return (
-    <div className="flex-[1_0_0] h-full min-h-px min-w-px relative" data-name="Image slot">
-      <div className="absolute inset-0 rounded-[16px]" data-name="Image 1">
+    <div className="flex-1 min-h-[260px] max-h-[300px] min-w-[320px] w-[400px] max-w-full aspect-[4/5] relative" data-name="Image slot">
+      <div className="absolute inset-0 min-h-[260px] rounded-[16px] flex flex-col justify-end" data-name="Image 1">
         <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[16px]">
           <div className="absolute bg-[#efefe4] inset-0 rounded-[16px]" />
           <div className="absolute inset-0 overflow-hidden rounded-[16px]">
-            <img alt="" className="absolute h-full left-[13.51%] max-w-none top-[4.31%] w-[72.98%]" src={imgImage10} />
+            <img alt="" className="absolute inset-0 size-full object-contain object-bottom" src={imgImage10} />
           </div>
         </div>
       </div>
@@ -4087,7 +4060,7 @@ function ImageSlot() {
 
 function Ia() {
   return (
-    <div className="content-stretch flex h-full items-center pl-[16px] py-[16px] relative shrink-0 w-[647px]" data-name="IA 1">
+    <div className="content-stretch flex min-h-[240px] min-w-[280px] max-w-[647px] flex-1 items-center pl-[16px] py-[16px] relative" data-name="IA 1">
       <ImageSlot />
     </div>
   );
@@ -4095,7 +4068,7 @@ function Ia() {
 
 function Row10() {
   return (
-    <div className="content-stretch flex flex-[1_0_0] flex-wrap gap-[32px] items-start justify-end min-h-px min-w-px relative w-full" data-name="Row 1">
+    <div className="content-stretch flex flex-wrap gap-[32px] items-start justify-end min-w-0 relative w-full" data-name="Row 1">
       <ValueProp9 />
       <Ia />
     </div>
@@ -4112,10 +4085,10 @@ function Count17() {
 
 function SectionHeadingVertical6() {
   return (
-    <div className="content-stretch flex flex-col gap-[8px] items-start justify-center relative shrink-0 w-full" data-name="Section Heading / Vertical">
+    <div className="content-stretch flex flex-col gap-[8px] items-start justify-center relative shrink-0 w-full min-w-0" data-name="Section Heading / Vertical">
       <Count17 />
-      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[normal] not-italic relative shrink-0 text-[20px] text-black">Photography felt lacking and inconsistent</p>
-      <p className="font-['Inter:Regular',sans-serif] font-normal leading-[24px] max-w-[800px] min-w-full not-italic relative shrink-0 text-[#4e4f4e] text-[16px] w-[min-content] whitespace-pre-wrap">
+      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[normal] not-italic relative shrink-0 text-[20px] text-black line-clamp-2 min-w-0 overflow-hidden">Photography felt lacking and inconsistent</p>
+      <p className="font-['Inter:Regular',sans-serif] font-normal leading-[24px] max-w-[800px] min-w-0 w-full not-italic relative shrink-0 text-[#4e4f4e] text-[16px] line-clamp-2 overflow-hidden">
         {`The current website's imagery, drawn from various photography campaigns, creates a disjointed and inconsistent experience for users navigating the top landing pages. `}
         <br aria-hidden="true" />
         <br aria-hidden="true" />A cohesive photography strategy could transform this into a powerful storytelling tool, enhancing the overall impact and consistency of our visual narrative.
@@ -4126,7 +4099,7 @@ function SectionHeadingVertical6() {
 
 function ValueProp10() {
   return (
-    <div className="content-stretch flex flex-[1_0_0] flex-col h-full items-start min-h-px min-w-px pb-[24px] relative" data-name="Value Prop">
+    <div className="content-stretch flex min-w-[280px] flex-1 flex-col items-start min-h-px max-w-full pb-[24px] relative" data-name="Value Prop">
       <SectionHeadingVertical6 />
     </div>
   );
@@ -4134,12 +4107,12 @@ function ValueProp10() {
 
 function ImageSlot1() {
   return (
-    <div className="flex-[1_0_0] h-full min-h-px min-w-px relative" data-name="Image slot">
-      <div className="absolute inset-0 rounded-[16px]" data-name="Image 1">
+    <div className="flex-1 min-h-[260px] max-h-[300px] min-w-[320px] w-[400px] max-w-full aspect-[4/5] relative" data-name="Image slot">
+      <div className="absolute inset-0 min-h-[260px] rounded-[16px] flex flex-col justify-end" data-name="Image 1">
         <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[16px]">
           <div className="absolute bg-[#efefe4] inset-0 rounded-[16px]" />
           <div className="absolute inset-0 overflow-hidden rounded-[16px]">
-            <img alt="" className="absolute h-[135.06%] left-[14.32%] max-w-none top-[0.16%] w-[71.8%]" src={imgImage11} />
+            <img alt="" className="absolute inset-0 size-full object-contain object-bottom" src={imgImage11} />
           </div>
         </div>
       </div>
@@ -4149,7 +4122,7 @@ function ImageSlot1() {
 
 function Ia1() {
   return (
-    <div className="content-stretch flex h-full items-center pl-[16px] py-[16px] relative shrink-0 w-[647px]" data-name="IA 2">
+    <div className="content-stretch flex min-h-[240px] min-w-[280px] max-w-[647px] flex-1 items-center pl-[16px] py-[16px] relative" data-name="IA 2">
       <ImageSlot1 />
     </div>
   );
@@ -4157,7 +4130,7 @@ function Ia1() {
 
 function Row11() {
   return (
-    <div className="content-stretch flex flex-[1_0_0] flex-wrap gap-[32px] items-start justify-end min-h-px min-w-px relative w-full" data-name="Row 2">
+    <div className="content-stretch flex flex-wrap gap-[32px] items-start justify-end min-w-0 relative w-full" data-name="Row 2">
       <ValueProp10 />
       <Ia1 />
     </div>
@@ -4166,7 +4139,7 @@ function Row11() {
 
 function SectionCardsVertical1() {
   return (
-    <div className="content-stretch flex flex-col gap-[32px] h-[1005px] items-start relative shrink-0 w-full" data-name="Section Cards / Vertical">
+    <div className="content-stretch flex flex-col gap-[32px] items-start relative shrink-0 w-full min-w-0" data-name="Section Cards / Vertical">
       <Row10 />
       <Row11 />
     </div>
@@ -4183,9 +4156,9 @@ function Count18() {
 
 function CountTitle15() {
   return (
-    <div className="content-stretch flex gap-[8px] items-center relative shrink-0" data-name="Count + Title">
+    <div className="content-stretch flex gap-[8px] items-center relative shrink-0 min-w-0" data-name="Count + Title">
       <Count18 />
-      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[normal] not-italic relative shrink-0 text-[20px] text-black">{`Site Map `}</p>
+      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[normal] not-italic relative shrink-0 text-[20px] text-black line-clamp-2 min-w-0 overflow-hidden">{`Site Map `}</p>
     </div>
   );
 }
@@ -4200,9 +4173,9 @@ function Title15() {
 
 function SectionHeadingFull15() {
   return (
-    <div className="content-start flex flex-wrap gap-[32px] items-start relative shrink-0 w-full" data-name="Section Heading / Full">
+    <div className="content-start flex flex-wrap gap-[32px] items-start relative shrink-0 w-full min-w-0" data-name="Section Heading / Full">
       <Title15 />
-      <p className="flex-[1_0_0] font-['Inter:Regular',sans-serif] font-normal leading-[24px] min-h-px min-w-px not-italic relative text-[#4e4f4e] text-[16px] whitespace-pre-wrap">{`We kick off our rebranding journey by analyzing our page templates' hierarchy to create a strategic site map that identifies key areas for impactful branded pages and outlines the necessary components to improve each template.`}</p>
+      <p className="min-w-[200px] flex-1 font-['Inter:Regular',sans-serif] font-normal leading-[24px] min-h-px not-italic relative text-[#4e4f4e] text-[16px] line-clamp-2 min-w-0 overflow-hidden">{`We kick off our rebranding journey by analyzing our page templates' hierarchy to create a strategic site map that identifies key areas for impactful branded pages and outlines the necessary components to improve each template.`}</p>
     </div>
   );
 }
@@ -5226,7 +5199,7 @@ function SectionCards4() {
 
 function SectionCards3() {
   return (
-    <div className="content-stretch flex flex-col gap-[32px] items-start pt-[32px] relative shrink-0 w-full" data-name="Section Cards">
+    <div id="information-architecture" className="content-stretch flex flex-col gap-[32px] items-start pt-[32px] relative shrink-0 w-full" data-name="Section Cards">
       <SectionHeadingFull14 />
       <SectionCardsVertical1 />
       <SectionHeadingFull15 />
@@ -5238,7 +5211,30 @@ function SectionCards3() {
 
 const COMPARISON_FRAME_H = 700;
 const COMPARISON_CONTENT_H = 3368;
+const COMPARISON_WIDTH = 1180;
 const scrollbarHide = "[scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden";
+
+function useSyncedScroll() {
+  const leftScrollRef = useRef<HTMLDivElement>(null);
+  const rightScrollRef = useRef<HTMLDivElement>(null);
+  const isSyncingScroll = useRef(false);
+
+  const syncScrollFromLeft = () => {
+    if (isSyncingScroll.current || !leftScrollRef.current || !rightScrollRef.current) return;
+    isSyncingScroll.current = true;
+    rightScrollRef.current.scrollTop = leftScrollRef.current.scrollTop;
+    requestAnimationFrame(() => { isSyncingScroll.current = false; });
+  };
+
+  const syncScrollFromRight = () => {
+    if (isSyncingScroll.current || !leftScrollRef.current || !rightScrollRef.current) return;
+    isSyncingScroll.current = true;
+    leftScrollRef.current.scrollTop = rightScrollRef.current.scrollTop;
+    requestAnimationFrame(() => { isSyncingScroll.current = false; });
+  };
+
+  return { leftScrollRef, rightScrollRef, syncScrollFromLeft, syncScrollFromRight };
+}
 
 function Left({ scrollRef, onScroll }: { scrollRef: React.RefObject<HTMLDivElement | null>; onScroll: () => void }) {
   return (
@@ -5264,96 +5260,125 @@ function Image15({ scrollRef, onScroll }: { scrollRef: React.RefObject<HTMLDivEl
   );
 }
 
-function Slot() {
+/* Design callout: light blue card + blue title/body text + directional dashed arrow.
+   direction="left"  → ←--- [card]  (default)
+   direction="up"    → vertical line above, card to the right  (The Main Story)
+   direction="down"  → [card] with line going down-left below  (Pathing) */
+function DesignCallout({
+  className,
+  title,
+  text,
+  direction = "left",
+  "data-name": dataName,
+}: {
+  className?: string;
+  title?: string;
+  text: string;
+  direction?: "left" | "up" | "down";
+  "data-name"?: string;
+}) {
+  const card = (
+    <div className="shrink-0 rounded-xl bg-[#EFF2FF] border border-[#C7D2FE] px-4 py-3 max-w-[260px]">
+      {title && (
+        <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold text-[13px] leading-[1.3] text-[#0026FF] mb-1.5">{title}</p>
+      )}
+      <p className="font-['Inter:Regular',sans-serif] text-[13px] leading-[1.5] text-[#0026FF]">{text}</p>
+    </div>
+  );
+
+  if (direction === "up") {
+    /* Vertical dashed line going up on the left, card aligned to its bottom */
+    return (
+      <div className={`flex items-end gap-2 text-left ${className ?? ""}`} data-name={dataName}>
+        <div className="flex flex-col items-center shrink-0" aria-hidden>
+          <svg width="14" height="8" viewBox="0 0 14 8" fill="none" className="shrink-0">
+            <path d="M1 7L7 1L13 7" stroke="#0026FF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+          <div className="shrink-0 border-l-2 border-dashed border-[#0026FF]" style={{ height: 120 }} />
+        </div>
+        {card}
+      </div>
+    );
+  }
+
+  if (direction === "down") {
+    /* L-shaped: horizontal dashed line at top extends left from card, vertical goes down with ↓ arrowhead */
+    return (
+      <div className={`flex flex-row items-start gap-0 text-left ${className ?? ""}`} data-name={dataName}>
+        <div className="shrink-0 mt-[30px]" aria-hidden>
+          <svg width="86" height="101" viewBox="0 0 86 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5.52345 0.749997L5.52345 -3.4532e-06L4.77345 -3.48598e-06L4.77345 0.749997L5.52345 0.749997ZM4.99311 100.28C5.28601 100.573 5.76088 100.573 6.05377 100.28L10.8267 95.5074C11.1196 95.2145 11.1196 94.7396 10.8267 94.4467C10.5338 94.1538 10.059 94.1538 9.76608 94.4467L5.52344 98.6893L1.2808 94.4467C0.987911 94.1538 0.513035 94.1538 0.220142 94.4467C-0.0727504 94.7396 -0.0727504 95.2145 0.220142 95.5074L4.99311 100.28ZM84.5232 0.75L85.2732 0.749772L85.273 3.27645e-08L84.5232 0L84.5232 0.75ZM83.7734 1.41023C83.7736 1.82444 84.1094 2.16013 84.5237 2.16C84.9379 2.15987 85.2736 1.82399 85.2734 1.40977L84.5234 1.41L83.7734 1.41023ZM85.2734 1.18977C85.2732 0.775558 84.9373 0.439874 84.5231 0.44C84.1089 0.440126 83.7732 0.776015 83.7734 1.19023L84.5234 1.19L85.2734 1.18977ZM83.7733 0.970228C83.7734 1.38444 84.1093 1.72013 84.5235 1.72C84.9377 1.71987 85.2734 1.38399 85.2733 0.969772L84.5233 0.97L83.7733 0.970228ZM80.7613 -1.64447e-07C80.3471 -1.82553e-07 80.0113 0.335786 80.0113 0.75C80.0113 1.16421 80.3471 1.5 80.7613 1.5L80.7613 0.75L80.7613 -1.64447e-07ZM76.9994 1.5C77.4137 1.5 77.7494 1.16421 77.7494 0.75C77.7494 0.335786 77.4137 -3.10778e-07 76.9994 -3.28884e-07L76.9994 0.75L76.9994 1.5ZM69.4757 -6.5776e-07C69.0614 -6.75865e-07 68.7257 0.335786 68.7257 0.749999C68.7257 1.16421 69.0614 1.5 69.4757 1.5L69.4757 0.749999L69.4757 -6.5776e-07ZM65.7138 1.5C66.128 1.5 66.4638 1.16421 66.4638 0.749999C66.4638 0.335786 66.128 -8.04091e-07 65.7138 -8.22197e-07L65.7138 0.749999L65.7138 1.5ZM58.19 -1.15107e-06C57.7758 -1.16918e-06 57.44 0.335785 57.44 0.749999C57.44 1.16421 57.7758 1.5 58.19 1.5L58.19 0.749999L58.19 -1.15107e-06ZM54.4281 1.5C54.8423 1.5 55.1781 1.16421 55.1781 0.749999C55.1781 0.335785 54.8423 -1.2974e-06 54.4281 -1.31551e-06L54.4281 0.749999L54.4281 1.5ZM46.9043 -1.64439e-06C46.4901 -1.66249e-06 46.1543 0.335785 46.1543 0.749998C46.1543 1.16421 46.4901 1.5 46.9043 1.5L46.9043 0.749998L46.9043 -1.64439e-06ZM43.1424 1.5C43.5566 1.5 43.8924 1.16421 43.8924 0.749998C43.8924 0.335785 43.5566 -1.79072e-06 43.1424 -1.80882e-06L43.1424 0.749998L43.1424 1.5ZM35.6186 -2.1377e-06C35.2044 -2.1558e-06 34.8686 0.335784 34.8686 0.749998C34.8686 1.16421 35.2044 1.5 35.6186 1.5L35.6186 0.749998L35.6186 -2.1377e-06ZM31.8567 1.5C32.2709 1.5 32.6067 1.16421 32.6067 0.749998C32.6067 0.335784 32.2709 -2.28403e-06 31.8567 -2.30214e-06L31.8567 0.749998L31.8567 1.5ZM24.3329 -2.63101e-06C23.9187 -2.64912e-06 23.5829 0.335784 23.5829 0.749997C23.5829 1.16421 23.9187 1.5 24.3329 1.5L24.3329 0.749997L24.3329 -2.63101e-06ZM20.571 1.5C20.9852 1.5 21.321 1.16421 21.321 0.749997C21.321 0.335784 20.9852 -2.77734e-06 20.571 -2.79545e-06L20.571 0.749997L20.571 1.5ZM13.0472 -3.12432e-06C12.633 -3.14243e-06 12.2972 0.335783 12.2972 0.749997C12.2972 1.16421 12.633 1.5 13.0472 1.5L13.0472 0.749997L13.0472 -3.12432e-06ZM9.28534 1.5C9.69955 1.5 10.0353 1.16421 10.0353 0.749997C10.0353 0.335783 9.69955 -3.27066e-06 9.28534 -3.28876e-06L9.28534 0.749997L9.28534 1.5ZM4.77344 5.31724C4.77344 5.73145 5.10923 6.06724 5.52344 6.06724C5.93766 6.06724 6.27344 5.73145 6.27344 5.31724L5.52344 5.31724L4.77344 5.31724ZM6.27344 9.88448C6.27344 9.47027 5.93766 9.13448 5.52344 9.13448C5.10923 9.13448 4.77344 9.47027 4.77344 9.88448L5.52344 9.88448L6.27344 9.88448ZM4.77344 19.019C4.77344 19.4332 5.10923 19.769 5.52344 19.769C5.93766 19.769 6.27344 19.4332 6.27344 19.019L5.52344 19.019L4.77344 19.019ZM6.27344 23.5862C6.27344 23.172 5.93766 22.8362 5.52344 22.8362C5.10923 22.8362 4.77344 23.172 4.77344 23.5862L5.52344 23.5862L6.27344 23.5862ZM4.77344 32.7207C4.77344 33.1349 5.10923 33.4707 5.52344 33.4707C5.93766 33.4707 6.27344 33.1349 6.27344 32.7207L5.52344 32.7207L4.77344 32.7207ZM6.27344 37.2879C6.27344 36.8737 5.93766 36.5379 5.52344 36.5379C5.10923 36.5379 4.77344 36.8737 4.77344 37.2879L5.52344 37.2879L6.27344 37.2879ZM4.77344 45.7148C4.77344 46.1291 5.10923 46.4648 5.52344 46.4648C5.93766 46.4648 6.27344 46.1291 6.27344 45.7148L5.52344 45.7148L4.77344 45.7148ZM6.27344 49.5745C6.27344 49.1603 5.93766 48.8245 5.52344 48.8245C5.10923 48.8245 4.77344 49.1603 4.77344 49.5745L5.52344 49.5745L6.27344 49.5745ZM4.77344 57.2938C4.77344 57.708 5.10923 58.0438 5.52344 58.0438C5.93766 58.0438 6.27344 57.708 6.27344 57.2938L5.52344 57.2938L4.77344 57.2938ZM6.27344 61.1535C6.27344 60.7392 5.93766 60.4035 5.52344 60.4035C5.10923 60.4035 4.77344 60.7392 4.77344 61.1535L5.52344 61.1535L6.27344 61.1535ZM4.77344 68.8728C4.77344 69.287 5.10923 69.6228 5.52344 69.6228C5.93766 69.6228 6.27344 69.287 6.27344 68.8728L5.52344 68.8728L4.77344 68.8728ZM6.27344 72.7324C6.27344 72.3182 5.93766 71.9824 5.52344 71.9824C5.10923 71.9824 4.77344 72.3182 4.77344 72.7324L5.52344 72.7324L6.27344 72.7324ZM4.77344 80.4517C4.77344 80.8659 5.10923 81.2017 5.52344 81.2017C5.93766 81.2017 6.27344 80.8659 6.27344 80.4517L5.52344 80.4517L4.77344 80.4517ZM6.27344 84.3114C6.27344 83.8972 5.93766 83.5614 5.52344 83.5614C5.10923 83.5614 4.77344 83.8972 4.77344 84.3114L5.52344 84.3114L6.27344 84.3114ZM4.77344 92.0307C4.77344 92.4449 5.10923 92.7807 5.52344 92.7807C5.93766 92.7807 6.27344 92.4449 6.27344 92.0307L5.52344 92.0307L4.77344 92.0307ZM6.27344 95.8903C6.27344 95.4761 5.93766 95.1403 5.52344 95.1403C5.10923 95.1403 4.77344 95.4761 4.77344 95.8903L5.52344 95.8903L6.27344 95.8903ZM84.5234 1.41L85.2734 1.40977L85.2734 1.18977L84.5234 1.19L83.7734 1.19023L83.7734 1.41023L84.5234 1.41ZM84.5233 0.97L85.2733 0.969772L85.2732 0.749772L84.5232 0.75L83.7732 0.750228L83.7733 0.970228L84.5233 0.97ZM84.5232 0.75L84.5232 0L80.7613 -1.64447e-07L80.7613 0.75L80.7613 1.5L84.5232 1.5L84.5232 0.75ZM76.9994 0.75L76.9994 -3.28884e-07L69.4757 -6.5776e-07L69.4757 0.749999L69.4757 1.5L76.9994 1.5L76.9994 0.75ZM65.7138 0.749999L65.7138 -8.22197e-07L58.19 -1.15107e-06L58.19 0.749999L58.19 1.5L65.7138 1.5L65.7138 0.749999ZM54.4281 0.749999L54.4281 -1.31551e-06L46.9043 -1.64439e-06L46.9043 0.749998L46.9043 1.5L54.4281 1.5L54.4281 0.749999ZM43.1424 0.749998L43.1424 -1.80882e-06L35.6186 -2.1377e-06L35.6186 0.749998L35.6186 1.5L43.1424 1.5L43.1424 0.749998ZM31.8567 0.749998L31.8567 -2.30214e-06L24.3329 -2.63101e-06L24.3329 0.749997L24.3329 1.5L31.8567 1.5L31.8567 0.749998ZM20.571 0.749997L20.571 -2.79545e-06L13.0472 -3.12432e-06L13.0472 0.749997L13.0472 1.5L20.571 1.5L20.571 0.749997ZM9.28534 0.749997L9.28534 -3.28876e-06L5.52345 -3.4532e-06L5.52345 0.749997L5.52345 1.5L9.28534 1.5L9.28534 0.749997ZM5.52345 0.749997L4.77345 0.749997L4.77344 5.31724L5.52344 5.31724L6.27344 5.31724L6.27345 0.749997L5.52345 0.749997ZM5.52344 9.88448L4.77344 9.88448L4.77344 19.019L5.52344 19.019L6.27344 19.019L6.27344 9.88448L5.52344 9.88448ZM5.52344 23.5862L4.77344 23.5862L4.77344 32.7207L5.52344 32.7207L6.27344 32.7207L6.27344 23.5862L5.52344 23.5862ZM5.52344 37.2879L4.77344 37.2879L4.77344 41.8552L5.52344 41.8552L6.27344 41.8552L6.27344 37.2879L5.52344 37.2879ZM5.52344 41.8552L4.77344 41.8552L4.77344 45.7148L5.52344 45.7148L6.27344 45.7148L6.27344 41.8552L5.52344 41.8552ZM5.52344 49.5745L4.77344 49.5745L4.77344 57.2938L5.52344 57.2938L6.27344 57.2938L6.27344 49.5745L5.52344 49.5745ZM5.52344 61.1535L4.77344 61.1535L4.77344 68.8728L5.52344 68.8728L6.27344 68.8728L6.27344 61.1535L5.52344 61.1535ZM5.52344 72.7324L4.77344 72.7324L4.77344 80.4517L5.52344 80.4517L6.27344 80.4517L6.27344 72.7324L5.52344 72.7324ZM5.52344 84.3114L4.77344 84.3114L4.77344 92.0307L5.52344 92.0307L6.27344 92.0307L6.27344 84.3114L5.52344 84.3114ZM5.52344 95.8903L4.77344 95.8903L4.77344 99.75L5.52344 99.75L6.27344 99.75L6.27344 95.8903L5.52344 95.8903Z" fill="#0026FF"/>
+          </svg>
+        </div>
+        {card}
+      </div>
+    );
+  }
+
+  /* Default: left-pointing horizontal arrow */
   return (
-    <div className="absolute content-stretch flex flex-col items-start left-0 top-[-53px] w-[154px] opacity-0 transition-opacity duration-200 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto" data-name="Slot">
-      <div className="h-[40px] shrink-0 w-full rounded-lg bg-white px-3 py-2 shadow-md border border-[#e8e8e8] flex items-center text-[#4e4f4e] text-[14px] font-['Inter:Regular',sans-serif]" data-name="slot">Callout 1</div>
+    <div className={`flex items-center gap-0 text-left ${className ?? ""}`} data-name={dataName}>
+      <div className="flex items-center shrink-0" aria-hidden>
+        <svg width="8" height="14" viewBox="0 0 8 14" fill="none" className="shrink-0">
+          <path d="M7 1L1 7L7 13" stroke="#0026FF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+        <div className="w-10 shrink-0 border-t-2 border-dashed border-[#0026FF]" />
+      </div>
+      {card}
     </div>
   );
 }
 
-function Pin1() {
-  return (
-    <div className="absolute right-0 size-[22px] top-[15px] cursor-pointer z-10" data-name="Pin">
-      <div className="absolute bg-[rgba(239,242,255,0.6)] inset-0 rounded-[1000px]" />
-      <div className="absolute bg-[rgba(0,38,255,0.9)] inset-[22.73%] rounded-[1000px]" />
-    </div>
-  );
-}
-
+/* Callout 1 — Clear Sub-navigation (top of wireframe, subnav area) */
 function Callout() {
   return (
-    <div className="group absolute h-[50px] left-[229.85px] top-[481px] w-[154px]" data-name="Callout 1">
-      <Slot />
-      <Pin1 />
+    <div className="absolute left-[360px] top-[425px] z-10" data-name="Callout 1">
+      <DesignCallout
+        title="Clear Sub-navigation"
+        text="It's possible that a story will take more than one page. The subnav is meant to be placed beneath the hero and to stay on scroll. Not as an anchor link, but as a link to a different page."
+        data-name="Callout 1"
+      />
     </div>
   );
 }
 
-function Slot1() {
-  return (
-    <div className="absolute content-stretch flex flex-col items-start left-0 top-[-53px] w-[154px] opacity-0 transition-opacity duration-200 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto" data-name="Slot">
-      <div className="h-[40px] shrink-0 w-full rounded-lg bg-white px-3 py-2 shadow-md border border-[#e8e8e8] flex items-center text-[#4e4f4e] text-[14px] font-['Inter:Regular',sans-serif]" data-name="slot">Callout 2</div>
-    </div>
-  );
-}
-
-function Pin2() {
-  return (
-    <div className="absolute right-0 size-[22px] top-[15px] cursor-pointer z-10" data-name="Pin">
-      <div className="absolute bg-[rgba(239,242,255,0.6)] inset-0 rounded-[1000px]" />
-      <div className="absolute bg-[rgba(0,38,255,0.9)] inset-[22.73%] rounded-[1000px]" />
-    </div>
-  );
-}
-
+/* Callout 2 — Primary CTA (Reserve Your Spot section, button area) */
 function Callout1() {
   return (
-    <div className="group absolute h-[53px] left-[261.85px] top-[850px] w-[154px]" data-name="Callout 2">
-      <Slot1 />
-      <Pin2 />
+    <div className="absolute left-[390px] top-[815px] z-10" data-name="Callout 2">
+      <DesignCallout
+        title="Primary CTA"
+        text="When these tales contain an action that you want users to do, make it easy for them to identify and understand the action."
+        data-name="Callout 2"
+      />
     </div>
   );
 }
 
-function Pin3() {
-  return (
-    <div className="-translate-y-1/2 absolute left-0 size-[22px] top-1/2 cursor-pointer z-10" data-name="Pin">
-      <div className="absolute bg-[rgba(239,242,255,0.6)] inset-0 rounded-[1000px]" />
-      <div className="absolute bg-[rgba(0,38,255,0.9)] inset-[22.73%] rounded-[1000px]" />
-    </div>
-  );
-}
-
+/* Callout 3 — The Main Story (video / media section, vertical arrow pointing up) */
 function Callout2() {
   return (
-    <div className="group absolute h-[230px] left-[95.85px] top-[1368px] w-[764px]" data-name="Callout 3">
-      <div className="absolute inset-0 left-[30px] top-1/2 -translate-y-1/2 w-[300px] rounded-lg bg-white p-4 shadow-lg border border-[#e8e8e8] opacity-0 transition-opacity duration-200 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto flex flex-col gap-2">
-        <p className="font-['Inter:Medium',sans-serif] font-medium text-[#2e2f32] text-[16px]">Callout 3</p>
-        <p className="font-['Inter:Regular',sans-serif] text-[14px] text-[#4e4f4e]">Content for this callout.</p>
-      </div>
-      <Pin3 />
+    <div className="absolute left-[96px] top-[1240px] z-10" data-name="Callout 3">
+      <DesignCallout
+        title="The Main Story"
+        text="There's lots of room to build the story you want to tell by combining current and new components."
+        direction="up"
+        data-name="Callout 3"
+      />
     </div>
   );
 }
 
-function Pin4() {
-  return (
-    <div className="absolute bottom-0 right-[281px] size-[22px] cursor-pointer z-10" data-name="Pin">
-      <div className="absolute bg-[rgba(239,242,255,0.6)] inset-0 rounded-[1000px]" />
-      <div className="absolute bg-[rgba(0,38,255,0.9)] inset-[22.73%] rounded-[1000px]" />
-    </div>
-  );
-}
-
+/* Callout 4 — Pathing (right side, card grid section, L-shaped arrow going down) */
 function Callout3() {
   return (
-    <div className="group absolute h-[101px] right-[61.15px] top-[1903px] w-[350px]" data-name="Callout 4">
-      <div className="absolute bottom-full left-0 mb-2 w-[280px] rounded-lg bg-white p-4 shadow-lg border border-[#e8e8e8] opacity-0 transition-opacity duration-200 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto flex flex-col gap-2">
-        <p className="font-['Inter:Medium',sans-serif] font-medium text-[#2e2f32] text-[16px]">Callout 4</p>
-        <p className="font-['Inter:Regular',sans-serif] text-[14px] text-[#4e4f4e]">Content for this callout.</p>
-      </div>
-      <Pin4 />
+    <div className="absolute right-[61px] top-[1903px] z-10" data-name="Callout 4">
+      <DesignCallout
+        title="Pathing"
+        text="We can assure that there are no dead ends by using the Grids and Pathing components, and that a user always has something new to investigate."
+        direction="down"
+        data-name="Callout 4"
+      />
     </div>
   );
 }
@@ -5366,13 +5391,18 @@ function Image16({ className, scrollRef, onScroll }: { className?: string; scrol
       className={`${className ?? "bg-[#f4f4f4] h-full overflow-x-clip overflow-y-auto relative shrink-0 w-[587px]"} ${scrollbarHide} scroll-smooth`}
       data-name="Image 1"
     >
-      <div className="absolute left-0 top-0 w-full min-h-full" style={{ minHeight: COMPARISON_CONTENT_H }} data-name="Wireframe 1">
-        <img alt="" className="absolute inset-0 max-w-none object-cover object-top pointer-events-none size-full" src={imgWireframe1} />
+      <div className="relative w-[1185px]" style={{ height: COMPARISON_CONTENT_H }} data-name="Wireframe 1">
+        <img
+          alt=""
+          className="absolute inset-0 max-w-none object-cover object-left-top pointer-events-none size-full"
+          src={imgWireframe1}
+          srcSet={`${imgWireframe1} 1x, ${imgWireframe1_2x} 2x`}
+        />
+        <Callout />
+        <Callout1 />
+        <Callout2 />
+        <Callout3 />
       </div>
-      <Callout />
-      <Callout1 />
-      <Callout2 />
-      <Callout3 />
     </div>
   );
 }
@@ -5439,7 +5469,6 @@ function CircleCaretLeft({ onDrag, splitX }: { onDrag: (deltaX: number) => void;
   );
 }
 
-const COMPARISON_WIDTH = 1180;
 const LEFT_PANEL_MAX_WIDTH = COMPARISON_WIDTH;
 
 function RightImage({
@@ -5465,24 +5494,8 @@ function RightImage({
 }
 
 function Comparison() {
-  const [leftPanelWidth, setLeftPanelWidth] = useState(LEFT_PANEL_MAX_WIDTH);
-  const leftScrollRef = useRef<HTMLDivElement>(null);
-  const rightScrollRef = useRef<HTMLDivElement>(null);
-  const isSyncingScroll = useRef(false);
-
-  const syncScrollFromLeft = () => {
-    if (isSyncingScroll.current || !leftScrollRef.current || !rightScrollRef.current) return;
-    isSyncingScroll.current = true;
-    rightScrollRef.current.scrollTop = leftScrollRef.current.scrollTop;
-    requestAnimationFrame(() => { isSyncingScroll.current = false; });
-  };
-
-  const syncScrollFromRight = () => {
-    if (isSyncingScroll.current || !leftScrollRef.current || !rightScrollRef.current) return;
-    isSyncingScroll.current = true;
-    leftScrollRef.current.scrollTop = rightScrollRef.current.scrollTop;
-    requestAnimationFrame(() => { isSyncingScroll.current = false; });
-  };
+  const [leftPanelWidth, setLeftPanelWidth] = useState(Math.round(LEFT_PANEL_MAX_WIDTH / 2));
+  const { leftScrollRef, rightScrollRef, syncScrollFromLeft, syncScrollFromRight } = useSyncedScroll();
 
   const handleCaretDrag = (deltaX: number) => {
     const step = Math.sign(deltaX) * Math.min(Math.abs(deltaX) * 1.8, 400);
@@ -5490,12 +5503,14 @@ function Comparison() {
   };
 
   return (
-    <div className="relative rounded-[16px] shrink-0 w-[1180px]" style={{ height: COMPARISON_FRAME_H }} data-name="Comparison">
-      <div className="overflow-clip relative rounded-[inherit] size-full">
-        <Image15 scrollRef={rightScrollRef} onScroll={syncScrollFromRight} />
-        <RightImage leftPanelWidth={leftPanelWidth} onDrag={handleCaretDrag} leftScrollRef={leftScrollRef} onLeftScroll={syncScrollFromLeft} />
+    <div className={`w-full max-w-[1180px] overflow-x-auto overflow-y-hidden rounded-[16px] ${scrollbarHide}`}>
+      <div className="relative rounded-[16px] min-w-[1180px]" style={{ height: COMPARISON_FRAME_H }} data-name="Comparison">
+        <div className="overflow-clip relative rounded-[inherit] size-full">
+          <Image15 scrollRef={rightScrollRef} onScroll={syncScrollFromRight} />
+          <RightImage leftPanelWidth={leftPanelWidth} onDrag={handleCaretDrag} leftScrollRef={leftScrollRef} onLeftScroll={syncScrollFromLeft} />
+        </div>
+        <div aria-hidden="true" className="absolute border border-[#ccc] border-solid inset-0 pointer-events-none rounded-[16px]" />
       </div>
-      <div aria-hidden="true" className="absolute border border-[#ccc] border-solid inset-0 pointer-events-none rounded-[16px]" />
     </div>
   );
 }
@@ -5576,7 +5591,7 @@ function ImageSlot2() {
         <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[16px]">
           <div className="absolute bg-white inset-0 rounded-[16px]" />
           <div className="absolute inset-0 overflow-hidden rounded-[16px]">
-            <img alt="" className="absolute h-[109.3%] left-0 max-w-none top-[-0.13%] w-full" src={imgImage12} />
+            <img alt="" className="absolute inset-0 size-full object-contain object-center" src={imgImage12} />
           </div>
         </div>
       </div>
@@ -5637,25 +5652,38 @@ function Frame100() {
   );
 }
 
-function RecycleRightRight() {
+const RECYCLE_CONTENT_H = 3368;
+
+function RecycleRightRight({ scrollRef, onScroll }: { scrollRef?: React.RefObject<HTMLDivElement | null>; onScroll?: () => void } = {}) {
   return (
-    <div className="absolute inset-0 overflow-clip" data-name="Recycle right right">
-      <div className="absolute inset-0 w-full h-full" data-name="D.Recycling 101 1">
-        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgDRecycling1011} />
+    <div
+      ref={scrollRef}
+      className={`absolute overflow-y-auto overflow-x-hidden right-0 top-0 w-[1184px] scroll-smooth ${scrollbarHide}`}
+      style={{ height: COMPARISON_FRAME_H }}
+      onScroll={onScroll}
+      data-name="Recycle right right"
+    >
+      <div className="relative right-[-0.3px] top-0 w-[1184.352px]" style={{ height: RECYCLE_CONTENT_H }} data-name="D.Recycling 101 1">
+        <img
+          alt=""
+          className="absolute inset-0 max-w-none object-cover object-left-top pointer-events-none size-full"
+          src={imgDRecycling1011}
+          srcSet={`${imgDRecycling1011} 1x, ${imgDRecycling1011_2x} 2x`}
+        />
+        <div className="absolute bg-[#f7f8f2] h-[58.335px] left-0 top-[3406.43px] w-[105.167px]" />
+        <div className="absolute bg-[#f7f8f2] h-[14.789px] left-[1074.68px] top-[3407.26px] w-[108.454px]" />
+        <div className="absolute bg-[#f7f8f2] h-[13.968px] left-[746.03px] mix-blend-multiply top-[3410.54px] w-[19.719px]" />
+        <div className="absolute bg-[#f7f8f2] h-[14.789px] left-[416.56px] mix-blend-multiply top-[3409.72px] w-[19.719px]" />
+        <div className="absolute bg-[#f7f8f2] h-[35.33px] left-[105.17px] mix-blend-multiply top-[3422.05px] w-[1077.965px]" />
       </div>
-      <div className="absolute bg-[#f7f8f2] h-[58.335px] left-0 top-[3406.43px] w-[105.167px]" />
-      <div className="absolute bg-[#f7f8f2] h-[14.789px] left-[1074.68px] top-[3407.26px] w-[108.454px]" />
-      <div className="absolute bg-[#f7f8f2] h-[13.968px] left-[746.03px] mix-blend-multiply top-[3410.54px] w-[19.719px]" />
-      <div className="absolute bg-[#f7f8f2] h-[14.789px] left-[416.56px] mix-blend-multiply top-[3409.72px] w-[19.719px]" />
-      <div className="absolute bg-[#f7f8f2] h-[35.33px] left-[105.17px] mix-blend-multiply top-[3422.05px] w-[1077.965px]" />
     </div>
   );
 }
 
-function Image17() {
+function Image17({ scrollRef, onScroll }: { scrollRef?: React.RefObject<HTMLDivElement | null>; onScroll?: () => void } = {}) {
   return (
-    <div className="absolute inset-0" data-name="Image 2">
-      <RecycleRightRight />
+    <div className="absolute left-px right-[-1px] top-0" style={{ height: COMPARISON_FRAME_H }} data-name="Image 2">
+      <RecycleRightRight scrollRef={scrollRef} onScroll={onScroll} />
     </div>
   );
 }
@@ -7500,7 +7528,7 @@ function ProductCarousel() {
 
 function Image18() {
   return (
-    <div className="bg-white flex-[1_0_0] h-full min-h-px min-w-px overflow-clip relative" data-name="Image 1">
+    <div className="bg-white relative overflow-clip" style={{ height: RECYCLE_CONTENT_H, minWidth: COMPARISON_WIDTH }} data-name="Image 1">
       <div className="absolute bg-[#f8f8f2] h-[558.701px] left-0 top-[1766.48px] w-[1183.132px]" data-name="Rectangle" />
       <FlipCards />
       <Multimedia2Copy />
@@ -7531,41 +7559,108 @@ function Frame98() {
   );
 }
 
-function CircleCaretLeft1() {
+function CircleCaretLeft1({ onDrag, splitX }: { onDrag: (deltaX: number) => void; splitX: number }) {
+  const dragStart = useRef<{ x: number } | null>(null);
+
+  const onPointerDown = (e: React.PointerEvent) => {
+    e.preventDefault();
+    (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
+    dragStart.current = { x: e.clientX };
+  };
+
+  const onPointerMove = (e: React.PointerEvent) => {
+    if (dragStart.current == null) return;
+    const deltaX = e.clientX - dragStart.current.x;
+    dragStart.current = { x: e.clientX };
+    onDrag(deltaX);
+  };
+
+  const onPointerUp = (e: React.PointerEvent) => {
+    (e.currentTarget as HTMLElement).releasePointerCapture(e.pointerId);
+    dragStart.current = null;
+  };
+
   return (
-    <div className="absolute bg-[rgba(25,25,25,0.4)] right-[-40px] rounded-[1000px] size-[80px] top-[532.8px]" data-name="circleCaret/left">
+    <button
+      type="button"
+      className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 z-10 bg-[rgba(25,25,25,0.4)] rounded-[1000px] size-[80px] cursor-grab active:cursor-grabbing touch-none select-none border-0 p-0 appearance-none focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[rgba(25,25,25,0.4)]"
+      style={{ left: splitX + 1 }}
+      data-name="circleCaret/left"
+      onPointerDown={onPointerDown}
+      onPointerMove={onPointerMove}
+      onPointerUp={onPointerUp}
+      onPointerCancel={onPointerUp}
+      onKeyDown={(e) => {
+        if (e.key === "ArrowRight") {
+          e.preventDefault();
+          onDrag(150);
+        } else if (e.key === "ArrowLeft") {
+          e.preventDefault();
+          onDrag(-150);
+        }
+      }}
+      aria-label="Drag to resize left panel"
+    >
       <div aria-hidden="true" className="absolute border border-[#f8f8f8] border-solid inset-[-0.5px] pointer-events-none rounded-[1000.5px] shadow-[0px_2px_8px_0px_rgba(0,0,0,0.1)]" />
       <Frame98 />
-      <div className="absolute border border-[#e8e8e8] border-solid inset-0 rounded-[100px]" data-name="border" />
-    </div>
+      <div className="absolute border border-[#e8e8e8] border-solid inset-0 rounded-[100px] pointer-events-none" data-name="border" />
+    </button>
   );
 }
 
-function RightImage1() {
+function RightImage1({
+  leftPanelWidth,
+  onDrag,
+  leftScrollRef,
+  onLeftScroll,
+}: {
+  leftPanelWidth: number;
+  onDrag: (deltaX: number) => void;
+  leftScrollRef: React.RefObject<HTMLDivElement | null>;
+  onLeftScroll: () => void;
+}) {
   return (
-    <div className="absolute content-stretch flex h-[3366px] items-center left-0 top-px w-[589px]" data-name="Right Image">
-      <Image18 />
-      <div className="bg-[#023625] h-[1144px] shrink-0 w-[2px]" data-name="Line" />
-      <CircleCaretLeft1 />
+    <div className="absolute content-stretch flex items-center left-0 top-0" style={{ height: COMPARISON_FRAME_H }} data-name="Right Image">
+      <div className="h-full overflow-hidden shrink-0 transition-[width] duration-75" style={{ width: leftPanelWidth }}>
+        <div
+          ref={leftScrollRef}
+          onScroll={onLeftScroll}
+          className={`h-full overflow-x-clip overflow-y-auto relative w-full min-w-0 ${scrollbarHide} scroll-smooth`}
+        >
+          <Image18 />
+        </div>
+      </div>
+      <div className="bg-[#023625] h-full shrink-0 w-[2px]" data-name="Line" />
+      <CircleCaretLeft1 onDrag={onDrag} splitX={leftPanelWidth} />
     </div>
   );
 }
 
 function Comparison1() {
+  const [leftPanelWidth, setLeftPanelWidth] = useState(Math.round(COMPARISON_WIDTH / 2));
+  const { leftScrollRef, rightScrollRef, syncScrollFromLeft, syncScrollFromRight } = useSyncedScroll();
+
+  const handleCaretDrag = (deltaX: number) => {
+    const step = Math.sign(deltaX) * Math.min(Math.abs(deltaX) * 1.8, 400);
+    setLeftPanelWidth((prev) => Math.max(0, Math.min(COMPARISON_WIDTH, prev + step)));
+  };
+
   return (
-    <div className="h-[3369px] relative rounded-[16px] shrink-0 w-[1180px]" data-name="Comparison">
-      <div className="overflow-clip relative rounded-[inherit] size-full">
-        <Image17 />
-        <RightImage1 />
+    <div className={`w-full max-w-[1180px] overflow-x-auto overflow-y-hidden rounded-[16px] ${scrollbarHide}`}>
+      <div className="relative rounded-[16px] min-w-[1180px]" style={{ height: COMPARISON_FRAME_H }} data-name="Comparison">
+        <div className="overflow-clip relative rounded-[inherit] size-full">
+          <Image17 scrollRef={rightScrollRef} onScroll={syncScrollFromRight} />
+          <RightImage1 leftPanelWidth={leftPanelWidth} onDrag={handleCaretDrag} leftScrollRef={leftScrollRef} onLeftScroll={syncScrollFromLeft} />
+        </div>
+        <div aria-hidden="true" className="absolute border border-[#ccc] border-solid inset-0 pointer-events-none rounded-[16px]" />
       </div>
-      <div aria-hidden="true" className="absolute border border-[#ccc] border-solid inset-0 pointer-events-none rounded-[16px]" />
     </div>
   );
 }
 
 function SectionCardsVertical2() {
   return (
-    <div className="content-stretch flex flex-col gap-[32px] items-start relative shrink-0 w-full" data-name="Section Cards / Vertical">
+    <div id="compromises" className="content-stretch flex flex-col gap-[32px] items-start relative shrink-0 w-full" data-name="Section Cards / Vertical">
       <SectionHeadingFull17 />
       <Row20 />
       <SectionHeadingFull18 />
@@ -7602,8 +7697,8 @@ function SectionHeadingFull19() {
 
 function Grid() {
   return (
-    <div className="content-stretch flex flex-[1_0_0] h-full items-center min-h-px min-w-px relative" data-name="grid 1">
-      <div className="flex-[1_0_0] h-full min-h-px min-w-px relative rounded-[16px]" data-name="Image 4">
+    <div className="flex flex-1 min-w-0 relative" data-name="grid 1">
+      <div className="w-full aspect-[1/2] relative rounded-[16px]" data-name="Image 4">
         <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[16px]">
           <div className="absolute bg-[#e3f233] inset-0 rounded-[16px]" />
           <div className="absolute inset-0 overflow-hidden rounded-[16px]">
@@ -7617,8 +7712,8 @@ function Grid() {
 
 function Grid1() {
   return (
-    <div className="content-stretch flex flex-[1_0_0] h-full items-center min-h-px min-w-px relative" data-name="grid 2">
-      <div className="flex-[1_0_0] h-[571.407px] min-h-px min-w-px relative rounded-[16px]" data-name="Image 4">
+    <div className="flex flex-1 min-w-0 relative" data-name="grid 2">
+      <div className="w-full aspect-[1/2] relative rounded-[16px]" data-name="Image 4">
         <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[16px]">
           <div className="absolute bg-[#3c8a2e] inset-0 rounded-[16px]" />
           <div className="absolute inset-0 overflow-hidden rounded-[16px]">
@@ -7632,8 +7727,8 @@ function Grid1() {
 
 function Grid2() {
   return (
-    <div className="content-stretch flex flex-[1_0_0] h-full items-center min-h-px min-w-px relative" data-name="grid 3">
-      <div className="flex-[1_0_0] h-full min-h-px min-w-px relative rounded-[16px]" data-name="Image 4">
+    <div className="flex flex-1 min-w-0 relative" data-name="grid 3">
+      <div className="w-full aspect-[1/2] relative rounded-[16px]" data-name="Image 4">
         <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[16px]">
           <div className="absolute bg-[#1c4632] inset-0 rounded-[16px]" />
           <div className="absolute inset-0 overflow-hidden rounded-[16px]">
@@ -7647,7 +7742,7 @@ function Grid2() {
 
 function VisualGrid3() {
   return (
-    <div className="content-stretch flex gap-[16px] h-[571.407px] items-start relative shrink-0 w-full" data-name="Visual Grid">
+    <div className="flex gap-[16px] items-stretch relative shrink-0 w-full" data-name="Visual Grid">
       <Grid />
       <Grid1 />
       <Grid2 />
@@ -7897,7 +7992,7 @@ function Frame88() {
   return (
     <div className="relative shrink-0 w-full overflow-x-hidden">
       <div className="flex flex-row items-center justify-center w-full">
-        <div className="content-stretch flex items-center justify-center px-4 sm:px-6 md:px-12 lg:px-24 xl:px-[280px] relative w-full max-w-full">
+        <div className="content-stretch flex items-center justify-center w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-12 lg:px-[68px] relative">
           <Frame52 />
         </div>
       </div>
@@ -7914,12 +8009,25 @@ function Button11() {
 }
 
 export default function WmDesignSystem() {
+  const [navVisible, setNavVisible] = useState(false);
+
   return (
     <div className="bg-white w-full max-w-full overflow-x-hidden flex flex-col gap-12 sm:gap-16 md:gap-20 lg:gap-[80px] items-center justify-center pb-12 md:pb-16 lg:pb-[100px] relative" data-name="WM Design System 2026">
+      {/* Nav slides in when user hovers the left edge past the hero */}
+      <PageNavigation onVisibleChange={setNavVisible} />
       <Heading />
-      <ProjectDetails />
-      <Frame88 />
-      <Button11 />
+      {/* Push wrapper: shifts content right to clear the nav panel when visible */}
+      <div
+        className="w-full flex flex-col gap-12 sm:gap-16 md:gap-20 lg:gap-[80px]"
+        style={{
+          paddingLeft: navVisible ? "240px" : "0px",
+          transition: "padding-left 400ms cubic-bezier(0.4,0,0.2,1)",
+        }}
+      >
+        <ProjectDetails />
+        <Frame88 />
+        <Button11 />
+      </div>
     </div>
   );
 }
