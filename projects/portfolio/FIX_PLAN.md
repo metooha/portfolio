@@ -26,11 +26,11 @@ The app fails to build/run because **Vite cannot resolve `figma:asset/...` impor
 ### Step 3: Handle missing assets
 - **Missing assets identified:**  
   - `45ef906eb23a4c2a2f3b0e23ddfad19e1c93a4de.png` (hobbies "Countries Visited")  
-  - `c22af8bfcb65f93d01f2862c0d18f313ac7bc96a.png` (case-study-2 hover image)
+  - `c22af8bfcb65f93d01f2862c0d18f313ac7bc96a.png` (Hover case study image in `case-studies-config.ts`)
 - **Action:**  
   - In the Vite plugin, if the resolved path does not exist, resolve to a known existing asset (e.g. a generic placeholder) so the build does not fail.  
   - In `portfolio-data.ts`, use an existing hobby image for "Countries Visited".  
-  - In `case-study-2.tsx`, the import will go through the plugin; use a fallback image in the plugin when the file is missing (e.g. another existing asset path).
+  - The Hover case study image is imported in `case-studies-config.ts`; the plugin should use a fallback when that file is missing.
 
 ## Steps to implement
 
@@ -38,7 +38,7 @@ The app fails to build/run because **Vite cannot resolve `figma:asset/...` impor
    - `resolveId(id, importer)`: if `id.startsWith('figma:asset/')`, extract the filename and return `path.resolve(__dirname, 'src/assets', filename)`. If that path does not exist, return path to a fallback asset so the build succeeds.
 2. **Register the plugin** in `vite.config.ts` before the React plugin (so it runs first).
 3. **Update `portfolio-data.ts`**: Add imports for the 4 hobby images that use `figma:asset/`. Use an existing asset for the missing `45ef...` (e.g. reuse another hobby image).
-4. **Handle missing asset in case-study-2**: In the plugin, when the requested figma asset file is missing, resolve to an existing placeholder image so `case-study-2` does not break.
+4. **Handle missing asset for Hover case study**: In the plugin, when the requested figma asset file is missing, resolve to an existing placeholder image so the Hover case study (id 2) does not break.
 5. **Verify**: Run `npm run dev` and confirm the app loads without import errors. Click through pages that use figma assets (home, about, contact, case studies) to confirm images load.
 
 ## Files to change

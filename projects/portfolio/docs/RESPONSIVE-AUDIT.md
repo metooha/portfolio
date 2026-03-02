@@ -7,11 +7,10 @@
 | Home | `app/pages/home.tsx` | Hero, skills pills, case study cards |
 | About | `app/pages/about.tsx` | Hero, experience, timeline, values, hobbies |
 | Contact | `app/pages/contact.tsx` | Two-column grid, form |
-| Case study (Walmart DS) | `app/pages/case-study.tsx` | Mounts `WmDesignSystem2026` |
-| Other case studies | `case-study-2.tsx`, `case-study-3.tsx`, `case-study-4.tsx` | May use shared patterns |
-| Other work | `other-work.tsx`, `other-work-detail.tsx` | List/detail |
+| Case studies | `app/pages/case-study-page.tsx` | Single route `/case-study/:id`; id 1 = `WmDesignSystem2026`, ids 2–4 = `CaseStudyTemplate` + `case-studies-config.ts` |
+| Other work | `app/pages/other-work.tsx`, `app/pages/other-work-detail.tsx` | List/detail |
 
-**WmDesignSystem2026** is used only in `case-study.tsx`. The design system component is a large single file (`imports/WmDesignSystem2026.tsx`) with many fixed-width sections, comparison panels, and value-prop rows.
+**WmDesignSystem2026** is rendered by `case-study-page.tsx` when `id === "1"`. The design system component is a large single file (`imports/WmDesignSystem2026.tsx`) with many fixed-width sections, comparison panels, and value-prop rows.
 
 ## 2. Non-responsive patterns found
 

@@ -5068,7 +5068,7 @@ function Column5And6() {
 
 function Frame102() {
   return (
-    <div className="content-stretch flex flex-[1_0_0] flex-wrap gap-[16px] items-start justify-center min-h-[500px] min-w-0 relative w-full">
+    <div className="content-stretch flex flex-[1_0_0] flex-wrap gap-[16px] items-start justify-center min-h-0 min-w-0 relative w-full">
       <Column3 />
       <Column4 />
       <Column5And6 />
