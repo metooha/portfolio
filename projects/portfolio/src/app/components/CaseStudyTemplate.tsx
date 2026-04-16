@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { CaseStudyPageNav } from "@/app/components/CaseStudyPageNav";
 import { CaseStudyMeta } from "@/app/components/CaseStudyMeta";
@@ -95,7 +95,24 @@ export function CaseStudyTemplate({
   children,
 }: CaseStudyTemplateProps) {
   const [navVisible, setNavVisible] = useState(false);
+  const [heroOffset, setHeroOffset] = useState(0);
+  const heroContainerRef = useRef<HTMLDivElement>(null);
   const showNav = navSections.length > 0;
+
+  // Parallax: hero moves slightly on scroll so it "hands off" to the content section
+  useEffect(() => {
+    const onScroll = () => {
+      if (!heroContainerRef.current) return;
+      const rect = heroContainerRef.current.getBoundingClientRect();
+      const heroHeight = heroContainerRef.current.offsetHeight;
+      // As user scrolls, shift hero up slightly (max ~15% of hero height) for a gentle parallax
+      const scrollProgress = Math.min(1, Math.max(0, -rect.top / (heroHeight * 0.8)));
+      setHeroOffset(scrollProgress * heroHeight * 0.15);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
     <div className="min-h-screen bg-white w-full overflow-x-hidden -my-12">
@@ -110,8 +127,14 @@ export function CaseStudyTemplate({
             />
           )}
 
-          {/* Hero */}
-          {hero}
+          {/* Hero with parallax */}
+          <div ref={heroContainerRef} className="relative w-full shrink-0 overflow-hidden">
+            <div
+              style={{ transform: `translateY(${-heroOffset}px)` }}
+            >
+              {hero}
+            </div>
+          </div>
 
           {/* Main content with optional padding for nav */}
           <div

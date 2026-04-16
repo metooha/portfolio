@@ -111,16 +111,18 @@ function Row2() {
 
 function Column() {
   return (
-    <div className="content-stretch flex flex-[1_0_0] flex-col gap-[17px] h-full items-start min-h-px min-w-0 relative" data-name="Column 1">
-      <div className="flex-[1_0_0] min-h-px min-w-px relative rounded-[16px] w-full" data-name="Image 2">
-        <div className="absolute inset-0 overflow-hidden pointer-events-none rounded-[16px]">
-          <img alt="" className="absolute h-[121.71%] left-[-0.1%] max-w-none top-[-5.13%] w-[99.65%]" src={imgImage2} />
+    <div className="content-stretch flex flex-[1_0_0] flex-col aspect-[324/551] w-full min-h-0 min-w-0 max-h-[min(75vh,680px)] relative shrink-0" data-name="Column 1">
+      <div className="flex flex-1 min-h-0 flex-col gap-2 w-full">
+        <div className="flex-1 min-h-0 relative rounded-[16px] overflow-hidden min-w-0" data-name="Image 2">
+          <div className="absolute inset-0 overflow-hidden pointer-events-none rounded-[16px]">
+            <img alt="" className="absolute inset-0 size-full object-cover rounded-[16px] md:inset-auto md:h-[121.71%] md:left-[-0.1%] md:max-w-none md:top-[-5.13%] md:w-[99.65%]" src={imgImage2} />
+          </div>
         </div>
-      </div>
-      <div className="flex-[1_0_0] min-h-px min-w-px relative rounded-[16px] w-full" data-name="Image 3">
-        <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[16px]">
-          <div className="absolute bg-[#1c4633] inset-0 rounded-[16px]" />
-          <img alt="" className="absolute max-w-none object-contain rounded-[16px] size-full" src={imgImage3} />
+        <div className="flex-1 min-h-0 relative rounded-[16px] overflow-hidden min-w-0" data-name="Image 3">
+          <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[16px]">
+            <div className="absolute bg-[#1c4633] inset-0 rounded-[16px]" />
+            <img alt="" className="absolute inset-0 size-full object-cover rounded-[16px]" src={imgImage3} />
+          </div>
         </div>
       </div>
     </div>
@@ -129,9 +131,9 @@ function Column() {
 
 function Column1() {
   return (
-    <div className="content-stretch flex flex-[1_0_0] h-full items-center min-h-px min-w-0 relative" data-name="Column 2">
-      <div className="aspect-[324/551] flex-[1_0_0] min-h-px min-w-px relative rounded-[16px]" data-name="Image 4">
-        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[16px] size-full" src={imgImage4} />
+    <div className="content-stretch flex flex-[1_0_0] flex-col aspect-[324/551] w-full min-h-0 min-w-0 max-h-[min(75vh,680px)] relative shrink-0" data-name="Column 2">
+      <div className="absolute inset-0 rounded-[16px] overflow-hidden" data-name="Image 4">
+        <img alt="" className="absolute inset-0 size-full object-cover object-center pointer-events-none rounded-[16px]" src={imgImage4} />
       </div>
     </div>
   );
@@ -139,15 +141,17 @@ function Column1() {
 
 function Column2() {
   return (
-    <div className="content-stretch flex flex-[1_0_0] flex-col gap-[19px] h-full items-start min-h-px min-w-0 relative" data-name="Column 3">
-      <div className="flex-[1_0_0] min-h-px min-w-px relative rounded-[16px] w-full" data-name="Image 5">
-        <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[16px]">
-          <div className="absolute bg-[#ecedea] inset-0 rounded-[16px]" />
-          <img alt="" className="absolute max-w-none object-contain rounded-[16px] size-full" src={imgImage5} />
+    <div className="content-stretch flex flex-[1_0_0] flex-col aspect-[324/551] w-full min-h-0 min-w-0 max-h-[min(75vh,680px)] relative shrink-0 overflow-hidden" data-name="Column 3">
+      <div className="flex flex-1 min-h-0 min-w-0 w-full h-full flex-col md:flex-row lg:flex-col gap-2">
+        <div className="flex-1 min-h-0 min-w-0 w-full relative rounded-[16px] overflow-hidden" data-name="Image 5">
+          <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[16px]">
+            <div className="absolute bg-[#ecedea] inset-0 rounded-[16px]" />
+            <img alt="" className="absolute inset-0 size-full object-cover object-center rounded-[16px]" src={imgImage5} />
+          </div>
         </div>
-      </div>
-      <div className="flex-[1_0_0] min-h-px min-w-px relative rounded-[16px] w-full" data-name="Image 6">
-        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[16px] size-full" src={imgImage6} />
+        <div className="flex-1 min-h-0 min-w-0 w-full relative rounded-[16px] overflow-hidden" data-name="Image 6">
+          <img alt="" className="absolute inset-0 size-full object-cover object-center pointer-events-none rounded-[16px]" src={imgImage6} />
+        </div>
       </div>
     </div>
   );
@@ -155,14 +159,14 @@ function Column2() {
 
 function Row3() {
   return (
-    <div className="grid gap-[16px] items-stretch relative shrink-0 w-full min-w-0 grid-cols-[repeat(3,minmax(250px,316px))]" data-name="Row 2">
-      <div className="flex flex-row items-center self-stretch min-w-0">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 items-stretch relative flex-1 min-h-0 w-full min-w-0" data-name="Row 2">
+      <div className="flex flex-row items-stretch self-stretch min-w-0 min-h-0 w-full">
         <Column />
       </div>
-      <div className="flex flex-row items-center self-stretch min-w-0">
+      <div className="flex flex-row items-stretch self-stretch min-w-0 min-h-0 w-full">
         <Column1 />
       </div>
-      <div className="flex flex-row items-center self-stretch min-w-0">
+      <div className="flex flex-row items-stretch self-stretch min-w-0 min-h-0 w-full md:col-span-2 lg:col-span-1">
         <Column2 />
       </div>
     </div>
@@ -171,7 +175,7 @@ function Row3() {
 
 function VisualGrid() {
   return (
-    <div className="content-stretch flex flex-col gap-[16px] items-start relative shrink-0 w-full" data-name="Visual Grid">
+    <div className="content-stretch flex flex-col gap-[16px] items-stretch relative shrink-0 w-full min-w-0" data-name="Visual Grid">
       <Row2 />
       <Row3 />
     </div>
@@ -1532,7 +1536,7 @@ function CountTitle9() {
 
 function Title9() {
   return (
-    <div className="content-stretch flex flex-[1_0_0] h-[72px] items-start min-h-px min-w-px relative" data-name="title">
+    <div className="content-stretch flex flex-[1_0_0] items-start min-h-0 min-w-0 relative shrink-0" data-name="title">
       <CountTitle9 />
     </div>
   );
@@ -1540,7 +1544,7 @@ function Title9() {
 
 function SectionHeadingFull9() {
   return (
-    <div className="content-start flex flex-col md:flex-row flex-wrap gap-[32px] items-start relative shrink-0 w-full min-w-0" data-name="Section Heading / Full">
+    <div className="content-start flex flex-col md:flex-row flex-wrap gap-6 items-start relative shrink-0 w-full min-w-0" data-name="Section Heading / Full">
       <Title9 />
       <p className="min-w-0 flex-1 font-['Inter:Regular',sans-serif] font-normal leading-[24px] min-h-px not-italic relative text-[#4e4f4e] text-[16px] whitespace-pre-wrap">Created with reuse in mind rather than customization, our components are organized to assist content designers. This structure helps users easily understand calls to action and how to interact with the pages.</p>
     </div>
@@ -1753,7 +1757,7 @@ function Title10() {
 
 function SectionHeadingFull10() {
   return (
-    <div className="content-start flex flex-col md:flex-row flex-wrap gap-[32px] items-start relative shrink-0 w-full min-w-0" data-name="Section Heading / Full">
+    <div className="content-start flex flex-col md:flex-row flex-wrap gap-6 items-start relative shrink-0 w-full min-w-0" data-name="Section Heading / Full">
       <Title10 />
       <p className="min-w-0 flex-1 font-['Inter:Regular',sans-serif] font-normal leading-[24px] min-h-px not-italic relative text-[#4e4f4e] text-[16px] whitespace-pre-wrap">We recognized that cards are essential, but there was a lack of consistent rules or patterns across various designs. We aimed to collaborate with the agency to clarify how cards should be used for the different paths a customer might take.</p>
     </div>
@@ -1839,7 +1843,7 @@ function HoverRevealCard({
   const [isFlipped, setIsFlipped] = useState(false);
   return (
     <div
-      className="flex min-h-[300px] min-w-[200px] flex-1 relative [perspective:1000px] self-stretch"
+      className="flex min-h-[400px] min-w-[200px] flex-1 basis-0 relative [perspective:1000px] self-stretch"
       data-name={dataName}
       onMouseEnter={() => setIsFlipped(true)}
       onMouseLeave={() => setIsFlipped(false)}
@@ -2179,8 +2183,8 @@ function Frame114() {
 
 function CardTypes() {
   return (
-    <div className="bg-[#f8f8f8] relative min-h-[400px] rounded-[8px] shrink-0 w-full" data-name="Card types 2">
-      <div className="flex min-h-[400px] w-full flex-row items-stretch">
+    <div className="bg-[#f8f8f8] relative min-h-[520px] rounded-[8px] shrink-0 w-full" data-name="Card types 2">
+      <div className="flex min-h-[480px] w-full flex-row items-stretch">
         <div className="flex min-h-0 min-w-0 flex-1 w-full flex-col items-stretch overflow-visible p-[32px]">
           <Frame114 />
         </div>
@@ -3517,7 +3521,7 @@ function Props2() {
 
 function DesignPanelProperties() {
   return (
-    <div className="absolute -left-10 top-0 bg-white content-stretch flex flex-col gap-[16px] items-start overflow-clip p-[24px] rounded-[8px] shadow-[0px_12px_10px_0px_rgba(0,0,0,0.1),0px_5px_10px_3px_rgba(0,0,0,0.15)] w-full max-w-[426px] z-[2]" data-name="Design Panel: Properties">
+    <div className="relative w-full max-w-[426px] bg-white content-stretch flex flex-col gap-[16px] items-start overflow-clip p-[24px] rounded-[8px] shadow-[0px_12px_10px_0px_rgba(0,0,0,0.1),0px_5px_10px_3px_rgba(0,0,0,0.15)] lg:absolute lg:-left-10 lg:top-0 z-[2]" data-name="Design Panel: Properties">
       <NameDescription />
       <Props2 />
     </div>
@@ -3871,7 +3875,7 @@ function Props1() {
 
 function ComponentProps() {
   return (
-    <div className="flex flex-1 min-w-0 w-full gap-0 items-stretch lg:flex-row lg:items-start relative" data-name="Component props">
+    <div className="flex flex-1 min-w-0 w-full flex-col gap-6 items-stretch lg:flex-row lg:gap-0 lg:items-start relative" data-name="Component props">
       <Props />
       <Props1 />
     </div>
@@ -3917,7 +3921,7 @@ function CountTitle14() {
 
 function Title14() {
   return (
-    <div className="content-stretch flex flex-[1_0_0] h-[72px] items-start min-h-px min-w-px relative" data-name="title">
+    <div className="content-stretch flex flex-[1_0_0] items-start min-h-0 min-w-0 relative shrink-0" data-name="title">
       <CountTitle14 />
     </div>
   );
@@ -3925,7 +3929,7 @@ function Title14() {
 
 function SectionHeadingFull14() {
   return (
-    <div className="content-start flex flex-col md:flex-row flex-wrap gap-[32px] items-start relative shrink-0 w-full min-w-0" data-name="Section Heading / Full">
+    <div className="content-start flex flex-col md:flex-row flex-wrap gap-6 items-start relative shrink-0 w-full min-w-0" data-name="Section Heading / Full">
       <Title14 />
       <p className="min-w-0 md:min-w-[200px] flex-1 font-['Inter:Regular',sans-serif] font-normal leading-[24px] min-h-px not-italic relative text-[#4e4f4e] text-[16px] line-clamp-2 overflow-hidden">Rather than designing pages individually, I defined a flexible information architecture that supported multiple content types and use cases. This abstraction allowed the system to scale without redesigning layouts for each new scenario.</p>
     </div>
@@ -5234,25 +5238,25 @@ function DesignCallout({
   );
 }
 
-/* Callout 1 — The Main Story (top of wireframe, subnav area) */
+/* Callout 1 — Clear Sub-navigation (top of wireframe, subnav area) */
 function Callout() {
   return (
     <div className="absolute left-[360px] top-[425px] z-10" data-name="Callout 1">
       <DesignCallout
-        title="The Main Story"
-        text="There's lots of room to build the story you want to tell by combining current and new components. "
+        title="Clear Sub-navigation"
+        text="It's possible that a story will take more than one page. The subnav is meant to be placed beneath the hero and to stay on scroll. Not as an anchor link, but as a link to a different page."
         data-name="Callout 1"
       />
     </div>
   );
 }
 
-/* Callout 2 — Main story (Reserve Your Spot section, button area) */
+/* Callout 2 — Primary CTA (Reserve Your Spot section, button area) */
 function Callout1() {
   return (
     <div className="absolute left-[390px] top-[815px] z-10" data-name="Callout 2">
       <DesignCallout
-        title="Main story"
+        title="Primary CTA"
         text="When these tales contain an action that you want users to do, make it easy for them to identify and understand the action."
         data-name="Callout 2"
       />
@@ -7878,7 +7882,7 @@ function Component2Colums() {
 
 function Frame52Content() {
   return (
-    <div className="content-stretch flex flex-1 flex-col gap-12 md:gap-16 lg:gap-[80px] items-center min-h-px w-full max-w-full min-w-0 relative">
+    <div className="content-stretch flex flex-1 flex-col gap-12 md:gap-16 lg:gap-[80px] items-stretch min-h-px w-full max-w-full min-w-0 relative">
       <VisualGrid />
       <Section />
       <SectionCards />
@@ -7895,8 +7899,8 @@ function Frame52Content() {
 function Frame88() {
   return (
     <div className="relative shrink-0 w-full overflow-x-hidden">
-      <div className="flex flex-row items-center justify-center w-full">
-        <div className="content-stretch flex items-center justify-center w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-12 lg:px-[68px] relative">
+      <div className="flex flex-row items-stretch justify-center w-full">
+        <div className="content-stretch flex flex-col items-stretch w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-12 lg:px-[68px] relative">
           <Frame52Content />
         </div>
       </div>

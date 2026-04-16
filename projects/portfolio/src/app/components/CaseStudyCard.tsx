@@ -20,6 +20,7 @@ export interface CaseStudyCardProps {
 export function CaseStudyCard({ caseStudy }: CaseStudyCardProps) {
   const title = caseStudy.cardTitle ?? caseStudy.title;
   const description = caseStudy.cardDescription ?? caseStudy.shortDescription;
+  const isClickable = caseStudy.isPublished !== false;
 
   const heroContent =
     caseStudy.heroType === "component" && caseStudy.HeroComponent ? (
@@ -32,12 +33,17 @@ export function CaseStudyCard({ caseStudy }: CaseStudyCardProps) {
       />
     );
 
-  return (
-    <Link to={caseStudy.path} className="block">
-      <div className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300">
+  const card = (
+    <div
+      className={`bg-white rounded-3xl overflow-hidden shadow-lg transition-shadow duration-300 ${
+        isClickable ? "hover:shadow-2xl" : "opacity-90"
+      }`}
+    >
         <div className="relative aspect-[16/9] group">
           <div className="w-full h-full">{heroContent}</div>
-          <div className="absolute inset-0 bg-green-500 opacity-0 group-hover:opacity-40 transition-opacity duration-300" />
+          {isClickable && (
+            <div className="absolute inset-0 bg-green-500 opacity-0 group-hover:opacity-40 transition-opacity duration-300" />
+          )}
         </div>
         <div className="bg-[rgb(241,241,241)] p-8 w-full h-full flex flex-col justify-between">
           <p className="text-xs uppercase tracking-wider mb-2 text-gray-600">
@@ -61,6 +67,15 @@ export function CaseStudyCard({ caseStudy }: CaseStudyCardProps) {
           </div>
         </div>
       </div>
+  );
+
+  if (!isClickable) {
+    return <div className="block cursor-default">{card}</div>;
+  }
+
+  return (
+    <Link to={caseStudy.path} className="block">
+      {card}
     </Link>
   );
 }

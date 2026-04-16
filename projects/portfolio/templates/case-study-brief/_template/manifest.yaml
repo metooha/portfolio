@@ -1,0 +1,58 @@
+# Case study brief manifest — maps to CaseStudyConfig in src/data/case-studies-config.ts
+# Replace __PLACEHOLDERS__ or run: npm run new-case-study-brief <slug> [id]
+
+routing: special
+# special = single embedded component + branch in case-study-page.tsx (like id "1" + WmDesignSystem2026)
+# generic = CaseStudyTemplatePage + ContentComponent only (no extra route branch)
+
+slug: __BRIEF_SLUG__
+componentName: __COMPONENT_NAME__
+
+caseStudy:
+  id: "__CASE_STUDY_ID__"
+  path: "/case-study/__CASE_STUDY_ID__"
+  title: "__CASE_STUDY_TITLE__"
+  cardTitle: "__CASE_STUDY_CARD_TITLE__"
+  shortDescription: ""
+  cardDescription: ""
+  fullDescription: ""
+  navAccentColor: "#207442"
+  tags: []
+  heroType: image # image | component
+  # Relative to this brief pack (implementation copies into src/assets and switches to figma:asset or @/assets imports)
+  heroAsset: assets/hero.png
+  thumbnailAsset: assets/thumbnail.png
+  overviewClient: ""
+  overviewCategory: ""
+
+metaItems:
+  - label: Role
+    value: ""
+  - label: Team
+    value: ""
+  - label: Scope
+    value: ""
+  - label: Focus
+    value: ""
+
+navSections:
+  - label: Overview
+    href: "#overview"
+  - label: Problem Space
+    href: "#problem-space"
+  - label: Our Goals
+    href: "#our-goals"
+  - label: Approach
+    href: "#approach"
+  - label: System Audit
+    href: "#system-audit"
+  - label: Information Architecture
+    href: "#information-architecture"
+  - label: Compromises
+    href: "#compromises"
+
+# Optional: stable IDs for images referenced as ![alt](asset:asset-id) in content/*.md
+assets:
+  - id: example-diagram
+    file: assets/sections/overview--diagram--01.png
+    alt: ""

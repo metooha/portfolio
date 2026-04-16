@@ -1,8 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams, Navigate } from "react-router-dom";
 import { CaseStudyTemplate } from "@/app/components/CaseStudyTemplate";
-import { getCaseStudyById, getAdjacentCaseStudies } from "@/data/case-studies-config";
+import { getCaseStudyById, getAdjacentCaseStudies, isCaseStudyPublished } from "@/data/case-studies-config";
 import WmDesignSystem2026 from "@/imports/WmDesignSystem2026";
+
+/** Scroll to top when navigating to a case study (so user lands at top of page). */
+function useScrollToTopOnCaseStudy() {
+  const { id } = useParams<{ id: string }>();
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "instant" });
+  }, [id]);
+}
 
 function CaseStudyTemplatePage({ caseStudy }: { caseStudy: NonNullable<ReturnType<typeof getCaseStudyById>> }) {
   const { prev, next } = getAdjacentCaseStudies(caseStudy.id);
@@ -58,7 +66,13 @@ function CaseStudyTemplatePage({ caseStudy }: { caseStudy: NonNullable<ReturnTyp
 export function CaseStudyPage() {
   const { id } = useParams<{ id: string }>();
 
+  useScrollToTopOnCaseStudy();
+
   if (!id) {
+    return <Navigate to="/" replace />;
+  }
+
+  if (!isCaseStudyPublished(id)) {
     return <Navigate to="/" replace />;
   }
 

@@ -15,6 +15,8 @@ export interface CaseStudyConfig {
   id: string;
   path: string;
   title: string;
+  /** Hide detail route while content is still in progress */
+  isPublished?: boolean;
   /** For home card & prev/next */
   shortDescription: string;
   /** For overview section */
@@ -42,6 +44,7 @@ const CASE_STUDIES: CaseStudyConfig[] = [
     id: "1",
     path: "/case-study/1",
     title: "Designing a scalable system for a digital rebrand",
+    isPublished: true,
     cardTitle: "WM.com Rebrand: Re-branding WM.com",
     shortDescription:
       "Designing a scalable system for a digital rebrand. In 2021, Waste Management launched a company-wide rebrand alongside a broader digital transformation.",
@@ -77,6 +80,7 @@ const CASE_STUDIES: CaseStudyConfig[] = [
     id: "2",
     path: "/case-study/2",
     title: "Hover - Digital Assistant Design System",
+    isPublished: false,
     shortDescription:
       "Hover is a digital assistant web app concept for teachers in which they can find resources and assignments to share with students.",
     cardDescription:
@@ -105,6 +109,7 @@ const CASE_STUDIES: CaseStudyConfig[] = [
     id: "3",
     path: "/case-study/3",
     title: "Xense Biotech",
+    isPublished: false,
     shortDescription:
       "Xense Biotech is a leading company in the medical imaging industry, specializing in advanced x-ray technology. Their flagship product, uTomoTM, is a groundbreaking image acquisition and reconstruction system.",
     cardDescription:
@@ -134,6 +139,7 @@ const CASE_STUDIES: CaseStudyConfig[] = [
     id: "4",
     path: "/case-study/4",
     title: "Academy Sports + Outdoors Branding",
+    isPublished: false,
     shortDescription:
       "Direct Mail catalogs are delivered every quarter at Academy Sports + Outdoors. The main categories are for sports such as golf, baseball/softball, football, athletics, fishing, and hunting.",
     cardDescription:
@@ -169,10 +175,11 @@ export function getAdjacentCaseStudies(id: string): {
   prev?: ProjectLink;
   next?: ProjectLink;
 } {
-  const index = CASE_STUDIES.findIndex((cs) => cs.id === id);
+  const published = CASE_STUDIES.filter((cs) => cs.isPublished !== false);
+  const index = published.findIndex((cs) => cs.id === id);
   if (index === -1) return {};
-  const prev = CASE_STUDIES[index === 0 ? CASE_STUDIES.length - 1 : index - 1];
-  const next = CASE_STUDIES[index === CASE_STUDIES.length - 1 ? 0 : index + 1];
+  const prev = published[index === 0 ? published.length - 1 : index - 1];
+  const next = published[index === published.length - 1 ? 0 : index + 1];
   return {
     prev: configToProjectLink(prev),
     next: configToProjectLink(next),
@@ -206,4 +213,8 @@ function configToProjectLink(config: CaseStudyConfig): ProjectLink {
 
 export function getFeaturedCaseStudies(): CaseStudyConfig[] {
   return CASE_STUDIES;
+}
+
+export function isCaseStudyPublished(id: string): boolean {
+  return getCaseStudyById(id)?.isPublished !== false;
 }
