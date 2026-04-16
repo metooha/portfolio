@@ -3931,7 +3931,7 @@ function SectionHeadingFull14() {
   return (
     <div className="content-start flex flex-col md:flex-row flex-wrap gap-6 items-start relative shrink-0 w-full min-w-0" data-name="Section Heading / Full">
       <Title14 />
-      <p className="min-w-0 md:min-w-[200px] flex-1 font-['Inter:Regular',sans-serif] font-normal leading-[24px] min-h-px not-italic relative text-[#4e4f4e] text-[16px] line-clamp-2 overflow-hidden">Rather than designing pages individually, I defined a flexible information architecture that supported multiple content types and use cases. This abstraction allowed the system to scale without redesigning layouts for each new scenario.</p>
+      <p className="min-w-0 md:min-w-[200px] flex-1 font-['Inter:Regular',sans-serif] font-normal leading-[24px] min-h-px not-italic relative text-[#4e4f4e] text-[16px]">Rather than designing pages individually, I defined a flexible information architecture that supported multiple content types and use cases. This abstraction allowed the system to scale without redesigning layouts for each new scenario.</p>
     </div>
   );
 }
@@ -4111,7 +4111,7 @@ function SectionHeadingFull15() {
   return (
     <div className="content-start flex flex-col md:flex-row flex-wrap gap-[32px] items-start relative shrink-0 w-full min-w-0" data-name="Section Heading / Full">
       <Title15 />
-      <p className="min-w-0 md:min-w-[200px] flex-1 font-['Inter:Regular',sans-serif] font-normal leading-[24px] min-h-px not-italic relative text-[#4e4f4e] text-[16px] line-clamp-2 overflow-hidden">{`We kick off our rebranding journey by analyzing our page templates' hierarchy to create a strategic site map that identifies key areas for impactful branded pages and outlines the necessary components to improve each template.`}</p>
+      <p className="min-w-0 md:min-w-[200px] flex-1 font-['Inter:Regular',sans-serif] font-normal leading-[24px] min-h-px not-italic relative text-[#4e4f4e] text-[16px]">{`We kick off our rebranding journey by analyzing our page templates' hierarchy to create a strategic site map that identifies key areas for impactful branded pages and outlines the necessary components to improve each template.`}</p>
     </div>
   );
 }
