@@ -52,6 +52,9 @@ export function Header() {
           <Link to="/contact" className="text-sm hover:underline">
             Contact
           </Link>
+          <Link to="/theme-editor" className="text-sm hover:underline">
+            Theme Editor
+          </Link>
         </nav>
 
         {/* Mobile Menu Button */}
@@ -95,6 +98,13 @@ export function Header() {
               onClick={() => setIsMenuOpen(false)}
             >
               Contact
+            </Link>
+            <Link
+              to="/theme-editor"
+              className="text-sm hover:underline py-2"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Theme Editor
             </Link>
           </div>
         </nav>

@@ -3,6 +3,8 @@ import { useParams, Navigate } from "react-router-dom";
 import { CaseStudyTemplate } from "@/app/components/CaseStudyTemplate";
 import { getCaseStudyById, getAdjacentCaseStudies, isCaseStudyPublished } from "@/data/case-studies-config";
 import WmDesignSystem2026 from "@/imports/WmDesignSystem2026";
+import EverydaySansCaseStudy from "@/imports/EverydaySansCaseStudy";
+import AirtableCaseStudy from "@/imports/AirtableCaseStudy";
 
 /** Scroll to top when navigating to a case study (so user lands at top of page). */
 function useScrollToTopOnCaseStudy() {
@@ -72,12 +74,20 @@ export function CaseStudyPage() {
     return <Navigate to="/" replace />;
   }
 
-  if (!isCaseStudyPublished(id)) {
-    return <Navigate to="/" replace />;
-  }
-
   if (id === "1") {
     return <WmDesignSystem2026 />;
+  }
+
+  if (id === "5") {
+    return <EverydaySansCaseStudy />;
+  }
+
+  if (id === "6") {
+    return <AirtableCaseStudy />;
+  }
+
+  if (!isCaseStudyPublished(id)) {
+    return <Navigate to="/" replace />;
   }
 
   const caseStudy = getCaseStudyById(id);

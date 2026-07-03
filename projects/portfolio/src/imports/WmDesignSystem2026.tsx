@@ -7920,25 +7920,31 @@ export default function WmDesignSystem() {
   const { prev: prevProject, next: nextProject } = getAdjacentCaseStudies("1");
 
   return (
-    <CaseStudyTemplate
-      hero={<Heading />}
-      overviewLogo={<WmOverviewLogo />}
-      overviewClient="Waste Management"
-      overviewCategory="Design Systems, Branding"
-      overviewTitle="Designing a scalable system for a digital rebrand"
-      overviewDescription="In 2021, Waste Management launched a company-wide rebrand alongside a broader digital transformation focused on improving customer self-service. I worked with the branding agency and led the systems work behind the rebrand, treating it as an opportunity to establish shared UX infrastructure rather than redesign individual pages."
-      metaItems={[
-        { label: "Role", value: "Principal Product Designer" },
-        { label: "Team", value: "Partnered with product, engineering, and brand leadership" },
-        { label: "Scope", value: "Company-wide rebrand across web platforms" },
-        { label: "Focus", value: "Platform UX patterns, information architecture, and shared systems" },
-      ]}
-      navSections={WM_NAV_SECTIONS}
-      navAccentColor="#207442"
-      prevProject={prevProject}
-      nextProject={nextProject}
-    >
-      <Frame88 />
-    </CaseStudyTemplate>
+    // Scope the Living Design "WM" theme to this case study. `display:
+    // contents` carries the data-ld-theme attribute (so --ld-* tokens resolve
+    // to the WM greens for any Living Design components rendered inside) without
+    // adding a layout box, keeping the existing Figma layout untouched.
+    <div data-ld-theme="WM" style={{ display: "contents" }}>
+      <CaseStudyTemplate
+        hero={<Heading />}
+        overviewLogo={<WmOverviewLogo />}
+        overviewClient="Waste Management"
+        overviewCategory="Design Systems, Branding"
+        overviewTitle="Designing a scalable system for a digital rebrand"
+        overviewDescription="In 2021, Waste Management launched a company-wide rebrand alongside a broader digital transformation focused on improving customer self-service. I worked with the branding agency and led the systems work behind the rebrand, treating it as an opportunity to establish shared UX infrastructure rather than redesign individual pages."
+        metaItems={[
+          { label: "Role", value: "Principal Product Designer" },
+          { label: "Team", value: "Partnered with product, engineering, and brand leadership" },
+          { label: "Scope", value: "Company-wide rebrand across web platforms" },
+          { label: "Focus", value: "Platform UX patterns, information architecture, and shared systems" },
+        ]}
+        navSections={WM_NAV_SECTIONS}
+        navAccentColor="#207442"
+        prevProject={prevProject}
+        nextProject={nextProject}
+      >
+        <Frame88 />
+      </CaseStudyTemplate>
+    </div>
   );
 }

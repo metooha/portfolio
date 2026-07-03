@@ -1,0 +1,189 @@
+/* LD Portable – Attachment Tile */
+
+/* ── Base ────────────────────────────────────────────────────────────────
+   A removable attachment chip. White fill with a 1px border that thickens to
+   2px on hover/focus/pressed; the fill tints on those states. The `.hover`,
+   `.focused`, and `.pressed` helper classes mirror the pseudo-classes so all
+   states can be demonstrated statically. */
+.ld-attachmenttile-tile {
+  align-items: center;
+  background: var(--ld-semantic-color-fill, #ffffff);
+  border-style: solid;
+  /* Border stays a constant 1px so the box never changes size; the thicker
+     2px hover/focus/pressed edge is faked with a 1px inset box-shadow so it
+     paints inside the box without shifting layout. */
+  border-width: var(--ld-semantic-scale-borderwidth-interactive, 0.0625rem);
+  border-color: var(--ld-semantic-color-border, #2e2f32);
+  border-radius: var(--ld-semantic-border-radius-large, 0.5rem);
+  box-sizing: border-box;
+  color: var(--ld-semantic-color-text, #2e2f32);
+  display: inline-flex;
+  font-family: inherit;
+  /* No flex gap: inter-element spacing is set with margins so the collapsed
+     close button leaves no trailing space and the tile hugs its content. */
+  transition: background 0.1s cubic-bezier(0.77, 0, 0.175, 1),
+              border-color 0.1s cubic-bezier(0.77, 0, 0.175, 1),
+              box-shadow 0.1s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.ld-attachmenttile-tile:hover,
+.ld-attachmenttile-tile.hover {
+  background: var(--ld-semantic-color-fill-hovered, #f1f1f2);
+  box-shadow: inset 0 0 0 0.0625rem var(--ld-semantic-color-border, #2e2f32);
+}
+.ld-attachmenttile-tile:focus-within,
+.ld-attachmenttile-tile.focused {
+  background: var(--ld-semantic-color-fill-focused, #f1f1f2);
+  box-shadow: inset 0 0 0 0.0625rem var(--ld-semantic-color-border, #2e2f32);
+}
+.ld-attachmenttile-tile:active,
+.ld-attachmenttile-tile.pressed {
+  background: var(--ld-semantic-color-fill-pressed, #e3e4e5);
+  box-shadow: inset 0 0 0 0.0625rem var(--ld-semantic-color-border, #2e2f32);
+}
+
+/* ── Disabled ──────────────────────────────────────────────────────────── */
+.ld-attachmenttile-disabled,
+.ld-attachmenttile-disabled:hover,
+.ld-attachmenttile-disabled.hover,
+.ld-attachmenttile-disabled:focus-within,
+.ld-attachmenttile-disabled:active {
+  background: var(--ld-semantic-color-fill-disabled, #ffffff);
+  border-color: var(--ld-semantic-color-border-disabled, #babbbe);
+  box-shadow: none;
+  color: var(--ld-semantic-color-text-disabled, #babbbe);
+}
+.ld-attachmenttile-disabled .ld-attachmenttile-leading,
+.ld-attachmenttile-disabled .ld-attachmenttile-imageSlot {
+  opacity: 0.5;
+}
+
+/* ── Icon variant — ≈176×64 ──────────────────────────────────────────────── */
+.ld-attachmenttile-icon {
+  min-height: 4rem; /* 64px */
+  padding: var(--ld-primitive-scale-space-100, 0.5rem);
+}
+
+.ld-attachmenttile-leading {
+  align-items: center;
+  display: inline-flex;
+  flex-shrink: 0;
+  line-height: 1;
+  /* Gap between the leading pictogram and the title/description. */
+  margin-inline-end: var(--ld-primitive-scale-space-100, 0.5rem);
+}
+
+.ld-attachmenttile-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ld-primitive-scale-space-25, 0.125rem);
+  min-width: 0;
+  /* Sit beside the leading pictogram; absorb the remaining width. */
+  flex: 1 1 auto;
+}
+.ld-attachmenttile-title {
+  font-size: var(--ld-semantic-font-body-small-size, 0.875rem);
+  font-weight: var(--ld-semantic-font-body-small-weight-alt, 700);
+  line-height: var(--ld-semantic-font-body-small-line-height, 1.25rem);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.ld-attachmenttile-description {
+  color: var(--ld-semantic-color-text-subtle, #74767c);
+  font-size: var(--ld-semantic-font-caption-size, 0.75rem);
+  font-weight: var(--ld-semantic-font-caption-weight-default, 400);
+  line-height: var(--ld-semantic-font-caption-line-height, 1rem);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+/* The disabled text color cascades to the title/description from the tile. */
+.ld-attachmenttile-disabled .ld-attachmenttile-description {
+  color: inherit;
+}
+
+/* ── Image variant — ≈88×56 ──────────────────────────────────────────────── */
+.ld-attachmenttile-image {
+  min-height: 3.5rem; /* 56px */
+  padding: var(--ld-primitive-scale-space-100, 0.5rem);
+}
+.ld-attachmenttile-imageSlot {
+  align-items: center;
+  border-radius: var(--ld-semantic-border-radius-medium, 0.25rem);
+  display: inline-flex;
+  flex-shrink: 0;
+  height: 2.5rem; /* 40px */
+  justify-content: center;
+  overflow: hidden;
+  width: 2.5rem; /* 40px */
+}
+.ld-attachmenttile-imageSlot > img,
+.ld-attachmenttile-imageSlot > * {
+  display: block;
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+/* ── Close (remove) button ─────────────────────────────────────────────────
+   Transparent ghost button with a subtle fill on hover/press. Collapsed to
+   zero width by default so the tile hugs its content; on hover (or when the
+   tile gains keyboard focus) it expands, growing the tile to reveal it. */
+.ld-attachmenttile-close {
+  align-items: center;
+  background: var(--ld-semantic-color-action-fill-transparent, transparent);
+  border: 0;
+  border-radius: var(--ld-semantic-border-radius-round, 62.5rem);
+  color: inherit;
+  cursor: pointer;
+  display: inline-flex;
+  flex-shrink: 0;
+  font: inherit;
+  justify-content: center;
+  /* Collapsed: no width, no padding/margin, clipped icon. */
+  margin-inline-start: 0;
+  max-width: 0;
+  opacity: 0;
+  overflow: hidden;
+  padding: 0;
+  pointer-events: none;
+  transition: max-width 0.15s ease, padding 0.15s ease, margin 0.15s ease,
+              opacity 0.15s ease, background-color 0.15s ease;
+}
+.ld-attachmenttile-tile:hover .ld-attachmenttile-close,
+.ld-attachmenttile-tile:focus-within .ld-attachmenttile-close {
+  margin-inline-start: var(--ld-primitive-scale-space-50, 0.25rem);
+  max-width: 2rem;
+  opacity: 1;
+  padding: var(--ld-primitive-scale-space-50, 0.25rem);
+  pointer-events: auto;
+}
+/* Disabled tiles can't be removed, so the close button never expands. */
+.ld-attachmenttile-disabled:hover .ld-attachmenttile-close,
+.ld-attachmenttile-disabled:focus-within .ld-attachmenttile-close {
+  margin-inline-start: 0;
+  max-width: 0;
+  opacity: 0;
+  padding: 0;
+  pointer-events: none;
+}
+.ld-attachmenttile-close:hover {
+  background: var(--ld-semantic-color-action-fill-transparent-hovered, rgba(0, 0, 0, 0.1));
+}
+.ld-attachmenttile-close:active {
+  background: var(--ld-semantic-color-action-fill-transparent-pressed, rgba(0, 0, 0, 0.2));
+}
+.ld-attachmenttile-close:focus-visible {
+  outline: 0.125rem solid var(--ld-semantic-color-border-activated, #0053e2);
+  outline-offset: 0.0625rem;
+}
+.ld-attachmenttile-close:disabled {
+  background: transparent;
+  color: var(--ld-semantic-color-text-disabled, #babbbe);
+  cursor: not-allowed;
+}
+.ld-attachmenttile-closeIcon {
+  display: block;
+  line-height: 1;
+}

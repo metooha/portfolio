@@ -1,0 +1,16 @@
+# CODEOWNERS for ld-kit
+# Docs: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-security/customizing-your-repository/about-code-owners
+#
+# Order matters: the LAST matching pattern takes precedence.
+
+# Default owner for the entire repository
+*                   @Design/ld-platform-team
+
+# Protected: only ld-platform-team can modify
+/src/context/       @Design/ld-platform-team
+/src/context/**     @Design/ld-platform-team
+
+# Release plumbing — gated by ld-platform-team (tier promotion authority)
+/.looper.yml             @Design/ld-platform-team
+/scripts/promote-tag.mjs @Design/ld-platform-team
+/PROMOTE.md              @Design/ld-platform-team

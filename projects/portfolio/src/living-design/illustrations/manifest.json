@@ -1,0 +1,69 @@
+{
+  "mono-small": {
+    "label": "Mono Small",
+    "count": 8,
+    "items": [
+      {
+        "name": "CheckoutCart",
+        "width": 72,
+        "height": 73
+      },
+      {
+        "name": "Coupons",
+        "width": 73,
+        "height": 72
+      },
+      {
+        "name": "Delivery",
+        "width": 72,
+        "height": 73
+      },
+      {
+        "name": "Pickup",
+        "width": 72,
+        "height": 73
+      },
+      {
+        "name": "Search",
+        "width": 72,
+        "height": 72
+      },
+      {
+        "name": "ShoppingList",
+        "width": 72,
+        "height": 72
+      },
+      {
+        "name": "Returns",
+        "width": 73,
+        "height": 73
+      },
+      {
+        "name": "Home",
+        "width": 72,
+        "height": 73
+      }
+    ]
+  },
+  "spot": {
+    "label": "Spot",
+    "count": 3,
+    "items": [
+      {
+        "name": "AssociateOnTheWay",
+        "width": 240,
+        "height": 250
+      },
+      {
+        "name": "Couldn'tFindWhat",
+        "width": 240,
+        "height": 250
+      },
+      {
+        "name": "NoInternetConnection",
+        "width": 240,
+        "height": 250
+      }
+    ]
+  }
+}

@@ -1,0 +1,86 @@
+/* ------------------------------------------------------------------
+ * ProcessingTrace — elevated card shell with a button-only header.
+ *
+ * Only .ld-processingtrace-header is the interactive element (button).
+ * The body region is plain markup so nested children can be interactive
+ * without competing with a parent button.
+ * ------------------------------------------------------------------ */
+
+.ld-processingtrace {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+  border-radius: 8px;
+  background: var(--ld-semantic-color-surface, #ffffff);
+  border: 1px solid transparent;
+  box-shadow:
+    0 1px 2px 1px rgba(0, 0, 0, 0.149),
+    0 -1px 2px 0 rgba(0, 0, 0, 0.102);
+  box-sizing: border-box;
+}
+
+/* Interactive header: stacked [Tag / Title] column + top-aligned chevron. */
+.ld-processingtrace-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  width: 100%;
+  margin: 0;
+  padding: 4px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  border-radius: 6px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.ld-processingtrace-header:hover {
+  background: var(--ld-semantic-color-surface-hovered, #f1f1f2);
+}
+
+.ld-processingtrace-header:active {
+  background: var(--ld-semantic-color-surface-pressed, #e3e4e5);
+}
+
+.ld-processingtrace-header:focus-visible {
+  outline: 2px solid var(--ld-semantic-color-border-activated, #0053e2);
+  outline-offset: 2px;
+}
+
+.ld-processingtrace-header-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  flex: 1;
+  min-width: 0;
+}
+
+.ld-processingtrace-header-title {
+  margin: 0;
+  min-width: 0;
+  word-break: break-word;
+}
+
+.ld-processingtrace-chevron {
+  flex: none;
+  margin-top: 2px;
+  transition: transform 0.18s ease-out;
+  color: var(--ld-semantic-color-text-subtlest, #74767c);
+}
+
+.ld-processingtrace--open .ld-processingtrace-chevron {
+  transform: rotate(90deg);
+}
+
+/* Non-interactive body — free for any nested interactive children. */
+.ld-processingtrace-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0 4px 4px;
+}

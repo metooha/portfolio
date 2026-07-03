@@ -1,0 +1,115 @@
+/* LD Portable – Tooltip */
+
+/* Wrapper — mirrors .ld-popover-popover layout */
+.ld-tooltip-wrapper {
+  display: inline-block;
+  position: relative;
+}
+
+/*
+  Tooltip panel — mirrors .ld-popover-popoverlayoutmanager-layoutManager.
+  Starts at top:0 left:0 of the wrapper; JS sets transform:translate3d(X,Y,0)
+  via getPositionStyle() using trigger/tooltip dimensions only, so scroll
+  never invalidates the position.
+*/
+.ld-tooltip-tooltip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: var(--ld-semantic-color-fill-inverse, #2e2f32);
+  border-radius: var(--ld-primitive-scale-borderradius-50, 0.25rem);
+  box-shadow: var(--ld-semantic-elevation-100, 0 0.0625rem 0.125rem 0.0625rem #00000026, 0 -0.0625rem 0.125rem 0 #0000001a);
+  color: var(--ld-semantic-color-text-inverse, #ffffff);
+  font-family: var(--ld-semantic-font-body-small-family, 'Everyday Sans UI', -apple-system, Roboto, sans-serif);
+  font-size: var(--ld-semantic-font-body-small-size, 0.875rem);
+  font-weight: var(--ld-semantic-font-body-small-weight-default, 400);
+  line-height: var(--ld-semantic-font-body-small-line-height, 1.25rem);
+  width: max-content;
+  max-width: 15rem;
+  padding: var(--ld-primitive-scale-space-150, 0.75rem);
+  pointer-events: none;
+  z-index: var(--ld-semantic-z-index-tooltip, 1070);
+  white-space: normal;
+  word-wrap: break-word;
+}
+
+/* Caret shared base */
+.ld-tooltip-tooltip::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  border: var(--ld-primitive-scale-space-100, 0.5rem) solid transparent;
+}
+
+/* Top variants — tooltip above trigger, caret at bottom pointing down */
+
+/* topLeft: nubbin inset 12px from right edge */
+.ld-tooltip-topLeft::after {
+  top: 100%;
+  margin-top: -1px;
+  right: 12px;
+  border-top-color: var(--ld-semantic-color-fill-inverse, #2e2f32);
+}
+
+/* topCenter: nubbin centered */
+.ld-tooltip-topCenter::after {
+  top: 100%;
+  margin-top: -1px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-top-color: var(--ld-semantic-color-fill-inverse, #2e2f32);
+}
+
+/* topRight: nubbin inset 12px from left edge */
+.ld-tooltip-topRight::after {
+  top: 100%;
+  margin-top: -1px;
+  left: 12px;
+  border-top-color: var(--ld-semantic-color-fill-inverse, #2e2f32);
+}
+
+/* Bottom variants — tooltip below trigger, caret at top pointing up */
+
+/* bottomLeft: nubbin inset 12px from right edge */
+.ld-tooltip-bottomLeft::after {
+  bottom: 100%;
+  margin-bottom: -1px;
+  right: 12px;
+  border-bottom-color: var(--ld-semantic-color-fill-inverse, #2e2f32);
+}
+
+/* bottomCenter: nubbin centered */
+.ld-tooltip-bottomCenter::after {
+  bottom: 100%;
+  margin-bottom: -1px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-bottom-color: var(--ld-semantic-color-fill-inverse, #2e2f32);
+}
+
+/* bottomRight: nubbin inset 12px from left edge */
+.ld-tooltip-bottomRight::after {
+  bottom: 100%;
+  margin-bottom: -1px;
+  left: 12px;
+  border-bottom-color: var(--ld-semantic-color-fill-inverse, #2e2f32);
+}
+
+/* Left — tooltip left of trigger, caret on right pointing right */
+.ld-tooltip-left::after {
+  left: 100%;
+  margin-left: -1px; /* 1px overlap prevents sub-pixel gap between body and nubbin */
+  top: 50%;
+  transform: translateY(-50%);
+  border-left-color: var(--ld-semantic-color-fill-inverse, #2e2f32);
+}
+
+/* Right — tooltip right of trigger, caret on left pointing left */
+.ld-tooltip-right::after {
+  right: 100%;
+  margin-right: -1px; /* 1px overlap prevents sub-pixel gap between body and nubbin */
+  top: 50%;
+  transform: translateY(-50%);
+  border-right-color: var(--ld-semantic-color-fill-inverse, #2e2f32);
+}

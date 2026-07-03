@@ -1,0 +1,95 @@
+/* LD Portable – Banner */
+/* Banner */
+.ld-banner-banner {
+  font-size: var(--ld-semantic-font-body-small-size, 0.875rem);
+  font-weight: var(--ld-semantic-font-body-small-weight-default, 400);
+  line-height: var(--ld-semantic-font-body-small-line-height, 1.25rem);
+  align-items: flex-start;
+  align-self: flex-start;
+  box-sizing: border-box;
+  display: flex;
+  width: 100%;
+}
+
+.ld-banner-contentContainer {
+  flex-grow: 1;
+  padding: 1rem 0 1rem 1rem;
+}
+
+.ld-banner-content {
+  margin: 0 auto;
+  max-width: 43.75rem;
+  text-align: center;
+}
+
+.ld-banner-error {
+  background: var(--ld-semantic-color-notice-fill-negative, #ea1100);
+  color: var(--ld-semantic-color-notice-text-on-fill-negative, #ffffff);
+}
+
+.ld-banner-info {
+  background: var(--ld-semantic-color-notice-fill-info, #0053e2);
+  color: var(--ld-semantic-color-notice-text-on-fill-info, #ffffff);
+}
+
+.ld-banner-success {
+  background: var(--ld-semantic-color-notice-fill-positive, #2a8703);
+  color: var(--ld-semantic-color-notice-text-on-fill-positive, #ffffff);
+}
+
+.ld-banner-warning {
+  background: var(--ld-semantic-color-notice-fill-warning, #ffc220);
+  color: var(--ld-semantic-color-notice-text-on-fill-warning, #2e2f32);
+}
+
+/* Small variant – rounded corners, compact layout, leading status icon */
+.ld-banner-small {
+  align-items: flex-start;
+  border-radius: var(--ld-semantic-border-radius-large, 0.5rem);
+  gap: var(--ld-semantic-spacing-100, 0.5rem);
+  padding: var(--ld-semantic-spacing-100, 0.5rem)
+    var(--ld-semantic-spacing-150, 0.75rem);
+  width: auto;
+}
+
+.ld-banner-leadingIcon {
+  align-items: center;
+  display: inline-flex;
+  flex-shrink: 0;
+  font-size: var(--ld-semantic-scale-icon-small, 1rem);
+  /* line-height: 1 collapses the glyph's line box to the icon size so it can
+     be centered; min-height matches the content line-height so a single line
+     centers while a wrapped message stays aligned to the first line. */
+  line-height: 1;
+  min-height: 1.25rem;
+}
+
+.ld-banner-small .ld-banner-contentContainer {
+  justify-content: flex-start;
+  padding: 0;
+}
+
+.ld-banner-small .ld-banner-content {
+  text-align: left;
+}
+
+/* BannerCloseButton — plain button with a 2.75rem (44px) min tap target
+   (WCAG 2.5.5). Interactive states come from the button itself. */
+.ld-banner-bannerclosebutton-close {
+  align-items: center;
+  background: transparent;
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+  display: flex;
+  flex-shrink: 0;
+  font: inherit;
+  justify-content: center;
+  min-height: 2.75rem;
+  min-width: 2.75rem;
+  padding: 1rem;
+}
+
+.ld-banner-bannerclosebutton-closeIcon {
+  display: block;
+}

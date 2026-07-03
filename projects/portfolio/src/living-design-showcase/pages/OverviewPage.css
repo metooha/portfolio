@@ -1,0 +1,36 @@
+/* Overview entry card — used for every Core/Extra/WCP/Pattern tile.
+   Tokens only; hover lift moved out of inline JS handlers to a CSS rule. */
+
+.ld-overview-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--ld-semantic-color-surface);
+  border-radius: 8px;
+  border: 1px solid var(--ld-semantic-color-separator);
+  text-decoration: none;
+  transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.ld-overview-card:hover,
+.ld-overview-card:focus-visible {
+  transform: translateY(-2px);
+  border-color: var(--ld-semantic-color-border);
+  box-shadow: 0 4px 12px var(--ld-semantic-color-shadow-action, rgba(0, 0, 0, 0.08));
+}
+
+.ld-overview-card:focus-visible {
+  outline: 2px solid var(--ld-semantic-color-action-focus-outline);
+  outline-offset: 2px;
+}
+
+.ld-overview-card-preview {
+  padding: 20px;
+  background: var(--ld-semantic-color-fill-subtle);
+  border-bottom: 1px solid var(--ld-semantic-color-separator);
+  pointer-events: none;
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+}

@@ -1,0 +1,43 @@
+/* Living Design Theme System – Entry Point */
+
+@import './base.css';
+@import './walmart.css';
+@import './sams-club.css';
+@import './walmart-b2b.css';
+@import './bodega.css';
+@import './cashi-mx.css';
+@import './data-ventures.css';
+@import './sparky.css';
+@import './walmart-legacy.css';
+@import './walmart-plus.css';
+@import './members-mark.css';
+
+/* A11y semantic alias — disabled text that passes WCAG AA (4.5:1 on white).
+   The default --ld-semantic-color-text-disabled (#babbbe) fails contrast.
+   Use this token wherever disabled labels, inputs, or controls need to be legible.
+   NOTE: This is hand-maintained in index.css (not generated from Airtable).
+   Regenerated theme files target the individual theme CSS files, not this entry
+   point — so this block is safe from being overwritten by the token pipeline. */
+:root {
+  --ld-a11y-color-text-disabled: var(--ld-primitive-color-gray-110, #686a70);
+}
+
+/* page-nav semantic aliases.
+   Theme sources define pageNav (camelCase) tokens while component styles use
+   page-nav (kebab-case). Keep the mapping centralized here as the primary
+   token layer instead of component-level fallbacks. */
+:root,
+[data-ld-theme] {
+  --ld-semantic-color-page-nav-fill: var(--ld-semantic-color-pageNav-fill, #ffffff);
+  --ld-semantic-color-page-nav-fill-hovered: var(--ld-semantic-color-pageNav-fill-hovered, #f0f5ff);
+  --ld-semantic-color-page-nav-fill-pressed: var(--ld-semantic-color-pageNav-fill-pressed, #e9f1fe);
+
+  --ld-semantic-color-page-nav-fill-activated: var(--ld-semantic-color-pageNav-fill-activated, #f0f5ff);
+  --ld-semantic-color-page-nav-fill-activated-hovered: var(--ld-semantic-color-pageNav-fill-activated-hovered, #e9f1fe);
+  --ld-semantic-color-page-nav-fill-activated-pressed: var(--ld-semantic-color-pageNav-fill-activated-pressed, #c9dcfd);
+
+  --ld-semantic-color-page-nav-indicator-activated: var(--ld-semantic-color-pageNav-indicator-activated, #0053e2);
+
+  --ld-semantic-color-page-nav-text-on-fill: var(--ld-semantic-color-pageNav-text-onFill, #2e2f32);
+  --ld-semantic-color-page-nav-text-on-fill-activated: var(--ld-semantic-color-pageNav-text-onFill-activated, #2e2f32);
+}

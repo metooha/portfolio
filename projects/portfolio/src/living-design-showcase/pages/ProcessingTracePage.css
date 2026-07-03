@@ -1,0 +1,63 @@
+/* ------------------------------------------------------------------
+ * ProcessingTracePage — demo grid utilities
+ * Page-level only. Component CSS lives in ProcessingTrace/.
+ * ------------------------------------------------------------------ */
+
+.ld-processingtracepage-three-up {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+@media (max-width: 900px) {
+  .ld-processingtracepage-three-up {
+    grid-template-columns: 1fr;
+  }
+}
+
+.ld-processingtracepage-sources-row {
+  align-items: center;
+  gap: 14px;
+  border-top: 0;
+  padding: 9px 0;
+}
+
+.ld-processingtracepage-sources-row + .ld-processingtracepage-sources-row {
+  border-top: 0;
+}
+
+.ld-processingtracepage-sources-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  color: var(--ld-semantic-color-text-default, #2e2f32);
+}
+
+.ld-processingtracepage-sources-content {
+  min-width: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.ld-processingtracepage-sources-label {
+  margin: 0;
+  color: var(--ld-semantic-color-text-default, #2e2f32);
+  flex: 1;
+  min-width: 0;
+}
+
+.ld-processingtracepage-sources-meta {
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+
+@media (max-width: 740px) {
+  .ld-processingtracepage-sources-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+}

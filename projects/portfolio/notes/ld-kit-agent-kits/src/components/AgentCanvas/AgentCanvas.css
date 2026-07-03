@@ -1,0 +1,138 @@
+/* LD Portable – Agent Canvas */
+
+/* A floating, rounded, elevated work surface: header / scrollable body /
+   optional footer, filling its container (so it can live inside a resizable
+   panel group). */
+.ld-agentcanvas {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  border-radius: var(--ld-primitive-scale-borderradius-200, 1rem);
+  border: 0.0625rem solid var(--ld-semantic-color-separator, #e3e4e5);
+  box-shadow: var(--ld-semantic-elevation-100);
+  background: var(--ld-semantic-color-surface, #ffffff);
+  overflow: hidden;
+}
+
+.ld-agentcanvas-header {
+  display: flex;
+  align-items: center;
+  gap: var(--ld-primitive-scale-space-100, 0.5rem);
+  padding: var(--ld-primitive-scale-space-150, 0.75rem) var(--ld-primitive-scale-space-200, 1rem);
+  border-bottom: 0.0625rem solid var(--ld-semantic-color-separator, #e3e4e5);
+  flex: 0 0 auto;
+}
+/* When the header is a drag handle, signal grab affordance. */
+.ld-agentcanvas-header--draggable {
+  cursor: grab;
+  user-select: none;
+}
+.ld-agentcanvas-header--draggable:active {
+  cursor: grabbing;
+}
+/* When the whole canvas is a drag handle — grab it anywhere to reorder. */
+.ld-agentcanvas--grabbable {
+  cursor: grab;
+}
+.ld-agentcanvas--grabbable:active {
+  cursor: grabbing;
+}
+/* The body stays a normal pointer so text/controls don't read as draggable. */
+.ld-agentcanvas--grabbable .ld-agentcanvas-body {
+  cursor: auto;
+}
+/* While being grabbed/adjusted, the canvas wears an animated magic-gradient
+   border (the same magic tokens as MagicBox) to signal it's being moved. */
+.ld-agentcanvas--dragging {
+  border-color: transparent;
+}
+.ld-agentcanvas--dragging::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 2px;
+  background: linear-gradient(
+    110deg,
+    var(--ld-semantic-color-border-magic-start, #0053e2),
+    var(--ld-semantic-color-border-magic-middle, #3d90ec),
+    var(--ld-semantic-color-border-magic-stop, #79cdf6),
+    var(--ld-semantic-color-border-magic-middle, #3d90ec),
+    var(--ld-semantic-color-border-magic-start, #0053e2)
+  );
+  background-size: 200% 100%;
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: ld-agentcanvas-magic 1.8s linear infinite;
+  pointer-events: none;
+  z-index: 4;
+}
+@keyframes ld-agentcanvas-magic {
+  to {
+    background-position: 200% 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ld-agentcanvas--dragging::after {
+    animation: none;
+  }
+}
+/* The active reference: the header's divider line picks up a subtle brand
+   accent (2px) tying the canvas back to the chat message it was opened from. */
+.ld-agentcanvas--linked .ld-agentcanvas-header {
+  border-bottom-width: 0.125rem;
+  border-bottom-color: var(--ld-semantic-color-border-brand, #0053e2);
+}
+
+.ld-agentcanvas-icon {
+  display: inline-flex;
+  flex: 0 0 auto;
+  color: var(--ld-semantic-color-text, #2e2f32);
+}
+
+.ld-agentcanvas-title {
+  margin: 0;
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ld-agentcanvas-headerActions {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ld-primitive-scale-space-50, 0.25rem);
+  flex: 0 0 auto;
+}
+
+.ld-agentcanvas-body {
+  flex: 1 1 auto;
+  min-height: 0;
+}
+.ld-agentcanvas-bodyInner {
+  display: grid;
+  gap: var(--ld-primitive-scale-space-200, 1rem);
+  padding: var(--ld-primitive-scale-space-200, 1rem);
+}
+
+.ld-agentcanvas-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--ld-primitive-scale-space-100, 0.5rem);
+  padding: var(--ld-primitive-scale-space-200, 1rem);
+  border-top: 0.0625rem solid var(--ld-semantic-color-separator, #e3e4e5);
+  flex: 0 0 auto;
+}
+
+/* The footer hosts an ActionGroup (a full-width <ul> by default). Let it
+   shrink-wrap so the footer's flex-end alignment keeps the actions on the
+   right, matching the original two-button layout. */
+.ld-agentcanvas-footer .ld-wcp-actiongroup-group {
+  width: auto;
+}

@@ -1,0 +1,50 @@
+routing: special
+slug: everyday-sans
+componentName: EverydaySansCaseStudy
+
+caseStudy:
+  id: "5"
+  path: "/case-study/5"
+  title: "Everyday Sans UI — Brand and performance, without compromise"
+  cardTitle: "Everyday Sans UI"
+  shortDescription: "How a variable font ended the trade-off between brand hierarchy and web performance at Walmart."
+  cardDescription: "Brand held back on font weights because each new file carried a performance cost. The variable font ended that compromise — permanently."
+  fullDescription: "Every new font weight came with a performance cost. So Brand held back. The result was visual hierarchy that never reached its potential, and a design system that had to make peace with compromise. The variable font ended that trade-off — permanently."
+  navAccentColor: "#0053e2"
+  tags: ["Typography", "Design System", "Performance", "Accessibility"]
+  heroType: image
+  heroAsset: assets/hero.png
+  thumbnailAsset: assets/thumbnail.png
+  overviewClient: "Walmart Commerce Platform"
+  overviewCategory: "Living Design, Typography"
+
+metaItems:
+  - label: Role
+    value: "Lead Designer, Living Design"
+  - label: Timeline
+    value: "Jun 2024 – Dec 2025"
+  - label: Scope
+    value: "Web, iOS, Android, Email"
+  - label: Focus
+    value: "Variable font adoption, design tokens, accessibility"
+
+navSections:
+  - label: Overview
+    href: "#overview"
+  - label: The compromise
+    href: "#tension"
+  - label: Weight scale
+    href: "#weight-scale"
+  - label: Before & after
+    href: "#before-after"
+  - label: The journey
+    href: "#journey"
+  - label: User testing
+    href: "#user-testing"
+  - label: What's next
+    href: "#whats-next"
+
+assets:
+  - id: font-audit-1
+    file: assets/font-audit-01.jpg
+    alt: "Font audit comparison"

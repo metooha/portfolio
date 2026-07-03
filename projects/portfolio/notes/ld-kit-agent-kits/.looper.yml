@@ -1,0 +1,436 @@
+# Looper pipeline for @walmart/ld-kit (Single-Branch LooperPro job)
+# DX job: f9c344ec-b919-4e8c-8c73-a4d758062792
+#
+# Single-Branch Looper invokes ONLY `flows.default`. The legacy `triggers:` /
+# `branches:` blocks and named flows (`pr`, `publish`) are not honored by the
+# Single-Branch dispatcher, so this file inlines PR-vs-main detection inside
+# `default` and dispatches accordingly.
+#
+# Behavior:
+#   PR push      → install + build-and-pack (no publish)
+#   main push    → install + build-and-pack + version + publish + push-back
+#
+# Secrets used (auto-injected by Looper, no manual provisioning):
+#   ${reposolnsUsername} / ${reposolnsPassword}  → Artifactory npm credentials
+#   ${GITHUB_ACCESS_TOKEN}                       → optional (Slack/GH release)
+#
+# See ./.looper/README.md for the pipeline contract, secret list, and rollback
+# procedure.
+
+docker:
+  - name: 'looper-agent'
+    image: 'docker.ci.artifacts.walmart.com/devtools-docker-prod-local/devtools/looper-agent-docker:ubuntu22'
+    # Without an explicit label, the scheduler tries arm64 agents first and
+    # those are reserved for label-matched jobs only — build sits in
+    # "Build Pickup" forever with "reserved for jobs with matching label
+    # expression". Pin to the generic x86_64 pool.
+    label: looperpro-prod-x86agent
+
+envs:
+  global:
+    variables:
+      # Pre-existing team channel reused until a dedicated #ld-kit-releases
+      # channel + bot service account are provisioned. Username intentionally
+      # unset — Looper posts as the default integration bot, which avoids the
+      # AD service-account hyphen-vs-underscore footgun (see DX onboarding
+      # gotcha: hyphenated SVC-* IDs are invalid AD users).
+      SLACK_CHANNEL: ld-kit-releases
+      # ALLOW_NPM_PUSH_TO_AF retired Mar-2025 (DX docs: Looper now defaults npm
+      # to Artifactory). Kept here as a compatibility hint; harmless if ignored.
+      ALLOW_NPM_PUSH_TO_AF: true
+      ALLOW_ARTIFACTORY_PUSH: true
+      # Loop-safety: commits authored by this identity are filtered out below.
+      RELEASE_BOT_NAME: 'Electrode Looper'
+      RELEASE_BOT_EMAIL: 'SVCelectrodeops@walmartlabs.com'
+
+tools:
+  nodejs: 22.11.0  # matches ld-kit/package.json:engines.node ">=22"
+
+# ---- Manual triggers (LooperPro UI sidebar) --------------------------------
+# Surface release-channel promotions as buttons under "Manual Trigger" in the
+# LooperPro UI (https://dx.walmart.com/nextgenci → this job). Each button
+# invokes a named flow below; the existing `default` flow (main-push publish)
+# is unaffected. Per LooperPro docs, adding any `- manual:` entry removes the
+# built-in "Build" button — we restore it explicitly with `- manual: Build`.
+#
+# Only members of the job's ACL group can click these buttons. ld-platform-team
+# additionally owns `.looper.yml` and `scripts/promote-tag.mjs` via CODEOWNERS,
+# so changes to the flows themselves require their review.
+triggers:
+  - manual: Build  # restores the default main-build button removed by the entries below
+
+  - manual:
+      name: Promote dev → next (stage)
+      call: promoteStage
+
+  - manual:
+      name: Promote next → latest (prod)
+      call: promoteProd
+
+  - manual:
+      name: Pin version to a tag (rollback / re-issue)
+      call: promotePin
+
+# Default values for the "Pin version to a tag" manual trigger. The LooperPro
+# UI prompts for overrides at click-time.
+configuration:
+  arguments:
+    pinVersion: ""             # required at click-time, e.g. "1.4.5"
+    pinTargetTag: "latest"     # one of: dev | next | latest
+
+flows:
+  # ---- pr flow: required by Looper engine even in Single-Branch ------------
+  # The Looper engine validates the presence of a `pr` flow at startup and
+  # fails with "Missing required flow definition: pr" otherwise. Single-Branch
+  # routes PR builds here; main pushes go through `default` below.
+  pr:
+    - dockguardAgent(looper-agent):
+        - shell: |
+            set -e
+            echo "Node version: $(node --version)"
+            echo "npm version:  $(npm --version)"
+            npm ci
+            # `prepack` (locked in PUBLISH_3) runs build:portable + build:cli
+            # automatically when `npm pack` is invoked.
+            npm pack --dry-run
+            echo "PR checks complete."
+
+  # ---- default flow: invoked on main pushes --------------------------------
+  # Includes a defensive PR-detection branch in case the engine routes a PR
+  # build here (env-var conventions vary across Looper versions).
+  default:
+    - dockguardAgent(looper-agent):
+        - shell: |
+            set -e
+            echo "Node version: $(node --version)"
+            echo "npm version:  $(npm --version)"
+
+            IS_PR="false"
+            if [ -n "${ghprbPullId:-}" ] || [ -n "${CHANGE_ID:-}" ] || [ -n "${PULL_REQUEST_ID:-}" ]; then
+              IS_PR="true"
+            fi
+
+            CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo "")
+            echo "IS_PR=${IS_PR}  CURRENT_BRANCH=${CURRENT_BRANCH}"
+
+            # ---- PR path: checks only --------------------------------------
+            if [ "${IS_PR}" = "true" ]; then
+              echo "PR build detected — running checks only (no publish)."
+              npm ci
+              # `prepack` (locked in PUBLISH_3) runs build:portable + build:cli
+              # automatically when `npm pack` is invoked.
+              npm pack --dry-run
+              echo "PR checks complete."
+              echo "===> ACTION: pr-checks-passed"
+              exit 0
+            fi
+
+            # ---- main path guard: only publish from main -------------------
+            # Single-Branch Looper may be triggered on non-main pushes if the
+            # job is reconfigured later; refuse to publish from anything but
+            # main as a defense-in-depth check.
+            if [ "${CURRENT_BRANCH}" != "main" ] && [ "${CURRENT_BRANCH}" != "HEAD" ]; then
+              echo "Not on main (branch=${CURRENT_BRANCH}) — running checks only."
+              npm ci
+              npm pack --dry-run
+              echo "===> ACTION: skipped-not-main"
+              exit 0
+            fi
+
+            # ---- Loop-safety guards ----------------------------------------
+            # Guard #1: bail out if the HEAD commit is itself a release-bot
+            # commit. (The legacy `branches.ignoreAuthors` filter is not
+            # honored by Single-Branch Looper, so this in-flow check is the
+            # sole loop-safety mechanism for author-based filtering.)
+            HEAD_AUTHOR_EMAIL=$(git log -1 --pretty=format:'%ae')
+            HEAD_MSG=$(git log -1 --pretty=format:'%B')
+            if [ "$HEAD_AUTHOR_EMAIL" = "${RELEASE_BOT_EMAIL}" ]; then
+              echo "HEAD commit authored by release bot — skipping publish to avoid loop."
+              echo "===> ACTION: skipped-release-bot-commit"
+              exit 0
+            fi
+            # Guard #2: [skip ci] / [looper skip] token in commit message.
+            if echo "$HEAD_MSG" | grep -qE '\[skip ci\]|\[looper skip\]'; then
+              echo "HEAD commit message contains [skip ci] — skipping publish to avoid loop."
+              echo "===> ACTION: skipped-skip-ci-token"
+              exit 0
+            fi
+
+            # ---- Inject Artifactory auth into .npmrc (BEFORE npm ci) -------
+            # Mirrors the proven pattern from genaica/wibey-agent-sdk
+            # (`@wibey/agent-sdk` → genaica-npm). One `_authToken` line +
+            # one scope line — no `_auth=base64`, no read/write split, no
+            # NPM_CONFIG_REGISTRY env var dance.
+            #
+            # Looper auto-injects NPM_CONFIG_REGISTRY pointing at the read
+            # aggregator (npme-npm) for `npm ci` transitive dep resolution
+            # (March 2025+). `publishConfig.registry` in package.json
+            # points at design-npm-prod-local and overrides for
+            # `npm publish` only.
+            #
+            # The `@walmart:registry=` line ensures @scope reads also hit
+            # the write endpoint (which Artifactory aggregates with
+            # public proxies), so transitive `@walmart/*` resolution works
+            # without a separate read URL.
+            #
+            # Written via `printf` (NOT a heredoc): a YAML `shell: |` block
+            # only strips the *minimum* common indentation, so any heredoc
+            # body indented deeper than `set -e` would emit space-prefixed
+            # lines. npm's ini parser silently rejects lines with leading
+            # whitespace.
+            REG_WRITE_URL="https://npm.ci.artifacts.walmart.com/artifactory/api/npm/design-npm-prod-local/"
+            REG_WRITE_HOST="${REG_WRITE_URL#https:}"
+            printf '%s\n%s\n' \
+              "${REG_WRITE_HOST}:_authToken=${reposolnsPassword}" \
+              "@walmart:registry=${REG_WRITE_URL}" \
+              > ./.npmrc
+            chmod 600 ./.npmrc
+
+            echo "--- npm registry routing ---"
+            echo "NPM_CONFIG_REGISTRY=${NPM_CONFIG_REGISTRY:-<not set>}"
+            echo "REG_WRITE_URL=${REG_WRITE_URL}"
+            echo "npm config get registry → $(npm config get registry)"
+            echo "npm config get @walmart:registry → $(npm config get @walmart:registry)"
+            echo "publishConfig.registry → $(node -p "require('./package.json').publishConfig.registry")"
+            echo "----------------------------"
+
+            # ---- Install deps (single npm ci for the whole flow) -----------
+            npm ci --no-audit --no-fund
+            # Sanity: prove the tarball will assemble cleanly before mutating
+            # package.json. If pack fails here, no version bump has happened
+            # yet and the next run is clean.
+            npm pack --dry-run
+
+            # ---- Configure git for the bot identity ------------------------
+            git config user.name  "${RELEASE_BOT_NAME}"
+            git config user.email "${RELEASE_BOT_EMAIL}"
+
+            # ---- changeset version -----------------------------------------
+            # Bumps package.json:version, prepends CHANGELOG.md, deletes
+            # consumed .changeset/*.md files. PUBLISH_4 locked
+            # config.json:commit=false so this does NOT auto-commit.
+            npx --no-install changeset version
+
+            # If no changeset was present, version() is a no-op. Detect via
+            # `git status --porcelain` and skip the publish step.
+            if [ -z "$(git status --porcelain)" ]; then
+              echo "No changeset present on this push — nothing to publish."
+              echo "===> ACTION: skipped-no-changeset"
+              exit 0
+            fi
+
+            NEW_VERSION=$(node -p "require('./package.json').version")
+            echo "Releasing @walmart/ld-kit@${NEW_VERSION}"
+
+            # ---- Explicit build + artifact assertion -----------------------
+            # `prepack` would also run these on `npm publish`, but duplicating
+            # them here makes the release pipeline robust against future
+            # `package.json:scripts.prepack` drift (rename, env-flag guard,
+            # move to prepublishOnly, etc.). The assertion below refuses to
+            # publish if the CLI bin or template payload is missing — Walmart
+            # Artifactory enforces immutable releases, so a broken tarball
+            # ships permanently.
+            npm run build:portable
+            npm run build:cli
+            test -f dist/cli.js -a -f living-design/src/App.tsx -a -d living-design/src/components \
+              || { echo "build artifacts missing (dist/cli.js or living-design template) — refusing to publish"; exit 1; }
+
+            # ---- Build GitHub Pages docs site ----------------------------------
+            # Keeps the docs/ output committed to main so GitHub Pages always
+            # reflects the latest release. Run after the artifact assertion so
+            # a broken CLI build still gates the pages build.
+            npm run build:pages
+
+            # ---- npm publish (BEFORE the commit-back to main) --------------
+            # Order matters: publish first, commit-back second. If publish
+            # fails (Artifactory 5xx, transient network), the version bump
+            # has NOT been pushed and the next release re-tries cleanly.
+            # The reverse order would leave package.json on main claiming a
+            # version that was never published — unrecoverable under
+            # Artifactory's immutability rules.
+            #
+            # Registry routing: `publishConfig.registry` in package.json
+            # points at design-npm-prod-local. With Looper's auto-injected
+            # NPM_CONFIG_REGISTRY pointing at npme-npm (read aggregator),
+            # the env var would normally trump publishConfig — but
+            # `npm publish` is the one command that honors publishConfig
+            # over env vars (npm-cli docs: "publishConfig overrides
+            # whatever registry you have set globally for publishing
+            # only"). Build #20's E400 was actually caused by us forcing
+            # NPM_CONFIG_REGISTRY=REG_READ_URL, NOT by Looper's default.
+            # Removing that override lets publishConfig route correctly.
+            #
+            # Tiered release channels (owned by ld-platform-team):
+            #   - CI publishes to the `dev` dist-tag on every main release.
+            #     Customers who `npm install @walmart/ld-kit` (no tag) hit
+            #     `latest` and are NOT affected by these dev releases.
+            #   - Promotion `dev → next` (stage) and `next → latest` (prod)
+            #     is a tag move performed manually by ld-platform-team via
+            #     `npm run promote:stage` / `npm run promote:prod`
+            #     (see scripts/promote-tag.mjs and PROMOTE.md).
+            #   - First-ever release: if no `latest` tag exists yet,
+            #     manually seed it with `npm run promote --version=<v> --to=latest --yes`
+            #     so customer `npm install` does not 404.
+            npx --no-install changeset publish --tag dev
+
+            # ---- Scrub credential file before commit-back ------------------
+            # The install step above overwrote ./.npmrc with base64-encoded
+            # Artifactory credentials. ./.npmrc is tracked (committed) but the
+            # commit-back below only stages an explicit allow-list (package.json
+            # CHANGELOG.md .changeset docs), so the credentialed copy can never
+            # be committed. Removing it here is defense in depth — it also keeps
+            # the credentialed file from lingering in the workspace after the run.
+            rm -f ./.npmrc
+
+            # ---- Mark publish completion (debug breadcrumb) ----------------
+            PUBLISHED_MARKER=/tmp/.ld-kit-published-version
+            echo "${NEW_VERSION}" > "${PUBLISHED_MARKER}"
+
+            # ---- Commit-back to main with [skip ci] (AFTER publish OK) -----
+            # Residual risk: publish succeeded but the push fails (non-fast-
+            # forward because main advanced during the run, branch protection,
+            # transient network). That state IS recoverable — a human can
+            # re-run the bump-and-push manually since the registry already
+            # has the package.
+            # We mitigate the most common failure (non-fast-forward) by
+            # rebasing onto the latest origin/main BEFORE pushing. If even
+            # that fails, we exit with a distinct code (42) so the catch-
+            # equivalent slack notification names the half-failed scenario.
+            git add package.json CHANGELOG.md .changeset docs
+            git commit -m "chore(release): @walmart/ld-kit@${NEW_VERSION} [skip ci]"
+
+            if ! git fetch origin main; then
+              echo "Failed to fetch origin/main — cannot safely push. Marking for manual reconciliation."
+              exit 42
+            fi
+            if ! git rebase origin/main; then
+              git rebase --abort 2>/dev/null || true
+              echo "Rebase onto origin/main failed — manual reconciliation required."
+              exit 42
+            fi
+            if ! git push origin HEAD:main; then
+              echo "git push origin HEAD:main failed after successful publish — manual reconciliation required."
+              echo "===> ACTION: published-${NEW_VERSION}-but-push-back-failed"
+              exit 42
+            fi
+            echo "===> ACTION: published-${NEW_VERSION}"
+    # ---- Slack notification on flow completion -----------------------------
+    # The trailing slack call fires after ANY exit-0 path inside the shell
+    # (publish, no-changeset skip, PR checks, [skip ci] skip, release-bot
+    # skip), and Looper Single-Branch can't interpolate runtime env vars into
+    # YAML-level call args. So the message intentionally points humans at the
+    # build log instead of claiming a specific outcome — grep the log for
+    # `===> ACTION:` to see which path ran. Single-Branch Looper does not
+    # support try/catch around dockguardAgent blocks the way Multibranch does,
+    # so the failure-path slack is emitted via a separate top-level error
+    # handler (see `onFailure` below if your Looper version supports it;
+    # otherwise rely on Looper's built-in build-failure notification
+    # configured in the DX job settings).
+    - call: send_slack(message = "@walmart/ld-kit main pipeline finished (exit 0). Grep the build log for `===> ACTION:` to see whether this run published or skipped, and why.", iconEmoji = ":looper-green:")
+
+  # ---- shared: slack notification ------------------------------------------
+  # `username:` intentionally omitted — there is no dedicated SVC-ld-kit-bot
+  # AD account yet, and slack.postMessage falls back to the default Looper
+  # integration bot identity when the field is absent. Re-add `username:
+  # ${SLACK_USERNAME}` once a bot account is provisioned.
+  send_slack:
+    - slack.postMessage:
+        message: ${message}
+        channelId: ${SLACK_CHANNEL}
+        iconEmoji: ${iconEmoji}
+
+  # ---- promoteStage / promoteProd / promotePin (UI manual triggers) ---------
+  # All three flows share the same shape:
+  #   1. Write the Artifactory `.npmrc` so `npm dist-tag add` is authenticated
+  #      against design-npm-prod-local.
+  #   2. Invoke `scripts/promote-tag.mjs` with --yes (non-TTY anyway).
+  #   3. Scrub `./.npmrc` before exit.
+  #   4. Print the resulting dist-tags.
+  #   5. Emit a Slack notification.
+  #
+  # No `npm ci`, no `changeset publish`, no build artifacts, no git push-back.
+  # A dist-tag move is the entire side-effect — fast, reversible, and immune
+  # to a broken tarball blocking the operation.
+
+  promoteStage:
+    - dockguardAgent(looper-agent):
+        - shell: |
+            set -e
+            echo "Manual trigger: promote dev → next (stage)"
+            REG_WRITE_URL="https://npm.ci.artifacts.walmart.com/artifactory/api/npm/design-npm-prod-local/"
+            REG_WRITE_HOST="${REG_WRITE_URL#https:}"
+            printf '%s\n%s\n' \
+              "${REG_WRITE_HOST}:_authToken=${reposolnsPassword}" \
+              "@walmart:registry=${REG_WRITE_URL}" \
+              > ./.npmrc
+            chmod 600 ./.npmrc
+
+            node scripts/promote-tag.mjs dev-to-stage --yes
+
+            rm -f ./.npmrc
+            echo "Final dist-tags:"
+            npm view @walmart/ld-kit dist-tags --registry="$REG_WRITE_URL" || true
+            echo "===> ACTION: promoted-stage"
+    - call: send_slack(message = "@walmart/ld-kit promoted dev → next (stage). Verify with `npm view @walmart/ld-kit dist-tags`.", iconEmoji = ":looper-green:")
+
+  promoteProd:
+    - dockguardAgent(looper-agent):
+        - shell: |
+            set -e
+            echo "Manual trigger: promote next → latest (prod / golden)"
+            REG_WRITE_URL="https://npm.ci.artifacts.walmart.com/artifactory/api/npm/design-npm-prod-local/"
+            REG_WRITE_HOST="${REG_WRITE_URL#https:}"
+            printf '%s\n%s\n' \
+              "${REG_WRITE_HOST}:_authToken=${reposolnsPassword}" \
+              "@walmart:registry=${REG_WRITE_URL}" \
+              > ./.npmrc
+            chmod 600 ./.npmrc
+
+            node scripts/promote-tag.mjs stage-to-prod --yes
+
+            rm -f ./.npmrc
+            echo "Final dist-tags:"
+            npm view @walmart/ld-kit dist-tags --registry="$REG_WRITE_URL" || true
+            echo "===> ACTION: promoted-prod"
+    - call: send_slack(message = "@walmart/ld-kit promoted next → latest (prod). Customers running `npm install @walmart/ld-kit` will now receive the new version.", iconEmoji = ":looper-green:")
+
+  # Pin an exact version to a specific dist-tag. UI prompts for pinVersion and
+  # pinTargetTag (defaults under `configuration.arguments` above). Use for
+  # rollback (`pinTargetTag=latest`, pinVersion=<last good>) or to re-issue a
+  # version under a different tier.
+  promotePin:
+    - dockguardAgent(looper-agent):
+        - shell: |
+            set -e
+            PIN_VERSION="${pinVersion}"
+            PIN_TARGET_TAG="${pinTargetTag}"
+            if [ -z "$PIN_VERSION" ]; then
+              echo "pinVersion is required (e.g. 1.4.5). Click the trigger again and fill it in."
+              echo "===> ACTION: promote-pin-missing-version"
+              exit 1
+            fi
+            case "$PIN_TARGET_TAG" in
+              dev|next|latest) : ;;
+              *)
+                echo "pinTargetTag must be one of: dev | next | latest (got '${PIN_TARGET_TAG}')."
+                echo "===> ACTION: promote-pin-bad-tag"
+                exit 1
+                ;;
+            esac
+            echo "Manual trigger: pin ${PIN_VERSION} → ${PIN_TARGET_TAG}"
+
+            REG_WRITE_URL="https://npm.ci.artifacts.walmart.com/artifactory/api/npm/design-npm-prod-local/"
+            REG_WRITE_HOST="${REG_WRITE_URL#https:}"
+            printf '%s\n%s\n' \
+              "${REG_WRITE_HOST}:_authToken=${reposolnsPassword}" \
+              "@walmart:registry=${REG_WRITE_URL}" \
+              > ./.npmrc
+            chmod 600 ./.npmrc
+
+            node scripts/promote-tag.mjs --version="$PIN_VERSION" --to="$PIN_TARGET_TAG" --yes
+
+            rm -f ./.npmrc
+            echo "Final dist-tags:"
+            npm view @walmart/ld-kit dist-tags --registry="$REG_WRITE_URL" || true
+            echo "===> ACTION: pinned-${PIN_VERSION}-to-${PIN_TARGET_TAG}"
+    - call: send_slack(message = "@walmart/ld-kit pin operation completed. See build log `===> ACTION` line for version → tag mapping.", iconEmoji = ":looper-green:")

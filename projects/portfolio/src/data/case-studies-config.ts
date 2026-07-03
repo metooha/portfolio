@@ -9,6 +9,8 @@ import Academy from "@/imports/Academy";
 import { CaseStudyHoverContent } from "@/app/components/content/CaseStudyHoverContent";
 import { CaseStudyXenseContent } from "@/app/components/content/CaseStudyXenseContent";
 import { CaseStudyAcademyContent } from "@/app/components/content/CaseStudyAcademyContent";
+import imgEverydaySansThumb from "@/assets/everyday-sans/Typography Adjustment examples.png";
+import imgAirtableThumb from "@/assets/everyday-sans/Visual Tweaking.png";
 import type { ProjectLink } from "@/app/components/CaseStudyTemplate";
 
 export interface CaseStudyConfig {
@@ -165,6 +167,78 @@ const CASE_STUDIES: CaseStudyConfig[] = [
     thumbnail: imgAcademy,
     ContentComponent: CaseStudyAcademyContent,
   },
+  {
+    id: "5",
+    path: "/case-study/5",
+    title: "Everyday Sans UI — Brand and performance, without compromise",
+    isPublished: true,
+    cardTitle: "Everyday Sans UI",
+    shortDescription:
+      "How a variable font ended the trade-off between brand hierarchy and web performance at Walmart.",
+    cardDescription:
+      "Brand held back on font weights because each new file carried a performance cost. The variable font ended that compromise — permanently.",
+    fullDescription:
+      "Every new font weight came with a performance cost. So Brand held back. The result was visual hierarchy that never reached its potential, and a design system that had to make peace with compromise. The variable font ended that trade-off — permanently.",
+    metaItems: [
+      { label: "Role", value: "Lead Designer, Living Design" },
+      { label: "Timeline", value: "Jun 2024 – Dec 2025" },
+      { label: "Scope", value: "Web, iOS, Android, Email" },
+      { label: "Focus", value: "Variable font adoption, design tokens, accessibility" },
+    ],
+    navSections: [
+      { label: "Overview", href: "#overview" },
+      { label: "The compromise", href: "#tension" },
+      { label: "Weight scale", href: "#weight-scale" },
+      { label: "Before & after", href: "#before-after" },
+      { label: "The journey", href: "#journey" },
+      { label: "User testing", href: "#user-testing" },
+      { label: "What's next", href: "#whats-next" },
+    ],
+    navAccentColor: "#207442",
+    tags: ["Typography", "Design System", "Performance", "Accessibility"],
+    heroType: "image",
+    heroImage: imgEverydaySansThumb,
+    thumbnail: imgEverydaySansThumb,
+    ContentComponent: (() => null) as React.ComponentType,
+    overviewClient: "Walmart Commerce Platform",
+    overviewCategory: "Living Design, Typography",
+  },
+  {
+    id: "6",
+    path: "/case-study/6",
+    title: "Airtable as Source of Truth",
+    isPublished: true,
+    cardTitle: "Airtable as Source of Truth",
+    shortDescription:
+      "How a shared token infrastructure cut deployment time from 3 days to 10 minutes.",
+    cardDescription:
+      "From 17+ teams maintaining separate token copies to a single automated pipeline — zero coordination, zero errors.",
+    fullDescription:
+      "We went from 17+ teams maintaining their own copies of design tokens — manually, inconsistently, and constantly out of sync — to a single automated pipeline where a designer updates a value in Airtable and it's live in production in 10 minutes.",
+    metaItems: [
+      { label: "Role", value: "Lead Designer, Living Design" },
+      { label: "Timeline", value: "Aug 2024 – Nov 2025" },
+      { label: "Scope", value: "17 brand themes · iOS · Android · Web" },
+      { label: "Focus", value: "Token infrastructure, automation, theme hierarchy" },
+    ],
+    navSections: [
+      { label: "Overview", href: "#overview" },
+      { label: "Situation", href: "#situation" },
+      { label: "Human cost", href: "#human-cost" },
+      { label: "The work", href: "#the-work" },
+      { label: "Pipeline", href: "#pipeline" },
+      { label: "Theme hierarchy", href: "#theme-hierarchy" },
+      { label: "Results", href: "#results" },
+    ],
+    navAccentColor: "#207442",
+    tags: ["Design Tokens", "Design System", "Automation", "Living Design"],
+    heroType: "image",
+    heroImage: imgAirtableThumb,
+    thumbnail: imgAirtableThumb,
+    ContentComponent: (() => null) as React.ComponentType,
+    overviewClient: "Walmart Commerce Platform",
+    overviewCategory: "Living Design, Design Tokens",
+  },
 ];
 
 export function getCaseStudyById(id: string): CaseStudyConfig | undefined {
@@ -212,7 +286,7 @@ function configToProjectLink(config: CaseStudyConfig): ProjectLink {
 }
 
 export function getFeaturedCaseStudies(): CaseStudyConfig[] {
-  return CASE_STUDIES;
+  return CASE_STUDIES.filter((cs) => cs.isPublished !== false);
 }
 
 export function isCaseStudyPublished(id: string): boolean {

@@ -1,0 +1,56 @@
+/**
+ * Living Design theme entry.
+ *
+ * Import order matters: base tokens define the :root defaults, official brand
+ * themes override them under [data-ld-theme="..."], and the custom "Portfolio"
+ * theme is last. This file declares ONLY custom properties and @font-face
+ * rules — it never restyles html/body or any existing element, so importing it
+ * globally in src/main.tsx is safe for all current pages.
+ */
+
+@import './base-tokens.css';
+@import '../fonts/everyday-sans/font.css';
+@import '../fonts/everyday-sans-mono/font.css';
+@import '../fonts/gibson/font.css';
+@import '../fonts/bogle/font.css';
+@import './brands/walmart.css';
+@import './brands/sams-club.css';
+@import './brands/walmart-b2b.css';
+@import './brands/bodega.css';
+@import './brands/cashi-mx.css';
+@import './brands/data-ventures.css';
+@import './brands/sparky.css';
+@import './brands/walmart-legacy.css';
+@import './brands/walmart-plus.css';
+@import './brands/members-mark.css';
+@import './portfolio.css';
+@import './wm.css';
+
+/* Migrated Sam's Sans Text — available as an optional brand fallback. */
+@font-face {
+  font-display: swap;
+  font-family: 'Sams Sans Text';
+  font-style: normal;
+  font-weight: 500;
+  src: url('./fonts/SamsSansText-Medium.ttf') format('truetype');
+}
+
+/* A11y semantic alias — copied from the LD kit entry point. */
+:root {
+  --ld-a11y-color-text-disabled: var(--ld-primitive-color-gray-110, #686a70);
+}
+
+/* page-nav semantic aliases. Theme sources define pageNav (camelCase) tokens
+   while component styles use page-nav (kebab-case). */
+:root,
+[data-ld-theme] {
+  --ld-semantic-color-page-nav-fill: var(--ld-semantic-color-pageNav-fill, #ffffff);
+  --ld-semantic-color-page-nav-fill-hovered: var(--ld-semantic-color-pageNav-fill-hovered, #f0f5ff);
+  --ld-semantic-color-page-nav-fill-pressed: var(--ld-semantic-color-pageNav-fill-pressed, #e9f1fe);
+  --ld-semantic-color-page-nav-fill-activated: var(--ld-semantic-color-pageNav-fill-activated, #f0f5ff);
+  --ld-semantic-color-page-nav-fill-activated-hovered: var(--ld-semantic-color-pageNav-fill-activated-hovered, #e9f1fe);
+  --ld-semantic-color-page-nav-fill-activated-pressed: var(--ld-semantic-color-pageNav-fill-activated-pressed, #c9dcfd);
+  --ld-semantic-color-page-nav-indicator-activated: var(--ld-semantic-color-pageNav-indicator-activated, #0053e2);
+  --ld-semantic-color-page-nav-text-on-fill: var(--ld-semantic-color-pageNav-text-onFill, #2e2f32);
+  --ld-semantic-color-page-nav-text-on-fill-activated: var(--ld-semantic-color-pageNav-text-onFill-activated, #2e2f32);
+}

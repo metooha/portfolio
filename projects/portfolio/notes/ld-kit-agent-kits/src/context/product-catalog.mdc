@@ -1,0 +1,237 @@
+---
+description: Product data — every product anywhere in the app MUST come from ProductService, never inlined or invented
+globs:
+alwaysApply: true
+---
+
+# Product Catalog
+
+All product data in this project flows through `src/utils/ProductService.ts`. Do NOT invent product literals, hand-write SKUs, hardcode prices, or import `productCatalog.json` directly. Whenever a tile, card, carousel, PDP, search result, demo button, or example needs a product, fetch it from `ProductService`. The catalog is the single source of truth — it owns the names, SKUs, prices, ratings, badges, images, and category structure.
+
+This rule is the data-side companion to `component-communication.mdc`. That file says how product cards bind to Store state. This file says where the product itself comes from.
+
+## Import
+
+```tsx
+import {
+  getAllProducts,
+  getProductBySku,
+  getProductsByCategory,
+  getProductsBySubcategory,
+  getCategories,
+  searchProducts,
+  getHeroBanners,
+  getMarketingTiles,
+  getCatalogStats,
+  type Product,
+  type Category,
+} from "./utils/ProductService";
+```
+
+Adjust relative depth from your file location. Never reach past `ProductService` to read `productCatalog.json` yourself.
+
+## Architecture
+
+`ProductService` is the only contract pages and components should know about. The JSON file behind it is an implementation detail.
+
+| Layer | What it does | When to use |
+|-------|--------------|-------------|
+| **Data file** (`src/data/productCatalog.json`) | Owns the catalog content | Edit when adding/changing products. Never imported elsewhere. |
+| **Service** (`src/utils/ProductService.ts`) | Typed, in-memory access to products, categories, banners, stats | Always — every consumer goes through this |
+| **Components** (`src/components/{components,patterns}/`) | Render a product visually | Pass a `Product` (or its fields) in; never invent product data inside |
+| **Bindings** (`useStoreConnectedItemBindings` in `Store.tsx`) | Wire a rendered product to cart/heart state | See `component-communication.mdc` |
+
+## CRITICAL: products come from `ProductService`, never inline
+
+This is the rule the rest of the file expands on. Any time you need a product anywhere in the app, you pick it from the catalog.
+
+```tsx
+// CORRECT — pick a product from the catalog
+const product = getProductBySku("asus-vivobook-go-15-ryzen5");
+if (!product) return null;
+
+<ProductCardGrid
+  image={product.imageUrl}
+  name={product.name}
+  price={product.price}
+  cents={product.cents}
+  rating={product.rating}
+  ratingCount={product.ratingCount}
+  pickup={product.pickup}
+  wasPrice={product.originalPrice ?? undefined}
+  flag={product.flag ?? undefined}
+/>
+```
+
+```tsx
+// WRONG — invented product literal. Names, prices, SKUs, and images
+// must not be hand-written. They drift from the catalog and break
+// search, cart consistency, and Store bindings.
+<ProductCardGrid
+  image="https://example.com/blender.jpg"
+  name="3-in-1 Blender"
+  price="169"
+  cents="98"
+/>
+```
+
+```tsx
+// WRONG — bypassing the service to read JSON directly.
+// ProductService enriches each product with category context;
+// raw JSON does not have categoryId/categoryName/etc.
+import catalog from "../data/productCatalog.json";
+const blender = catalog.categories[1].subcategories[1].items[0];
+```
+
+This applies to **every** surface — production pages, demo sections, Storybook examples, fixtures used in dev, anywhere a product appears. If the catalog doesn't have what you need, add it to `productCatalog.json`; do not work around the service.
+
+## API
+
+### Browsing
+
+```tsx
+const categories = getCategories();              // Category[]
+const allProducts = getAllProducts();            // Product[]
+const electronics = getProductsByCategory("electronics");
+const laptops = getProductsBySubcategory("electronics", "laptops");
+```
+
+`Category` exposes `subcategories` (each with `products: Product[]`) and a flat `allProducts: Product[]`. Use these — do not flatten subcategories yourself.
+
+### Lookup
+
+```tsx
+const product = getProductBySku("asus-vivobook-go-15-ryzen5");
+if (!product) return null; // sku not in catalog
+```
+
+`getProductBySku` returns `Product | undefined`. Always handle the undefined case rather than non-null-asserting.
+
+### Search
+
+```tsx
+const results = searchProducts(query);   // case-insensitive substring on product name
+```
+
+Empty/whitespace query returns every product. The Store search query event is independent — see `component-communication.mdc` for `useSharedSearchQuery()`.
+
+### Stats
+
+```tsx
+const { totalProducts, totalCategories, totalSubcategories, ebtEligibleCount } = getCatalogStats();
+```
+
+Use this for catalog overview UIs. Never count `getAllProducts().length` inline if a stat already covers it.
+
+### Hero banners & marketing tiles
+
+```tsx
+const banners = getHeroBanners();    // HeroBanner[]
+const tiles = getMarketingTiles();   // MarketingTile[]
+```
+
+These are catalog content too — same rule applies. Don't hand-author banner or tile literals; edit `productCatalog.json`.
+
+## Product shape
+
+```ts
+interface Product {
+  sku: string;            // unique identifier — the key for Store bindings
+  name: string;
+  price: string;          // dollar portion as a string, e.g. "299"
+  cents: string;          // cents portion as a string, e.g. "00"
+  priceCents: number;     // integer cents — the value used by cart math
+  originalPrice: string | null;
+  rating: number;         // 0–5
+  ratingCount: string;    // formatted, e.g. "10,747"
+  imageUrl: string;       // resolved CDN URL
+  badge: { label: string; type: string } | null;
+  pickup: string;         // e.g. "Free shipping, arrives tomorrow"
+  ebt: boolean;
+  flag: string | null;
+  categoryId: string;
+  categoryName: string;
+  subcategoryId: string;
+  subcategoryName: string;
+}
+```
+
+`price` / `cents` are split because the design renders the dollar and cent portions at different sizes. `priceCents` is the value to pass into Store cart operations.
+
+## Wiring a product into the UI
+
+Once you have a `Product`, bind it to the Store using the pattern in `component-communication.mdc`. The two rules compose: `ProductService` gives you the product, `useStoreConnectedItemBindings` keeps it in sync with the cart and favorites.
+
+```tsx
+import { useStoreConnectedItemBindings } from "./utils/Store";
+import { getProductBySku } from "./utils/ProductService";
+
+function FeaturedProduct() {
+  const product = getProductBySku("asus-vivobook-go-15-ryzen5");
+  const bindings = useStoreConnectedItemBindings()({
+    sku: product!.sku,
+    name: product!.name,
+    priceCents: product!.priceCents,
+  });
+
+  return (
+    <ProductCardGrid
+      image={product!.imageUrl}
+      name={product!.name}
+      price={product!.price}
+      cents={product!.cents}
+      rating={product!.rating}
+      ratingCount={product!.ratingCount}
+      pickup={product!.pickup}
+      hearted={bindings.hearted}
+      onHeartChange={bindings.onHeartChange}
+      cartQty={bindings.cartQty}
+      onCartQtyChange={bindings.onCartQtyChange}
+      onAddToCart={bindings.onAddToCart}
+    />
+  );
+}
+```
+
+For details on `addToCart` vs `setCartQty`, the binding shape, and PDP composition, read `component-communication.mdc`. Do not restate or re-implement those rules here.
+
+## Hard Constraints
+
+- MUST source every product from `ProductService` — `getProductBySku`, `getAllProducts`, `getProductsByCategory`, `getProductsBySubcategory`, `searchProducts`, or by iterating `getCategories()`.
+- MUST source hero banners from `getHeroBanners()` and marketing tiles from `getMarketingTiles()`.
+- MUST identify a product to the Store using `{ sku, name, priceCents }` taken **directly** from the `Product` returned by `ProductService` — never re-typed by hand.
+- MUST add new products by editing `src/data/productCatalog.json`. The JSON is the only authoring surface.
+- NEVER import `src/data/productCatalog.json` outside `ProductService.ts`.
+- NEVER hand-write product names, SKUs, prices, images, ratings, or badges as inline literals — even in demos, examples, or fixtures.
+- NEVER mock a `Product` with `{ sku: "demo-1", name: "Demo Item", priceCents: 999 }` for a card or tile. Pick a real product from the catalog instead.
+- NEVER non-null-assert (`!`) the result of `getProductBySku` in production paths without first guarding against `undefined`.
+- NEVER duplicate `ProductService` functionality — no parallel "product helpers" file, no per-page filtering helpers that re-implement `getProductsByCategory`.
+- NEVER reach into `Subcategory.products` or `Category.allProducts` to invent your own flattening; use `getAllProducts` or `getProductsByCategory`.
+
+## Intent → API map
+
+| You want to… | Use this |
+|---|---|
+| Show one specific product (PDP, hero, featured) | `getProductBySku(sku)` |
+| Show a product grid for a whole category | `getProductsByCategory(categoryId)` |
+| Show a product grid for one subcategory | `getProductsBySubcategory(categoryId, subcategoryId)` |
+| Show every product on the page | `getAllProducts()` |
+| Power a search input | `searchProducts(query)` |
+| Render a category navigation / filter bar | `getCategories()` |
+| Render hero/banner content | `getHeroBanners()` |
+| Render marketing tile content | `getMarketingTiles()` |
+| Show counts in a stats strip | `getCatalogStats()` |
+| Build a "flash deals" row | `getAllProducts().filter(p => p.originalPrice)` |
+
+## Pre-Response Checklist
+
+Before returning code that touches a product, confirm:
+
+- [ ] Every product comes from `ProductService` — no inline `{ sku, name, priceCents }` literals.
+- [ ] Hero banners and marketing tiles come from `getHeroBanners()` / `getMarketingTiles()`.
+- [ ] `productCatalog.json` is not imported anywhere except `ProductService.ts`.
+- [ ] `getProductBySku` results are guarded for `undefined` before use.
+- [ ] Store identity (`{ sku, name, priceCents }`) is read straight off the `Product`, not retyped.
+- [ ] Category/subcategory traversal uses `getCategories()` shapes, not hand-rolled flattening.
+- [ ] No competing "product helpers" file is being introduced.
+- [ ] If new products were needed, they were added to `productCatalog.json` rather than inlined in code.

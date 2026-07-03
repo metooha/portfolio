@@ -1,0 +1,47 @@
+routing: special
+slug: airtable-sot
+componentName: AirtableCaseStudy
+
+caseStudy:
+  id: "6"
+  path: "/case-study/6"
+  title: "Airtable as Source of Truth"
+  cardTitle: "Airtable as Source of Truth"
+  shortDescription: "How a shared token infrastructure cut deployment time from 3 days to 10 minutes."
+  cardDescription: "From 17+ teams maintaining separate token copies to a single automated pipeline — zero coordination, zero errors."
+  fullDescription: "We went from 17+ teams maintaining their own copies of design tokens — manually, inconsistently, and constantly out of sync — to a single automated pipeline where a designer updates a value in Airtable and it's live in production in 10 minutes."
+  navAccentColor: "#0053e2"
+  tags: ["Design Tokens", "Design System", "Automation", "Living Design"]
+  heroType: image
+  heroAsset: assets/hero.png
+  thumbnailAsset: assets/thumbnail.png
+  overviewClient: "Walmart Commerce Platform"
+  overviewCategory: "Living Design, Design Tokens"
+
+metaItems:
+  - label: Role
+    value: "Lead Designer, Living Design"
+  - label: Timeline
+    value: "Aug 2024 – Nov 2025"
+  - label: Scope
+    value: "17 brand themes · iOS · Android · Web"
+  - label: Focus
+    value: "Token infrastructure, automation, theme hierarchy"
+
+navSections:
+  - label: Overview
+    href: "#overview"
+  - label: Situation
+    href: "#situation"
+  - label: Human cost
+    href: "#human-cost"
+  - label: The work
+    href: "#the-work"
+  - label: Pipeline
+    href: "#pipeline"
+  - label: Theme hierarchy
+    href: "#theme-hierarchy"
+  - label: Results
+    href: "#results"
+
+assets: []

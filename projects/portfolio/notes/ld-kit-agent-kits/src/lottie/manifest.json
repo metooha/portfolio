@@ -1,0 +1,17 @@
+{
+  "count": 2,
+  "items": [
+    {
+      "name": "MartyEmotes",
+      "tokenName": "ld-primitive-lottie-martyEmotes",
+      "format": "lottie",
+      "size": 17092
+    },
+    {
+      "name": "WibeyEmotes",
+      "tokenName": "ld-primitive-lottie-wibeyEmotes",
+      "format": "lottie",
+      "size": 12190
+    }
+  ]
+}
