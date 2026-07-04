@@ -7,6 +7,7 @@ import {
   initMegaMode,
   prepareThemeStorage,
 } from "./app/components/utils/themeManager";
+import { prepareSiteConfig } from "./app/auth/site-config";
 
 function getInitialPathname(): string {
   const basename = import.meta.env.BASE_URL.replace(/\/$/, "");
@@ -19,9 +20,14 @@ function getInitialPathname(): string {
   return pathname || "/";
 }
 
-prepareThemeStorage();
-initMegaMode();
-applyThemeForPath(getInitialPathname());
+async function bootstrap() {
+  prepareThemeStorage();
+  await prepareSiteConfig();
+  initMegaMode();
+  applyThemeForPath(getInitialPathname());
 
-createRoot(document.getElementById("root")!).render(<App />);
+  createRoot(document.getElementById("root")!).render(<App />);
+}
+
+bootstrap();
   

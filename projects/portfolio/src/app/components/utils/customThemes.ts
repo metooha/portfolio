@@ -29,6 +29,7 @@ import {
 } from './colorUtils';
 import { THEME_FONT_CONFIG } from './Theming';
 import type { TextFontKey, ThemeName } from './Theming';
+import { getDeployedCustomThemes } from '@/app/auth/site-config';
 
 /* ── Types ─────────────────────────────────────────────────────── */
 
@@ -522,7 +523,7 @@ export function createThemeFromBuiltIn(themeName: ThemeName, name = themeName): 
   };
 }
 
-export function getCustomThemes(): CustomTheme[] {
+function readLocalCustomThemes(): CustomTheme[] {
   try {
     const raw = localStorage.getItem(CUSTOM_THEMES_KEY);
     if (!raw) return [];
@@ -531,6 +532,21 @@ export function getCustomThemes(): CustomTheme[] {
   } catch {
     return [];
   }
+}
+
+function mergeCustomThemes(deployed: CustomTheme[], local: CustomTheme[]): CustomTheme[] {
+  const byId = new Map<string, CustomTheme>();
+  for (const theme of deployed) {
+    byId.set(theme.id, theme);
+  }
+  for (const theme of local) {
+    byId.set(theme.id, theme);
+  }
+  return Array.from(byId.values());
+}
+
+export function getCustomThemes(): CustomTheme[] {
+  return mergeCustomThemes(getDeployedCustomThemes(), readLocalCustomThemes());
 }
 
 export function getCustomTheme(name: string): CustomTheme | undefined {
@@ -562,7 +578,7 @@ function persist(themes: CustomTheme[]): void {
 /** Create or update a custom theme (matched by id). Returns the saved theme. */
 export function saveCustomTheme(theme: CustomTheme): CustomTheme {
   const now = Date.now();
-  const themes = getCustomThemes();
+  const themes = readLocalCustomThemes();
   let idx = themes.findIndex((t) => t.id === theme.id);
   if (idx < 0 && !theme.builtInPreset) {
     idx = themes.findIndex((t) => t.name === theme.name && !t.builtInPreset);
@@ -590,12 +606,12 @@ export function saveCustomTheme(theme: CustomTheme): CustomTheme {
 }
 
 export function deleteCustomTheme(name: string): void {
-  persist(getCustomThemes().filter((t) => t.id !== name && t.name !== name));
+  persist(readLocalCustomThemes().filter((t) => t.id !== name && t.name !== name));
 }
 
 /** Remove a saved custom theme by id and/or name. Returns whether a record was removed. */
 export function deleteCustomThemeRecord(theme: Pick<CustomTheme, 'id' | 'name'>): boolean {
-  const themes = getCustomThemes();
+  const themes = readLocalCustomThemes();
   const next = themes.filter(
     (t) => t.id !== theme.id && t.name !== theme.name && t.id !== theme.name && t.name !== theme.id,
   );

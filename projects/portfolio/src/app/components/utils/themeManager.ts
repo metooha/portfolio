@@ -27,6 +27,7 @@ import {
 } from './customThemes';
 import { getAllCaseStudies } from '@/app/data/case-studies-config';
 import { otherWork } from '@/app/data/portfolio-data';
+import { getDeployedPageThemes } from '@/app/auth/site-config';
 
 export { THEME_PRESETS, THEME_FONT_CONFIG, type ThemePreset };
 
@@ -271,7 +272,7 @@ export function getAllThemeNames(): string[] {
   return [...Object.keys(THEME_PRESETS), ...getCustomThemeNames()];
 }
 
-export function getPageThemeAssignments(): Record<string, string> {
+function readLocalPageThemeAssignments(): Record<string, string> {
   try {
     const raw = localStorage.getItem(PAGE_THEMES_STORAGE_KEY);
     return raw ? (JSON.parse(raw) as Record<string, string>) : {};
@@ -280,9 +281,13 @@ export function getPageThemeAssignments(): Record<string, string> {
   }
 }
 
+export function getPageThemeAssignments(): Record<string, string> {
+  return { ...getDeployedPageThemes(), ...readLocalPageThemeAssignments() };
+}
+
 export function setPageTheme(targetId: string, themeName: string): void {
   try {
-    const next = { ...getPageThemeAssignments(), [targetId]: themeName };
+    const next = { ...readLocalPageThemeAssignments(), [targetId]: themeName };
     localStorage.setItem(PAGE_THEMES_STORAGE_KEY, JSON.stringify(next));
   } catch {
     // Page-scoped themes are an enhancement; ignore storage failures.
@@ -294,7 +299,7 @@ export function setPageTheme(targetId: string, themeName: string): void {
 
 export function clearPageTheme(targetId: string): void {
   try {
-    const next = { ...getPageThemeAssignments() };
+    const next = { ...readLocalPageThemeAssignments() };
     delete next[targetId];
     localStorage.setItem(PAGE_THEMES_STORAGE_KEY, JSON.stringify(next));
   } catch {
@@ -308,7 +313,7 @@ export function clearPageTheme(targetId: string): void {
 /** Remove page-level theme overrides that point at a deleted or retired theme. */
 export function clearPageThemesUsingTheme(themeName: string): void {
   try {
-    const assignments = getPageThemeAssignments();
+    const assignments = readLocalPageThemeAssignments();
     const next = { ...assignments };
     let changed = false;
     for (const [targetId, theme] of Object.entries(assignments)) {

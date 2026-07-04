@@ -10,6 +10,7 @@ import {
   isPageUnlocked,
   unlockPage,
 } from "@/app/auth/page-protection";
+import { isSiteConfigLoaded, prepareSiteConfig } from "@/app/auth/site-config";
 
 type PagePasswordGateProps = {
   path: string;
@@ -22,12 +23,29 @@ export function PagePasswordGate({ path, pageName, children }: PagePasswordGateP
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [unlocked, setUnlocked] = useState(() => isPageUnlocked(path));
+  const [passwordsReady, setPasswordsReady] = useState(isSiteConfigLoaded());
+
+  useEffect(() => {
+    let cancelled = false;
+    prepareSiteConfig().then(() => {
+      if (!cancelled) {
+        setPasswordsReady(true);
+      }
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   useEffect(() => {
     setUnlocked(isPageUnlocked(path));
     setPassword("");
     setError("");
   }, [path]);
+
+  if (!passwordsReady) {
+    return null;
+  }
 
   const protectedPage = isPageProtected(path);
 

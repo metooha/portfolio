@@ -40,16 +40,31 @@ import {
   setPageTheme,
 } from "@/app/components/utils/themeManager";
 import { useAuth } from "@/app/auth/auth-context";
+import { getAdminPassword } from "@/app/auth/admin-password";
+import {
+  createSiteConfigPullRequest,
+  DEFAULT_GITHUB_REPO,
+  getStoredGitHubPat,
+  GITHUB_PAT_CREATE_URL,
+  GITHUB_SECRETS_URL,
+  setStoredGitHubPat,
+  verifyGitHubPat,
+  buildAdminPasswordSecretInstructions,
+} from "@/app/auth/github-publish";
 import {
   getSitePages,
   isPageProtected,
   setPagePassword,
   type SitePage,
 } from "@/app/auth/page-protection";
+import {
+  collectPublishedSiteConfig,
+  downloadPublishedSiteConfig,
+} from "@/app/auth/site-config-publish";
 import { ProtectedRoute } from "@/app/auth/protected-route";
 import "@/app/components/admin/AdminLayout.css";
 
-type SettingsSection = "account" | SitePage["group"];
+type SettingsSection = "account" | "publish" | SitePage["group"];
 
 const SETTINGS_SECTIONS: Array<{
   id: SettingsSection;
@@ -60,6 +75,11 @@ const SETTINGS_SECTIONS: Array<{
     id: "account",
     label: "Account",
     description: "Manage your admin sign-in credentials.",
+  },
+  {
+    id: "publish",
+    label: "Publish",
+    description: "Sync dashboard changes to GitHub so all visitors see them after merge.",
   },
   {
     id: "main",
@@ -139,7 +159,10 @@ function SitePageRow({ page }: { page: SitePage }) {
     setPagePassword(page.path, draftPassword || null);
     setProtectedPage(isPageProtected(page.path));
     setDraftPassword("");
-    addSnack({ message: "Password saved." });
+    addSnack({
+      message:
+        "Password saved in this browser. Publish to GitHub when you're ready for all visitors to see it.",
+    });
   };
 
   const handleClear = () => {
@@ -247,6 +270,189 @@ function SitePageRow({ page }: { page: SitePage }) {
   );
 }
 
+function SiteSettingsPublishPanel() {
+  const { addSnack } = useSnackbar();
+  const [githubPat, setGithubPat] = useState(() => getStoredGitHubPat());
+  const [githubUser, setGithubUser] = useState("");
+  const [isConnecting, setIsConnecting] = useState(false);
+  const [isPublishing, setIsPublishing] = useState(false);
+  const [error, setError] = useState("");
+  const [prUrl, setPrUrl] = useState("");
+
+  const handleSavePat = async () => {
+    setError("");
+    setIsConnecting(true);
+    try {
+      const trimmed = githubPat.trim();
+      if (!trimmed) {
+        setStoredGitHubPat("");
+        setGithubUser("");
+        addSnack({ message: "GitHub connection removed." });
+        return;
+      }
+
+      const login = await verifyGitHubPat(trimmed);
+      setStoredGitHubPat(trimmed);
+      setGithubUser(login);
+      addSnack({ message: `Connected to GitHub as ${login}.` });
+    } catch (connectError) {
+      setStoredGitHubPat("");
+      setGithubUser("");
+      setError(connectError instanceof Error ? connectError.message : "Could not connect to GitHub.");
+    } finally {
+      setIsConnecting(false);
+    }
+  };
+
+  const handlePublish = async () => {
+    setError("");
+    setPrUrl("");
+    const token = getStoredGitHubPat();
+    if (!token) {
+      setError("Connect GitHub first with a personal access token.");
+      return;
+    }
+
+    setIsPublishing(true);
+    try {
+      const config = collectPublishedSiteConfig();
+      const result = await createSiteConfigPullRequest(token, config);
+      setPrUrl(result.prUrl);
+      addSnack({ message: "Pull request created. Review and merge on GitHub." });
+      window.open(result.prUrl, "_blank", "noopener,noreferrer");
+    } catch (publishError) {
+      setError(publishError instanceof Error ? publishError.message : "Could not create pull request.");
+    } finally {
+      setIsPublishing(false);
+    }
+  };
+
+  const handleDownload = () => {
+    downloadPublishedSiteConfig();
+    addSnack({
+      message:
+        "Downloaded site-config.json. Commit it to projects/portfolio/public/site-config.json if you prefer manual publish.",
+    });
+  };
+
+  return (
+    <div className="admin-settings-layout__panel-stack">
+      <Card size="small">
+        <CardHeader title="GitHub connection" headingLevel="h3" />
+        <CardContent UNSAFE_className="admin-card-stack">
+          <Body as="p" size="small" color="subtle">
+            Create a token with <Body as="span" size="small">repo</Body> access, paste it here once,
+            then publish changes as a pull request to{" "}
+            <Body as="span" size="small" UNSAFE_className="font-mono">
+              {DEFAULT_GITHUB_REPO.owner}/{DEFAULT_GITHUB_REPO.repo}
+            </Body>
+            .
+          </Body>
+          <TextField
+            label="GitHub personal access token"
+            type="password"
+            size="small"
+            value={githubPat}
+            onChange={(event) => {
+              setGithubPat(event.target.value);
+              setError("");
+            }}
+            error={error || undefined}
+            textFieldProps={{
+              autoComplete: "off",
+              placeholder: githubUser ? `Connected as ${githubUser}` : "ghp_…",
+            }}
+          />
+          <ButtonGroup>
+            <Button
+              variant="secondary"
+              size="small"
+              type="button"
+              onClick={handleSavePat}
+              disabled={isConnecting}
+            >
+              {isConnecting ? "Connecting…" : "Save connection"}
+            </Button>
+            <Button
+              variant="secondary"
+              size="small"
+              type="button"
+              onClick={() => window.open(GITHUB_PAT_CREATE_URL, "_blank", "noopener,noreferrer")}
+            >
+              Create token
+            </Button>
+          </ButtonGroup>
+        </CardContent>
+      </Card>
+
+      <Card size="small">
+        <CardHeader title="Publish site settings" headingLevel="h3" />
+        <CardContent UNSAFE_className="admin-card-stack">
+          <Body as="p" size="small" color="subtle">
+            Opens a pull request with your current page passwords, per-page themes, and custom themes.
+            Merge the PR on GitHub and GitHub Pages will redeploy automatically.
+          </Body>
+          <ButtonGroup>
+            <Button
+              variant="primary"
+              size="small"
+              type="button"
+              onClick={handlePublish}
+              disabled={isPublishing}
+            >
+              {isPublishing ? "Creating pull request…" : "Open pull request on GitHub"}
+            </Button>
+            <Button variant="secondary" size="small" type="button" onClick={handleDownload}>
+              Download site-config.json
+            </Button>
+          </ButtonGroup>
+          {prUrl ? (
+            <Body as="p" size="small">
+              <a href={prUrl} target="_blank" rel="noopener noreferrer" className="hover:underline">
+                Review pull request on GitHub
+              </a>
+            </Body>
+          ) : null}
+        </CardContent>
+      </Card>
+
+      <Card size="small">
+        <CardHeader title="Admin login password" headingLevel="h3" />
+        <CardContent UNSAFE_className="admin-card-stack">
+          <Body as="p" size="small" color="subtle">
+            Admin login is not stored in public site files. Add{" "}
+            <Body as="span" size="small" UNSAFE_className="font-mono">
+              VITE_ADMIN_PASSWORD
+            </Body>{" "}
+            as a GitHub Actions secret, then redeploy.
+          </Body>
+          <ButtonGroup>
+            <Button
+              variant="secondary"
+              size="small"
+              type="button"
+              onClick={() => {
+                void navigator.clipboard.writeText(buildAdminPasswordSecretInstructions(getAdminPassword()));
+                addSnack({ message: "Copied admin password secret instructions." });
+              }}
+            >
+              Copy secret instructions
+            </Button>
+            <Button
+              variant="secondary"
+              size="small"
+              type="button"
+              onClick={() => window.open(GITHUB_SECRETS_URL, "_blank", "noopener,noreferrer")}
+            >
+              Open GitHub secrets
+            </Button>
+          </ButtonGroup>
+        </CardContent>
+      </Card>
+    </div>
+  );
+}
+
 function SitePagesPanel({ group }: { group: SitePage["group"] }) {
   const pages = useMemo(
     () => getSitePages().filter((page) => page.group === group),
@@ -267,22 +473,22 @@ function SitePagesPanel({ group }: { group: SitePage["group"] }) {
 
   return (
     <Card size="small" UNSAFE_className="admin-pages-card">
-      <CardContent UNSAFE_className="admin-pages-table">
-        <DataTable UNSAFE_className="w-full text-left text-sm">
-          <DataTableHead>
-            <DataTableRow>
-              <DataTableHeader>Page</DataTableHeader>
-              <DataTableHeader>Status</DataTableHeader>
-              <DataTableHeader>Theme</DataTableHeader>
-              <DataTableHeader>Password</DataTableHeader>
-            </DataTableRow>
-          </DataTableHead>
-          <DataTableBody>
-            {pages.map((page) => (
-              <SitePageRow key={page.path} page={page} />
-            ))}
-          </DataTableBody>
-        </DataTable>
+        <CardContent UNSAFE_className="admin-pages-table">
+          <DataTable UNSAFE_className="w-full text-left text-sm">
+            <DataTableHead>
+              <DataTableRow>
+                <DataTableHeader>Page</DataTableHeader>
+                <DataTableHeader>Status</DataTableHeader>
+                <DataTableHeader>Theme</DataTableHeader>
+                <DataTableHeader>Password</DataTableHeader>
+              </DataTableRow>
+            </DataTableHead>
+            <DataTableBody>
+              {pages.map((page) => (
+                <SitePageRow key={page.path} page={page} />
+              ))}
+            </DataTableBody>
+          </DataTable>
       </CardContent>
     </Card>
   );
@@ -410,6 +616,10 @@ function AccountSettings() {
 function SettingsPanel({ section }: { section: SettingsSection }) {
   if (section === "account") {
     return <AccountSettings />;
+  }
+
+  if (section === "publish") {
+    return <SiteSettingsPublishPanel />;
   }
 
   return <SitePagesPanel group={section} />;

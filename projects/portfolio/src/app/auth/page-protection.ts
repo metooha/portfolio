@@ -1,6 +1,11 @@
 import { getAllCaseStudies, getCaseStudyAccessPassword } from "@/app/data/case-studies-config";
 import { otherWork } from "@/app/data/portfolio-data";
 import { navigationSections, navigationTopItems } from "@/component-library/navigation";
+import {
+  downloadJsonFile,
+  getDeployedPagePassword,
+  setDeployedPagePassword,
+} from "@/app/auth/site-config";
 
 const PAGE_PASSWORDS_KEY = "portfolio-page-passwords";
 const UNLOCKED_PAGES_KEY = "portfolio-unlocked-pages";
@@ -98,7 +103,29 @@ export function getPagePassword(path: string): string | null {
     return stored?.trim() ? stored : null;
   }
 
+  const deployed = getDeployedPagePassword(path);
+  if (deployed) {
+    return deployed;
+  }
+
   return getCaseStudyAccessPassword(path);
+}
+
+export function getPublishedPagePasswords(): Record<string, string> {
+  const published: Record<string, string> = {};
+
+  for (const page of getSitePages()) {
+    const password = getPagePassword(page.path);
+    if (password) {
+      published[page.path] = password;
+    }
+  }
+
+  return published;
+}
+
+export function downloadPublishedPagePasswords(): void {
+  downloadJsonFile("page-passwords.json", getPublishedPagePasswords());
 }
 
 export function isPageProtected(path: string): boolean {
@@ -111,6 +138,7 @@ export function setPagePassword(path: string, password: string | null) {
 
   if (trimmed) {
     passwords[path] = trimmed;
+    setDeployedPagePassword(path, trimmed);
   } else {
     delete passwords[path];
   }
