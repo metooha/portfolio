@@ -856,7 +856,7 @@ function BrandScaleGridContent({
         const base = draftBases[family]
           ?? getScaleBaseScoped(resolveToken, family, previewTheme.tokenOverrides);
         const normalized = normaliseHex(base);
-        const tokens = normalized
+        const tokens = dirtyFamilies.has(family) && normalized
           ? generateColorScale(normalized)
           : SCALE_STEPS.map((step) => ({
               step,
