@@ -1,5 +1,7 @@
 import React, { useRef, useState } from "react";
 import { motion } from "motion/react";
+import { Body } from "@/app/components/Text/Text";
+import { CaseStudyHeroText } from "@/app/components/CaseStudyText/CaseStudyText";
 
 interface CaseStudyHeroProps {
   /** The hero background image src */
@@ -8,18 +10,20 @@ interface CaseStudyHeroProps {
   title: string;
   /** Optional subtitle below the title */
   subtitle?: string;
-  /** Text color for the title. Defaults to dark green. */
+  /** Text color for the title. Defaults to semantic text token. */
   titleColor?: string;
   /** How much the image moves on mouse move (default 12) */
   parallaxStrength?: number;
   className?: string;
 }
 
+const MotionHeroTitle = motion.div;
+
 export function CaseStudyHero({
   image,
   title,
   subtitle,
-  titleColor = "#143526",
+  titleColor = "var(--ld-semantic-color-text, #2e2f32)",
   parallaxStrength = 12,
   className = "",
 }: CaseStudyHeroProps) {
@@ -45,7 +49,6 @@ export function CaseStudyHero({
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
-      {/* Parallax background image */}
       <div
         className="absolute inset-0 z-[1] transition-transform duration-300 ease-out"
         aria-hidden="true"
@@ -58,28 +61,36 @@ export function CaseStudyHero({
         />
       </div>
 
-      {/* Title overlay */}
-      <div className="relative z-[2] flex flex-col items-center justify-center size-full pointer-events-none">
-        <div className="flex flex-col gap-[10px] items-center justify-center px-4 sm:px-8 md:px-16 lg:px-32 xl:px-[250px] py-12 sm:py-20 md:py-32 lg:py-40 xl:py-[294px] size-full pointer-events-auto">
-          <motion.p
-            className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-tight not-italic relative shrink-0 text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-[140px] text-center"
+      <div className="absolute inset-0 z-[2] flex flex-col items-center justify-center pointer-events-none px-4 sm:px-8 md:px-16">
+        <div
+          className="flex flex-col items-center justify-center pointer-events-auto text-center w-full max-w-full"
+          style={{ gap: "var(--ld-semantic-spacing-250, 1.25rem)" }}
+        >
+          <MotionHeroTitle
+            className="relative shrink-0 text-center"
             style={{ color: titleColor }}
             initial={{ opacity: 0, y: -80 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ type: "spring", stiffness: 180, damping: 14, mass: 0.8 }}
           >
-            {title}
-          </motion.p>
+            <CaseStudyHeroText
+              as="p"
+              UNSAFE_className="text-center"
+              UNSAFE_style={{ color: titleColor }}
+            >
+              {title}
+            </CaseStudyHeroText>
+          </MotionHeroTitle>
           {subtitle && (
-            <motion.p
-              className="font-['Inter:Regular',sans-serif] font-normal text-lg md:text-2xl text-center mt-4"
-              style={{ color: titleColor }}
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ type: "spring", stiffness: 180, damping: 14, mass: 0.8, delay: 0.15 }}
             >
-              {subtitle}
-            </motion.p>
+              <Body as="p" size="large" UNSAFE_className="text-center" UNSAFE_style={{ color: titleColor }}>
+                {subtitle}
+              </Body>
+            </motion.div>
           )}
         </div>
       </div>

@@ -1,5 +1,8 @@
 import React, { useRef, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { LinkButton } from "@/app/components/LinkButton/LinkButton";
+import { ChevronLeftIcon } from "@/app/components/Icons/Icons";
+import { Body } from "@/app/components/Text/Text";
 
 export interface NavSection {
   label: string;
@@ -38,12 +41,10 @@ export function CaseStudyPageNav({
   const [isHovered, setIsHovered] = useState(false);
   const [isPastHero, setIsPastHero] = useState(false);
   const leaveTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  // Use a ref so the mousemove handler always reads the latest value without re-registering
   const isHoveredRef = useRef(false);
 
   const visible = isHovered && isPastHero;
 
-  // Detect when user has scrolled past the hero into the content sections
   useEffect(() => {
     const handleScroll = () => {
       setIsPastHero(window.scrollY > heroScrollThreshold);
@@ -53,11 +54,9 @@ export function CaseStudyPageNav({
     return () => window.removeEventListener("scroll", handleScroll);
   }, [heroScrollThreshold]);
 
-  // Show nav when cursor is near the left edge; keep open while cursor is over nav panel
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       const inTriggerZone = e.clientX < triggerWidth;
-      // While nav is open, keep it open as long as cursor is within the nav panel width
       const inNavPanel = isHoveredRef.current && e.clientX < navWidth;
 
       if (inTriggerZone || inNavPanel) {
@@ -82,7 +81,6 @@ export function CaseStudyPageNav({
     };
   }, [triggerWidth, navWidth]);
 
-  // Notify parent when visibility changes
   useEffect(() => {
     onVisibleChange?.(visible);
   }, [visible, onVisibleChange]);
@@ -101,53 +99,45 @@ export function CaseStudyPageNav({
           pointerEvents: visible ? "auto" : "none",
         }}
       >
-        {/* Back button */}
-        <button
+        <LinkButton
+          size="small"
+          color="subtle"
+          leading={<ChevronLeftIcon size="small" decorative />}
           onClick={() => navigate(-1)}
-          className="flex gap-[6px] items-center cursor-pointer bg-transparent border-0 p-0 shrink-0"
           data-name="Text Link / Back"
         >
-          <svg width="16" height="16" fill="none" viewBox="0 0 16 16" className="shrink-0">
-            <path
-              d="M10 12L6 8l4-4"
-              stroke="#4E4F4E"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-          <span className="font-['Inter:Regular',sans-serif] font-normal leading-9 not-italic shrink-0 text-[#4e4f4e] text-[16px]">
-            Back
-          </span>
-        </button>
+          Back
+        </LinkButton>
 
-        {/* Section links */}
         <nav className="flex flex-col items-start shrink-0" data-name="Side Navigation">
           {sections.map(({ label, href }) => {
             const isActive = activeHref === href;
             return (
-              <a
+              <LinkButton
                 key={href}
-                href={href}
-                onClick={(e) => {
-                  e.preventDefault();
+                size="small"
+                color="subtle"
+                onClick={() => {
                   setActiveHref(href);
                   scrollToSection(href);
                 }}
-                className="flex gap-[6px] items-center shrink-0 w-full no-underline group"
+                UNSAFE_className="flex gap-[6px] items-center shrink-0 w-full group"
                 data-name="Side Nav"
               >
-                <div
-                  className="h-[22px] shrink-0 w-[3px] rounded-full transition-colors duration-200"
-                  style={{ backgroundColor: isActive ? accentColor : "transparent" }}
-                />
-                <span
-                  className="font-['Inter:Regular',sans-serif] font-normal leading-9 not-italic shrink-0 text-[16px] transition-colors duration-200"
-                  style={{ color: isActive ? accentColor : "#4e4f4e" }}
-                >
-                  {label}
+                <span className="flex gap-[6px] items-center">
+                  <span
+                    className="h-[22px] shrink-0 w-[3px] rounded-full transition-colors duration-200"
+                    style={{ backgroundColor: isActive ? accentColor : "transparent" }}
+                  />
+                  <Body
+                    as="span"
+                    size="small"
+                    UNSAFE_style={{ color: isActive ? accentColor : "#4e4f4e" }}
+                  >
+                    {label}
+                  </Body>
                 </span>
-              </a>
+              </LinkButton>
             );
           })}
         </nav>

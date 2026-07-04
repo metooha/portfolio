@@ -1,0 +1,198 @@
+.theme-editor-scroll-root {
+  position: relative;
+  min-height: 0;
+}
+
+.theme-editor-scroll-viewport {
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+
+.theme-editor-scroll-viewport.is-scrolling,
+.theme-editor-scroll-viewport:focus-within {
+  scrollbar-color: var(--ld-primitive-color-gray-40, #c7c8cb) transparent;
+}
+
+.theme-editor-scroll-viewport::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.theme-editor-scroll-viewport::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.theme-editor-scroll-viewport::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  border-radius: var(--ld-primitive-scale-border-radius-100, 0.5rem);
+  border: 2px solid transparent;
+  background-clip: content-box;
+  transition: background-color 0.25s ease;
+}
+
+.theme-editor-scroll-viewport.is-scrolling::-webkit-scrollbar-thumb,
+.theme-editor-scroll-viewport:focus-within::-webkit-scrollbar-thumb {
+  background-color: var(--ld-primitive-color-gray-40, #c7c8cb);
+}
+
+/* ── editor chrome (semantic tokens) ───────────────────────────── */
+
+.theme-editor-panel {
+  border: 1px solid var(--ld-semantic-color-separator, #e3e4e5);
+  border-radius: 10px;
+  background: var(--ld-semantic-color-surface, #fff);
+  overflow: hidden;
+}
+
+.theme-editor-panel__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--ld-semantic-color-separator, #e3e4e5);
+  background: var(--ld-semantic-color-surface-subtle, #fafafa);
+}
+
+.theme-editor-section-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.theme-editor-category-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: 4px;
+  border-radius: 8px;
+  border: 1px solid var(--ld-semantic-color-separator, #e3e4e5);
+  background: var(--ld-semantic-color-surface-subtle, #fafafa);
+}
+
+.theme-editor-category-nav__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 6px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--ld-semantic-color-text, #2e2f32);
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.theme-editor-category-nav__item--current {
+  padding: 4px 10px 4px 6px;
+  background: var(--ld-semantic-color-surface-subtle, #fafafa);
+  border-color: var(--ld-semantic-color-separator, #e3e4e5);
+  font-weight: 600;
+}
+
+.theme-editor-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+}
+
+.theme-editor-row--stacked {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.theme-editor-row--divider {
+  border-top: 1px solid var(--ld-semantic-color-separator, #e3e4e5);
+}
+
+.theme-editor-row__header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.theme-editor-row__main {
+  flex: 1;
+  min-width: 0;
+}
+
+.theme-editor-row__token-slug {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.theme-editor-row__actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.theme-editor-row__tags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.theme-editor-preview-chrome {
+  background: var(--ld-semantic-color-surface-subtle, #ececed);
+}
+
+.theme-editor-preview-frame {
+  background: var(--ld-semantic-color-surface, #fff);
+  border: 1px solid var(--ld-semantic-color-separator, #e3e4e5);
+}
+
+.theme-editor-card {
+  border: 1px solid var(--ld-semantic-color-separator, #e3e4e5);
+  border-radius: 10px;
+  background: var(--ld-semantic-color-surface, #fff);
+}
+
+.theme-editor-card__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--ld-semantic-color-separator, #e3e4e5);
+  background: var(--ld-semantic-color-surface-subtle, #fafafa);
+  flex-shrink: 0;
+}
+
+.theme-editor-card--padded {
+  padding: 14px;
+}
+
+/* Keep sidebar tooltips/menus above the editor scroll region */
+.theme-editor-sidebar-actions .ld-tooltip-wrapper {
+  position: relative;
+  z-index: 3;
+}
+
+.theme-editor-sidebar-actions .ld-tooltip-tooltip {
+  z-index: var(--ld-semantic-z-index-tooltip, 1070);
+}
+
+.theme-editor-split-layout .ax-resizable__panel-group {
+  height: 100%;
+}
+
+/* Case study template preview: fit hero inside theme editor frame */
+.case-study-template-preview [class~="-my-12"] {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.case-study-template-preview [data-name="Heading"] {
+  height: clamp(220px, 38vh, 420px) !important;
+}

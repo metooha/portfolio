@@ -1,7 +1,7 @@
-import hobby1Image from "@/assets/44d10a559bd5029af6d0ad8c8825825d1dab5380.png"
-import hobby2Image from "@/assets/10d0cda067425d00b1609b442126311a8c2ef767.png"
-import hobby5Image from "@/assets/567818549e99611135158f0a0441ebe5b9e55fbc.png"
-import hobby7Image from "@/assets/c159c06a416c7949298dd8b48d728f465f8a4227.png"
+import hobby1Image from "@/app/assets/pages/about/hobbies/countries-visited.png"
+import hobby2Image from "@/app/assets/pages/about/hobbies/distance-ridden.png"
+import hobby5Image from "@/app/assets/pages/about/hobbies/wipe-outs.png"
+import hobby7Image from "@/app/assets/pages/about/hobbies/board-games.png"
 
 export interface WorkExperience {
   id: string;

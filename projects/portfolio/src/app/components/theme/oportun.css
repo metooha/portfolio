@@ -1,0 +1,107 @@
+/**
+ * "Oportun" theme — Digit/Oportun rebrand palette (case study).
+ *
+ * Activate with `data-ld-theme="Oportun"`.
+ *
+ * Source palette (Oportun brand):
+ *   honeydew green       #BFEBC9
+ *   brand green          #6CDB8C
+ *   lavender accent      #B19DF5
+ */
+
+[data-ld-theme="Oportun"] {
+  --ld-primitive-font-family-sans: 'TT Commons Classic', 'Inter', -apple-system, Roboto, sans-serif;
+
+  /* ── Oportun green primitive ramp ──────────────────────────────── */
+  --ld-primitive-color-green-5: #f4fbf6;
+  --ld-primitive-color-green-10: #e8f9ed;
+  --ld-primitive-color-green-20: #d4f3dc;
+  --ld-primitive-color-green-30: #bfebca;
+  --ld-primitive-color-green-40: #9ee4b3;
+  --ld-primitive-color-green-50: #6cdb8c;
+  --ld-primitive-color-green-60: #4cc974;
+  --ld-primitive-color-green-70: #34a85c;
+  --ld-primitive-color-green-80: #2e9b58;
+  --ld-primitive-color-green-90: #248349;
+  --ld-primitive-color-green-100: #6cdb8c;
+  --ld-primitive-color-green-110: #248349;
+  --ld-primitive-color-green-120: #1d6b3b;
+  --ld-primitive-color-green-130: #16542f;
+  --ld-primitive-color-green-140: #0f3d22;
+  --ld-primitive-color-green-150: #0a2917;
+  --ld-primitive-color-green-160: #061a0f;
+  --ld-primitive-color-green-170: #030f09;
+  --ld-primitive-color-green-180: #020805;
+
+  --ld-primitive-color-blue-100: #34a85c;
+  --ld-primitive-color-blue-120: #2e9b58;
+  --ld-primitive-color-blue-140: #1d6b3b;
+
+  --ld-primitive-color-spark-100: #b19df5;
+
+  /* ── Semantic: actions ─────────────────────────────────────────── */
+  --ld-semantic-color-action-fill-primary: #2e9b58;
+  --ld-semantic-color-action-fill-primary-focused: #248349;
+  --ld-semantic-color-action-fill-primary-hovered: #1d6b3b;
+  --ld-semantic-color-action-fill-primary-pressed: #16542f;
+
+  /* ── Semantic: borders ─────────────────────────────────────────── */
+  --ld-semantic-color-border-activated: #2e9b58;
+  --ld-semantic-color-border-brand: #6cdb8c;
+  --ld-semantic-color-border-brand-bold: #248349;
+
+  /* ── Semantic: fills ───────────────────────────────────────────── */
+  --ld-semantic-color-fill-activated: #2e9b58;
+  --ld-semantic-color-fill-activated-focused: #248349;
+  --ld-semantic-color-fill-activated-hovered: #1d6b3b;
+  --ld-semantic-color-fill-activated-pressed: #16542f;
+  --ld-semantic-color-fill-activated-subtle: #f4fbf6;
+  --ld-semantic-color-fill-activated-subtle-focused: #e8f9ed;
+  --ld-semantic-color-fill-activated-subtle-hovered: #e8f9ed;
+  --ld-semantic-color-fill-activated-subtle-pressed: #d4f3dc;
+  --ld-semantic-color-fill-brand: #6cdb8c;
+  --ld-semantic-color-fill-brand-bold: #248349;
+  --ld-semantic-color-fill-brand-subtle: #bfebca;
+  --ld-semantic-color-fill-brand-subtle-focused: #9ee4b3;
+  --ld-semantic-color-fill-brand-subtle-hovered: #9ee4b3;
+  --ld-semantic-color-fill-brand-subtle-pressed: #6cdb8c;
+  --ld-semantic-color-fill-accent-green-subtle: #e8f9ed;
+  --ld-semantic-color-fill-accent-yellow: #b19df5;
+  --ld-semantic-color-fill-accent-yellow-subtle: #f4f0fe;
+
+  /* ── Semantic: surfaces ────────────────────────────────────────── */
+  --ld-semantic-color-surface-activated: #f4fbf6;
+  --ld-semantic-color-surface-activated-focused: #e8f9ed;
+  --ld-semantic-color-surface-activated-hovered: #d4f3dc;
+  --ld-semantic-color-surface-activated-pressed: #d4f3dc;
+  --ld-semantic-color-surface-brand: #bfebca;
+  --ld-semantic-color-surface-overlay-brand-subtle: #e8f9ed;
+  --ld-semantic-color-surface-overlay-inverse: #0f3d22;
+
+  /* ── Semantic: text ────────────────────────────────────────────── */
+  --ld-semantic-color-text-activated: #248349;
+  --ld-semantic-color-text-brand: #2e9b58;
+  --ld-semantic-color-text-brand-bold: #1d6b3b;
+  --ld-semantic-color-text-brand-onFill: #ffffff;
+  --ld-semantic-color-text-accent-green-onFill: #ffffff;
+  --ld-semantic-color-text-onFill-brand-subtle: #0f3d22;
+  --ld-semantic-color-text-accent-yellow: #7c5fd4;
+  --ld-semantic-color-text-accent-yellow-bold: #5b3fae;
+
+  /* ── Semantic: navigation / controls ───────────────────────────── */
+  --ld-semantic-color-topNav-fill: #34a85c;
+  --ld-semantic-color-pageNav-indicator-activated: #2e9b58;
+  --ld-semantic-color-pageNav-indicator-activated-focused: #248349;
+  --ld-semantic-color-pageNav-indicator-activated-hovered: #1d6b3b;
+  --ld-semantic-color-pageNav-indicator-activated-pressed: #16542f;
+  --ld-semantic-color-pageNav-fill-activated: #f4fbf6;
+  --ld-semantic-color-pageNav-fill-hovered: #f4fbf6;
+  --ld-semantic-color-switch-fill-activated: #2e9b58;
+  --ld-semantic-color-switch-fill-activated-focused: #248349;
+  --ld-semantic-color-switch-fill-activated-hovered: #1d6b3b;
+  --ld-semantic-color-switch-fill-activated-pressed: #16542f;
+  --ld-semantic-color-progress-fill-info: #2e9b58;
+
+  /* ── Focus ring ────────────────────────────────────────────────── */
+  --ld-semantic-focus-ring-color: #2e9b58;
+}

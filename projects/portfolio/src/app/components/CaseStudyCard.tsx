@@ -1,6 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import type { CaseStudyConfig } from "@/data/case-studies-config";
+import type { CaseStudyConfig } from "@/app/data/case-studies-config";
+import { isPageProtected } from "@/app/auth/page-protection";
+import { LockIcon } from "@/app/components/Icons/Icons";
+import { Tag } from "@/app/components/Tag/Tag";
 
 const TAG_PALETTE = [
   { bg: "#7C3AED", text: "#FFFFFF" },
@@ -21,6 +24,7 @@ export function CaseStudyCard({ caseStudy }: CaseStudyCardProps) {
   const title = caseStudy.cardTitle ?? caseStudy.title;
   const description = caseStudy.cardDescription ?? caseStudy.shortDescription;
   const isClickable = caseStudy.isPublished !== false;
+  const isProtected = isPageProtected(caseStudy.path);
 
   const heroContent =
     caseStudy.heroType === "component" && caseStudy.HeroComponent ? (
@@ -46,9 +50,21 @@ export function CaseStudyCard({ caseStudy }: CaseStudyCardProps) {
           )}
         </div>
         <div className="bg-[rgb(241,241,241)] p-8 w-full h-full flex flex-col justify-between">
-          <p className="text-xs uppercase tracking-wider mb-2 text-gray-600">
-            CASE STUDY {String(caseStudy.id).padStart(2, "0")}
-          </p>
+          <div className="flex items-center justify-between gap-2 mb-2">
+            <p className="text-xs uppercase tracking-wider text-gray-600">
+              CASE STUDY {String(caseStudy.id).padStart(2, "0")}
+            </p>
+            {isProtected ? (
+              <Tag
+                color="warning"
+                variant="secondary"
+                size="small"
+                leading={<LockIcon size="small" decorative />}
+              >
+                Password protected
+              </Tag>
+            ) : null}
+          </div>
           <h2 className="text-3xl font-bold mb-2">{title}</h2>
           <p className="text-gray-700 mb-4">{description}</p>
           <div className="flex gap-2 flex-wrap">

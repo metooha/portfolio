@@ -48,10 +48,12 @@ Apply these conventions when adding or refactoring code in `projects/portfolio/`
 
 ## Imports and Figma-generated code
 
+Case study page components live in `src/app/components/case-studies/<slug>/`.
+
 | Item | Convention | Example |
 |------|-------------|---------|
-| File name | PascalCase for components; `svg-<hash>.ts` for SVG modules | `WmDesignSystem2026.tsx`, `Xense.tsx`, `svg-bny7f.ts` |
-| Component export | Default: `export default function Name()` | `export default function WmDesignSystem2026()` |
+| File name | PascalCase for components; `svg-<hash>.ts` for SVG modules | `WmDesignSystemCaseStudy.tsx`, `XenseHero.tsx`, `svg-bny7f.ts` |
+| Component export | Default: `export default function Name()` | `export default function WmDesignSystemCaseStudy()` |
 | Internal helpers | PascalCase, non-exported | `function Frame112() { ... }` |
 
 **Note:** Names like `Frame43`, `Row10`, `Column5` come from Figma exports. Preserve them unless refactoring for clarity. Do not rename generated pieces unnecessarily.
@@ -75,7 +77,7 @@ img + PascalCase descriptor
 
 **Avoid:** `academyImage`, `designImage` (use `imgAcademy`, `imgDesign` instead).
 
-### Asset file names (in `src/assets/`)
+### Asset file names (in `src/app/assets/`)
 
 | Type | Convention | Example |
 |------|------------|---------|

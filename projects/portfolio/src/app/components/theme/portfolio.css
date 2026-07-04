@@ -1,0 +1,120 @@
+/**
+ * "Portfolio" theme — Living Design brand tokens derived from the portfolio
+ * site shell (home, about, contact, other work), not WM Case Study greens.
+ *
+ * Activate with `data-ld-theme="Portfolio"`.
+ *
+ * Source palette (from src/app/pages):
+ *   primary CTA purple   #4F39F6  (home/contact buttons, featured work heading)
+ *   CTA hover            #3d2bc4
+ *   link / accent indigo #4f46e5  (tailwind indigo-600 — about, contact links)
+ *   hero gradient        indigo-600 → purple-700
+ *   card gradients       indigo-500 → purple-600
+ *   decorative wave      #6366f1
+ *   body text            #111827 / gray-800
+ */
+
+[data-ld-theme="Portfolio"] {
+  --ld-primitive-font-family-sans: 'Inter', 'Maax', 'Sams Sans Text', -apple-system, Roboto, sans-serif;
+
+  /* ── Violet primitive ramp (portfolio brand) ───────────────────── */
+  --ld-primitive-color-green-5: #f5f3ff;
+  --ld-primitive-color-green-10: #ede9fe;
+  --ld-primitive-color-green-20: #ddd6fe;
+  --ld-primitive-color-green-30: #c4b5fd;
+  --ld-primitive-color-green-40: #a78bfa;
+  --ld-primitive-color-green-50: #8b5cf6;
+  --ld-primitive-color-green-60: #7c3aed;
+  --ld-primitive-color-green-70: #6d28d9;
+  --ld-primitive-color-green-80: #5b21b6;
+  --ld-primitive-color-green-90: #4c1d95;
+  --ld-primitive-color-green-100: #4f39f6;
+  --ld-primitive-color-green-110: #4338ca;
+  --ld-primitive-color-green-120: #3d2bc4;
+  --ld-primitive-color-green-130: #3730a3;
+  --ld-primitive-color-green-140: #312e81;
+  --ld-primitive-color-green-150: #1e1b4b;
+  --ld-primitive-color-green-160: #18181b;
+  --ld-primitive-color-green-170: #0f0f12;
+  --ld-primitive-color-green-180: #09090b;
+
+  /* Indigo accent (links, secondary brand moments) */
+  --ld-primitive-color-blue-100: #4f46e5;
+  --ld-primitive-color-blue-120: #4338ca;
+  --ld-primitive-color-blue-140: #3730a3;
+
+  /* Spark / highlight (kept warm for contrast on purple surfaces) */
+  --ld-primitive-color-spark-100: #6366f1;
+
+  /* ── Semantic: actions (primary buttons) ───────────────────────── */
+  --ld-semantic-color-action-fill-primary: #4f39f6;
+  --ld-semantic-color-action-fill-primary-focused: #4338ca;
+  --ld-semantic-color-action-fill-primary-hovered: #3d2bc4;
+  --ld-semantic-color-action-fill-primary-pressed: #3730a3;
+
+  /* ── Semantic: borders ─────────────────────────────────────────── */
+  --ld-semantic-color-border-activated: #4f39f6;
+  --ld-semantic-color-border-brand: #4f39f6;
+  --ld-semantic-color-border-brand-bold: #3730a3;
+
+  /* ── Semantic: fills ───────────────────────────────────────────── */
+  --ld-semantic-color-fill-activated: #4f39f6;
+  --ld-semantic-color-fill-activated-focused: #4338ca;
+  --ld-semantic-color-fill-activated-hovered: #3d2bc4;
+  --ld-semantic-color-fill-activated-pressed: #3730a3;
+  --ld-semantic-color-fill-activated-subtle: #f5f3ff;
+  --ld-semantic-color-fill-activated-subtle-focused: #ede9fe;
+  --ld-semantic-color-fill-activated-subtle-hovered: #ede9fe;
+  --ld-semantic-color-fill-activated-subtle-pressed: #ddd6fe;
+  --ld-semantic-color-fill-brand: #4f39f6;
+  --ld-semantic-color-fill-brand-bold: #3730a3;
+  --ld-semantic-color-fill-brand-subtle: #ede9fe;
+  --ld-semantic-color-fill-brand-subtle-focused: #ddd6fe;
+  --ld-semantic-color-fill-brand-subtle-hovered: #ddd6fe;
+  --ld-semantic-color-fill-brand-subtle-pressed: #c4b5fd;
+  --ld-semantic-color-fill-accent-green-subtle: #ede9fe;
+  --ld-semantic-color-fill-accent-yellow: #6366f1;
+  --ld-semantic-color-fill-accent-yellow-subtle: #eef2ff;
+
+  /* ── Semantic: surfaces ────────────────────────────────────────── */
+  --ld-semantic-color-surface-activated: #f5f3ff;
+  --ld-semantic-color-surface-activated-focused: #ede9fe;
+  --ld-semantic-color-surface-activated-hovered: #ddd6fe;
+  --ld-semantic-color-surface-activated-pressed: #ddd6fe;
+  --ld-semantic-color-surface-brand: #ddd6fe;
+  --ld-semantic-color-surface-overlay-brand-subtle: #ede9fe;
+  --ld-semantic-color-surface-overlay-inverse: #312e81;
+
+  /* ── Semantic: text ────────────────────────────────────────────── */
+  --ld-semantic-color-text-activated: #4338ca;
+  --ld-semantic-color-text-brand: #4f39f6;
+  --ld-semantic-color-text-brand-bold: #3730a3;
+  --ld-semantic-color-text-brand-onFill: #ffffff;
+  --ld-semantic-color-text-accent-green-onFill: #ffffff;
+  --ld-semantic-color-text-onFill-brand-subtle: #312e81;
+  --ld-semantic-color-text-accent-yellow: #4338ca;
+  --ld-semantic-color-text-accent-yellow-bold: #312e81;
+
+  /* ── Semantic: navigation / controls ───────────────────────────── */
+  --ld-semantic-color-topNav-fill: #ffffff;
+  --ld-semantic-color-topNav-fill-hovered: rgba(0, 0, 0, 0.06);
+  --ld-semantic-color-topNav-fill-pressed: rgba(0, 0, 0, 0.1);
+  --ld-semantic-color-topNav-separator: #e6e6e8;
+  --ld-semantic-color-topNav-text-onFill: #2e2f32;
+  --ld-semantic-color-topNav-text-onFill-hovered: #2e2f32;
+  --ld-semantic-color-topNav-text-onFill-pressed: #2e2f32;
+  --ld-semantic-color-pageNav-indicator-activated: #4f39f6;
+  --ld-semantic-color-pageNav-indicator-activated-focused: #4338ca;
+  --ld-semantic-color-pageNav-indicator-activated-hovered: #3d2bc4;
+  --ld-semantic-color-pageNav-indicator-activated-pressed: #3730a3;
+  --ld-semantic-color-pageNav-fill-activated: #f5f3ff;
+  --ld-semantic-color-pageNav-fill-hovered: #f5f3ff;
+  --ld-semantic-color-switch-fill-activated: #4f39f6;
+  --ld-semantic-color-switch-fill-activated-focused: #4338ca;
+  --ld-semantic-color-switch-fill-activated-hovered: #3d2bc4;
+  --ld-semantic-color-switch-fill-activated-pressed: #3730a3;
+  --ld-semantic-color-progress-fill-info: #4f39f6;
+
+  /* ── Focus ring ────────────────────────────────────────────────── */
+  --ld-semantic-focus-ring-color: #4f39f6;
+}

@@ -1,10 +1,7 @@
 import React, { useEffect } from "react";
 import { useParams, Navigate } from "react-router-dom";
 import { CaseStudyTemplate } from "@/app/components/CaseStudyTemplate";
-import { getCaseStudyById, getAdjacentCaseStudies, isCaseStudyPublished } from "@/data/case-studies-config";
-import WmDesignSystem2026 from "@/imports/WmDesignSystem2026";
-import EverydaySansCaseStudy from "@/imports/EverydaySansCaseStudy";
-import AirtableCaseStudy from "@/imports/AirtableCaseStudy";
+import { getCaseStudyById, getAdjacentCaseStudies, isCaseStudyPublished } from "@/app/data/case-studies-config";
 
 /** Scroll to top when navigating to a case study (so user lands at top of page). */
 function useScrollToTopOnCaseStudy() {
@@ -16,15 +13,7 @@ function useScrollToTopOnCaseStudy() {
 
 function CaseStudyTemplatePage({ caseStudy }: { caseStudy: NonNullable<ReturnType<typeof getCaseStudyById>> }) {
   const { prev, next } = getAdjacentCaseStudies(caseStudy.id);
-
-  const gradientClass =
-    caseStudy.id === "2"
-      ? "bg-gradient-to-br from-purple-50 to-indigo-50"
-      : caseStudy.id === "3"
-        ? "bg-gradient-to-br from-blue-50 to-cyan-50"
-        : caseStudy.id === "4"
-          ? "bg-gradient-to-br from-orange-50 to-red-50"
-          : "";
+  const gradientClass = caseStudy.heroGradientClass ?? "";
 
   const hero =
     caseStudy.heroType === "image" && caseStudy.heroImage ? (
@@ -47,7 +36,7 @@ function CaseStudyTemplatePage({ caseStudy }: { caseStudy: NonNullable<ReturnTyp
       </div>
     ) : null;
 
-  const ContentComponent = caseStudy.ContentComponent;
+  const ContentComponent = caseStudy.ContentComponent ?? (() => null);
 
   return (
     <CaseStudyTemplate
@@ -74,25 +63,18 @@ export function CaseStudyPage() {
     return <Navigate to="/" replace />;
   }
 
-  if (id === "1") {
-    return <WmDesignSystem2026 />;
-  }
-
-  if (id === "5") {
-    return <EverydaySansCaseStudy />;
-  }
-
-  if (id === "6") {
-    return <AirtableCaseStudy />;
+  const caseStudy = getCaseStudyById(id);
+  if (!caseStudy) {
+    return <Navigate to="/" replace />;
   }
 
   if (!isCaseStudyPublished(id)) {
     return <Navigate to="/" replace />;
   }
 
-  const caseStudy = getCaseStudyById(id);
-  if (!caseStudy) {
-    return <Navigate to="/" replace />;
+  if (caseStudy.PageComponent) {
+    const PageComponent = caseStudy.PageComponent;
+    return <PageComponent />;
   }
 
   return <CaseStudyTemplatePage caseStudy={caseStudy} />;

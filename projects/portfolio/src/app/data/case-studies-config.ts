@@ -1,24 +1,32 @@
 import React from "react";
-import imgDesign from "figma:asset/840e6895ac600c62a54c6dbd6cbb35a7f6faa2e0.png";
-import imgXense from "figma:asset/1ea8d1f27e915c6e54282fce05a4bfbf9fd1b925.png";
-import imgAcademy from "figma:asset/42ca637efa8254de788bf106bc9cc80a6048f696.png";
+import imgDesign from "@/app/assets/pages/case-study/wm-rebrand/design.png";
+import imgXense from "@/app/assets/pages/case-study/wm-rebrand/xense.png";
+import imgAcademy from "@/app/assets/pages/case-study/wm-rebrand/academy.png";
 import hoverImage from "figma:asset/c22af8bfcb65f93d01f2862c0d18f313ac7bc96a.png";
-import wmNewImage from "figma:asset/aaa7dd8ee1fac7cf707385537cb8b691c2a4157e.png";
-import Xense from "@/imports/Xense";
-import Academy from "@/imports/Academy";
-import { CaseStudyHoverContent } from "@/app/components/content/CaseStudyHoverContent";
-import { CaseStudyXenseContent } from "@/app/components/content/CaseStudyXenseContent";
-import { CaseStudyAcademyContent } from "@/app/components/content/CaseStudyAcademyContent";
-import imgEverydaySansThumb from "@/assets/everyday-sans/Typography Adjustment examples.png";
-import imgAirtableThumb from "@/assets/everyday-sans/Visual Tweaking.png";
+import wmNewImage from "@/app/assets/pages/case-study/wm-rebrand/wm-new-image.png";
+import XenseHero from "@/app/components/case-studies/heroes/XenseHero";
+import AcademyHero from "@/app/components/case-studies/heroes/AcademyHero";
+import WmDesignSystemCaseStudy from "@/app/components/case-studies/wm-rebrand/WmDesignSystemCaseStudy";
+import EverydaySansCaseStudy from "@/app/components/case-studies/everyday-sans/EverydaySansCaseStudy";
+import AirtableCaseStudy from "@/app/components/case-studies/airtable-sot/AirtableCaseStudy";
+import { CaseStudyHoverContent } from "@/app/components/case-studies/hover/CaseStudyHoverContent";
+import { CaseStudyXenseContent } from "@/app/components/case-studies/xense/CaseStudyXenseContent";
+import { CaseStudyAcademyContent } from "@/app/components/case-studies/academy/CaseStudyAcademyContent";
+import imgEverydaySansThumb from "@/app/assets/pages/case-study/everyday-sans/typography-adjustment-examples.png";
+import imgAirtableThumb from "@/app/assets/pages/case-study/everyday-sans/visual-tweaking.png";
 import type { ProjectLink } from "@/app/components/CaseStudyTemplate";
+import type { ThemeName } from "@/app/components/utils/Theming";
 
 export interface CaseStudyConfig {
   id: string;
   path: string;
   title: string;
+  /** Theme applied when no page-level override is set. */
+  defaultTheme?: ThemeName;
   /** Hide detail route while content is still in progress */
   isPublished?: boolean;
+  /** Default client-side access password (overridable via admin dashboard). */
+  accessPassword?: string;
   /** For home card & prev/next */
   shortDescription: string;
   /** For overview section */
@@ -33,9 +41,14 @@ export interface CaseStudyConfig {
   tags: string[];
   heroType: "image" | "component";
   heroImage?: string;
+  /** Optional gradient behind hero for generic template pages */
+  heroGradientClass?: string;
   HeroComponent?: React.ComponentType;
   thumbnail: string;
-  ContentComponent: React.ComponentType;
+  /** Body content for generic template pages */
+  ContentComponent?: React.ComponentType;
+  /** Full-page component for special routing (replaces template page) */
+  PageComponent?: React.ComponentType;
   overviewLogo?: React.ReactNode;
   overviewClient?: string;
   overviewCategory?: string;
@@ -46,6 +59,7 @@ const CASE_STUDIES: CaseStudyConfig[] = [
     id: "1",
     path: "/case-study/1",
     title: "Designing a scalable system for a digital rebrand",
+    defaultTheme: "WM",
     isPublished: true,
     cardTitle: "WM.com Rebrand: Re-branding WM.com",
     shortDescription:
@@ -74,7 +88,7 @@ const CASE_STUDIES: CaseStudyConfig[] = [
     heroType: "image",
     heroImage: imgDesign,
     thumbnail: wmNewImage,
-    ContentComponent: (() => null) as React.ComponentType,
+    PageComponent: WmDesignSystemCaseStudy,
     overviewClient: "Waste Management",
     overviewCategory: "Design Systems, Branding",
   },
@@ -82,7 +96,8 @@ const CASE_STUDIES: CaseStudyConfig[] = [
     id: "2",
     path: "/case-study/2",
     title: "Hover - Digital Assistant Design System",
-    isPublished: false,
+    accessPassword: import.meta.env.VITE_HOVER_CASE_STUDY_PASSWORD ?? "hover",
+    isPublished: true,
     shortDescription:
       "Hover is a digital assistant web app concept for teachers in which they can find resources and assignments to share with students.",
     cardDescription:
@@ -104,6 +119,7 @@ const CASE_STUDIES: CaseStudyConfig[] = [
     tags: ["Design System", "Digital Assistant", "Education"],
     heroType: "image",
     heroImage: hoverImage,
+    heroGradientClass: "bg-gradient-to-br from-purple-50 to-indigo-50",
     thumbnail: hoverImage,
     ContentComponent: CaseStudyHoverContent,
   },
@@ -111,7 +127,7 @@ const CASE_STUDIES: CaseStudyConfig[] = [
     id: "3",
     path: "/case-study/3",
     title: "Xense Biotech",
-    isPublished: false,
+    isPublished: true,
     shortDescription:
       "Xense Biotech is a leading company in the medical imaging industry, specializing in advanced x-ray technology. Their flagship product, uTomoTM, is a groundbreaking image acquisition and reconstruction system.",
     cardDescription:
@@ -133,7 +149,8 @@ const CASE_STUDIES: CaseStudyConfig[] = [
     navAccentColor: "#0891b2",
     tags: ["Desktop", "Biotech", "UI Kit"],
     heroType: "component",
-    HeroComponent: Xense,
+    HeroComponent: XenseHero,
+    heroGradientClass: "bg-gradient-to-br from-blue-50 to-cyan-50",
     thumbnail: imgXense,
     ContentComponent: CaseStudyXenseContent,
   },
@@ -141,7 +158,7 @@ const CASE_STUDIES: CaseStudyConfig[] = [
     id: "4",
     path: "/case-study/4",
     title: "Academy Sports + Outdoors Branding",
-    isPublished: false,
+    isPublished: true,
     shortDescription:
       "Direct Mail catalogs are delivered every quarter at Academy Sports + Outdoors. The main categories are for sports such as golf, baseball/softball, football, athletics, fishing, and hunting.",
     cardDescription:
@@ -163,7 +180,8 @@ const CASE_STUDIES: CaseStudyConfig[] = [
     navAccentColor: "#ea580c",
     tags: ["Branding", "Print", "Digital", "Campaigns"],
     heroType: "component",
-    HeroComponent: Academy,
+    HeroComponent: AcademyHero,
+    heroGradientClass: "bg-gradient-to-br from-orange-50 to-red-50",
     thumbnail: imgAcademy,
     ContentComponent: CaseStudyAcademyContent,
   },
@@ -171,6 +189,7 @@ const CASE_STUDIES: CaseStudyConfig[] = [
     id: "5",
     path: "/case-study/5",
     title: "Everyday Sans UI — Brand and performance, without compromise",
+    defaultTheme: "Walmart",
     isPublished: true,
     cardTitle: "Everyday Sans UI",
     shortDescription:
@@ -199,7 +218,7 @@ const CASE_STUDIES: CaseStudyConfig[] = [
     heroType: "image",
     heroImage: imgEverydaySansThumb,
     thumbnail: imgEverydaySansThumb,
-    ContentComponent: (() => null) as React.ComponentType,
+    PageComponent: EverydaySansCaseStudy,
     overviewClient: "Walmart Commerce Platform",
     overviewCategory: "Living Design, Typography",
   },
@@ -207,6 +226,7 @@ const CASE_STUDIES: CaseStudyConfig[] = [
     id: "6",
     path: "/case-study/6",
     title: "Airtable as Source of Truth",
+    defaultTheme: "Walmart",
     isPublished: true,
     cardTitle: "Airtable as Source of Truth",
     shortDescription:
@@ -235,11 +255,21 @@ const CASE_STUDIES: CaseStudyConfig[] = [
     heroType: "image",
     heroImage: imgAirtableThumb,
     thumbnail: imgAirtableThumb,
-    ContentComponent: (() => null) as React.ComponentType,
+    PageComponent: AirtableCaseStudy,
     overviewClient: "Walmart Commerce Platform",
     overviewCategory: "Living Design, Design Tokens",
   },
 ];
+
+export function getAllCaseStudies(): CaseStudyConfig[] {
+  return CASE_STUDIES;
+}
+
+export function getCaseStudyAccessPassword(path: string): string | null {
+  const study = CASE_STUDIES.find((entry) => entry.path === path);
+  const password = study?.accessPassword;
+  return password?.trim() ? password : null;
+}
 
 export function getCaseStudyById(id: string): CaseStudyConfig | undefined {
   return CASE_STUDIES.find((cs) => cs.id === id);

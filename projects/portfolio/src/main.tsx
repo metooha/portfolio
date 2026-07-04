@@ -1,8 +1,27 @@
+import { createRoot } from "react-dom/client";
+import App from "./app/App.tsx";
+import "./app/styles/index.css";
+import "./app/components/theme/index.css";
+import {
+  applyThemeForPath,
+  initMegaMode,
+  prepareThemeStorage,
+} from "./app/components/utils/themeManager";
 
-  import { createRoot } from "react-dom/client";
-  import App from "./app/App.tsx";
-  import "./styles/index.css";
-  import "./living-design/theme/index.css";
+function getInitialPathname(): string {
+  const basename = import.meta.env.BASE_URL.replace(/\/$/, "");
+  const { pathname } = window.location;
+  if (!basename) return pathname || "/";
+  if (pathname === basename) return "/";
+  if (pathname.startsWith(`${basename}/`)) {
+    return pathname.slice(basename.length) || "/";
+  }
+  return pathname || "/";
+}
 
-  createRoot(document.getElementById("root")!).render(<App />);
+prepareThemeStorage();
+initMegaMode();
+applyThemeForPath(getInitialPathname());
+
+createRoot(document.getElementById("root")!).render(<App />);
   

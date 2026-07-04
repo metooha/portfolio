@@ -1,34 +1,33 @@
 import {
   Accordion,
-  AccordionContent,
+  AccordionPanel,
   AccordionItem,
-  AccordionTrigger,
-} from "@/app/components/ui/accordion";
-import gardenImage from "figma:asset/bcba4309c4413f66ba1670f338c909933eea6d40.png";
+  AccordionHeader,
+} from "@/app/components/patterns/Accordion";
+import { Link } from "@/app/components/Link/Link";
+import gardenImage from "@/app/assets/pages/about/about-me.png";
 import { motion } from "motion/react";
 import React, { useState, useRef, useEffect } from "react";
-import timeline1 from "figma:asset/f6b670d7136c94aefa409fc41093bb3a8321cd5c.png";
-import timeline2 from "figma:asset/dfc3f48eee89232d687cb7e44a79036645f8d842.png";
-import timeline3 from "figma:asset/b43fef14eebad328ddd1d90efb04565737b40d74.png";
-import timeline4 from "figma:asset/b784861b3767300678432b939093af03ca7985df.png";
-import timeline5 from "figma:asset/d0c49a36dfc6602b8ed37c85d29d447f5c77bd83.png";
-import timeline6 from "figma:asset/ee9fad5fe71fead45570ab7c722c95220767f2a4.png";
-import timeline7 from "figma:asset/c02effe235772ba9bbd59129d76803ab6ef8e15a.png";
-import hobby1 from "figma:asset/44d10a559bd5029af6d0ad8c8825825d1dab5380.png";
-import hobby2 from "figma:asset/10d0cda067425d00b1609b442126311a8c2ef767.png";
-import hobby3 from "figma:asset/63e7ed985a2f7e61dc78fb9d9749374af7ce97d1.png";
-import hobby4 from "figma:asset/385a43c8506f3781b2f4d988bdaa70702aa5ee7b.png";
-import hobby5 from "figma:asset/567818549e99611135158f0a0441ebe5b9e55fbc.png";
-import hobby6 from "figma:asset/279f8d1ef1e899b016c01c20722d7b2a3d1559cb.png";
-import hobby7 from "figma:asset/c159c06a416c7949298dd8b48d728f465f8a4227.png";
-import hobby8 from "figma:asset/0e73aaad0f2d982b69d9935a91e290ed0671c87f.png";
-import aiIllustration from "figma:asset/bf5771133342b8de9c2234960f7c5a720d64c50e.png";
-import coffeeIllustration from "figma:asset/733a7871df6fcaf7034192ea656e0879f5c27768.png";
-import sparklesIllustration from "figma:asset/abceb447c7b4723a4186029f5f69bb90179b0e6a.png";
-import pencilIllustration from "figma:asset/a11b8f2d4e3a31105c0a88c92c8abee704d829b5.png";
-import peaceIllustration from "figma:asset/afce2a00dc589e65b89908eeb96feb128961ff73.png";
-import colorSwatchIllustration from "figma:asset/66fffb1db7cc8a8b4d18368a523c4d55f2aa5019.png";
-import smileyIllustration from "figma:asset/c4148cce376a0d6238affeede96c2415696c2383.png";
+import timeline1 from "@/app/assets/pages/about/carbon.png";
+import timeline2 from "@/app/assets/pages/about/retail.png";
+import timeline3 from "@/app/assets/pages/about/xense-bio.png";
+import timeline4 from "@/app/assets/pages/about/design-system.png";
+import timeline5 from "@/app/assets/pages/about/desktop.png";
+import timeline6 from "@/app/assets/pages/about/digit.png";
+import timeline7 from "@/app/assets/pages/about/oportun.png";
+import hobby1 from "@/app/assets/pages/about/hobbies/countries-visited.png";
+import hobby2 from "@/app/assets/pages/about/hobbies/distance-ridden.png";
+import hobby3 from "@/app/assets/pages/about/plants.png";
+import hobby4 from "@/app/assets/pages/about/white-sands-national-park.png";
+import hobby5 from "@/app/assets/pages/about/hobbies/wipe-outs.png";
+import hobby6 from "@/app/assets/pages/about/fishing.png";
+import hobby7 from "@/app/assets/pages/about/hobbies/board-games.png";
+import hobby8 from "@/app/assets/pages/about/tahoe.png";
+import coffeeIllustration from "@/app/assets/pages/profile/shared/coffee-illustration.png";
+import sparklesIllustration from "@/app/assets/pages/profile/shared/sparkles-illustration.png";
+import pencilIllustration from "@/app/assets/pages/profile/shared/pencil-illustration.png";
+import peaceIllustration from "@/app/assets/pages/profile/shared/peace-illustration.png";
+import colorSwatchIllustration from "@/app/assets/pages/profile/shared/color-swatch-illustration.png";
 
 export function About() {
   const [isPaused, setIsPaused] = useState(false);
@@ -118,9 +117,18 @@ export function About() {
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-indigo-600 mb-6 md:mb-8">My Experience</h2>
         
           <p className="text-base text-gray-800 mb-2">
-            View the entire history on <a href="https://www.linkedin.com/in/haamy/" target="_blank" rel="noopener noreferrer" className="text-indigo-600 underline font-medium">LinkedIn</a>.
-          
-            <span> Download my <a href="https://drive.google.com/file/d/1Ey7f4JafSZUQ2PZdavkqzrZTLgSGfO2M/view?usp=drive_link" target="_blank" rel="noopener noreferrer" className="text-indigo-600 underline font-medium">resume</a>.</span>
+            View the entire history on{" "}
+            <Link href="https://www.linkedin.com/in/haamy/" target="_blank">
+              LinkedIn
+            </Link>
+            . Download my{" "}
+            <Link
+              href="https://drive.google.com/file/d/1Ey7f4JafSZUQ2PZdavkqzrZTLgSGfO2M/view?usp=drive_link"
+              target="_blank"
+            >
+              resume
+            </Link>
+            .
           </p>
         </div>
 
@@ -247,15 +255,15 @@ export function About() {
           </div>
         </div>
 
-        <Accordion type="single" collapsible defaultValue="walmart-current" className="w-full mt-8">
+        <Accordion collapsible defaultOpenItems={["walmart-current"]} multiple={false} className="w-full mt-8">
           <AccordionItem value="walmart-current">
-            <AccordionTrigger className="text-left hover:no-underline">
+            <AccordionHeader className="text-left hover:no-underline">
               <div className="flex flex-col items-start">
                 <div className="font-semibold">Principal UX Designer, Platform & Design Systems - Walmart</div>
                 <div className="text-sm text-gray-600">San Bruno, CA | 2023 - Present</div>
               </div>
-            </AccordionTrigger>
-            <AccordionContent>
+            </AccordionHeader>
+            <AccordionPanel>
               <div className="pt-4 space-y-3">
                 <ul className="space-y-2">
                   <li className="flex items-center gap-2">
@@ -288,17 +296,17 @@ export function About() {
                   </li>
                 </ul>
               </div>
-            </AccordionContent>
+            </AccordionPanel>
           </AccordionItem>
 
           <AccordionItem value="oportun">
-            <AccordionTrigger className="text-left hover:no-underline">
+            <AccordionHeader className="text-left hover:no-underline">
               <div className="flex flex-col items-start">
                 <div className="font-semibold">Lead Product Designer, Design Systems - Oportun</div>
                 <div className="text-sm text-gray-600">2023</div>
               </div>
-            </AccordionTrigger>
-            <AccordionContent>
+            </AccordionHeader>
+            <AccordionPanel>
               <div className="pt-4 space-y-3">
                 <ul className="space-y-2">
                   <li className="flex items-center gap-2">
@@ -315,17 +323,17 @@ export function About() {
                   </li>
                 </ul>
               </div>
-            </AccordionContent>
+            </AccordionPanel>
           </AccordionItem>
 
           <AccordionItem value="digit">
-            <AccordionTrigger className="text-left hover:no-underline">
+            <AccordionHeader className="text-left hover:no-underline">
               <div className="flex flex-col items-start">
                 <div className="font-semibold">Lead Product Designer, Design Systems - Digit</div>
                 <div className="text-sm text-gray-600">2022 - 2023</div>
               </div>
-            </AccordionTrigger>
-            <AccordionContent>
+            </AccordionHeader>
+            <AccordionPanel>
               <div className="pt-4 space-y-3">
                 <ul className="space-y-2">
                   <li className="flex items-center gap-2">
@@ -338,17 +346,17 @@ export function About() {
                   </li>
                 </ul>
               </div>
-            </AccordionContent>
+            </AccordionPanel>
           </AccordionItem>
 
           <AccordionItem value="carbon">
-            <AccordionTrigger className="text-left hover:no-underline">
+            <AccordionHeader className="text-left hover:no-underline">
               <div className="flex flex-col items-start">
                 <div className="font-semibold">Lead Product Designer - Carbon</div>
                 <div className="text-sm text-gray-600">2022</div>
               </div>
-            </AccordionTrigger>
-            <AccordionContent>
+            </AccordionHeader>
+            <AccordionPanel>
               <div className="pt-4 space-y-3">
                 <ul className="space-y-2">
                   <li className="flex items-center gap-2">
@@ -361,17 +369,17 @@ export function About() {
                   </li>
                 </ul>
               </div>
-            </AccordionContent>
+            </AccordionPanel>
           </AccordionItem>
 
           <AccordionItem value="waste-principal">
-            <AccordionTrigger className="text-left hover:no-underline">
+            <AccordionHeader className="text-left hover:no-underline">
               <div className="flex flex-col items-start">
                 <div className="font-semibold">Principal Product Designer - Waste Management</div>
                 <div className="text-sm text-gray-600">2019 - 2022</div>
               </div>
-            </AccordionTrigger>
-            <AccordionContent>
+            </AccordionHeader>
+            <AccordionPanel>
               <div className="pt-4 space-y-3">
                 <ul className="space-y-2">
                   <li className="flex items-center gap-2">
@@ -384,7 +392,7 @@ export function About() {
                   </li>
                 </ul>
               </div>
-            </AccordionContent>
+            </AccordionPanel>
           </AccordionItem>
         </Accordion>
 

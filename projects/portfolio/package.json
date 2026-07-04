@@ -6,7 +6,9 @@
   "scripts": {
     "build": "vite build",
     "dev": "vite",
-    "new-case-study-brief": "node scripts/new-case-study-brief.mjs"
+    "preview": "vite build --mode local && vite preview",
+    "new-case-study-brief": "node scripts/new-case-study-brief.mjs",
+    "lint:components": "node scripts/check-no-lucide-in-pages.mjs"
   },
   "dependencies": {
     "@emotion/react": "11.14.0",

@@ -4,8 +4,11 @@ import fs from 'fs'
 import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
 
-const assetsDir = path.resolve(__dirname, 'src/assets')
-const fallbackAsset = path.resolve(assetsDir, '840e6895ac600c62a54c6dbd6cbb35a7f6faa2e0.png')
+const assetsDir = path.resolve(__dirname, 'src/app/assets')
+const fallbackAsset = path.resolve(
+  assetsDir,
+  'pages/case-study/wm-rebrand/design.png',
+)
 
 function figmaAssetPlugin() {
   return {
@@ -42,7 +45,7 @@ function copyIndexTo404Plugin() {
   }
 }
 
-export default defineConfig(({ command }) => ({
+export default defineConfig(({ command, mode }) => ({
   plugins: [
     figmaAssetPlugin(),
     // The React and Tailwind plugins are both required for Make, even if
@@ -60,13 +63,15 @@ export default defineConfig(({ command }) => ({
   server: {
     host: 'localhost',
     port: 5173,
+    strictPort: true,
     hmr: true,
     open: true,
   },
   preview: {
     host: 'localhost',
     port: 5173,
+    strictPort: true,
   },
-  // Use root base in dev so Cursor browser can open http://localhost:5173
-  base: command === 'build' ? '/portfolio/' : '/',
+  // GitHub Pages needs /portfolio/; local dev and preview should run at localhost root.
+  base: command === 'build' && mode === 'production' ? '/portfolio/' : '/',
 }))

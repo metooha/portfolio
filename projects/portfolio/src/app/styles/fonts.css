@@ -1,149 +1,35 @@
-/* Google Fonts - Inter */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+/* Portfolio + Figma import fonts — bundled under walmart-assets/fonts */
 
-/* Font family definitions for Figma imports */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Inter'), local('Inter Regular');
-}
+@import '../assets/walmart-assets/fonts/inter/font.css';
+@import '../assets/walmart-assets/fonts/maax/font.css';
+@import '../assets/walmart-assets/fonts/calibre/font.css';
+@import '../assets/walmart-assets/fonts/tt-commons/font.css';
 
+/* Figma export aliases for Inter */
 @font-face {
   font-family: 'Inter:Regular';
   font-style: normal;
   font-weight: 400;
-  src: local('Inter'), local('Inter Regular');
+  src: local('Inter'), url('../assets/walmart-assets/fonts/inter/InterVariable.woff2') format('woff2');
 }
 
 @font-face {
   font-family: 'Inter:Medium';
   font-style: normal;
   font-weight: 500;
-  src: local('Inter Medium'), local('Inter-Medium');
+  src: local('Inter Medium'), url('../assets/walmart-assets/fonts/inter/InterVariable.woff2') format('woff2');
 }
 
 @font-face {
   font-family: 'Inter:Semi_Bold';
   font-style: normal;
   font-weight: 600;
-  src: local('Inter SemiBold'), local('Inter-SemiBold');
+  src: local('Inter SemiBold'), url('../assets/walmart-assets/fonts/inter/InterVariable.woff2') format('woff2');
 }
 
 @font-face {
   font-family: 'Inter:Bold';
   font-style: normal;
   font-weight: 700;
-  src: local('Inter Bold'), local('Inter-Bold');
-}
-
-/* Calibre fallback to system fonts */
-@font-face {
-  font-family: 'Calibre-R';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Helvetica Neue'), local('Helvetica'), local('Arial');
-}
-
-@font-face {
-  font-family: 'Calibre-R:Regular';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Helvetica Neue'), local('Helvetica'), local('Arial');
-}
-
-@font-face {
-  font-family: 'Calibre-R:Medium';
-  font-style: normal;
-  font-weight: 500;
-  src: local('Helvetica Neue Medium'), local('Helvetica'), local('Arial');
-}
-
-@font-face {
-  font-family: 'Calibre-R:Semibold';
-  font-style: normal;
-  font-weight: 600;
-  src: local('Helvetica Neue Bold'), local('Helvetica Bold'), local('Arial');
-}
-
-/* Maax */
-@font-face {
-  font-family: 'Maax';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url('../assets/fonts/maax/Maax.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'Maax:Regular';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url('../assets/fonts/maax/Maax.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'Maax:Medium';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url('../assets/fonts/maax/Maax-Medium.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'Maax:Bold';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url('../assets/fonts/maax/Maax-Black.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'Maax:Black';
-  font-style: normal;
-  font-weight: 900;
-  font-display: swap;
-  src: url('../assets/fonts/maax/Maax-Black.ttf') format('truetype');
-}
-
-/* DIN_OT */
-@font-face {
-  font-family: 'DIN_OT';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url('../assets/fonts/din/DINOT.otf') format('opentype');
-}
-
-@font-face {
-  font-family: 'DIN_OT:Regular';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url('../assets/fonts/din/DINOT.otf') format('opentype');
-}
-
-@font-face {
-  font-family: 'DIN_OT:Medium';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url('../assets/fonts/din/DINOT-Medium.otf') format('opentype');
-}
-
-@font-face {
-  font-family: 'DIN_OT:Bold';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url('../assets/fonts/din/DINOT-Bold.otf') format('opentype');
-}
-
-@font-face {
-  font-family: 'DIN_OT:Black';
-  font-style: normal;
-  font-weight: 900;
-  font-display: swap;
-  src: url('../assets/fonts/din/DINOT-Black.otf') format('opentype');
+  src: local('Inter Bold'), url('../assets/walmart-assets/fonts/inter/InterVariable.woff2') format('woff2');
 }

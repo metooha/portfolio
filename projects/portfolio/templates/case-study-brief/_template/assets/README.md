@@ -1,6 +1,6 @@
 # Brief pack assets
 
-Place final exports here before zipping or handing off. After implementation, files typically land in `src/assets/` (and may use `figma:asset/<hash>.png` if tied to Figma exports—see Vite config).
+Place final exports here before zipping or handing off. After implementation, files typically land in `src/app/assets/` (and may use `figma:asset/<hash>.png` if tied to Figma exports—see Vite config).
 
 ## Required (for manifest)
 

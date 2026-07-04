@@ -1,0 +1,30 @@
+---
+description: LD core component adherence — no raw HTML form elements in portfolio UI
+alwaysApply: true
+---
+
+# Portfolio Core Adherence
+
+Read `agent-context/core-adherence.md` before writing UI.
+
+## Hard rules
+
+- MUST import UI from `@/app/components/` (Button, TextField, TextArea, Select, Link, etc.)
+- MUST NOT use raw `<input>`, `<textarea>`, `<select>`, or styled `<button>` in pages/auth/header when LD core exists
+- MUST NOT import `lucide-react` in `src/app/pages/`, `src/app/auth/`, `header.tsx`, `footer.tsx`
+- MUST use LD `Link` for external `href`; `react-router-dom` `Link` for internal SPA routes only
+- MUST run `pnpm run build` from `projects/portfolio/` after UI changes
+
+## Component mapping
+
+| Need | Import |
+|------|--------|
+| Actions | `@/app/components/Button/Button` |
+| Icon actions | `@/app/components/IconButton/IconButton` |
+| Text inputs | `@/app/components/TextField/TextField` |
+| Multi-line | `@/app/components/TextArea/TextArea` |
+| External links | `@/app/components/Link/Link` |
+| Icons | `@/app/components/Icons/Icons` |
+| Layout | `@/app/components/layout` |
+
+Full inventory and API patterns: `agent-context/core-adherence.md`

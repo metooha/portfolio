@@ -23,6 +23,6 @@ After scaffolding, `__BRIEF_SLUG__` matches the folder name (e.g. `acme-platform
 
 In the portfolio repo, the Waste Management study is the richest example:
 
-- [`src/imports/WmDesignSystem2026.tsx`](../src/imports/WmDesignSystem2026.tsx)
-- Config entry with `id: "1"` in [`src/data/case-studies-config.ts`](../src/data/case-studies-config.ts)
-- Special route in [`src/app/pages/case-study-page.tsx`](../src/app/pages/case-study-page.tsx)
+- [`src/app/components/case-studies/wm-rebrand/WmDesignSystemCaseStudy.tsx`](../src/app/components/case-studies/wm-rebrand/WmDesignSystemCaseStudy.tsx)
+- Config entry with `id: "1"` in [`src/app/data/case-studies-config.ts`](../src/app/data/case-studies-config.ts)
+- `PageComponent` on config entry in [`src/app/data/case-studies-config.ts`](../src/app/data/case-studies-config.ts)

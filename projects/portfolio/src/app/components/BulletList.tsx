@@ -1,4 +1,6 @@
 import React from "react";
+import { parseHex, contrastColor } from "@/app/components/utils/colorUtils";
+import { Body } from "@/app/components/Text/Text";
 
 interface BulletItem {
   text: string;
@@ -8,31 +10,48 @@ interface BulletItem {
 
 interface BulletListProps {
   items: BulletItem[];
-  /** Accent color for the number badge */
+  /** Overrides the default positive fill token for the number badge */
   accentColor?: string;
   className?: string;
 }
 
-export function BulletList({ items, accentColor = "#207442", className = "" }: BulletListProps) {
+export function BulletList({
+  items,
+  accentColor,
+  className = "",
+}: BulletListProps) {
+  const markerStyle = accentColor
+    ? ({
+        "--case-study-bullet-fill": accentColor,
+        ...(parseHex(accentColor)
+          ? { "--case-study-bullet-text": contrastColor(parseHex(accentColor)!) }
+          : {}),
+      } as React.CSSProperties)
+    : undefined;
+
   return (
-    <div className={`flex flex-col gap-4 items-start relative shrink-0 w-full ${className}`}>
+    <div
+      className={`flex flex-col items-start relative shrink-0 w-full ${className}`}
+      style={{ gap: "var(--ld-semantic-spacing-200, 1rem)" }}
+    >
       {items.map((item, i) => (
         <div
           key={i}
-          className="flex gap-4 items-start relative shrink-0 w-full"
+          className="flex items-start relative shrink-0 w-full"
+          style={{ gap: "var(--ld-semantic-spacing-200, 1rem)" }}
           data-name="Body / Bullet Point"
         >
-          <div
-            className="flex flex-col items-center justify-center min-h-[32px] min-w-[32px] overflow-clip p-[6px] relative rounded-full shrink-0 text-center"
-            style={{ backgroundColor: accentColor }}
-          >
-            <span className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-normal not-italic text-[12px] text-white">
-              {item.label ?? i + 1}
-            </span>
+          <div className="ld-case-study-bullet-marker" style={markerStyle}>
+            {item.label ?? i + 1}
           </div>
-          <p className="flex-[1_0_0] font-['Inter:Regular',sans-serif] font-normal leading-5 min-h-px min-w-px not-italic relative text-[#4e4f4e] text-[16px] whitespace-pre-wrap">
+          <Body
+            as="p"
+            size="medium"
+            color="subtle"
+            UNSAFE_className="flex-[1_0_0] min-h-px min-w-px relative whitespace-pre-wrap"
+          >
             {item.text}
-          </p>
+          </Body>
         </div>
       ))}
     </div>

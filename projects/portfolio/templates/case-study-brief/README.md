@@ -1,6 +1,6 @@
 # Case study brief template
 
-This folder defines a **zip-friendly brief pack** for new portfolio case studies that match the depth and layout style of the Waste Management study ([`src/imports/WmDesignSystem2026.tsx`](../../src/imports/WmDesignSystem2026.tsx)): long-form React content, `CaseStudyTemplate`, shared UI building blocks, and many assets.
+This folder defines a **zip-friendly brief pack** for new portfolio case studies that match the depth and layout style of the Waste Management study ([`src/app/components/case-studies/wm-rebrand/WmDesignSystemCaseStudy.tsx`](../../src/app/components/case-studies/wm-rebrand/WmDesignSystemCaseStudy.tsx)): long-form React content, `CaseStudyTemplate`, shared UI building blocks, and many assets.
 
 ## Quick start
 
@@ -23,7 +23,7 @@ This copies `_template/` to `briefs/<kebab-slug>/` and substitutes placeholders.
 | Path | Role |
 |------|------|
 | [`_template/`](_template/) | Master copy used by the scaffold script; treat each generated `briefs/<slug>/` as a disposable or versioned working pack. |
-| `_template/manifest.yaml` | Maps to `CaseStudyConfig` in [`src/data/case-studies-config.ts`](../../src/data/case-studies-config.ts). |
+| `_template/manifest.yaml` | Maps to `CaseStudyConfig` in [`src/app/data/case-studies-config.ts`](../../src/app/data/case-studies-config.ts). |
 | `_template/content/` | One markdown file per nav section; copy source for narrative and image references. |
 | `_template/assets/` | Binary exports; see `assets/README.md` for naming. |
 

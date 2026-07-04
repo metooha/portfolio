@@ -9,30 +9,31 @@ Work in `projects/portfolio`. Check boxes as you go.
 
 ## 1. Assets
 
-- [ ] Copy brief `assets/` files into `src/assets/` (or adopt `figma:asset/<hash>.png` names if supplied by a Figma export pipeline).
+- [ ] Copy brief `assets/` files into `src/app/assets/` (or adopt `figma:asset/<hash>.png` names if supplied by a Figma export pipeline).
 - [ ] Ensure hero and thumbnail used on the home case study card resolve in dev (Vite + [`figma:asset` plugin](../vite.config.ts) if applicable).
 - [ ] Add alt text from manifest `assets[].alt` or from markdown.
 
 ## 2. Main component
 
-- [ ] Create `src/imports/EverydaySansCaseStudy.tsx` (or merge exported code into that path).
+- [ ] Create `src/app/components/case-studies/everyday-sans/EverydaySansCaseStudy.tsx` (or merge exported code into that path).
 - [ ] Use `CaseStudyTemplate` with `hero`, `overviewTitle` (= `caseStudy.title` or dedicated hero title), `overviewDescription` (= `fullDescription`), `metaItems`, `navSections`, `navAccentColor`, `overviewClient`, `overviewCategory` from `manifest.yaml`.
 - [ ] Implement body sections; each `navSections` target must exist as `id="<anchor>"` (without `#`).
-- [ ] Reuse shared components (see `WmDesignSystem2026.tsx` imports) instead of duplicating primitives.
-- [ ] Apply responsive patterns per `docs/RESPONSIVE-GUIDELINES.md`.
+- [ ] Reuse shared components (see `WmDesignSystemCaseStudy.tsx` imports) instead of duplicating primitives.
+- [ ] Apply responsive patterns per `notes/docs/RESPONSIVE-GUIDELINES.md`.
 
 ## 3. Config
 
-- [ ] Add or update an entry in `src/data/case-studies-config.ts` `CASE_STUDIES` array:
+- [ ] Add or update an entry in `src/app/data/case-studies-config.ts` `CASE_STUDIES` array:
   - All required `CaseStudyConfig` fields.
   - Imports for `heroImage` and `thumbnail`.
-  - `ContentComponent`: real component for `generic` routing; for `special` (WM-style), a no-op stub is acceptable if the route renders the full page component (match existing id `1` pattern).
+  - `PageComponent`: full page component for `special` routing (WM-style).
+  - `ContentComponent`: body component for `generic` routing only.
 - [ ] Confirm card copy (`cardTitle`, `cardDescription`, `shortDescription`) matches marketing intent.
 
 ## 4. Routing
 
-- [ ] **`routing: generic`**: ensure `case-study-page.tsx` uses `CaseStudyTemplatePage` for this id (no new branch).
-- [ ] **`routing: special`**: add a branch in `case-study-page.tsx` that returns `<EverydaySansCaseStudy />` for this `id` (mirror `id === "1"`).
+- [ ] **`routing: generic`**: ensure config has `ContentComponent` and no `PageComponent` (template page renders automatically).
+- [ ] **`routing: special`**: set `PageComponent` on the config entry to `<EverydaySansCaseStudy />` (mirror id `"1"` + `WmDesignSystemCaseStudy`).
 
 ## 5. Prev / next and home
 
@@ -51,8 +52,8 @@ Work in `projects/portfolio`. Check boxes as you go.
 
 | `manifest.yaml` path | `CaseStudyConfig` / code |
 |----------------------|---------------------------|
-| `routing` | `special` → extra branch in `case-study-page.tsx`; `generic` → template page only |
-| `componentName` | React file name in `src/imports/` |
+| `routing` | `special` → `PageComponent` in config; `generic` → `ContentComponent` only |
+| `componentName` | React file name in `src/app/components/case-studies/<slug>/` |
 | `caseStudy.id` | `id` string |
 | `caseStudy.path` | `path` (usually `/case-study/{id}`) |
 | `caseStudy.title` | `title`, `overviewTitle` in template |

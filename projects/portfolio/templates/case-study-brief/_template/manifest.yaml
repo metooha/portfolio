@@ -1,8 +1,8 @@
-# Case study brief manifest — maps to CaseStudyConfig in src/data/case-studies-config.ts
+# Case study brief manifest — maps to CaseStudyConfig in src/app/data/case-studies-config.ts
 # Replace __PLACEHOLDERS__ or run: npm run new-case-study-brief <slug> [id]
 
 routing: special
-# special = single embedded component + branch in case-study-page.tsx (like id "1" + WmDesignSystem2026)
+# special = PageComponent on config entry (like id "1" + WmDesignSystemCaseStudy)
 # generic = CaseStudyTemplatePage + ContentComponent only (no extra route branch)
 
 slug: __BRIEF_SLUG__
@@ -19,7 +19,7 @@ caseStudy:
   navAccentColor: "#207442"
   tags: []
   heroType: image # image | component
-  # Relative to this brief pack (implementation copies into src/assets and switches to figma:asset or @/assets imports)
+  # Relative to this brief pack (implementation copies into src/app/assets and switches to figma:asset or @/app/assets imports)
   heroAsset: assets/hero.png
   thumbnailAsset: assets/thumbnail.png
   overviewClient: ""

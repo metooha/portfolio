@@ -1,0 +1,9 @@
+/* Inter — https://rsms.me/inter/ (SIL Open Font License 1.1) */
+
+@font-face {
+  font-display: swap;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 100 900;
+  src: url('./InterVariable.woff2') format('woff2');
+}

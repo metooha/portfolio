@@ -1,0 +1,66 @@
+/* Maax — WM brand typeface */
+
+@font-face {
+  font-display: swap;
+  font-family: 'Maax';
+  font-style: normal;
+  font-weight: 400;
+  src: url('./Maax.ttf') format('truetype');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'Maax';
+  font-style: normal;
+  font-weight: 500;
+  src: url('./Maax-Medium.ttf') format('truetype');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'Maax';
+  font-style: normal;
+  font-weight: 700;
+  src: url('./Maax-Black.ttf') format('truetype');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'Maax';
+  font-style: normal;
+  font-weight: 900;
+  src: url('./Maax-Black.ttf') format('truetype');
+}
+
+/* Figma export aliases */
+@font-face {
+  font-display: swap;
+  font-family: 'Maax:Regular';
+  font-style: normal;
+  font-weight: 400;
+  src: url('./Maax.ttf') format('truetype');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'Maax:Medium';
+  font-style: normal;
+  font-weight: 500;
+  src: url('./Maax-Medium.ttf') format('truetype');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'Maax:Bold';
+  font-style: normal;
+  font-weight: 700;
+  src: url('./Maax-Black.ttf') format('truetype');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'Maax:Black';
+  font-style: normal;
+  font-weight: 900;
+  src: url('./Maax-Black.ttf') format('truetype');
+}
