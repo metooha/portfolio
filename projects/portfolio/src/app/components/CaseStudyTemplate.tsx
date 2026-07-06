@@ -55,13 +55,13 @@ function NavCard({
   return (
     <Link
       to={project.path}
-      className={`content-stretch flex flex-[1_0_0] flex-col min-h-px min-w-px relative no-underline group ${
-        isPrev ? "items-start" : "items-end"
+      className={`flex h-full min-h-0 w-full flex-col no-underline group ${
+        isPrev ? "items-start text-left" : "items-end text-right"
       }`}
       style={{ gap: "var(--ld-semantic-spacing-200, 1rem)" }}
     >
       <div
-        className="content-stretch flex items-center relative shrink-0"
+        className={`flex shrink-0 items-center ${isPrev ? "justify-start" : "justify-end"}`}
         style={{ gap: "var(--ld-semantic-spacing-100, 0.5rem)" }}
       >
         {isPrev && (
@@ -75,38 +75,40 @@ function NavCard({
         )}
       </div>
       <div
-        className="content-stretch flex h-[200px] items-center relative shrink-0 w-full overflow-hidden"
+        className="relative h-[200px] w-full shrink-0 overflow-hidden"
         style={{ borderRadius: "var(--ld-primitive-scale-border-radius-200, 1rem)" }}
       >
-        <div
-          className="flex-[1_0_0] h-full min-h-px min-w-px overflow-hidden"
-          style={{ borderRadius: "var(--ld-primitive-scale-border-radius-200, 1rem)" }}
-        >
+        <div className="absolute inset-0 [&_img]:block [&_img]:h-full [&_img]:w-full [&_img]:object-cover [&>*]:h-full [&>*]:w-full">
           {project.image}
         </div>
       </div>
       <div
-        className="content-stretch flex flex-col items-start relative shrink-0 w-full"
+        className={`flex w-full flex-1 flex-col ${isPrev ? "items-start" : "items-end"}`}
         style={{ gap: "var(--ld-semantic-spacing-150, 0.75rem)" }}
       >
         <div
-          className="relative shrink-0 size-[48px] overflow-hidden"
+          className="relative size-12 shrink-0 overflow-hidden"
           style={{ borderRadius: "var(--ld-primitive-scale-border-radius-200, 1rem)" }}
         >
-          <img src={project.thumbnail} alt="" className="w-full h-full object-cover" />
+          <img src={project.thumbnail} alt="" className="h-full w-full object-cover" />
         </div>
         <div
-          className="content-stretch flex flex-col items-start relative shrink-0 w-full"
+          className={`flex w-full flex-col ${isPrev ? "items-start" : "items-end"}`}
           style={{ gap: "var(--ld-semantic-spacing-100, 0.5rem)" }}
         >
-          <Heading as="p" size="medium" weight="default" UNSAFE_className="relative shrink-0">
+          <Heading
+            as="p"
+            size="medium"
+            weight="default"
+            UNSAFE_className={`relative shrink-0 ${isPrev ? "text-left" : "text-right"}`}
+          >
             {project.title}
           </Heading>
           <Body
             as="p"
             size="medium"
             color="subtle"
-            UNSAFE_className="min-w-full relative shrink-0 w-[min-content] whitespace-pre-wrap"
+            UNSAFE_className={`w-full whitespace-pre-wrap ${isPrev ? "text-left" : "text-right"}`}
           >
             {project.description}
           </Body>
@@ -234,14 +236,14 @@ export function CaseStudyTemplate({
             {children}
 
             {(prevProject || nextProject) && (
-              <div className="relative shrink-0 w-full">
-                <div className="content-stretch flex items-center justify-center w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-12 lg:px-[68px] relative">
+              <div className="relative w-full shrink-0">
+                <div className="relative mx-auto w-full max-w-7xl px-4 sm:px-6 md:px-12 lg:px-[68px]">
                   <div
-                    className="content-stretch flex items-center relative shrink-0 w-full"
+                    className="grid w-full grid-cols-1 items-stretch md:grid-cols-2"
                     style={{ gap: "var(--ld-semantic-spacing-300, 1.5rem)" }}
                   >
-                    {prevProject ? <NavCard direction="prev" project={prevProject} /> : <div className="flex-[1_0_0]" />}
-                    {nextProject && <NavCard direction="next" project={nextProject} />}
+                    {prevProject ? <NavCard direction="prev" project={prevProject} /> : <div />}
+                    {nextProject ? <NavCard direction="next" project={nextProject} /> : <div />}
                   </div>
                 </div>
               </div>

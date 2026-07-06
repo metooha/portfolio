@@ -5,7 +5,9 @@ import { CaseStudyHeroText } from "@/app/components/CaseStudyText/CaseStudyText"
 
 interface CaseStudyHeroProps {
   /** The hero background image src */
-  image: string;
+  image?: string;
+  /** Custom background content (used instead of `image` when provided) */
+  background?: React.ReactNode;
   /** Large display title shown over the hero */
   title?: string;
   /** Optional subtitle below the title */
@@ -38,6 +40,7 @@ const MotionHeroTitle = motion.div;
 
 export function CaseStudyHero({
   image,
+  background,
   title,
   subtitle,
   titleColor = "var(--ld-semantic-color-text, #2e2f32)",
@@ -76,7 +79,7 @@ export function CaseStudyHero({
         ? "max-w-full max-h-full w-auto h-auto"
         : "w-full h-full min-h-full min-w-full";
   const parallaxScale = imageFit === "cover" ? 1.08 : 1;
-  const parallaxEnabled = imageFit === "cover";
+  const parallaxEnabled = imageFit === "cover" && !background && Boolean(image);
   const useAspectRatio = Boolean(aspectRatio);
   const heightClass = useAspectRatio
     ? "w-full relative shrink-0 overflow-hidden"
@@ -103,16 +106,20 @@ export function CaseStudyHero({
             : undefined
         }
       >
-        <img
-          alt=""
-          className={`block ${imageSizeClass} ${imageFitClass} object-center ${imageClassName}`.trim()}
-          src={image}
-          srcSet={imageSrcSet}
-          sizes={imageSrcSet ? imageSizes : undefined}
-          width={imageWidth}
-          height={imageHeight}
-          decoding="async"
-        />
+        {background ? (
+          background
+        ) : image ? (
+          <img
+            alt=""
+            className={`block ${imageSizeClass} ${imageFitClass} object-center ${imageClassName}`.trim()}
+            src={image}
+            srcSet={imageSrcSet}
+            sizes={imageSrcSet ? imageSizes : undefined}
+            width={imageWidth}
+            height={imageHeight}
+            decoding="async"
+          />
+        ) : null}
       </div>
 
       {(title || subtitle) && (
@@ -131,7 +138,7 @@ export function CaseStudyHero({
           >
             <CaseStudyHeroText
               as="p"
-              UNSAFE_className="text-center"
+              UNSAFE_className="text-center whitespace-pre-line"
               UNSAFE_style={{ color: titleColor }}
             >
               {title}

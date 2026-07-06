@@ -9,11 +9,13 @@ import AcademyHero from "@/app/components/case-studies/heroes/AcademyHero";
 import WmDesignSystemCaseStudy from "@/app/components/case-studies/wm-rebrand/WmDesignSystemCaseStudy";
 import EverydaySansCaseStudy from "@/app/components/case-studies/everyday-sans/EverydaySansCaseStudy";
 import AirtableCaseStudy from "@/app/components/case-studies/airtable-sot/AirtableCaseStudy";
+import OportunDsCaseStudy from "@/app/components/case-studies/oportun-ds/OportunDsCaseStudy";
 import { CaseStudyHoverContent } from "@/app/components/case-studies/hover/CaseStudyHoverContent";
 import { CaseStudyXenseContent } from "@/app/components/case-studies/xense/CaseStudyXenseContent";
 import { CaseStudyAcademyContent } from "@/app/components/case-studies/academy/CaseStudyAcademyContent";
 import imgEverydaySansCover from "@/app/assets/pages/case-study/everyday-sans/cover.jpg";
-import imgAirtableCover from "@/app/assets/pages/case-study/airtable-sot/cover.png";
+import { imgAirtableCover } from "@/app/assets/pages/case-study/airtable-sot/assets";
+import imgOportunDsCover from "@/app/assets/pages/case-study/oportun-ds/cover.png";
 import type { ProjectLink } from "@/app/components/CaseStudyTemplate";
 import type { ThemeName } from "@/app/components/utils/Theming";
 
@@ -243,12 +245,14 @@ const CASE_STUDIES: CaseStudyConfig[] = [
     ],
     navSections: [
       { label: "Overview", href: "#overview" },
-      { label: "Situation", href: "#situation" },
+      { label: "Problem space", href: "#situation" },
       { label: "Human cost", href: "#human-cost" },
+      { label: "The bridge", href: "#bridge" },
+      { label: "The pivot", href: "#pivot" },
       { label: "The work", href: "#the-work" },
-      { label: "Pipeline", href: "#pipeline" },
-      { label: "Theme hierarchy", href: "#theme-hierarchy" },
+      { label: "Architecture", href: "#architecture" },
       { label: "Results", href: "#results" },
+      { label: "What's next", href: "#whats-next" },
     ],
     navAccentColor: "#0053e2",
     tags: ["Design Tokens", "Design System", "Automation", "Living Design"],
@@ -258,6 +262,45 @@ const CASE_STUDIES: CaseStudyConfig[] = [
     PageComponent: AirtableCaseStudy,
     overviewClient: "Walmart",
     overviewCategory: "Living Design, Design Tokens",
+  },
+  {
+    id: "7",
+    path: "/case-study/7",
+    title: "Oportun Design System",
+    defaultTheme: "Oportun",
+    isPublished: true,
+    cardTitle: "Oportun Design System",
+    shortDescription:
+      "Rebranding and unifying Digit and Oportun under one design language — from foundations through adoption.",
+    cardDescription:
+      "Led the design system through a full rebrand: foundations, components, Storybook, documentation, and product validation across mobile and web.",
+    fullDescription:
+      "Oportun's acquisition of Digit created an urgent need to rebrand and unify two distinct product experiences. I led the design systems work — defining strategy, building foundational libraries, shipping components in Storybook, and validating patterns through high-stakes product flows like the loan calculator.",
+    metaItems: [
+      { label: "Role", value: "Lead Product Designer, Design Systems" },
+      { label: "Timeline", value: "July 2022 – Jan 2023" },
+      { label: "Scope", value: "Mobile & Web · Figma · Storybook" },
+      { label: "Focus", value: "Rebrand, foundations, components, adoption" },
+    ],
+    navSections: [
+      { label: "Overview", href: "#overview" },
+      { label: "The challenge", href: "#challenge" },
+      { label: "The approach", href: "#approach" },
+      { label: "Strategy", href: "#strategy" },
+      { label: "Roadmapping", href: "#roadmap" },
+      { label: "Foundations", href: "#foundations" },
+      { label: "Components", href: "#components" },
+      { label: "Product work", href: "#product" },
+      { label: "Results", href: "#results" },
+    ],
+    navAccentColor: "#6CDB8C",
+    tags: ["Design System", "Rebrand", "Storybook", "Fintech"],
+    heroType: "image",
+    heroImage: imgOportunDsCover,
+    thumbnail: imgOportunDsCover,
+    PageComponent: OportunDsCaseStudy,
+    overviewClient: "Oportun / Digit",
+    overviewCategory: "Design Systems, Rebrand",
   },
 ];
 

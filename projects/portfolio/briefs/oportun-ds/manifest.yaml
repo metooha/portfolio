@@ -1,0 +1,58 @@
+# Case study brief manifest — maps to CaseStudyConfig in src/app/data/case-studies-config.ts
+# Replace __PLACEHOLDERS__ or run: npm run new-case-study-brief <slug> [id]
+
+routing: special
+# special = PageComponent on config entry (like id "1" + WmDesignSystemCaseStudy)
+# generic = CaseStudyTemplatePage + ContentComponent only (no extra route branch)
+
+slug: oportun-ds
+componentName: OportunDsCaseStudy
+
+caseStudy:
+  id: "7"
+  path: "/case-study/7"
+  title: "Oportun Ds"
+  cardTitle: "Oportun Ds"
+  shortDescription: ""
+  cardDescription: ""
+  fullDescription: ""
+  navAccentColor: "#207442"
+  tags: []
+  heroType: image # image | component
+  # Relative to this brief pack (implementation copies into src/app/assets and switches to figma:asset or @/app/assets imports)
+  heroAsset: assets/hero.png
+  thumbnailAsset: assets/thumbnail.png
+  overviewClient: ""
+  overviewCategory: ""
+
+metaItems:
+  - label: Role
+    value: ""
+  - label: Team
+    value: ""
+  - label: Scope
+    value: ""
+  - label: Focus
+    value: ""
+
+navSections:
+  - label: Overview
+    href: "#overview"
+  - label: Problem Space
+    href: "#problem-space"
+  - label: Our Goals
+    href: "#our-goals"
+  - label: Approach
+    href: "#approach"
+  - label: System Audit
+    href: "#system-audit"
+  - label: Information Architecture
+    href: "#information-architecture"
+  - label: Compromises
+    href: "#compromises"
+
+# Optional: stable IDs for images referenced as ![alt](asset:asset-id) in content/*.md
+assets:
+  - id: example-diagram
+    file: assets/sections/overview--diagram--01.png
+    alt: ""

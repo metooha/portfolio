@@ -257,6 +257,100 @@ export function EdsImageFull({
   );
 }
 
+export function EdsEmbedFrame({
+  src,
+  title,
+  className = "",
+  bordered = false,
+  rounded = true,
+  surface = "white",
+  clipEdges = true,
+  aspectRatio = 1046 / 664,
+}: {
+  src: string;
+  title: string;
+  className?: string;
+  bordered?: boolean;
+  rounded?: boolean;
+  surface?: EdsImageSurface;
+  clipEdges?: boolean;
+  aspectRatio?: number;
+}) {
+  return (
+    <div
+      className={`w-full ${rounded ? "overflow-hidden rounded-xl" : "overflow-hidden"} ${className}`}
+      style={{
+        background: IMAGE_SURFACE[surface],
+        border: bordered ? "1px solid var(--ld-semantic-color-separator, #e3e4e5)" : undefined,
+      }}
+    >
+      <div className={clipEdges ? "overflow-hidden -m-[3px] p-[3px]" : undefined}>
+        <div className="w-full" style={{ aspectRatio }}>
+          <iframe
+            src={src}
+            title={title}
+            className="block h-full w-full border-0"
+            loading="lazy"
+            allow="clipboard-write"
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export function EdsEmbedFull({
+  src,
+  title,
+  caption,
+  label,
+  className = "",
+  frameClassName = "",
+  surface = "white",
+  clipEdges = true,
+  aspectRatio,
+}: {
+  src: string;
+  title: string;
+  caption?: string;
+  label?: string;
+  className?: string;
+  frameClassName?: string;
+  surface?: EdsImageSurface;
+  clipEdges?: boolean;
+  aspectRatio?: number;
+}) {
+  return (
+    <figure className={`m-0 flex flex-col gap-6 ${className}`}>
+      {label && (
+        <Body
+          as="p"
+          size="small"
+          weight="alt"
+          color="brand"
+          UNSAFE_className="uppercase tracking-[0.1em]"
+          UNSAFE_style={{ fontSize: "10px" }}
+        >
+          {label}
+        </Body>
+      )}
+      <EdsEmbedFrame
+        src={src}
+        title={title}
+        className={frameClassName}
+        surface={surface}
+        clipEdges={clipEdges}
+        aspectRatio={aspectRatio}
+      />
+      {caption && (
+        <Body as="figcaption" size="small" color="subtlest" UNSAFE_className="leading-snug">
+          {caption}
+        </Body>
+      )}
+    </figure>
+  );
+}
+
 export function EdsVideoFrame({
   src,
   alt,
@@ -577,23 +671,45 @@ export function EdsResearchCard({
 
 export function EdsStatsRow({
   stats,
+  variant = "dark",
 }: {
   stats: { value: string; label: string; valueColor?: string }[];
+  variant?: "dark" | "light";
 }) {
+  const isLight = variant === "light";
+
   return (
     <div
       className="grid grid-cols-2 lg:grid-cols-4 gap-px rounded-xl overflow-hidden"
-      style={{ background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.1)" }}
+      style={{
+        background: isLight ? "var(--ld-semantic-color-separator, #e3e4e5)" : "rgba(255,255,255,0.1)",
+        border: isLight ? "1px solid var(--ld-semantic-color-separator, #e3e4e5)" : "1px solid rgba(255,255,255,0.1)",
+      }}
     >
       {stats.map((stat) => (
-        <div key={stat.label} className="text-center px-5 py-8" style={{ background: "rgba(255,255,255,0.04)" }}>
+        <div
+          key={stat.label}
+          className="text-center px-5 py-8"
+          style={{ background: isLight ? "#e7f1fc" : "rgba(255,255,255,0.04)" }}
+        >
           <div
             className="text-[44px] font-bold leading-none mb-2"
-            style={{ color: stat.valueColor ?? "var(--ld-primitive-color-spark-100, #ffc220)" }}
+            style={{
+              color: stat.valueColor ?? (isLight ? "#0053e2" : "var(--ld-primitive-color-spark-100, #ffc220)"),
+            }}
           >
             {stat.value}
           </div>
-          <Body as="p" size="small" UNSAFE_className="leading-snug" UNSAFE_style={{ color: "rgba(255,255,255,0.55)", fontSize: "13px" }}>
+          <Body
+            as="p"
+            size="small"
+            UNSAFE_className="leading-snug"
+            UNSAFE_style={{
+              color: isLight ? "#001e60" : "rgba(255,255,255,0.55)",
+              fontSize: "13px",
+              opacity: isLight ? 0.75 : 1,
+            }}
+          >
             {stat.label}
           </Body>
         </div>
