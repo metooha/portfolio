@@ -10,7 +10,7 @@ import { CaseStudyCard } from "@/app/components/CaseStudyCard";
 import { PageContainer } from "@/app/components/layout";
 import { CaseStudyHeroText } from "@/app/components/CaseStudyText/CaseStudyText";
 import { Body, Heading } from "@/app/components/Text/Text";
-import { getAllCaseStudies } from "@/app/data/case-studies-config";
+import { getFeaturedCaseStudies } from "@/app/data/case-studies-config";
 
 const sparklesCursor =
   "https://images.unsplash.com/photo-1576499162440-5e55a43278e1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzcGFya2xlcyUyMHN0YXIlMjBpY29ufGVufDF8fHx8MTc2ODg2NTcwN3ww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral";
@@ -138,7 +138,7 @@ export function Home() {
         </div>
 
         <div className="space-y-16">
-          {getAllCaseStudies().map((caseStudy) => (
+          {getFeaturedCaseStudies().map((caseStudy) => (
             <CaseStudyCard key={caseStudy.id} caseStudy={caseStudy} />
           ))}
         </div>

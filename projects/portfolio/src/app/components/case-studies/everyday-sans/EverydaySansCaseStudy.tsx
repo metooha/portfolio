@@ -92,8 +92,8 @@ export default function EverydaySansCaseStudy() {
           <EdsWhatsNextSection />
           <EdsSamsSansSection />
           <EdsFontCompareSection />
-          <EdsClosingSection />
         </div>
+        <EdsClosingSection />
       </CaseStudyTemplate>
     </div>
   );

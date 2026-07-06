@@ -1,6 +1,7 @@
 /** Figma-exported icons and illustrations for the Airtable case study. */
 
 export { default as imgAirtableCover } from "./cover.png";
+export { default as imgAirtableCoverPreview } from "./cover-preview.png";
 export { default as imgAirtableLogo } from "./logo.png";
 
 export { default as imgIconIos } from "./icons/ios.png";

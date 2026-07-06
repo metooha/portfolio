@@ -13,9 +13,10 @@ import imgCharacterMisreads from "@/app/assets/pages/case-study/everyday-sans/ac
 import imgLanguageCoverage from "@/app/assets/pages/case-study/everyday-sans/language-coverage.jpg";
 import imgLanguageFrench from "@/app/assets/pages/case-study/everyday-sans/language-french.jpg";
 import imgLanguageSpanish from "@/app/assets/pages/case-study/everyday-sans/language-spanish.jpg";
+import imgFontCompare from "@/app/assets/pages/case-study/everyday-sans/font-compare-tool.png";
+import { Link } from "@/app/components/Link";
 import {
   EdsBeforeAfter,
-  EdsEmbedFull,
   EdsEyebrow,
   EdsImageFrame,
   EdsImageFull,
@@ -531,13 +532,25 @@ export function EdsFontCompareSection() {
       <EdsLead>
         The Walmart variable font took 18 months. For Sam&apos;s Sans, I built an internal Font Compare Tool that let teams evaluate fonts side by side — glyphs, paragraphs, real UI mocks, and metadata — in one place. It compressed the decision-making process from a year to under two months.
       </EdsLead>
-      <EdsEmbedFull
-        src="https://metooha.github.io/font-compare/"
-        title="Font Compare Tool — side-by-side font evaluation"
+      <EdsImageFull
+        src={imgFontCompare}
+        alt="Font Compare Tool — side-by-side font evaluation"
         caption="The Font Compare Tool: up to 5 fonts compared simultaneously across paragraphs, glyphs, PDP mocks, and full metadata including glyph coverage, CSS @font-face, and design tokens. Built to make the process repeatable without the year-long back-and-forth."
         surface="subtle"
         clipEdges={false}
       />
+      <Link
+        href="https://metooha.github.io/font-compare/"
+        target="_blank"
+        UNSAFE_style={{
+          color: "var(--ld-semantic-color-text-brand, #0053e2)",
+          fontSize: "var(--ld-semantic-font-body-large-size, 1.125rem)",
+          fontWeight: 700,
+        }}
+        UNSAFE_className="no-underline hover:underline"
+      >
+        Try the live Font Compare Tool →
+      </Link>
       <EdsStatCards
         stats={[
           { value: "< 2mo", label: "Sam's Sans evaluation and sign-off vs. 18 months for Walmart" },
@@ -552,26 +565,25 @@ export function EdsFontCompareSection() {
 export function EdsClosingSection() {
   return (
     <div
-      className="relative w-full shrink-0 text-center overflow-hidden py-[120px] px-6 md:px-12"
+      className="relative w-full shrink-0 text-center overflow-hidden py-[160px] px-6 md:px-12"
       style={{ background: "var(--ld-semantic-color-fill-brand, #0053e2)" }}
     >
-      <div className="max-w-[700px] mx-auto">
-        <Heading
-          as="h2"
-          size="large"
-          weight="alt"
-          color="inverse"
-          UNSAFE_className="leading-[48px] font-light"
-          UNSAFE_style={{ fontSize: "clamp(26px, 4vw, 52px)" }}
-        >
-          Brand quality and site performance
-          <br />
+      <Heading
+        as="h2"
+        size="large"
+        weight="alt"
+        color="inverse"
+        UNSAFE_className="font-light w-fit mx-auto flex flex-col items-center gap-[16px]"
+        UNSAFE_style={{ fontSize: "clamp(26px, 4vw, 52px)", lineHeight: 1 }}
+      >
+        <span className="whitespace-nowrap">Brand quality and site performance</span>
+        <span className="whitespace-nowrap">
           are no longer{" "}
           <span style={{ fontWeight: 700, color: "var(--ld-primitive-color-spark-100, #ffc220)" }}>
             a trade-off.
           </span>
-        </Heading>
-      </div>
+        </span>
+      </Heading>
     </div>
   );
 }

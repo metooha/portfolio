@@ -2,7 +2,6 @@ import React from "react";
 import imgDesign from "@/app/assets/pages/case-study/wm-rebrand/design.png";
 import imgXense from "@/app/assets/pages/case-study/wm-rebrand/xense.png";
 import imgAcademy from "@/app/assets/pages/case-study/wm-rebrand/academy.png";
-import hoverImage from "figma:asset/c22af8bfcb65f93d01f2862c0d18f313ac7bc96a.png";
 import wmNewImage from "@/app/assets/pages/case-study/wm-rebrand/wm-new-image.png";
 import XenseHero from "@/app/components/case-studies/heroes/XenseHero";
 import AcademyHero from "@/app/components/case-studies/heroes/AcademyHero";
@@ -10,11 +9,10 @@ import WmDesignSystemCaseStudy from "@/app/components/case-studies/wm-rebrand/Wm
 import EverydaySansCaseStudy from "@/app/components/case-studies/everyday-sans/EverydaySansCaseStudy";
 import AirtableCaseStudy from "@/app/components/case-studies/airtable-sot/AirtableCaseStudy";
 import OportunDsCaseStudy from "@/app/components/case-studies/oportun-ds/OportunDsCaseStudy";
-import { CaseStudyHoverContent } from "@/app/components/case-studies/hover/CaseStudyHoverContent";
 import { CaseStudyXenseContent } from "@/app/components/case-studies/xense/CaseStudyXenseContent";
 import { CaseStudyAcademyContent } from "@/app/components/case-studies/academy/CaseStudyAcademyContent";
 import imgEverydaySansCover from "@/app/assets/pages/case-study/everyday-sans/cover.jpg";
-import { imgAirtableCover } from "@/app/assets/pages/case-study/airtable-sot/assets";
+import { imgAirtableCoverPreview } from "@/app/assets/pages/case-study/airtable-sot/assets";
 import imgOportunDsCover from "@/app/assets/pages/case-study/oportun-ds/cover.png";
 import type { ProjectLink } from "@/app/components/CaseStudyTemplate";
 import type { ThemeName } from "@/app/components/utils/Theming";
@@ -27,6 +25,8 @@ export interface CaseStudyConfig {
   defaultTheme?: ThemeName;
   /** Hide detail route while content is still in progress */
   isPublished?: boolean;
+  /** Show on the home page featured work section (defaults to true) */
+  featuredOnHome?: boolean;
   /** Default client-side access password (overridable via admin dashboard). */
   accessPassword?: string;
   /** For home card & prev/next */
@@ -95,41 +95,11 @@ const CASE_STUDIES: CaseStudyConfig[] = [
     overviewCategory: "Design Systems, Branding",
   },
   {
-    id: "2",
-    path: "/case-study/2",
-    title: "Hover - Digital Assistant Design System",
-    accessPassword: import.meta.env.VITE_HOVER_CASE_STUDY_PASSWORD ?? "hover",
-    isPublished: true,
-    shortDescription:
-      "Hover is a digital assistant web app concept for teachers in which they can find resources and assignments to share with students.",
-    cardDescription:
-      "Hover is a digital assistant web app concept for teachers in which they can find resources and assignments to share with students. Working with one other designer, I developed the vision and design system for this concept.",
-    fullDescription:
-      "Hover is a digital assistant web app concept for teachers in which they can find resources and assignments to share with students. Working with one other designer, I developed the vision and design system for this concept.",
-    metaItems: [
-      { label: "Role", value: "Lead Designer" },
-      { label: "Team", value: "2 Designers" },
-      { label: "Tags", value: "Design System, Digital Assistant, Education" },
-      { label: "Focus", value: "Visual design system and component library" },
-    ],
-    navSections: [
-      { label: "Overview", href: "#overview" },
-      { label: "The Challenge", href: "#challenge" },
-      { label: "The Solution", href: "#solution" },
-    ],
-    navAccentColor: "#4F39F6",
-    tags: ["Design System", "Digital Assistant", "Education"],
-    heroType: "image",
-    heroImage: hoverImage,
-    heroGradientClass: "bg-gradient-to-br from-purple-50 to-indigo-50",
-    thumbnail: hoverImage,
-    ContentComponent: CaseStudyHoverContent,
-  },
-  {
     id: "3",
     path: "/case-study/3",
     title: "Xense Biotech",
     isPublished: true,
+    featuredOnHome: false,
     shortDescription:
       "Xense Biotech is a leading company in the medical imaging industry, specializing in advanced x-ray technology. Their flagship product, uTomoTM, is a groundbreaking image acquisition and reconstruction system.",
     cardDescription:
@@ -161,6 +131,7 @@ const CASE_STUDIES: CaseStudyConfig[] = [
     path: "/case-study/4",
     title: "Academy Sports + Outdoors Branding",
     isPublished: true,
+    featuredOnHome: false,
     shortDescription:
       "Direct Mail catalogs are delivered every quarter at Academy Sports + Outdoors. The main categories are for sports such as golf, baseball/softball, football, athletics, fishing, and hunting.",
     cardDescription:
@@ -257,8 +228,8 @@ const CASE_STUDIES: CaseStudyConfig[] = [
     navAccentColor: "#0053e2",
     tags: ["Design Tokens", "Design System", "Automation", "Living Design"],
     heroType: "image",
-    heroImage: imgAirtableCover,
-    thumbnail: imgAirtableCover,
+    heroImage: imgAirtableCoverPreview,
+    thumbnail: imgAirtableCoverPreview,
     PageComponent: AirtableCaseStudy,
     overviewClient: "Walmart",
     overviewCategory: "Living Design, Design Tokens",
@@ -359,7 +330,9 @@ function configToProjectLink(config: CaseStudyConfig): ProjectLink {
 }
 
 export function getFeaturedCaseStudies(): CaseStudyConfig[] {
-  return CASE_STUDIES.filter((cs) => cs.isPublished !== false);
+  return CASE_STUDIES.filter(
+    (cs) => cs.isPublished !== false && cs.featuredOnHome !== false,
+  );
 }
 
 export function isCaseStudyPublished(id: string): boolean {

@@ -6,8 +6,8 @@ import {
 } from "@/app/components/patterns/Accordion";
 import { Link } from "@/app/components/Link/Link";
 import gardenImage from "@/app/assets/pages/about/about-me.png";
-import { motion } from "motion/react";
-import React, { useState, useRef, useEffect } from "react";
+import { motion, useInView } from "motion/react";
+import React, { useRef, useEffect } from "react";
 import timeline1 from "@/app/assets/pages/about/carbon.png";
 import timeline2 from "@/app/assets/pages/about/retail.png";
 import timeline3 from "@/app/assets/pages/about/xense-bio.png";
@@ -30,36 +30,42 @@ import peaceIllustration from "@/app/assets/pages/profile/shared/peace-illustrat
 import colorSwatchIllustration from "@/app/assets/pages/profile/shared/color-swatch-illustration.png";
 
 export function About() {
-  const [isPaused, setIsPaused] = useState(false);
+  const timelineSectionRef = useRef<HTMLDivElement>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const isTimelineInView = useInView(timelineSectionRef, { once: true, margin: "-80px" });
 
   useEffect(() => {
+    if (!isTimelineInView) return;
+
     const container = scrollContainerRef.current;
     if (!container) return;
 
-    const scrollDuration = 7000; // Match the line animation duration
+    const maxScroll = container.scrollWidth - container.clientWidth;
+    if (maxScroll <= 0) return;
+
+    const scrollDuration = 7000;
     const startTime = Date.now();
+    let frameId = 0;
 
     const animateScroll = () => {
       const elapsed = Date.now() - startTime;
       const progress = Math.min(elapsed / scrollDuration, 1);
-      
-      // Scroll to the right as the animation progresses
-      const maxScroll = container.scrollWidth - container.clientWidth;
       container.scrollLeft = maxScroll * progress;
 
       if (progress < 1) {
-        requestAnimationFrame(animateScroll);
+        frameId = requestAnimationFrame(animateScroll);
       }
     };
 
-    // Start scrolling animation after a short delay
     const timeoutId = setTimeout(() => {
-      animateScroll();
-    }, 500);
+      frameId = requestAnimationFrame(animateScroll);
+    }, 400);
 
-    return () => clearTimeout(timeoutId);
-  }, []);
+    return () => {
+      clearTimeout(timeoutId);
+      cancelAnimationFrame(frameId);
+    };
+  }, [isTimelineInView]);
 
   return (
     <div className="min-h-screen px-4 md:px-[68px] [&::-webkit-scrollbar]:w-[2px] [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300">
@@ -136,6 +142,7 @@ export function About() {
         
 
         {/* Work History Timeline Section */}
+        <div ref={timelineSectionRef}>
         <div ref={scrollContainerRef} className="relative w-full overflow-x-auto pt-[0px] pr-[0px] pl-[0px] [&::-webkit-scrollbar]:h-[2px] [&::-webkit-scrollbar-track]:bg-gray-200 [&::-webkit-scrollbar-thumb]:bg-gray-400">
           <div className="flex justify-start w-full gap-4 p-[0px] relative">
             {[
@@ -200,10 +207,9 @@ export function About() {
                 key={index}
                 className="flex flex-col items-center flex-1 min-w-[200px] relative z-10 pt-[0px] pr-[0px] pb-[16px] pl-[0px]"
                 initial={{ opacity: 0, x: -50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
+                animate={isTimelineInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
                 transition={{
-                  delay: 3 + index * 0.15,
+                  delay: index * 0.12,
                   duration: 0.5,
                   ease: "easeOut"
                 }}
@@ -223,10 +229,9 @@ export function About() {
                 <motion.div 
                   className="text-xs text-indigo-600 font-semibold mb-2 text-center"
                   initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, margin: "-50px" }}
+                  animate={isTimelineInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
                   transition={{
-                    delay: 3 + index * 0.15 + 0.2,
+                    delay: index * 0.12 + 0.15,
                     duration: 0.4,
                     ease: "easeOut"
                   }}
@@ -238,10 +243,9 @@ export function About() {
                 <motion.div 
                   className="text-center px-2"
                   initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, margin: "-50px" }}
+                  animate={isTimelineInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
                   transition={{
-                    delay: 3 + index * 0.15 + 0.3,
+                    delay: index * 0.12 + 0.25,
                     duration: 0.4,
                     ease: "easeOut"
                   }}
@@ -253,6 +257,7 @@ export function About() {
               </motion.div>
             ))}
           </div>
+        </div>
         </div>
 
         <Accordion collapsible defaultOpenItems={["walmart-current"]} multiple={false} className="w-full mt-8">
