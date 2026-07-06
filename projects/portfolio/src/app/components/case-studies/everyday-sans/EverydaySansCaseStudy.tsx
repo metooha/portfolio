@@ -39,7 +39,6 @@ function EverydaySansHero() {
     <CaseStudyHero
       image={imgCover}
       title="Everyday Sans UI"
-      subtitle="Brand. Performance. Pick one — or used to."
       titleColor="#ffffff"
     />
   );
@@ -64,9 +63,9 @@ export default function EverydaySansCaseStudy() {
       <CaseStudyTemplate
         hero={<EverydaySansHero />}
         overviewLogo={<EverydaySansOverviewLogo />}
-        overviewClient="Walmart Commerce Platform"
+        overviewClient="Walmart"
         overviewCategory="Living Design, Typography"
-        overviewTitle="Everyday Sans UI — Brand and performance, without compromise"
+        overviewTitle="Brand and performance, without compromise"
         overviewDescription="Every new font weight came with a performance cost. So Brand held back. The result was visual hierarchy that never reached its potential, and a design system that had to make peace with compromise. The variable font ended that trade-off — permanently."
         metaItems={[
           { label: "Role", value: "Principal Designer, Living Design" },

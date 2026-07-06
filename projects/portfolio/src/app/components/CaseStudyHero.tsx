@@ -7,7 +7,7 @@ interface CaseStudyHeroProps {
   /** The hero background image src */
   image: string;
   /** Large display title shown over the hero */
-  title: string;
+  title?: string;
   /** Optional subtitle below the title */
   subtitle?: string;
   /** Text color for the title. Defaults to semantic text token. */
@@ -16,6 +16,19 @@ interface CaseStudyHeroProps {
   parallaxStrength?: number;
   /** Extra classes for the parallax image */
   imageClassName?: string;
+  /** How the hero image fills its area. Default "cover". */
+  imageFit?: "cover" | "contain" | "fill";
+  /** Fixed aspect ratio for the hero (e.g. "2 / 1"). Overrides breakpoint heights. */
+  aspectRatio?: string;
+  /** Optional responsive srcset for sharper retina display */
+  imageSrcSet?: string;
+  /** Sizes hint paired with imageSrcSet */
+  imageSizes?: string;
+  /** Intrinsic width/height to preserve aspect ratio and reduce layout shift */
+  imageWidth?: number;
+  imageHeight?: number;
+  /** Background fill behind the image (useful with imageFit="contain"). */
+  backgroundColor?: string;
   /** Curved wave divider at the bottom of the hero */
   curvedDivider?: boolean;
   className?: string;
@@ -30,6 +43,13 @@ export function CaseStudyHero({
   titleColor = "var(--ld-semantic-color-text, #2e2f32)",
   parallaxStrength = 12,
   imageClassName = "",
+  imageFit = "cover",
+  aspectRatio,
+  imageSrcSet,
+  imageSizes = "100vw",
+  imageWidth,
+  imageHeight,
+  backgroundColor,
   curvedDivider = true,
   className = "",
 }: CaseStudyHeroProps) {
@@ -47,31 +67,61 @@ export function CaseStudyHero({
 
   const handleMouseLeave = () => setParallax({ x: 0, y: 0 });
 
+  const imageFitClass =
+    imageFit === "contain" ? "object-contain" : imageFit === "cover" ? "object-cover" : "";
+  const imageSizeClass =
+    imageFit === "fill"
+      ? "absolute inset-0 w-full h-full"
+      : imageFit === "contain"
+        ? "max-w-full max-h-full w-auto h-auto"
+        : "w-full h-full min-h-full min-w-full";
+  const parallaxScale = imageFit === "cover" ? 1.08 : 1;
+  const parallaxEnabled = imageFit === "cover";
+  const useAspectRatio = Boolean(aspectRatio);
+  const heightClass = useAspectRatio
+    ? "w-full relative shrink-0 overflow-hidden"
+    : "h-[280px] sm:h-[400px] md:h-[560px] lg:h-[670px] xl:h-[870px] relative shrink-0 w-full overflow-hidden";
+
   return (
     <div
       ref={containerRef}
-      className={`h-[280px] sm:h-[400px] md:h-[560px] lg:h-[670px] xl:h-[870px] relative shrink-0 w-full overflow-hidden ${className}`}
+      className={`${heightClass} ${className}`}
       data-name="Heading"
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
+      onMouseMove={parallaxEnabled ? handleMouseMove : undefined}
+      onMouseLeave={parallaxEnabled ? handleMouseLeave : undefined}
+      style={{
+        background: backgroundColor,
+        aspectRatio: useAspectRatio ? aspectRatio : undefined,
+      }}
     >
       <div
-        className="absolute inset-0 z-[1] transition-transform duration-300 ease-out"
+        className={`absolute inset-0 z-[1] ${imageFit === "contain" ? "flex items-center justify-center" : ""} ${parallaxEnabled ? "transition-transform duration-300 ease-out" : ""}`}
         aria-hidden="true"
-        style={{ transform: `translate(${parallax.x}px, ${parallax.y}px) scale(1.08)` }}
+        style={
+          parallaxEnabled
+            ? { transform: `translate(${parallax.x}px, ${parallax.y}px) scale(${parallaxScale})` }
+            : undefined
+        }
       >
         <img
           alt=""
-          className={`block w-full h-full min-h-full min-w-full object-cover object-center ${imageClassName}`}
+          className={`block ${imageSizeClass} ${imageFitClass} object-center ${imageClassName}`.trim()}
           src={image}
+          srcSet={imageSrcSet}
+          sizes={imageSrcSet ? imageSizes : undefined}
+          width={imageWidth}
+          height={imageHeight}
+          decoding="async"
         />
       </div>
 
+      {(title || subtitle) && (
       <div className="absolute inset-0 z-[2] flex flex-col items-center justify-center pointer-events-none px-4 sm:px-8 md:px-16">
         <div
           className="flex flex-col items-center justify-center text-center w-full max-w-full pointer-events-none"
           style={{ gap: "var(--ld-semantic-spacing-250, 1.25rem)" }}
         >
+          {title && (
           <MotionHeroTitle
             className="relative shrink-0 text-center"
             style={{ color: titleColor }}
@@ -87,6 +137,7 @@ export function CaseStudyHero({
               {title}
             </CaseStudyHeroText>
           </MotionHeroTitle>
+          )}
           {subtitle && (
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -100,6 +151,7 @@ export function CaseStudyHero({
           )}
         </div>
       </div>
+      )}
 
       {curvedDivider && (
         <div

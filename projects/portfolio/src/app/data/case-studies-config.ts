@@ -13,7 +13,7 @@ import { CaseStudyHoverContent } from "@/app/components/case-studies/hover/CaseS
 import { CaseStudyXenseContent } from "@/app/components/case-studies/xense/CaseStudyXenseContent";
 import { CaseStudyAcademyContent } from "@/app/components/case-studies/academy/CaseStudyAcademyContent";
 import imgEverydaySansCover from "@/app/assets/pages/case-study/everyday-sans/cover.jpg";
-import imgAirtableThumb from "@/app/assets/pages/case-study/everyday-sans/font-compare-tool.png";
+import imgAirtableCover from "@/app/assets/pages/case-study/airtable-sot/cover.png";
 import type { ProjectLink } from "@/app/components/CaseStudyTemplate";
 import type { ThemeName } from "@/app/components/utils/Theming";
 
@@ -219,7 +219,7 @@ const CASE_STUDIES: CaseStudyConfig[] = [
     heroImage: imgEverydaySansCover,
     thumbnail: imgEverydaySansCover,
     PageComponent: EverydaySansCaseStudy,
-    overviewClient: "Walmart Commerce Platform",
+    overviewClient: "Walmart",
     overviewCategory: "Living Design, Typography",
   },
   {
@@ -250,13 +250,13 @@ const CASE_STUDIES: CaseStudyConfig[] = [
       { label: "Theme hierarchy", href: "#theme-hierarchy" },
       { label: "Results", href: "#results" },
     ],
-    navAccentColor: "#207442",
+    navAccentColor: "#0053e2",
     tags: ["Design Tokens", "Design System", "Automation", "Living Design"],
     heroType: "image",
-    heroImage: imgAirtableThumb,
-    thumbnail: imgAirtableThumb,
+    heroImage: imgAirtableCover,
+    thumbnail: imgAirtableCover,
     PageComponent: AirtableCaseStudy,
-    overviewClient: "Walmart Commerce Platform",
+    overviewClient: "Walmart",
     overviewCategory: "Living Design, Design Tokens",
   },
 ];
