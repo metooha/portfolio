@@ -146,6 +146,10 @@
   flex: none;
 }
 
+.ld-textfield-passwordToggle {
+  margin-right: 0.25rem;
+}
+
 .ld-textfield-helperText {
   margin-top: 0.25rem;
 }

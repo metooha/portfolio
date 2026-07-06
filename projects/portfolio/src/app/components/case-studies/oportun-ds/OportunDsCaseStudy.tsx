@@ -2,7 +2,7 @@ import React from "react";
 import { CaseStudyHero } from "@/app/components/CaseStudyHero";
 import { CaseStudyTemplate } from "@/app/components/CaseStudyTemplate";
 import { getAdjacentCaseStudies } from "@/app/data/case-studies-config";
-import imgCover from "@/app/assets/pages/case-study/oportun-ds/cover.png";
+import imgCover from "@/app/assets/pages/case-study/oportun-ds/cover.jpg";
 import imgLogo from "@/app/assets/pages/case-study/oportun-ds/logo.png";
 import { OportunDsOverview } from "./OportunDsCaseStudyVisuals";
 import {

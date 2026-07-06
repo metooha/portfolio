@@ -57,6 +57,7 @@ import {
   setPagePassword,
   type SitePage,
 } from "@/app/auth/page-protection";
+import { prototypes } from "@/app/data/prototypes-data";
 import {
   collectPublishedSiteConfig,
   downloadPublishedSiteConfig,
@@ -64,7 +65,7 @@ import {
 import { ProtectedRoute } from "@/app/auth/protected-route";
 import "@/app/components/admin/AdminLayout.css";
 
-type SettingsSection = "account" | "publish" | SitePage["group"];
+type SettingsSection = "account" | "publish" | "prototypes" | SitePage["group"];
 
 const SETTINGS_SECTIONS: Array<{
   id: SettingsSection;
@@ -95,6 +96,11 @@ const SETTINGS_SECTIONS: Array<{
     id: "other-work",
     label: "Other work",
     description: "Set optional passwords and assign themes for other work detail pages.",
+  },
+  {
+    id: "prototypes",
+    label: "Prototypes",
+    description: "Interactive experiments and tools hosted outside the portfolio site.",
   },
 ];
 
@@ -453,6 +459,38 @@ function SiteSettingsPublishPanel() {
   );
 }
 
+function PrototypesPanel() {
+  return (
+    <Card size="small">
+      <CardContent>
+        <ul className="admin-prototypes-list">
+          {prototypes.map((prototype) => (
+            <li key={prototype.id} className="admin-prototypes-list__item">
+              <Heading as="h3" size="small" weight="default">
+                {prototype.name}
+              </Heading>
+              <Body as="p" size="small" color="subtle" UNSAFE_className="mt-1">
+                {prototype.description}
+              </Body>
+              <div className="admin-prototypes-list__actions">
+                <Button
+                  variant="primary"
+                  size="small"
+                  href={prototype.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Open prototype
+                </Button>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </CardContent>
+    </Card>
+  );
+}
+
 function SitePagesPanel({ group }: { group: SitePage["group"] }) {
   const pages = useMemo(
     () => getSitePages().filter((page) => page.group === group),
@@ -620,6 +658,10 @@ function SettingsPanel({ section }: { section: SettingsSection }) {
 
   if (section === "publish") {
     return <SiteSettingsPublishPanel />;
+  }
+
+  if (section === "prototypes") {
+    return <PrototypesPanel />;
   }
 
   return <SitePagesPanel group={section} />;

@@ -1,4 +1,4 @@
-export { default as imgOportunCover } from "./cover.png";
+export { default as imgOportunCover } from "./cover.jpg";
 export { default as imgOportunLogo } from "./logo.png";
 export { default as imgOportunThumbnail } from "./thumbnail.png";
 

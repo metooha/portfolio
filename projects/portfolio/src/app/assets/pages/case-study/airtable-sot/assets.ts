@@ -1,7 +1,10 @@
 /** Figma-exported icons and illustrations for the Airtable case study. */
 
 export { default as imgAirtableCover } from "./cover.png";
-export { default as imgAirtableCoverPreview } from "./cover-preview.png";
+/** 16:9 PNG cropped for home card — generated from `home/Coverpreview.jpg` */
+export { default as imgAirtableCoverPreview } from "../../home/cover-preview-card.png";
+/** Full 2:1 hero / source art */
+export { default as imgAirtableCoverSource } from "../../home/Coverpreview.jpg";
 export { default as imgAirtableLogo } from "./logo.png";
 
 export { default as imgIconIos } from "./icons/ios.png";

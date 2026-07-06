@@ -18,9 +18,11 @@ const TAG_PALETTE = [
 
 export interface CaseStudyCardProps {
   caseStudy: CaseStudyConfig;
+  /** Eager-load and high-priority decode for above-the-fold cards */
+  priority?: boolean;
 }
 
-export function CaseStudyCard({ caseStudy }: CaseStudyCardProps) {
+export function CaseStudyCard({ caseStudy, priority = false }: CaseStudyCardProps) {
   const title = caseStudy.cardTitle ?? caseStudy.title;
   const description = caseStudy.cardDescription ?? caseStudy.shortDescription;
   const isClickable = caseStudy.isPublished !== false;
@@ -33,7 +35,10 @@ export function CaseStudyCard({ caseStudy }: CaseStudyCardProps) {
       <img
         src={caseStudy.thumbnail}
         alt={title}
-        className="w-full h-full object-cover transition-all duration-300"
+        className="block w-full h-full object-cover object-center"
+        decoding={priority ? "sync" : "async"}
+        loading={priority ? "eager" : "lazy"}
+        fetchPriority={priority ? "high" : "auto"}
       />
     );
 

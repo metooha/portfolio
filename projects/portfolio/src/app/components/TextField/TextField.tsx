@@ -5,6 +5,8 @@ import * as React from 'react';
 import {cx} from '../common/cx';
 import {useStableId, applyCommonProps} from '../common/helpers';
 import {WithIconProps} from '../common/types';
+import {Icon} from '../Icons/Icons';
+import {IconButton} from '../IconButton/IconButton';
 import {VisuallyHidden} from '../VisuallyHidden';
 import {FormHelperText, FormLabel} from '../Form';
 import './TextField.css';
@@ -137,6 +139,29 @@ export const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
     const id = useStableId(initialId);
     const helperId = useStableId();
     const magicLabelId = useStableId();
+    const [passwordVisible, setPasswordVisible] = React.useState(false);
+
+    const isPasswordField = type === 'password';
+    const inputType = isPasswordField && passwordVisible ? 'text' : type;
+    const iconButtonSize = size === 'large' ? 'medium' : 'small';
+    const passwordToggle =
+      isPasswordField && !trailing ? (
+        <IconButton
+          type="button"
+          a11yLabel={passwordVisible ? 'Hide password' : 'Show password'}
+          size={iconButtonSize}
+          disabled={disabled || readOnly}
+          onClick={() => setPasswordVisible((visible) => !visible)}
+          UNSAFE_className="ld-textfield-passwordToggle"
+        >
+          <Icon
+            name={passwordVisible ? 'EyeSlash' : 'Eye'}
+            size="small"
+            decorative
+          />
+        </IconButton>
+      ) : null;
+    const trailingContent = trailing ?? passwordToggle;
 
     const hasError = !!error && !disabled && !readOnly;
     const helperContent = hasError ? error : helperText;
@@ -182,7 +207,7 @@ export const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
             onChange={onChange}
             readOnly={readOnly}
             ref={ref}
-            type={type}
+            type={inputType}
             value={value}
             {...textFieldProps}
             className={cx('ld-textfield-value', textFieldProps?.className)}
@@ -195,9 +220,9 @@ export const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
             >{`${a11yMagicLabel},`}</VisuallyHidden>
           )}
 
-          {trailing && (
+          {trailingContent && (
             <span className={cx('ld-textfield-icon', 'ld-textfield-trailing')}>
-              {trailing}
+              {trailingContent}
             </span>
           )}
         </div>

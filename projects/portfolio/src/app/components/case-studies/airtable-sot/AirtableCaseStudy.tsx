@@ -2,7 +2,7 @@ import React from "react";
 import { CaseStudyHero } from "@/app/components/CaseStudyHero";
 import { CaseStudyTemplate } from "@/app/components/CaseStudyTemplate";
 import { getAdjacentCaseStudies } from "@/app/data/case-studies-config";
-import { imgAirtableCover, imgAirtableLogo } from "@/app/assets/pages/case-study/airtable-sot/assets";
+import { imgAirtableCoverSource, imgAirtableLogo } from "@/app/assets/pages/case-study/airtable-sot/assets";
 import {
   AirtableArchitectureSection,
   AirtableBridgeSection,
@@ -29,7 +29,7 @@ const NAV = [
 function AirtableHero() {
   return (
     <CaseStudyHero
-      image={imgAirtableCover}
+      image={imgAirtableCoverSource}
       title="17 themes."
       subtitle="One design language."
       titleColor="#001e60"

@@ -7,7 +7,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { changeAdminPassword, getAdminPassword } from "@/app/auth/admin-password";
+import { changeAdminPassword, verifyAdminPassword } from "@/app/auth/admin-password";
 
 const ADMIN_SESSION_KEY = "portfolio-admin-session";
 
@@ -35,7 +35,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const login = useCallback((password: string) => {
-    if (password !== getAdminPassword()) {
+    if (!verifyAdminPassword(password)) {
       return false;
     }
 

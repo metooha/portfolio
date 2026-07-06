@@ -22,9 +22,14 @@ export function Login() {
     return <Navigate to={redirectTo} replace />;
   }
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (login(password)) {
+    const submittedPassword =
+      new FormData(event.currentTarget).get("admin-password")?.toString() ??
+      password;
+
+    if (login(submittedPassword)) {
+      navigate(redirectTo);
       return;
     }
     setError("Incorrect password.");
@@ -55,6 +60,7 @@ export function Login() {
               error={error || undefined}
               textFieldProps={{
                 id: "admin-password",
+                name: "admin-password",
                 autoComplete: "current-password",
               }}
             />

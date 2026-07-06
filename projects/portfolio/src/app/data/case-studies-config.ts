@@ -12,8 +12,8 @@ import OportunDsCaseStudy from "@/app/components/case-studies/oportun-ds/Oportun
 import { CaseStudyXenseContent } from "@/app/components/case-studies/xense/CaseStudyXenseContent";
 import { CaseStudyAcademyContent } from "@/app/components/case-studies/academy/CaseStudyAcademyContent";
 import imgEverydaySansCover from "@/app/assets/pages/case-study/everyday-sans/cover.jpg";
-import { imgAirtableCoverPreview } from "@/app/assets/pages/case-study/airtable-sot/assets";
-import imgOportunDsCover from "@/app/assets/pages/case-study/oportun-ds/cover.png";
+import { imgAirtableCoverPreview, imgAirtableCoverSource } from "@/app/assets/pages/case-study/airtable-sot/assets";
+import imgOportunDsCover from "@/app/assets/pages/case-study/oportun-ds/cover.jpg";
 import type { ProjectLink } from "@/app/components/CaseStudyTemplate";
 import type { ThemeName } from "@/app/components/utils/Theming";
 
@@ -191,7 +191,7 @@ const CASE_STUDIES: CaseStudyConfig[] = [
     navAccentColor: "#0053e2",
     tags: ["Design Tokens", "Design System", "Automation", "Living Design"],
     heroType: "image",
-    heroImage: imgAirtableCoverPreview,
+    heroImage: imgAirtableCoverSource,
     thumbnail: imgAirtableCoverPreview,
     PageComponent: AirtableCaseStudy,
     overviewClient: "Walmart",

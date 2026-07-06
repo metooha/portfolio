@@ -138,8 +138,8 @@ export function Home() {
         </div>
 
         <div className="space-y-16">
-          {getFeaturedCaseStudies().map((caseStudy) => (
-            <CaseStudyCard key={caseStudy.id} caseStudy={caseStudy} />
+          {getFeaturedCaseStudies().map((caseStudy, index) => (
+            <CaseStudyCard key={caseStudy.id} caseStudy={caseStudy} priority={index < 2} />
           ))}
         </div>
 
