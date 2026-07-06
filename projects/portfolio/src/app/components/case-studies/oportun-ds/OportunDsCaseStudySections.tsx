@@ -1,12 +1,21 @@
 import {
   EdsEyebrow,
   EdsImageFull,
-  EdsImageGrid2,
+  EdsJourneyTimeline,
   EdsLead,
   EdsSection,
   EdsSectionTitle,
   EdsStatsRow,
+  type EdsJourneyItem,
 } from "../everyday-sans/EdsCaseStudyPrimitives";
+import {
+  OportunDsChallengeCards,
+  OportunDsChallengeVisual,
+  OportunDsComponentLifeCycleVisual,
+  OportunDsLoanCalculatorPrototype,
+  OportunDsTransferMoneyPrototype,
+  OportunIllustrationColorUsageFigure,
+} from "./OportunDsCaseStudyVisuals";
 import {
   Carousel,
   CarouselContent,
@@ -16,176 +25,247 @@ import {
   CarouselPrevious,
 } from "@/app/components/Carousel/Carousel";
 import { Body, Heading } from "@/app/components/Text/Text";
-import imgApproachFlowchart from "@/app/assets/pages/case-study/oportun-ds/approach-flowchart.png";
 import imgMappingPlanning from "@/app/assets/pages/case-study/oportun-ds/mapping-planning.png";
 import imgRoadmapping from "@/app/assets/pages/case-study/oportun-ds/roadmapping.png";
-import imgType from "@/app/assets/pages/case-study/oportun-ds/type.png";
-import imgSpacing from "@/app/assets/pages/case-study/oportun-ds/spacing.png";
-import imgIconsControls from "@/app/assets/pages/case-study/oportun-ds/icons-controls.png";
-import imgStorybook from "@/app/assets/pages/case-study/oportun-ds/storybook.png";
-import imgPrototypingComponents from "@/app/assets/pages/case-study/oportun-ds/prototyping-components.png";
-import imgRebrandExploration from "@/app/assets/pages/case-study/oportun-ds/rebrand-exploration.png";
+import {
+  imgFoundationColor,
+  imgFoundationIconsControls,
+  imgFoundationSpacing,
+  imgFoundationType,
+  imgDesignSystemAssetLibraries,
+  imgDesignSystemBanner,
+  imgDesignSystemComponentFiles,
+  imgDesignSystemContributing,
+  imgDesignSystemFilesTheming,
+  imgDesignSystemLearningTraining,
+  imgDesignSystemLibraries,
+  imgDesignSystemSyllabus,
+} from "@/app/assets/pages/case-study/oportun-ds/assets";
 import imgLoanCalculatorFlow from "@/app/assets/pages/case-study/oportun-ds/loan-calculator-flow.png";
-import imgUserflowsOptionsAb from "@/app/assets/pages/case-study/oportun-ds/userflows-options-ab.png";
-
-const LAVENDER = "var(--ld-semantic-color-text-accent-yellow-bold, #5b3fae)";
 
 const FOUNDATION_SLIDES = [
-  { src: imgType, alt: "Oportun design system typography foundations and typescale", label: "Typography" },
-  { src: imgSpacing, alt: "Oportun design system spacing grid units and layout specs", label: "Spacing" },
   {
-    src: imgIconsControls,
-    alt: "Oportun design system icons, glyphs, and controls documentation",
+    src: imgFoundationColor,
+    alt: "Oportun design system color foundations, palettes, brand swatches, and use cases",
+    label: "Color",
+  },
+  {
+    src: imgFoundationType,
+    alt: "Oportun design system typography foundations, typescale, and tokens",
+    label: "Typography",
+  },
+  {
+    src: imgFoundationSpacing,
+    alt: "Oportun design system spacing grid units, characteristics, and usage guidance",
+    label: "Spacing",
+  },
+  {
+    src: imgFoundationIconsControls,
+    alt: "Oportun design system icons, glyphs, controls, and handoff specs",
     label: "Icons & controls",
   },
 ] as const;
 
-const STRATEGY_STEPS = [
+const ROADMAP_SLIDES = [
   {
-    num: "1",
-    title: "Audit existing libraries",
-    body: "Determine the effort required to rebrand and build new assets across Digit and Oportun product surfaces.",
+    src: imgMappingPlanning,
+    alt: "Design system planning board with phased crawl walk run strategy",
+    label: "Planning & phased rollout",
   },
   {
-    num: "2",
-    title: "Roadmap & sprint plan",
-    body: "Define success metrics and phase work across crawl, walk, and run milestones with engineering partners.",
-  },
-  {
-    num: "3",
-    title: "Build foundational libraries",
-    body: "Establish color, typography, spacing, and icon foundations as the shared language for all teams.",
-  },
-  {
-    num: "4",
-    title: "Leverage new brand for product",
-    body: "Identify high-impact product areas where the rebrand could accelerate trust and consistency.",
-  },
-  {
-    num: "5",
-    title: "Build components",
-    body: "Ship atomic and molecular components in Figma and Storybook with documentation for every state.",
-  },
-  {
-    num: "6",
-    title: "UI designs & prototyping",
-    body: "Validate patterns through loan calculator flows, mobile dashboards, and desktop parity explorations.",
-  },
-  {
-    num: "7",
-    title: "Testing & developer handoff",
-    body: "Build screens to test quality and scalability, then hand off specs engineers can implement without guesswork.",
+    src: imgRoadmapping,
+    alt: "FigJam roadmapping workshop with sticky notes across seven themes",
+    label: "Roadmapping workshop",
   },
 ] as const;
 
-function OportunStrategyGrid() {
-  return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-      {STRATEGY_STEPS.map((step) => (
-        <div
-          key={step.num}
-          className="rounded-[10px] px-6 py-5 h-full flex flex-col gap-2"
-          style={{
-            background: "var(--ld-semantic-color-fill, #ffffff)",
-            border: "1px solid var(--ld-semantic-color-border-brand, #6cdb8c)",
-          }}
-        >
-          <Heading as="span" size="small" color="brand" UNSAFE_className="m-0">
-            {step.num}
-          </Heading>
-          <Body
-            as="p"
-            size="medium"
-            weight="alt"
-            UNSAFE_className="m-0"
-            UNSAFE_style={{ color: "var(--ld-semantic-color-text-brand-bold, #1d6b3b)" }}
-          >
-            {step.title}
-          </Body>
-          <Body as="p" size="small" color="subtlest" UNSAFE_className="m-0 leading-[1.65]">
-            {step.body}
-          </Body>
-        </div>
-      ))}
-    </div>
-  );
-}
+const DESIGN_SYSTEM_SLIDES = [
+  {
+    src: imgDesignSystemBanner,
+    alt: "Design Systems documentation banner with apple, books, gears, and peace sign illustrations",
+    label: "Overview",
+  },
+  {
+    src: imgDesignSystemAssetLibraries,
+    alt: "Design system asset libraries page covering emojis, icons, graphics, and illustrations in Figma",
+    label: "Asset libraries",
+  },
+  {
+    src: imgDesignSystemLibraries,
+    alt: "Design system libraries panel in Figma showing foundational, component, asset, and local libraries",
+    label: "Libraries",
+  },
+  {
+    src: imgDesignSystemFilesTheming,
+    alt: "Headless design system files and theming documentation with light and dark mode component previews",
+    label: "Files & theming",
+  },
+  {
+    src: imgDesignSystemComponentFiles,
+    alt: "Component files documentation for handoff, usage, variants, and engineering specs in Figma",
+    label: "Component files",
+  },
+  {
+    src: imgDesignSystemContributing,
+    alt: "Contribution guides in Coda covering icons, emojis, documentation, patterns, and engineering",
+    label: "Contributing",
+  },
+  {
+    src: imgDesignSystemLearningTraining,
+    alt: "Learning and training syllabus organizing onboarding materials for design system enthusiasts",
+    label: "Learning & training",
+  },
+  {
+    src: imgDesignSystemSyllabus,
+    alt: "Design system syllabus table with categorized pages, tags, and assignment status",
+    label: "Syllabus",
+  },
+] as const;
 
-function OportunMissionQuote() {
-  return (
-    <blockquote className="m-0 mt-8 max-w-3xl">
-      <Body
-        as="p"
-        size="large"
-        UNSAFE_className="leading-snug m-0"
-        UNSAFE_style={{
-          fontSize: "clamp(1.25rem, 3vw, 2rem)",
-          color: "var(--ld-semantic-color-text, #2e2f32)",
-        }}
-      >
-        To give you <strong style={{ color: LAVENDER }}>confidence</strong>, to{" "}
-        <strong style={{ color: LAVENDER }}>seize</strong> every{" "}
-        <strong style={{ color: LAVENDER }}>opportunity</strong>. We are your savvy money friend.
-      </Body>
-    </blockquote>
-  );
-}
+const SECTION_OUTER = "w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-12 lg:px-[68px]";
+const SECTION_INNER = "w-full max-w-4xl lg:max-w-[1046px] flex flex-col gap-6";
+
+const APPROACH_ITEMS: EdsJourneyItem[] = [
+  {
+    date: "",
+    phase: "Audit",
+    who: [
+      { label: "Design", variant: "brand" },
+      { label: "Engineering", variant: "engineering" },
+    ],
+    mood: "progress",
+    story: "Determined the level of effort for rebranding and building new assets.",
+  },
+  {
+    date: "",
+    phase: "Roadmap",
+    who: [
+      { label: "Design", variant: "brand" },
+      { label: "Engineering", variant: "engineering" },
+    ],
+    mood: "progress",
+    story: "Created tasks for the upcoming quarter after assessing the workload.",
+  },
+  {
+    date: "",
+    phase: "Success metrics",
+    who: [
+      { label: "Design", variant: "brand" },
+      { label: "Engineering", variant: "engineering" },
+    ],
+    mood: "progress",
+    story: "Outlined the OKRs.",
+  },
+  {
+    date: "",
+    phase: "New brand",
+    who: [
+      { label: "Design", variant: "brand" },
+      { label: "Engineering", variant: "engineering" },
+    ],
+    mood: "progress",
+    story: "Identified areas where the brand impacted product the most.",
+  },
+  {
+    date: "",
+    phase: "Foundations",
+    who: [{ label: "Design", variant: "brand" }],
+    mood: "progress",
+    story: "Utilized a headless design system, tokens, and implemented a formula for scalability.",
+  },
+  {
+    date: "",
+    phase: "UI designs",
+    who: [{ label: "Design", variant: "brand" }],
+    mood: "progress",
+    story: "Built component prototypes with the new themes, styles, and interactions.",
+  },
+  {
+    date: "",
+    phase: "Testing",
+    who: [{ label: "Design", variant: "brand" }],
+    mood: "progress",
+    story: "Product designers used the design system and provided critiques.",
+  },
+  {
+    date: "",
+    phase: "Dev handoff",
+    who: [{ label: "Design", variant: "brand" }],
+    mood: "progress",
+    story:
+      "Documentation for use cases, developer guidelines, and component specs were added to the backlog.",
+  },
+];
 
 export function OportunDsChallengeSection() {
   return (
-    <EdsSection id="challenge">
-      <EdsEyebrow>The challenge</EdsEyebrow>
-      <EdsSectionTitle>Unifying two brands under one design language</EdsSectionTitle>
-      <EdsLead>
-        Oportun&apos;s acquisition of Digit created an urgent need to rebrand and unify two distinct product
-        experiences. Teams were maintaining parallel libraries, inconsistent patterns, and fragmented
-        documentation — slowing delivery and eroding trust in the system as a shared platform.
-      </EdsLead>
-      <OportunMissionQuote />
-    </EdsSection>
+    <section
+      id="challenge"
+      className="w-full shrink-0 border-b"
+      style={{
+        background: "var(--ld-semantic-color-fill, #ffffff)",
+        borderColor: "var(--ld-semantic-color-separator, #e3e4e5)",
+        paddingTop: "var(--ld-semantic-spacing-1000, 5rem)",
+        paddingBottom: "var(--ld-semantic-spacing-1000, 5rem)",
+      }}
+    >
+      <div className={`${SECTION_OUTER} flex flex-col gap-10`}>
+        <div className={SECTION_INNER}>
+          <EdsEyebrow>The challenge</EdsEyebrow>
+          <EdsSectionTitle>Unifying two brands under one design language</EdsSectionTitle>
+        </div>
+        <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] gap-8 lg:gap-12 items-center">
+          <OportunDsChallengeCards />
+          <OportunDsChallengeVisual />
+        </div>
+      </div>
+    </section>
   );
 }
 
 export function OportunDsApproachSection() {
   return (
-    <EdsSection
-      id="approach"
-      variant="dark"
-      className="[&_h2]:!text-white [&_.ld-text-body-body]:!text-white/75"
-    >
-      <EdsEyebrow onDark>The approach</EdsEyebrow>
-      <EdsSectionTitle onDark>A phased process from audit to handoff</EdsSectionTitle>
-      <EdsLead onDark>
-        Documentation ran through every stage — from auditing existing libraries to shipping components and
-        validating them in product prototypes before developer handoff.
+    <EdsSection id="approach">
+      <EdsEyebrow>The approach</EdsEyebrow>
+      <EdsSectionTitle>Defining the strategy</EdsSectionTitle>
+      <EdsLead>
+        As a team we worked on figuring out what our game plan was, and how to create our roadmap and define our
+        deliverables.
       </EdsLead>
-      <EdsImageFull
-        src={imgApproachFlowchart}
-        alt="Design system process flowchart from audit to developer handoff"
-        surface="white"
-      />
+      <EdsJourneyTimeline items={APPROACH_ITEMS} />
     </EdsSection>
   );
 }
 
-export function OportunDsStrategySection() {
+export function OportunDsAssetLibrariesSection() {
   return (
-    <EdsSection id="strategy" variant="mid">
-      <EdsEyebrow>Defining the strategy</EdsEyebrow>
-      <EdsSectionTitle>Seven interconnected steps toward a north-star system</EdsSectionTitle>
-      <EdsLead>
-        A crawl-walk-run roadmap aligned product, brand, and engineering around shared foundations, components,
-        and adoption.
-      </EdsLead>
-      <OportunStrategyGrid />
-      <div className="mt-10">
-        <EdsImageFull
-          src={imgMappingPlanning}
-          alt="Design system planning board with phased crawl walk run strategy"
-          label="Planning & phased rollout"
-        />
+    <section
+      id="asset-libraries"
+      className="w-full shrink-0 border-b"
+      style={{
+        background: "var(--ld-semantic-color-fill, #ffffff)",
+        borderColor: "var(--ld-semantic-color-separator, #e3e4e5)",
+        paddingTop: "var(--ld-semantic-spacing-1000, 5rem)",
+        paddingBottom: "var(--ld-semantic-spacing-1000, 5rem)",
+      }}
+    >
+      <div className={SECTION_OUTER}>
+        <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,0.4fr)_minmax(0,0.6fr)] gap-8 lg:gap-12 items-start">
+          <div className="flex flex-col gap-6">
+            <EdsEyebrow>Asset libraries</EdsEyebrow>
+            <EdsSectionTitle>Illustration / Color Usage</EdsSectionTitle>
+            <EdsLead>
+              Illustrations help to communicate the design intent and aesthetic of a product, as well as its key
+              features and functions. Illustrations can also be used to create technical drawings that can be used to
+              guide the users to make informed decisions. Additionally, illustrations can be used to create
+              marketing materials, such as product catalogs and advertisements, that can help to promote a product
+              and increase sales.
+            </EdsLead>
+          </div>
+          <OportunIllustrationColorUsageFigure />
+        </div>
       </div>
-    </EdsSection>
+    </section>
   );
 }
 
@@ -198,26 +278,9 @@ export function OportunDsRoadmapSection() {
         Cross-functional workshops surfaced team expectations, technical debt, documentation gaps, and process
         improvements — shaping the DS 4.0 roadmap.
       </EdsLead>
-      <EdsImageFull
-        src={imgRoadmapping}
-        alt="FigJam roadmapping workshop with sticky notes across seven themes"
-      />
-    </EdsSection>
-  );
-}
-
-export function OportunDsFoundationsSection() {
-  return (
-    <EdsSection id="foundations" variant="mid">
-      <EdsEyebrow>Foundations</EdsEyebrow>
-      <EdsSectionTitle>Typography, spacing, and iconography</EdsSectionTitle>
-      <EdsLead>
-        Documented for designers and engineers with do/don&apos;t guidance, token specs, and handoff examples
-        across mobile and web.
-      </EdsLead>
-      <Carousel aria-label="Design system foundations">
+      <Carousel aria-label="Design system planning and roadmapping">
         <CarouselContent>
-          {FOUNDATION_SLIDES.map((slide) => (
+          {ROADMAP_SLIDES.map((slide) => (
             <CarouselItem key={slide.label} cols={1}>
               <EdsImageFull src={slide.src} alt={slide.alt} label={slide.label} />
             </CarouselItem>
@@ -231,46 +294,181 @@ export function OportunDsFoundationsSection() {
   );
 }
 
-export function OportunDsComponentsSection() {
+export function OportunDsComponentLifeCycleSection() {
   return (
-    <EdsSection id="components">
-      <EdsEyebrow>Components & Storybook</EdsEyebrow>
-      <EdsSectionTitle>Building the component library architecture</EdsSectionTitle>
-      <EdsLead>
-        A living library in Storybook bridged design and code — with props, states, and accessibility controls
-        for every pattern.
-      </EdsLead>
-      <EdsImageGrid2
-        items={[
-          { src: imgStorybook, alt: "Digit Storybook component documentation with Large Card preview" },
-          {
-            src: imgPrototypingComponents,
-            alt: "Oportun prototype components including loan offer cards and form patterns",
-          },
-        ]}
-      />
-    </EdsSection>
+    <section
+      id="component-life-cycle"
+      className="w-full shrink-0 border-b"
+      style={{
+        background: "var(--ld-semantic-color-fill, #ffffff)",
+        borderColor: "var(--ld-semantic-color-separator, #e3e4e5)",
+        paddingTop: "var(--ld-semantic-spacing-1000, 5rem)",
+        paddingBottom: "var(--ld-semantic-spacing-1000, 5rem)",
+      }}
+    >
+      <div className={`${SECTION_OUTER} flex flex-col gap-10`}>
+        <div className={SECTION_INNER}>
+          <EdsEyebrow>Component life cycle</EdsEyebrow>
+          <EdsSectionTitle>A component in action</EdsSectionTitle>
+          <EdsLead>
+            Here&apos;s an example of the Snack bar component, and everything that is involved in creating it.
+          </EdsLead>
+        </div>
+        <OportunDsComponentLifeCycleVisual />
+      </div>
+    </section>
+  );
+}
+
+export function OportunDsUsageExamplesSection() {
+  return (
+    <section
+      id="usage-examples"
+      className="w-full shrink-0 border-b"
+      style={{
+        background: "var(--ld-semantic-color-fill, #ffffff)",
+        borderColor: "var(--ld-semantic-color-separator, #e3e4e5)",
+        paddingTop: "var(--ld-semantic-spacing-1000, 5rem)",
+        paddingBottom: "var(--ld-semantic-spacing-1000, 5rem)",
+      }}
+    >
+      <div className={`${SECTION_OUTER} flex flex-col gap-10`}>
+        <div className={SECTION_INNER}>
+          <EdsEyebrow>Usage examples</EdsEyebrow>
+          <EdsSectionTitle>Prototype Mobile App: Transfer Money</EdsSectionTitle>
+          <EdsLead>
+            Here&apos;s an example of the Snack bar component, and everything that is involved in creating it.
+          </EdsLead>
+        </div>
+        <OportunDsTransferMoneyPrototype />
+      </div>
+    </section>
+  );
+}
+
+export function OportunDsDesignSystemSection() {
+  return (
+    <section
+      id="design-system"
+      className="w-full shrink-0 border-b"
+      style={{
+        background: "var(--ld-semantic-color-fill, #ffffff)",
+        borderColor: "var(--ld-semantic-color-separator, #e3e4e5)",
+        paddingTop: "var(--ld-semantic-spacing-1000, 5rem)",
+        paddingBottom: "var(--ld-semantic-spacing-1000, 5rem)",
+      }}
+    >
+      <div className={`${SECTION_OUTER} flex flex-col gap-6`}>
+        <div className={SECTION_INNER}>
+          <Heading
+            as="h2"
+            size="medium"
+            weight="default"
+            UNSAFE_className="leading-[1.15]"
+            UNSAFE_style={{
+              color: "var(--ld-semantic-color-text-accent-yellow-bold, #5b3fae)",
+              fontSize: "clamp(24px, 3vw, 38px)",
+            }}
+          >
+            Design System
+          </Heading>
+          <EdsLead>
+            A design system is not a system without users. I created documents for designers, engineers, and
+            cross-functional teams to learn about design systems. These pages include but are not limited to using a
+            design system, onboarding, using Figma, accessibility, contributions, component documentation, release
+            notes, and more.
+          </EdsLead>
+        </div>
+        <Carousel aria-label="Design system documentation">
+          <CarouselContent>
+            {DESIGN_SYSTEM_SLIDES.map((slide) => (
+              <CarouselItem key={slide.label} cols={1}>
+                <EdsImageFull src={slide.src} alt={slide.alt} label={slide.label} />
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious />
+          <CarouselNext />
+          <CarouselPagination />
+        </Carousel>
+      </div>
+    </section>
+  );
+}
+
+export function OportunDsFoundationsSection() {
+  return (
+    <section
+      id="foundations"
+      className="w-full shrink-0 border-b"
+      style={{
+        background: "var(--ld-semantic-color-fill-subtle, #f0f1f2)",
+        borderColor: "var(--ld-semantic-color-separator, #e3e4e5)",
+        paddingTop: "var(--ld-semantic-spacing-1000, 5rem)",
+        paddingBottom: "var(--ld-semantic-spacing-1000, 5rem)",
+      }}
+    >
+      <div className={`${SECTION_OUTER} flex flex-col gap-6`}>
+        <div className={SECTION_INNER}>
+          <EdsEyebrow>Process</EdsEyebrow>
+          <EdsSectionTitle>Building the design system</EdsSectionTitle>
+          <EdsLead>
+            The design system&apos;s language encompasses essential elements such as color palettes, typography
+            styles, spacing guidelines, padding, corner radii, and the use of icons, controls, and logos. It
+            also includes comprehensive usage and token guidelines, along with brand exploration exercises to
+            ensure consistency and clarity in design.
+          </EdsLead>
+        </div>
+        <Carousel aria-label="Design system foundations">
+          <CarouselContent>
+            {FOUNDATION_SLIDES.map((slide) => (
+              <CarouselItem key={slide.label} cols={1}>
+                <EdsImageFull src={slide.src} alt={slide.alt} label={slide.label} />
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious />
+          <CarouselNext />
+          <CarouselPagination />
+        </Carousel>
+      </div>
+    </section>
   );
 }
 
 export function OportunDsProductSection() {
   return (
-    <EdsSection id="product" variant="mid">
-      <EdsEyebrow>Product work</EdsEyebrow>
-      <EdsSectionTitle>Validating the system in high-stakes flows</EdsSectionTitle>
-      <EdsLead>
-        Rebrand explorations and loan calculator flows tested the system in real product contexts before wide
-        adoption.
-      </EdsLead>
-      <EdsImageGrid2
-        stacked
-        items={[
-          { src: imgRebrandExploration, alt: "Oportun mobile rebrand exploration screens" },
-          { src: imgLoanCalculatorFlow, alt: "Loan calculator happy path user flow diagram" },
-          { src: imgUserflowsOptionsAb, alt: "Loan calculator options A and B visual user flows" },
-        ]}
-      />
-    </EdsSection>
+    <section
+      id="product"
+      className="w-full shrink-0 border-b"
+      style={{
+        background: "var(--ld-semantic-color-fill-brand-subtle, #e9f1fe)",
+        borderColor: "var(--ld-semantic-color-separator, #e3e4e5)",
+        paddingTop: "var(--ld-semantic-spacing-1000, 5rem)",
+        paddingBottom: "var(--ld-semantic-spacing-1000, 5rem)",
+      }}
+    >
+      <div className={SECTION_OUTER}>
+        <div className={`${SECTION_INNER} !gap-10`}>
+          <div className="flex w-full flex-col gap-6">
+            <EdsEyebrow>Product work</EdsEyebrow>
+            <EdsSectionTitle>Validating the system in high-stakes flows</EdsSectionTitle>
+            <EdsLead>
+              Loan calculator flows tested the system in a high-stakes product context before wide adoption.
+            </EdsLead>
+            <EdsImageFull
+              src={imgLoanCalculatorFlow}
+              alt="Loan calculator happy path user flow diagram"
+            />
+          </div>
+          <div className="flex w-full flex-col gap-6">
+            <EdsSectionTitle>Homepage / Loan calculator</EdsSectionTitle>
+            <EdsLead>Interactive prototype for the loan calculator happy path.</EdsLead>
+            <OportunDsLoanCalculatorPrototype />
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -284,9 +482,9 @@ export function OportunDsResultsSection() {
         accelerating delivery across web and mobile.
       </EdsLead>
       <EdsStatsRow
-        variant="light"
+        variant="brand"
         stats={[
-          { value: "3", label: "Foundation pillars" },
+          { value: "4", label: "Foundation pillars" },
           { value: "100+", label: "Components documented" },
           { value: "2", label: "Brands unified" },
           { value: "6 mo", label: "Delivery timeline" },
@@ -303,9 +501,8 @@ export function OportunDsResultsSection() {
           as="h3"
           size="small"
           weight="alt"
-          color="inverse"
           UNSAFE_className="m-0"
-          UNSAFE_style={{ fontSize: "clamp(20px, 2.5vw, 28px)" }}
+          UNSAFE_style={{ fontSize: "clamp(20px, 2.5vw, 28px)", color: "#000000" }}
         >
           Success &amp; impact
         </Heading>
@@ -319,9 +516,9 @@ export function OportunDsResultsSection() {
             <li key={item} className="flex gap-3">
               <span
                 className="shrink-0 w-1.5 h-1.5 rounded-full mt-2"
-                style={{ background: "var(--ld-primitive-color-white, #ffffff)" }}
+                style={{ background: "#000000" }}
               />
-              <Body as="span" size="medium" UNSAFE_className="leading-relaxed m-0" color="inverse">
+              <Body as="span" size="medium" UNSAFE_className="leading-relaxed m-0" UNSAFE_style={{ color: "#000000" }}>
                 {item}
               </Body>
             </li>

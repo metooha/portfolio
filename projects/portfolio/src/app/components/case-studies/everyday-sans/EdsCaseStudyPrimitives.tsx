@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Body, Heading } from "@/app/components/Text/Text";
 
 /** Matches CaseStudyTemplate overview shell (max-w-7xl + inner content width). */
@@ -202,6 +202,74 @@ export function EdsImageFrame({
   );
 }
 
+export function EdsFrameCycle({
+  frames,
+  intervalMs = 2800,
+  alt,
+  className = "",
+  frameClassName = "",
+  imageClassName = "",
+  surface = "subtle",
+  background,
+}: {
+  frames: { src: string; alt?: string }[];
+  intervalMs?: number;
+  alt: string;
+  className?: string;
+  frameClassName?: string;
+  imageClassName?: string;
+  surface?: EdsImageSurface;
+  background?: string;
+}) {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  useEffect(() => {
+    if (frames.length <= 1) return;
+    const timer = window.setInterval(() => {
+      setActiveIndex((current) => (current + 1) % frames.length);
+    }, intervalMs);
+    return () => window.clearInterval(timer);
+  }, [frames.length, intervalMs]);
+
+  return (
+    <figure className={`m-0 relative w-full ${className}`} aria-label={alt}>
+      <div
+        className={`relative w-full overflow-hidden rounded-xl ${frameClassName}`}
+        style={{ background: background ?? IMAGE_SURFACE[surface] }}
+      >
+        {frames.map((frame, index) => (
+          <img
+            key={frame.src}
+            src={frame.src}
+            alt={frame.alt ?? alt}
+            className={`absolute inset-0 block h-full w-full transition-opacity duration-700 ease-in-out ${imageClassName} ${
+              index === activeIndex ? "opacity-100" : "opacity-0"
+            }`}
+            loading={index === 0 ? "eager" : "lazy"}
+            decoding="async"
+          />
+        ))}
+      </div>
+      {frames.length > 1 && (
+        <div className="absolute bottom-4 left-1/2 flex -translate-x-1/2 gap-2" aria-hidden="true">
+          {frames.map((frame, index) => (
+            <span
+              key={frame.src}
+              className="size-2 rounded-full transition-colors duration-300"
+              style={{
+                background:
+                  index === activeIndex
+                    ? "var(--ld-semantic-color-fill-brand, #6cdb8c)"
+                    : "var(--ld-semantic-color-separator, #e3e4e5)",
+              }}
+            />
+          ))}
+        </div>
+      )}
+    </figure>
+  );
+}
+
 export function EdsImageFull({
   src,
   alt,
@@ -213,6 +281,7 @@ export function EdsImageFull({
   fit = "natural",
   surface = "white",
   clipEdges = true,
+  rounded = true,
 }: {
   src: string;
   alt: string;
@@ -224,6 +293,7 @@ export function EdsImageFull({
   fit?: "natural" | "cover" | "contain";
   surface?: EdsImageSurface;
   clipEdges?: boolean;
+  rounded?: boolean;
 }) {
   return (
     <figure className={`m-0 flex flex-col gap-6 ${className}`}>
@@ -247,6 +317,7 @@ export function EdsImageFull({
         fit={fit}
         surface={surface}
         clipEdges={clipEdges}
+        rounded={rounded}
       />
       {caption && (
         <Body as="figcaption" size="small" color="subtlest" UNSAFE_className="leading-snug">
@@ -457,9 +528,11 @@ export function EdsJourneyTimeline({ items }: { items: EdsJourneyItem[] }) {
               className="hidden md:block absolute -right-[7px] top-8 w-3 h-3 rounded-full border-2 border-white"
               style={{ background: MOOD_COLOR[item.mood], boxShadow: `0 0 0 2px ${MOOD_COLOR[item.mood]}` }}
             />
-            <Body as="p" size="small" weight="alt" color="subtlest" UNSAFE_className="tracking-wide mb-1" UNSAFE_style={{ fontSize: "11px" }}>
-              {item.date}
-            </Body>
+            {item.date ? (
+              <Body as="p" size="small" weight="alt" color="subtlest" UNSAFE_className="tracking-wide mb-1" UNSAFE_style={{ fontSize: "11px" }}>
+                {item.date}
+              </Body>
+            ) : null}
             <Body as="p" size="small" weight="alt" UNSAFE_className="italic leading-snug mb-2" UNSAFE_style={{ color: "var(--ld-semantic-color-fill-brand-bold, #001e60)" }}>
               {item.phase}
             </Body>
@@ -580,28 +653,43 @@ export function EdsStatsRow({
   variant = "dark",
 }: {
   stats: { value: string; label: string; valueColor?: string }[];
-  variant?: "dark" | "light";
+  variant?: "dark" | "light" | "brand";
 }) {
   const isLight = variant === "light";
+  const isBrand = variant === "brand";
+
+  const cellBackground = isBrand
+    ? "var(--ld-semantic-color-fill-brand, #6cdb8c)"
+    : isLight
+      ? "#e7f1fc"
+      : "rgba(255,255,255,0.04)";
+
+  const defaultValueColor = isBrand
+    ? "#000000"
+    : isLight
+      ? "#0053e2"
+      : "var(--ld-primitive-color-spark-100, #ffc220)";
+
+  const labelColor = isBrand ? "#000000" : isLight ? "#001e60" : "rgba(255,255,255,0.55)";
 
   return (
     <div
       className="grid grid-cols-2 lg:grid-cols-4 gap-px rounded-xl overflow-hidden"
       style={{
-        background: isLight ? "var(--ld-semantic-color-separator, #e3e4e5)" : "rgba(255,255,255,0.1)",
-        border: isLight ? "1px solid var(--ld-semantic-color-separator, #e3e4e5)" : "1px solid rgba(255,255,255,0.1)",
+        background: isLight || isBrand ? "var(--ld-semantic-color-separator, #e3e4e5)" : "rgba(255,255,255,0.1)",
+        border: isLight || isBrand ? "1px solid var(--ld-semantic-color-separator, #e3e4e5)" : "1px solid rgba(255,255,255,0.1)",
       }}
     >
       {stats.map((stat) => (
         <div
           key={stat.label}
           className="text-center px-5 py-8"
-          style={{ background: isLight ? "#e7f1fc" : "rgba(255,255,255,0.04)" }}
+          style={{ background: cellBackground }}
         >
           <div
             className="text-[44px] font-bold leading-none mb-2"
             style={{
-              color: stat.valueColor ?? (isLight ? "#0053e2" : "var(--ld-primitive-color-spark-100, #ffc220)"),
+              color: stat.valueColor ?? defaultValueColor,
             }}
           >
             {stat.value}
@@ -611,7 +699,7 @@ export function EdsStatsRow({
             size="small"
             UNSAFE_className="leading-snug"
             UNSAFE_style={{
-              color: isLight ? "#001e60" : "rgba(255,255,255,0.55)",
+              color: labelColor,
               fontSize: "13px",
               opacity: isLight ? 0.75 : 1,
             }}

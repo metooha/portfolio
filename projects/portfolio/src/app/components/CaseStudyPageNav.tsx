@@ -104,12 +104,13 @@ export function CaseStudyPageNav({
           color="subtle"
           leading={<ChevronLeftIcon size="small" decorative />}
           onClick={() => navigate(-1)}
+          UNSAFE_style={{ textDecoration: "none" }}
           data-name="Text Link / Back"
         >
           Back
         </LinkButton>
 
-        <nav className="flex flex-col items-start shrink-0" data-name="Side Navigation">
+        <nav className="flex flex-col items-start shrink-0" aria-label="Case study sections" data-name="Side Navigation">
           {sections.map(({ label, href }) => {
             const isActive = activeHref === href;
             return (
@@ -121,18 +122,27 @@ export function CaseStudyPageNav({
                   setActiveHref(href);
                   scrollToSection(href);
                 }}
+                aria-current={isActive ? "location" : undefined}
                 UNSAFE_className="flex gap-[6px] items-center shrink-0 w-full group"
+                UNSAFE_style={{ textDecoration: "none" }}
                 data-name="Side Nav"
               >
                 <span className="flex gap-[6px] items-center">
                   <span
                     className="h-[22px] shrink-0 w-[3px] rounded-full transition-colors duration-200"
                     style={{ backgroundColor: isActive ? accentColor : "transparent" }}
+                    aria-hidden="true"
                   />
                   <Body
                     as="span"
                     size="small"
-                    UNSAFE_style={{ color: isActive ? accentColor : "#4e4f4e" }}
+                    color={isActive ? undefined : "subtle"}
+                    weight={isActive ? "alt" : "default"}
+                    UNSAFE_style={
+                      isActive
+                        ? { color: "var(--ld-semantic-color-text, #2e2f32)" }
+                        : undefined
+                    }
                   >
                     {label}
                   </Body>

@@ -25,6 +25,8 @@ export interface CaseStudyTemplateProps {
   overviewTitle: string;
   overviewDescription: string;
   metaItems: MetaItem[];
+  /** Replaces the default overview block (logo, title, description, meta) when provided. */
+  overviewContent?: React.ReactNode;
   navSections?: NavSection[];
   navAccentColor?: string;
   prevProject?: ProjectLink;
@@ -126,6 +128,7 @@ export function CaseStudyTemplate({
   overviewTitle,
   overviewDescription,
   metaItems,
+  overviewContent,
   navSections = [],
   navAccentColor = "var(--ld-semantic-color-text-positive, #207442)",
   prevProject,
@@ -187,48 +190,52 @@ export function CaseStudyTemplate({
                   className="content-stretch flex flex-1 flex-col items-start min-h-px min-w-0 w-full max-w-4xl lg:max-w-[1046px] pt-8 md:pt-16 lg:pt-0 relative"
                   style={{ gap: "var(--ld-semantic-spacing-400, 2rem)" }}
                 >
-                  {(overviewLogo || overviewClient) && (
-                    <div
-                      className="content-stretch flex items-start relative shrink-0"
-                      style={{ gap: "var(--ld-semantic-spacing-150, 0.75rem)" }}
-                    >
-                      {overviewLogo && (
+                  {overviewContent ?? (
+                    <>
+                      {(overviewLogo || overviewClient) && (
                         <div
-                          className="overflow-clip relative shrink-0 size-[48px]"
-                          style={{ borderRadius: "var(--ld-primitive-scale-border-radius-200, 1rem)" }}
+                          className="content-stretch flex items-start relative shrink-0"
+                          style={{ gap: "var(--ld-semantic-spacing-150, 0.75rem)" }}
                         >
-                          {overviewLogo}
+                          {overviewLogo && (
+                            <div
+                              className="overflow-clip relative shrink-0 size-[48px]"
+                              style={{ borderRadius: "var(--ld-primitive-scale-border-radius-200, 1rem)" }}
+                            >
+                              {overviewLogo}
+                            </div>
+                          )}
+                          {(overviewClient || overviewCategory) && (
+                            <div
+                              className="content-stretch flex flex-col items-start relative shrink-0"
+                              style={{ gap: 0 }}
+                            >
+                              {overviewClient && (
+                                <Heading as="p" size="medium" weight="default" UNSAFE_className="relative shrink-0">
+                                  {overviewClient}
+                                </Heading>
+                              )}
+                              {overviewCategory && (
+                                <Body as="p" size="medium" color="subtle" UNSAFE_className="relative shrink-0">
+                                  {overviewCategory}
+                                </Body>
+                              )}
+                            </div>
+                          )}
                         </div>
                       )}
-                      {(overviewClient || overviewCategory) && (
-                        <div
-                          className="content-stretch flex flex-col items-start relative shrink-0"
-                          style={{ gap: 0 }}
-                        >
-                          {overviewClient && (
-                            <Heading as="p" size="medium" weight="default" UNSAFE_className="relative shrink-0">
-                              {overviewClient}
-                            </Heading>
-                          )}
-                          {overviewCategory && (
-                            <Body as="p" size="medium" color="subtle" UNSAFE_className="relative shrink-0">
-                              {overviewCategory}
-                            </Body>
-                          )}
-                        </div>
-                      )}
-                    </div>
+                      <PageTitleText
+                        as="p"
+                        UNSAFE_className="relative shrink-0 w-full max-w-[1200px]"
+                      >
+                        {overviewTitle}
+                      </PageTitleText>
+                      <Body as="p" size="large" UNSAFE_className="max-w-[1200px] relative shrink-0 w-full">
+                        {overviewDescription}
+                      </Body>
+                      <CaseStudyMeta items={metaItems} />
+                    </>
                   )}
-                  <PageTitleText
-                    as="p"
-                    UNSAFE_className="relative shrink-0 w-full max-w-[1200px]"
-                  >
-                    {overviewTitle}
-                  </PageTitleText>
-                  <Body as="p" size="large" UNSAFE_className="max-w-[1200px] relative shrink-0 w-full">
-                    {overviewDescription}
-                  </Body>
-                  <CaseStudyMeta items={metaItems} />
                 </div>
               </div>
             </div>

@@ -4,28 +4,33 @@ import { CaseStudyTemplate } from "@/app/components/CaseStudyTemplate";
 import { getAdjacentCaseStudies } from "@/app/data/case-studies-config";
 import imgCover from "@/app/assets/pages/case-study/oportun-ds/cover.png";
 import imgLogo from "@/app/assets/pages/case-study/oportun-ds/logo.png";
+import { OportunDsOverview } from "./OportunDsCaseStudyVisuals";
 import {
   OportunDsApproachSection,
+  OportunDsAssetLibrariesSection,
   OportunDsChallengeSection,
-  OportunDsComponentsSection,
+  OportunDsComponentLifeCycleSection,
+  OportunDsDesignSystemSection,
   OportunDsFoundationsSection,
   OportunDsProductSection,
   OportunDsResultsSection,
   OportunDsRoadmapSection,
-  OportunDsStrategySection,
+  OportunDsUsageExamplesSection,
 } from "./OportunDsCaseStudySections";
 
 const NAV = [
   { label: "Overview", href: "#overview" },
   { label: "The challenge", href: "#challenge" },
   { label: "The approach", href: "#approach" },
-  { label: "Strategy", href: "#strategy" },
   { label: "Roadmapping", href: "#roadmap" },
+  { label: "Asset libraries", href: "#asset-libraries" },
   { label: "Foundations", href: "#foundations" },
-  { label: "Components", href: "#components" },
+  { label: "Component life cycle", href: "#component-life-cycle" },
+  { label: "Usage examples", href: "#usage-examples" },
   { label: "Product work", href: "#product" },
   { label: "Results", href: "#results" },
-];
+  { label: "Design system", href: "#design-system" },
+] as const;
 
 const HERO_TITLE_COLOR = "#000000";
 const PEACH_HERO = "#FFB08A";
@@ -48,6 +53,17 @@ function OportunDsHero() {
   );
 }
 
+const OVERVIEW_TITLE = "The mission to unify two distinct brands into a single language.";
+const OVERVIEW_DESCRIPTION =
+  "In March of 2022, Oportun acquired Digit and combined their borrowing and neobanking products. This meant a complete rebranding opportunity and redesigning Oportun's mobile app.";
+const OVERVIEW_META = [
+  { label: "Role", value: "Lead Product Designer, Design Systems" },
+  { label: "Team", value: "Partnered with product, engineering, design leadership" },
+  { label: "Timeline", value: "July 2022 – Jan 2023" },
+  { label: "Scope", value: "Mobile & Web · Foundations · Components · Adoption" },
+  { label: "Focus", value: "Token infrastructure, components, design language" },
+] as const;
+
 function OportunDsOverviewLogo() {
   return (
     <div
@@ -66,21 +82,19 @@ export default function OportunDsCaseStudy() {
     <div data-ld-theme="Oportun" style={{ display: "contents" }}>
       <CaseStudyTemplate
         hero={<OportunDsHero />}
-        overviewLogo={<OportunDsOverviewLogo />}
-        overviewClient="Oportun / Digit"
-        overviewCategory="Design Systems, Rebrand"
-        overviewTitle="Oportun Design System"
-        overviewDescription="Oportun's acquisition of Digit created an urgent need to rebrand and unify two distinct product experiences. I led the design systems work — defining strategy, building foundational libraries, shipping components in Storybook, and validating patterns through high-stakes product flows."
-        metaItems={[
-          { label: "Role", value: "Lead Product Designer, Design Systems" },
-          {
-            label: "Team",
-            value: "1 Engineering Manager · 1 UI Lead · 2 UI Engineers · 1 Brand Designer",
-          },
-          { label: "Timeline", value: "July 2022 – Jan 2023" },
-          { label: "Tools", value: "Figma / FigJam · Coda · Storybook / GitHub" },
-          { label: "Scope", value: "Mobile & Web · Foundations · Components · Adoption" },
-        ]}
+        overviewTitle={OVERVIEW_TITLE}
+        overviewDescription={OVERVIEW_DESCRIPTION}
+        metaItems={[...OVERVIEW_META]}
+        overviewContent={
+          <OportunDsOverview
+            logo={<OportunDsOverviewLogo />}
+            client="Oportun / Digit"
+            category="Design System"
+            title={OVERVIEW_TITLE}
+            description={OVERVIEW_DESCRIPTION}
+            metaItems={[...OVERVIEW_META]}
+          />
+        }
         navSections={NAV}
         navAccentColor="#6CDB8C"
         prevProject={prevProject}
@@ -89,12 +103,14 @@ export default function OportunDsCaseStudy() {
         <div className="relative shrink-0 w-full overflow-x-hidden">
           <OportunDsChallengeSection />
           <OportunDsApproachSection />
-          <OportunDsStrategySection />
           <OportunDsRoadmapSection />
+          <OportunDsAssetLibrariesSection />
           <OportunDsFoundationsSection />
-          <OportunDsComponentsSection />
+          <OportunDsComponentLifeCycleSection />
+          <OportunDsUsageExamplesSection />
           <OportunDsProductSection />
           <OportunDsResultsSection />
+          <OportunDsDesignSystemSection />
         </div>
       </CaseStudyTemplate>
     </div>
