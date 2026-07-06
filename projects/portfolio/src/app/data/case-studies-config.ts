@@ -58,43 +58,6 @@ export interface CaseStudyConfig {
 
 const CASE_STUDIES: CaseStudyConfig[] = [
   {
-    id: "1",
-    path: "/case-study/1",
-    title: "Designing a scalable system for a digital rebrand",
-    defaultTheme: "WM",
-    isPublished: true,
-    cardTitle: "WM.com Rebrand: Re-branding WM.com",
-    shortDescription:
-      "Designing a scalable system for a digital rebrand. In 2021, Waste Management launched a company-wide rebrand alongside a broader digital transformation.",
-    cardDescription:
-      "with a new design system and 40+ AEM components to support migration of 1000+ localized pages, ecommerce site, marketing, and educational resources in the US, France, and Mexico markets.",
-    fullDescription:
-      "In 2021, Waste Management launched a company-wide rebrand alongside a broader digital transformation focused on improving customer self-service. I worked with the branding agency and led the systems work behind the rebrand, treating it as an opportunity to establish shared UX infrastructure rather than redesign individual pages.",
-    metaItems: [
-      { label: "Role", value: "Principal Product Designer" },
-      { label: "Team", value: "Partnered with product, engineering, and brand leadership" },
-      { label: "Scope", value: "Company-wide rebrand across web platforms" },
-      { label: "Focus", value: "Platform UX patterns, information architecture, and shared systems" },
-    ],
-    navSections: [
-      { label: "Overview", href: "#overview" },
-      { label: "Problem Space", href: "#problem-space" },
-      { label: "Our Goals", href: "#our-goals" },
-      { label: "Approach", href: "#approach" },
-      { label: "System Audit", href: "#system-audit" },
-      { label: "Information Architecture", href: "#information-architecture" },
-      { label: "Compromises", href: "#compromises" },
-    ],
-    navAccentColor: "#207442",
-    tags: ["WEB", "Mobile App", "Design System", "Branding"],
-    heroType: "image",
-    heroImage: imgDesign,
-    thumbnail: wmNewImage,
-    PageComponent: WmDesignSystemCaseStudy,
-    overviewClient: "Waste Management",
-    overviewCategory: "Design Systems, Branding",
-  },
-  {
     id: "3",
     path: "/case-study/3",
     title: "Xense Biotech",
@@ -198,10 +161,10 @@ const CASE_STUDIES: CaseStudyConfig[] = [
   {
     id: "6",
     path: "/case-study/6",
-    title: "Airtable as Source of Truth",
+    title: "A Quest for a Source of Truth",
     defaultTheme: "Walmart",
     isPublished: true,
-    cardTitle: "Airtable as Source of Truth",
+    cardTitle: "A Quest for a Source of Truth",
     shortDescription:
       "How a shared token infrastructure cut deployment time from 3 days to 10 minutes.",
     cardDescription:
@@ -233,6 +196,43 @@ const CASE_STUDIES: CaseStudyConfig[] = [
     PageComponent: AirtableCaseStudy,
     overviewClient: "Walmart",
     overviewCategory: "Living Design, Design Tokens",
+  },
+  {
+    id: "1",
+    path: "/case-study/1",
+    title: "Designing a scalable system for a digital rebrand",
+    defaultTheme: "WM",
+    isPublished: true,
+    cardTitle: "WM.com Rebrand: Re-branding WM.com",
+    shortDescription:
+      "Designing a scalable system for a digital rebrand. In 2021, Waste Management launched a company-wide rebrand alongside a broader digital transformation.",
+    cardDescription:
+      "with a new design system and 40+ AEM components to support migration of 1000+ localized pages, ecommerce site, marketing, and educational resources in the US, France, and Mexico markets.",
+    fullDescription:
+      "In 2021, Waste Management launched a company-wide rebrand alongside a broader digital transformation focused on improving customer self-service. I worked with the branding agency and led the systems work behind the rebrand, treating it as an opportunity to establish shared UX infrastructure rather than redesign individual pages.",
+    metaItems: [
+      { label: "Role", value: "Principal Product Designer" },
+      { label: "Team", value: "Partnered with product, engineering, and brand leadership" },
+      { label: "Scope", value: "Company-wide rebrand across web platforms" },
+      { label: "Focus", value: "Platform UX patterns, information architecture, and shared systems" },
+    ],
+    navSections: [
+      { label: "Overview", href: "#overview" },
+      { label: "Problem Space", href: "#problem-space" },
+      { label: "Our Goals", href: "#our-goals" },
+      { label: "Approach", href: "#approach" },
+      { label: "System Audit", href: "#system-audit" },
+      { label: "Information Architecture", href: "#information-architecture" },
+      { label: "Compromises", href: "#compromises" },
+    ],
+    navAccentColor: "#207442",
+    tags: ["WEB", "Mobile App", "Design System", "Branding"],
+    heroType: "image",
+    heroImage: imgDesign,
+    thumbnail: wmNewImage,
+    PageComponent: WmDesignSystemCaseStudy,
+    overviewClient: "Waste Management",
+    overviewCategory: "Design Systems, Branding",
   },
   {
     id: "7",
