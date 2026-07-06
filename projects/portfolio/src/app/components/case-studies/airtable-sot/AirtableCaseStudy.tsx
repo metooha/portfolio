@@ -5,7 +5,7 @@ import { SectionHeading } from "@/app/components/SectionHeading";
 import { ValuePropCard, ValuePropGrid } from "@/app/components/ValuePropCard";
 import { BulletList } from "@/app/components/BulletList";
 import { getAdjacentCaseStudies } from "@/app/data/case-studies-config";
-import imgHero from "@/app/assets/pages/case-study/everyday-sans/visual-tweaking.png";
+import imgHero from "@/app/assets/pages/case-study/everyday-sans/font-compare-tool.png";
 
 const NAV = [
   { label: "Overview", href: "#overview" },

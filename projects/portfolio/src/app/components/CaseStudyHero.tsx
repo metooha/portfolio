@@ -14,6 +14,10 @@ interface CaseStudyHeroProps {
   titleColor?: string;
   /** How much the image moves on mouse move (default 12) */
   parallaxStrength?: number;
+  /** Extra classes for the parallax image */
+  imageClassName?: string;
+  /** Curved wave divider at the bottom of the hero */
+  curvedDivider?: boolean;
   className?: string;
 }
 
@@ -25,6 +29,8 @@ export function CaseStudyHero({
   subtitle,
   titleColor = "var(--ld-semantic-color-text, #2e2f32)",
   parallaxStrength = 12,
+  imageClassName = "",
+  curvedDivider = true,
   className = "",
 }: CaseStudyHeroProps) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -56,14 +62,14 @@ export function CaseStudyHero({
       >
         <img
           alt=""
-          className="block w-full h-full min-h-full min-w-full object-cover object-center"
+          className={`block w-full h-full min-h-full min-w-full object-cover object-center ${imageClassName}`}
           src={image}
         />
       </div>
 
       <div className="absolute inset-0 z-[2] flex flex-col items-center justify-center pointer-events-none px-4 sm:px-8 md:px-16">
         <div
-          className="flex flex-col items-center justify-center pointer-events-auto text-center w-full max-w-full"
+          className="flex flex-col items-center justify-center text-center w-full max-w-full pointer-events-none"
           style={{ gap: "var(--ld-semantic-spacing-250, 1.25rem)" }}
         >
           <MotionHeroTitle
@@ -94,6 +100,24 @@ export function CaseStudyHero({
           )}
         </div>
       </div>
+
+      {curvedDivider && (
+        <div
+          className="absolute bottom-0 left-0 right-0 z-[3] pointer-events-none"
+          aria-hidden="true"
+        >
+          <svg
+            viewBox="0 0 1440 120"
+            preserveAspectRatio="none"
+            className="block w-full h-8 sm:h-10 md:h-12 lg:h-16"
+          >
+            <path
+              d="M0,60 Q360,0 720,60 T1440,60 L1440,120 L0,120 Z"
+              fill="var(--ld-semantic-color-fill, #ffffff)"
+            />
+          </svg>
+        </div>
+      )}
     </div>
   );
 }

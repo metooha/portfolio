@@ -201,7 +201,7 @@ export function CaseStudyTemplate({
                       {(overviewClient || overviewCategory) && (
                         <div
                           className="content-stretch flex flex-col items-start relative shrink-0"
-                          style={{ gap: "var(--ld-semantic-spacing-100, 0.5rem)" }}
+                          style={{ gap: 0 }}
                         >
                           {overviewClient && (
                             <Heading as="p" size="medium" weight="default" UNSAFE_className="relative shrink-0">

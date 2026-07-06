@@ -12,8 +12,8 @@ import AirtableCaseStudy from "@/app/components/case-studies/airtable-sot/Airtab
 import { CaseStudyHoverContent } from "@/app/components/case-studies/hover/CaseStudyHoverContent";
 import { CaseStudyXenseContent } from "@/app/components/case-studies/xense/CaseStudyXenseContent";
 import { CaseStudyAcademyContent } from "@/app/components/case-studies/academy/CaseStudyAcademyContent";
-import imgEverydaySansThumb from "@/app/assets/pages/case-study/everyday-sans/typography-adjustment-examples.png";
-import imgAirtableThumb from "@/app/assets/pages/case-study/everyday-sans/visual-tweaking.png";
+import imgEverydaySansCover from "@/app/assets/pages/case-study/everyday-sans/cover.jpg";
+import imgAirtableThumb from "@/app/assets/pages/case-study/everyday-sans/font-compare-tool.png";
 import type { ProjectLink } from "@/app/components/CaseStudyTemplate";
 import type { ThemeName } from "@/app/components/utils/Theming";
 
@@ -216,8 +216,8 @@ const CASE_STUDIES: CaseStudyConfig[] = [
     navAccentColor: "#207442",
     tags: ["Typography", "Design System", "Performance", "Accessibility"],
     heroType: "image",
-    heroImage: imgEverydaySansThumb,
-    thumbnail: imgEverydaySansThumb,
+    heroImage: imgEverydaySansCover,
+    thumbnail: imgEverydaySansCover,
     PageComponent: EverydaySansCaseStudy,
     overviewClient: "Walmart Commerce Platform",
     overviewCategory: "Living Design, Typography",
