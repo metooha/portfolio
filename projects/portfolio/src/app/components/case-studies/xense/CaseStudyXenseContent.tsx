@@ -1,16 +1,16 @@
 import React from "react";
 
 const cardStyle: React.CSSProperties = {
-  background: "var(--ld-semantic-color-surface-subtle, #3a3b3e)",
+  background: "var(--ld-semantic-color-surface-subtle, #2b2b2b)",
 };
 
 const cardStyleAccent: React.CSSProperties = {
-  background: "var(--ld-semantic-color-surface-brand, #034401)",
+  background: "var(--ld-semantic-color-surface-brand, #063032)",
 };
 
 const impactStyle: React.CSSProperties = {
   background:
-    "linear-gradient(to bottom right, var(--ld-semantic-color-surface, #2e2f32), var(--ld-semantic-color-surface-brand, #034401))",
+    "linear-gradient(to bottom right, var(--ld-semantic-color-surface, #1f1f1f), var(--ld-semantic-color-surface-brand, #063032))",
 };
 
 const bodyTextClass = "text-lg md:text-xl leading-relaxed max-w-[1000px]";
@@ -18,7 +18,7 @@ const bodyTextStyle: React.CSSProperties = {
   color: "var(--ld-semantic-color-text-subtle, #c1c7cc)",
 };
 
-const checkColor = "var(--ld-semantic-color-text-brand, #0bfc06)";
+const checkColor = "var(--ld-semantic-color-text-brand, #17d3b9)";
 
 export function CaseStudyXenseContent() {
   return (

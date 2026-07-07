@@ -96,7 +96,7 @@ This mirrors the CSS cascade without duplicating 800-line theme files.
 | Walmart B2B | LD Base | Navy `#002e99`, semantic-only |
 | Portfolio | LD Base | Purple `#4f39f6`, indigo spark |
 | WM | LD Base | Green `#006937` |
-| Xense | LD Base | Dark mode, mint green `#0bfc06` |
+| Xense | LD Base | Dark mode, teal `#17d3b9` |
 | Carbon | LD Base | Blue `#2a0eff`, dark nav |
 
 ## Regenerating client themes

@@ -81,7 +81,7 @@ const CASE_STUDIES: CaseStudyConfig[] = [
       { label: "The Solution", href: "#solution" },
       { label: "Impact", href: "#impact" },
     ],
-    navAccentColor: "#0bfc06",
+    navAccentColor: "#17d3b9",
     tags: ["Desktop", "Biotech", "UI Kit"],
     heroType: "component",
     thumbnail: imgXense,

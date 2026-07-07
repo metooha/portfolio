@@ -26,7 +26,7 @@ export default function XenseCaseStudy() {
               className="h-[60vh] min-h-[400px] flex items-center justify-center"
               style={{
                 background:
-                  "linear-gradient(to bottom right, var(--ld-semantic-color-background, #232325), var(--ld-semantic-color-surface, #2e2f32))",
+                  "linear-gradient(to bottom right, var(--ld-semantic-color-background, #2b2b2b), var(--ld-semantic-color-surface, #1f1f1f))",
               }}
             >
               <div className="w-full h-full">
@@ -44,7 +44,7 @@ export default function XenseCaseStudy() {
           { label: "Focus", value: "Medical software interface design system" },
         ]}
         navSections={[...NAV_SECTIONS]}
-        navAccentColor="#0bfc06"
+        navAccentColor="#17d3b9"
         prevProject={prevProject}
         nextProject={nextProject}
       >

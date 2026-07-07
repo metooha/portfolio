@@ -462,12 +462,12 @@ export const BUILT_IN_THEME_SEEDS: Record<ThemeName, Record<SeedId, string>> = {
     warning: '#ffc220',
   },
   Xense: {
-    primary: '#0bfc06',
-    navigation: '#000000',
-    surface: '#2e2f32',
-    positive: '#0bfc06',
-    negative: '#fa0101',
-    warning: '#faf001',
+    primary: '#17d3b9',
+    navigation: '#121212',
+    surface: '#2b2b2b',
+    positive: '#00ff00',
+    negative: '#fa3131',
+    warning: '#faf031',
   },
   Carbon: {
     primary: '#2a0eff',

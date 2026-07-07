@@ -42,8 +42,8 @@ export const THEME_PRESETS: Record<string, ThemePreset> = {
     primaryColor: '#00C859',
   },
   'Xense': {
-    description: 'Xense Biotech medical imaging — dark mode with mint green brand (#0bfc06)',
-    primaryColor: '#0bfc06',
+    description: 'Xense Biotech medical imaging — dark mode with teal brand (#17d3b9)',
+    primaryColor: '#17d3b9',
   },
   'Carbon': {
     description: 'Carbon 3D — Calibre typography and electric blue brand',

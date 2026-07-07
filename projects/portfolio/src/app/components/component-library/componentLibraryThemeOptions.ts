@@ -24,8 +24,8 @@ export const THEME_OPTIONS = [
     name: "Xense",
     label: "Xense",
     description:
-      "Xense Biotech medical imaging — dark mode UI with mint green brand (#0bfc06).",
-    swatch: "#0bfc06",
+      "Xense Biotech medical imaging — dark mode UI with teal brand (#17d3b9).",
+    swatch: "#17d3b9",
   },
   {
     name: "Carbon",
