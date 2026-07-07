@@ -273,6 +273,33 @@
   --ld-primitive-color-yellow-170: #4d2500;
   --ld-primitive-color-yellow-180: #331500;
 
+  /* Light green color scale */
+  --ld-primitive-color-light-green-5: #f1faf7;
+  --ld-primitive-color-light-green-10: #e2fdf4;
+  --ld-primitive-color-light-green-20: #d4fff2;
+  --ld-primitive-color-light-green-30: #beffea;
+  --ld-primitive-color-light-green-40: #a5fbe0;
+  --ld-primitive-color-light-green-50: #87f4d2;
+  --ld-primitive-color-light-green-60: #68eac0;
+  --ld-primitive-color-light-green-70: #47ddad;
+  --ld-primitive-color-light-green-80: #26cd98;
+  --ld-primitive-color-light-green-90: #08bb82;
+  --ld-primitive-color-light-green-100: #03a06e;
+  --ld-primitive-color-light-green-110: #00865b;
+  --ld-primitive-color-light-green-120: #006e4a;
+  --ld-primitive-color-light-green-130: #00593c;
+  --ld-primitive-color-light-green-150: #003724;
+  --ld-primitive-color-light-green-160: #002b1c;
+  --ld-primitive-color-light-green-170: #002215;
+  --ld-primitive-color-light-green-180: #001b10;
+
+  /* WM green color scale */
+  --ld-primitive-color-wm-green-5: #eaf3e7;
+  --ld-primitive-color-wm-green-10: #d5e8d0;
+  --ld-primitive-color-wm-green-20: #c1dcb9;
+  --ld-primitive-color-wm-green-30: #acd1a2;
+  --ld-primitive-color-wm-green-50: #83ba73;
+
   /* ========================================
      ACTION COLORS
      ======================================== */

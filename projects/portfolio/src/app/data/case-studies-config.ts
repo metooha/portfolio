@@ -3,13 +3,12 @@ import imgDesign from "@/app/assets/pages/case-study/wm-rebrand/design.png";
 import imgXense from "@/app/assets/pages/case-study/wm-rebrand/xense.png";
 import imgAcademy from "@/app/assets/pages/case-study/wm-rebrand/academy.png";
 import wmNewImage from "@/app/assets/pages/case-study/wm-rebrand/wm-new-image.png";
-import XenseHero from "@/app/components/case-studies/heroes/XenseHero";
+import XenseCaseStudy from "@/app/components/case-studies/xense/XenseCaseStudy";
 import AcademyHero from "@/app/components/case-studies/heroes/AcademyHero";
 import WmDesignSystemCaseStudy from "@/app/components/case-studies/wm-rebrand/WmDesignSystemCaseStudy";
 import EverydaySansCaseStudy from "@/app/components/case-studies/everyday-sans/EverydaySansCaseStudy";
 import AirtableCaseStudy from "@/app/components/case-studies/airtable-sot/AirtableCaseStudy";
 import OportunDsCaseStudy from "@/app/components/case-studies/oportun-ds/OportunDsCaseStudy";
-import { CaseStudyXenseContent } from "@/app/components/case-studies/xense/CaseStudyXenseContent";
 import { CaseStudyAcademyContent } from "@/app/components/case-studies/academy/CaseStudyAcademyContent";
 import imgEverydaySansCover from "@/app/assets/pages/case-study/everyday-sans/cover.jpg";
 import { imgAirtableCoverPreview, imgAirtableCoverSource } from "@/app/assets/pages/case-study/airtable-sot/assets";
@@ -61,6 +60,7 @@ const CASE_STUDIES: CaseStudyConfig[] = [
     id: "3",
     path: "/case-study/3",
     title: "Xense Biotech",
+    defaultTheme: "Xense",
     isPublished: true,
     featuredOnHome: false,
     shortDescription:
@@ -81,13 +81,13 @@ const CASE_STUDIES: CaseStudyConfig[] = [
       { label: "The Solution", href: "#solution" },
       { label: "Impact", href: "#impact" },
     ],
-    navAccentColor: "#0891b2",
+    navAccentColor: "#0bfc06",
     tags: ["Desktop", "Biotech", "UI Kit"],
     heroType: "component",
-    HeroComponent: XenseHero,
-    heroGradientClass: "bg-gradient-to-br from-blue-50 to-cyan-50",
     thumbnail: imgXense,
-    ContentComponent: CaseStudyXenseContent,
+    PageComponent: XenseCaseStudy,
+    overviewClient: "Xense Biotech",
+    overviewCategory: "Medical Imaging, UI Kit",
   },
   {
     id: "4",
@@ -265,7 +265,7 @@ const CASE_STUDIES: CaseStudyConfig[] = [
       { label: "Results", href: "#results" },
       { label: "Design system", href: "#design-system" },
     ],
-    navAccentColor: "#6CDB8C",
+    navAccentColor: "#00C859",
     tags: ["Design System", "Rebrand", "Storybook", "Fintech"],
     heroType: "image",
     heroImage: imgOportunDsCover,

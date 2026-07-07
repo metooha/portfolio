@@ -147,7 +147,7 @@ export function Home() {
           <svg viewBox="0 0 1440 120" preserveAspectRatio="none" className="w-full h-24">
             <path
               d="M0,60 Q360,0 720,60 T1440,60 L1440,120 L0,120 Z"
-              fill="var(--ld-semantic-color-fill-accent-yellow, #6366f1)"
+              fill="var(--ld-semantic-color-fill-accent-purple, #7950f2)"
             />
           </svg>
         </div>

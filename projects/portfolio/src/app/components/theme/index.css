@@ -1,11 +1,13 @@
 /**
  * Living Design theme entry.
  *
- * Import order matters: base tokens define the :root defaults, official brand
- * themes override them under [data-ld-theme="..."], and the custom "Portfolio"
- * theme is last. This file declares ONLY custom properties and @font-face
- * rules — it never restyles html/body or any existing element, so importing it
- * globally in src/main.tsx is safe for all current pages.
+ * Inheritance model — see THEME_INHERITANCE.md:
+ *   1. base-tokens.css  → LD Base (:root), complete token set
+ *   2. brands/*.css     → official theme overrides only
+ *   3. portfolio.css…   → client theme overrides (loaded last)
+ *
+ * Import order matters. This file declares ONLY custom properties and
+ * @font-face rules — safe to import globally in src/main.tsx.
  */
 
 @import './base-tokens.css';
@@ -26,6 +28,8 @@
 @import './portfolio.css';
 @import './wm.css';
 @import './oportun.css';
+@import './xense.css';
+@import './carbon.css';
 
 /* A11y semantic alias — copied from the LD kit entry point. */
 :root {

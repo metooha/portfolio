@@ -69,7 +69,7 @@ export function OportunDsOverview({
 const CHALLENGE_ACCENT = {
   mission: "#1d83ff",
   considerations: "#e85d04",
-  goals: "#6cdb8c",
+  goals: "#00c859",
 } as const;
 
 const THINGS_TO_CONSIDER = [

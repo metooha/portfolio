@@ -30,6 +30,9 @@ import {
 import { THEME_FONT_CONFIG } from './Theming';
 import type { TextFontKey, ThemeName } from './Theming';
 import { getDeployedCustomThemes } from '@/app/auth/site-config';
+import {
+  getThemePreviewLayers,
+} from '@/component-library/theme-editor/colorTokens';
 
 /* ── Types ─────────────────────────────────────────────────────── */
 
@@ -366,6 +369,13 @@ export function isBuiltInPresetTheme(name: string): name is ThemeName {
   return Object.prototype.hasOwnProperty.call(BUILT_IN_THEME_SEEDS, name);
 }
 
+/** Resolve the official preset theme for preview/CSS (handles saved built-in customizations). */
+export function resolvePresetThemeName(theme: CustomTheme): ThemeName | null {
+  if (theme.builtInPreset) return theme.builtInPreset;
+  if (isBuiltInPresetTheme(theme.name)) return theme.name as ThemeName;
+  return null;
+}
+
 function builtInSeedsChanged(theme: CustomTheme): boolean {
   const defaults = BUILT_IN_THEME_SEEDS[theme.name as ThemeName];
   if (!defaults) return false;
@@ -374,31 +384,49 @@ function builtInSeedsChanged(theme: CustomTheme): boolean {
 
 /**
  * Resolve how a theme should render in the editor preview.
- * Built-in presets use their full CSS via `data-ld-theme`; only user edits
- * (seed changes, token overrides, font changes) are applied as inline vars.
- * Custom themes layer seed + token overrides on top of `baseTheme`.
+ *
+ * Inheritance model (THEME_INHERITANCE.md):
+ *   1. LD Base primitives on the preview scope (isolates from `<html>` theme)
+ *   2. Theme-specific primitive + semantic overrides via `data-ld-theme` CSS
+ *   3. Seed derivations and user token overrides on top
  */
 export function getPreviewThemeContext(
   theme: CustomTheme,
 ): { dataLdTheme: ThemeName; overrideStyle: Record<string, string> } {
-  if (isBuiltInPresetTheme(theme.name)) {
-    const dataLdTheme = theme.name as ThemeName;
-    const style: Record<string, string> = {};
+  const presetTheme = resolvePresetThemeName(theme);
+  if (presetTheme) {
+    const dataLdTheme = presetTheme;
+    const { base, primitiveOverrides, semanticOverrides } = getThemePreviewLayers(dataLdTheme);
+    const style: Record<string, string> = {
+      ...base,
+      ...primitiveOverrides,
+      ...semanticOverrides,
+    };
     Object.assign(style, buildTextFontOverrides(resolvePreviewTextFont(theme, dataLdTheme)));
-    // Always derive seeds onto the preview scope so tokens don't inherit Portfolio
-    // defaults from the document root (`<html data-ld-theme="Portfolio">`).
     (Object.keys(theme.seeds) as SeedId[]).forEach((id) => {
       const def = SEED_BY_ID[id];
       if (def) Object.assign(style, def.derive(theme.seeds[id]));
     });
     if (theme.tokenOverrides) Object.assign(style, theme.tokenOverrides);
+    // Re-apply inherited layers unless explicitly overridden by the user.
+    for (const [token, value] of Object.entries({ ...base, ...primitiveOverrides })) {
+      if (!theme.tokenOverrides?.[token]) {
+        style[token] = value;
+      }
+    }
     return { dataLdTheme, overrideStyle: expandSemanticTokenAliases(style) };
   }
 
   const dataLdTheme = theme.baseTheme;
+  const { base, primitiveOverrides, semanticOverrides } = getThemePreviewLayers(dataLdTheme);
   return {
     dataLdTheme,
-    overrideStyle: resolveOverrides(theme),
+    overrideStyle: {
+      ...base,
+      ...primitiveOverrides,
+      ...semanticOverrides,
+      ...resolveOverrides(theme),
+    },
   };
 }
 
@@ -426,12 +454,28 @@ export const BUILT_IN_THEME_SEEDS: Record<ThemeName, Record<SeedId, string>> = {
     warning: '#ffc220',
   },
   Oportun: {
-    primary: '#6cdb8c',
-    navigation: '#6cdb8c',
+    primary: '#00c859',
+    navigation: '#00c859',
     surface: '#ffffff',
-    positive: '#6cdb8c',
-    negative: '#ea1100',
-    warning: '#b19df5',
+    positive: '#00c859',
+    negative: '#fc1904',
+    warning: '#ffc220',
+  },
+  Xense: {
+    primary: '#0bfc06',
+    navigation: '#000000',
+    surface: '#2e2f32',
+    positive: '#0bfc06',
+    negative: '#fa0101',
+    warning: '#faf001',
+  },
+  Carbon: {
+    primary: '#2a0eff',
+    navigation: '#2e3032',
+    surface: '#ffffff',
+    positive: '#51ffbc',
+    negative: '#d32f4a',
+    warning: '#c0d042',
   },
   Walmart: {
     primary: '#0053e2',
@@ -447,7 +491,7 @@ export const BUILT_IN_THEME_SEEDS: Record<ThemeName, Record<SeedId, string>> = {
     surface: '#ffffff',
     positive: '#2a8703',
     negative: '#df2c2c',
-    warning: '#ffc220',
+    warning: '#f27c00',
   },
   "Sam's Club Maverick": {
     primary: '#0a6cff',
@@ -455,7 +499,7 @@ export const BUILT_IN_THEME_SEEDS: Record<ThemeName, Record<SeedId, string>> = {
     surface: '#ffffff',
     positive: '#2a8703',
     negative: '#df2c2c',
-    warning: '#ffc220',
+    warning: '#f27c00',
   },
   'Walmart B2B': {
     primary: '#002e99',
@@ -514,6 +558,7 @@ export function createThemeFromBuiltIn(themeName: ThemeName, name = themeName): 
     id: name,
     name,
     baseTheme: themeName,
+    builtInPreset: themeName,
     description: `Based on ${themeName}`,
     textFont: THEME_FONT_CONFIG[themeName]?.textFont ?? THEME_FONT_CONFIG[DEFAULT_BASE_THEME].textFont,
     seeds: { ...BUILT_IN_THEME_SEEDS[themeName] },

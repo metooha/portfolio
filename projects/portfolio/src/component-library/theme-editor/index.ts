@@ -18,8 +18,15 @@ export {PageExamplePicker} from './PageExamplePicker';
 export {PreviewPanel} from './previews/PreviewPanel';
 export {BASE_SURFACE_TOKENS} from './surfaceTokens';
 export {
+  BASE_SPARK_PRIMITIVE_VARS,
   buildColorSelectOptions,
   buildPrimitiveOptions,
+  getSparkPrimitiveVars,
+  getThemePreviewPrimitiveVars,
+  getThemePrimitiveVars,
+  getBrandThemePrimitiveVars,
+  getScaleFamiliesForTheme,
+  getScaleStepsForFamily,
   resolveCssColor,
   resolveCssVar,
   resolveSemanticToken,

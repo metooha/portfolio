@@ -77,6 +77,8 @@ export const THEME_MEDIA_TENANT: Record<ThemeName, MediaTenant> = {
   'Portfolio':       'wcp',
   'WM':              'wcp',
   'Oportun':         'wcp',
+  'Xense':           'wcp',
+  'Carbon':          'wcp',
   'Walmart':         'wcp',
   "Sam's Club":      'sams-club',
   "Sam's Club Maverick": 'sams-club-maverick',

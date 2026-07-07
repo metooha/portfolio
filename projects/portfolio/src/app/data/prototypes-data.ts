@@ -19,4 +19,18 @@ export const prototypes: Prototype[] = [
     description: "Side-by-side font comparison tool for Walmart and Sam's Club type systems.",
     url: "https://metooha.github.io/font-compare/",
   },
+  {
+    id: "auto-reorder",
+    name: "Auto Reorder",
+    description:
+      "Walmart Auto Reorder prototype for replenishment onboarding, purchase history, and order management.",
+    url: "https://metooha.github.io/auto-reorder/",
+  },
+  {
+    id: "walmart-connect",
+    name: "Walmart Connect",
+    description:
+      "Walmart Connect advertising platform UI prototype for campaign management, analytics, and ad center workflows.",
+    url: "https://metooha.github.io/walmart-connect/",
+  },
 ];

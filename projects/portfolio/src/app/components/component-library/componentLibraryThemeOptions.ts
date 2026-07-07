@@ -17,8 +17,22 @@ export const THEME_OPTIONS = [
     name: "Oportun",
     label: "Oportun",
     description:
-      "Digit/Oportun rebrand — TT Commons Classic typography and brand greens (#6CDB8C).",
-    swatch: "#6CDB8C",
+      "Oportun / Digit rebrand — TT Commons Classic typography, brand green (#00C859), blue, and teal.",
+    swatch: "#00C859",
+  },
+  {
+    name: "Xense",
+    label: "Xense",
+    description:
+      "Xense Biotech medical imaging — dark mode UI with mint green brand (#0bfc06).",
+    swatch: "#0bfc06",
+  },
+  {
+    name: "Carbon",
+    label: "Carbon",
+    description:
+      "Carbon 3D — Calibre typography and electric blue brand (#2a0eff).",
+    swatch: "#2a0eff",
   },
   {
     name: "Walmart",

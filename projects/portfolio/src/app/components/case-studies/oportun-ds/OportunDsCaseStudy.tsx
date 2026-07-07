@@ -96,7 +96,7 @@ export default function OportunDsCaseStudy() {
           />
         }
         navSections={NAV}
-        navAccentColor="#6CDB8C"
+        navAccentColor="#00C859"
         prevProject={prevProject}
         nextProject={nextProject}
       >

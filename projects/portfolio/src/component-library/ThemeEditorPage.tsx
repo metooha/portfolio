@@ -23,12 +23,10 @@ import {
   TabNavigation,
   TabNavigationItem,
   Icon,
-  Tag,
   TextField,
   ResizableHandle,
   ResizablePanel,
   ResizablePanelGroup,
-  type TagColor,
 } from '@/app/components';
 import {
   SEEDS,
@@ -119,16 +117,6 @@ const HEADING_FONT_TOKENS = [
   '--ld-semantic-font-heading-medium-family',
   '--ld-semantic-font-heading-small-family',
 ] as const;
-
-/** Tag color for seed component pills — uses semantic tokens that update with each seed. */
-const SEED_TAG_COLORS: Record<SeedId, TagColor> = {
-  primary: 'brand',
-  navigation: 'brand',
-  surface: 'neutral',
-  positive: 'positive',
-  negative: 'negative',
-  warning: 'warning',
-};
 
 const TYPE_SCALE_OPTIONS = [
   { value: 'default', label: 'Default — 1', ratio: 1 },
@@ -1391,7 +1379,6 @@ function BaseStylesSection({
                 label={row.label}
                 description={row.description}
                 components={[...row.components]}
-                componentTagColor={row.token.includes('brand') ? 'brand' : 'neutral'}
                 showDivider={index > 0}
                 isOverridden={isOverridden}
                 onReset={() => onResetToken(row.token)}
@@ -1419,7 +1406,6 @@ function BaseStylesSection({
               label={seed.label}
               description={seed.description}
               components={[...seed.components]}
-              componentTagColor={SEED_TAG_COLORS[seed.id]}
               showDivider={index > 0}
               isOverridden={!seedsEqual(hex, baselineHex)}
               onReset={() => onSeedReset(seed.id)}

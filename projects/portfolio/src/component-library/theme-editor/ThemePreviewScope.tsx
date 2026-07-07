@@ -26,38 +26,36 @@ export function ThemePreviewScope({
   className?: string;
 }) {
   const scopeRef = React.useRef<HTMLDivElement>(null);
-  const scopeId = React.useId().replace(/:/g, '');
+  const [scopeReady, setScopeReady] = React.useState(0);
   const { dataLdTheme, overrideStyle } = React.useMemo(
     () => getPreviewThemeContext(theme),
     [theme],
   );
 
-  const overrideCss = React.useMemo(
-    () => Object.entries(overrideStyle)
-      .map(([token, value]) => `  ${token}: ${value};`)
-      .join('\n'),
-    [overrideStyle],
-  );
-
   const resolveToken = React.useCallback<ThemeTokenResolver>((cssVarName, fallback = '') => (
     resolveCssVarFromElement(scopeRef.current, cssVarName, fallback)
-  ), []);
+  ), [scopeReady]);
 
   const scopeKey = `${dataLdTheme}-${theme.id}-${theme.updatedAt ?? 0}`;
+
+  const handleScopeRef = React.useCallback((node: HTMLDivElement | null) => {
+    scopeRef.current = node;
+    if (node) setScopeReady((value) => value + 1);
+  }, []);
 
   return (
     <ThemePreviewContext.Provider value={resolveToken}>
       <div
         key={scopeKey}
-        ref={scopeRef}
+        ref={handleScopeRef}
         data-ld-theme={dataLdTheme}
-        data-theme-preview-scope={scopeId}
         className={className}
-        style={{ ...style, fontFamily: 'var(--ld-primitive-font-family-sans, inherit)' }}
+        style={{
+          ...(overrideStyle as React.CSSProperties),
+          ...style,
+          fontFamily: 'var(--ld-primitive-font-family-sans, inherit)',
+        }}
       >
-        {overrideCss.length > 0 && (
-          <style>{`[data-theme-preview-scope="${scopeId}"] {\n${overrideCss}\n}`}</style>
-        )}
         {children}
       </div>
     </ThemePreviewContext.Provider>

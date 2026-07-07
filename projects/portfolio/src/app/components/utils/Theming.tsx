@@ -7,6 +7,8 @@ export const THEME_NAMES = [
   'Portfolio',
   'WM',
   'Oportun',
+  'Xense',
+  'Carbon',
   'Walmart',
   "Sam's Club",
   "Sam's Club Maverick",
@@ -36,8 +38,16 @@ export const THEME_PRESETS: Record<string, ThemePreset> = {
     primaryColor: '#006937',
   },
   'Oportun': {
-    description: 'Digit/Oportun rebrand — TT Commons Classic and brand greens',
-    primaryColor: '#6CDB8C',
+    description: 'Oportun / Digit rebrand — TT Commons Classic, brand green (#00C859)',
+    primaryColor: '#00C859',
+  },
+  'Xense': {
+    description: 'Xense Biotech medical imaging — dark mode with mint green brand (#0bfc06)',
+    primaryColor: '#0bfc06',
+  },
+  'Carbon': {
+    description: 'Carbon 3D — Calibre typography and electric blue brand',
+    primaryColor: '#2a0eff',
   },
   'Walmart': {
     description: 'Default Walmart theme',
@@ -123,6 +133,8 @@ export const THEME_FONT_CONFIG: Record<ThemeName, ThemeFontConfig> = {
   'Portfolio':      { textFont: 'inter',         primaryIconFont: 'wcp',       _loadFonts: ['ld', 'wcp'] },
   'WM':             { textFont: 'maax',          primaryIconFont: 'wcp',       _loadFonts: ['ld', 'wcp'] },
   'Oportun':        { textFont: 'tt-commons',    primaryIconFont: 'wcp',       _loadFonts: ['ld', 'wcp'] },
+  'Xense':          { textFont: 'inter',         primaryIconFont: 'wcp',       _loadFonts: ['ld', 'wcp'] },
+  'Carbon':         { textFont: 'calibre',       primaryIconFont: 'wcp',       _loadFonts: ['ld', 'wcp'] },
   'Walmart':        { textFont: 'everyday-sans', primaryIconFont: 'wcp',       _loadFonts: ['ld', 'wcp'] },
   "Sam's Club":     { textFont: 'gibson',        primaryIconFont: 'sams-club', _loadFonts: ['ld', 'sams-club', 'ax-sams-club', 'px-sams-club'] },
   "Sam's Club Maverick": { textFont: 'gibson',   primaryIconFont: 'sams-club', _loadFonts: ['ld', 'sams-club', 'ax-sams-club', 'px-sams-club'] },

@@ -493,7 +493,7 @@ export function OportunDsResultsSection() {
       <div
         className="rounded-xl p-8 mt-6 flex flex-col gap-4"
         style={{
-          background: "var(--ld-semantic-color-fill-brand, #6cdb8c)",
+          background: "var(--ld-semantic-color-fill-brand, #00c859)",
           border: "1px solid var(--ld-semantic-color-separator, #e3e4e5)",
         }}
       >

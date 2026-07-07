@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Body, Caption, Icon, IconButton, Tag, type TagColor} from '@/app/components';
+import {Body, Caption, Icon, IconButton, Tag} from '@/app/components';
 import {TOKEN_PICKER_WIDTH, TOKEN_ROW_RESET_SIZE} from './constants';
 
 export function ThemeEditorTokenRowActions({
@@ -40,7 +40,6 @@ export type ThemeEditorTokenRowProps = {
   tokenSlug?: string;
   description?: string;
   components?: string[];
-  componentTagColor?: TagColor;
   picker: React.ReactNode;
   isOverridden: boolean;
   onReset: () => void;
@@ -54,7 +53,6 @@ export function ThemeEditorTokenRow({
   tokenSlug,
   description,
   components,
-  componentTagColor = 'gray',
   picker,
   isOverridden,
   onReset,
@@ -106,8 +104,8 @@ export function ThemeEditorTokenRow({
               <Tag
                 key={component}
                 size="small"
-                variant="secondary"
-                color={componentTagColor}
+                variant="tertiary"
+                color="gray"
               >
                 {component}
               </Tag>

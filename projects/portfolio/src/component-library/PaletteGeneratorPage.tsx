@@ -6,12 +6,12 @@ import {
   Caption,
   FilterChip,
   Heading,
+  Icon,
   IconButton,
   Menu,
   MenuItem,
   MenuSectionTitle,
   MoreIcon,
-  SaveIcon,
   CloseIcon,
   ScrollArea,
   SearchBar,
@@ -47,6 +47,7 @@ import {
   getCustomTheme,
   getCustomThemes,
   getPreviewThemeContext,
+  resolvePresetThemeName,
   saveCustomTheme,
 } from '@/app/components/utils/customThemes';
 import {
@@ -58,22 +59,33 @@ import {isDark} from '@/app/components/utils/colorUtils';
 import type {ThemeName} from '@/app/components/utils/Theming';
 import {ThemePreviewScope, useThemePreviewResolve} from '@/component-library/theme-editor/ThemePreviewScope';
 import {loadThemeFonts} from '@/app/components/utils/Theming';
-const SCALE_STEPS = [5, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160, 170, 180];
-const SCALE_FAMILIES = [
-  'blue',
-  'cyan',
-  'gray',
-  'green',
-  'orange',
-  'pink',
-  'purple',
-  'red',
-  'spark',
-  'teal',
-  'yellow',
+import {SCALE_STEPS, getScaleFamiliesForTheme, getScaleStepsForFamily} from '@/component-library/theme-editor/colorTokens';
+
+const BRAND_THEME_NAMES: ThemeName[] = [
+  'Walmart',
+  "Sam's Club",
+  "Sam's Club Maverick",
+  'Cashi MX',
+  'Bodega',
+  'WM',
+  'Oportun',
+  'Portfolio',
+  'Xense',
+  'Carbon',
 ];
-const BRAND_THEME_NAMES: ThemeName[] = ['Walmart', "Sam's Club", 'Cashi MX', 'Bodega'];
-const HUE_COLUMNS = ['gray', 'red', 'orange', 'spark', 'yellow', 'green', 'teal', 'cyan', 'blue', 'purple', 'pink'];
+const HUE_COLUMNS = [
+  'gray',
+  'red',
+  'orange',
+  'spark',
+  'yellow',
+  'green',
+  'teal',
+  'cyan',
+  'blue',
+  'purple',
+  'pink',
+];
 const LIGHTNESS_ROWS = [
   {id: 'very-light', label: 'Very light', step: 10},
   {id: 'light', label: 'Light', step: 30},
@@ -172,7 +184,9 @@ function getScaleBaseScoped(
 }
 
 function basesFromDraftOverrides(draft: CustomTheme): Record<string, string> {
-  return SCALE_FAMILIES.reduce((acc, family) => {
+  const themeKey = (resolvePresetThemeName(draft) ?? draft.baseTheme ?? draft.name) as ThemeName;
+  const families = getScaleFamiliesForTheme(themeKey);
+  return families.reduce((acc, family) => {
     const token = primitiveToken(family, 100);
     const override = draft.tokenOverrides?.[token];
     if (override) acc[family] = override;
@@ -192,8 +206,11 @@ function uniqueThemeName(base = 'New Palette'): string {
 }
 
 function buildScaleOverrides(family: string, baseHex: string): Record<string, string> {
+  const steps = new Set(getScaleStepsForFamily(family));
   return Object.fromEntries(
-    generateColorScale(baseHex).map((token) => [primitiveToken(family, token.step), token.hex]),
+    generateColorScale(baseHex)
+      .filter((token) => steps.has(token.step))
+      .map((token) => [primitiveToken(family, token.step), token.hex]),
   );
 }
 
@@ -294,6 +311,59 @@ function SwatchMarkGrid({colors}: {colors: string[]}) {
   );
 }
 
+function ScaleRowActions({
+  family,
+  isDirty,
+  onSave,
+  onReset,
+}: {
+  family: string;
+  isDirty: boolean;
+  onSave: () => void;
+  onReset: () => void;
+}) {
+  const [menuOpen, setMenuOpen] = React.useState(false);
+  const triggerRef = React.useRef<HTMLButtonElement>(null);
+
+  return (
+    <div className="palette-generator__scale-row-actions">
+      <Menu
+        isOpen={menuOpen}
+        onOpen={() => setMenuOpen(true)}
+        onClose={() => setMenuOpen(false)}
+        position="bottomRight"
+        triggerRef={triggerRef}
+        trigger={(
+          <IconButton
+            ref={triggerRef}
+            a11yLabel={`Actions for ${family} scale`}
+            color="secondary"
+            size="small"
+            onClick={(event) => {
+              event.preventDefault();
+              event.stopPropagation();
+              setMenuOpen(true);
+            }}
+          >
+            <MoreIcon decorative />
+          </IconButton>
+        )}
+      >
+        <MenuSectionTitle variant="bold">Scale actions</MenuSectionTitle>
+        <MenuItem onClick={() => { onSave(); setMenuOpen(false); }}>
+          Save scale
+        </MenuItem>
+        <MenuItem
+          disabled={!isDirty}
+          onClick={() => { onReset(); setMenuOpen(false); }}
+        >
+          Reset to theme
+        </MenuItem>
+      </Menu>
+    </div>
+  );
+}
+
 function ThemeNavItem({
   label,
   swatchColor,
@@ -306,6 +376,7 @@ function ThemeNavItem({
   onDelete,
   canRename,
   menuVariant,
+  compact = false,
 }: {
   label: string;
   swatchColor?: string;
@@ -318,6 +389,7 @@ function ThemeNavItem({
   onDelete?: () => void;
   canRename: boolean;
   menuVariant: 'brand' | 'campaign';
+  compact?: boolean;
 }) {
   const [editing, setEditing] = React.useState(false);
   const [draftName, setDraftName] = React.useState(label);
@@ -342,9 +414,9 @@ function ThemeNavItem({
 
   return (
     <div
-      className="palette-generator__nav-item-row"
+      className={`palette-generator__nav-item-row${compact ? ' palette-generator__nav-item-row--compact' : ''}`}
       onDoubleClick={() => {
-        if (canRename) setEditing(true);
+        if (canRename && !compact) setEditing(true);
       }}
     >
       <div style={{flex: 1, minWidth: 0}}>
@@ -379,12 +451,13 @@ function ThemeNavItem({
               event.preventDefault();
               onSelect();
             }}
+            title={compact ? label : undefined}
           >
-            {label}
+            {!compact ? label : null}
           </SideNavigationItem>
         )}
       </div>
-      {!editing && (
+      {!editing && !compact && (
         <Menu
           isOpen={menuOpen}
           onOpen={() => setMenuOpen(true)}
@@ -436,6 +509,8 @@ function ThemesSidebar({
   selection,
   customThemeNames,
   campaignPalettes,
+  collapsed,
+  onToggleCollapsed,
   onSelectBrand,
   onSelectCampaign,
   onNewBrand,
@@ -451,6 +526,8 @@ function ThemesSidebar({
   selection: NavSelection;
   customThemeNames: string[];
   campaignPalettes: CampaignPalette[];
+  collapsed: boolean;
+  onToggleCollapsed: () => void;
   onSelectBrand: (id: string) => void;
   onSelectCampaign: (id: string) => void;
   onNewBrand: () => void;
@@ -475,34 +552,46 @@ function ThemesSidebar({
   const brandPrimaryColor = (id: string) => getThemePrimaryColor(id);
 
   return (
-    <aside className="palette-generator__sidebar">
+    <aside className={`palette-generator__sidebar${collapsed ? ' palette-generator__sidebar--collapsed' : ''}`}>
       <div className="palette-generator__sidebar-header">
-        <Heading as="h2" size="small">Themes</Heading>
-        <Menu
-          isOpen={newMenuOpen}
-          onOpen={() => setNewMenuOpen(true)}
-          onClose={() => setNewMenuOpen(false)}
-          position="bottomRight"
-          triggerRef={newMenuTriggerRef}
-          trigger={(
-            <Button ref={newMenuTriggerRef} variant="secondary" size="small">
-              + New
-            </Button>
-          )}
+        <IconButton
+          a11yLabel={collapsed ? 'Expand themes sidebar' : 'Collapse themes sidebar'}
+          color="tertiary"
+          size="small"
+          onClick={onToggleCollapsed}
         >
-          <MenuItem onClick={() => { onNewBrand(); setNewMenuOpen(false); }}>
-            New brand theme
-          </MenuItem>
-          <MenuItem onClick={() => { onNewCampaign(); setNewMenuOpen(false); }}>
-            New campaign palette
-          </MenuItem>
-        </Menu>
+          <Icon name={collapsed ? 'LeftPanel' : 'LeftPanelFill'} decorative />
+        </IconButton>
+        {!collapsed && <Heading as="h2" size="small" UNSAFE_className="palette-generator__sidebar-title">Themes</Heading>}
+        {!collapsed && (
+          <Menu
+            isOpen={newMenuOpen}
+            onOpen={() => setNewMenuOpen(true)}
+            onClose={() => setNewMenuOpen(false)}
+            position="bottomRight"
+            triggerRef={newMenuTriggerRef}
+            trigger={(
+              <Button ref={newMenuTriggerRef} variant="secondary" size="small">
+                + New
+              </Button>
+            )}
+          >
+            <MenuItem onClick={() => { onNewBrand(); setNewMenuOpen(false); }}>
+              New brand theme
+            </MenuItem>
+            <MenuItem onClick={() => { onNewCampaign(); setNewMenuOpen(false); }}>
+              New campaign palette
+            </MenuItem>
+          </Menu>
+        )}
       </div>
       <ScrollArea a11yLabel="Themes and palettes" className="palette-generator__sidebar-scroll">
         <SideNavigation aria-label="Theme and palette navigation">
-          <Caption as="p" color="subtlest" UNSAFE_className="palette-generator__nav-section-label">
-            Brand
-          </Caption>
+          {!collapsed && (
+            <Caption as="p" color="subtlest" UNSAFE_className="palette-generator__nav-section-label">
+              Brand
+            </Caption>
+          )}
           {brandThemes.map((name) => (
             <ThemeNavItem
               key={`brand-${name}`}
@@ -511,15 +600,18 @@ function ThemesSidebar({
               isCurrent={selection.kind === 'brand' && selection.id === name}
               canRename={Boolean(getCustomTheme(name)) && !THEME_PRESETS[name]}
               menuVariant="brand"
+              compact={collapsed}
               onSelect={() => onSelectBrand(name)}
               onRename={(nextName) => onRenameBrand(name, nextName)}
               onDuplicate={() => onDuplicateBrand(name)}
               onDelete={getCustomTheme(name) && !THEME_PRESETS[name] ? () => onDeleteBrand(name) : undefined}
             />
           ))}
-          <Caption as="p" color="subtlest" UNSAFE_className="palette-generator__nav-section-label">
-            Campaign palettes
-          </Caption>
+          {!collapsed && (
+            <Caption as="p" color="subtlest" UNSAFE_className="palette-generator__nav-section-label">
+              Campaign palettes
+            </Caption>
+          )}
           {campaignPalettes.map((palette) => (
             <ThemeNavItem
               key={`campaign-${palette.id}`}
@@ -528,6 +620,7 @@ function ThemesSidebar({
               isCurrent={selection.kind === 'campaign' && selection.id === palette.id}
               canRename={!palette.isBuiltIn}
               menuVariant="campaign"
+              compact={collapsed}
               onSelect={() => onSelectCampaign(palette.id)}
               onRename={(nextName) => onRenameCampaign(palette.id, nextName)}
               onDuplicate={() => onDuplicateCampaign(palette.id)}
@@ -537,9 +630,11 @@ function ThemesSidebar({
           ))}
         </SideNavigation>
       </ScrollArea>
-      <Caption as="p" color="subtlest" UNSAFE_className="palette-generator__nav-footer">
-        Fork any theme or palette to start customizing. Double-click a name to rename.
-      </Caption>
+      {!collapsed && (
+        <Caption as="p" color="subtlest" UNSAFE_className="palette-generator__nav-footer">
+          Fork any theme or palette to start customizing. Double-click a name to rename.
+        </Caption>
+      )}
     </aside>
   );
 }
@@ -831,7 +926,6 @@ function BrandScaleGridContent({
   draftBases,
   dirtyFamilies,
   activeTheme,
-  stepHeader,
   onUpdateFamilyBase,
   onSaveFamily,
   onResetFamily,
@@ -841,24 +935,30 @@ function BrandScaleGridContent({
   draftBases: Record<string, string>;
   dirtyFamilies: Set<string>;
   activeTheme: string;
-  stepHeader: React.ReactNode;
   onUpdateFamilyBase: (family: string, raw: string) => void;
   onSaveFamily: (family: string) => void;
   onResetFamily: (family: string) => void;
   onCopyHex: (hex: string) => void;
 }) {
   const resolveToken = useThemePreviewResolve();
+  const scaleTheme = (resolvePresetThemeName(previewTheme) ?? previewTheme.baseTheme ?? activeTheme) as ThemeName;
+  const scaleFamilies = getScaleFamiliesForTheme(scaleTheme);
 
   return (
     <div className="palette-generator__scale-grid">
-      {stepHeader}
-      {SCALE_FAMILIES.map((family) => {
+      <div className="palette-generator__scale-header">
+        <Caption as="span" color="subtlest">Family</Caption>
+        <Caption as="span" color="subtlest">Scale steps</Caption>
+        <span />
+      </div>
+      {scaleFamilies.map((family) => {
+        const steps = getScaleStepsForFamily(family);
         const base = draftBases[family]
           ?? getScaleBaseScoped(resolveToken, family, previewTheme.tokenOverrides);
         const normalized = normaliseHex(base);
         const tokens = dirtyFamilies.has(family) && normalized
-          ? generateColorScale(normalized)
-          : SCALE_STEPS.map((step) => ({
+          ? generateColorScale(normalized).filter((token) => steps.includes(token.step))
+          : steps.map((step) => ({
               step,
               hex: resolveToken(primitiveToken(family, step), '#E3E4E5'),
             }));
@@ -866,6 +966,7 @@ function BrandScaleGridContent({
           <div
             key={`${family}-${activeTheme}`}
             className={`palette-generator__scale-row${dirtyFamilies.has(family) ? ' palette-generator__scale-row--dirty' : ''}`}
+            style={{'--scale-step-count': steps.length} as React.CSSProperties}
           >
             <span className="palette-generator__scale-family">
               <Body as="span" size="small" weight="alt" UNSAFE_className="palette-generator__scale-family-name">
@@ -895,31 +996,30 @@ function BrandScaleGridContent({
                 }}
               />
             </span>
-            {tokens.map((token) => (
-              <Swatch
-                key={token.step}
-                hex={token.hex}
-                label={primitiveToken(family, token.step)}
-                onCopy={onCopyHex}
-              />
-            ))}
-            <IconButton
-              a11yLabel={`Save ${family} scale`}
-              color={dirtyFamilies.has(family) ? 'primary' : 'secondary'}
-              size="small"
-              onClick={() => onSaveFamily(family)}
-            >
-              <SaveIcon decorative />
-            </IconButton>
-            <IconButton
-              a11yLabel={`Reset ${family} to source theme`}
-              color="secondary"
-              size="small"
-              disabled={!dirtyFamilies.has(family)}
-              onClick={() => onResetFamily(family)}
-            >
-              <CloseIcon decorative />
-            </IconButton>
+            <div className="palette-generator__scale-swatches">
+              {steps.map((step) => {
+                const token = tokens.find((item) => item.step === step);
+                const hex = token?.hex ?? resolveToken(primitiveToken(family, step), '#E3E4E5');
+                return (
+                  <div key={step} className="palette-generator__scale-swatch-cell">
+                    <Swatch
+                      hex={hex}
+                      label={primitiveToken(family, step)}
+                      onCopy={onCopyHex}
+                    />
+                    <Caption as="span" color="subtlest" UNSAFE_className="palette-generator__scale-step-label">
+                      {step}
+                    </Caption>
+                  </div>
+                );
+              })}
+            </div>
+            <ScaleRowActions
+              family={family}
+              isDirty={dirtyFamilies.has(family)}
+              onSave={() => onSaveFamily(family)}
+              onReset={() => onResetFamily(family)}
+            />
           </div>
         );
       })}
@@ -932,7 +1032,6 @@ function BrandScaleGrid({
   draftBases,
   dirtyFamilies,
   activeTheme,
-  stepHeader,
   onUpdateFamilyBase,
   onSaveFamily,
   onResetFamily,
@@ -942,7 +1041,6 @@ function BrandScaleGrid({
   draftBases: Record<string, string>;
   dirtyFamilies: Set<string>;
   activeTheme: string;
-  stepHeader: React.ReactNode;
   onUpdateFamilyBase: (family: string, raw: string) => void;
   onSaveFamily: (family: string) => void;
   onResetFamily: (family: string) => void;
@@ -955,7 +1053,6 @@ function BrandScaleGrid({
         draftBases={draftBases}
         dirtyFamilies={dirtyFamilies}
         activeTheme={activeTheme}
-        stepHeader={stepHeader}
         onUpdateFamilyBase={onUpdateFamilyBase}
         onSaveFamily={onSaveFamily}
         onResetFamily={onResetFamily}
@@ -983,6 +1080,7 @@ export default function PaletteGeneratorPage() {
   const [draftBases, setDraftBases] = React.useState<Record<string, string>>({});
   const [dirtyFamilies, setDirtyFamilies] = React.useState<Set<string>>(() => new Set());
   const [campaignDraftColors, setCampaignDraftColors] = React.useState<string[]>([]);
+  const [sidebarCollapsed, setSidebarCollapsed] = React.useState(false);
   const [toast, setToast] = React.useState<string | null>(null);
 
   const flash = React.useCallback((message: string) => {
@@ -1172,25 +1270,14 @@ export default function PaletteGeneratorPage() {
     handleSaveCampaignPalette({...palette, colors: campaignDraftColors.length ? campaignDraftColors : palette.colors});
   };
 
-  const stepHeader = (
-    <div className="palette-generator__scale-header">
-      <Caption as="span" color="subtlest">Family</Caption>
-      {SCALE_STEPS.map((step) => (
-        <Caption key={step} as="span" color="subtlest" style={{textAlign: 'center'}}>
-          {step}
-        </Caption>
-      ))}
-      <span />
-      <span />
-    </div>
-  );
-
   return (
     <div className="palette-generator">
       <ThemesSidebar
         selection={selection}
         customThemeNames={customThemeNames}
         campaignPalettes={campaignPalettes}
+        collapsed={sidebarCollapsed}
+        onToggleCollapsed={() => setSidebarCollapsed((value) => !value)}
         onSelectBrand={(id) => {
           setSelection({kind: 'brand', id});
         }}
@@ -1272,17 +1359,18 @@ export default function PaletteGeneratorPage() {
 
             <div className="palette-generator__scales-section">
               <Heading as="h2" size="small">Editable primitive scales</Heading>
-              <BrandScaleGrid
-                previewTheme={previewTheme}
-                draftBases={draftBases}
-                dirtyFamilies={dirtyFamilies}
-                activeTheme={activeTheme}
-                stepHeader={stepHeader}
-                onUpdateFamilyBase={updateFamilyBase}
-                onSaveFamily={saveFamily}
-                onResetFamily={resetFamily}
-                onCopyHex={copyHex}
-              />
+              <div className="palette-generator__scales-scroll">
+                <BrandScaleGrid
+                  previewTheme={previewTheme}
+                  draftBases={draftBases}
+                  dirtyFamilies={dirtyFamilies}
+                  activeTheme={activeTheme}
+                  onUpdateFamilyBase={updateFamilyBase}
+                  onSaveFamily={saveFamily}
+                  onResetFamily={resetFamily}
+                  onCopyHex={copyHex}
+                />
+              </div>
             </div>
           </ScrollArea>
         )}
