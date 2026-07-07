@@ -875,18 +875,30 @@ export function EdsQuoteBlock({
     >
       <div className={CONTAINER_OUTER}>
         <div className={CONTAINER_INNER}>
-        <div className="text-[72px] font-bold leading-[0.8] mb-3" style={{ color: "var(--ld-primitive-color-spark-100, #ffc220)" }}>
+        <div className="text-[72px] font-bold leading-[0.8]" style={{ color: "var(--ld-primitive-color-spark-100, #ffc220)", marginBottom: "-16px" }}>
           &ldquo;
         </div>
         <Body
           as="p"
           size="large"
           color="inverse"
-          UNSAFE_className="max-w-[800px] mb-5 leading-none font-light"
+          UNSAFE_className="max-w-[800px] leading-none font-light"
           UNSAFE_style={{ fontSize: "clamp(20px, 2.8vw, 32px)", lineHeight: 1 }}
         >
-          {quote}&rdquo;
+          {quote}
         </Body>
+        <div className="max-w-[800px] flex justify-end mb-5">
+          <div
+            className="text-[72px] font-bold leading-[0.8]"
+            style={{
+              color: "var(--ld-primitive-color-spark-100, #ffc220)",
+              marginTop: "-16px",
+              transform: "rotate(180deg)",
+            }}
+          >
+            &ldquo;
+          </div>
+        </div>
         <Body as="p" size="small" UNSAFE_style={{ color: "rgba(255,255,255,0.45)", fontSize: "13px" }}>
           {attribution}
         </Body>
