@@ -43,25 +43,26 @@ export function Home() {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen">
+    <div data-ld-theme="Portfolio" style={{ display: "contents" }}>
+      <div className="min-h-screen">
       <PageContainer className="pt-0 pb-16 md:pb-24" maxWidth="max-w-7xl">
         <div className="py-6 md:py-8 mt-8 md:mt-10 mb-1 pb-8 md:pb-10">
           <CaseStudyHeroText
             as="p"
             UNSAFE_className="flex flex-wrap items-center gap-2 md:gap-3 w-full"
           >
-            <span style={{ color: "var(--ld-semantic-color-text, #111827)" }}>Hello, there.</span>
+            <span style={{ color: "var(--ld-semantic-color-text)" }}>Hello, there.</span>
             <img
               src={sparklesIllustration}
               alt=""
               className="w-8 h-8 md:w-10 md:h-10 inline-block hidden md:inline-block shrink-0"
             />
-            <span style={{ color: "var(--ld-semantic-color-text, #111827)" }}>I'm Amy, a</span>
-            <span style={{ color: "var(--ld-semantic-color-text-brand, #4f39f6)" }}>
+            <span style={{ color: "var(--ld-semantic-color-text)" }}>I'm Amy, a</span>
+            <span style={{ color: "var(--ld-semantic-color-text-brand)" }}>
               Principal Product
             </span>
             <span className="inline-flex items-center gap-2 md:gap-3">
-              <span style={{ color: "var(--ld-semantic-color-text-brand, #4f39f6)" }}>
+              <span style={{ color: "var(--ld-semantic-color-text-brand)" }}>
                 Designer,
               </span>
               <img
@@ -70,7 +71,7 @@ export function Home() {
                 className="w-8 h-8 md:w-12 md:h-12 shrink-0 hidden md:inline-block"
               />
             </span>
-            <span style={{ color: "var(--ld-semantic-color-text, #111827)" }}>
+            <span style={{ color: "var(--ld-semantic-color-text)" }}>
               who builds scalable products, with a focus on branding, usability, and workflow
               integrations.
             </span>
@@ -147,11 +148,12 @@ export function Home() {
           <svg viewBox="0 0 1440 120" preserveAspectRatio="none" className="w-full h-24">
             <path
               d="M0,60 Q360,0 720,60 T1440,60 L1440,120 L0,120 Z"
-              fill="var(--ld-semantic-color-fill-accent-purple, #7950f2)"
+              fill="var(--ld-semantic-color-text-brand)"
             />
           </svg>
         </div>
       </PageContainer>
+      </div>
     </div>
   );
 }
