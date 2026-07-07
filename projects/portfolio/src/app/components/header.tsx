@@ -1,6 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
-import { Button } from "@/app/components/Button/Button";
+import { useState, useEffect, useRef } from "react";
 import { CloseIcon, MenuIcon } from "@/app/components/Icons/Icons";
 import { IconButton } from "@/app/components/IconButton/IconButton";
 import { Body } from "@/app/components/Text/Text";
@@ -20,6 +19,8 @@ export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const [isAccountMenuOpen, setIsAccountMenuOpen] = useState(false);
+  const accountMenuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -39,33 +40,24 @@ export function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
 
+  useEffect(() => {
+    if (!isAccountMenuOpen) return;
+
+    const handleClickOutside = (event: MouseEvent) => {
+      if (accountMenuRef.current && !accountMenuRef.current.contains(event.target as Node)) {
+        setIsAccountMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [isAccountMenuOpen]);
+
   const handleLogout = () => {
     logout();
     setIsMenuOpen(false);
     navigate("/");
   };
-
-  const adminActions = isAdmin ? (
-    <>
-      <span className="h-4 w-px bg-gray-200" aria-hidden="true" />
-      <Link to="/dashboard" className="text-sm hover:underline">
-        Dashboard
-      </Link>
-      <Link to="/theme-editor" className="text-sm hover:underline">
-        Theme Editor
-      </Link>
-      <Link to="/component-library" className="text-sm hover:underline">
-        Component Library
-      </Link>
-      <Button variant="secondary" size="small" type="button" onClick={handleLogout}>
-        Sign out
-      </Button>
-    </>
-  ) : (
-    <Button variant="secondary" size="small" type="button" onClick={() => navigate("/login")}>
-      Sign in
-    </Button>
-  );
 
   return (
     <header
@@ -74,12 +66,70 @@ export function Header() {
       }`}
     >
       <div className="w-full flex h-16 items-center px-4 md:px-[68px]">
-        <Link to="/" className="flex items-center space-x-2 no-underline text-inherit shrink-0">
-          <img src={logo} alt="Amy Ha Logo" className="h-8 w-auto" />
-          <Body as="span" size="medium">
-            Amy Ha
-          </Body>
-        </Link>
+        <div className="relative shrink-0" ref={accountMenuRef}>
+          <button
+            type="button"
+            className="flex items-center space-x-2 text-inherit"
+            onClick={() => setIsAccountMenuOpen((open) => !open)}
+          >
+            <img src={logo} alt="Amy Ha Logo" className="h-8 w-auto" />
+            <Body as="span" size="medium">
+              Amy Ha
+            </Body>
+          </button>
+
+          {isAccountMenuOpen ? (
+            <div className="absolute left-0 top-full mt-2 min-w-[160px] rounded-md border bg-white py-1 shadow-lg z-50">
+              {isAdmin ? (
+                <>
+                  <Link
+                    to="/dashboard"
+                    className="block px-3 py-2 text-sm hover:bg-gray-50"
+                    onClick={() => setIsAccountMenuOpen(false)}
+                  >
+                    Dashboard
+                  </Link>
+                  <Link
+                    to="/theme-editor"
+                    className="block px-3 py-2 text-sm hover:bg-gray-50"
+                    onClick={() => setIsAccountMenuOpen(false)}
+                  >
+                    Theme Editor
+                  </Link>
+                  <Link
+                    to="/component-library"
+                    className="block px-3 py-2 text-sm hover:bg-gray-50"
+                    onClick={() => setIsAccountMenuOpen(false)}
+                  >
+                    Component Library
+                  </Link>
+                  <div className="my-1 h-px bg-gray-200" aria-hidden="true" />
+                  <button
+                    type="button"
+                    className="block w-full text-left px-3 py-2 text-sm hover:bg-gray-50"
+                    onClick={() => {
+                      setIsAccountMenuOpen(false);
+                      handleLogout();
+                    }}
+                  >
+                    Sign out
+                  </button>
+                </>
+              ) : (
+                <button
+                  type="button"
+                  className="block w-full text-left px-3 py-2 text-sm hover:bg-gray-50"
+                  onClick={() => {
+                    setIsAccountMenuOpen(false);
+                    navigate("/login");
+                  }}
+                >
+                  Login
+                </button>
+              )}
+            </div>
+          ) : null}
+        </div>
 
         <div className="ml-auto flex items-center gap-6">
           <nav className="hidden md:flex items-center gap-6">
@@ -88,7 +138,6 @@ export function Header() {
                 {link.label}
               </Link>
             ))}
-            {adminActions}
           </nav>
 
           <span className="md:hidden">
@@ -118,48 +167,6 @@ export function Header() {
                 {link.label}
               </Link>
             ))}
-
-            {isAdmin ? (
-              <>
-                <div className="my-1 h-px bg-gray-200" aria-hidden="true" />
-                <Link
-                  to="/dashboard"
-                  className="text-sm hover:underline py-2"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Dashboard
-                </Link>
-                <Link
-                  to="/theme-editor"
-                  className="text-sm hover:underline py-2"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Theme Editor
-                </Link>
-                <Link
-                  to="/component-library"
-                  className="text-sm hover:underline py-2"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Component Library
-                </Link>
-                <Button variant="secondary" size="small" type="button" onClick={handleLogout}>
-                  Sign out
-                </Button>
-              </>
-            ) : (
-              <Button
-                variant="secondary"
-                size="small"
-                type="button"
-                onClick={() => {
-                  setIsMenuOpen(false);
-                  navigate("/login");
-                }}
-              >
-                Sign in
-              </Button>
-            )}
           </div>
         </nav>
       ) : null}

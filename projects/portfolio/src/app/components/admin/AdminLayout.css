@@ -39,60 +39,6 @@
   width: auto;
 }
 
-.admin-nav__actions {
-  align-items: center;
-  display: flex;
-  gap: 1.5rem;
-  margin-left: auto;
-}
-
-.admin-nav__links--desktop {
-  align-items: center;
-  display: none;
-  gap: 1.5rem;
-}
-
-@media (min-width: 48rem) {
-  .admin-nav__links--desktop {
-    display: flex;
-  }
-}
-
-.admin-nav__menu-button {
-  display: inline-flex;
-}
-
-@media (min-width: 48rem) {
-  .admin-nav__menu-button {
-    display: none;
-  }
-}
-
-.admin-nav__mobile {
-  background: #ffffff;
-  border-top: 1px solid #e5e7eb;
-}
-
-@media (min-width: 48rem) {
-  .admin-nav__mobile {
-    display: none;
-  }
-}
-
-.admin-nav__mobile-inner {
-  align-items: flex-end;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  padding: 1rem 1rem 1rem;
-}
-
-@media (min-width: 48rem) {
-  .admin-nav__mobile-inner {
-    padding-inline: 4.25rem;
-  }
-}
-
 .admin-page {
   background: var(--ld-semantic-color-surface, #ffffff);
   display: flex;

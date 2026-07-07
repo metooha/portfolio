@@ -1,0 +1,68 @@
+/* Oportun case study — animated snackbar mockup */
+.oportun-snackbar-mockup {
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+  border-radius: 0.75rem;
+  overflow: hidden;
+}
+
+.oportun-snackbar-mockup-image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Covers the snackbar baked into the screenshot's pixels so only the
+   animated bar below is visible. Bounds measured from the source PNG
+   (486x1024): the static bar sits at x 53-430, y 771-873. */
+.oportun-snackbar-mockup-patch {
+  position: absolute;
+  top: 74.7%;
+  left: 6.4%;
+  width: 86.6%;
+  height: 11.2%;
+  background: #ffffff;
+}
+
+.oportun-snackbar-mockup-bar {
+  position: absolute;
+  top: 75.3%;
+  left: 10.9%;
+  width: 77.5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  background: #000000;
+  border-radius: 0.875rem;
+  padding: 0.75rem 1rem;
+  animation: oportun-snackbar-mockup-slide 2s cubic-bezier(0, 0, 0.58, 1) infinite;
+}
+
+@keyframes oportun-snackbar-mockup-slide {
+  0% {
+    transform: translateY(100%);
+  }
+  25% {
+    /* 500ms of the 2000ms cycle, matching the Figma-specced entrance timing */
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.oportun-snackbar-mockup-message {
+  margin: 0;
+  font-size: 0.8125rem;
+  line-height: 1.2;
+  color: #ffffff;
+}
+
+.oportun-snackbar-mockup-undo {
+  flex-shrink: 0;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: #aae5bd;
+}

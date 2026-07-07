@@ -64,11 +64,13 @@
   top: 100%;
 }
 .ld-snackbar-snackbar.ld-snackbar-transitionEnter {
-  opacity: 0;
+  opacity: 1;
+  transform: translateY(12.5rem);
 }
 .ld-snackbar-snackbar.ld-snackbar-transitionEnterActive {
   opacity: 1;
-  transition: opacity 0.5s ease-in;
+  transform: translateY(0);
+  transition: transform 0.5s cubic-bezier(0, 0, 0.58, 1);
 }
 .ld-snackbar-snackbar.ld-snackbar-transitionExit {
   opacity: 1;

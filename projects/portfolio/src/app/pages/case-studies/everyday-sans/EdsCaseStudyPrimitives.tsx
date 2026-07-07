@@ -651,18 +651,24 @@ export function EdsResearchCard({
 export function EdsStatsRow({
   stats,
   variant = "dark",
+  cellBackground: cellBackgroundOverride,
+  borderColor,
 }: {
   stats: { value: string; label: string; valueColor?: string }[];
   variant?: "dark" | "light" | "brand";
+  cellBackground?: string;
+  borderColor?: string;
 }) {
   const isLight = variant === "light";
   const isBrand = variant === "brand";
 
-  const cellBackground = isBrand
-    ? "var(--ld-semantic-color-fill-brand, #6cdb8c)"
-    : isLight
-      ? "#e7f1fc"
-      : "rgba(255,255,255,0.04)";
+  const cellBackground =
+    cellBackgroundOverride ??
+    (isBrand
+      ? "var(--ld-semantic-color-fill-brand, #6cdb8c)"
+      : isLight
+        ? "#e7f1fc"
+        : "rgba(255,255,255,0.04)");
 
   const defaultValueColor = isBrand
     ? "#000000"
@@ -676,8 +682,8 @@ export function EdsStatsRow({
     <div
       className="grid grid-cols-2 lg:grid-cols-4 gap-px rounded-[24px] overflow-hidden"
       style={{
-        background: isLight || isBrand ? "var(--ld-semantic-color-separator, #e3e4e5)" : "rgba(255,255,255,0.1)",
-        border: isLight || isBrand ? "1px solid var(--ld-semantic-color-separator, #e3e4e5)" : "1px solid rgba(255,255,255,0.1)",
+        background: borderColor ?? (isLight || isBrand ? "var(--ld-semantic-color-separator, #e3e4e5)" : "rgba(255,255,255,0.1)"),
+        border: `1px solid ${borderColor ?? (isLight || isBrand ? "var(--ld-semantic-color-separator, #e3e4e5)" : "rgba(255,255,255,0.1)")}`,
       }}
     >
       {stats.map((stat) => (

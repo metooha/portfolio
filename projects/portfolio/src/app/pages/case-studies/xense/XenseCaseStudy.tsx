@@ -1,6 +1,6 @@
 import { CaseStudyTemplate } from "@/app/components/CaseStudyTemplate";
 import { getAdjacentCaseStudies } from "@/app/data/case-studies-config";
-import XenseHero from "@/app/components/case-studies/heroes/XenseHero";
+import XenseHero from "@/app/pages/case-studies/heroes/XenseHero";
 import { CaseStudyXenseContent } from "./CaseStudyXenseContent";
 
 const NAV_SECTIONS = [

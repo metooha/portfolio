@@ -16,7 +16,7 @@ import { ProtectedRoute } from "@/app/auth/protected-route";
 import { PagePasswordGate, usePageGatePath } from "@/app/auth/page-password-gate";
 
 const ComponentLibraryShowcase = lazy(() =>
-  import("@/app/components/ComponentLibraryShowcase").then((module) => ({
+  import("@/app/pages/component-library-showcase").then((module) => ({
     default: module.ComponentLibraryShowcase,
   })),
 );

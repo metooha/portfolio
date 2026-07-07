@@ -1,8 +1,5 @@
 import { Link as RouterLink, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { Button } from "@/app/components/Button/Button";
-import { CloseIcon, MenuIcon } from "@/app/components/Icons/Icons";
-import { IconButton } from "@/app/components/IconButton/IconButton";
+import { useEffect, useRef, useState } from "react";
 import { Body } from "@/app/components/Text/Text";
 import logo from "@/app/assets/pages/profile/shared/amy-ha-logo.png";
 import { useAuth } from "@/app/auth/auth-context";
@@ -40,9 +37,10 @@ export const ADMIN_NAV_HEIGHT = 64;
 export function AdminNav({ currentPage }: AdminNavProps) {
   const { logout } = useAuth();
   const navigate = useNavigate();
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const [isAccountMenuOpen, setIsAccountMenuOpen] = useState(false);
+  const accountMenuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -62,14 +60,24 @@ export function AdminNav({ currentPage }: AdminNavProps) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
 
+  useEffect(() => {
+    if (!isAccountMenuOpen) return;
+
+    const handleClickOutside = (event: MouseEvent) => {
+      if (accountMenuRef.current && !accountMenuRef.current.contains(event.target as Node)) {
+        setIsAccountMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [isAccountMenuOpen]);
+
   const handleLogout = () => {
     logout();
-    setIsMenuOpen(false);
+    setIsAccountMenuOpen(false);
     navigate("/");
   };
-
-  const linkClass = (page: AdminPage) =>
-    `text-sm hover:underline${page === currentPage ? " underline" : ""}`;
 
   return (
     <header
@@ -78,66 +86,44 @@ export function AdminNav({ currentPage }: AdminNavProps) {
       }`}
     >
       <div className="admin-nav__inner">
-        <RouterLink to="/" className="admin-nav__brand">
-          <img src={logo} alt="Amy Ha Logo" className="admin-nav__logo" />
-          <Body as="span" size="medium">
-            Amy Ha
-          </Body>
-        </RouterLink>
+        <div className="relative shrink-0" ref={accountMenuRef}>
+          <button
+            type="button"
+            className="admin-nav__brand"
+            onClick={() => setIsAccountMenuOpen((open) => !open)}
+          >
+            <img src={logo} alt="Amy Ha Logo" className="admin-nav__logo" />
+            <Body as="span" size="medium">
+              Amy Ha
+            </Body>
+          </button>
 
-        <div className="admin-nav__actions">
-          <nav className="admin-nav__links--desktop">
-            {ADMIN_PAGES.map((page) => (
-              <RouterLink
-                key={page}
-                to={ADMIN_PAGE_PATHS[page]}
-                className={linkClass(page)}
+          {isAccountMenuOpen ? (
+            <div className="absolute left-0 top-full mt-2 min-w-[160px] rounded-md border bg-white py-1 shadow-lg z-50">
+              {ADMIN_PAGES.map((page) => (
+                <RouterLink
+                  key={page}
+                  to={ADMIN_PAGE_PATHS[page]}
+                  className={`block px-3 py-2 text-sm hover:bg-gray-50${
+                    page === currentPage ? " underline" : ""
+                  }`}
+                  onClick={() => setIsAccountMenuOpen(false)}
+                >
+                  {ADMIN_PAGE_LABELS[page]}
+                </RouterLink>
+              ))}
+              <div className="my-1 h-px bg-gray-200" aria-hidden="true" />
+              <button
+                type="button"
+                className="block w-full text-left px-3 py-2 text-sm hover:bg-gray-50"
+                onClick={handleLogout}
               >
-                {ADMIN_PAGE_LABELS[page]}
-              </RouterLink>
-            ))}
-            <Button variant="secondary" size="small" type="button" onClick={handleLogout}>
-              Sign out
-            </Button>
-          </nav>
-
-          <span className="admin-nav__menu-button">
-            <IconButton
-              a11yLabel={isMenuOpen ? "Close menu" : "Open menu"}
-              size="small"
-              color="tertiary"
-              type="button"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-            >
-              {isMenuOpen ? (
-                <CloseIcon size="medium" decorative />
-              ) : (
-                <MenuIcon size="medium" decorative />
-              )}
-            </IconButton>
-          </span>
+                Sign out
+              </button>
+            </div>
+          ) : null}
         </div>
       </div>
-
-      {isMenuOpen ? (
-        <nav className="admin-nav__mobile">
-          <div className="admin-nav__mobile-inner">
-            {ADMIN_PAGES.map((page) => (
-              <RouterLink
-                key={page}
-                to={ADMIN_PAGE_PATHS[page]}
-                className={`${linkClass(page)} py-2`}
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {ADMIN_PAGE_LABELS[page]}
-              </RouterLink>
-            ))}
-            <Button variant="secondary" size="small" type="button" onClick={handleLogout}>
-              Sign out
-            </Button>
-          </div>
-        </nav>
-      ) : null}
     </header>
   );
 }

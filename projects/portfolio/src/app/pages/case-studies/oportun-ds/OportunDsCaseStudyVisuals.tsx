@@ -275,10 +275,9 @@ export function OportunDsComponentLifeCycleVisual() {
 }
 
 const TRANSFER_MONEY_PROTOTYPE_URL =
-  "https://www.figma.com/proto/ne0HusyVVKR4Rhp7HiEmsZ/Amy-Portfolio?node-id=3742-54338&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=3742%3A21678&show-proto-sidebar=1&page-id=3742%3A7086";
-
+  "https://www.figma.com/proto/ne0HusyVVKR4Rhp7HiEmsZ/Amy-Portfolio?node-id=3742-54338&t=ADhd6ig9viFB9zv6-0&scaling=scale-down-width&content-scaling=fixed&starting-point-node-id=3742%3A21678&show-proto-sidebar=1&page-id=3742%3A7086&hide-ui=1"
 const TRANSFER_MONEY_PROTOTYPE_EMBED =
-  "https://embed.figma.com/proto/ne0HusyVVKR4Rhp7HiEmsZ/Amy-Portfolio?node-id=3742-54338&viewport=982%2C225%2C0.06&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=3742%3A21678&show-proto-sidebar=1&page-id=3742%3A7086&embed-host=share";
+  "https://embed.figma.com/proto/ne0HusyVVKR4Rhp7HiEmsZ/Amy-Portfolio?node-id=3742-54338&scaling=scale-down-width&content-scaling=fixed&starting-point-node-id=3742%3A21678&page-id=3742%3A7086&show-proto-sidebar=1&hide-ui=1&embed-host=share";
 
 const LOAN_CALCULATOR_PROTOTYPE_URL =
   "https://www.figma.com/proto/ne0HusyVVKR4Rhp7HiEmsZ/Amy-Portfolio?node-id=3742-24814&scaling=scale-down-width&content-scaling=fixed&starting-point-node-id=3742%3A21678&page-id=3742%3A7086&show-proto-sidebar=1&hide-ui=1";
@@ -372,9 +371,6 @@ function OportunDsFigmaPrototype({
             Open prototype in Figma
           </Body>
         </a>
-        <Body as="span" size="small" color="subtlest" UNSAFE_className="max-w-[520px]">
-          If the embed is blank, the file may need link sharing enabled in Figma (Anyone with the link → can view).
-        </Body>
       </figcaption>
     </figure>
   );
