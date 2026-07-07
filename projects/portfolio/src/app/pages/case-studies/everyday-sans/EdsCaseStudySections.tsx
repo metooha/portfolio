@@ -13,12 +13,11 @@ import imgCharacterMisreads from "@/app/assets/pages/case-study/everyday-sans/ac
 import imgLanguageCoverage from "@/app/assets/pages/case-study/everyday-sans/language-coverage.jpg";
 import imgLanguageFrench from "@/app/assets/pages/case-study/everyday-sans/language-french.jpg";
 import imgLanguageSpanish from "@/app/assets/pages/case-study/everyday-sans/language-spanish.jpg";
-import imgFontCompare from "@/app/assets/pages/case-study/everyday-sans/font-compare-tool.png";
 import { Link } from "@/app/components/Link";
 import {
   EdsBeforeAfter,
+  EdsEmbedFull,
   EdsEyebrow,
-  EdsImageFrame,
   EdsImageFull,
   EdsVideoFull,
   EdsImageGrid2,
@@ -532,12 +531,12 @@ export function EdsFontCompareSection() {
       <EdsLead>
         The Walmart variable font took 18 months. For Sam&apos;s Sans, I built an internal Font Compare Tool that let teams evaluate fonts side by side — glyphs, paragraphs, real UI mocks, and metadata — in one place. It compressed the decision-making process from a year to under two months.
       </EdsLead>
-      <EdsImageFull
-        src={imgFontCompare}
-        alt="Font Compare Tool — side-by-side font evaluation"
+      <EdsEmbedFull
+        src="https://metooha.github.io/font-compare/"
+        title="Font Compare Tool — side-by-side font evaluation"
         caption="The Font Compare Tool: up to 5 fonts compared simultaneously across paragraphs, glyphs, PDP mocks, and full metadata including glyph coverage, CSS @font-face, and design tokens. Built to make the process repeatable without the year-long back-and-forth."
         surface="subtle"
-        clipEdges={false}
+        aspectRatio="4 / 3"
       />
       <Link
         href="https://metooha.github.io/font-compare/"
@@ -549,7 +548,7 @@ export function EdsFontCompareSection() {
         }}
         UNSAFE_className="no-underline hover:underline"
       >
-        Try the live Font Compare Tool →
+        Open the Font Compare Tool in a new tab →
       </Link>
       <EdsStatCards
         stats={[

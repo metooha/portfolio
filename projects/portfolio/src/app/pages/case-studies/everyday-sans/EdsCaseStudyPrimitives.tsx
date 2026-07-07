@@ -328,6 +328,100 @@ export function EdsImageFull({
   );
 }
 
+export function EdsEmbedFrame({
+  src,
+  title,
+  className = "",
+  iframeClassName = "",
+  aspectRatio = "16 / 10",
+  bordered = false,
+  rounded = true,
+  surface = "white",
+}: {
+  src: string;
+  title: string;
+  className?: string;
+  iframeClassName?: string;
+  aspectRatio?: string;
+  bordered?: boolean;
+  rounded?: boolean;
+  surface?: EdsImageSurface;
+}) {
+  return (
+    <div
+      className={`w-full ${rounded ? "overflow-hidden rounded-xl" : "overflow-hidden"} ${className}`}
+      style={{
+        background: IMAGE_SURFACE[surface],
+        border: bordered ? "1px solid var(--ld-semantic-color-separator, #e3e4e5)" : undefined,
+      }}
+    >
+      <div className="relative w-full" style={{ aspectRatio }}>
+        <iframe
+          src={src}
+          title={title}
+          loading="lazy"
+          className={`absolute inset-0 block size-full border-0 ${iframeClassName}`}
+        />
+      </div>
+    </div>
+  );
+}
+
+export function EdsEmbedFull({
+  src,
+  title,
+  caption,
+  label,
+  className = "",
+  frameClassName = "",
+  iframeClassName = "",
+  aspectRatio = "16 / 10",
+  surface = "white",
+  rounded = true,
+}: {
+  src: string;
+  title: string;
+  caption?: string;
+  label?: string;
+  className?: string;
+  frameClassName?: string;
+  iframeClassName?: string;
+  aspectRatio?: string;
+  surface?: EdsImageSurface;
+  rounded?: boolean;
+}) {
+  return (
+    <figure className={`m-0 flex flex-col gap-6 ${className}`}>
+      {label && (
+        <Body
+          as="p"
+          size="small"
+          weight="alt"
+          color="brand"
+          UNSAFE_className="uppercase tracking-[0.1em]"
+          UNSAFE_style={{ fontSize: "10px" }}
+        >
+          {label}
+        </Body>
+      )}
+      <EdsEmbedFrame
+        src={src}
+        title={title}
+        className={frameClassName}
+        iframeClassName={iframeClassName}
+        aspectRatio={aspectRatio}
+        surface={surface}
+        rounded={rounded}
+      />
+      {caption && (
+        <Body as="figcaption" size="small" color="subtlest" UNSAFE_className="leading-snug">
+          {caption}
+        </Body>
+      )}
+    </figure>
+  );
+}
+
 export function EdsVideoFrame({
   src,
   alt,
