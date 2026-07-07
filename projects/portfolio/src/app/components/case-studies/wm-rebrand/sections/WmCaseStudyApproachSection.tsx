@@ -230,7 +230,7 @@ function CountTitle8() {
 
 function Title8() {
   return (
-    <div className="content-stretch flex flex-[1_0_0] h-[72px] items-center min-h-px min-w-px relative" data-name="title">
+    <div className="content-stretch flex flex-[1_0_0] items-center min-h-px min-w-px relative" data-name="title">
       <CountTitle8 />
     </div>
   );
@@ -255,8 +255,10 @@ function Count8() {
 function SectionHeadingVertical3() {
   return (
     <div className="content-stretch flex flex-col gap-[8px] items-start justify-center relative shrink-0 w-full" data-name="Section Heading / Vertical">
-      <Count8 />
-      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[normal] not-italic relative shrink-0 text-[20px] text-black">Audit and System Discovery</p>
+      <div className="content-stretch flex gap-[16px] items-center relative shrink-0 w-full" data-name="Count + Title">
+        <Count8 />
+        <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[normal] not-italic relative shrink-0 text-[20px] text-black">Audit and System Discovery</p>
+      </div>
       <p className="font-['Inter:Regular',sans-serif] font-normal leading-[24px] max-w-[800px] min-w-full not-italic relative shrink-0 text-[#4e4f4e] text-[16px] w-[min-content] whitespace-pre-wrap">I conducted a system-level audit of existing pages, components, and patterns to identify redundancy, inconsistencies, and opportunities for consolidation. This work established a shared design vocabulary and informed which elements should become foundational system components.</p>
     </div>
   );
@@ -520,8 +522,10 @@ function Count9() {
 function SectionHeadingVertical4() {
   return (
     <div className="content-stretch flex flex-col gap-[8px] items-start justify-center relative shrink-0 w-full max-w-[375px]" data-name="Section Heading / Vertical">
-      <Count9 />
-      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[normal] not-italic relative shrink-0 text-[20px] text-black w-full min-w-0">{`Tokens & Foundations`}</p>
+      <div className="content-stretch flex gap-[16px] items-center relative shrink-0 w-full min-w-0" data-name="Count + Title">
+        <Count9 />
+        <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[normal] not-italic relative shrink-0 text-[20px] text-black w-full min-w-0">{`Tokens & Foundations`}</p>
+      </div>
       <p className="font-['Inter:Regular',sans-serif] font-normal leading-[24px] not-italic relative shrink-0 text-[#4e4f4e] text-[16px] w-full min-w-0">
         {`Our branding foundations and hierarchy are built on a mix of primitive and semantic tokens. `}
         <br aria-hidden="true" />
@@ -848,7 +852,7 @@ function CountTitle9() {
 
 function Title9() {
   return (
-    <div className="content-stretch flex flex-[1_0_0] items-start min-h-0 min-w-0 relative shrink-0" data-name="title">
+    <div className="content-stretch flex flex-[1_0_0] items-center min-h-0 min-w-0 relative shrink-0" data-name="title">
       <CountTitle9 />
     </div>
   );
@@ -1061,7 +1065,7 @@ function CountTitle10() {
 
 function Title10() {
   return (
-    <div className="content-stretch flex flex-[1_0_0] items-start min-h-px min-w-px relative" data-name="title">
+    <div className="content-stretch flex flex-[1_0_0] items-center min-h-px min-w-px relative" data-name="title">
       <CountTitle10 />
     </div>
   );
@@ -1095,7 +1099,7 @@ function CountTitle11() {
 
 function Title11() {
   return (
-    <div className="content-stretch flex flex-[1_0_0] items-start min-h-px min-w-px relative" data-name="title">
+    <div className="content-stretch flex flex-[1_0_0] items-center min-h-px min-w-px relative" data-name="title">
       <CountTitle11 />
     </div>
   );
@@ -1494,7 +1498,7 @@ function CountTitle12() {
 
 function Title12() {
   return (
-    <div className="content-stretch flex flex-[1_0_0] h-[72px] items-start min-h-px min-w-px relative" data-name="title">
+    <div className="content-stretch flex flex-[1_0_0] items-center min-h-px min-w-px relative" data-name="title">
       <CountTitle12 />
     </div>
   );
@@ -1934,7 +1938,7 @@ function CountTitle13() {
 
 function Title13() {
   return (
-    <div className="content-stretch flex flex-[1_0_0] h-[72px] items-start min-h-px min-w-px relative" data-name="title">
+    <div className="content-stretch flex flex-[1_0_0] items-center min-h-px min-w-px relative" data-name="title">
       <CountTitle13 />
     </div>
   );
@@ -1942,7 +1946,7 @@ function Title13() {
 
 function SectionHeadingFull13() {
   return (
-    <div className="content-start flex flex-wrap gap-[32px] h-[32px] items-start relative shrink-0 w-[563px]" data-name="Section Heading / Full">
+    <div className="content-start flex flex-wrap gap-[32px] items-start relative shrink-0 w-full" data-name="Section Heading / Full">
       <Title13 />
     </div>
   );

@@ -56,10 +56,16 @@ export function SectionHeading({
         style={sectionGapStyle}
         data-name="Section Heading / Vertical"
       >
-        {badgeEl}
-        <Heading as="p" size={size} weight={weight} UNSAFE_className="relative shrink-0 w-full">
-          {title}
-        </Heading>
+        <div
+          className="flex items-center relative shrink-0 w-full"
+          style={{ gap: "var(--ld-semantic-spacing-200, 1rem)" }}
+          data-name="Count + Title"
+        >
+          {badgeEl}
+          <Heading as="p" size={size} weight={weight} UNSAFE_className="relative shrink-0 w-full">
+            {title}
+          </Heading>
+        </div>
         {description && (
           <Body as="p" size="medium" color="subtle" UNSAFE_className="max-w-[800px] relative shrink-0 w-full">
             {description}
@@ -75,7 +81,7 @@ export function SectionHeading({
       style={{ gap: "var(--ld-semantic-spacing-400, 2rem)" }}
       data-name="Section Heading / Full"
     >
-      <div className="flex flex-[1_0_0] min-h-[72px] items-center min-w-px relative">
+      <div className="flex flex-[1_0_0] items-center min-w-px relative">
         <div
           className="flex items-center relative shrink-0"
           style={{ gap: "var(--ld-semantic-spacing-200, 1rem)" }}

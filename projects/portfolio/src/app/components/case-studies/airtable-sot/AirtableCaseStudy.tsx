@@ -7,7 +7,6 @@ import {
   AirtableArchitectureSection,
   AirtableBridgeSection,
   AirtableHumanCostSection,
-  AirtablePivotSection,
   AirtableResultsSection,
   AirtableSituationSection,
   AirtableTheWorkSection,
@@ -19,7 +18,6 @@ const NAV = [
   { label: "Problem space", href: "#situation" },
   { label: "Human cost", href: "#human-cost" },
   { label: "The bridge", href: "#bridge" },
-  { label: "The pivot", href: "#pivot" },
   { label: "The work", href: "#the-work" },
   { label: "Architecture", href: "#architecture" },
   { label: "Results", href: "#results" },
@@ -37,6 +35,7 @@ function AirtableHero() {
       imageHeight={1024}
       aspectRatio="2 / 1"
       imageFit="cover"
+      imageClassName="opacity-20"
       backgroundColor="#e8f2fa"
       className="max-w-[2048px] mx-auto"
     />
@@ -64,7 +63,7 @@ export default function AirtableCaseStudy() {
         overviewLogo={<AirtableOverviewLogo />}
         overviewClient="Walmart"
         overviewCategory="Design Tokens"
-        overviewTitle="The Quest for a Single Source of Truth"
+        overviewTitle={"The Quest for a\nSingle Source of Truth"}
         overviewDescription="We went from 17+ teams maintaining their own copies of design tokens — manually, inconsistently, and constantly out of sync — to a single automated pipeline where a designer updates a value in Airtable and it's live in production in 10 minutes. Zero manual steps. Zero coordination. Zero errors."
         metaItems={[
           { label: "Role", value: "Principal Product Designer" },
@@ -82,7 +81,6 @@ export default function AirtableCaseStudy() {
           <AirtableSituationSection />
           <AirtableHumanCostSection />
           <AirtableBridgeSection />
-          <AirtablePivotSection />
           <AirtableTheWorkSection />
           <AirtableArchitectureSection />
           <AirtableResultsSection />

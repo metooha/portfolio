@@ -57,7 +57,7 @@ function CountTitle() {
 
 function Title() {
   return (
-    <div className="content-stretch flex flex-[1_0_0] h-[72px] items-center min-h-px min-w-px relative" data-name="title">
+    <div className="content-stretch flex flex-[1_0_0] items-center min-h-px min-w-px relative" data-name="title">
       <CountTitle />
     </div>
   );
@@ -220,7 +220,7 @@ function CountTitle3() {
 
 function Title3() {
   return (
-    <div className="content-stretch flex flex-[1_0_0] h-[72px] items-center min-h-px min-w-px relative" data-name="title">
+    <div className="content-stretch flex flex-[1_0_0] items-center min-h-px min-w-px relative" data-name="title">
       <CountTitle3 />
     </div>
   );
@@ -270,7 +270,7 @@ function CountTitle4() {
 
 function Title4() {
   return (
-    <div className="content-stretch flex flex-[1_0_0] h-[72px] items-center min-h-px min-w-px relative" data-name="title">
+    <div className="content-stretch flex flex-[1_0_0] items-center min-h-px min-w-px relative" data-name="title">
       <CountTitle4 />
     </div>
   );
@@ -312,7 +312,7 @@ function CountTitle5() {
 
 function Title5() {
   return (
-    <div className="content-stretch flex flex-[1_0_0] h-[72px] items-center min-h-px min-w-px relative" data-name="title">
+    <div className="content-stretch flex flex-[1_0_0] items-center min-h-px min-w-px relative" data-name="title">
       <CountTitle5 />
     </div>
   );
@@ -358,7 +358,7 @@ function CountTitle6() {
 
 function Title6() {
   return (
-    <div className="content-stretch flex flex-[1_0_0] h-[72px] items-center min-h-px min-w-px relative" data-name="title">
+    <div className="content-stretch flex flex-[1_0_0] items-center min-h-px min-w-px relative" data-name="title">
       <CountTitle6 />
     </div>
   );

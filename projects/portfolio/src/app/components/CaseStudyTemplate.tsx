@@ -226,7 +226,7 @@ export function CaseStudyTemplate({
                       )}
                       <PageTitleText
                         as="p"
-                        UNSAFE_className="relative shrink-0 w-full max-w-[1200px]"
+                        UNSAFE_className="relative shrink-0 w-full max-w-[1200px] whitespace-pre-line"
                       >
                         {overviewTitle}
                       </PageTitleText>

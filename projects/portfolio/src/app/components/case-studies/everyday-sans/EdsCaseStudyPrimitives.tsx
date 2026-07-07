@@ -78,7 +78,7 @@ export function EdsSectionTitle({
       as="h2"
       size="medium"
       weight="default"
-      UNSAFE_className="leading-[1.15]"
+      UNSAFE_className="leading-[1.15] whitespace-pre-line"
       UNSAFE_style={{
         color: onDark ? "var(--ld-primitive-color-white, #ffffff)" : undefined,
         fontSize: "clamp(24px, 3vw, 38px)",
@@ -674,7 +674,7 @@ export function EdsStatsRow({
 
   return (
     <div
-      className="grid grid-cols-2 lg:grid-cols-4 gap-px rounded-xl overflow-hidden"
+      className="grid grid-cols-2 lg:grid-cols-4 gap-px rounded-[24px] overflow-hidden"
       style={{
         background: isLight || isBrand ? "var(--ld-semantic-color-separator, #e3e4e5)" : "rgba(255,255,255,0.1)",
         border: isLight || isBrand ? "1px solid var(--ld-semantic-color-separator, #e3e4e5)" : "1px solid rgba(255,255,255,0.1)",
@@ -721,7 +721,7 @@ export function EdsBeforeAfter({
 }) {
   return (
     <div
-      className="grid grid-cols-1 md:grid-cols-2 gap-px rounded-xl overflow-hidden"
+      className="grid grid-cols-1 md:grid-cols-2 gap-px rounded-[24px] overflow-hidden"
       style={{ background: "var(--ld-semantic-color-separator, #e3e4e5)", border: "1px solid var(--ld-semantic-color-separator, #e3e4e5)" }}
     >
       {[

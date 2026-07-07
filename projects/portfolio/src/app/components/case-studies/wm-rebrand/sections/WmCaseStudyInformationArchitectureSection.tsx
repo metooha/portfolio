@@ -27,7 +27,7 @@ function CountTitle14() {
 
 function Title14() {
   return (
-    <div className="content-stretch flex flex-[1_0_0] items-start min-h-0 min-w-0 relative shrink-0" data-name="title">
+    <div className="content-stretch flex flex-[1_0_0] items-center min-h-0 min-w-0 relative shrink-0" data-name="title">
       <CountTitle14 />
     </div>
   );
@@ -53,8 +53,10 @@ function Count16() {
 function SectionHeadingVertical5() {
   return (
     <div className="content-stretch flex flex-col gap-[8px] items-start justify-center relative shrink-0 w-full min-w-0" data-name="Section Heading / Vertical">
-      <Count16 />
-      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[normal] not-italic relative shrink-0 text-[20px] text-black line-clamp-2 min-w-0 overflow-hidden">Function over form</p>
+      <div className="content-stretch flex gap-[16px] items-center relative shrink-0 w-full min-w-0" data-name="Count + Title">
+        <Count16 />
+        <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[normal] not-italic relative shrink-0 text-[20px] text-black line-clamp-2 min-w-0 overflow-hidden">Function over form</p>
+      </div>
       <div className="font-['Inter:Regular',sans-serif] font-normal leading-[0] max-w-[800px] min-w-0 w-full not-italic relative shrink-0 text-[#4e4f4e] text-[16px] line-clamp-2 overflow-hidden">
         <p className="leading-[24px] mb-0">The site itself is simple and as basic information, but hard to navigate to information like recycling, self-service needs, and it’s more branded pages live externally on a different website.</p>
         <p className="leading-[24px] mb-0">&nbsp;</p>
@@ -128,8 +130,10 @@ function Count17() {
 function SectionHeadingVertical6() {
   return (
     <div className="content-stretch flex flex-col gap-[8px] items-start justify-center relative shrink-0 w-full min-w-0" data-name="Section Heading / Vertical">
-      <Count17 />
-      <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[normal] not-italic relative shrink-0 text-[20px] text-black line-clamp-2 min-w-0 overflow-hidden">Photography felt lacking and inconsistent</p>
+      <div className="content-stretch flex gap-[16px] items-center relative shrink-0 w-full min-w-0" data-name="Count + Title">
+        <Count17 />
+        <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[normal] not-italic relative shrink-0 text-[20px] text-black line-clamp-2 min-w-0 overflow-hidden">Photography felt lacking and inconsistent</p>
+      </div>
       <p className="font-['Inter:Regular',sans-serif] font-normal leading-[24px] max-w-[800px] min-w-0 w-full not-italic relative shrink-0 text-[#4e4f4e] text-[16px] line-clamp-2 overflow-hidden">
         {`The current website's imagery, drawn from various photography campaigns, creates a disjointed and inconsistent experience for users navigating the top landing pages. `}
         <br aria-hidden="true" />
@@ -207,7 +211,7 @@ function CountTitle15() {
 
 function Title15() {
   return (
-    <div className="content-stretch flex flex-[1_0_0] h-[72px] items-start min-h-px min-w-px relative" data-name="title">
+    <div className="content-stretch flex flex-[1_0_0] items-center min-h-px min-w-px relative" data-name="title">
       <CountTitle15 />
     </div>
   );
@@ -866,7 +870,7 @@ function CountTitle16() {
 
 function Title16() {
   return (
-    <div className="content-stretch flex flex-[1_0_0] h-[72px] items-start min-h-px min-w-px relative" data-name="title">
+    <div className="content-stretch flex flex-[1_0_0] items-center min-h-px min-w-px relative" data-name="title">
       <CountTitle16 />
     </div>
   );

@@ -113,7 +113,7 @@ function AirtableProblemGrid() {
       {PROBLEM_CARDS.map((card) => (
         <div
           key={card.who}
-          className="rounded-[10px] overflow-hidden"
+          className="rounded-[16px] overflow-hidden"
           style={{
             background: "var(--ld-semantic-color-fill, #ffffff)",
             border: "1px solid var(--ld-semantic-color-separator, #e3e4e5)",
@@ -155,7 +155,7 @@ function AirtableRoadmapList() {
       {ROADMAP_ITEMS.map((item) => (
         <div
           key={item.title}
-          className="rounded-[10px] px-9 py-5"
+          className="rounded-[16px] px-9 py-5"
           style={{
             background: "var(--ld-semantic-color-fill, #ffffff)",
             border: "1px solid var(--ld-semantic-color-separator, #e3e4e5)",
@@ -208,20 +208,14 @@ export function AirtableBridgeSection() {
   return (
     <EdsSection id="bridge">
       <EdsEyebrow>Designer Ease vs. Engineer Control</EdsEyebrow>
-      <EdsSectionTitle>Designers wanted Airtable. Engineers needed Git. We built a bridge.</EdsSectionTitle>
+      <EdsSectionTitle>
+        {"Designers wanted Airtable. Engineers needed Git.\nWe built a bridge."}
+      </EdsSectionTitle>
       <EdsLead>
         Tool selection should follow team behavior — that&apos;s the core principle behind this architecture.
       </EdsLead>
       <AirtableBridgeVisual />
-    </EdsSection>
-  );
-}
-
-export function AirtablePivotSection() {
-  return (
-    <EdsSection id="pivot" variant="mid">
       <EdsEyebrow>The Pivot</EdsEyebrow>
-      <EdsSectionTitle>Designers wanted Airtable. Engineers needed Git. We built a bridge.</EdsSectionTitle>
       <EdsLead>
         The breakthrough was agreeing on a contract — a shared JSON schema — before building anything. A single
         alignment decision eliminated almost all integration friction.
@@ -235,7 +229,9 @@ export function AirtableTheWorkSection() {
   return (
     <EdsSection id="the-work">
       <EdsEyebrow>The Work</EdsEyebrow>
-      <EdsSectionTitle>Three phases. Eighteen months. One source everyone could trust.</EdsSectionTitle>
+      <EdsSectionTitle>
+        {"Three phases. Eighteen months.\nOne source everyone could trust."}
+      </EdsSectionTitle>
       <EdsLead>
         Foundation first — alignment and proof of concept. Then automation and inheritance. Then a fully shipped
         pipeline with guardrails.
@@ -305,26 +301,28 @@ export function AirtableResultsSection() {
         ]}
       />
       <div
-        className="rounded-xl p-8 mt-6"
+        className="rounded-[24px] p-8 mt-6"
         style={{
           background: "var(--ld-semantic-color-fill-brand, #0053e2)",
           border: "1px solid var(--ld-semantic-color-separator, #e3e4e5)",
         }}
       >
-        <Heading
-          as="h3"
-          size="small"
-          weight="alt"
-          color="inverse"
-          UNSAFE_className="mb-2"
-          UNSAFE_style={{ fontSize: "clamp(20px, 2.5vw, 28px)" }}
-        >
-          347 Automated Tests Passed
-        </Heading>
-        <Body as="p" size="small" UNSAFE_className="mb-6 leading-[1.7]" UNSAFE_style={{ color: "rgba(255,255,255,0.75)" }}>
-          If a change breaks a platform, the pipeline &apos;fails fast and fails loud&apos;. This moved us from a
-          &apos;fear of breaking&apos; to absolute &apos;trust in the system&apos;.
-        </Body>
+        <div className="p-4">
+          <Heading
+            as="h3"
+            size="small"
+            weight="alt"
+            color="inverse"
+            UNSAFE_className="mb-2"
+            UNSAFE_style={{ fontSize: "clamp(20px, 2.5vw, 28px)" }}
+          >
+            347 Automated Tests Passed
+          </Heading>
+          <Body as="p" size="small" UNSAFE_className="mb-6 leading-[1.7]" UNSAFE_style={{ color: "rgba(255,255,255,0.75)" }}>
+            If a change breaks a platform, the pipeline &apos;fails fast and fails loud&apos;. This moved us from a
+            &apos;fear of breaking&apos; to absolute &apos;trust in the system&apos;.
+          </Body>
+        </div>
         <AirtableValidationVisual />
         <div className="mt-6">
           <EdsBeforeAfter

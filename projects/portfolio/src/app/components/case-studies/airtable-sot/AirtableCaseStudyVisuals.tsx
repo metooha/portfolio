@@ -35,6 +35,9 @@ import {
 const SURFACE = "#e7f1fc";
 const NAVY = "#001e60";
 const CARD_BLUE = "#a9ddf7";
+/** Case study surfaces: 16px chips/cards, 24px panels. */
+const RADIUS_SM = "rounded-[16px]";
+const RADIUS_LG = "rounded-[24px]";
 const HUMAN_COST_STAT_SIZE = "clamp(40px, 8vw, 60px)";
 const HUMAN_COST_CIRCLE_SIZE = 153;
 const HUMAN_COST_DIAGRAM_MIN_HEIGHT = 347;
@@ -80,7 +83,7 @@ function VisualFrame({
 }) {
   return (
     <div
-      className={`w-full overflow-hidden rounded-xl ${className}`}
+      className={`w-full overflow-hidden ${RADIUS_LG} ${className}`}
       style={
         surface === "none"
           ? undefined
@@ -114,7 +117,7 @@ function AccentTopCard({
 }) {
   return (
     <div
-      className="flex-1 min-w-0 rounded-[10px] overflow-hidden"
+      className={`flex-1 min-w-0 ${RADIUS_SM} overflow-hidden`}
       style={{
         background: "var(--ld-semantic-color-fill, #ffffff)",
         border: "1px solid var(--ld-semantic-color-separator, #e3e4e5)",
@@ -170,7 +173,7 @@ export function AirtableSituationVisual() {
           {PLATFORMS.map((platform) => (
             <div
               key={platform.label}
-              className="rounded-2xl p-6 shadow-sm"
+              className={`${RADIUS_LG} p-6 shadow-sm`}
               style={{
                 background: SURFACE,
                 boxShadow: "0 5px 10px 3px rgba(0,0,0,0.08), 0 -1px 4px rgba(0,0,0,0.1)",
@@ -189,7 +192,7 @@ export function AirtableSituationVisual() {
         </div>
 
         <div
-          className="flex-1 min-w-0 rounded-3xl p-6 sm:p-8 flex flex-col items-center gap-5 shadow-sm"
+          className={`flex-1 min-w-0 ${RADIUS_LG} p-6 sm:p-8 flex flex-col items-center gap-5 shadow-sm`}
           style={{
             background: SURFACE,
             boxShadow: "0 5px 10px 3px rgba(0,0,0,0.08), 0 -1px 4px rgba(0,0,0,0.1)",
@@ -202,7 +205,7 @@ export function AirtableSituationVisual() {
             {BRAND_THEMES.map((brand) => (
               <div
                 key={brand.label}
-                className="rounded-lg px-3 py-2.5 flex items-center justify-center text-center min-h-[41px]"
+                className={`${RADIUS_SM} px-3 py-2.5 flex items-center justify-center text-center min-h-[41px]`}
                 style={{ background: brand.bg, color: brand.color ?? SURFACE }}
               >
                 <Body as="span" size="small" weight="alt" UNSAFE_style={{ color: "inherit", fontSize: "14px" }}>
@@ -284,7 +287,7 @@ function HumanCostCard({
 }) {
   return (
     <div
-      className="flex flex-1 min-w-0 flex-col gap-4 rounded-2xl p-6 xl:min-h-[540px]"
+      className={`flex flex-1 min-w-0 flex-col gap-4 ${RADIUS_LG} p-6 xl:min-h-[540px]`}
       style={{ background: CARD_BLUE }}
     >
       <Body as="p" size="medium" UNSAFE_style={{ color: NAVY, fontSize: "18px" }}>
@@ -320,7 +323,7 @@ export function AirtableHumanCostVisual() {
           {WORKFLOW_STEPS.map((item) => (
             <div
               key={item.title}
-              className="rounded-2xl flex gap-6 items-center px-8 py-8"
+              className={`${RADIUS_LG} flex gap-6 items-center px-8 py-8`}
               style={{ background: NAVY, color: SURFACE }}
             >
               <WorkflowStepBadge step={item.step} />
@@ -451,7 +454,7 @@ export function AirtablePivotVisual() {
           {PIVOT_ROWS.map((row) => (
             <div
               key={row.title}
-              className="rounded-2xl p-6 sm:p-8 flex gap-6 items-center"
+              className={`${RADIUS_LG} p-6 sm:p-8 flex gap-6 items-center`}
               style={{ background: "var(--ld-semantic-color-fill-brand-subtle, #e9f1fe)" }}
             >
               <div
@@ -473,7 +476,7 @@ export function AirtablePivotVisual() {
         </div>
 
         <div
-          className="lg:w-[484px] shrink-0 rounded-2xl p-6 sm:p-10 flex flex-col gap-6"
+          className={`lg:w-[484px] shrink-0 ${RADIUS_LG} p-6 sm:p-10 flex flex-col gap-6`}
           style={{ background: "#0053e2", color: "#ffffff" }}
         >
           <div>
@@ -484,7 +487,7 @@ export function AirtablePivotVisual() {
               Neither side had to abandon their native tooling. The pipeline was the translator.
             </Body>
           </div>
-          <div className="rounded-xl overflow-hidden" style={{ background: "#1e1e1e" }}>
+          <div className={`${RADIUS_SM} overflow-hidden`} style={{ background: "#1e1e1e" }}>
             <div className="flex gap-2 px-4 pt-4">
               <span className="size-2.5 rounded-full bg-[#ff5f57]" />
               <span className="size-2.5 rounded-full bg-[#febc2e]" />
@@ -585,7 +588,7 @@ function PipelineStepCard({
 
   return (
     <div
-      className="h-full w-full rounded-2xl flex flex-col items-center justify-center gap-4 p-6 sm:p-8 text-center min-h-[215px]"
+      className={`h-full w-full ${RADIUS_LG} flex flex-col items-center justify-center gap-4 p-6 sm:p-8 text-center min-h-[215px]`}
       style={{
         background: isNavy ? NAVY : SURFACE,
         color: isNavy ? SURFACE : "#2e2f32",
@@ -615,7 +618,7 @@ function PipelineDeliveryCard({
 }) {
   return (
     <div
-      className="w-full rounded-2xl flex flex-col items-center justify-center gap-2 p-5 text-center"
+      className={`w-full ${RADIUS_LG} flex flex-col items-center justify-center gap-2 p-5 text-center`}
       style={{ background: "#0053e2", color: SURFACE }}
     >
       <div className="flex items-center gap-2">
@@ -636,7 +639,7 @@ function PipelineLayerBadge({ label, styleKey }: { label: string; styleKey: keyo
 
   return (
     <span
-      className="inline-flex items-center rounded-lg px-4 py-1.5 whitespace-nowrap"
+      className={`inline-flex items-center ${RADIUS_SM} px-4 py-1.5 whitespace-nowrap`}
       style={{
         background: badge.background,
         color: badge.color,
@@ -750,7 +753,7 @@ export function AirtableInheritanceVisual() {
           {INHERITANCE_LAYERS.map((card, index) => (
             <React.Fragment key={card.title}>
               <div
-                className="min-w-0 rounded-xl overflow-hidden flex flex-col h-full"
+                className={`min-w-0 ${RADIUS_SM} overflow-hidden flex flex-col h-full`}
                 style={{
                   background: "var(--ld-semantic-color-fill, #ffffff)",
                   border: "1px solid var(--ld-semantic-color-separator, #e3e4e5)",
@@ -800,7 +803,7 @@ export function AirtableScaleVisual() {
     <VisualFrame surface="none">
       <div>
         <div
-          className="rounded-xl p-6 sm:p-8 text-center relative"
+          className={`${RADIUS_LG} p-6 sm:p-8 text-center relative`}
           style={{ background: NAVY, color: SURFACE }}
         >
           <Heading as="p" size="small" weight="alt" UNSAFE_style={{ color: "inherit", fontSize: "clamp(20px, 2.5vw, 28px)" }}>
@@ -810,7 +813,7 @@ export function AirtableScaleVisual() {
             Foundation tokens
           </Body>
           <div
-            className="hidden lg:flex absolute right-6 top-1/2 -translate-y-1/2 items-start gap-3 max-w-[280px] text-left rounded-lg p-3"
+            className={`hidden lg:flex absolute right-6 top-1/2 -translate-y-1/2 items-start gap-3 max-w-[280px] text-left ${RADIUS_SM} p-3`}
             style={{ background: "#ffc220", color: NAVY }}
           >
             <FigmaIcon src={imgIconLightbulb} alt="" size={16} />
@@ -830,7 +833,7 @@ export function AirtableScaleVisual() {
               {row.map((brand) => (
                 <div
                   key={brand}
-                  className="rounded-xl px-4 py-6 flex items-center justify-center text-center min-h-[71px]"
+                  className={`${RADIUS_SM} px-4 py-6 flex items-center justify-center text-center min-h-[71px]`}
                   style={{
                     background: "var(--ld-semantic-color-fill, #ffffff)",
                     border: "1px solid var(--ld-semantic-color-separator, #e3e4e5)",
@@ -864,7 +867,7 @@ export function AirtableValidationVisual() {
       {VALIDATION_ITEMS.map((item) => (
         <div
           key={item}
-          className="rounded-lg px-3 py-4 flex items-start gap-2 min-h-[72px]"
+          className={`${RADIUS_SM} px-3 py-4 flex items-start gap-2 min-h-[72px]`}
           style={{ background: NAVY }}
         >
           <FigmaIcon src={imgIconCircleCheck} alt="" size={24} />
@@ -888,7 +891,7 @@ export function AirtableDynamicSvgsVisual() {
     <VisualFrame surface="white">
       <div className="flex flex-col sm:flex-row gap-8 sm:gap-12 justify-center items-end p-6 sm:p-10">
         {THEMED_BASKETS.map((theme) => (
-          <div key={theme.label} className="flex flex-col items-center gap-3 flex-1 min-w-0 max-w-[200px]">
+          <div key={theme.label} className="flex flex-col items-center flex-1 min-w-0 max-w-[200px]">
             <img
               src={theme.image}
               alt={`${theme.label} checkout basket illustration`}
@@ -896,9 +899,6 @@ export function AirtableDynamicSvgsVisual() {
               loading="lazy"
               decoding="async"
             />
-            <Body as="span" size="small" color="subtlest" UNSAFE_className="text-[13px]">
-              {theme.label}
-            </Body>
           </div>
         ))}
       </div>
