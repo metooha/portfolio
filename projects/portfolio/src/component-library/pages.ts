@@ -189,4 +189,5 @@ export { default as AgentSidebarPage } from './AgentSidebarPage';
 export { default as CaseStudyTemplatePage } from './CaseStudyTemplatePage';
 export { default as CaseStudyComponentsPage } from './CaseStudyComponentsPage';
 export { default as CaseStudyTypographyPage } from './CaseStudyTypographyPage';
+export { default as CaseStudyPrimitivesPage } from './CaseStudyPrimitivesPage';
 

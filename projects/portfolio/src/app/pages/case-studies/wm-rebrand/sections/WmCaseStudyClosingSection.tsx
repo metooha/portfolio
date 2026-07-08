@@ -156,20 +156,12 @@ function Frame108() {
   );
 }
 
-function Frame82() {
-  return (
-    <div className="content-stretch flex flex-[1_0_0] flex-col gap-[16px] h-[83px] items-start min-h-px min-w-px relative">
-      <p className="font-['Inter:Medium',sans-serif] font-medium leading-[normal] not-italic relative shrink-0 text-[40px] text-black w-full whitespace-pre-wrap">{`Reflections & Takeaways`}</p>
-    </div>
-  );
-}
-
 function SectionHeadingFull20() {
   return (
-    <div className="content-start flex flex-wrap gap-[32px] items-start relative shrink-0 w-full" data-name="Section Heading / Full">
-      <Frame82 />
-      <p className="flex-[1_0_0] font-['Inter:Regular',sans-serif] font-normal leading-[24px] min-h-px min-w-px not-italic relative text-[#4e4f4e] text-[16px] whitespace-pre-wrap">Reflecting on this ambitious project with its tight deadlines, I realize it taught me the importance of being systematic. I learned how to implement strategies for quick scaling, but I also recognize that I could have improved by compromising more effectively and delegating tasks better throughout the process.</p>
-    </div>
+    <SectionHeading
+      title="Reflections & Takeaways"
+      description="Reflecting on this ambitious project with its tight deadlines, I realize it taught me the importance of being systematic. I learned how to implement strategies for quick scaling, but I also recognize that I could have improved by compromising more effectively and delegating tasks better throughout the process."
+    />
   );
 }
 

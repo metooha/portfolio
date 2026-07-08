@@ -31,6 +31,7 @@ export const navigationSections = [
       { id: 'patterns-case-study-template', name: 'Case Study Template' },
       { id: 'patterns-case-study-components', name: 'Case Study Components' },
       { id: 'patterns-case-study-typography', name: 'Case Study Typography' },
+      { id: 'patterns-case-study-primitives', name: 'Case Study Primitives' },
       { id: 'patterns-agent-canvas', name: 'Agent Canvas' },
       { id: 'patterns-processing-trace', name: 'Processing Trace' },
       { id: 'components-accordion', name: 'Accordion' },

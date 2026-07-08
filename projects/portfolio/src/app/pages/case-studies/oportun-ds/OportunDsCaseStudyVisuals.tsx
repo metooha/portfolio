@@ -3,7 +3,7 @@ import { AspectRatio } from "@/app/components/AspectRatio/AspectRatio";
 import { CaseStudyMeta, type MetaItem } from "@/app/components/CaseStudyMeta";
 import { PageTitleText } from "@/app/components/CaseStudyText/CaseStudyText";
 import { Body, Heading } from "@/app/components/Text/Text";
-import { EdsFrameCycle, EdsImageFull } from "../everyday-sans/EdsCaseStudyPrimitives";
+import { FrameCycle as EdsFrameCycle, ImageFull as EdsImageFull } from "@/app/components/CaseStudyPrimitives";
 import {
   imgChallengeFrame1,
   imgChallengeFrame2,

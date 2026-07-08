@@ -53,9 +53,9 @@ function OportunDsHero() {
 }
 
 const OVERVIEW_TITLE =
-  "Architecting shared design infrastructure for two merged fintech brands — while shipping product.";
+  "Architecting shared design infrastructure for two merged fintech brands, all while shipping product.";
 const OVERVIEW_DESCRIPTION =
-  "When Oportun acquired Digit in March 2022, the real challenge wasn't a rebrand — it was an infrastructure problem: architect a shared, token-based design system and 100+ components, and ship production product simultaneously, in six months.";
+  "When Oportun acquired Digit in March 2022, the real challenge wasn't a rebrand. It was an infrastructure problem: architect a shared, token-based design system and 100+ components, and ship production product simultaneously, in six months.";
 const OVERVIEW_META = [
   { label: "Role", value: "Principal Product Designer · Design Systems Architecture" },
   { label: "Scope", value: "Token infrastructure · Component library · Governance · Mobile & Web" },

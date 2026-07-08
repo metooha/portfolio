@@ -24,7 +24,7 @@ const sectionGapStyle: React.CSSProperties = {
 function headingProps(titleSize: TitleSize): { size: HeadingSize; weight: HeadingWeight } {
   switch (titleSize) {
     case "xl":
-      return { size: "large", weight: "alt" };
+      return { size: "medium", weight: "default" };
     case "lg":
       return { size: "medium", weight: "alt" };
     case "md":
@@ -33,6 +33,11 @@ function headingProps(titleSize: TitleSize): { size: HeadingSize; weight: Headin
       return { size: "small", weight: "default" };
   }
 }
+
+/** Matches the fluid title scale used across case study section headings (e.g. EdsSectionTitle). */
+const XL_TITLE_STYLE: React.CSSProperties = {
+  fontSize: "clamp(24px, 3vw, 38px)",
+};
 
 export function SectionHeading({
   badge,
@@ -62,7 +67,13 @@ export function SectionHeading({
           data-name="Count + Title"
         >
           {badgeEl}
-          <Heading as="p" size={size} weight={weight} UNSAFE_className="relative shrink-0 w-full">
+          <Heading
+            as="p"
+            size={size}
+            weight={weight}
+            UNSAFE_className={`relative shrink-0 w-full ${titleSize === "xl" ? "leading-[1.15]" : ""}`}
+            UNSAFE_style={titleSize === "xl" ? XL_TITLE_STYLE : undefined}
+          >
             {title}
           </Heading>
         </div>
@@ -88,7 +99,13 @@ export function SectionHeading({
           data-name="Count + Title"
         >
           {badgeEl}
-          <Heading as="p" size={size} weight={weight} UNSAFE_className="relative shrink-0">
+          <Heading
+            as="p"
+            size={size}
+            weight={weight}
+            UNSAFE_className={`relative shrink-0 ${titleSize === "xl" ? "leading-[1.15]" : ""}`}
+            UNSAFE_style={titleSize === "xl" ? XL_TITLE_STYLE : undefined}
+          >
             {title}
           </Heading>
         </div>

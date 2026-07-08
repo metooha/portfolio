@@ -1,11 +1,13 @@
 import {
-  EdsBeforeAfter,
-  EdsEyebrow,
+  BeforeAfter as EdsBeforeAfter,
+  Eyebrow as EdsEyebrow,
+  Lead as EdsLead,
+  Section as EdsSection,
+  SectionTitle as EdsSectionTitle,
+  StatsRow as EdsStatsRow,
+} from "@/app/components/CaseStudyPrimitives";
+import {
   EdsJourneyTimeline,
-  EdsLead,
-  EdsSection,
-  EdsSectionTitle,
-  EdsStatsRow,
   type EdsJourneyItem,
 } from "../everyday-sans/EdsCaseStudyPrimitives";
 import { Body, Heading } from "@/app/components/Text/Text";
@@ -44,7 +46,7 @@ const PHASE_ITEMS: EdsJourneyItem[] = [
     mood: "progress",
     story:
       "Restructured the Airtable IA to remove legacy bloat and standardize naming conventions. Designed user flows for designer-friendly tenant onboarding. Worked with Zach to define an intermediate JSON representation.",
-    win: "Theme inheritance model defined — each tenant contains only overrides, with a hierarchy file providing inheritance rules (Sam's Club ← WCP ← LD Base).",
+    win: "Theme inheritance model defined: each tenant contains only overrides, with a hierarchy file providing inheritance rules (Sam's Club ← WCP ← LD Base).",
   },
   {
     date: "Q3–Q4 2025",
@@ -66,7 +68,7 @@ const PROBLEM_CARDS = [
     whoColor: "#7b4f00",
     title: "Figma was restricted",
     description:
-      "The core team locked down their files — no direct access, no token contributions, no syncing. Figma couldn't be a source of truth.",
+      "The core team locked down their files: no direct access, no token contributions, no syncing. Figma couldn't be a source of truth.",
   },
   {
     who: "Engineering",
@@ -80,7 +82,7 @@ const PROBLEM_CARDS = [
     whoColor: "#1a4f8a",
     title: "Commerce needs were unmet",
     description:
-      "Commerce teams needed branding tokens, extended components, and multi-org support — none of which the core system was scoped to provide.",
+      "Commerce teams needed branding tokens, extended components, and multi-org support, none of which the core system was scoped to provide.",
   },
 ] as const;
 
@@ -212,12 +214,12 @@ export function AirtableBridgeSection() {
         {"Designers wanted Airtable. Engineers needed Git.\nWe built a bridge."}
       </EdsSectionTitle>
       <EdsLead>
-        Tool selection should follow team behavior — that&apos;s the core principle behind this architecture.
+        Tool selection should follow team behavior. That&apos;s the core principle behind this architecture.
       </EdsLead>
       <AirtableBridgeVisual />
       <EdsEyebrow>The Pivot</EdsEyebrow>
       <EdsLead>
-        The breakthrough was agreeing on a contract — a shared JSON schema — before building anything. A single
+        The breakthrough was agreeing on a contract, a shared JSON schema, before building anything. A single
         alignment decision eliminated almost all integration friction.
       </EdsLead>
       <AirtablePivotVisual />
@@ -233,7 +235,7 @@ export function AirtableTheWorkSection() {
         {"Three phases. Eighteen months.\nOne source everyone could trust."}
       </EdsSectionTitle>
       <EdsLead>
-        Foundation first — alignment and proof of concept. Then automation and inheritance. Then a fully shipped
+        Foundation first: alignment and proof of concept. Then automation and inheritance. Then a fully shipped
         pipeline with guardrails.
       </EdsLead>
       <EdsJourneyTimeline items={PHASE_ITEMS} />
@@ -288,7 +290,7 @@ export function AirtableResultsSection() {
       <EdsEyebrow>Results</EdsEyebrow>
       <EdsSectionTitle>One zip file. 17 platforms. Zero manual steps.</EdsSectionTitle>
       <EdsLead>
-        That&apos;s what a Single Source of Truth looks like in practice — and this is the system we built to make
+        That&apos;s what a Single Source of Truth looks like in practice, and this is the system we built to make
         it real.
       </EdsLead>
       <EdsStatsRow
@@ -347,7 +349,7 @@ export function AirtableResultsSection() {
               {
                 who: "Deployment",
                 title: "95% reduction in deployment time.",
-                description: "Fully automated — zero coordination required.",
+                description: "Fully automated. Zero coordination required.",
               },
               {
                 who: "Quality",

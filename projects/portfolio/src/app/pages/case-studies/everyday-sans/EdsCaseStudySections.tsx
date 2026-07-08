@@ -58,7 +58,7 @@ const JOURNEY_ITEMS: EdsJourneyItem[] = [
       { label: "Android", variant: "engineering" },
     ],
     mood: "blocker",
-    story: "Adding Medium broke the release — too heavy for web vitals. iOS doesn't support variable fonts. Draft at 70kb — 2× the limit.",
+    story: "Adding Medium broke the release: too heavy for web vitals. iOS doesn't support variable fonts. Draft at 70kb, 2× the limit.",
     tension: "Three platforms, three blockers. The file meant to remove the trade-off couldn't run on half our devices.",
   },
   {
@@ -71,7 +71,7 @@ const JOURNEY_ITEMS: EdsJourneyItem[] = [
     ],
     mood: "blocker",
     story: "Three audits, three failure modes. Android line-heights wrong. iOS font defaults diverged from LD specs. Web had five inconsistent file variants. Baseline off everywhere.",
-    tension: "A fix for Android could break iOS — all three needed a coordinated spec.",
+    tension: "A fix for Android could break iOS. All three needed a coordinated spec.",
   },
   {
     date: "Nov 2024",
@@ -82,7 +82,7 @@ const JOURNEY_ITEMS: EdsJourneyItem[] = [
     ],
     mood: "friction",
     story: "8 users with disabilities tested the prototype. O/0 and I/l misread, dollar sign confused with \"S\". Rated 3.25/5. Findings sent to foundry as prioritized change list.",
-    tension: "\"I can't tell the difference... Zeros or O's?\" — James",
+    tension: "\"I can't tell the difference... Zeros or O's?\" (James)",
   },
   {
     date: "Jan 2025",
@@ -93,7 +93,7 @@ const JOURNEY_ITEMS: EdsJourneyItem[] = [
     ],
     mood: "progress",
     story: "8 users on live walmart.com. No tasks blocked. AUS scores ~70. Rating improved to 3.3/5.",
-    win: "\"I like how the price is bold.\" — Sheetal, Magnification User",
+    win: "\"I like how the price is bold.\" (Sheetal, Magnification User)",
   },
   {
     date: "Jan 2025",
@@ -118,7 +118,7 @@ const JOURNEY_ITEMS: EdsJourneyItem[] = [
     mood: "friction",
     story: "Scale up ~8.5% or down ~8%? Two weeks of back-and-forth before the team chose to scale up.",
     tension: "Brand needed Bogle parity. Engineering didn't want layout rework.",
-    win: "Scaling up — short-term rework for long-term consistency.",
+    win: "Scaling up: short-term rework for long-term consistency.",
   },
   {
     date: "Sep–Oct 2025",
@@ -162,7 +162,7 @@ export function EdsProblemSpaceSection() {
             whoColor: "#7b4f00",
             title: "Needed weight variety",
             description:
-              "Regular and Bold only. Every new weight had a performance cost — Medium, Semibold, Black all held back.",
+              "Regular and Bold only. Every new weight had a performance cost: Medium, Semibold, Black all held back.",
           },
           {
             who: "Engineering",
@@ -181,9 +181,9 @@ export function EdsWeightScaleSection() {
   return (
     <EdsSection id="weight-scale" variant="mid">
       <EdsEyebrow>The Font</EdsEyebrow>
-      <EdsSectionTitle>Everyday Sans — weight scale</EdsSectionTitle>
+      <EdsSectionTitle>Everyday Sans: weight scale</EdsSectionTitle>
       <EdsLead>Three new weights unlocked at zero additional performance cost.</EdsLead>
-      <EdsVideoFull src={videoWeightScale} alt="Everyday Sans weight scale — Light to Black" surface="subtle" />
+      <EdsVideoFull src={videoWeightScale} alt="Everyday Sans weight scale, Light to Black" surface="subtle" />
       <EdsWeightScale />
     </EdsSection>
   );
@@ -200,7 +200,7 @@ export function EdsTypeRampSection() {
       <EdsImageFull
         src={imgTypeRamp}
         alt="Type ramp mapping"
-        caption="Every size mapped to match Bogle defaults — size, line height, and tracking aligned so teams could swap fonts without adjusting layouts."
+        caption="Every size mapped to match Bogle defaults: size, line height, and tracking aligned so teams could swap fonts without adjusting layouts."
       />
     </EdsSection>
   );
@@ -218,31 +218,31 @@ export function EdsTechnicalFixesSection() {
         <EdsImageFull
           src={imgTrackingFixes}
           alt="Tracking fixes"
-          caption="Tracking & word spacing — updated to match Bogle, preventing words from bleeding into each other."
+          caption="Tracking and word spacing updated to match Bogle, preventing words from bleeding into each other."
           surface="subtle"
         />
         <EdsImageFull
           src={imgSuperscript}
           alt="Superscript fixes"
-          caption="Superscript / subscript — position aligned to Bogle for correct rendering in price and specification contexts."
+          caption="Superscript and subscript position aligned to Bogle for correct rendering in price and specification contexts."
           surface="subtle"
         />
         <EdsImageFull
           src={imgBaseline}
           alt="Baseline fix"
-          caption="Baseline alignment — text was sitting too high in icon/label components. Corrected across all platforms."
+          caption="Baseline alignment: text was sitting too high in icon/label components. Corrected across all platforms."
           surface="subtle"
         />
         <EdsImageFull
           src={imgUiTheming}
           alt="UI theming comparison"
-          caption="Theming comparison — Everyday Sans UI vs Bogle and Gibson across Walmart and Sam's Club surfaces."
+          caption="Theming comparison: Everyday Sans UI vs Bogle and Gibson across Walmart and Sam's Club surfaces."
           surface="subtle"
         />
         <EdsImageFull
           src={imgAccessibilityAudit}
           alt="Accessibility issues"
-          caption="Accessibility audit: I, l, 1, 0, and O confusion in Mono — specific letterform changes requested."
+          caption="Accessibility audit: I, l, 1, 0, and O confusion in Mono, prompting specific letterform changes."
           surface="subtle"
         />
       </div>
@@ -259,8 +259,8 @@ export function EdsRealPageTestingSection() {
       <EdsImageFull
         src={imgEdsUiVersions}
         alt="EDS UI versions"
-        label="Everyday Sans UI — Version comparison"
-        caption="5 versions across Grocery, Fashion, and other categories — tracking visual consistency at every stage."
+        label="Everyday Sans UI: Version comparison"
+        caption="5 versions across Grocery, Fashion, and other categories, tracking visual consistency at every stage."
         surface="subtle"
       />
       <EdsImageGrid2
@@ -269,15 +269,15 @@ export function EdsRealPageTestingSection() {
           {
             src: imgEdsMono,
             alt: "EDS Mono comparison",
-            label: "EDS Mono — Current vs Updated",
-            caption: "Mono tested on consumables — spacing and character clarity validated.",
+            label: "EDS Mono: Current vs Updated",
+            caption: "Mono tested on consumables: spacing and character clarity validated.",
             surface: "subtle",
           },
           {
             src: imgThemingComparison,
             alt: "Theming comparison",
             label: "Theming comparison",
-            caption: "New EDS UI vs legacy Bodega and Sam's Club Gibson — line height and visual weight aligned.",
+            caption: "New EDS UI vs legacy Bodega and Sam's Club Gibson, with line height and visual weight aligned.",
             surface: "subtle",
           },
         ]}
@@ -291,7 +291,7 @@ export function EdsAccessibilityResearchSection() {
     <EdsSection id="user-testing" variant="mid">
       <EdsEyebrow>Accessibility Research</EdsEyebrow>
       <EdsSectionTitle>Tested with people who depend on it</EdsSectionTitle>
-      <EdsLead>Two studies with 8 users each — one pre-launch, one on live walmart.com.</EdsLead>
+      <EdsLead>Two studies with 8 users each, one pre-launch, one on live walmart.com.</EdsLead>
       <EdsImageGrid2
         stacked
         items={[
@@ -349,14 +349,14 @@ export function EdsLanguageSection() {
   return (
     <EdsSection id="language">
       <EdsEyebrow>Language Considerations</EdsEyebrow>
-      <EdsSectionTitle>English, Spanish, French — and beyond</EdsSectionTitle>
+      <EdsSectionTitle>English, Spanish, French, and beyond</EdsSectionTitle>
       <EdsLead>
-        The variable font ships with full coverage for three languages. French had 8 missing glyphs identified in the audit — addressed in the final deliverable.
+        The variable font ships with full coverage for three languages. French had 8 missing glyphs identified in the audit, addressed in the final deliverable.
       </EdsLead>
       <EdsImageFull
         src={imgLanguageCoverage}
         alt="Language coverage"
-        caption="English and Spanish complete. French had 8 missing characters including guillemets, AE and OE ligatures — all added to the final spec."
+        caption="English and Spanish complete. French had 8 missing characters including guillemets, AE and OE ligatures, all added to the final spec."
         surface="subtle"
       />
       <EdsImageGrid2
@@ -365,7 +365,7 @@ export function EdsLanguageSection() {
           {
             src: imgLanguageFrench,
             alt: "French Canadian screens",
-            caption: "French Canadian — validated across add to cart, product detail, and checkout.",
+            caption: "French Canadian: validated across add to cart, product detail, and checkout.",
             surface: "subtle",
           },
           {
@@ -411,7 +411,7 @@ export function EdsOutcomeSection() {
         ]}
         after={[
           { who: "Design", title: "Full weight scale available.", description: "Medium, Semibold, and Black are design decisions now." },
-          { who: "Engineering", title: "One file. No manual overrides.", description: "Size, spacing, and line-height baked in — consistent across all platforms." },
+          { who: "Engineering", title: "One file. No manual overrides.", description: "Size, spacing, and line-height baked in, consistent across all platforms." },
           { who: "Accessibility", title: "Validated improvements.", description: "Spacing, O/zero, baseline, symbols all corrected. Rating improved to 3.3/5." },
         ]}
       />
@@ -423,7 +423,7 @@ export function EdsQuoteSection() {
   return (
     <EdsQuoteBlock
       quote="Feels like a font for reading a book. Easier to read, nicer on the eyes. The numbers stand out and don't blend with the text."
-      attribution="Participant — quadriplegic user, on-screen keyboard · Everyday Sans 5/5 · Bogle 4.5/5"
+      attribution="Participant, quadriplegic user, on-screen keyboard · Everyday Sans 5/5 · Bogle 4.5/5"
     />
   );
 }
@@ -435,7 +435,7 @@ export function EdsWhatsNextSection() {
       <EdsSectionTitle>The font is ready. The design system needs to catch up.</EdsSectionTitle>
       <EdsNextGrid
         items={[
-          { when: "FY27 Q3", title: "Web platforms", description: "Variable font implementation on Web platforms — file size within target, fast rollout." },
+          { when: "FY27 Q3", title: "Web platforms", description: "Variable font implementation on Web platforms, file size within target, fast rollout." },
           { when: "FY27 Q2", title: "New weights in tokens", description: "Medium and Semibold added to design tokens." },
           { when: "FY27 Q2", title: "Dynamic text on mobile", description: "App text scales with system font size preferences." },
           { when: "Future", title: "More languages", description: "English, Spanish, French built in. Simplified Chinese being explored.", future: true },
@@ -449,9 +449,9 @@ export function EdsSamsSansSection() {
   return (
     <EdsSection id="sams-sans" variant="mid">
       <EdsEyebrow>Extended Impact</EdsEyebrow>
-      <EdsSectionTitle>Sam&apos;s Sans — the same method, a new brand</EdsSectionTitle>
+      <EdsSectionTitle>Sam&apos;s Sans: the same method, a new brand</EdsSectionTitle>
       <EdsLead>
-        The variable font approach didn&apos;t stay at Walmart. In 2026, Sam&apos;s Club used the same infrastructure to ship Sam&apos;s Sans as a variable font as part of their full rebrand — proving the process was repeatable.
+        The variable font approach didn&apos;t stay at Walmart. In 2026, Sam&apos;s Club used the same infrastructure to ship Sam&apos;s Sans as a variable font as part of their full rebrand, proving the process was repeatable.
       </EdsLead>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div
@@ -500,7 +500,7 @@ export function EdsSamsSansSection() {
             Sam&apos;s Sans
           </Body>
           <Body as="p" size="small" UNSAFE_className="leading-[1.65] mb-4 pb-4" UNSAFE_style={{ color: "rgba(255,255,255,0.65)" }}>
-            The same variable font infrastructure, applied to an entirely new brand system. Same audit process, same cross-platform spec, same approach — shipping as part of a full rebrand in a fraction of the time.
+            The same variable font infrastructure, applied to an entirely new brand system. Same audit process, same cross-platform spec, same approach, shipping as part of a full rebrand in a fraction of the time.
           </Body>
           <div className="flex flex-wrap gap-3">
             {["Variable Font", "Full Rebrand", "2026"].map((tag) => (
@@ -527,13 +527,13 @@ export function EdsFontCompareSection() {
   return (
     <EdsSection id="font-compare">
       <EdsEyebrow>Process Innovation</EdsEyebrow>
-      <EdsSectionTitle>The Font Compare Tool — under 2 months instead of a year</EdsSectionTitle>
+      <EdsSectionTitle>The Font Compare Tool: under 2 months instead of a year</EdsSectionTitle>
       <EdsLead>
-        The Walmart variable font took 18 months. For Sam&apos;s Sans, I built an internal Font Compare Tool that let teams evaluate fonts side by side — glyphs, paragraphs, real UI mocks, and metadata — in one place. It compressed the decision-making process from a year to under two months.
+        The Walmart variable font took 18 months. For Sam&apos;s Sans, I built an internal Font Compare Tool that let teams evaluate fonts side by side (glyphs, paragraphs, real UI mocks, and metadata) in one place. It compressed the decision-making process from a year to under two months.
       </EdsLead>
       <EdsEmbedFull
         src="https://metooha.github.io/font-compare/"
-        title="Font Compare Tool — side-by-side font evaluation"
+        title="Font Compare Tool: side-by-side font evaluation"
         caption="The Font Compare Tool: up to 5 fonts compared simultaneously across paragraphs, glyphs, PDP mocks, and full metadata including glyph coverage, CSS @font-face, and design tokens. Built to make the process repeatable without the year-long back-and-forth."
         surface="subtle"
         aspectRatio="4 / 3"

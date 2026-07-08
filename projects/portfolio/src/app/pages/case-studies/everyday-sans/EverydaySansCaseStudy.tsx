@@ -66,7 +66,7 @@ export default function EverydaySansCaseStudy() {
         overviewClient="Walmart"
         overviewCategory="Living Design, Typography"
         overviewTitle={"Brand and performance,\nwithout compromise"}
-        overviewDescription="Every new font weight came with a performance cost. So Brand held back. The result was visual hierarchy that never reached its potential, and a design system that had to make peace with compromise. The variable font ended that trade-off — permanently."
+        overviewDescription="Every new font weight came with a performance cost. So Brand held back. The result was visual hierarchy that never reached its potential, and a design system that had to make peace with compromise. The variable font ended that trade-off, permanently."
         metaItems={[
           { label: "Role", value: "Principal Designer, Living Design" },
           { label: "Timeline", value: "Jun 2024 – Dec 2025" },

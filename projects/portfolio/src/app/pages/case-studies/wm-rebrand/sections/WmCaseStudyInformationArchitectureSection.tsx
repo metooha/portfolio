@@ -8,37 +8,14 @@ import imgImage10 from "@/app/assets/pages/case-study/wm-rebrand/wm-rebrand-asse
 import imgImage11 from "@/app/assets/pages/case-study/wm-rebrand/wm-rebrand-asset-6d8490c5.png";
 import imgImage from "@/app/assets/pages/case-study/wm-rebrand/wm-rebrand-asset-001d291f.png";
 
-function Count15() {
-  return (
-    <div className="bg-[#e9f722] content-stretch flex flex-col items-center justify-center min-h-[48px] min-w-[48px] overflow-clip p-[12px] relative rounded-[100px] shrink-0 w-[48px]" data-name="Count">
-      <p className="font-['Inter:Regular',sans-serif] font-normal leading-[normal] not-italic relative shrink-0 text-[16px] text-black text-center w-full whitespace-pre-wrap">2.0</p>
-    </div>
-  );
-}
-
-function CountTitle14() {
-  return (
-    <div className="content-stretch flex gap-[16px] items-center relative shrink-0 min-w-0" data-name="Count + Title">
-      <Count15 />
-      <p className="font-['Inter:Medium',sans-serif] font-medium leading-[normal] not-italic relative shrink-0 text-[40px] text-black line-clamp-2 min-w-0 overflow-hidden">Information Architecture</p>
-    </div>
-  );
-}
-
-function Title14() {
-  return (
-    <div className="content-stretch flex flex-[1_0_0] items-center min-h-0 min-w-0 relative shrink-0" data-name="title">
-      <CountTitle14 />
-    </div>
-  );
-}
-
 function SectionHeadingFull14() {
   return (
-    <div className="content-start flex flex-col md:flex-row flex-wrap gap-6 items-start relative shrink-0 w-full min-w-0" data-name="Section Heading / Full">
-      <Title14 />
-      <p className="min-w-0 md:min-w-[200px] flex-1 font-['Inter:Regular',sans-serif] font-normal leading-[24px] min-h-px not-italic relative text-[#4e4f4e] text-[16px]">Rather than designing pages individually, I defined a flexible information architecture that supported multiple content types and use cases. This abstraction allowed the system to scale without redesigning layouts for each new scenario.</p>
-    </div>
+    <SectionHeading
+      badge="2.0"
+      badgeColor="yellow"
+      title="Information Architecture"
+      description="Rather than designing pages individually, I defined a flexible information architecture that supported multiple content types and use cases. This abstraction allowed the system to scale without redesigning layouts for each new scenario."
+    />
   );
 }
 

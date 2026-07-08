@@ -1,11 +1,11 @@
 import React from "react";
 import {
-  EdsEyebrow,
-  EdsImageFull,
-  EdsLead,
-  EdsSectionTitle,
-  EdsStatsRow,
-} from "../everyday-sans/EdsCaseStudyPrimitives";
+  Eyebrow as EdsEyebrow,
+  ImageFull as EdsImageFull,
+  Lead as EdsLead,
+  SectionTitle as EdsSectionTitle,
+  StatsRow as EdsStatsRow,
+} from "@/app/components/CaseStudyPrimitives";
 import {
   OportunArchitectureTimeline,
   OportunComponentAnatomy,
@@ -128,7 +128,7 @@ const CHALLENGE_ITEMS: OportunChallengeItem[] = [
   {
     number: "03",
     title: "No stress-test window",
-    body: "Adoption had to happen in parallel with construction — governance had to work from day one.",
+    body: "Adoption had to happen in parallel with construction. Governance had to work from day one.",
   },
   {
     number: "04",
@@ -143,12 +143,12 @@ const APPROACH_ITEMS: OportunTimelineItem[] = [
     phase: "Audit & scope",
     who: ["design", "engineering"],
     title: "Mapping the inheritance problem",
-    body: "Audited both systems to identify what to preserve, rebuild, and where token overlap was highest — separating rebranding effort from net-new work.",
+    body: "Audited both systems to identify what to preserve, rebuild, and where token overlap was highest, separating rebranding effort from net-new work.",
     decision: (
       <>
-        Adopted a three-tier token model — <OportunToken>colors/green/300</OportunToken> →{" "}
+        Adopted a three-tier token model: <OportunToken>colors/green/300</OportunToken> →{" "}
         <OportunToken>surface.brand.primary</OportunToken> →{" "}
-        <OportunToken>button.surface.primary.default</OportunToken> — so both brands share one
+        <OportunToken>button.surface.primary.default</OportunToken>, so both brands share one
         primitive set with differentiation at the alias layer, and light/dark mode handled
         automatically.
       </>
@@ -166,7 +166,7 @@ const APPROACH_ITEMS: OportunTimelineItem[] = [
     phase: "Foundations",
     who: ["design"],
     title: "Token infrastructure",
-    body: "Built the full token hierarchy — color, typography, spacing, radius, elevation, motion — and defined the theming model that lets both brands switch expression at the semantic layer without touching components.",
+    body: "Built the full token hierarchy (color, typography, spacing, radius, elevation, motion) and defined the theming model that lets both brands switch expression at the semantic layer without touching components.",
     decision: (
       <>
         Generated the color scale from WCAG contrast-ratio targets rather than hand-picked values.
@@ -180,21 +180,21 @@ const APPROACH_ITEMS: OportunTimelineItem[] = [
     phase: "Component library",
     who: ["design"],
     title: "100+ components, built against real product flows",
-    body: "Every component was designed against live product needs — not hypothetical use cases — so stress testing happened through actual product work instead of a separate QA phase.",
+    body: "Every component was designed against live product needs, not hypothetical use cases, so stress testing happened through actual product work instead of a separate QA phase.",
   },
   {
     date: "Month 3–5",
     phase: "Testing",
     who: ["design"],
     title: "Designers as first adopters",
-    body: "Product designers used the system in live work and gave structured critique, surfacing governance gaps and missing states before engineering handoff — while changes were still low-cost.",
+    body: "Product designers used the system in live work and gave structured critique, surfacing governance gaps and missing states before engineering handoff, while changes were still low-cost.",
   },
   {
     date: "Month 4–6",
     phase: "Dev handoff",
     who: ["design", "engineering"],
     title: "From Figma to production infrastructure",
-    body: "Added full developer documentation — use cases, component specs, token references, accessibility requirements — and partnered with engineering to move from project assets to shared platform infrastructure.",
+    body: "Added full developer documentation (use cases, component specs, token references, accessibility requirements) and partnered with engineering to move from project assets to shared platform infrastructure.",
   },
 ];
 
@@ -203,7 +203,7 @@ const TOKEN_TIERS: OportunTokenTier[] = [
     tier: "Tier 1",
     name: "Primitives",
     desc: "Raw values. Never used directly in components.",
-    connector: "Alias tokens reference primitives — light / dark mode values swap here",
+    connector: "Alias tokens reference primitives: light / dark mode values swap here",
     tokens: [
       { label: "colors/gray/50" },
       { label: "colors/gray/300" },
@@ -220,7 +220,7 @@ const TOKEN_TIERS: OportunTokenTier[] = [
     tier: "Tier 2",
     name: "Aliases",
     desc: "Semantic intent. Light & dark values defined here.",
-    connector: "Component tokens reference aliases only — never primitives directly",
+    connector: "Component tokens reference aliases only, never primitives directly",
     tokens: [
       { label: "surface.neutral.primary", tone: "green" },
       { label: "surface.brand.primary", tone: "green" },
@@ -279,7 +279,7 @@ const DECISION_CARDS: OportunDecisionCard[] = [
   {
     symbol: "↗",
     title: "Prioritized by product surface coverage",
-    body: "Built highest-coverage components first — buttons, inputs, cards, nav — so product teams could adopt immediately, creating real-world stress testing early.",
+    body: "Built highest-coverage components first (buttons, inputs, cards, nav) so product teams could adopt immediately, creating real-world stress testing early.",
     badge: "Velocity",
   },
 ];
@@ -289,7 +289,7 @@ const ANATOMY_SPEC: OportunAnatomyItem[] = [
   { name: "References & Best Practices", value: "Live product usage examples and implementation patterns", dot: "engineering" },
   { name: "Handoff & Theming", value: "Token bindings, size / color / stroke, theming for both brands", dot: "orange" },
   { name: "Inventory & Requests", value: "Current usage, contribution requests, enhancement backlog", dot: "product" },
-  { name: "Versioning", value: "Deprecated assets flagged, not deleted — engineers redirected", dot: "design" },
+  { name: "Versioning", value: "Deprecated assets flagged, not deleted, engineers redirected", dot: "design" },
 ];
 
 const ANATOMY_BINDINGS: OportunAnatomyItem[] = [
@@ -302,7 +302,7 @@ const ANATOMY_BINDINGS: OportunAnatomyItem[] = [
 
 const PIPELINE_STEPS: OportunPipeStep[] = [
   { label: "Source", tool: "Figma", desc: "Token variables + component library with full states and theming." },
-  { label: "Export", tool: "Tokens Plugin", desc: "Structured JSON — global, semantic, and component tiers." },
+  { label: "Export", tool: "Tokens Plugin", desc: "Structured JSON: global, semantic, and component tiers." },
   { label: "Version control", tool: "GitHub", desc: "Token diffs visible to engineering on every PR." },
   { label: "Docs", tool: "Storybook", desc: "Live examples, token references, accessibility notes." },
   { label: "Output", tool: "Production", desc: "CSS variables consumed directly from token JSON." },
@@ -367,17 +367,17 @@ const VALIDATION_CARDS: OportunDecisionCard[] = [
   {
     icon: "CheckCircle",
     title: "What these flows tested",
-    body: "Multi-step forms, calculator inputs, data display, empty states, error handling, progressive disclosure — the complex patterns that reveal whether a system is production-ready or just a component showcase.",
+    body: "Multi-step forms, calculator inputs, data display, empty states, error handling, progressive disclosure: the complex patterns that reveal whether a system is production-ready or just a component showcase.",
   },
   {
     icon: "Refresh",
     title: "How findings fed back into the system",
-    body: "Every gap surfaced during product work was triaged — immediate fixes for blockers, backlog items for the rest. This feedback loop is what makes a system a living product, not a static artifact.",
+    body: "Every gap surfaced during product work was triaged: immediate fixes for blockers, backlog items for the rest. This feedback loop is what makes a system a living product, not a static artifact.",
   },
 ];
 
 const RESULTS_IMPACT = [
-  "Led design systems work across a two-brand fintech ecosystem — architecting the foundation rather than inheriting one.",
+  "Led design systems work across a two-brand fintech ecosystem, architecting the foundation rather than inheriting one.",
   "Partnered with engineering to move from per-project assets to shared platform infrastructure, with tokens as the design-to-code contract.",
   "Established documentation, adoption tracking, and accessibility standards across design and engineering.",
   "Reduced per-feature design decision overhead by creating a single source of truth across both brands.",
@@ -393,7 +393,7 @@ export function OportunDsChallengeSection() {
           <EdsEyebrow>The challenge</EdsEyebrow>
           <EdsSectionTitle>Not a rebrand. An infrastructure problem.</EdsSectionTitle>
           <EdsLead>
-            Oportun acquired Digit in March 2022 — combining two products, two design teams, and two
+            Oportun acquired Digit in March 2022, combining two products, two design teams, and two
             incompatible design systems under one org. We had to design and build simultaneously,
             with no runway to architect first and hand off later.
           </EdsLead>
@@ -469,8 +469,8 @@ export function OportunDsTokenArchitectureSection() {
     <Section id="tokens">
       <SectionHeader
         eyebrow="Foundation architecture"
-        title="Three-tier token system — one shared foundation."
-        lead="Both brands share a single token hierarchy. Brand differentiation lives entirely at the semantic layer — one component file, two brand expressions, zero duplication."
+        title="Three-tier token system: one shared foundation."
+        lead="Both brands share a single token hierarchy. Brand differentiation lives entirely at the semantic layer: one component file, two brand expressions, zero duplication."
       />
       <div className="w-full max-w-4xl lg:max-w-[1046px]">
         <OportunTokenTierDiagram tiers={TOKEN_TIERS} />
@@ -483,8 +483,8 @@ export function OportunDsTokenArchitectureSection() {
         />
         <div className="flex flex-col gap-6">
           <EdsLead>
-            The token file drives the foundations designers actually work from — color, typography,
-            spacing, and iconography — so a change at the source ripples predictably through every
+            The token file drives the foundations designers actually work from (color, typography,
+            spacing, and iconography), so a change at the source ripples predictably through every
             surface.
           </EdsLead>
           <Carousel aria-label="Design system foundations">
@@ -522,7 +522,7 @@ export function OportunDsComponentLifeCycleSection() {
       <SectionHeader
         eyebrow="Component life cycle"
         title="A component is a contract, not a UI element."
-        lead="Every component ships with its full specification — not just visuals. The Snack Bar shows how the architecture works in practice."
+        lead="Every component ships with its full specification, not just visuals. The Snack Bar shows how the architecture works in practice."
       />
       <div className="grid grid-cols-1 lg:grid-cols-[auto_1fr] gap-8 lg:gap-12 items-stretch">
         <figure className="m-0 w-fit max-w-full shrink-0 self-start">
@@ -531,7 +531,7 @@ export function OportunDsComponentLifeCycleSection() {
         <OportunComponentAnatomy
           specLabel="Component specification"
           spec={ANATOMY_SPEC}
-          bindingsLabel="Token bindings — Snack Bar"
+          bindingsLabel="Token bindings: Snack Bar"
           bindings={ANATOMY_BINDINGS}
           className="min-h-0"
         />
@@ -593,7 +593,7 @@ export function OportunDsInActionSection() {
       <SectionHeader
         eyebrow="Design system in action"
         title="Validating the system in high-stakes flows."
-        lead="The system wasn't validated in isolation — it was stress-tested against the most complex product flows first. The loan calculator and Transfer Money flows were among the first full surfaces built on the unified system, exposing real component gaps and token edge cases before wide adoption."
+        lead="The system wasn't validated in isolation. It was stress-tested against the most complex product flows first. The loan calculator and Transfer Money flows were among the first full surfaces built on the unified system, exposing real component gaps and token edge cases before wide adoption."
       />
       <div className="w-full max-w-4xl lg:max-w-[1046px] flex flex-col gap-10">
         <div className="flex flex-col gap-4">
@@ -605,7 +605,7 @@ export function OportunDsInActionSection() {
             UNSAFE_className="uppercase tracking-[0.1em]"
             UNSAFE_style={{ fontSize: "10px" }}
           >
-            Interactive prototype — Transfer Money
+            Interactive prototype: Transfer Money
           </Body>
           <OportunDsTransferMoneyPrototype />
         </div>
@@ -618,7 +618,7 @@ export function OportunDsInActionSection() {
             UNSAFE_className="uppercase tracking-[0.1em]"
             UNSAFE_style={{ fontSize: "10px" }}
           >
-            Interactive prototype — Loan calculator
+            Interactive prototype: Loan calculator
           </Body>
           <OportunDsLoanCalculatorPrototype />
         </div>
@@ -634,7 +634,7 @@ export function OportunDsResultsSection() {
       <SectionHeader
         eyebrow="Results"
         title="From project assets to shared platform infrastructure."
-        lead="The system gave teams a single source of truth for patterns, documentation, and implementation — accelerating delivery across web and mobile."
+        lead="The system gave teams a single source of truth for patterns, documentation, and implementation, accelerating delivery across web and mobile."
       />
       <div className="w-full max-w-4xl lg:max-w-[1046px] flex flex-col gap-10">
         <EdsStatsRow

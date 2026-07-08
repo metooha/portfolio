@@ -64,7 +64,7 @@ export default function AirtableCaseStudy() {
         overviewClient="Walmart"
         overviewCategory="Design Tokens"
         overviewTitle={"The Quest for a\nSingle Source of Truth"}
-        overviewDescription="We went from 17+ teams maintaining their own copies of design tokens — manually, inconsistently, and constantly out of sync — to a single automated pipeline where a designer updates a value in Airtable and it's live in production in 10 minutes. Zero manual steps. Zero coordination. Zero errors."
+        overviewDescription="We went from 17+ teams maintaining their own copies of design tokens, manually, inconsistently, and constantly out of sync, to a single automated pipeline where a designer updates a value in Airtable and it's live in production in 10 minutes. Zero manual steps. Zero coordination. Zero errors."
         metaItems={[
           { label: "Role", value: "Principal Product Designer" },
           { label: "Team", value: "Partnered with product, engineering, design leadership" },

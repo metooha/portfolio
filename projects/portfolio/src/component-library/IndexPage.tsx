@@ -192,6 +192,7 @@ import {
   CaseStudyTemplatePage,
   CaseStudyComponentsPage,
   CaseStudyTypographyPage,
+  CaseStudyPrimitivesPage,
 } from './pages';
 
 function useHashRoute(): [string, (route: string) => void] {
@@ -428,6 +429,7 @@ function PageRouter({route, navigate}: {route: string; navigate: (r: string) => 
     case 'patterns-case-study-template': return <CaseStudyTemplatePage />;
     case 'patterns-case-study-components': return <CaseStudyComponentsPage />;
     case 'patterns-case-study-typography': return <CaseStudyTypographyPage />;
+    case 'patterns-case-study-primitives': return <CaseStudyPrimitivesPage />;
 
     case 'patterns-associate': return <AssociatePatternsPage />;
     case 'patterns-clocking-widget': return <ClockingWidgetPage />;

@@ -442,7 +442,7 @@ const PIVOT_ROWS = [
   {
     icon: imgIconComments,
     title: "The shared contract: JSON schema",
-    body: "Agreed before building — eliminated integration friction entirely",
+    body: "Agreed before building, eliminating integration friction entirely",
   },
 ] as const;
 
@@ -721,19 +721,19 @@ export function AirtablePipelineVisual() {
 const INHERITANCE_LAYERS = [
   {
     layer: "Layer 1",
-    title: "LD Base — 650+ Tokens",
+    title: "LD Base: 650+ Tokens",
     body: "Primitive + semantic tokens. Update once and all 17 brands receive the change automatically.",
     image: imgInheritanceLdBase,
   },
   {
     layer: "Layer 2",
-    title: "WCP Theme — Platform Overrides",
+    title: "WCP Theme: Platform Overrides",
     body: "Platform-specific overrides only. Inherits everything from LD Base automatically.",
     image: imgInheritanceWcp,
   },
   {
     layer: "Layer 3",
-    title: "Brand Themes — ~10% Overrides",
+    title: "Brand Themes: ~10% Overrides",
     body: "Sam's Club, Walmart+, Bodega each define ~10% of tokens. 90% inherits automatically. Zero drift.",
     image: imgInheritanceBrand,
   },

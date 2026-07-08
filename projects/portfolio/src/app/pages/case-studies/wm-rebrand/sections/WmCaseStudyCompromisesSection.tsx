@@ -37,37 +37,8 @@ import { useWmSyncedScroll } from "./shared/useWmSyncedScroll";
 
 const RECYCLE_CONTENT_H = 3368;
 
-function Count20() {
-  return (
-    <div className="bg-[#e9f722] content-stretch flex flex-col items-center justify-center min-h-[48px] min-w-[48px] overflow-clip p-[12px] relative rounded-[100px] shrink-0 w-[48px]" data-name="Count">
-      <p className="font-['Inter:Regular',sans-serif] font-normal leading-[normal] not-italic relative shrink-0 text-[16px] text-black text-center w-full whitespace-pre-wrap">3.0</p>
-    </div>
-  );
-}
-
-function CountTitle17() {
-  return (
-    <div className="content-stretch flex gap-[16px] items-center relative shrink-0" data-name="Count + Title">
-      <Count20 />
-      <p className="font-['Inter:Medium',sans-serif] font-medium leading-[normal] not-italic relative shrink-0 text-[40px] text-black">Compromises along the way</p>
-    </div>
-  );
-}
-
-function Title17() {
-  return (
-    <div className="content-stretch flex flex-[1_0_0] items-center min-h-px min-w-px relative" data-name="title">
-      <CountTitle17 />
-    </div>
-  );
-}
-
 function SectionHeadingFull17() {
-  return (
-    <div className="content-start flex flex-wrap gap-[32px] items-start relative shrink-0 w-full" data-name="Section Heading / Full">
-      <Title17 />
-    </div>
-  );
+  return <SectionHeading badge="3.0" badgeColor="yellow" title="Compromises along the way" />;
 }
 
 function SectionHeadingVertical7() {
