@@ -433,6 +433,7 @@ export function VideoFrame({
   rounded = true,
   surface = "white",
   clipEdges = true,
+  playback = "loop",
 }: {
   src: string;
   alt: string;
@@ -443,6 +444,8 @@ export function VideoFrame({
   rounded?: boolean;
   surface?: ImageSurface;
   clipEdges?: boolean;
+  /** "loop" autoplays muted on repeat (ambient clips); "controls" is a standard player for longer, narrated videos. */
+  playback?: "loop" | "controls";
 }) {
   const videoSize = fit === "natural" ? "h-auto" : "h-full";
   const videoFit =
@@ -457,15 +460,25 @@ export function VideoFrame({
       }}
     >
       <div className={clipEdges ? "overflow-hidden -m-[3px] p-[3px]" : undefined}>
-        <video
-          src={src}
-          aria-label={alt}
-          className={`block w-full ${videoSize} ${videoFit} ${videoClassName}`.trim()}
-          autoPlay
-          loop
-          muted
-          playsInline
-        />
+        {playback === "controls" ? (
+          <video
+            src={src}
+            aria-label={alt}
+            className={`block w-full ${videoSize} ${videoFit} ${videoClassName}`.trim()}
+            controls
+            playsInline
+          />
+        ) : (
+          <video
+            src={src}
+            aria-label={alt}
+            className={`block w-full ${videoSize} ${videoFit} ${videoClassName}`.trim()}
+            autoPlay
+            loop
+            muted
+            playsInline
+          />
+        )}
       </div>
     </div>
   );
@@ -481,6 +494,7 @@ export function VideoFull({
   videoClassName = "",
   fit = "natural",
   surface = "white",
+  playback = "loop",
 }: {
   src: string;
   alt: string;
@@ -491,6 +505,7 @@ export function VideoFull({
   videoClassName?: string;
   fit?: "natural" | "cover" | "contain";
   surface?: ImageSurface;
+  playback?: "loop" | "controls";
 }) {
   return (
     <figure className={`m-0 flex flex-col gap-6 ${className}`}>
@@ -512,6 +527,7 @@ export function VideoFull({
         className={frameClassName}
         videoClassName={videoClassName}
         fit={fit}
+        playback={playback}
         surface={surface}
       />
       {caption && (

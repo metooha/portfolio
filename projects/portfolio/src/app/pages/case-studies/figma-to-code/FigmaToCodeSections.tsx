@@ -10,6 +10,7 @@ import {
   Section as EdsSection,
   SectionTitle as EdsSectionTitle,
   StatsRow,
+  VideoFull,
 } from "@/app/components/CaseStudyPrimitives";
 import { EdsJourneyTimeline, type EdsJourneyItem } from "../everyday-sans/EdsCaseStudyPrimitives";
 import {
@@ -25,7 +26,7 @@ import {
 import imgDesignEngineering from "@/app/assets/pages/case-study/figma-to-code/optimized/design-engineering.jpg";
 import imgPipeline from "@/app/assets/pages/case-study/figma-to-code/optimized/discovery-flow-diagram.jpg";
 import imgInheritance from "@/app/assets/pages/case-study/figma-to-code/optimized/Simple-inheritance-Model.jpg";
-import imgB2bKit from "@/app/assets/pages/case-study/figma-to-code/optimized/px-builder-kit.jpg";
+import videoB2bKit from "@/app/assets/pages/case-study/figma-to-code/optimized/kit-demo.mp4";
 import imgAirtableDatabase from "@/app/assets/pages/case-study/figma-to-code/optimized/airtable-database.jpg";
 import imgDayZero from "@/app/assets/pages/case-study/figma-to-code/optimized/day-zero.jpg";
 import imgDayOne from "@/app/assets/pages/case-study/figma-to-code/optimized/day-one.jpg";
@@ -167,15 +168,12 @@ export function FigmaToCodeKitSection() {
           { title: "Frictionless handoff", description: "Turn visual designs into production-ready blueprints, not specs to reinterpret." },
         ]}
       />
-      <ImageFull
-        src={imgB2bKit}
-        alt="Builder.io component library and page templates for the B2B kit"
+      <VideoFull
+        src={videoB2bKit}
+        alt="Demo of the B2B kit inside Builder.io: the full component library and page templates for the kit"
         caption="The B2B kit inside Builder.io. The full component library and guidelines, themed with real tokens, every project starts from a shared foundation."
         surface="subtle"
-        fit="cover"
-        rounded={false}
-        frameClassName="aspect-[1800/1560] rounded-[24px]"
-        imageClassName="object-top"
+        playback="controls"
       />
       <FigmaDayCard
         tag="Day Zero"
