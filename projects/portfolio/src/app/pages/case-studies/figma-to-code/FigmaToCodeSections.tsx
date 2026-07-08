@@ -28,6 +28,7 @@ import imgPipeline from "@/app/assets/pages/case-study/figma-to-code/optimized/d
 import imgInheritance from "@/app/assets/pages/case-study/figma-to-code/optimized/Simple-inheritance-Model.jpg";
 import videoB2bKit from "@/app/assets/pages/case-study/figma-to-code/optimized/kit-demo.mp4";
 import imgAirtableDatabase from "@/app/assets/pages/case-study/figma-to-code/optimized/airtable-database.jpg";
+import imgTempoEngSpecs from "@/app/assets/pages/case-study/figma-to-code/optimized/tempo-eng-specs.jpg";
 import imgDayZero from "@/app/assets/pages/case-study/figma-to-code/optimized/day-zero.jpg";
 import imgDayOne from "@/app/assets/pages/case-study/figma-to-code/optimized/day-one.jpg";
 import imgMultiplayer from "@/app/assets/pages/case-study/figma-to-code/optimized/builder.io-multi-player.jpg";
@@ -115,9 +116,9 @@ export function FigmaToCodeDiscoverySection() {
       <EdsEyebrow>How it started</EdsEyebrow>
       <EdsSectionTitle>First, it got figured out together.</EdsSectionTitle>
       <EdsLead>
-        Before scaling anything, a discovery phase ran with engineering and the Builder.io team: pressure-testing
-        feasibility, scoring component complexity, and agreeing on what getting design-to-code right would
-        actually take.
+        Before scaling anything, a six-week discovery phase ran with engineering and the Builder.io team:
+        pressure-testing feasibility, scoring component complexity, and agreeing on what getting design-to-code
+        right would actually take.
       </EdsLead>
       <EdsJourneyTimeline items={DISCOVERY_ITEMS} />
     </EdsSection>
@@ -142,8 +143,27 @@ export function FigmaToCodeProjectSection() {
           { value: "50–70%", label: "Target cut in design-to-code time" },
           { value: "70%", label: "Production-ready on generation" },
           { value: "3", label: "Platforms: DWeb, MWeb, iOS/Android" },
-          { value: "6 wks", label: "Phase 1 timeline" },
+          { value: "3 mo", label: "Phase 1 timeline" },
         ]}
+      />
+      <Body as="p" size="small" weight="alt" UNSAFE_className="uppercase tracking-[0.1em] m-0 mt-2" UNSAFE_style={{ fontSize: "11px", color: BRAND }}>
+        Component creation with a seed file
+      </Body>
+      <Body as="p" size="small" color="subtlest" UNSAFE_className="max-w-[660px] leading-[1.7] -mt-3">
+        This is what got tested first: engineering specs annotated directly on the component in Figma, then
+        translated into a seed file so generation had structured data to build from, not just a static design.
+      </Body>
+      <ImageFull
+        src={imgTempoEngSpecs}
+        alt="Figma engineering specs for the adjustable carousel card component: anatomy, breakpoint variants, and design tokens by platform"
+        caption="The engineering specs tested against the real component: anatomy, breakpoint variants, and tokens by platform, annotated directly in Figma."
+        surface="subtle"
+      />
+      <ImageFull
+        src={imgAirtableDatabase}
+        alt="Airtable base modeling module configs, option types, and required fields for each component"
+        caption="Those specs became the seed file. Module configs, option types, and required fields, modeled in Airtable, the structured data generation builds from."
+        surface="subtle"
       />
     </EdsSection>
   );
@@ -346,12 +366,6 @@ export function FigmaToCodePipelineSection() {
         src={imgPipeline}
         alt="Pipeline diagram: Figma input into a processor trained on the design system, generating code, refined by a fine-tuned LLM, output to GitHub and then DWeb, MWeb, native apps, and Tempo seed JSONs"
         caption="Figma in, production code out. The processor knows the design system; the LLM refines the generated code; GitHub carries it to DWeb, MWeb, native apps, and Tempo seed JSONs."
-      />
-      <ImageFull
-        src={imgAirtableDatabase}
-        alt="Airtable base modeling module configs, option types, and required fields for each component"
-        caption="Airtable as the backbone. Module configs, content constraints, and tokens live here, feeding code generation and syncing back to Figma as the source of truth."
-        surface="subtle"
       />
 
       <Body as="p" size="small" color="subtlest" UNSAFE_className="max-w-[660px] leading-[1.7] mt-2">

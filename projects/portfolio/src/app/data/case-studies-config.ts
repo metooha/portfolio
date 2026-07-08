@@ -77,7 +77,7 @@ const CASE_STUDIES: CaseStudyConfig[] = [
     metaItems: [
       { label: "Role", value: "Principal UX Designer" },
       { label: "Platform", value: "Builder.io · Walmart Design System" },
-      { label: "Timeline", value: "Mar – May 2025 · Phase 2 in progress" },
+      { label: "Timeline", value: "Mar 2025 – Jan 2026" },
       { label: "Focus", value: "Design-to-code automation, component lifecycle, adoption" },
     ],
     navSections: [
