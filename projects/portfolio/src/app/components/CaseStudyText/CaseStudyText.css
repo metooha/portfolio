@@ -19,9 +19,14 @@
 .ld-text-page-title {
   color: var(--ld-semantic-color-text, #2e2f32);
   font-family: var(--ld-semantic-font-page-title-family, var(--ld-semantic-font-family-sans, inherit));
-  font-size: var(--ld-semantic-font-page-title-size, 4rem);
+  font-size: clamp(
+    var(--ld-semantic-font-page-title-size-min, 1.75rem),
+    5vw + 0.5rem,
+    var(--ld-semantic-font-page-title-size-max, 4rem)
+  );
   font-weight: var(--ld-semantic-font-page-title-weight, 700);
   line-height: var(--ld-semantic-font-page-title-line-height, 1.2);
+  overflow-wrap: break-word;
 }
 
 .ld-case-study-badge {

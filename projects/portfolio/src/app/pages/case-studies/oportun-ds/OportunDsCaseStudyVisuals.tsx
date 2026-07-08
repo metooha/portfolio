@@ -53,11 +53,11 @@ export function OportunDsOverview({
         </div>
       </div>
 
-      <PageTitleText as="p" UNSAFE_className="w-full max-w-[1200px]">
+      <PageTitleText as="p" UNSAFE_className="w-full max-w-[1300px]">
         {title}
       </PageTitleText>
 
-      <Body as="p" size="large" UNSAFE_className="max-w-[1200px] w-full">
+      <Body as="p" size="large" UNSAFE_className="max-w-[1300px] w-full">
         {description}
       </Body>
 

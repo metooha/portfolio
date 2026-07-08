@@ -390,7 +390,8 @@ const TYPOGRAPHY_STYLE_GROUPS: TypographyStyleGroup[] = [
         sample: 'Building a cohesive design system',
         familyToken: '--ld-semantic-font-page-title-family',
         fields: [
-          { id: 'size', label: 'Size', token: '--ld-semantic-font-page-title-size', options: FONT_SIZE_OPTIONS },
+          { id: 'sizeMin', label: 'Min size', token: '--ld-semantic-font-page-title-size-min', options: FONT_SIZE_OPTIONS },
+          { id: 'sizeMax', label: 'Max size', token: '--ld-semantic-font-page-title-size-max', options: FONT_SIZE_OPTIONS },
           { id: 'lineHeight', label: 'Line height', token: '--ld-semantic-font-page-title-line-height', options: LINE_HEIGHT_OPTIONS },
           { id: 'weightDefault', label: 'Weight', token: '--ld-semantic-font-page-title-weight', options: FONT_WEIGHT_OPTIONS },
         ],

@@ -51,7 +51,7 @@ export default function WmDesignSystemCaseStudy() {
       >
         <div className="relative shrink-0 w-full overflow-x-hidden">
           <div className="flex flex-row items-stretch justify-center w-full">
-            <div className="content-stretch flex flex-col items-stretch w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-12 lg:px-[68px] relative">
+            <div className="content-stretch flex flex-col items-stretch w-full max-w-[1660px] mx-auto px-4 sm:px-6 md:px-12 lg:px-[68px] relative">
               <div className={SECTION_LAYOUT}>
                 <WmCaseStudyVisualGrid />
                 <WmCaseStudyProblemSpaceSection />

@@ -40,7 +40,7 @@ export function Contact() {
 
   return (
     <div className="min-h-screen pt-16">
-      <PageContainer className="py-12" maxWidth="max-w-7xl">
+      <PageContainer className="py-12" maxWidth="max-w-[1660px]">
         <TwoColumnSection gap="gap-16">
           <div className="space-y-6">
             <div className="flex items-center gap-3">

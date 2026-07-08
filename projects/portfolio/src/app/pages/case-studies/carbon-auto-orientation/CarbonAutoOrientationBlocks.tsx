@@ -1,5 +1,6 @@
 import React from "react";
 import { Body, Heading } from "@/app/components/Text/Text";
+import { fluidSize } from "@/app/components/common/fluidSize";
 import {
   DataTable,
   DataTableBody,
@@ -223,8 +224,8 @@ export function CarbonTradeoffGrid({ cards }: { cards: CarbonTradeoffCard[] }) {
           }}
         >
           <span
-            className="text-[26px] font-bold leading-none"
-            style={{ color: "var(--ld-primitive-color-blue-10, #d8d3ff)" }}
+            className="font-bold leading-none"
+            style={{ fontSize: fluidSize(20, 26), color: "var(--ld-primitive-color-blue-10, #d8d3ff)" }}
           >
             {card.number}
           </span>
@@ -389,7 +390,7 @@ export function CarbonStatsRow({ stats }: { stats: CarbonStat[] }) {
           className={`text-center px-6 py-6 ${STAT_BORDER_CLASSES[index] ?? ""}`}
           style={{ borderColor: "rgba(255,255,255,0.2)" }}
         >
-          <div className="text-[44px] font-bold leading-none mb-2" style={{ color: "#ffffff" }}>
+          <div className="font-bold leading-none mb-2" style={{ fontSize: fluidSize(28, 44), color: "#ffffff" }}>
             {stat.value}
           </div>
           <Body

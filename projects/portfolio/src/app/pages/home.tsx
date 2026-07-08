@@ -45,7 +45,7 @@ export function Home() {
   return (
     <div data-ld-theme="Portfolio" style={{ display: "contents" }}>
       <div className="min-h-screen">
-      <PageContainer className="pt-0 pb-16 md:pb-24" maxWidth="max-w-7xl">
+      <PageContainer className="pt-0 pb-16 md:pb-24" maxWidth="max-w-[1660px]">
         <div className="py-6 md:py-8 mt-8 md:mt-10 mb-1 pb-8 md:pb-10">
           <CaseStudyHeroText
             as="p"

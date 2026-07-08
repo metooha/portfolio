@@ -22,7 +22,7 @@ export function OtherWorkDetail() {
 
   return (
     <div className="min-h-screen pt-16">
-      <PageContainer className="py-12" maxWidth="max-w-7xl">
+      <PageContainer className="py-12" maxWidth="max-w-[1660px]">
         <LinkButton
           size="small"
           leading={<ChevronLeftIcon size="small" decorative />}

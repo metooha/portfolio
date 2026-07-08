@@ -1,5 +1,6 @@
 import React from "react";
 import { Body } from "@/app/components/Text/Text";
+import { fluidSize } from "@/app/components/common/fluidSize";
 
 const SEPARATOR = "var(--ld-semantic-color-separator, #e3e4e5)";
 const SURFACE = "var(--ld-semantic-color-fill, #ffffff)";
@@ -233,8 +234,8 @@ export function FigmaGenAiJourney({ steps }: { steps: FigmaJourneyStep[] }) {
               </span>
             )}
             <span
-              className="text-[22px] font-bold leading-none"
-              style={{ color: isCurrent ? "var(--ld-primitive-color-spark-100, #ffc220)" : "#ffffff" }}
+              className="font-bold leading-none"
+              style={{ fontSize: fluidSize(18, 22), color: isCurrent ? "var(--ld-primitive-color-spark-100, #ffc220)" : "#ffffff" }}
             >
               {step.number}
             </span>

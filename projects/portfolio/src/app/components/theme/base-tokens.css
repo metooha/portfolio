@@ -969,7 +969,8 @@
   --ld-semantic-font-case-study-hero-weight: var(--ld-primitive-font-weight-700, 700);
 
   --ld-semantic-font-page-title-family: var(--ld-primitive-font-family-sans, 'Everyday Sans UI', -apple-system, Roboto, sans-serif);
-  --ld-semantic-font-page-title-size: 4rem;
+  --ld-semantic-font-page-title-size-min: 1.75rem;
+  --ld-semantic-font-page-title-size-max: 4rem;
   --ld-semantic-font-page-title-line-height: 1.2;
   --ld-semantic-font-page-title-weight: var(--ld-primitive-font-weight-700, 700);
 

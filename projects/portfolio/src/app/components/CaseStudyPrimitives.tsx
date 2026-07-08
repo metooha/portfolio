@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Body, Heading } from "@/app/components/Text/Text";
+import { fluidSize } from "@/app/components/common/fluidSize";
 
-/** Matches CaseStudyTemplate overview shell (max-w-7xl + inner content width). */
-const CONTAINER_OUTER = "w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-12 lg:px-[68px]";
-const CONTAINER_INNER = "w-full max-w-4xl lg:max-w-[1046px] flex flex-col gap-6";
+/** Matches CaseStudyTemplate overview shell (max-w-[1660px] + inner content width). */
+const CONTAINER_OUTER = "w-full max-w-[1660px] mx-auto px-4 sm:px-6 md:px-12 lg:px-[68px]";
+const CONTAINER_INNER = "w-full max-w-[1300px] flex flex-col gap-6";
 
 export function Section({
   id,
@@ -81,7 +82,7 @@ export function SectionTitle({
       UNSAFE_className="leading-[1.15] whitespace-pre-line"
       UNSAFE_style={{
         color: onDark ? "var(--ld-primitive-color-white, #ffffff)" : undefined,
-        fontSize: "clamp(24px, 3vw, 38px)",
+        fontSize: fluidSize(24, 38, 3),
       }}
     >
       {children}
@@ -558,7 +559,7 @@ export function QuoteBlock({
     >
       <div className={CONTAINER_OUTER}>
         <div className={CONTAINER_INNER}>
-        <div className="text-[72px] font-bold leading-[0.8]" style={{ color: "var(--ld-primitive-color-spark-100, #ffc220)", marginBottom: "-16px" }}>
+        <div className="font-bold leading-[0.8]" style={{ fontSize: fluidSize(40, 72), color: "var(--ld-primitive-color-spark-100, #ffc220)", marginBottom: "-16px" }}>
           &ldquo;
         </div>
         <Body
@@ -566,14 +567,15 @@ export function QuoteBlock({
           size="large"
           color="inverse"
           UNSAFE_className="max-w-[800px] leading-none font-light"
-          UNSAFE_style={{ fontSize: "clamp(20px, 2.8vw, 32px)", lineHeight: 1 }}
+          UNSAFE_style={{ fontSize: fluidSize(20, 32, 2.8), lineHeight: 1 }}
         >
           {quote}
         </Body>
         <div className="max-w-[800px] flex justify-end mb-5">
           <div
-            className="text-[72px] font-bold leading-[0.8]"
+            className="font-bold leading-[0.8]"
             style={{
+              fontSize: fluidSize(40, 72),
               color: "var(--ld-primitive-color-spark-100, #ffc220)",
               marginTop: "-16px",
               transform: "rotate(180deg)",
@@ -645,7 +647,7 @@ export function StatCards({
             border: "1px solid var(--ld-semantic-color-separator, #e3e4e5)",
           }}
         >
-          <div className="text-[32px] font-bold leading-none mb-2" style={{ color: "var(--ld-semantic-color-text-brand, #0053e2)" }}>
+          <div className="font-bold leading-none mb-2" style={{ fontSize: fluidSize(22, 32), color: "var(--ld-semantic-color-text-brand, #0053e2)" }}>
             {stat.value}
           </div>
           <Body as="p" size="small" color="subtlest" UNSAFE_className="leading-[1.6]">
@@ -702,8 +704,9 @@ export function StatsRow({
           style={{ background: cellBackground }}
         >
           <div
-            className="text-[44px] font-bold leading-none mb-2"
+            className="font-bold leading-none mb-2"
             style={{
+              fontSize: fluidSize(28, 44),
               color: stat.valueColor ?? defaultValueColor,
             }}
           >

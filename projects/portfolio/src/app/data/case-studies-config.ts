@@ -71,7 +71,7 @@ const CASE_STUDIES: CaseStudyConfig[] = [
     shortDescription:
       "A Figma-to-code pipeline trained on the Walmart Design System, so what engineering receives is a pull request to review, not a Figma file to reinterpret.",
     cardDescription:
-      "One component, one measurable goal: cut design-to-code time in half. It scaled into a company-wide pilot with 150+ sign-ups across 75+ teams.",
+      "Validated across the Walmart Design System's component library, then scaled into a company-wide pilot with 150+ sign-ups across 75+ teams cutting design-to-code time in half.",
     fullDescription:
       "The design is done: every token, spacing value, and state already defined in Figma. Then it gets rebuilt by hand in code, thousands of times a year. This case study covers a Figma-to-code pipeline trained on the Walmart Design System that closes that gap, from a single validated component to a company-wide pilot with real adoption demand.",
     metaItems: [
@@ -300,11 +300,11 @@ const CASE_STUDIES: CaseStudyConfig[] = [
     title: "Designing a scalable system for a digital rebrand",
     defaultTheme: "WM",
     isPublished: true,
-    cardTitle: "WM.com Rebrand: Re-branding WM.com",
+    cardTitle: "Rebranding Waste Management",
     shortDescription:
       "Designing a scalable system for a digital rebrand. In 2021, Waste Management launched a company-wide rebrand alongside a broader digital transformation.",
     cardDescription:
-      "with a new design system and 40+ AEM components to support migration of 1000+ localized pages, ecommerce site, marketing, and educational resources in the US, France, and Mexico markets.",
+      "A company-wide rebrand of WM.com, built on a new design system and 40+ AEM components that powered the migration of 1,000+ localized pages across the ecommerce site, marketing, and educational content in the US, France, and Mexico.",
     fullDescription:
       "In 2021, Waste Management launched a company-wide rebrand alongside a broader digital transformation focused on improving customer self-service. I worked with the branding agency and led the systems work behind the rebrand, treating it as an opportunity to establish shared UX infrastructure rather than redesign individual pages.",
     metaItems: [

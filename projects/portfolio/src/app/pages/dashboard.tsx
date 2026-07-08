@@ -677,7 +677,7 @@ function DashboardContent() {
       <AdminNav currentPage="dashboard" />
 
       <div className="admin-page-header-band">
-        <PageContainer maxWidth="max-w-[1440px]">
+        <PageContainer maxWidth="max-w-[1660px]">
           <PageHeader
             section="Admin"
             title="Settings"
@@ -687,7 +687,7 @@ function DashboardContent() {
         </PageContainer>
       </div>
 
-      <PageContainer as="main" maxWidth="max-w-[1440px]" className="admin-page__content">
+      <PageContainer as="main" maxWidth="max-w-[1660px]" className="admin-page__content">
         <div className="admin-settings-layout">
           <aside className="admin-settings-layout__nav">
             <SideNavigation aria-label="Settings">

@@ -1,6 +1,7 @@
 import React from "react";
 import { Body, Heading, type HeadingSize, type HeadingWeight } from "@/app/components/Text/Text";
 import { CaseStudyBadge, type CaseStudyBadgeColor } from "@/app/components/CaseStudyText/CaseStudyText";
+import { fluidSize } from "@/app/components/common/fluidSize";
 
 type BadgeColor = CaseStudyBadgeColor | "none";
 type Layout = "horizontal" | "vertical";
@@ -36,7 +37,7 @@ function headingProps(titleSize: TitleSize): { size: HeadingSize; weight: Headin
 
 /** Matches the fluid title scale used across case study section headings (e.g. EdsSectionTitle). */
 const XL_TITLE_STYLE: React.CSSProperties = {
-  fontSize: "clamp(24px, 3vw, 38px)",
+  fontSize: fluidSize(24, 38, 3),
 };
 
 export function SectionHeading({

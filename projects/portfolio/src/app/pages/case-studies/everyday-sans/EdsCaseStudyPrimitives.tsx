@@ -1,5 +1,6 @@
 import React from "react";
 import { Body } from "@/app/components/Text/Text";
+import { fluidSize } from "@/app/components/common/fluidSize";
 import {
   BeforeAfter,
   EmbedFull,
@@ -216,8 +217,11 @@ export function EdsResearchCard({
       <div className="p-6 bg-white">
         <div className="flex items-baseline gap-2 mb-5">
           <span
-            className="text-[38px] font-bold leading-none"
-            style={{ color: variant === "pre" ? "var(--ld-semantic-color-text-brand, #0053e2)" : "var(--ld-semantic-color-text-positive, #2a8703)" }}
+            className="font-bold leading-none"
+            style={{
+              fontSize: fluidSize(26, 38),
+              color: variant === "pre" ? "var(--ld-semantic-color-text-brand, #0053e2)" : "var(--ld-semantic-color-text-positive, #2a8703)",
+            }}
           >
             {rating}
           </span>

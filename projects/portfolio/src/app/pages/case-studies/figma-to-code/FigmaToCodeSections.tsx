@@ -51,7 +51,6 @@ export function FigmaToCodeProblemSection() {
         alt="Two panels: Design specifies tokens and spacing in Figma; Engineering rebuilds it in code and the values start to drift"
         caption="The same work, twice. Design sets every token and spec in Figma; engineering re-implements the exact same values in code, so the spec now lives in two places and drifts."
         surface="subtle"
-        className="max-w-[900px]"
       />
       <FigmaCallout lead="The reframe:">
         the spec already exists. What&rsquo;s missing is a system that carries it into code without a human

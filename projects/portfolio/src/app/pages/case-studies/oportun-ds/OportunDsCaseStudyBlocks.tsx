@@ -2,6 +2,7 @@ import React from "react";
 import { Body, Heading } from "@/app/components/Text/Text";
 import { Tag, type TagColor } from "@/app/components/Tag/Tag";
 import { Icon } from "@/app/components/Icons/Icons";
+import { fluidSize } from "@/app/components/common/fluidSize";
 import {
   DataTable,
   DataTableBody,
@@ -83,7 +84,7 @@ export function OportunVizPlaceholder({
           border: `1px dashed ${SEPARATOR}`,
         }}
       >
-        <span className="text-[28px] leading-none" aria-hidden="true">
+        <span className="leading-none" style={{ fontSize: fluidSize(22, 28) }} aria-hidden="true">
           {icon}
         </span>
         <Body as="p" size="medium" weight="alt" UNSAFE_className="m-0" UNSAFE_style={{ color: INK }}>
@@ -127,7 +128,7 @@ export function OportunNumberedChallengeCards({ items }: { items: OportunChallen
     >
       {items.map((item) => (
         <div key={item.number} className="flex flex-col gap-2 p-6" style={{ background: SURFACE }}>
-          <span className="text-[30px] font-bold leading-none" style={{ color: SEPARATOR }}>
+          <span className="font-bold leading-none" style={{ fontSize: fluidSize(22, 30), color: SEPARATOR }}>
             {item.number}
           </span>
           <Body as="h3" size="small" weight="alt" UNSAFE_className="m-0" UNSAFE_style={{ color: INK }}>
@@ -368,7 +369,7 @@ export function OportunDecisionGrid({
           {card.icon ? (
             <Icon name={card.icon} size="medium" style={{ color: GREEN }} decorative />
           ) : (
-            <span className="text-[22px] leading-none" style={{ color: GREEN }} aria-hidden="true">
+            <span className="leading-none" style={{ fontSize: fluidSize(18, 22), color: GREEN }} aria-hidden="true">
               {card.symbol}
             </span>
           )}
