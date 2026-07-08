@@ -54,7 +54,7 @@ function AirtableOverviewLogo() {
 }
 
 export default function AirtableCaseStudy() {
-  const { prev: prevProject, next: nextProject } = getAdjacentCaseStudies("6");
+  const { prev: prevProject, next: nextProject } = getAdjacentCaseStudies("3");
 
   return (
     <div data-ld-theme="Walmart" style={{ display: "contents" }}>

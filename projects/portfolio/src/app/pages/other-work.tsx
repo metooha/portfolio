@@ -8,9 +8,12 @@ export function OtherWork() {
   return (
     <div className="min-h-screen pt-16">
       <PageContainer className="py-12" maxWidth="max-w-7xl">
-        <Heading as="h1" size="large" weight="default" UNSAFE_className="text-4xl md:text-5xl mb-12 pb-10">
+        <Heading as="h1" size="large" weight="default" UNSAFE_className="text-4xl md:text-5xl mb-4">
           Other Work
         </Heading>
+        <Body as="p" size="medium" color="subtle" UNSAFE_className="mb-12 pb-10">
+          Coming soon
+        </Body>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {otherWork.map((work) => (
             <Link

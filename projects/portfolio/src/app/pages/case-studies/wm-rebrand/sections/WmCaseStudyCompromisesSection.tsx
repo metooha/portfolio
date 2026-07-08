@@ -6,7 +6,6 @@ import imgImage1 from "@/app/assets/pages/case-study/wm-rebrand/wm-rebrand-asset
 import img from "@/app/assets/pages/case-study/wm-rebrand/wm-rebrand-asset-80347242.png";
 import imgImage12 from "@/app/assets/pages/case-study/wm-rebrand/wm-rebrand-asset-c7c28a59.png";
 import imgDRecycling1011 from "@/app/assets/pages/case-study/wm-rebrand/drecycling1011.png";
-import imgDRecycling1011_2x from "figma:asset/5a6597134fabb5047bbb0740a11b4501bad4cc42@2x.png";
 import imgMedia from "@/app/assets/pages/case-study/wm-rebrand/media.png";
 import img1 from "@/app/assets/pages/case-study/wm-rebrand/wm-rebrand-asset-d95d6128.png";
 import img2 from "@/app/assets/pages/case-study/wm-rebrand/wm-rebrand-asset-e69489dc.png";
@@ -159,7 +158,6 @@ function RecycleRightRight({ scrollRef, onScroll }: { scrollRef?: React.RefObjec
           alt=""
           className="absolute inset-0 max-w-none object-cover object-left-top pointer-events-none size-full"
           src={imgDRecycling1011}
-          srcSet={`${imgDRecycling1011} 1x, ${imgDRecycling1011_2x} 2x`}
         />
         <div className="absolute bg-[#f7f8f2] h-[58.335px] left-0 top-[3406.43px] w-[105.167px]" />
         <div className="absolute bg-[#f7f8f2] h-[14.789px] left-[1074.68px] top-[3407.26px] w-[108.454px]" />

@@ -9,10 +9,14 @@ import WmDesignSystemCaseStudy from "@/app/pages/case-studies/wm-rebrand/WmDesig
 import EverydaySansCaseStudy from "@/app/pages/case-studies/everyday-sans/EverydaySansCaseStudy";
 import AirtableCaseStudy from "@/app/pages/case-studies/airtable-sot/AirtableCaseStudy";
 import OportunDsCaseStudy from "@/app/pages/case-studies/oportun-ds/OportunDsCaseStudy";
+import CarbonAutoOrientationCaseStudy from "@/app/pages/case-studies/carbon-auto-orientation/CarbonAutoOrientationCaseStudy";
+import FigmaToCodeCaseStudy from "@/app/pages/case-studies/figma-to-code/FigmaToCodeCaseStudy";
 import { CaseStudyAcademyContent } from "@/app/pages/case-studies/academy/CaseStudyAcademyContent";
 import imgEverydaySansCover from "@/app/assets/pages/case-study/everyday-sans/cover.jpg";
 import { imgAirtableCoverPreview, imgAirtableCoverSource } from "@/app/assets/pages/case-study/airtable-sot/assets";
 import imgOportunDsCover from "@/app/assets/pages/case-study/oportun-ds/cover.jpg";
+import imgCarbonCover from "@/app/assets/pages/case-study/carbon/design-engine.jpg";
+import imgFigmaToCodeCover from "@/app/assets/pages/case-study/figma-to-code/optimized/cover.jpg";
 import type { ProjectLink } from "@/app/components/CaseStudyTemplate";
 import type { ThemeName } from "@/app/components/utils/Theming";
 
@@ -57,73 +61,51 @@ export interface CaseStudyConfig {
 
 const CASE_STUDIES: CaseStudyConfig[] = [
   {
-    id: "3",
-    path: "/case-study/3",
-    title: "Xense Biotech",
-    defaultTheme: "Xense",
+    id: "1",
+    path: "/case-study/1",
+    title: "Enabling AI-Assisted Prototyping",
+    defaultTheme: "Walmart",
     isPublished: true,
-    featuredOnHome: false,
+    accessPassword: "Indigo",
+    cardTitle: "Enabling AI-Assisted Prototyping",
     shortDescription:
-      "Xense Biotech is a leading company in the medical imaging industry, specializing in advanced x-ray technology. Their flagship product, uTomoTM, is a groundbreaking image acquisition and reconstruction system.",
+      "A Figma-to-code pipeline trained on the Walmart Design System, so what engineering receives is a pull request to review, not a Figma file to reinterpret.",
     cardDescription:
-      "Xense's main technological platform, uTomoTM x-ray imaging, reduces the time it takes to diagnose, intervene, and recover from illness. The non-toroid tomographic imaging system from Xense allows for low-radiation quick diagnostic imaging in an all-in-one architecture with no performance restrictions.",
+      "One component, one measurable goal: cut design-to-code time in half. It scaled into a company-wide pilot with 150+ sign-ups across 75+ teams.",
     fullDescription:
-      "Xense Biotech is a leading company in the medical imaging industry, specializing in advanced x-ray technology. Their flagship product, uTomoTM, is a groundbreaking image acquisition and reconstruction system that enhances diagnostic capabilities. I was tasked with designing a comprehensive UI kit to support their software platform and establish a cohesive visual language.",
+      "The design is done: every token, spacing value, and state already defined in Figma. Then it gets rebuilt by hand in code, thousands of times a year. This case study covers a Figma-to-code pipeline trained on the Walmart Design System that closes that gap, from a single validated component to a company-wide pilot with real adoption demand.",
     metaItems: [
-      { label: "Role", value: "UI/UX Designer" },
-      { label: "Industry", value: "Medical Imaging & Biotech" },
-      { label: "Tags", value: "Desktop, Biotech, UI Kit" },
-      { label: "Focus", value: "Medical software interface design system" },
+      { label: "Role", value: "Principal UX Designer" },
+      { label: "Platform", value: "Builder.io · Walmart Design System" },
+      { label: "Timeline", value: "Mar – May 2025 · Phase 2 in progress" },
+      { label: "Focus", value: "Design-to-code automation, component lifecycle, adoption" },
     ],
     navSections: [
       { label: "Overview", href: "#overview" },
-      { label: "The Challenge", href: "#challenge" },
-      { label: "The Solution", href: "#solution" },
-      { label: "Impact", href: "#impact" },
+      { label: "The problem", href: "#problem" },
+      { label: "Discovery", href: "#discovery" },
+      { label: "Real project", href: "#project" },
+      { label: "The kit", href: "#kit" },
+      { label: "The proof", href: "#proof" },
+      { label: "Walmart Connect", href: "#connect" },
+      { label: "Going wide", href: "#conference" },
+      { label: "The demand", href: "#demand" },
+      { label: "The pipeline", href: "#pipeline" },
+      { label: "The change", href: "#change" },
+      { label: "Reflection", href: "#reflection" },
     ],
-    navAccentColor: "#17d3b9",
-    tags: ["Desktop", "Biotech", "UI Kit"],
-    heroType: "component",
-    thumbnail: imgXense,
-    PageComponent: XenseCaseStudy,
-    overviewClient: "Xense Biotech",
-    overviewCategory: "Medical Imaging, UI Kit",
+    navAccentColor: "#0053e2",
+    tags: ["AI", "Design Systems", "Prototyping", "Automation"],
+    heroType: "image",
+    heroImage: imgFigmaToCodeCover,
+    thumbnail: imgFigmaToCodeCover,
+    PageComponent: FigmaToCodeCaseStudy,
+    overviewClient: "Walmart",
+    overviewCategory: "Walmart Design System, AI Tooling",
   },
   {
-    id: "4",
-    path: "/case-study/4",
-    title: "Academy Sports + Outdoors Branding",
-    isPublished: true,
-    featuredOnHome: false,
-    shortDescription:
-      "Direct Mail catalogs are delivered every quarter at Academy Sports + Outdoors. The main categories are for sports such as golf, baseball/softball, football, athletics, fishing, and hunting.",
-    cardDescription:
-      "Direct Mail catalogs are delivered every quarter at Academy Sports + Outdoors. The main categories are for sports such as golf, baseball/softball, football, athletics, fishing, and hunting. I created these catalogs from conception to print production.",
-    fullDescription:
-      "Direct Mail catalogs are delivered every quarter at Academy Sports + Outdoors. The main categories are for sports such as golf, baseball/softball, football, athletics, fishing, and hunting. I created these catalogs from conception to print production, ensuring brand consistency and engaging visual storytelling.",
-    metaItems: [
-      { label: "Role", value: "Brand Designer" },
-      { label: "Client", value: "Academy Sports + Outdoors" },
-      { label: "Tags", value: "Branding, Print, Digital, Campaigns" },
-      { label: "Focus", value: "Quarterly catalog design and brand campaigns" },
-    ],
-    navSections: [
-      { label: "Overview", href: "#overview" },
-      { label: "The Challenge", href: "#challenge" },
-      { label: "The Solution", href: "#solution" },
-      { label: "Impact", href: "#impact" },
-    ],
-    navAccentColor: "#ea580c",
-    tags: ["Branding", "Print", "Digital", "Campaigns"],
-    heroType: "component",
-    HeroComponent: AcademyHero,
-    heroGradientClass: "bg-gradient-to-br from-orange-50 to-red-50",
-    thumbnail: imgAcademy,
-    ContentComponent: CaseStudyAcademyContent,
-  },
-  {
-    id: "5",
-    path: "/case-study/5",
+    id: "2",
+    path: "/case-study/2",
     title: "Everyday Sans UI — Brand and performance, without compromise",
     defaultTheme: "Walmart",
     isPublished: true,
@@ -159,8 +141,8 @@ const CASE_STUDIES: CaseStudyConfig[] = [
     overviewCategory: "Living Design, Typography",
   },
   {
-    id: "6",
-    path: "/case-study/6",
+    id: "3",
+    path: "/case-study/3",
     title: "A Quest for a Source of Truth",
     defaultTheme: "Walmart",
     isPublished: true,
@@ -198,45 +180,8 @@ const CASE_STUDIES: CaseStudyConfig[] = [
     overviewCategory: "Living Design, Design Tokens",
   },
   {
-    id: "1",
-    path: "/case-study/1",
-    title: "Designing a scalable system for a digital rebrand",
-    defaultTheme: "WM",
-    isPublished: true,
-    cardTitle: "WM.com Rebrand: Re-branding WM.com",
-    shortDescription:
-      "Designing a scalable system for a digital rebrand. In 2021, Waste Management launched a company-wide rebrand alongside a broader digital transformation.",
-    cardDescription:
-      "with a new design system and 40+ AEM components to support migration of 1000+ localized pages, ecommerce site, marketing, and educational resources in the US, France, and Mexico markets.",
-    fullDescription:
-      "In 2021, Waste Management launched a company-wide rebrand alongside a broader digital transformation focused on improving customer self-service. I worked with the branding agency and led the systems work behind the rebrand, treating it as an opportunity to establish shared UX infrastructure rather than redesign individual pages.",
-    metaItems: [
-      { label: "Role", value: "Principal Product Designer" },
-      { label: "Team", value: "Partnered with product, engineering, and brand leadership" },
-      { label: "Scope", value: "Company-wide rebrand across web platforms" },
-      { label: "Focus", value: "Platform UX patterns, information architecture, and shared systems" },
-    ],
-    navSections: [
-      { label: "Overview", href: "#overview" },
-      { label: "Problem Space", href: "#problem-space" },
-      { label: "Our Goals", href: "#our-goals" },
-      { label: "Approach", href: "#approach" },
-      { label: "System Audit", href: "#system-audit" },
-      { label: "Information Architecture", href: "#information-architecture" },
-      { label: "Compromises", href: "#compromises" },
-    ],
-    navAccentColor: "#207442",
-    tags: ["WEB", "Mobile App", "Design System", "Branding"],
-    heroType: "image",
-    heroImage: imgDesign,
-    thumbnail: wmNewImage,
-    PageComponent: WmDesignSystemCaseStudy,
-    overviewClient: "Waste Management",
-    overviewCategory: "Design Systems, Branding",
-  },
-  {
-    id: "7",
-    path: "/case-study/7",
+    id: "4",
+    path: "/case-study/4",
     title: "Oportun Design System",
     defaultTheme: "Oportun",
     isPublished: true,
@@ -273,6 +218,150 @@ const CASE_STUDIES: CaseStudyConfig[] = [
     PageComponent: OportunDsCaseStudy,
     overviewClient: "Oportun / Digit",
     overviewCategory: "Design Systems, Rebrand",
+  },
+  {
+    id: "5",
+    path: "/case-study/5",
+    title: "Carbon Auto-Orientation: Print success without orientation expertise",
+    defaultTheme: "Carbon",
+    isPublished: true,
+    cardTitle: "Carbon Auto-Orientation",
+    shortDescription:
+      "Redesigning a resin-printing feature so novices and experts could both trust the same tool.",
+    cardDescription:
+      "Replaced an all-or-nothing Advanced Options panel with a guided, ranked set of orientations: fast enough for a first-time user, transparent enough for an expert.",
+    fullDescription:
+      "A resin-printing feature at Carbon, redesigned so a first-time user and a seasoned technician could both trust it, without one losing simplicity or the other losing control.",
+    metaItems: [
+      { label: "Role", value: "Lead Product Designer" },
+      { label: "Team", value: "1 UI engineer · 1 back-end engineer" },
+      { label: "Scope", value: "Auto-Orientation 2.0" },
+      { label: "Focus", value: "Guided automation, decision UI, sub-10s runtime" },
+    ],
+    navSections: [
+      { label: "Overview", href: "#overview" },
+      { label: "Problem statement", href: "#problem" },
+      { label: "Tension", href: "#tension" },
+      { label: "The approach", href: "#approach" },
+      { label: "The process", href: "#process" },
+      { label: "Goals & targets", href: "#targets" },
+      { label: "How we'll know it worked", href: "#success-metrics" },
+      { label: "Product decisions", href: "#decisions" },
+      { label: "See it in action", href: "#video" },
+      { label: "User testing", href: "#user-testing" },
+      { label: "Before & after", href: "#before-after" },
+      { label: "Reflection", href: "#reflection" },
+    ],
+    navAccentColor: "#2a0eff",
+    tags: ["Product Design", "3D Printing", "Decision UI", "Manufacturing"],
+    heroType: "image",
+    heroImage: imgCarbonCover,
+    thumbnail: imgCarbonCover,
+    PageComponent: CarbonAutoOrientationCaseStudy,
+    overviewClient: "Carbon Inc.",
+    overviewCategory: "Feature Design, Resin 3D Printing",
+  },
+  {
+    id: "6",
+    path: "/case-study/6",
+    title: "Xense Biotech",
+    defaultTheme: "Xense",
+    isPublished: false,
+    featuredOnHome: false,
+    shortDescription:
+      "Xense Biotech is a leading company in the medical imaging industry, specializing in advanced x-ray technology. Their flagship product, uTomoTM, is a groundbreaking image acquisition and reconstruction system.",
+    cardDescription:
+      "Xense's main technological platform, uTomoTM x-ray imaging, reduces the time it takes to diagnose, intervene, and recover from illness. The non-toroid tomographic imaging system from Xense allows for low-radiation quick diagnostic imaging in an all-in-one architecture with no performance restrictions.",
+    fullDescription:
+      "Xense Biotech is a leading company in the medical imaging industry, specializing in advanced x-ray technology. Their flagship product, uTomoTM, is a groundbreaking image acquisition and reconstruction system that enhances diagnostic capabilities. I was tasked with designing a comprehensive UI kit to support their software platform and establish a cohesive visual language.",
+    metaItems: [
+      { label: "Role", value: "UI/UX Designer" },
+      { label: "Industry", value: "Medical Imaging & Biotech" },
+      { label: "Tags", value: "Desktop, Biotech, UI Kit" },
+      { label: "Focus", value: "Medical software interface design system" },
+    ],
+    navSections: [
+      { label: "Overview", href: "#overview" },
+      { label: "The Challenge", href: "#challenge" },
+      { label: "The Solution", href: "#solution" },
+      { label: "Impact", href: "#impact" },
+    ],
+    navAccentColor: "#17d3b9",
+    tags: ["Desktop", "Biotech", "UI Kit"],
+    heroType: "component",
+    thumbnail: imgXense,
+    PageComponent: XenseCaseStudy,
+    overviewClient: "Xense Biotech",
+    overviewCategory: "Medical Imaging, UI Kit",
+  },
+  {
+    id: "7",
+    path: "/case-study/7",
+    title: "Designing a scalable system for a digital rebrand",
+    defaultTheme: "WM",
+    isPublished: true,
+    cardTitle: "WM.com Rebrand: Re-branding WM.com",
+    shortDescription:
+      "Designing a scalable system for a digital rebrand. In 2021, Waste Management launched a company-wide rebrand alongside a broader digital transformation.",
+    cardDescription:
+      "with a new design system and 40+ AEM components to support migration of 1000+ localized pages, ecommerce site, marketing, and educational resources in the US, France, and Mexico markets.",
+    fullDescription:
+      "In 2021, Waste Management launched a company-wide rebrand alongside a broader digital transformation focused on improving customer self-service. I worked with the branding agency and led the systems work behind the rebrand, treating it as an opportunity to establish shared UX infrastructure rather than redesign individual pages.",
+    metaItems: [
+      { label: "Role", value: "Principal Product Designer" },
+      { label: "Team", value: "Partnered with product, engineering, and brand leadership" },
+      { label: "Scope", value: "Company-wide rebrand across web platforms" },
+      { label: "Focus", value: "Platform UX patterns, information architecture, and shared systems" },
+    ],
+    navSections: [
+      { label: "Overview", href: "#overview" },
+      { label: "Problem Space", href: "#problem-space" },
+      { label: "Our Goals", href: "#our-goals" },
+      { label: "Approach", href: "#approach" },
+      { label: "System Audit", href: "#system-audit" },
+      { label: "Information Architecture", href: "#information-architecture" },
+      { label: "Compromises", href: "#compromises" },
+    ],
+    navAccentColor: "#207442",
+    tags: ["WEB", "Mobile App", "Design System", "Branding"],
+    heroType: "image",
+    heroImage: imgDesign,
+    thumbnail: wmNewImage,
+    PageComponent: WmDesignSystemCaseStudy,
+    overviewClient: "Waste Management",
+    overviewCategory: "Design Systems, Branding",
+  },
+  {
+    id: "8",
+    path: "/case-study/8",
+    title: "Academy Sports + Outdoors Branding",
+    isPublished: false,
+    featuredOnHome: false,
+    shortDescription:
+      "Direct Mail catalogs are delivered every quarter at Academy Sports + Outdoors. The main categories are for sports such as golf, baseball/softball, football, athletics, fishing, and hunting.",
+    cardDescription:
+      "Direct Mail catalogs are delivered every quarter at Academy Sports + Outdoors. The main categories are for sports such as golf, baseball/softball, football, athletics, fishing, and hunting. I created these catalogs from conception to print production.",
+    fullDescription:
+      "Direct Mail catalogs are delivered every quarter at Academy Sports + Outdoors. The main categories are for sports such as golf, baseball/softball, football, athletics, fishing, and hunting. I created these catalogs from conception to print production, ensuring brand consistency and engaging visual storytelling.",
+    metaItems: [
+      { label: "Role", value: "Brand Designer" },
+      { label: "Client", value: "Academy Sports + Outdoors" },
+      { label: "Tags", value: "Branding, Print, Digital, Campaigns" },
+      { label: "Focus", value: "Quarterly catalog design and brand campaigns" },
+    ],
+    navSections: [
+      { label: "Overview", href: "#overview" },
+      { label: "The Challenge", href: "#challenge" },
+      { label: "The Solution", href: "#solution" },
+      { label: "Impact", href: "#impact" },
+    ],
+    navAccentColor: "#ea580c",
+    tags: ["Branding", "Print", "Digital", "Campaigns"],
+    heroType: "component",
+    HeroComponent: AcademyHero,
+    heroGradientClass: "bg-gradient-to-br from-orange-50 to-red-50",
+    thumbnail: imgAcademy,
+    ContentComponent: CaseStudyAcademyContent,
   },
 ];
 

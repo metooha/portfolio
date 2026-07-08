@@ -56,7 +56,7 @@ function EverydaySansOverviewLogo() {
 }
 
 export default function EverydaySansCaseStudy() {
-  const { prev: prevProject, next: nextProject } = getAdjacentCaseStudies("5");
+  const { prev: prevProject, next: nextProject } = getAdjacentCaseStudies("2");
 
   return (
     <div data-ld-theme="Walmart" style={{ display: "contents" }}>

@@ -86,13 +86,16 @@ export function AdminNav({ currentPage }: AdminNavProps) {
       }`}
     >
       <div className="admin-nav__inner">
-        <div className="relative shrink-0" ref={accountMenuRef}>
+        <div className="relative shrink-0 flex items-center gap-1" ref={accountMenuRef}>
+          <RouterLink to="/" className="admin-nav__logo-link">
+            <img src={logo} alt="Amy Ha Logo" className="admin-nav__logo" />
+          </RouterLink>
           <button
             type="button"
             className="admin-nav__brand"
+            aria-expanded={isAccountMenuOpen}
             onClick={() => setIsAccountMenuOpen((open) => !open)}
           >
-            <img src={logo} alt="Amy Ha Logo" className="admin-nav__logo" />
             <Body as="span" size="medium">
               Amy Ha
             </Body>

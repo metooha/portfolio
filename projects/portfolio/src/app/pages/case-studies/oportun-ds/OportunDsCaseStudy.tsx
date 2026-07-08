@@ -76,7 +76,7 @@ function OportunDsOverviewLogo() {
 }
 
 export default function OportunDsCaseStudy() {
-  const { prev: prevProject, next: nextProject } = getAdjacentCaseStudies("7");
+  const { prev: prevProject, next: nextProject } = getAdjacentCaseStudies("4");
 
   return (
     <div data-ld-theme="Oportun" style={{ display: "contents" }}>

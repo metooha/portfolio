@@ -15,7 +15,7 @@ const OVERVIEW_DESCRIPTION =
   "Xense Biotech is a leading company in the medical imaging industry, specializing in advanced x-ray technology. Their flagship product, uTomoTM, is a groundbreaking image acquisition and reconstruction system that enhances diagnostic capabilities. I was tasked with designing a comprehensive UI kit to support their software platform and establish a cohesive visual language.";
 
 export default function XenseCaseStudy() {
-  const { prev: prevProject, next: nextProject } = getAdjacentCaseStudies("3");
+  const { prev: prevProject, next: nextProject } = getAdjacentCaseStudies("6");
 
   return (
     <div data-ld-theme="Xense" style={{ display: "contents" }}>

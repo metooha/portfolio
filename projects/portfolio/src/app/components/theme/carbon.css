@@ -236,4 +236,18 @@
   --ld-primitive-color-yellow-180: #151707;
   /* === SEMANTIC OVERRIDES === */
   --ld-semantic-color-topNav-fill: var(--ld-primitive-color-gray-160, #2e3032);
+  /* Base maps text-subtlest to gray-100, but Carbon's gray-100 (#abb2ba) is
+     much lighter than the base scale's (#74767c), failing AA contrast for
+     body copy. gray-130 lands at the same ~4.9:1 contrast base achieves. */
+  --ld-semantic-color-text-subtlest: var(--ld-primitive-color-gray-130, #6c7176);
+  /* Same issue for text-positive: base maps it to green-100, but Carbon's
+     green-100 (#51ffbc) is a light neon green that fails contrast on white.
+     green-150 lands at ~5.7:1, safely AA even at small bold sizes. */
+  --ld-semantic-color-text-positive: var(--ld-primitive-color-green-150, #247355);
+  /* fill-brand maps to blue-100, Carbon's most saturated brand blue (#2a0eff) —
+     fine for small accents, too intense as a full-bleed section background.
+     blue-140 reads as a calm, deep navy instead. Buttons and links are
+     untouched — they use action-fill-primary / text-brand, which still
+     resolve to blue-100. */
+  --ld-semantic-color-fill-brand: var(--ld-primitive-color-blue-140, #16078b);
 }

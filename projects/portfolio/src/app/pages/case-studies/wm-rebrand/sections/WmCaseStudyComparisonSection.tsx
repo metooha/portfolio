@@ -4,7 +4,6 @@ import svgPaths from "../svg/svg-wznnermhqa";
 import imgDSf1Landing2 from "@/app/assets/pages/case-study/wm-rebrand/dsf1-landing2.png";
 import img from "@/app/assets/pages/case-study/wm-rebrand/wm-rebrand-asset-80347242.png";
 import imgWireframe1 from "@/app/assets/pages/case-study/wm-rebrand/wireframe1.png";
-import imgWireframe1_2x from "figma:asset/8f0e182098872906bfe1ae2e5c8753c973347910@2x.png";
 
 import { COMPARISON_FRAME_H, COMPARISON_CONTENT_H, COMPARISON_WIDTH, LEFT_PANEL_MAX_WIDTH, scrollbarHide } from "./shared/wmComparisonConstants";
 import { useWmSyncedScroll } from "./shared/useWmSyncedScroll";
@@ -174,7 +173,6 @@ function Image16({ className, scrollRef, onScroll }: { className?: string; scrol
           alt=""
           className="absolute inset-0 max-w-none object-cover object-left-top pointer-events-none size-full"
           src={imgWireframe1}
-          srcSet={`${imgWireframe1} 1x, ${imgWireframe1_2x} 2x`}
         />
         <Callout />
         <Callout1 />

@@ -124,7 +124,7 @@ export function CaseStudyPageNav({
                 }}
                 aria-current={isActive ? "location" : undefined}
                 UNSAFE_className="flex gap-[6px] items-center shrink-0 w-full group"
-                UNSAFE_style={{ textDecoration: "none" }}
+                UNSAFE_style={{ textDecoration: "none", justifyContent: "flex-start" }}
                 data-name="Side Nav"
               >
                 <span className="flex gap-[6px] items-center">

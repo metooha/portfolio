@@ -23,7 +23,7 @@ const SECTION_LAYOUT =
   "content-stretch flex flex-1 flex-col gap-12 md:gap-16 lg:gap-[80px] items-stretch min-h-px w-full max-w-full min-w-0 relative";
 
 export default function WmDesignSystemCaseStudy() {
-  const { prev: prevProject, next: nextProject } = getAdjacentCaseStudies("1");
+  const { prev: prevProject, next: nextProject } = getAdjacentCaseStudies("7");
 
   return (
     // Scope the Living Design "WM" theme to this case study. `display:
