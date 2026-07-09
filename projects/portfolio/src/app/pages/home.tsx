@@ -9,8 +9,20 @@ import { Button } from "@/app/components/Button/Button";
 import { CaseStudyCard } from "@/app/components/CaseStudyCard";
 import { PageContainer } from "@/app/components/layout";
 import { CaseStudyHeroText } from "@/app/components/CaseStudyText/CaseStudyText";
-import { Body, Heading } from "@/app/components/Text/Text";
-import { getFeaturedCaseStudies } from "@/app/data/case-studies-config";
+import { Body, Display, Heading } from "@/app/components/Text/Text";
+import { getFeaturedCaseStudiesByGroup } from "@/app/data/case-studies-config";
+
+const GROUP_DESCRIPTIONS: Record<"Design Systems" | "Branding" | "Product", string> = {
+  "Design Systems": "Shared infrastructure, tokens, and tooling that scale design across teams and platforms.",
+  Branding: "Identity, strategy, and visual systems built to give a brand its own voice.",
+  Product: "Feature-level design work, from problem framing to a shipped experience.",
+};
+
+const GROUP_FILLS: Record<"Design Systems" | "Branding" | "Product", string> = {
+  "Design Systems": "var(--ld-semantic-color-fill-accent-purple-subtle, #efebf2)",
+  Branding: "var(--ld-semantic-color-fill-accent-pink-subtle, #fce9f5)",
+  Product: "var(--ld-semantic-color-fill-accent-orange-subtle, #fff0e6)",
+};
 
 const sparklesCursor =
   "https://images.unsplash.com/photo-1576499162440-5e55a43278e1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzcGFya2xlcyUyMHN0YXIlMjBpY29ufGVufDF8fHx8MTc2ODg2NTcwN3ww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral";
@@ -45,7 +57,7 @@ export function Home() {
   return (
     <div data-ld-theme="Portfolio" style={{ display: "contents" }}>
       <div className="min-h-screen">
-      <PageContainer className="pt-0 pb-16 md:pb-24" maxWidth="max-w-[1660px]">
+      <PageContainer className="pt-0" maxWidth="max-w-[1660px]">
         <div className="py-6 md:py-8 mt-8 md:mt-10 mb-1 pb-8 md:pb-10">
           <CaseStudyHeroText
             as="p"
@@ -108,11 +120,69 @@ export function Home() {
             <SkillTag filled>Workflow Integration</SkillTag>
           </div>
         </div>
+      </PageContainer>
 
-        <div className="mb-16">
+      {(() => {
+        let cardIndex = 0;
+        return (
+          <div className="flex flex-col">
+            {getFeaturedCaseStudiesByGroup().map(({ group, caseStudies }, groupIndex) => (
+              <section
+                key={group}
+                className="w-full border-b"
+                style={{
+                  background: GROUP_FILLS[group],
+                  borderColor: "var(--ld-semantic-color-separator, #e3e4e5)",
+                }}
+              >
+                <PageContainer maxWidth="max-w-[1660px]" className="py-16 md:py-20">
+                  {groupIndex === 0 && (
+                    <div className="mb-16">
+                      <Heading
+                        as="h1"
+                        size="large"
+                        weight="default"
+                        color="brand"
+                        UNSAFE_className="text-[96px] leading-[1] text-center"
+                      >
+                        Highlighted Projects
+                      </Heading>
+                    </div>
+                  )}
+                  <div className="mb-10 text-center">
+                    <Display as="h2" size="small" weight="default">
+                      {group}
+                    </Display>
+                    <Body
+                      as="p"
+                      size="medium"
+                      color="subtle"
+                      UNSAFE_className="mt-2 whitespace-nowrap"
+                    >
+                      {GROUP_DESCRIPTIONS[group]}
+                    </Body>
+                  </div>
+                  <div className="space-y-16">
+                    {caseStudies.map((caseStudy) => (
+                      <CaseStudyCard
+                        key={caseStudy.id}
+                        caseStudy={caseStudy}
+                        priority={cardIndex++ < 2}
+                      />
+                    ))}
+                  </div>
+                </PageContainer>
+              </section>
+            ))}
+          </div>
+        );
+      })()}
+
+      <PageContainer className="pb-16 md:pb-24" maxWidth="max-w-[1660px]">
+        <div>
           <div className="flex items-center justify-center gap-6 pt-[60px] pb-[60px]">
             <Body as="p" size="large" color="subtle" UNSAFE_className="text-2xl font-normal">
-              Wanna work together? Let's Chat
+              Wanna work together? Let's chat
             </Body>
             <Button
               variant="primary"
@@ -121,27 +191,9 @@ export function Home() {
               type="button"
               onClick={() => navigate("/contact")}
             >
-              Get in Touch
+              Get in touch
             </Button>
           </div>
-        </div>
-
-        <div className="mb-8">
-          <Heading
-            as="h1"
-            size="large"
-            weight="default"
-            color="brand"
-            UNSAFE_className="text-[48px]"
-          >
-            My featured work
-          </Heading>
-        </div>
-
-        <div className="space-y-16">
-          {getFeaturedCaseStudies().map((caseStudy, index) => (
-            <CaseStudyCard key={caseStudy.id} caseStudy={caseStudy} priority={index < 2} />
-          ))}
         </div>
 
         <div className="fixed bottom-0 left-0 right-0 z-0 w-full">

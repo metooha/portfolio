@@ -63,7 +63,12 @@ export interface CaseStudyConfig {
   overviewLogo?: React.ReactNode;
   overviewClient?: string;
   overviewCategory?: string;
+  /** Groups featured case studies into sections on the home page. */
+  homeGroup?: "Design Systems" | "Branding" | "Product";
 }
+
+/** Order featured home-page sections should render in. */
+export const HOME_GROUP_ORDER = ["Design Systems", "Branding", "Product"] as const;
 
 const CASE_STUDIES: CaseStudyConfig[] = [
   {
@@ -108,6 +113,7 @@ const CASE_STUDIES: CaseStudyConfig[] = [
     PageComponent: FigmaToCodeCaseStudy,
     overviewClient: "Walmart",
     overviewCategory: "Walmart Design System, AI Tooling",
+    homeGroup: "Design Systems",
   },
   {
     id: "2",
@@ -145,6 +151,7 @@ const CASE_STUDIES: CaseStudyConfig[] = [
     PageComponent: EverydaySansCaseStudy,
     overviewClient: "Walmart",
     overviewCategory: "Living Design, Typography",
+    homeGroup: "Design Systems",
   },
   {
     id: "3",
@@ -184,6 +191,7 @@ const CASE_STUDIES: CaseStudyConfig[] = [
     PageComponent: AirtableCaseStudy,
     overviewClient: "Walmart",
     overviewCategory: "Living Design, Design Tokens",
+    homeGroup: "Design Systems",
   },
   {
     id: "4",
@@ -224,6 +232,7 @@ const CASE_STUDIES: CaseStudyConfig[] = [
     PageComponent: OportunDsCaseStudy,
     overviewClient: "Oportun / Digit",
     overviewCategory: "Design Systems, Rebrand",
+    homeGroup: "Design Systems",
   },
   {
     id: "5",
@@ -263,6 +272,7 @@ const CASE_STUDIES: CaseStudyConfig[] = [
     PageComponent: BreakoutNetworkCaseStudy,
     overviewClient: "Breakout Athletic Network",
     overviewCategory: "Brand Identity, Guidelines",
+    homeGroup: "Branding",
   },
   {
     id: "6",
@@ -305,6 +315,7 @@ const CASE_STUDIES: CaseStudyConfig[] = [
     PageComponent: CarbonAutoOrientationCaseStudy,
     overviewClient: "Carbon Inc.",
     overviewCategory: "Feature Design, Resin 3D Printing",
+    homeGroup: "Product",
   },
   {
     id: "7",
@@ -375,6 +386,7 @@ const CASE_STUDIES: CaseStudyConfig[] = [
     PageComponent: WmDesignSystemCaseStudy,
     overviewClient: "Waste Management",
     overviewCategory: "Design Systems, Branding",
+    homeGroup: "Branding",
   },
   {
     id: "9",
@@ -455,6 +467,7 @@ const CASE_STUDIES: CaseStudyConfig[] = [
     PageComponent: NiniJewelsCaseStudy,
     overviewClient: "Nini Jewels",
     overviewCategory: "Website Redesign, Build & Illustration",
+    homeGroup: "Branding",
   },
   {
     id: "11",
@@ -548,6 +561,18 @@ export function getFeaturedCaseStudies(): CaseStudyConfig[] {
   return CASE_STUDIES.filter(
     (cs) => cs.isPublished !== false && cs.featuredOnHome !== false,
   );
+}
+
+/** Featured case studies grouped by homeGroup, in HOME_GROUP_ORDER. Ungrouped studies are dropped. */
+export function getFeaturedCaseStudiesByGroup(): {
+  group: (typeof HOME_GROUP_ORDER)[number];
+  caseStudies: CaseStudyConfig[];
+}[] {
+  const featured = getFeaturedCaseStudies();
+  return HOME_GROUP_ORDER.map((group) => ({
+    group,
+    caseStudies: featured.filter((cs) => cs.homeGroup === group),
+  })).filter((section) => section.caseStudies.length > 0);
 }
 
 export function isCaseStudyPublished(id: string): boolean {
