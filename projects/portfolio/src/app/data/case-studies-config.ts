@@ -11,12 +11,18 @@ import AirtableCaseStudy from "@/app/pages/case-studies/airtable-sot/AirtableCas
 import OportunDsCaseStudy from "@/app/pages/case-studies/oportun-ds/OportunDsCaseStudy";
 import CarbonAutoOrientationCaseStudy from "@/app/pages/case-studies/carbon-auto-orientation/CarbonAutoOrientationCaseStudy";
 import FigmaToCodeCaseStudy from "@/app/pages/case-studies/figma-to-code/FigmaToCodeCaseStudy";
+import WmEmailCaseStudy from "@/app/pages/case-studies/wm-email-rebrand/WmEmailCaseStudy";
+import NiniJewelsCaseStudy from "@/app/pages/case-studies/nini-jewels/NiniJewelsCaseStudy";
+import BreakoutNetworkCaseStudy from "@/app/pages/case-studies/breakout-network/BreakoutNetworkCaseStudy";
 import { CaseStudyAcademyContent } from "@/app/pages/case-studies/academy/CaseStudyAcademyContent";
 import imgEverydaySansCover from "@/app/assets/pages/case-study/everyday-sans/cover.jpg";
 import { imgAirtableCoverPreview, imgAirtableCoverSource } from "@/app/assets/pages/case-study/airtable-sot/assets";
 import imgOportunDsCover from "@/app/assets/pages/case-study/oportun-ds/cover.jpg";
 import imgCarbonCover from "@/app/assets/pages/case-study/carbon/design-engine.jpg";
 import imgFigmaToCodeCover from "@/app/assets/pages/case-study/figma-to-code/optimized/cover.jpg";
+import imgWmEmailCover from "@/app/assets/pages/case-study/wm-email-rebrand/mockup-min.png";
+import imgNiniJewelsCover from "@/app/assets/pages/case-study/nini-jewels/nini-cover.jpg";
+import imgBreakoutCover from "@/app/assets/pages/case-study/breakout-network/cover.jpeg";
 import type { ProjectLink } from "@/app/components/CaseStudyTemplate";
 import type { ThemeName } from "@/app/components/utils/Theming";
 
@@ -222,6 +228,46 @@ const CASE_STUDIES: CaseStudyConfig[] = [
   {
     id: "5",
     path: "/case-study/5",
+    title: "The Breakout Network",
+    defaultTheme: "Portfolio",
+    isPublished: false,
+    featuredOnHome: false,
+    cardTitle: "The Breakout Network",
+    shortDescription:
+      "A brand identity and set of guidelines for an athletic networking app, bridging brand strategy and product design.",
+    cardDescription:
+      "A scrappy startup needed a brand system as credible as its ambitions. Strategy, visual identity, and guidelines gave product teams a clear North Star to build from.",
+    fullDescription:
+      "The Breakout Network mobile application lacked a cohesive brand identity, leaving product designers without a clear direction. Drawing on prior experience in athletic branding, the project delivered a new visual identity and a full set of brand guidelines — the system product teams needed to build with confidence.",
+    metaItems: [
+      { label: "Role", value: "Art Director/Brand Designer" },
+      { label: "Project Scope", value: "Brand Guidelines" },
+      { label: "Project Tools", value: "Figma/Adobe Creative Suite" },
+      { label: "Timeline", value: "July 2022 – Aug 2022" },
+    ],
+    navSections: [
+      { label: "Overview", href: "#overview" },
+      { label: "The challenge", href: "#challenge" },
+      { label: "The approach", href: "#approach" },
+      { label: "Defining the strategy", href: "#strategy" },
+      { label: "Brand", href: "#brand" },
+      { label: "Visual identity", href: "#visual-identity" },
+      { label: "Brand guidelines", href: "#guidelines" },
+      { label: "The brand in use", href: "#in-use" },
+      { label: "Marketing", href: "#marketing" },
+    ],
+    navAccentColor: "#D0201C",
+    tags: ["Branding", "Brand Guidelines", "Art Direction"],
+    heroType: "image",
+    heroImage: imgBreakoutCover,
+    thumbnail: imgBreakoutCover,
+    PageComponent: BreakoutNetworkCaseStudy,
+    overviewClient: "Breakout Athletic Network",
+    overviewCategory: "Brand Identity, Guidelines",
+  },
+  {
+    id: "6",
+    path: "/case-study/6",
     title: "Carbon Auto-Orientation: Print success without orientation expertise",
     defaultTheme: "Carbon",
     isPublished: true,
@@ -262,8 +308,8 @@ const CASE_STUDIES: CaseStudyConfig[] = [
     overviewCategory: "Feature Design, Resin 3D Printing",
   },
   {
-    id: "6",
-    path: "/case-study/6",
+    id: "7",
+    path: "/case-study/7",
     title: "Xense Biotech",
     defaultTheme: "Xense",
     isPublished: false,
@@ -295,8 +341,8 @@ const CASE_STUDIES: CaseStudyConfig[] = [
     overviewCategory: "Medical Imaging, UI Kit",
   },
   {
-    id: "7",
-    path: "/case-study/7",
+    id: "8",
+    path: "/case-study/8",
     title: "Designing a scalable system for a digital rebrand",
     defaultTheme: "WM",
     isPublished: true,
@@ -332,8 +378,88 @@ const CASE_STUDIES: CaseStudyConfig[] = [
     overviewCategory: "Design Systems, Branding",
   },
   {
-    id: "8",
-    path: "/case-study/8",
+    id: "9",
+    path: "/case-study/9",
+    title: "Redesigning WM email from fragmented sends to a modular digital system",
+    defaultTheme: "WM",
+    isPublished: false,
+    featuredOnHome: false,
+    cardTitle: "WM Email Rebrand",
+    shortDescription:
+      "A collaborative rebranding of Waste Management's email program — purpose, audience strategy, and a 50+ block design system that made every email feel like WM.",
+    cardDescription:
+      "70 new templates and a 50+ block modular toolkit built on research into how people actually read email — 18.5M emails sent under the new system in 2021.",
+    fullDescription:
+      "In 2021, Waste Management's Email Marketing team led a rebrand of the email program in collaboration with the Digital Studio and Brand Team. I led the design work: heuristic analysis, competitive research, and a modular Email Tool Kit — 50+ blocks across five categories — built on SFMC and grounded in the psychology of how people actually read email.",
+    metaItems: [
+      { label: "My Role", value: "Lead Product Designer, w/ team of 4" },
+      { label: "Project Scope", value: "50+ Blocks · Documentation · Style Guide" },
+      { label: "Tools", value: "Sketch · Salesforce CRM · Invision DSM / Prototyping" },
+      { label: "Platform", value: "Salesforce Marketing Cloud (SFMC)" },
+    ],
+    navSections: [
+      { label: "Overview", href: "#overview" },
+      { label: "Context", href: "#context" },
+      { label: "The approach", href: "#approach" },
+      { label: "Research & audit", href: "#research" },
+      { label: "Competitive analysis", href: "#competitive" },
+      { label: "Design system", href: "#design-system" },
+      { label: "Final designs", href: "#final-designs" },
+      { label: "Results & impact", href: "#results" },
+      { label: "Next steps", href: "#next-steps" },
+      { label: "Reflections", href: "#reflection" },
+    ],
+    navAccentColor: "#006B38",
+    tags: ["Email Design", "Design System", "SFMC", "Branding"],
+    heroType: "image",
+    heroImage: imgWmEmailCover,
+    thumbnail: imgWmEmailCover,
+    PageComponent: WmEmailCaseStudy,
+    overviewClient: "Waste Management",
+    overviewCategory: "Email Design System, SFMC",
+  },
+  {
+    id: "10",
+    path: "/case-study/10",
+    title: "Fine jewelry the old site made look like costume",
+    defaultTheme: "Portfolio",
+    isPublished: true,
+    cardTitle: "Nini Jewels",
+    shortDescription:
+      "A full website redesign, build, illustration, and film for a celebrated Thai jewelry designer: brand, code, and story, end to end.",
+    cardDescription:
+      "The old site made fine jewelry look like costume. The redesign delivered a black-and-white brand system, illustrated collections, and a site the team can update themselves.",
+    fullDescription:
+      "Nini Hale is a celebrated Thai jewelry designer. Her website was dated, hard to update, and didn't match the work: fine pieces using rare, striking stones, presented like costume jewelry. The redesign covered design, front-end development, illustration, and film, delivered end to end.",
+    metaItems: [
+      { label: "Role", value: "UI design, front-end development, illustration & video editing" },
+      { label: "Scope", value: "Full website redesign: brand, build, and content" },
+      { label: "Deliverables", value: "Design → live site: UI, build, illustrations, video introduction" },
+      { label: "Timeline", value: "2020" },
+    ],
+    navSections: [
+      { label: "Overview", href: "#overview" },
+      { label: "The problem", href: "#problem" },
+      { label: "The Challenge", href: "#tension" },
+      { label: "Homepage", href: "#homepage" },
+      { label: "The approach", href: "#approach" },
+      { label: "Brand guidelines", href: "#brand-system" },
+      { label: "Collections", href: "#collections" },
+      { label: "More pages", href: "#pages" },
+      { label: "Reflection", href: "#reflection" },
+    ],
+    navAccentColor: "#27A6A0",
+    tags: ["Branding", "Web Design", "Front-End", "Illustration"],
+    heroType: "image",
+    heroImage: imgNiniJewelsCover,
+    thumbnail: imgNiniJewelsCover,
+    PageComponent: NiniJewelsCaseStudy,
+    overviewClient: "Nini Jewels",
+    overviewCategory: "Website Redesign, Build & Illustration",
+  },
+  {
+    id: "11",
+    path: "/case-study/11",
     title: "Academy Sports + Outdoors Branding",
     isPublished: false,
     featuredOnHome: false,

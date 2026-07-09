@@ -1,6 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Body, Heading } from "@/app/components/Text/Text";
 import { fluidSize } from "@/app/components/common/fluidSize";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPagination,
+  CarouselPrevious,
+} from "@/app/components/Carousel/Carousel";
 
 /** Matches CaseStudyTemplate overview shell (max-w-[1660px] + inner content width). */
 const CONTAINER_OUTER = "w-full max-w-[1660px] mx-auto px-4 sm:px-6 md:px-12 lg:px-[68px]";
@@ -9,20 +17,24 @@ const CONTAINER_INNER = "w-full max-w-[1300px] flex flex-col gap-6";
 export function Section({
   id,
   variant = "default",
+  background,
   children,
   className = "",
 }: {
   id?: string;
   variant?: "default" | "mid" | "dark";
+  /** Overrides the variant-computed background — use for a case study whose brand palette shouldn't inherit the site theme's brand hue. */
+  background?: string;
   children: React.ReactNode;
   className?: string;
 }) {
   const bg =
-    variant === "mid"
+    background ??
+    (variant === "mid"
       ? "var(--ld-semantic-color-fill-brand-subtle, #e9f1fe)"
       : variant === "dark"
         ? "var(--ld-semantic-color-fill-brand, #0053e2)"
-        : "var(--ld-semantic-color-fill, #ffffff)";
+        : "var(--ld-semantic-color-fill, #ffffff)");
 
   return (
     <section
@@ -45,9 +57,12 @@ export function Section({
 export function Eyebrow({
   children,
   onDark = false,
+  color,
 }: {
   children: React.ReactNode;
   onDark?: boolean;
+  /** Overrides the onDark-computed color — use for a case study whose brand palette shouldn't inherit the site theme's brand hue. */
+  color?: string;
 }) {
   return (
     <Body
@@ -56,9 +71,11 @@ export function Eyebrow({
       weight="alt"
       UNSAFE_className="uppercase tracking-[0.12em]"
       UNSAFE_style={{
-        color: onDark
-          ? "var(--ld-primitive-color-spark-100, #ffc220)"
-          : "var(--ld-semantic-color-text-brand, #0053e2)",
+        color:
+          color ??
+          (onDark
+            ? "var(--ld-primitive-color-spark-100, #ffc220)"
+            : "var(--ld-semantic-color-text-brand, #0053e2)"),
         fontSize: "11px",
       }}
     >
@@ -276,6 +293,7 @@ export function ImageFull({
   alt,
   caption,
   label,
+  labelColor,
   className = "",
   frameClassName = "",
   imageClassName = "",
@@ -288,6 +306,8 @@ export function ImageFull({
   alt: string;
   caption?: string;
   label?: string;
+  /** Overrides the label's default brand color — use for a case study whose palette shouldn't inherit the site theme's brand hue. */
+  labelColor?: string;
   className?: string;
   frameClassName?: string;
   imageClassName?: string;
@@ -303,9 +323,9 @@ export function ImageFull({
           as="p"
           size="small"
           weight="alt"
-          color="brand"
+          color={labelColor ? undefined : "brand"}
           UNSAFE_className="uppercase tracking-[0.1em]"
-          UNSAFE_style={{ fontSize: "10px" }}
+          UNSAFE_style={{ fontSize: "10px", color: labelColor }}
         >
           {label}
         </Body>
@@ -489,22 +509,27 @@ export function VideoFull({
   alt,
   caption,
   label,
+  labelColor,
   className = "",
   frameClassName = "",
   videoClassName = "",
   fit = "natural",
   surface = "white",
+  bordered = false,
   playback = "loop",
 }: {
   src: string;
   alt: string;
   caption?: string;
   label?: string;
+  /** Overrides the label's default brand color — use for a case study whose palette shouldn't inherit the site theme's brand hue. */
+  labelColor?: string;
   className?: string;
   frameClassName?: string;
   videoClassName?: string;
   fit?: "natural" | "cover" | "contain";
   surface?: ImageSurface;
+  bordered?: boolean;
   playback?: "loop" | "controls";
 }) {
   return (
@@ -514,9 +539,9 @@ export function VideoFull({
           as="p"
           size="small"
           weight="alt"
-          color="brand"
+          color={labelColor ? undefined : "brand"}
           UNSAFE_className="uppercase tracking-[0.1em]"
-          UNSAFE_style={{ fontSize: "10px" }}
+          UNSAFE_style={{ fontSize: "10px", color: labelColor }}
         >
           {label}
         </Body>
@@ -525,6 +550,7 @@ export function VideoFull({
         src={src}
         alt={alt}
         className={frameClassName}
+        bordered={bordered}
         videoClassName={videoClassName}
         fit={fit}
         playback={playback}
@@ -544,7 +570,7 @@ export function ImageGrid2({
   className = "",
   stacked = false,
 }: {
-  items: { src: string; alt: string; caption?: string; label?: string; frameClassName?: string; imageClassName?: string; fit?: "natural" | "cover" | "contain"; surface?: ImageSurface }[];
+  items: { src: string; alt: string; caption?: string; label?: string; labelColor?: string; frameClassName?: string; imageClassName?: string; fit?: "natural" | "cover" | "contain"; surface?: ImageSurface }[];
   className?: string;
   stacked?: boolean;
 }) {
@@ -554,6 +580,59 @@ export function ImageGrid2({
         <ImageFull key={item.alt} {...item} />
       ))}
     </div>
+  );
+}
+
+/**
+ * A carousel of same-size images — use for a folder of grouped, uniformly
+ * sized assets (a slide deck export, a photo set) instead of stacking them
+ * all as a static grid.
+ */
+export function ImageCarousel({
+  images,
+  ariaLabel,
+  fit = "natural",
+  surface = "white",
+  itemHeight,
+}: {
+  images: { src: string; alt: string; caption?: string }[];
+  ariaLabel: string;
+  fit?: "natural" | "cover" | "contain";
+  surface?: ImageSurface;
+  /** When set, each slide renders in a fixed-height frame with internal vertical scroll — use for tall, full-page screenshots so every slide compares at the same visual size. */
+  itemHeight?: number;
+}) {
+  return (
+    <Carousel aria-label={ariaLabel}>
+      <CarouselContent>
+        {images.map((image) =>
+          itemHeight ? (
+            <CarouselItem key={image.src} cols={1}>
+              <figure className="m-0 flex flex-col gap-3">
+                <div
+                  className="w-full overflow-y-auto rounded-xl"
+                  style={{ height: itemHeight, background: IMAGE_SURFACE[surface], border: "1px solid var(--ld-semantic-color-separator, #e3e4e5)" }}
+                >
+                  <img src={image.src} alt={image.alt} className="block w-full h-auto" loading="lazy" decoding="async" />
+                </div>
+                {image.caption && (
+                  <Body as="figcaption" size="small" color="subtlest" UNSAFE_className="leading-snug">
+                    {image.caption}
+                  </Body>
+                )}
+              </figure>
+            </CarouselItem>
+          ) : (
+            <CarouselItem key={image.src} cols={1}>
+              <ImageFull src={image.src} alt={image.alt} caption={image.caption} fit={fit} surface={surface} />
+            </CarouselItem>
+          ),
+        )}
+      </CarouselContent>
+      <CarouselPrevious />
+      <CarouselNext />
+      <CarouselPagination />
+    </Carousel>
   );
 }
 
@@ -742,6 +821,145 @@ export function StatsRow({
           </Body>
         </div>
       ))}
+    </div>
+  );
+}
+
+export type JourneyMood = "friction" | "blocker" | "progress" | "win" | "neutral";
+
+export interface JourneyItem {
+  date: string;
+  phase: string;
+  who?: { label: string; variant?: string }[];
+  story: string;
+  tension?: string;
+  win?: string;
+  mood: JourneyMood;
+}
+
+const JOURNEY_MOOD_COLOR: Record<JourneyMood, string> = {
+  friction: "var(--ld-semantic-color-text-negative, #ea1100)",
+  blocker: "var(--ld-primitive-color-orange-100, #fa6400)",
+  progress: "var(--ld-semantic-color-text-brand, #0053e2)",
+  win: "var(--ld-semantic-color-text-positive, #2a8703)",
+  neutral: "var(--ld-semantic-color-text, #2e2f32)",
+};
+
+const JOURNEY_CHIP_PALETTE = [
+  { bg: "#e8f2ff", color: "#1a4f8a", border: "#bed8f5" },
+  { bg: "#e6fff7", color: "#1a5c3a", border: "#9fdccc" },
+  { bg: "#f3eeff", color: "#553c9a", border: "#d9c9f5" },
+  { bg: "#fff3e6", color: "#7b3a00", border: "#f5d9b5" },
+];
+
+function journeyChipStyle(key: string) {
+  let hash = 0;
+  for (let i = 0; i < key.length; i += 1) hash = (hash * 31 + key.charCodeAt(i)) >>> 0;
+  return JOURNEY_CHIP_PALETTE[hash % JOURNEY_CHIP_PALETTE.length];
+}
+
+/** Vertical timeline for a project's chronological story, used across multiple case studies. */
+export function JourneyTimeline({
+  items,
+  phaseColor,
+}: {
+  items: JourneyItem[];
+  /** Overrides the phase title's default brand color — use for a case study whose palette shouldn't inherit the site theme's brand hue. */
+  phaseColor?: string;
+}) {
+  return (
+    <div>
+      {items.map((item) => (
+        <div key={`${item.date}-${item.phase}`} className="grid grid-cols-1 md:grid-cols-[180px_1fr]">
+          <div
+            className="relative py-7 pr-5 md:border-r-2"
+            style={{ borderColor: "var(--ld-semantic-color-separator, #e3e4e5)" }}
+          >
+            <div
+              className="hidden md:block absolute -right-[7px] top-8 w-3 h-3 rounded-full border-2 border-white"
+              style={{ background: JOURNEY_MOOD_COLOR[item.mood], boxShadow: `0 0 0 2px ${JOURNEY_MOOD_COLOR[item.mood]}` }}
+            />
+            {item.date ? (
+              <Body as="p" size="small" weight="alt" color="subtlest" UNSAFE_className="tracking-wide mb-1" UNSAFE_style={{ fontSize: "11px" }}>
+                {item.date}
+              </Body>
+            ) : null}
+            <Body
+              as="p"
+              size="small"
+              weight="alt"
+              UNSAFE_className="italic leading-snug mb-2"
+              UNSAFE_style={{ color: phaseColor ?? "var(--ld-semantic-color-fill-brand-bold, #001e60)" }}
+            >
+              {item.phase}
+            </Body>
+            {item.who && item.who.length > 0 && (
+              <div className="flex flex-wrap gap-1">
+                {item.who.map((w) => {
+                  const style = journeyChipStyle(w.variant ?? w.label);
+                  return (
+                    <span
+                      key={w.label}
+                      className="text-[9px] font-bold uppercase tracking-wide px-[7px] py-0.5 rounded-full border"
+                      style={style}
+                    >
+                      {w.label}
+                    </span>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+          <div className="py-7 md:pl-9">
+            <Body as="p" size="small" UNSAFE_className="leading-[1.7] mb-2.5">
+              {item.story}
+            </Body>
+            {item.tension && (
+              <div
+                className="text-[13px] leading-snug my-2 pl-3 border-l-[3px] rounded-r-[5px] py-2 pr-3"
+                style={{ background: "#fff3e6", borderColor: "var(--ld-primitive-color-orange-100, #fa6400)", color: "#7b3200" }}
+              >
+                <span className="font-bold">Tension: </span>
+                {item.tension}
+              </div>
+            )}
+            {item.win && (
+              <div
+                className="text-[13px] leading-snug my-2 pl-3 border-l-[3px] rounded-r-[5px] py-2 pr-3"
+                style={{ background: "var(--ld-primitive-color-green-10, #eaf3e6)", borderColor: "var(--ld-semantic-color-text-positive, #2a8703)", color: "var(--ld-semantic-color-text-positive-bold, #1d5f02)" }}
+              >
+                <span className="font-bold">Aligned: </span>
+                {item.win}
+              </div>
+            )}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+const CALLOUT_TONE: Record<"brand" | "positive" | "warning" | "neutral", { bg: string; border: string }> = {
+  brand: { bg: "var(--ld-semantic-color-fill-brand-subtle, #e9f1fe)", border: "var(--ld-semantic-color-text-brand, #0053e2)" },
+  positive: { bg: "var(--ld-primitive-color-green-10, #eaf3e6)", border: "var(--ld-semantic-color-text-positive, #2a8703)" },
+  warning: { bg: "#fff3e6", border: "var(--ld-primitive-color-orange-100, #fa6400)" },
+  neutral: { bg: "var(--ld-semantic-color-fill-subtle, #f8f8f8)", border: "var(--ld-semantic-color-fill-inverse, #2e2f32)" },
+};
+
+/** Colored callout box for a single highlighted takeaway within a section. */
+export function Callout({
+  children,
+  tone = "brand",
+}: {
+  children: React.ReactNode;
+  tone?: "brand" | "positive" | "warning" | "neutral";
+}) {
+  const style = CALLOUT_TONE[tone];
+  return (
+    <div className="rounded-r-[8px] py-4 pl-5 pr-5 border-l-4" style={{ background: style.bg, borderColor: style.border }}>
+      <Body as="div" size="small" UNSAFE_className="leading-[1.6]">
+        {children}
+      </Body>
     </div>
   );
 }

@@ -9,6 +9,7 @@ import {
   ImageFull,
   VideoFull,
   ImageGrid2,
+  JourneyTimeline,
   Lead,
   NextGrid,
   ProblemGrid,
@@ -18,6 +19,7 @@ import {
   StatCards,
   StatsRow,
   type ImageSurface,
+  type JourneyItem,
 } from "@/app/components/CaseStudyPrimitives";
 
 /**
@@ -34,6 +36,7 @@ export {
   ImageFull as EdsImageFull,
   VideoFull as EdsVideoFull,
   ImageGrid2 as EdsImageGrid2,
+  JourneyTimeline as EdsJourneyTimeline,
   Lead as EdsLead,
   NextGrid as EdsNextGrid,
   ProblemGrid as EdsProblemGrid,
@@ -43,7 +46,7 @@ export {
   StatCards as EdsStatCards,
   StatsRow as EdsStatsRow,
 };
-export type { ImageSurface as EdsImageSurface };
+export type { ImageSurface as EdsImageSurface, JourneyItem as EdsJourneyItem };
 
 const WEIGHT_ROWS = [
   { weight: "400", name: "Regular", role: "Captions, helper text", isNew: false, fontWeight: 400, gradient: "linear-gradient(90deg,#001335 0%,#001e60 100%)" },
@@ -82,94 +85,6 @@ export function EdsWeightScale() {
               new
             </span>
           )}
-        </div>
-      ))}
-    </div>
-  );
-}
-
-export type EdsJourneyMood = "friction" | "blocker" | "progress" | "win";
-
-export interface EdsJourneyItem {
-  date: string;
-  phase: string;
-  who: { label: string; variant: "brand" | "engineering" | "a11y" | "foundry" }[];
-  story: string;
-  tension?: string;
-  win?: string;
-  mood: EdsJourneyMood;
-}
-
-const MOOD_COLOR: Record<EdsJourneyMood, string> = {
-  friction: "var(--ld-semantic-color-text-negative, #ea1100)",
-  blocker: "var(--ld-primitive-color-orange-100, #fa6400)",
-  progress: "var(--ld-semantic-color-text-brand, #0053e2)",
-  win: "var(--ld-semantic-color-text-positive, #2a8703)",
-};
-
-const CHIP_STYLE: Record<EdsJourneyItem["who"][number]["variant"], { bg: string; color: string; border: string }> = {
-  brand: { bg: "#e8f2ff", color: "#1a4f8a", border: "#bed8f5" },
-  engineering: { bg: "#e6fff7", color: "#1a5c3a", border: "#9fdccc" },
-  a11y: { bg: "#f3eeff", color: "#553c9a", border: "#d9c9f5" },
-  foundry: { bg: "#fff3e6", color: "#7b3a00", border: "#f5d9b5" },
-};
-
-export function EdsJourneyTimeline({ items }: { items: EdsJourneyItem[] }) {
-  return (
-    <div>
-      {items.map((item) => (
-        <div key={`${item.date}-${item.phase}`} className="grid grid-cols-1 md:grid-cols-[180px_1fr]">
-          <div
-            className="relative py-7 pr-5 md:border-r-2"
-            style={{ borderColor: "var(--ld-semantic-color-separator, #e3e4e5)" }}
-          >
-            <div
-              className="hidden md:block absolute -right-[7px] top-8 w-3 h-3 rounded-full border-2 border-white"
-              style={{ background: MOOD_COLOR[item.mood], boxShadow: `0 0 0 2px ${MOOD_COLOR[item.mood]}` }}
-            />
-            {item.date ? (
-              <Body as="p" size="small" weight="alt" color="subtlest" UNSAFE_className="tracking-wide mb-1" UNSAFE_style={{ fontSize: "11px" }}>
-                {item.date}
-              </Body>
-            ) : null}
-            <Body as="p" size="small" weight="alt" UNSAFE_className="italic leading-snug mb-2" UNSAFE_style={{ color: "var(--ld-semantic-color-fill-brand-bold, #001e60)" }}>
-              {item.phase}
-            </Body>
-            <div className="flex flex-wrap gap-1">
-              {item.who.map((w) => (
-                <span
-                  key={w.label}
-                  className="text-[9px] font-bold uppercase tracking-wide px-[7px] py-0.5 rounded-full border"
-                  style={CHIP_STYLE[w.variant]}
-                >
-                  {w.label}
-                </span>
-              ))}
-            </div>
-          </div>
-          <div className="py-7 md:pl-9">
-            <Body as="p" size="small" UNSAFE_className="leading-[1.7] mb-2.5">
-              {item.story}
-            </Body>
-            {item.tension && (
-              <div
-                className="text-[13px] leading-snug my-2 pl-3 border-l-[3px] rounded-r-[5px] py-2 pr-3"
-                style={{ background: "#fff3e6", borderColor: "var(--ld-primitive-color-orange-100, #fa6400)", color: "#7b3200" }}
-              >
-                <span className="font-bold">Tension: </span>
-                {item.tension}
-              </div>
-            )}
-            {item.win && (
-              <div
-                className="text-[13px] leading-snug my-2 pl-3 border-l-[3px] rounded-r-[5px] py-2 pr-3"
-                style={{ background: "var(--ld-primitive-color-green-10, #eaf3e6)", borderColor: "var(--ld-semantic-color-text-positive, #2a8703)", color: "var(--ld-semantic-color-text-positive-bold, #1d5f02)" }}
-              >
-                <span className="font-bold">Aligned: </span>
-                {item.win}
-              </div>
-            )}
-          </div>
         </div>
       ))}
     </div>

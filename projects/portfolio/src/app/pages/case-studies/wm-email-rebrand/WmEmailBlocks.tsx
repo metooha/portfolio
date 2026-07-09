@@ -1,0 +1,193 @@
+import React from "react";
+import { Body } from "@/app/components/Text/Text";
+import { CheckIcon, CloseIcon, Icon } from "@/app/components/Icons/Icons";
+
+const SEPARATOR = "var(--ld-semantic-color-separator, #e3e4e5)";
+
+export function WmEmailTeamRow({ members }: { members: { label: string; color: string }[] }) {
+  return (
+    <div className="flex flex-wrap gap-2">
+      {members.map((m) => (
+        <div key={m.label} className="flex items-center gap-2 rounded-full border px-3 py-1.5" style={{ borderColor: SEPARATOR }}>
+          <span className="size-2 rounded-full shrink-0" style={{ background: m.color }} />
+          <Body as="span" size="small" weight="alt">
+            {m.label}
+          </Body>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+export function WmEmailToolChips({ tools }: { tools: string[] }) {
+  return (
+    <div className="flex flex-wrap gap-2">
+      {tools.map((tool) => (
+        <span
+          key={tool}
+          className="rounded px-2.5 py-1 text-[12px] font-semibold"
+          style={{ background: "var(--ld-semantic-color-fill-brand-subtle, #e9f1fe)", color: "var(--ld-semantic-color-text-subtle, #515357)" }}
+        >
+          {tool}
+        </span>
+      ))}
+    </div>
+  );
+}
+
+export function WmEmailApproachSteps({ steps }: { steps: string[] }) {
+  return (
+    <div className="grid grid-cols-2 sm:grid-cols-4 gap-px rounded-[18px] overflow-hidden" style={{ background: SEPARATOR, border: `1px solid ${SEPARATOR}` }}>
+      {steps.map((step, index) => (
+        <div key={step} className="bg-white text-center px-3 py-6">
+          <div className="font-bold leading-none mb-2" style={{ fontSize: "28px", color: SEPARATOR }}>
+            {String(index + 1).padStart(2, "0")}
+          </div>
+          <Body as="p" size="small" weight="alt" UNSAFE_className="leading-[1.3]">
+            {step}
+          </Body>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+export function WmEmailQuestionList({ items }: { items: { icon: string; lead: string; body: string }[] }) {
+  return (
+    <div className="flex flex-col">
+      {items.map((item, index) => (
+        <div
+          key={item.lead}
+          className="flex gap-3 py-3.5"
+          style={index < items.length - 1 ? { borderBottom: `1px solid ${SEPARATOR}` } : undefined}
+        >
+          <span className="shrink-0 mt-0.5" style={{ color: "var(--ld-semantic-color-text-brand, #0053e2)" }}>
+            <Icon name={item.icon} size="medium" decorative />
+          </span>
+          <Body as="p" size="medium" UNSAFE_className="leading-[1.6]">
+            <Body as="span" size="medium" weight="alt">
+              {item.lead}
+            </Body>{" "}
+            {item.body}
+          </Body>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+export function WmEmailPsychCards({ cards }: { cards: { stat: string; title: string; description: string }[] }) {
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      {cards.map((card) => (
+        <div
+          key={card.title}
+          className="rounded-[10px] p-5"
+          style={{ background: "var(--ld-semantic-color-fill, #ffffff)", border: `1px solid ${SEPARATOR}`, borderTopWidth: "3px", borderTopColor: "#3D35D8" }}
+        >
+          <div className="font-bold leading-none mb-2" style={{ fontSize: "28px", color: "#3D35D8" }}>
+            {card.stat}
+          </div>
+          <Body as="p" size="small" weight="alt" UNSAFE_className="mb-1">
+            {card.title}
+          </Body>
+          <Body as="p" size="small" color="subtlest" UNSAFE_className="leading-[1.6]">
+            {card.description}
+          </Body>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+export function WmEmailBlockCategoryGrid({
+  items,
+}: {
+  items: { tag: string; tagColor: string; title: string; description: string }[];
+}) {
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      {items.map((item) => (
+        <div key={item.title} className="rounded-[10px] p-5" style={{ background: "var(--ld-semantic-color-fill, #ffffff)", border: `1px solid ${SEPARATOR}` }}>
+          <span
+            className="inline-block text-[10px] font-bold uppercase tracking-wide px-2 py-0.5 rounded mb-3"
+            style={{ background: item.tagColor, color: "#ffffff" }}
+          >
+            {item.tag}
+          </span>
+          <Body as="p" size="small" weight="alt" UNSAFE_className="mb-1">
+            {item.title}
+          </Body>
+          <Body as="p" size="small" color="subtlest" UNSAFE_className="leading-[1.6]">
+            {item.description}
+          </Body>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+export function WmEmailAuditGrid({
+  before,
+  after,
+}: {
+  before: { label: string; items: string[] };
+  after: { label: string; items: string[] };
+}) {
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      {[
+        { ...before, IconComp: CloseIcon, color: "#C53030", bg: "#FFF5F5", border: "#FED7D7" },
+        { ...after, IconComp: CheckIcon, color: "#006937", bg: "var(--ld-semantic-color-fill-brand-subtle, #e9f1fe)", border: SEPARATOR },
+      ].map((col) => (
+        <div key={col.label} className="rounded-[10px] p-6" style={{ background: col.bg, border: `1px solid ${col.border}` }}>
+          <Body
+            as="p"
+            size="small"
+            weight="alt"
+            UNSAFE_className="uppercase tracking-[0.1em] mb-4"
+            UNSAFE_style={{ fontSize: "10px", color: col.color }}
+          >
+            {col.label}
+          </Body>
+          <ul className="flex flex-col gap-2.5">
+            {col.items.map((item) => (
+              <li key={item} className="flex gap-2.5 items-start">
+                <span className="shrink-0" style={{ color: col.color }}>
+                  <col.IconComp size="small" decorative />
+                </span>
+                <Body as="p" size="small" UNSAFE_className="leading-[1.55]">
+                  {item}
+                </Body>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+export function WmEmailReflectionGrid({ items }: { items: { icon: string; title: string; description: string }[] }) {
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      {items.map((item) => (
+        <div
+          key={item.title}
+          className="rounded-[10px] p-5"
+          style={{ background: "var(--ld-semantic-color-fill, #ffffff)", border: `1px solid ${SEPARATOR}`, borderLeftWidth: "4px", borderLeftColor: "#006937" }}
+        >
+          <div className="mb-2" style={{ color: "#006937" }}>
+            <Icon name={item.icon} size="large" decorative />
+          </div>
+          <Body as="p" size="small" weight="alt" UNSAFE_className="mb-1">
+            {item.title}
+          </Body>
+          <Body as="p" size="small" color="subtlest" UNSAFE_className="leading-[1.6]">
+            {item.description}
+          </Body>
+        </div>
+      ))}
+    </div>
+  );
+}

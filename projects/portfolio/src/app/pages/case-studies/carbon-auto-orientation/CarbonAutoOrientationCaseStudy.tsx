@@ -79,7 +79,7 @@ function CarbonOverviewLogo() {
 }
 
 export default function CarbonAutoOrientationCaseStudy() {
-  const { prev: prevProject, next: nextProject } = getAdjacentCaseStudies("5");
+  const { prev: prevProject, next: nextProject } = getAdjacentCaseStudies("6");
 
   return (
     <div data-ld-theme="Carbon" style={{ display: "contents" }}>
