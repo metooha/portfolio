@@ -230,15 +230,14 @@ const CASE_STUDIES: CaseStudyConfig[] = [
     path: "/case-study/5",
     title: "The Breakout Network",
     defaultTheme: "Portfolio",
-    isPublished: false,
-    featuredOnHome: false,
+    isPublished: true,
     cardTitle: "The Breakout Network",
     shortDescription:
       "A brand identity and set of guidelines for an athletic networking app, bridging brand strategy and product design.",
     cardDescription:
       "A scrappy startup needed a brand system as credible as its ambitions. Strategy, visual identity, and guidelines gave product teams a clear North Star to build from.",
     fullDescription:
-      "The Breakout Network mobile application lacked a cohesive brand identity, leaving product designers without a clear direction. Drawing on prior experience in athletic branding, the project delivered a new visual identity and a full set of brand guidelines — the system product teams needed to build with confidence.",
+      "The Breakout Network mobile application lacked a cohesive brand identity, leaving product designers without a clear direction. Drawing on prior experience in athletic branding, the project delivered a new visual identity and a full set of brand guidelines, the system product teams needed to build with confidence.",
     metaItems: [
       { label: "Role", value: "Art Director/Brand Designer" },
       { label: "Project Scope", value: "Brand Guidelines" },

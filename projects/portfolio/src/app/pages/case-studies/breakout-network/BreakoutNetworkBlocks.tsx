@@ -135,6 +135,56 @@ export function BreakoutLogoCompare({
   );
 }
 
+/** Frames a full-page screenshot inside a fixed 16:10 laptop-screen viewport. The screenshot scrolls inside the screen, like a real page would. */
+export function BreakoutLaptopMockup({
+  src,
+  alt,
+}: {
+  src: string;
+  alt: string;
+}) {
+  return (
+    <div className="w-full max-w-[1200px] mx-auto">
+      <div
+        className="relative w-full rounded-t-2xl"
+        style={{
+          background: "#1c1c1e",
+          padding: "16px 16px 20px",
+          boxShadow: "0 20px 40px -20px rgba(0,0,0,0.35)",
+        }}
+      >
+        <div
+          className="absolute left-1/2 -translate-x-1/2 rounded-full"
+          style={{ top: 6, width: 6, height: 6, background: "#3a3a3c" }}
+          aria-hidden="true"
+        />
+        <div
+          className="relative w-full overflow-y-auto overscroll-contain rounded-sm bg-white"
+          style={{ aspectRatio: "16 / 10" }}
+        >
+          <img src={src} alt={alt} className="block w-full h-auto" />
+        </div>
+      </div>
+      <div
+        className="relative mx-auto"
+        style={{
+          height: 14,
+          width: "104%",
+          marginLeft: "-2%",
+          background: "linear-gradient(180deg, #d4d4d6, #b8b8ba)",
+          borderRadius: "0 0 10px 10px",
+        }}
+        aria-hidden="true"
+      >
+        <div
+          className="absolute left-1/2 -translate-x-1/2 top-0"
+          style={{ width: 120, height: 8, background: "#a8a8aa", borderRadius: "0 0 8px 8px" }}
+        />
+      </div>
+    </div>
+  );
+}
+
 /** Existing vs. redesigned mobile app comparison: image + heading + bullet list per side. */
 export function BreakoutAppCompare({
   before,

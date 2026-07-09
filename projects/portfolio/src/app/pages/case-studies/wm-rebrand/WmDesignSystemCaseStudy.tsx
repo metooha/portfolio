@@ -2,12 +2,17 @@ import { CaseStudyTemplate } from "@/app/components/CaseStudyTemplate";
 import { getAdjacentCaseStudies } from "@/app/data/case-studies-config";
 import { WmCaseStudyHero, WmOverviewLogo } from "./sections/WmCaseStudyHero";
 import { WmCaseStudyVisualGrid } from "./sections/WmCaseStudyVisualGrid";
-import { WmCaseStudyProblemSpaceSection } from "./sections/WmCaseStudyProblemSpaceSection";
-import { WmCaseStudyApproachSection } from "./sections/WmCaseStudyApproachSection";
-import { WmCaseStudyInformationArchitectureSection } from "./sections/WmCaseStudyInformationArchitectureSection";
-import { WmCaseStudyComparisonSection } from "./sections/WmCaseStudyComparisonSection";
-import { WmCaseStudyCompromisesSection } from "./sections/WmCaseStudyCompromisesSection";
-import { WmCaseStudyClosingSection } from "./sections/WmCaseStudyClosingSection";
+import {
+  WmApproachSection,
+  WmAuditSection,
+  WmComponentsSection,
+  WmCompromisesSection,
+  WmDesignWalkthroughSection,
+  WmGoalsSection,
+  WmInformationArchitectureSection,
+  WmProblemSpaceSection,
+  WmReflectionSection,
+} from "./WmRebrandSections";
 
 const WM_NAV_SECTIONS = [
   { label: "Overview", href: "#overview" },
@@ -18,9 +23,6 @@ const WM_NAV_SECTIONS = [
   { label: "Information Architecture", href: "#information-architecture" },
   { label: "Compromises", href: "#compromises" },
 ];
-
-const SECTION_LAYOUT =
-  "content-stretch flex flex-1 flex-col gap-12 md:gap-16 lg:gap-[80px] items-stretch min-h-px w-full max-w-full min-w-0 relative";
 
 export default function WmDesignSystemCaseStudy() {
   const { prev: prevProject, next: nextProject } = getAdjacentCaseStudies("8");
@@ -50,19 +52,20 @@ export default function WmDesignSystemCaseStudy() {
         nextProject={nextProject}
       >
         <div className="relative shrink-0 w-full overflow-x-hidden">
-          <div className="flex flex-row items-stretch justify-center w-full">
-            <div className="content-stretch flex flex-col items-stretch w-full max-w-[1660px] mx-auto px-4 sm:px-6 md:px-12 lg:px-[68px] relative">
-              <div className={SECTION_LAYOUT}>
-                <WmCaseStudyVisualGrid />
-                <WmCaseStudyProblemSpaceSection />
-                <WmCaseStudyApproachSection />
-                <WmCaseStudyInformationArchitectureSection />
-                <WmCaseStudyComparisonSection />
-                <WmCaseStudyCompromisesSection />
-                <WmCaseStudyClosingSection />
-              </div>
+          <div className="w-full max-w-[1660px] mx-auto px-4 sm:px-6 md:px-12 lg:px-[68px] py-12 md:py-16">
+            <div className="w-full max-w-[1300px] mx-auto">
+              <WmCaseStudyVisualGrid />
             </div>
           </div>
+          <WmProblemSpaceSection />
+          <WmGoalsSection />
+          <WmApproachSection />
+          <WmAuditSection />
+          <WmComponentsSection />
+          <WmInformationArchitectureSection />
+          <WmDesignWalkthroughSection />
+          <WmCompromisesSection />
+          <WmReflectionSection />
         </div>
       </CaseStudyTemplate>
     </div>

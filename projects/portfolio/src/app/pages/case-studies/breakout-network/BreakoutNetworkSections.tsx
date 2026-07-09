@@ -3,8 +3,6 @@ import { Body } from "@/app/components/Text/Text";
 import {
   Eyebrow,
   ImageCarousel,
-  ImageFull,
-  ImageGrid2,
   Lead,
   Section,
   SectionTitle,
@@ -12,98 +10,143 @@ import {
 import {
   BreakoutApproachDiagram,
   BreakoutAppCompare,
+  BreakoutLaptopMockup,
   BreakoutLogoCompare,
-  BreakoutStatement,
   BreakoutStrategySteps,
 } from "./BreakoutNetworkBlocks";
 
 // Root assets
 import imgLogoOld from "@/app/assets/pages/case-study/breakout-network/BNW-Logo-old.png";
 import imgLogoNew from "@/app/assets/pages/case-study/breakout-network/BNW-logo-new.png";
-import imgLogoMin from "@/app/assets/pages/case-study/breakout-network/BNW-logo-min.jpg";
-import imgLogoVariations from "@/app/assets/pages/case-study/breakout-network/BNW-logo-variations.jpg";
-import imgMarkLight from "@/app/assets/pages/case-study/breakout-network/new-mark-light.png";
 import imgOldMockup from "@/app/assets/pages/case-study/breakout-network/old-mockup.png";
 import imgNewMockDark from "@/app/assets/pages/case-study/breakout-network/new-mock-dark.png";
 import imgSitePage from "@/app/assets/pages/case-study/breakout-network/site-page.png";
 
-// brand-carousel/
-import imgBrand3 from "@/app/assets/pages/case-study/breakout-network/brand-carousel/Breakout Athletic Network Brand Guidelines-3.jpg";
-import imgBrand4 from "@/app/assets/pages/case-study/breakout-network/brand-carousel/Breakout Athletic Network Brand Guidelines-4.jpg";
-import imgBrand5 from "@/app/assets/pages/case-study/breakout-network/brand-carousel/Breakout Athletic Network Brand Guidelines-5.jpg";
-import imgBrand6 from "@/app/assets/pages/case-study/breakout-network/brand-carousel/Breakout Athletic Network Brand Guidelines-6.jpg";
-import imgBrand7 from "@/app/assets/pages/case-study/breakout-network/brand-carousel/Breakout Athletic Network Brand Guidelines-7.jpg";
-import imgBrand8 from "@/app/assets/pages/case-study/breakout-network/brand-carousel/Breakout Athletic Network Brand Guidelines-8.jpg";
-import imgBrand9 from "@/app/assets/pages/case-study/breakout-network/brand-carousel/Breakout Athletic Network Brand Guidelines-9.jpg";
-import imgBrand47 from "@/app/assets/pages/case-study/breakout-network/brand-carousel/Breakout Athletic Network Brand Guidelines-47.jpg";
+// guidelines/ — Brand section
+import imgGCover from "@/app/assets/pages/case-study/breakout-network/guidelines/cover.jpg";
+import imgGToc from "@/app/assets/pages/case-study/breakout-network/guidelines/table-of-contents.jpg";
+import imgGPlatformTitle from "@/app/assets/pages/case-study/breakout-network/guidelines/platform-title.jpg";
+import imgGPlatformIntro from "@/app/assets/pages/case-study/breakout-network/guidelines/platform-intro-purpose.jpg";
+import imgGExtPurposeBreakout from "@/app/assets/pages/case-study/breakout-network/guidelines/external-purpose-breakout.jpg";
+import imgGExtPurposeNetwork from "@/app/assets/pages/case-study/breakout-network/guidelines/external-purpose-network.jpg";
+import imgGCompanyDescription from "@/app/assets/pages/case-study/breakout-network/guidelines/company-description.jpg";
+import imgGWhoWeAre from "@/app/assets/pages/case-study/breakout-network/guidelines/who-we-are.jpg";
+import imgGMessagingTitle from "@/app/assets/pages/case-study/breakout-network/guidelines/messaging-title.jpg";
+import imgGBrandVoice from "@/app/assets/pages/case-study/breakout-network/guidelines/brand-voice.jpg";
+import imgGBrandTone from "@/app/assets/pages/case-study/breakout-network/guidelines/brand-tone.jpg";
+import imgGCharacterTraits from "@/app/assets/pages/case-study/breakout-network/guidelines/character-traits.jpg";
+import imgGAttributes1 from "@/app/assets/pages/case-study/breakout-network/guidelines/brand-attributes-part-1.jpg";
+import imgGAttributes2 from "@/app/assets/pages/case-study/breakout-network/guidelines/brand-attributes-part-2.jpg";
+import imgGBrandDivider from "@/app/assets/pages/case-study/breakout-network/guidelines/brand-section-divider.jpg";
 
-// brand guidelines/
-import imgGuide26 from "@/app/assets/pages/case-study/breakout-network/brand guidelines/Breakout Athletic Network Brand Guidelines-26.jpg";
-import imgGuide27 from "@/app/assets/pages/case-study/breakout-network/brand guidelines/Breakout Athletic Network Brand Guidelines-27.jpg";
-import imgGuide32 from "@/app/assets/pages/case-study/breakout-network/brand guidelines/Breakout Athletic Network Brand Guidelines-32.jpg";
-import imgGuide34 from "@/app/assets/pages/case-study/breakout-network/brand guidelines/Breakout Athletic Network Brand Guidelines-34.jpg";
-import imgGuide35 from "@/app/assets/pages/case-study/breakout-network/brand guidelines/Breakout Athletic Network Brand Guidelines-35.jpg";
-import imgGuide37 from "@/app/assets/pages/case-study/breakout-network/brand guidelines/Breakout Athletic Network Brand Guidelines-37.jpg";
-import imgGuide38 from "@/app/assets/pages/case-study/breakout-network/brand guidelines/Breakout Athletic Network Brand Guidelines-38.jpg";
-import imgGuide39 from "@/app/assets/pages/case-study/breakout-network/brand guidelines/Breakout Athletic Network Brand Guidelines-39.jpg";
-import imgGuide40 from "@/app/assets/pages/case-study/breakout-network/brand guidelines/Breakout Athletic Network Brand Guidelines-40.jpg";
-import imgGuide41 from "@/app/assets/pages/case-study/breakout-network/brand guidelines/Breakout Athletic Network Brand Guidelines-41.jpg";
-import imgGuide42 from "@/app/assets/pages/case-study/breakout-network/brand guidelines/Breakout Athletic Network Brand Guidelines-42.jpg";
-import imgGuide43 from "@/app/assets/pages/case-study/breakout-network/brand guidelines/Breakout Athletic Network Brand Guidelines-43.jpg";
-import imgGuide44 from "@/app/assets/pages/case-study/breakout-network/brand guidelines/Breakout Athletic Network Brand Guidelines-44.jpg";
-import imgGuide45 from "@/app/assets/pages/case-study/breakout-network/brand guidelines/Breakout Athletic Network Brand Guidelines-45.jpg";
-import imgGuide48 from "@/app/assets/pages/case-study/breakout-network/brand guidelines/Breakout Athletic Network Brand Guidelines-48.jpg";
-import imgGuide49 from "@/app/assets/pages/case-study/breakout-network/brand guidelines/Breakout Athletic Network Brand Guidelines-49.jpg";
+// guidelines/ — Visual identity guidelines section (logo, color, typography, photography)
+import imgGLogoTitle from "@/app/assets/pages/case-study/breakout-network/guidelines/logo-title.jpg";
+import imgGLogoOverview from "@/app/assets/pages/case-study/breakout-network/guidelines/logo-overview.jpg";
+import imgGLogoAnatomy from "@/app/assets/pages/case-study/breakout-network/guidelines/logo-primary-anatomy.jpg";
+import imgGLogoHorizontal from "@/app/assets/pages/case-study/breakout-network/guidelines/logo-horizontal-layout.jpg";
+import imgGLogoDark from "@/app/assets/pages/case-study/breakout-network/guidelines/logo-dark-background-1.jpg";
+import imgGLogoDonts from "@/app/assets/pages/case-study/breakout-network/guidelines/logo-donts.jpg";
+import imgGColorTitle from "@/app/assets/pages/case-study/breakout-network/guidelines/color-title.jpg";
+import imgGColorPrimary from "@/app/assets/pages/case-study/breakout-network/guidelines/color-primary-palette.jpg";
+import imgGColorPrimaryRed from "@/app/assets/pages/case-study/breakout-network/guidelines/color-primary-red.jpg";
+import imgGColorSecondaryBlue from "@/app/assets/pages/case-study/breakout-network/guidelines/color-secondary-blue.jpg";
+import imgGColorTertiary from "@/app/assets/pages/case-study/breakout-network/guidelines/color-tertiary-semantic.jpg";
+import imgGColorGrayscale from "@/app/assets/pages/case-study/breakout-network/guidelines/color-grayscale-palette.jpg";
+import imgGColorSemanticUsage from "@/app/assets/pages/case-study/breakout-network/guidelines/color-semantic-usage.jpg";
+import imgGColorTextGrayscale from "@/app/assets/pages/case-study/breakout-network/guidelines/color-text-grayscale.jpg";
+import imgGColorTextRedBlue from "@/app/assets/pages/case-study/breakout-network/guidelines/color-text-red-blue.jpg";
+import imgGColorTextTertiary from "@/app/assets/pages/case-study/breakout-network/guidelines/color-text-tertiary-semantic.jpg";
+import imgGColorUsage from "@/app/assets/pages/case-study/breakout-network/guidelines/color-usage.jpg";
+import imgGColorDonts from "@/app/assets/pages/case-study/breakout-network/guidelines/color-donts.jpg";
+import imgGTypeTitle from "@/app/assets/pages/case-study/breakout-network/guidelines/typography-title.jpg";
+import imgGTypePrimary from "@/app/assets/pages/case-study/breakout-network/guidelines/typography-primary-typeface.jpg";
+import imgGTypeSecondary from "@/app/assets/pages/case-study/breakout-network/guidelines/typography-secondary-typeface.jpg";
+import imgGTypeHeadlineScale from "@/app/assets/pages/case-study/breakout-network/guidelines/typography-headline-typescale.jpg";
+import imgGTypeBodyScale from "@/app/assets/pages/case-study/breakout-network/guidelines/typography-body-typescale.jpg";
+import imgGTypeSecondaryScale from "@/app/assets/pages/case-study/breakout-network/guidelines/typography-secondary-typescale.jpg";
+import imgGTypeUsage from "@/app/assets/pages/case-study/breakout-network/guidelines/typography-usage.jpg";
+import imgGTypeDonts from "@/app/assets/pages/case-study/breakout-network/guidelines/typography-donts.jpg";
+import imgGPhotoTitle from "@/app/assets/pages/case-study/breakout-network/guidelines/photography-title.jpg";
+import imgGPhotoStock from "@/app/assets/pages/case-study/breakout-network/guidelines/photography-stock-imagery.jpg";
+import imgGPhotoDonts from "@/app/assets/pages/case-study/breakout-network/guidelines/photography-donts.jpg";
+import imgGVisualDivider from "@/app/assets/pages/case-study/breakout-network/guidelines/visual-identity-divider.jpg";
+import imgGVisualStatement from "@/app/assets/pages/case-study/breakout-network/guidelines/visual-identity-statement.jpg";
 
-// marketing-examples/
-import imgMkt57 from "@/app/assets/pages/case-study/breakout-network/marketing-examples/Breakout Athletic Network Brand Guidelines-57.jpg";
-import imgMkt58 from "@/app/assets/pages/case-study/breakout-network/marketing-examples/Breakout Athletic Network Brand Guidelines-58.jpg";
-import imgMkt59 from "@/app/assets/pages/case-study/breakout-network/marketing-examples/Breakout Athletic Network Brand Guidelines-59.jpg";
-import imgMkt60 from "@/app/assets/pages/case-study/breakout-network/marketing-examples/Breakout Athletic Network Brand Guidelines-60.jpg";
-import imgMkt62 from "@/app/assets/pages/case-study/breakout-network/marketing-examples/Breakout Athletic Network Brand Guidelines-62.jpg";
-import imgMkt63 from "@/app/assets/pages/case-study/breakout-network/marketing-examples/Breakout Athletic Network Brand Guidelines-63.jpg";
-import imgMktEnvelope from "@/app/assets/pages/case-study/breakout-network/marketing-examples/envelope.jpg";
+// guidelines/ — Marketing & brand-in-use collateral
+import imgGMarketingTitle from "@/app/assets/pages/case-study/breakout-network/guidelines/marketing-title.jpg";
+import imgGStationery from "@/app/assets/pages/case-study/breakout-network/guidelines/stationery-envelopes.jpg";
+import imgGBusinessCards from "@/app/assets/pages/case-study/breakout-network/guidelines/business-cards.jpg";
+import imgGTshirts from "@/app/assets/pages/case-study/breakout-network/guidelines/marketing-hardgoods-t-shirts.jpg";
+import imgGPolos from "@/app/assets/pages/case-study/breakout-network/guidelines/marketing-hardgoods-polo-shirts.jpg";
+import imgGBags from "@/app/assets/pages/case-study/breakout-network/guidelines/marketing-hardgoods-bags.jpg";
+import imgGDuffle from "@/app/assets/pages/case-study/breakout-network/guidelines/marketing-hardgoods-duffle-bags.jpg";
+import imgGAccessories from "@/app/assets/pages/case-study/breakout-network/guidelines/marketing-hardgoods-accessories.jpg";
+import imgGPoster from "@/app/assets/pages/case-study/breakout-network/guidelines/marketing-poster-mockup.jpg";
 
 const ACCENT = "#D0201C";
 
 const BRAND_CAROUSEL_IMAGES = [
-  { src: imgBrand3, alt: "Breakout Athletic Network brand photography" },
-  { src: imgBrand4, alt: "Breakout Athletic Network brand photography" },
-  { src: imgBrand5, alt: "Breakout Athletic Network brand photography" },
-  { src: imgBrand6, alt: "Breakout Athletic Network brand photography" },
-  { src: imgBrand7, alt: "Breakout Athletic Network brand photography" },
-  { src: imgBrand8, alt: "Breakout Athletic Network brand photography" },
-  { src: imgBrand9, alt: "Breakout Athletic Network brand photography" },
-  { src: imgBrand47, alt: "Breakout Athletic Network brand photography" },
+  { src: imgGCover, alt: "Brand guidelines cover" },
+  { src: imgGToc, alt: "Table of contents" },
+  { src: imgGPlatformTitle, alt: "Platform section title page" },
+  { src: imgGPlatformIntro, alt: "Platform introduction and purpose" },
+  { src: imgGExtPurposeBreakout, alt: "Breakout's external purpose statement" },
+  { src: imgGExtPurposeNetwork, alt: "Network's external purpose statement" },
+  { src: imgGCompanyDescription, alt: "Company description" },
+  { src: imgGWhoWeAre, alt: "Who we are statement" },
+  { src: imgGMessagingTitle, alt: "Messaging section title page" },
+  { src: imgGBrandVoice, alt: "Brand voice guidelines" },
+  { src: imgGBrandTone, alt: "Brand tone guidelines" },
+  { src: imgGCharacterTraits, alt: "Brand character traits" },
+  { src: imgGAttributes1, alt: "Brand attributes, part 1" },
+  { src: imgGAttributes2, alt: "Brand attributes, part 2" },
+  { src: imgGBrandDivider, alt: "Brand section divider" },
 ];
 
 const GUIDELINES_CAROUSEL_IMAGES = [
-  { src: imgGuide26, alt: "Brand guidelines page" },
-  { src: imgGuide27, alt: "Brand guidelines page" },
-  { src: imgGuide32, alt: "Brand guidelines page" },
-  { src: imgGuide34, alt: "Brand guidelines page" },
-  { src: imgGuide35, alt: "Brand guidelines page" },
-  { src: imgGuide37, alt: "Brand guidelines page" },
-  { src: imgGuide38, alt: "Brand guidelines page" },
-  { src: imgGuide39, alt: "Brand guidelines page" },
-  { src: imgGuide40, alt: "Brand guidelines page" },
-  { src: imgGuide41, alt: "Brand guidelines page" },
-  { src: imgGuide42, alt: "Brand guidelines page" },
-  { src: imgGuide43, alt: "Brand guidelines page" },
-  { src: imgGuide44, alt: "Brand guidelines page" },
-  { src: imgGuide45, alt: "Brand guidelines page" },
-  { src: imgGuide48, alt: "Brand guidelines page" },
-  { src: imgGuide49, alt: "Brand guidelines page" },
+  { src: imgGLogoTitle, alt: "Logo section title page" },
+  { src: imgGLogoOverview, alt: "Logo overview" },
+  { src: imgGLogoAnatomy, alt: "Primary logo anatomy" },
+  { src: imgGLogoHorizontal, alt: "Logo horizontal lockup" },
+  { src: imgGLogoDark, alt: "Logo on a dark background" },
+  { src: imgGLogoDonts, alt: "Logo don'ts" },
+  { src: imgGColorTitle, alt: "Color section title page" },
+  { src: imgGColorPrimary, alt: "Primary color palette" },
+  { src: imgGColorPrimaryRed, alt: "Primary red color usage" },
+  { src: imgGColorSecondaryBlue, alt: "Secondary blue color usage" },
+  { src: imgGColorTertiary, alt: "Tertiary and semantic colors" },
+  { src: imgGColorGrayscale, alt: "Grayscale color palette" },
+  { src: imgGColorSemanticUsage, alt: "Semantic color usage" },
+  { src: imgGColorTextGrayscale, alt: "Text color usage, grayscale" },
+  { src: imgGColorTextRedBlue, alt: "Text color usage, red and blue" },
+  { src: imgGColorTextTertiary, alt: "Text color usage, tertiary and semantic" },
+  { src: imgGColorUsage, alt: "Color usage guidelines" },
+  { src: imgGColorDonts, alt: "Color don'ts" },
+  { src: imgGTypeTitle, alt: "Typography section title page" },
+  { src: imgGTypePrimary, alt: "Primary typeface" },
+  { src: imgGTypeSecondary, alt: "Secondary typeface" },
+  { src: imgGTypeHeadlineScale, alt: "Headline type scale" },
+  { src: imgGTypeBodyScale, alt: "Body type scale" },
+  { src: imgGTypeSecondaryScale, alt: "Secondary type scale" },
+  { src: imgGTypeUsage, alt: "Typography usage guidelines" },
+  { src: imgGTypeDonts, alt: "Typography don'ts" },
+  { src: imgGPhotoTitle, alt: "Photography section title page" },
+  { src: imgGPhotoStock, alt: "Photography and stock imagery guidelines" },
+  { src: imgGPhotoDonts, alt: "Photography don'ts" },
+  { src: imgGVisualDivider, alt: "Visual identity section divider" },
+  { src: imgGVisualStatement, alt: "Visual identity statement" },
 ];
 
 const MARKETING_CAROUSEL_IMAGES = [
-  { src: imgMkt57, alt: "Breakout Athletic Network marketing example" },
-  { src: imgMkt58, alt: "Breakout Athletic Network marketing example" },
-  { src: imgMkt59, alt: "Breakout Athletic Network marketing example" },
-  { src: imgMkt60, alt: "Breakout Athletic Network marketing example" },
-  { src: imgMkt62, alt: "Breakout Athletic Network marketing example" },
-  { src: imgMkt63, alt: "Breakout Athletic Network marketing example" },
-  { src: imgMktEnvelope, alt: "Breakout Athletic Network branded envelope" },
+  { src: imgGMarketingTitle, alt: "Marketing section title page" },
+  { src: imgGStationery, alt: "Branded stationery and envelopes" },
+  { src: imgGBusinessCards, alt: "Branded business cards" },
+  { src: imgGTshirts, alt: "Branded t-shirts" },
+  { src: imgGPolos, alt: "Branded polo shirts" },
+  { src: imgGBags, alt: "Branded bags" },
+  { src: imgGDuffle, alt: "Branded duffle bags" },
+  { src: imgGAccessories, alt: "Branded accessories" },
+  { src: imgGPoster, alt: "Marketing poster mockup" },
 ];
 
 export function BreakoutChallengeSection() {
@@ -111,27 +154,14 @@ export function BreakoutChallengeSection() {
     <Section id="challenge">
       <Eyebrow color={ACCENT}>The Challenge</Eyebrow>
       <Body as="p" size="medium" color="subtlest" UNSAFE_className="max-w-[720px] leading-[1.7]">
-        The Breakout Network mobile application lacked a cohesive brand identity, making it difficult for
+        The mobile app lacked a cohesive brand identity, making it difficult for
         product designers to build with confidence. Seeking a clear &ldquo;North Star,&rdquo; the company had
         struggled to find a marketing agency that understood its startup culture and lifestyle branding.
       </Body>
       <Body as="p" size="medium" color="subtlest" UNSAFE_className="max-w-[720px] leading-[1.7]">
-        The opportunity grew out of prior experience in athletic branding — a natural fit for translating brand
+        The opportunity grew out of prior experience in athletic branding, a natural fit for translating brand
         strategy into a system product teams could use directly.
       </Body>
-      <BreakoutStatement
-        parts={[
-          { text: "Breakout Athletic Network " },
-          { text: "simplifies", highlight: true },
-          { text: " the sports digital world for " },
-          { text: "athletes", highlight: true },
-          { text: ", " },
-          { text: "coaches", highlight: true },
-          { text: ", and " },
-          { text: "supporters", highlight: true },
-          { text: "." },
-        ]}
-      />
     </Section>
   );
 }
@@ -182,8 +212,8 @@ export function BreakoutVisualIdentitySection() {
       <Eyebrow color={ACCENT}>Visual Identity</Eyebrow>
       <Body as="p" size="medium" color="subtlest" UNSAFE_className="max-w-[720px] leading-[1.7]">
         The foundation of the brand lies in its logo. The previous logo&rsquo;s color scheme and typography read
-        as overly feminine, lacking impact and failing to convey athleticism. The redesign leaned into powerful,
-        solid color — red, evoking ambition and determination — and a thick, boxy font inspired by baseball
+        as overly feminine, lacking impact and failing to convey athleticism. The redesign leaned into a powerful,
+        solid red, evoking ambition and determination, and a thick, boxy font inspired by baseball
         typography, adding a sporty edge to the brand.
       </Body>
       <BreakoutLogoCompare
@@ -195,7 +225,7 @@ export function BreakoutVisualIdentitySection() {
       </Body>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <Body as="p" size="small" color="subtlest" UNSAFE_className="leading-[1.6]">
-          The geometric crown design gives Breakout Athletic Network a strong visual impression of &ldquo;kings&rdquo;
+          The geometric crown design gives the brand a strong visual impression of &ldquo;kings&rdquo;
           or leaders.
         </Body>
         <Body as="p" size="small" color="subtlest" UNSAFE_className="leading-[1.6]">
@@ -206,17 +236,6 @@ export function BreakoutVisualIdentitySection() {
           discipline, sharpness, and command.
         </Body>
       </div>
-      <ImageFull
-        src={imgLogoVariations}
-        alt="Logo lockup variations across light and dark backgrounds"
-        caption="Logo lockup variations across light and dark backgrounds."
-      />
-      <ImageGrid2
-        items={[
-          { src: imgLogoMin, alt: "The new Breakout Athletic Network mark, detail view", caption: "The mark, up close." },
-          { src: imgMarkLight, alt: "The new mark on a light background", caption: "The mark on a light background." },
-        ]}
-      />
     </Section>
   );
 }
@@ -257,11 +276,15 @@ export function BreakoutInUseSection() {
           ],
         }}
       />
-      <ImageFull
-        src={imgSitePage}
-        alt="A supporting web page built alongside the brand guidelines"
-        caption="A supporting web page built alongside the guidelines."
-      />
+      <div className="flex flex-col gap-4">
+        <BreakoutLaptopMockup
+          src={imgSitePage}
+          alt="A supporting web page built alongside the brand guidelines"
+        />
+        <Body as="p" size="small" color="subtlest" UNSAFE_className="leading-snug text-center">
+          A supporting web page built alongside the guidelines.
+        </Body>
+      </div>
     </Section>
   );
 }

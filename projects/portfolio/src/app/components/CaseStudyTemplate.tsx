@@ -161,7 +161,9 @@ export function CaseStudyTemplate({
           style={{
             ...pageSurfaceStyle,
             ...sectionStackStyle,
-            paddingBottom: "var(--ld-semantic-spacing-1000, 5rem)",
+            // Fixed, scroll-reveal Footer overlays page content rather than pushing it up,
+            // so this needs to clear the footer's tallest (mobile, stacked) rendered height.
+            paddingBottom: "max(var(--ld-semantic-spacing-1000, 5rem), 10rem)",
           }}
         >
           {showNav && (
