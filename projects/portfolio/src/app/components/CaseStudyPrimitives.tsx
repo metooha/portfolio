@@ -12,7 +12,7 @@ import {
 
 /** Matches CaseStudyTemplate overview shell (max-w-[1660px] + inner content width). */
 const CONTAINER_OUTER = "w-full max-w-[1660px] mx-auto px-4 sm:px-6 md:px-12 lg:px-[68px]";
-const CONTAINER_INNER = "w-full max-w-[1300px] flex flex-col gap-6";
+const CONTAINER_INNER = "w-full max-w-[1300px] mx-auto flex flex-col gap-6";
 
 export function Section({
   id,

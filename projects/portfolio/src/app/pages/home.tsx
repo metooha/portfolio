@@ -58,10 +58,10 @@ export function Home() {
     <div data-ld-theme="Portfolio" style={{ display: "contents" }}>
       <div className="min-h-screen">
       <PageContainer className="pt-0" maxWidth="max-w-[1660px]">
-        <div className="py-6 md:py-8 mt-8 md:mt-10 mb-1 pb-8 md:pb-10">
+        <div className="mx-auto max-w-[1300px] py-6 md:py-8 mt-8 md:mt-10 mb-1 pb-8 md:pb-10">
           <CaseStudyHeroText
             as="p"
-            UNSAFE_className="flex flex-wrap items-center gap-2 md:gap-3 w-full"
+            UNSAFE_className="flex flex-wrap items-center gap-2 md:gap-3 w-full min-w-0"
           >
             <span style={{ color: "var(--ld-semantic-color-text)" }}>Hello, there.</span>
             <img
@@ -83,7 +83,10 @@ export function Home() {
                 className="w-8 h-8 md:w-12 md:h-12 shrink-0 hidden md:inline-block"
               />
             </span>
-            <span style={{ color: "var(--ld-semantic-color-text)" }}>
+            <span
+              className="min-w-0 max-w-full"
+              style={{ color: "var(--ld-semantic-color-text)", overflowWrap: "break-word" }}
+            >
               who builds scalable products, with a focus on branding, usability, and workflow
               integrations.
             </span>
