@@ -1,0 +1,2064 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Conversational UI Design System · Amy Ha</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;900&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --blue:   #0052e2;
+    --dark:   #011e60;
+    --yellow: #ffc220;
+    --sky:    #a9ddf7;
+    --blue2:  #4ebdf5;
+    --muted:  #74767c;
+    --light:  #eef5ff;
+    --border: #e3e4e5;
+    /* semantic accents mapped onto the brand palette */
+    --red:    #011e60;
+    --green:  #0052e2;
+    --green2: #0052e2;
+    --orange: #4ebdf5;
+    --purple: #4ebdf5;
+    --font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-head: 'DM Sans', sans-serif;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:var(--font-body);background:#fff;color:#2e2f32;line-height:1.65;-webkit-font-smoothing:antialiased;}
+
+  nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:0.8rem 2rem;display:flex;align-items:center;gap:0.75rem;}
+  nav .dot{width:10px;height:10px;border-radius:50%;background:var(--yellow);}
+  nav span{font-size:0.72rem;font-weight:600;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;}
+
+  .hero{background:var(--dark);color:#fff;padding:6rem 2rem 5rem;}
+  .hero-inner{max-width:820px;margin:0 auto;}
+  .hero-tag{display:inline-block;background:var(--yellow);color:var(--dark);font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;padding:0.28rem 0.7rem;margin-bottom:1.75rem;}
+  .hero h1{font-family:var(--font-head);font-size:clamp(2.4rem,5vw,4rem);line-height:1.15;margin-bottom:1.25rem;}
+  .hero h1 em{font-style:italic;color:var(--yellow);}
+  .hero-sub{font-size:1.1rem;color:rgba(255,255,255,0.65);max-width:580px;line-height:1.75;}
+  .hero-meta{display:flex;flex-wrap:wrap;gap:1.5rem;margin-top:2.5rem;padding-top:2rem;border-top:1px solid rgba(255,255,255,0.12);}
+  .hero-meta-item .hm-label{font-size:0.62rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:0.2rem;}
+  .hero-meta-item .hm-val{font-size:0.85rem;color:rgba(255,255,255,0.75);}
+
+  .section{padding:5rem 2rem;}
+  .section.alt{background:var(--light);}
+  .section.dark{background:var(--dark);}
+  .section-inner{max-width:820px;margin:0 auto;}
+  .eyebrow{font-size:0.68rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--blue);margin-bottom:0.6rem;}
+  .section.dark .eyebrow{color:rgba(255,193,32,0.8);}
+  h2.section-title{font-family:var(--font-head);font-size:clamp(1.7rem,3vw,2.4rem);line-height:1.2;margin-bottom:1rem;}
+  .section.dark h2.section-title{color:#fff;}
+  .section-lead{font-size:1rem;color:var(--muted);line-height:1.75;max-width:640px;margin-bottom:2.5rem;}
+  .section.dark .section-lead{color:rgba(255,255,255,0.55);}
+
+  /* TENSION PANEL */
+  .tension-vs{display:grid;grid-template-columns:1fr auto 1fr;gap:1.5rem;margin-top:2rem;align-items:center;}
+  @media(max-width:600px){.tension-vs{grid-template-columns:1fr;}}
+  .t-side{background:#fff;border:1px solid var(--border);border-radius:8px;padding:1.5rem;}
+  .t-side.left-side{border-top:3px solid var(--dark);}
+  .t-side.right-side{border-top:3px solid var(--blue2);}
+  .t-side .t-who{font-size:0.65rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:0.5rem;color:var(--muted);}
+  .t-side h3{font-size:1rem;font-weight:700;color:var(--dark);margin-bottom:0.65rem;}
+  .t-side p{font-size:0.85rem;color:var(--muted);line-height:1.65;}
+  .vs-badge{font-size:1.5rem;font-weight:700;color:var(--border);text-align:center;}
+  .resolved{margin-top:1.5rem;background:rgba(169,221,247,0.18);border:1px solid var(--sky);border-radius:8px;padding:1.25rem 1.5rem;display:flex;gap:1rem;align-items:flex-start;}
+  .resolved .r-icon{font-size:1.2rem;flex-shrink:0;margin-top:0.1rem;}
+  .resolved p{font-size:0.9rem;color:var(--dark);line-height:1.6;}
+  .resolved strong{color:var(--blue);}
+
+  /* STAT ROW */
+  .stat-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1rem;margin-bottom:3rem;}
+  .stat{text-align:center;background:var(--dark);border-radius:8px;padding:1.75rem 1rem;}
+  .stat .big{font-family:var(--font-head);font-size:2.4rem;color:var(--yellow);line-height:1;}
+  .stat .lbl{font-size:0.8rem;color:rgba(255,255,255,0.5);margin-top:0.4rem;line-height:1.4;}
+  .section.alt .stat{background:#fff;border:1px solid var(--border);}
+  .section.alt .stat .big{color:var(--blue);}
+  .section.alt .stat .lbl{color:var(--muted);}
+
+  /* MATTER/PRINCIPLE CARDS */
+  .matter-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.1rem;}
+  .matter-card{background:#fff;border:1px solid var(--border);border-radius:8px;padding:1.5rem;border-top:3px solid var(--blue);}
+  .matter-card .mc-icon{font-size:1.5rem;margin-bottom:0.75rem;}
+  .matter-card h3{font-size:0.95rem;font-weight:700;margin-bottom:0.4rem;color:var(--dark);}
+  .matter-card p{font-size:0.85rem;color:var(--muted);line-height:1.6;}
+  .section.alt .matter-card{background:#fff;}
+
+  /* JOURNEY TIMELINE */
+  .journey{margin-top:0.5rem;}
+  .journey-item{display:grid;grid-template-columns:200px 40px 1fr;margin-bottom:0;}
+  @media(max-width:640px){.journey-item{grid-template-columns:1fr;}}
+  .ji-left{padding:1.75rem 1.25rem 1.75rem 0;text-align:right;}
+  .ji-date{font-size:0.68rem;font-weight:700;color:var(--muted);letter-spacing:0.06em;margin-bottom:0.35rem;}
+  .ji-phase{font-size:0.95rem;font-weight:600;font-style:italic;line-height:1.3;color:var(--dark);}
+  .ji-who{display:flex;flex-wrap:wrap;gap:0.3rem;margin-top:0.6rem;justify-content:flex-end;}
+  .ji-mid{display:flex;flex-direction:column;align-items:center;padding-top:1.9rem;position:relative;}
+  .ji-mid::before{content:'';position:absolute;top:0;bottom:0;left:50%;width:2px;background:var(--border);transform:translateX(-50%);}
+  .journey-item:first-child .ji-mid::before{top:1.9rem;}
+  .journey-item:last-child .ji-mid::before{bottom:calc(100% - 2.2rem);}
+  .ji-dot{width:13px;height:13px;border-radius:50%;border:2px solid #fff;position:relative;z-index:1;flex-shrink:0;}
+  .mood-friction .ji-dot{background:var(--muted);box-shadow:0 0 0 2px var(--muted);}
+  .mood-blocker .ji-dot{background:var(--dark);box-shadow:0 0 0 2px var(--dark);}
+  .mood-progress .ji-dot{background:var(--blue2);box-shadow:0 0 0 2px var(--blue2);}
+  .mood-win .ji-dot{background:var(--blue);box-shadow:0 0 0 2px var(--blue);}
+  .ji-right{padding:1.75rem 0 1.75rem 1.25rem;}
+  .who-chip{font-size:0.62rem;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;padding:0.2rem 0.5rem;border-radius:20px;}
+  .who-brand{background:rgba(0,82,226,0.10);color:#0052e2;}
+  .who-eng{background:rgba(1,30,96,0.08);color:#011e60;}
+  .who-a11y{background:rgba(78,189,245,0.18);color:#011e60;}
+  .who-foundry{background:rgba(255,194,32,0.22);color:var(--dark);}
+  .ji-story{font-size:0.92rem;line-height:1.7;color:var(--dark);margin-bottom:1rem;}
+  .ji-tension{background:var(--light);border-left:3px solid var(--muted);padding:0.65rem 0.9rem;border-radius:0 4px 4px 0;font-size:0.8rem;color:var(--dark);line-height:1.55;margin-bottom:0.65rem;}
+  .ji-win{background:rgba(169,221,247,0.18);border-left:3px solid var(--blue);padding:0.65rem 0.9rem;border-radius:0 4px 4px 0;font-size:0.8rem;color:var(--dark);line-height:1.55;margin-bottom:0.65rem;}
+  .ji-note{background:var(--light);border-left:3px solid var(--blue);padding:0.65rem 0.9rem;border-radius:0 4px 4px 0;font-size:0.8rem;color:var(--dark);line-height:1.55;margin-bottom:0.65rem;}
+
+  /* PLATFORM GRID */
+  .platform-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:1.5rem 0;}
+  @media(max-width:720px){.platform-grid{grid-template-columns:1fr;}}
+  .platform-card{background:#fff;border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+  .plat-header{padding:0.7rem 1rem;display:flex;align-items:center;gap:0.5rem;border-bottom:1px solid var(--border);background:var(--dark);}
+  .plat-name{font-size:0.85rem;font-weight:700;color:#fff;}
+  .plat-tag{font-size:0.62rem;font-weight:700;letter-spacing:.07em;background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.6);border:1px solid rgba(255,255,255,0.15);padding:0.1rem 0.4rem;border-radius:3px;}
+  .plat-body{padding:0.85rem 1rem;}
+  .plat-req{font-size:0.78rem;color:var(--muted);margin-bottom:0.35rem;line-height:1.5;display:flex;gap:0.4rem;}
+  .plat-req::before{content:'✓';color:var(--blue);font-weight:700;flex-shrink:0;}
+  .plat-blocker{font-size:0.75rem;font-weight:700;color:var(--red);margin-top:0.5rem;}
+  .plat-win{font-size:0.75rem;font-weight:700;color:var(--green2);margin-top:0.5rem;}
+
+  /* BEFORE/AFTER */
+  .ba-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;}
+  @media(max-width:600px){.ba-grid{grid-template-columns:1fr;}}
+  .ba-card{border-radius:8px;padding:1.75rem;}
+  .ba-card.before{background:#f6f8fa;border:1px solid var(--border);}
+  .ba-card.after{background:rgba(169,221,247,0.15);border:1px solid var(--sky);}
+  .ba-label{font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:1rem;}
+  .ba-card.before .ba-label{color:var(--muted);}
+  .ba-card.after .ba-label{color:var(--blue);}
+  .ba-item{display:flex;gap:0.75rem;margin-bottom:1rem;align-items:flex-start;}
+  .ba-icon{font-size:1rem;flex-shrink:0;margin-top:0.05rem;}
+  .ba-item p{font-size:0.88rem;line-height:1.6;color:var(--dark);}
+
+  /* QUOTE */
+  .quote{background:var(--dark);border-radius:10px;padding:2.25rem 2.5rem;margin-top:2rem;}
+  .quote-text{font-family:var(--font-head);font-size:1.3rem;font-style:italic;color:#fff;line-height:1.55;margin-bottom:0.75rem;}
+  .quote-text::before{content:'\201C';color:var(--yellow);}
+  .quote-text::after{content:'\201D';color:var(--yellow);}
+  .quote-attr{font-size:0.78rem;color:rgba(255,255,255,0.45);}
+
+  /* NEXT STEPS */
+  .next-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;margin-top:2rem;}
+  .next-card{border:1px solid var(--border);border-radius:8px;padding:1.5rem;}
+  .next-when{font-size:0.65rem;font-weight:700;color:var(--blue);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.4rem;}
+  .next-card h4{font-size:0.95rem;font-weight:700;margin-bottom:0.35rem;color:var(--dark);}
+  .next-card p{font-size:0.83rem;color:var(--muted);}
+
+  /* PIPELINE DIAGRAM */
+  .pipeline-wrap{margin:2.5rem 0;background:var(--dark);border-radius:12px;padding:2rem;}
+  .pipeline-svg-wrap{overflow-x:auto;}
+
+  /* SCOPE ITEMS */
+  .scope-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin:1.5rem 0;}
+  @media(max-width:600px){.scope-grid{grid-template-columns:1fr;}}
+  .scope-item{background:#fff;border:1px solid var(--border);border-radius:6px;padding:0.9rem 1.1rem;display:flex;gap:0.75rem;align-items:flex-start;}
+  .scope-check{color:var(--green2);font-weight:700;flex-shrink:0;margin-top:0.1rem;}
+  .scope-item p{font-size:0.85rem;line-height:1.55;color:var(--dark);}
+  .scope-item p strong{font-weight:700;}
+
+  /* DISCOVERY STEPS */
+  .discovery-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:0;margin:1.5rem 0;border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+  .ds-step{padding:1.5rem;border-right:1px solid var(--border);position:relative;}
+  .ds-step:last-child{border-right:none;}
+  @media(max-width:600px){.ds-step{border-right:none;border-bottom:1px solid var(--border);}.ds-step:last-child{border-bottom:none;}}
+  .ds-num{font-family:var(--font-head);font-size:2rem;color:#e3e4e5;line-height:1;margin-bottom:0.6rem;}
+  .ds-title{font-size:0.88rem;font-weight:700;color:var(--dark);margin-bottom:0.4rem;}
+  .ds-desc{font-size:0.8rem;color:var(--muted);line-height:1.55;}
+
+  /* COMPONENT FLOW */
+  .comp-flow{display:flex;flex-wrap:wrap;gap:0;margin:1.5rem 0;align-items:center;}
+  .cf-step{background:#fff;border:1px solid var(--border);border-radius:6px;padding:0.5rem 0.75rem;font-size:0.75rem;font-weight:700;color:var(--dark);white-space:nowrap;}
+  .cf-arrow{color:var(--blue);font-weight:700;padding:0 0.4rem;font-size:1rem;}
+  .cf-new::after{content:'NEW';background:var(--yellow);color:var(--dark);font-size:0.55rem;font-weight:700;letter-spacing:0.1em;padding:0.1rem 0.3rem;border-radius:2px;margin-left:0.3rem;vertical-align:middle;}
+
+  /* RISK BOX */
+  .risk-box{background:var(--light);border:1px solid rgba(255,194,32,0.45);border-radius:8px;padding:1.25rem 1.5rem;margin:1.5rem 0;}
+  .risk-label{font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--orange);margin-bottom:0.5rem;}
+  .risk-box p{font-size:0.85rem;color:var(--dark);line-height:1.65;}
+  .risk-item{display:flex;gap:0.5rem;margin-bottom:0.35rem;font-size:0.85rem;color:var(--dark);}
+  .risk-item::before{content:'!';font-weight:700;color:var(--orange);flex-shrink:0;}
+
+  footer{background:var(--dark);color:rgba(255,255,255,0.4);text-align:center;padding:2rem;font-size:0.75rem;}
+
+  /* ── PLACEHOLDER IMAGES ─────────────────────────────────────────── */
+  .ph { margin: 1.75rem 0; }
+  .ph-img {
+    background: linear-gradient(148deg, rgba(169,221,247,0.35) 0%, rgba(78,189,245,0.18) 100%);
+    border: 1.5px dashed #b0c4de;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    text-align: center;
+    padding: 2.75rem 2rem;
+    min-height: 270px;
+  }
+  .ph-img.sm { min-height: 188px; padding: 1.75rem 1.5rem; }
+  .ph-img.lg { min-height: 340px; }
+  .ph-badge {
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    background: rgba(0,83,226,0.1);
+    color: var(--blue);
+    padding: 0.2rem 0.6rem;
+    border-radius: 3px;
+    margin-bottom: 0.15rem;
+  }
+  .ph-emoji { font-size: 2rem; opacity: 0.28; }
+  .ph-title { font-size: 0.88rem; font-weight: 700; color: #557; margin-top: 0.2rem; max-width: 360px; line-height: 1.4; }
+  .ph-sub { font-size: 0.73rem; color: #8aa0b8; max-width: 420px; line-height: 1.55; margin-top: 0.15rem; }
+  .ph-caption { font-size: 0.72rem; color: var(--muted); margin-top: 0.55rem; line-height: 1.5; font-style: italic; }
+  .ph-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.75rem 0; }
+  .ph-3col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.75rem; margin: 1.75rem 0; }
+  @media(max-width:620px){ .ph-2col,.ph-3col{ grid-template-columns: 1fr; } }
+  /* Card grid responsive */
+  @media(max-width:640px){
+    .wc-card-grid { grid-template-columns: 1fr !important; }
+  }
+  /* Real embedded screenshots */
+  .shot{margin:1.75rem 0;}
+  .shot img{width:100%;height:auto;display:block;border-radius:10px;border:1px solid var(--border);box-shadow:0 8px 30px rgba(0,30,96,0.08);}
+  .shot.frame img{border:1px solid rgba(0,30,96,0.12);}
+  .shot-cap{font-size:0.78rem;color:var(--muted);margin-top:0.6rem;line-height:1.55;}
+  .shot-cap strong{color:var(--dark);}
+  .shot-2col{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.75rem 0;}
+  @media(max-width:640px){.shot-2col{grid-template-columns:1fr;}}
+  .section.dark .shot img{border-color:rgba(255,255,255,0.12);box-shadow:0 8px 30px rgba(0,0,0,0.3);}
+  .section.dark .shot-cap{color:rgba(255,255,255,0.5);}
+  .section.dark .shot-cap strong{color:#fff;}
+  /* unlock list */
+  .unlock-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.5rem;}
+  @media(max-width:600px){.unlock-grid{grid-template-columns:1fr;}}
+  .unlock{background:#fff;border:1px solid var(--border);border-radius:8px;padding:1.25rem;border-left:3px solid var(--blue);}
+  .unlock h4{font-size:0.9rem;font-weight:700;color:var(--dark);margin-bottom:0.3rem;}
+  .unlock p{font-size:0.83rem;color:var(--muted);line-height:1.6;}
+  /* day cards */
+  .day-card{background:#fff;border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-top:1.5rem;}
+  .day-head{display:flex;align-items:baseline;gap:0.75rem;padding:1.1rem 1.5rem;border-bottom:1px solid var(--border);background:var(--light);}
+  .day-tag{font-size:0.6rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--blue);}
+  .day-head h3{font-size:1.05rem;color:var(--dark);font-family:var(--font-head);}
+  .day-body{padding:1.5rem;}
+  .day-body ul{list-style:none;display:flex;flex-direction:column;gap:0.6rem;}
+  .day-body li{font-size:0.85rem;color:var(--muted);line-height:1.55;display:flex;gap:0.55rem;align-items:flex-start;}
+  .day-body li::before{content:'✓';color:var(--blue);font-weight:700;flex-shrink:0;}
+  .day-body li strong{color:var(--dark);}
+  /* testimonials */
+  .quote-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.75rem;}
+  @media(max-width:700px){.quote-grid{grid-template-columns:1fr;}}
+  .tcard{background:#fff;border:1px solid var(--border);border-radius:10px;padding:1.5rem;}
+  .tcard .tq{font-size:0.88rem;color:#2e2f32;line-height:1.65;margin-bottom:1rem;}
+  .tcard .tn{font-size:0.85rem;font-weight:700;color:var(--dark);}
+  .tcard .tr{font-size:0.75rem;color:var(--blue);margin-top:0.1rem;}
+  .tcard .tl{font-size:0.7rem;color:var(--muted);margin-top:0.35rem;}
+  /* demand stats */
+  .demand-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin:1.75rem 0;}
+  @media(max-width:640px){.demand-row{grid-template-columns:1fr 1fr;}}
+  .demand-stat{text-align:center;padding:1.5rem 0.75rem;background:rgba(169,221,247,0.22);border-radius:10px;}
+  .demand-stat .dn{font-family:var(--font-head);font-size:2.6rem;color:var(--blue);line-height:1;}
+  .demand-stat .dl{font-size:0.78rem;color:var(--muted);margin-top:0.45rem;line-height:1.4;}
+  .signal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1.5rem;}
+  @media(max-width:760px){.signal-grid{grid-template-columns:1fr;}}
+  .signal{background:#fff;border:1px solid var(--border);border-radius:10px;padding:1.5rem;border-top:3px solid var(--yellow);}
+  .signal .sq{font-size:0.83rem;font-style:italic;color:#2e2f32;line-height:1.6;margin-bottom:0.85rem;}
+  .signal .sw{font-size:0.7rem;color:var(--muted);margin-bottom:1rem;}
+  .signal h4{font-size:0.92rem;font-weight:700;color:var(--dark);margin-bottom:0.35rem;}
+  .signal p{font-size:0.8rem;color:var(--muted);line-height:1.55;}
+  .signal .slbl{font-size:0.62rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--blue);margin-bottom:0.4rem;}
+  /* dark section placeholders */
+  .ph-dark .ph-img {
+    background: linear-gradient(148deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%);
+    border-color: rgba(255,255,255,0.12);
+  }
+  .ph-dark .ph-title { color: rgba(255,255,255,0.35); }
+  .ph-dark .ph-sub { color: rgba(255,255,255,0.2); }
+  .ph-dark .ph-badge { background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.4); }
+  .ph-dark .ph-caption { color: rgba(255,255,255,0.3); }
+
+  /* Gen AI product journey, native dark-section styling */
+  .gen-journey{display:grid;grid-template-columns:repeat(5,1fr);gap:0.6rem;}
+  @media(max-width:860px){.gen-journey{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:520px){.gen-journey{grid-template-columns:1fr;}}
+  .gj-step{position:relative;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:10px;padding:1.15rem 1rem;display:flex;flex-direction:column;gap:0.45rem;}
+  .gj-step.current{background:rgba(0,82,226,0.30);border-color:var(--blue2);box-shadow:0 0 0 1px var(--blue2);}
+  .gj-num{width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,0.14);color:#fff;font-size:0.72rem;font-weight:700;display:flex;align-items:center;justify-content:center;}
+  .gj-step.done .gj-num{background:var(--blue2);color:var(--dark);}
+  .gj-step.current .gj-num{background:var(--yellow);color:var(--dark);}
+  .gj-title{font-size:0.82rem;font-weight:700;color:#fff;line-height:1.3;}
+  .gj-desc{font-size:0.72rem;color:rgba(255,255,255,0.55);line-height:1.5;}
+  .gj-badge{position:absolute;top:-0.62rem;left:0.9rem;background:var(--yellow);color:var(--dark);font-size:0.56rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:0.18rem 0.5rem;border-radius:20px;}
+
+  /* ── ILLUSTRATED STAND-INS ────────────────────────────────────── */
+
+  /* 1. Real UI Grid (from mission slide) */
+  .illustrated-ui-grid {
+    background: var(--light);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 1.5rem;
+  }
+  .ui-grid-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 1.1rem;
+  }
+  .ui-swatch-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.65rem;
+    margin-bottom: 1rem;
+  }
+  @media(max-width:680px){ .ui-swatch-grid { grid-template-columns: 1fr 1fr; } }
+  .ui-swatch {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    padding-bottom: 0.5rem;
+  }
+  .ui-swatch-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.45rem 0.6rem;
+    color: #fff;
+    font-size: 0.65rem;
+    font-weight: 600;
+  }
+  .ui-swatch-dot {
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .ui-swatch-icon { font-size: 0.9rem; flex-shrink: 0; }
+  .ui-swatch-initials {
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.25);
+    font-size: 0.5rem;
+    font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .ui-swatch-name { flex: 1; font-size: 0.62rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .ui-swatch-x { font-size: 0.75rem; opacity: 0.6; flex-shrink: 0; }
+  .ui-bubble {
+    font-size: 0.62rem;
+    line-height: 1.4;
+    padding: 0.3rem 0.55rem;
+    border-radius: 10px 10px 10px 2px;
+    color: #fff;
+    max-width: 85%;
+    margin: 0 0.5rem 0 0.5rem;
+    align-self: flex-start;
+  }
+  .ui-bubble.b-user {
+    align-self: flex-end;
+    background: #e3e4e5;
+    color: #2e2f32;
+    border-radius: 10px 10px 2px 10px;
+    margin-left: auto;
+  }
+  .ui-helpful { font-size: 0.55rem; color: var(--muted); padding: 0 0.6rem; margin-top: 0.1rem; }
+  .b-shop   { background: #f5a623; color: #2e2f32; }
+  .b-storefront      { background: #0052e2; }
+  .b-market   { background: #007dc6; }
+  .b-club     { background: #003087; }
+  .b-assist   { background: #6c63ff; }
+  .b-merchant { background: #444; }
+  .ui-grid-note {
+    font-size: 0.75rem;
+    color: var(--muted);
+    line-height: 1.55;
+    border-top: 1px solid var(--border);
+    padding-top: 0.75rem;
+    font-style: italic;
+  }
+
+  /* 2. Atomic design layer diagram */
+  .illustrated-atomic {
+    background: var(--light);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 1.5rem;
+  }
+  .atomic-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 1.1rem;
+  }
+  .atomic-row {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    align-items: stretch;
+  }
+  @media(max-width:700px){ .atomic-row { flex-direction: column; } }
+  .atomic-arrow {
+    font-size: 1.2rem;
+    color: var(--border);
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .atomic-layer {
+    flex: 1;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .al-highlight {
+    border-color: var(--blue);
+    background: rgba(0,82,226,0.04);
+    box-shadow: 0 0 0 1px var(--blue);
+  }
+  .al-tag {
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .al-highlight .al-tag { color: var(--blue); }
+  .al-title { font-size: 0.82rem; font-weight: 700; color: var(--dark); line-height: 1.3; }
+  .al-chips { display: flex; flex-wrap: wrap; gap: 0.25rem; margin-top: 0.25rem; }
+  .al-chip {
+    font-size: 0.62rem;
+    padding: 0.15rem 0.4rem;
+    border-radius: 4px;
+    background: var(--light);
+    color: var(--muted);
+    border: 1px solid var(--border);
+  }
+  .chip-bright { background: var(--blue); color: #fff; border-color: var(--blue); font-weight: 700; }
+  .al-recipes { border-color: var(--yellow); background: rgba(255,194,32,0.06); }
+  .al-recipes .al-tag { color: #92640a; }
+
+  /* 3. Component documentation */
+  .illustrated-comp-doc {
+    background: #fff;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .cd-header {
+    background: var(--dark);
+    padding: 0.75rem 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .cd-tag { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.06em; color: rgba(255,255,255,0.6); font-family: monospace; }
+  .cd-status {
+    font-size: 0.63rem; font-weight: 700; background: rgba(78,189,245,0.22);
+    color: var(--blue2); border: 1px solid rgba(78,189,245,0.4);
+    padding: 0.15rem 0.55rem; border-radius: 20px; letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .cd-body { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 0; }
+  @media(max-width:680px){ .cd-body { grid-template-columns: 1fr; } }
+  .cd-col { padding: 1.1rem; border-right: 1px solid var(--border); }
+  .cd-col:last-child { border-right: none; }
+  .cd-section-label { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.65rem; }
+  .cd-anatomy-diagram { display: flex; flex-direction: column; gap: 0.65rem; }
+  .cd-bubble-wrap { position: relative; display: flex; align-items: center; gap: 0.5rem; }
+  .cd-callout {
+    position: absolute; width: 16px; height: 16px; background: var(--yellow); color: var(--dark);
+    font-size: 0.58rem; font-weight: 800; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 2;
+  }
+  .ca1 { left: -6px; top: -6px; } .ca2 { right: -8px; top: 0; } .ca3 { right: -8px; bottom: 2px; } .ca4 { left: 36px; bottom: -8px; }
+  .cd-avatar { width: 26px; height: 26px; border-radius: 50%; background: var(--blue); flex-shrink: 0; }
+  .cd-bubble-body { position: relative; background: var(--light); border: 1px solid var(--border); border-radius: 0 10px 10px 10px; padding: 0.55rem 0.7rem; flex: 1; }
+  .cd-bubble-line { height: 5px; border-radius: 3px; background: var(--border); margin-bottom: 4px; }
+  .cd-bubble-line.long { width: 85%; } .cd-bubble-line.short { width: 55%; margin-bottom: 0; }
+  .cd-leg-item { font-size: 0.68rem; color: var(--dark); display: flex; align-items: flex-start; gap: 0.35rem; margin-bottom: 0.25rem; line-height: 1.4; }
+  .cd-num { width: 15px; height: 15px; background: var(--yellow); color: var(--dark); font-size: 0.55rem; font-weight: 800; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+  .cd-token-list { display: flex; flex-direction: column; gap: 0.35rem; }
+  .cd-token { display: flex; align-items: center; gap: 0.45rem; font-size: 0.65rem; color: var(--muted); font-family: monospace; }
+  .cd-swatch { width: 12px; height: 12px; border-radius: 3px; border: 1px solid rgba(0,0,0,0.1); flex-shrink: 0; }
+  .cd-states { display: flex; flex-wrap: wrap; gap: 0.3rem; }
+  .cd-state { font-size: 0.63rem; font-weight: 600; padding: 0.18rem 0.5rem; border-radius: 4px; border: 1px solid var(--border); color: var(--muted); font-family: monospace; }
+  .cd-state.active { background: var(--blue); color: #fff; border-color: var(--blue); }
+  .cd-a11y { background: rgba(169,221,247,0.18); border: 1px solid var(--sky); border-radius: 6px; padding: 0.5rem 0.65rem; }
+  .cd-a11y-label { font-size: 0.57rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue); margin-bottom: 0.3rem; }
+  .cd-a11y-item { font-size: 0.66rem; color: var(--dark); line-height: 1.6; }
+  .cd-a11y-item::before { content: '✓ '; color: var(--blue); font-weight: 700; }
+  .cd-spec-block { border: 1px solid var(--border); border-radius: 6px; overflow: hidden; margin-bottom: 0.6rem; }
+  .cd-spec-row { display: flex; justify-content: space-between; padding: 0.3rem 0.6rem; border-bottom: 1px solid var(--border); }
+  .cd-spec-row:last-child { border-bottom: none; }
+  .cd-spec-k { font-size: 0.67rem; color: var(--muted); }
+  .cd-spec-v { font-size: 0.67rem; color: var(--dark); font-weight: 600; font-family: monospace; }
+
+  /* 4. Hierarchy / taxonomy */
+  .illustrated-hierarchy {
+    background: var(--light);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 1.5rem;
+  }
+  .hier-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.1rem; }
+  .hier-levels { display: flex; flex-direction: column; gap: 0; }
+  .hier-level { border-radius: 8px; padding: 0.85rem 1.1rem; display: flex; flex-direction: column; gap: 0.4rem; }
+  .hl-published { background: var(--dark); }
+  .hl-sub       { background: rgba(0,82,226,0.07); border: 1px solid rgba(0,82,226,0.15); }
+  .hl-base      { background: rgba(78,189,245,0.1); border: 1px solid rgba(78,189,245,0.2); }
+  .hl-atom      { background: #fff; border: 1px solid var(--border); }
+  .hl-badge { font-size: 0.57rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.15rem 0.5rem; border-radius: 20px; align-self: flex-start; }
+  .hl-published .hl-badge { background: var(--yellow); color: var(--dark); }
+  .hl-sub .hl-badge       { background: var(--blue); color: #fff; }
+  .hl-base .hl-badge      { background: var(--blue2); color: var(--dark); }
+  .hl-atom .hl-badge      { background: var(--border); color: var(--muted); }
+  .hl-title-wrap { display: flex; flex-direction: column; gap: 0.2rem; }
+  .hl-title { font-size: 0.82rem; font-weight: 700; font-family: monospace; }
+  .hl-published .hl-title { color: #fff; }
+  .hl-sub .hl-title, .hl-base .hl-title { color: var(--dark); }
+  .hl-atom .hl-title { color: var(--dark); }
+  .hl-desc { font-size: 0.72rem; }
+  .hl-published .hl-desc { color: rgba(255,255,255,0.45); }
+  .hl-sub .hl-desc, .hl-base .hl-desc, .hl-atom .hl-desc { color: var(--muted); }
+  .hl-chips { display: flex; flex-wrap: wrap; gap: 0.28rem; }
+  .hc { font-size: 0.65rem; font-weight: 600; padding: 0.15rem 0.45rem; border-radius: 4px; font-family: monospace; }
+  .hl-published .hc { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.65); }
+  .hl-sub .hc       { background: rgba(0,82,226,0.1); color: var(--blue); }
+  .hl-base .hc      { background: rgba(78,189,245,0.18); color: #0369a1; }
+  .hl-atom .hc      { background: var(--light); color: var(--muted); border: 1px solid var(--border); }
+  .hier-arrow { font-size: 0.7rem; color: var(--muted); text-align: center; padding: 0.35rem 0; letter-spacing: 0.04em; }
+
+  /* 5. Tracker (mirroring real Airtable columns from the slide) */
+  .illustrated-tracker { background: #fff; border: 1.5px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .tracker-header { background: var(--dark); padding: 0.8rem 1.1rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.4rem; }
+  .tracker-title { font-size: 0.8rem; font-weight: 700; color: #fff; }
+  .tracker-meta  { font-size: 0.65rem; color: rgba(255,255,255,0.4); }
+  .tracker-table { width: 100%; overflow-x: auto; }
+  .tracker-thead { display: grid; grid-template-columns: 2.2fr 1.2fr 1fr 0.8fr 1.1fr; padding: 0.45rem 1rem; background: var(--light); border-bottom: 1px solid var(--border); }
+  .tracker-row   { display: grid; grid-template-columns: 2.2fr 1.2fr 1fr 0.8fr 1.1fr; padding: 0.55rem 1rem; border-bottom: 1px solid var(--border); align-items: center; }
+  .tracker-row:last-child { border-bottom: none; }
+  .tracker-row-active { background: rgba(0,82,226,0.04); }
+  .tc { font-size: 0.75rem; color: var(--dark); }
+  .tc-name { font-weight: 600; font-family: monospace; font-size: 0.68rem; }
+  .tracker-thead .tc { font-size: 0.58rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+  .ts-chip { font-size: 0.6rem; font-weight: 700; padding: 0.16rem 0.5rem; border-radius: 20px; letter-spacing: 0.06em; text-transform: uppercase; }
+  .ts-done   { background: rgba(0,82,226,0.1);    color: var(--blue); }
+  .ts-review { background: rgba(255,194,32,0.2);  color: #92640a; }
+  .ts-build  { background: rgba(78,189,245,0.18); color: #0369a1; }
+  .ts-queue  { background: var(--light); color: var(--muted); border: 1px solid var(--border); }
+
+  /* Use-case cards */
+  .use-case-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+  @media(max-width:780px){ .use-case-grid { grid-template-columns: 1fr; } }
+  .uc-card {
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+  }
+  .uc-header {
+    padding: 1.1rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+  .uc-icon { font-size: 1.4rem; }
+  .uc-type {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: rgba(255,255,255,0.9);
+    line-height: 1.3;
+  }
+  .uc-body { padding: 1.1rem 1.25rem; background: #fff; flex: 1; display: flex; flex-direction: column; gap: 0.75rem; }
+  .uc-example {
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .uc-desc { font-size: 0.83rem; color: var(--dark); line-height: 1.65; }
+  .uc-patterns { margin-top: auto; padding-top: 0.75rem; border-top: 1px solid var(--border); }
+  .uc-pat-label {
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+  }
+  .uc-chips { display: flex; flex-wrap: wrap; gap: 0.3rem; }
+  .uc-chip {
+    font-size: 0.65rem;
+    padding: 0.18rem 0.5rem;
+    border-radius: 4px;
+    background: var(--light);
+    color: var(--dark);
+    border: 1px solid var(--border);
+    font-weight: 500;
+  }
+  .scope-note {
+    margin-top: 1.5rem;
+    padding: 1.1rem 1.4rem;
+    background: var(--light);
+    border-left: 3px solid var(--blue);
+    border-radius: 0 8px 8px 0;
+    font-size: 0.88rem;
+    color: var(--dark);
+    line-height: 1.7;
+  }
+
+  /* Platform matrix */
+  .platform-matrix {
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .pm-header {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr 1fr;
+    background: var(--dark);
+  }
+  .pm-corner { padding: 0.65rem 1rem; }
+  .pm-col-head {
+    padding: 0.65rem 0.85rem;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.55);
+    border-left: 1px solid rgba(255,255,255,0.08);
+  }
+  .pm-row {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr 1fr;
+    border-bottom: 1px solid var(--border);
+  }
+  .pm-row:last-child { border-bottom: none; }
+  .pm-row-infra { background: var(--light); }
+  .pm-row-label {
+    padding: 0.7rem 1rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--dark);
+    border-right: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+  }
+  .pm-row-infra .pm-row-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+  .pm-cell {
+    padding: 0.7rem 0.85rem;
+    font-size: 0.75rem;
+    line-height: 1.45;
+    border-left: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+  }
+  .pm-yes     { color: var(--dark); }
+  .pm-partial { color: var(--muted); font-style: italic; }
+  .pm-infra   { color: var(--muted); font-size: 0.7rem; }
+
+
+  .ambig-box {
+    display: flex;
+    gap: 1.1rem;
+    align-items: flex-start;
+    background: rgba(1,30,96,0.05);
+    border: 1.5px solid rgba(1,30,96,0.15);
+    border-left: 4px solid var(--dark);
+    border-radius: 8px;
+    padding: 1.4rem 1.5rem;
+    margin-top: 1.75rem;
+  }
+  .ambig-icon {
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--dark);
+    opacity: 0.25;
+    flex-shrink: 0;
+    line-height: 1;
+    margin-top: 0.1rem;
+  }
+  .ambig-head {
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 0.45rem;
+  }
+  .ambig-body {
+    font-size: 0.88rem;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  /* Define steps */
+  .define-steps { display: flex; flex-direction: column; gap: 0; margin-top: 0.5rem; }
+  .define-step {
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: 0 1.25rem;
+    padding: 1.75rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .define-step:last-child { border-bottom: none; }
+  .ds-marker {
+    font-family: var(--font-head);
+    font-size: 1.75rem;
+    font-weight: 900;
+    color: var(--border);
+    line-height: 1;
+    padding-top: 0.15rem;
+    flex-shrink: 0;
+  }
+  .ds-content h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 0.6rem;
+    line-height: 1.3;
+  }
+  .ds-content p {
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.72;
+  }
+  .define-goals {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .dg-item {
+    display: flex;
+    gap: 1rem;
+    align-items: baseline;
+    padding: 0.8rem 1rem;
+    border-bottom: 1px solid var(--border);
+    background: #fff;
+  }
+  .dg-item:last-child { border-bottom: none; }
+  .dg-label {
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--blue);
+    white-space: nowrap;
+    flex-shrink: 0;
+    padding-top: 0.1rem;
+  }
+  .dg-text {
+    font-size: 0.85rem;
+    color: var(--dark);
+    line-height: 1.6;
+  }
+
+  /* Tension timeline */
+  .tension-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin: 2rem 0 1.5rem;
+    position: relative;
+    padding-left: 2rem;
+  }
+  .tension-timeline::before {
+    content: '';
+    position: absolute;
+    left: 7px;
+    top: 12px;
+    bottom: 12px;
+    width: 2px;
+    background: var(--border);
+  }
+  .tt-item {
+    display: flex;
+    gap: 1.1rem;
+    align-items: flex-start;
+    padding-bottom: 1.75rem;
+    position: relative;
+  }
+  .tt-item:last-child { padding-bottom: 0; }
+  .tt-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 0.25rem;
+    position: absolute;
+    left: -2rem;
+    border: 2px solid #fff;
+    z-index: 1;
+  }
+  .tt-friction .tt-dot { background: var(--muted); box-shadow: 0 0 0 2px var(--muted); }
+  .tt-win .tt-dot     { background: var(--blue);  box-shadow: 0 0 0 2px var(--blue); }
+  .tt-body { flex: 1; }
+  .tt-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
+  .tt-friction .tt-label { color: var(--muted); }
+  .tt-win .tt-label     { color: var(--blue); }
+  .tt-body p {
+    font-size: 0.88rem;
+    color: var(--dark);
+    line-height: 1.7;
+  }
+
+  /* Converse explainer */
+  .converse-explainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 1.75rem 0 0;
+  }
+  @media(max-width:660px){ .converse-explainer { grid-template-columns: 1fr; } }
+  .ce-left {
+    padding: 1.4rem 1.5rem;
+    background: var(--dark);
+  }
+  .ce-right {
+    padding: 1.4rem 1.5rem;
+    background: #fff;
+    border-left: 1px solid var(--border);
+  }
+  @media(max-width:660px){ .ce-right { border-left: none; border-top: 1px solid var(--border); } }
+  .ce-label {
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+  .ce-left .ce-label  { color: rgba(255,255,255,0.4); }
+  .ce-right .ce-label { color: var(--muted); }
+  .ce-left p { font-size: 0.85rem; color: rgba(255,255,255,0.7); line-height: 1.72; }
+  .ce-gap-list { display: flex; flex-direction: column; gap: 0.55rem; }
+  .ce-gap-item { display: flex; gap: 0.65rem; align-items: flex-start; }
+  .ce-gap-icon { font-size: 0.85rem; color: var(--muted); flex-shrink: 0; margin-top: 0.05rem; }
+  .ce-gap-item p { font-size: 0.84rem; color: var(--dark); line-height: 1.55; }
+  .ce-note {
+    margin-top: 1rem;
+    padding: 0.65rem 0.9rem;
+    background: rgba(1,30,96,0.06);
+    border-left: 3px solid var(--dark);
+    border-radius: 0 4px 4px 0;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--dark);
+    line-height: 1.5;
+  }
+  .converse-bridge {
+    font-size: 0.95rem;
+    color: var(--muted);
+    line-height: 1.7;
+    margin: 1.25rem 0 0;
+    font-style: italic;
+  }
+
+  /* Forcing function cards */
+  .forcing-functions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 1.75rem 0 0;
+  }
+  @media(max-width:660px){ .forcing-functions { grid-template-columns: 1fr; } }
+  .ff-card {
+    border-radius: 10px;
+    padding: 1.4rem 1.5rem;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+  .ff-platform { background: var(--dark); }
+  .ff-org      { background: rgba(0,82,226,0.07); border: 1.5px solid rgba(0,82,226,0.15); }
+  .ff-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 0.1rem; }
+  .ff-label {
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.35rem;
+  }
+  .ff-platform .ff-label { color: rgba(255,255,255,0.4); }
+  .ff-org .ff-label      { color: var(--blue); }
+  .ff-card h3 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 0.5rem;
+  }
+  .ff-platform h3 { color: #fff; }
+  .ff-org h3      { color: var(--dark); }
+  .ff-card p { font-size: 0.8rem; line-height: 1.65; }
+  .ff-platform p { color: rgba(255,255,255,0.6); }
+  .ff-org p      { color: var(--muted); }
+  .ff-result {
+    margin-top: 1rem;
+    padding: 1rem 1.25rem;
+    background: rgba(255,194,32,0.08);
+    border: 1px solid rgba(255,194,32,0.25);
+    border-radius: 8px;
+    font-size: 0.88rem;
+    color: var(--dark);
+    line-height: 1.7;
+  }
+
+  /* Leadership pitch block */
+  .leadership-pitch {
+    margin-top: 1.75rem;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .lp-label {
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--blue);
+    background: rgba(0,82,226,0.06);
+    border-bottom: 1px solid var(--border);
+    padding: 0.65rem 1.25rem;
+  }
+  .lp-body {
+    padding: 1.25rem;
+    background: #fff;
+  }
+  .lp-body p { font-size: 0.86rem; color: var(--dark); line-height: 1.7; }
+
+  /* Impact grid */
+  .impact-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-top: 1.75rem;
+  }
+  @media(max-width:760px){ .impact-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media(max-width:440px){ .impact-grid { grid-template-columns: 1fr; } }
+  .impact-card {
+    background: var(--dark);
+    border-radius: 10px;
+    padding: 1.5rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .impact-num {
+    font-family: var(--font-head);
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--yellow);
+    line-height: 1;
+  }
+  .impact-label {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.3;
+  }
+  .impact-desc {
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.45);
+    line-height: 1.55;
+  }
+
+  /* Multiplier block */
+  .multiplier-block {
+    margin-top: 1.75rem;
+    background: var(--light);
+    border: 1.5px solid var(--border);
+    border-left: 4px solid var(--blue);
+    border-radius: 0 8px 8px 0;
+    padding: 1.4rem 1.5rem;
+  }
+  .mb-label {
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 0.6rem;
+  }
+  .multiplier-block p {
+    font-size: 0.86rem;
+    color: var(--dark);
+    line-height: 1.7;
+    margin-bottom: 1rem;
+  }
+  .mb-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .mb-stat {
+    display: flex;
+    align-items: baseline;
+    gap: 0.65rem;
+    font-size: 0.82rem;
+  }
+  .mb-num {
+    font-family: var(--font-head);
+    font-weight: 900;
+    color: var(--blue);
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+  .mb-text { color: var(--dark); }
+
+  /* Framework / blueprint block */
+  .framework-block {
+    margin-top: 1.75rem;
+    background: var(--dark);
+    border-radius: 10px;
+    padding: 1.6rem 1.5rem;
+  }
+  .fb-label {
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--yellow);
+    margin-bottom: 0.75rem;
+  }
+  .framework-block > p {
+    font-size: 0.88rem;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.7;
+  }
+  .fb-kits {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.65rem;
+    margin: 1.25rem 0 0;
+  }
+  @media(max-width:720px){ .fb-kits { grid-template-columns: repeat(2, 1fr); } }
+  @media(max-width:420px){ .fb-kits { grid-template-columns: 1fr; } }
+  .fb-kit {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+    padding: 0.9rem 0.85rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+  .fb-kit-done {
+    background: rgba(255,194,32,0.12);
+    border-color: rgba(255,194,32,0.3);
+  }
+  .fb-kit-icon { font-size: 1.3rem; }
+  .fb-kit-name { font-size: 0.8rem; font-weight: 700; color: #fff; line-height: 1.25; }
+  .fb-kit-status { font-size: 0.65rem; color: rgba(255,255,255,0.45); line-height: 1.4; }
+  .fb-kit-done .fb-kit-status { color: var(--yellow); }
+
+  /* Tradeoff decision block */
+  .tradeoff-box {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 0;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-top: 1rem;
+  }
+  @media(max-width:600px){ .tradeoff-box { grid-template-columns: 1fr; } }
+  .tb-col {
+    padding: 1.1rem 1.25rem;
+    background: #fff;
+  }
+  .tb-col:first-child { background: rgba(116,118,124,0.06); }
+  .tb-label {
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+  }
+  .tb-col:last-child .tb-label { color: var(--blue); }
+  .tb-col p { font-size: 0.82rem; color: var(--dark); line-height: 1.65; }
+  .tb-divider {
+    width: 1px;
+    background: var(--border);
+  }
+  @media(max-width:600px){ .tb-divider { width: 100%; height: 1px; } }
+
+  /* Business cost block */
+  .biz-cost {
+    margin: 1.5rem 0;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .bc-label {
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 0.65rem 1.25rem;
+    background: var(--light);
+    border-bottom: 1px solid var(--border);
+  }
+  .bc-items {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    background: #fff;
+  }
+  @media(max-width:640px){ .bc-items { grid-template-columns: 1fr; } }
+  .bc-item {
+    padding: 1rem 1.25rem;
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .bc-item:last-child { border-right: none; }
+  .bc-icon { font-size: 1.1rem; }
+  .bc-item p { font-size: 0.8rem; color: var(--dark); line-height: 1.6; }
+
+  /* Capture placeholders */
+  .capture-ph {
+    margin-top: 1.25rem;
+    border: 1.5px dashed #b8c7e0;
+    border-radius: 8px;
+    background: #f7f9fc;
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+  .capture-ph-sm { padding: 0.9rem 1.1rem; margin-top: 0.9rem; }
+  .cap-badge {
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--blue);
+    background: rgba(0,82,226,0.08);
+    border: 1px solid rgba(0,82,226,0.15);
+    padding: 0.15rem 0.5rem;
+    border-radius: 3px;
+    align-self: flex-start;
+  }
+  .cap-title { font-size: 0.88rem; font-weight: 700; color: #3a4a5c; margin-top: 0.2rem; }
+  .cap-desc  { font-size: 0.75rem; color: #7a8fa8; line-height: 1.55; }
+  .section.dark .capture-ph { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.14); }
+  .section.dark .cap-badge   { color: var(--blue2); background: rgba(78,189,245,0.12); border-color: rgba(78,189,245,0.2); }
+  .section.dark .cap-title   { color: rgba(255,255,255,0.7); }
+  .section.dark .cap-desc    { color: rgba(255,255,255,0.35); }
+
+  .quote-grid.three-col { grid-template-columns: repeat(3, 1fr); }
+  @media(max-width:700px){ .quote-grid.three-col { grid-template-columns: 1fr; } }
+
+  /* Subsection headings */
+  .subsection-head {
+    font-size: 0.88rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--dark);
+    margin-top: 2.5rem;
+    margin-bottom: 0;
+  }
+
+  /* Roadmap 4-column grid */
+  .gen-journey.four-step { grid-template-columns: repeat(4, 1fr); }
+  @media(max-width:760px){ .gen-journey.four-step { grid-template-columns: repeat(2,1fr); } }
+  @media(max-width:440px){ .gen-journey.four-step { grid-template-columns: 1fr; } }
+
+  /* Stat row in problem section */
+  .kit-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; margin: 1.75rem 0; }
+  @media(max-width:600px){ .kit-stats { grid-template-columns: 1fr 1fr; } }
+  .kit-stat { background: var(--dark); border-radius: 8px; padding: 1.5rem 1rem; text-align: center; }
+  .kit-stat .big { font-family: var(--font-head); font-size: 2.2rem; color: var(--yellow); line-height: 1; }
+  .kit-stat .lbl { font-size: 0.75rem; color: rgba(255,255,255,0.5); margin-top: 0.35rem; line-height: 1.4; }
+
+  /* Tooling stack card */
+  .tool-stack { display: grid; grid-template-columns: repeat(2,1fr); gap: 0.85rem; margin-top: 1rem; }
+  @media(max-width:580px){ .tool-stack { grid-template-columns: 1fr; } }
+  .tool-card { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.1rem; display: flex; gap: 0.75rem; align-items: flex-start; }
+  .tool-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 0.05rem; }
+  .tool-card h4 { font-size: 0.88rem; font-weight: 700; color: var(--dark); margin-bottom: 0.2rem; }
+  .tool-card p  { font-size: 0.8rem; color: var(--muted); line-height: 1.55; }
+
+
+  /* Inline SVG icon coloring (replacing emoji) */
+  .ff-icon svg{display:block}
+  .ff-platform .ff-icon svg{color:#fff}
+  .ff-org .ff-icon svg{color:var(--blue)}
+  .uc-icon svg{display:block;color:#fff}
+  .tool-icon svg{display:block;color:var(--blue)}
+  .fb-kit-icon svg{display:block;color:rgba(255,255,255,0.55)}
+  .fb-kit-done .fb-kit-icon svg{color:var(--yellow)}
+  .ui-swatch-icon svg{display:block}
+  .ui-helpful svg{display:inline-block;vertical-align:middle;margin:0 1px;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="dot"></div>
+  <span>Amy Ha &nbsp;·&nbsp; Conversational UI System &nbsp;·&nbsp; Case Study</span>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-tag">Conversational UI &nbsp;·&nbsp; Design System &nbsp;·&nbsp; Org-Level Impact</div>
+    <h1>One system, <em>many teams.</em></h1>
+    <p class="hero-sub">A platform migration and org merger meant teams could no longer maintain their own chat UIs. Engineering and product brought me the problem. I defined the system, built and mentored a contributor team, and handed it to the standing teams to maintain.</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item"><div class="hm-label">Role</div><div class="hm-val">Principal Product Designer</div></div>
+      <div class="hero-meta-item"><div class="hm-label">Scope</div><div class="hm-val">Strategy &nbsp;·&nbsp; Team &nbsp;·&nbsp; System &nbsp;·&nbsp; Governance</div></div>
+      <div class="hero-meta-item"><div class="hm-label">Products</div><div class="hm-val">AI shopping assistant &nbsp;·&nbsp; Support chat &nbsp;·&nbsp; Staff tools</div></div>
+      <div class="hero-meta-item"><div class="hm-label">Status</div><div class="hm-val">In build &nbsp;·&nbsp; SDK shipping Q3/Q4</div></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- PROBLEM -->
+<section class="section">
+  <div class="section-inner">
+    <div class="eyebrow">The Problem</div>
+    <h2 class="section-title">The platform changed. The UI hadn't.</h2>
+    <p class="section-lead">Two structural changes were happening at once. Neither could work without a shared UI foundation that didn't exist yet.</p>
+
+    <div class="forcing-functions">
+      <div class="ff-card ff-platform">
+        <div class="ff-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div>
+        <div class="ff-content">
+          <div class="ff-label">Platform migration</div>
+          <h3>Moving to a closed framework that requires tokens and theming</h3>
+          <p>The org was moving all products to a new closed framework. It requires shared tokens and theming. Teams could no longer maintain their own UI. Everyone would have to rebuild to spec.</p>
+        </div>
+      </div>
+      <div class="ff-card ff-org">
+        <div class="ff-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M6 21V9a9 9 0 0 0 9 9"/></svg></div>
+        <div class="ff-content">
+          <div class="ff-label">Org consolidation</div>
+          <h3>Merging the "hallways": separate platforms for separate markets</h3>
+          <p>Separate markets had built their own platforms. Now they were merging. The UIs weren't just different, they were incompatible. Unifying them needed one shared foundation supporting many brands and surfaces.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ff-result">
+      <p>The ask from engineering and PM was clear: support multi-tenancy and theming at scale, and stop teams managing it alone. We need a system. What should it be?</p>
+    </div>
+
+    <div class="ph">
+      <div class="illustrated-ui-grid">
+        <div class="ui-grid-label">The same interaction. Six different implementations.</div>
+        <div class="ui-swatch-grid">
+          <div class="ui-swatch">
+            <div class="ui-swatch-bar" style="background:#f5a623;">
+              <div class="ui-swatch-dot" style="background:#f5a623;border:2px solid rgba(255,255,255,0.5);"></div>
+              <div class="ui-swatch-name">Shopping Assistant</div>
+              <div class="ui-swatch-x">×</div>
+            </div>
+            <div class="ui-bubble b-shop">Hi, how can I help?</div>
+            <div class="ui-bubble b-user">What are your store hours?</div>
+            <div class="ui-bubble b-shop">We're open 9 to 9, seven days a week.</div>
+            <div class="ui-helpful">Was this helpful? <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 10v12"/><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2h0a3.13 3.13 0 0 1 3 3.88Z"/></svg> <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 14V2"/><path d="M9 18.12 10 14H4.17a2 2 0 0 1-1.92-2.56l2.33-8A2 2 0 0 1 6.5 2H20a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2.76a2 2 0 0 0-1.79 1.11L13 22h0a3.13 3.13 0 0 1-3-3.88Z"/></svg></div>
+          </div>
+          <div class="ui-swatch">
+            <div class="ui-swatch-bar" style="background:#0052e2;">
+              <div class="ui-swatch-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+              <div class="ui-swatch-name">Main Storefront</div>
+              <div class="ui-swatch-x">×</div>
+            </div>
+            <div class="ui-bubble b-storefront">Hi, how can I help?</div>
+            <div class="ui-bubble b-user">What are your store hours?</div>
+            <div class="ui-bubble b-storefront">We're open 9 to 9, seven days a week.</div>
+            <div class="ui-helpful">Was this helpful? <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 10v12"/><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2h0a3.13 3.13 0 0 1 3 3.88Z"/></svg> <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 14V2"/><path d="M9 18.12 10 14H4.17a2 2 0 0 1-1.92-2.56l2.33-8A2 2 0 0 1 6.5 2H20a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2.76a2 2 0 0 0-1.79 1.11L13 22h0a3.13 3.13 0 0 1-3-3.88Z"/></svg></div>
+          </div>
+          <div class="ui-swatch">
+            <div class="ui-swatch-bar" style="background:#007dc6;">
+              <div class="ui-swatch-icon" style="color:#fff;">⏳</div>
+              <div class="ui-swatch-name">Regional Market</div>
+              <div class="ui-swatch-x">×</div>
+            </div>
+            <div class="ui-bubble b-market">Hi, how can I help?</div>
+            <div class="ui-bubble b-user">What are your store hours?</div>
+            <div class="ui-bubble b-market">We're open 9 to 9, seven days a week.</div>
+            <div class="ui-helpful">Was this helpful? <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 10v12"/><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2h0a3.13 3.13 0 0 1 3 3.88Z"/></svg> <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 14V2"/><path d="M9 18.12 10 14H4.17a2 2 0 0 1-1.92-2.56l2.33-8A2 2 0 0 1 6.5 2H20a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2.76a2 2 0 0 0-1.79 1.11L13 22h0a3.13 3.13 0 0 1-3-3.88Z"/></svg></div>
+          </div>
+          <div class="ui-swatch">
+            <div class="ui-swatch-bar" style="background:#003087;">
+              <div class="ui-swatch-dot" style="background:#00a9e0;"></div>
+              <div class="ui-swatch-name">Membership Club</div>
+              <div class="ui-swatch-x">×</div>
+            </div>
+            <div class="ui-bubble b-club">Hi, how can I help?</div>
+            <div class="ui-bubble b-user">What are your store hours?</div>
+            <div class="ui-bubble b-club">We're open 9 to 9, seven days a week.</div>
+          </div>
+          <div class="ui-swatch">
+            <div class="ui-swatch-bar" style="background:#1a1a2e;">
+              <div class="ui-swatch-dot" style="background:#6c63ff;"></div>
+              <div class="ui-swatch-name">Support Agent</div>
+              <div class="ui-swatch-x">×</div>
+            </div>
+            <div class="ui-bubble b-assist">Hi, how can I help?</div>
+            <div class="ui-bubble b-user">What are your store hours?</div>
+            <div class="ui-bubble b-assist">We're open 9 to 9, seven days a week.</div>
+          </div>
+          <div class="ui-swatch">
+            <div class="ui-swatch-bar" style="background:#2d2d2d;">
+              <div class="ui-swatch-initials">MC</div>
+              <div class="ui-swatch-name">Seller Tools</div>
+              <div class="ui-swatch-x">×</div>
+            </div>
+            <div class="ui-bubble b-merchant">Hi, how can I help?</div>
+            <div class="ui-bubble b-user">What are your store hours?</div>
+            <div class="ui-bubble b-merchant">We're open 9 to 9, seven days a week.</div>
+          </div>
+        </div>
+
+      </div>
+      <div class="ph-caption">Shopping assistant, storefront chat, regional markets, membership club, support agents, and seller tools. All built in isolation, none shareable.</div>
+    </div>
+
+
+    <div class="quote-grid three-col">
+      <div class="tcard"><p class="tq">We do not have the design resources to build our own chatbot UI. We want guidelines or tools to create the essentials quickly.</p><div class="tn">A small product team</div><div class="tr">No design resources</div></div>
+      <div class="tcard"><p class="tq">We have our own design resources, but our components are unique. They are not built for other teams to borrow.</p><div class="tn">A team with its own UI</div><div class="tr">Not portable</div></div>
+      <div class="tcard"><p class="tq">Our tool is set to merge with another, but our UIs are inconsistent. When we merge, we would redo everything from scratch.</p><div class="tn">A team facing a merger</div><div class="tr">Forced rebuild</div></div>
+    </div>
+
+    <div class="ambig-box">
+      <div class="ambig-icon">?</div>
+      <div>
+        <p class="ambig-head">This is where design came in.</p>
+        <p class="ambig-body">They knew what was needed: a shared, themeable, multi-tenant chat system. They didn't know what it should look like, how to govern it, or who should build it. That was the design problem.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- DEFINING THE WORK -->
+<section class="section alt">
+  <div class="section-inner">
+    <div class="eyebrow">Defining the Work</div>
+    <h2 class="section-title">The problem was clear. The solution wasn't.</h2>
+    <p class="section-lead">My job was to turn a technical mandate into a system teams could actually adopt.</p>
+
+    <div class="define-steps">
+
+      <div class="define-step">
+        <div class="ds-marker">01</div>
+        <div class="ds-content">
+          <h3>Understand each team's position in the migration</h3>
+          <p>The migration hit everyone, but from different starting points (see the three teams above). The system had to serve all of them at once, not just the best-resourced.</p>
+        </div>
+      </div>
+
+      <div class="define-step">
+        <div class="ds-marker">02</div>
+        <div class="ds-content">
+          <h3>Map what existed and what the framework required</h3>
+          <p>The Core Design System had the atoms. The new framework required tokens and theming at the system level, not team by team. Local components weren't token-compliant. Nothing was structured for what the framework now required.</p>
+          <div class="capture-ph">
+            <div class="cap-badge">Screenshot · Figma</div>
+            <div class="cap-title">Audit spread</div>
+            <div class="cap-desc">Side-by-side audit of existing chat UIs across products, annotated to show what was token-compliant, what needed migration, and what had to be rebuilt.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="define-step">
+        <div class="ds-marker">03</div>
+        <div class="ds-content">
+          <h3>Translate the technical mandate into design goals</h3>
+          <p>Multi-tenancy and theming weren't optional features. They were requirements the framework imposed. The design goals had to start there and work outward.</p>
+          <div class="define-goals">
+            <div class="dg-item"><div class="dg-label">Goal 1</div><div class="dg-text">Multi-tenant and themeable from day one. Every component had to support multiple brands and surfaces without a rebuild.</div></div>
+            <div class="dg-item"><div class="dg-label">Goal 2</div><div class="dg-text">Remove duplication across the merging markets. One shared system replacing the independent builds each market had maintained.</div></div>
+            <div class="dg-item"><div class="dg-label">Goal 3</div><div class="dg-text">Clear starting points for every team, wherever they were starting from.</div></div>
+          </div>
+          <div class="capture-ph">
+            <div class="cap-badge">Screenshot · Planning doc</div>
+            <div class="cap-title">Project brief</div>
+            <div class="cap-desc">The brief developed with engineering and PM: migration requirements, multi-tenancy scope, and what design owned versus what the platform would handle.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="define-step">
+        <div class="ds-marker">04</div>
+        <div class="ds-content">
+          <h3>Make the hard call: patterns and recipes, not just components</h3>
+          <p>A component library was the obvious answer. Faster to build, easier to scope. But it solves a delivery problem, not a design one. Teams didn't just need shared buttons. They needed shared thinking for each use case.</p>
+          <div class="tradeoff-box">
+            <div class="tb-col">
+              <div class="tb-label">What we didn't build</div>
+              <p>A component library. Fast to ship, but teams would still make the same design decisions alone. Fragmentation would just move up one layer.</p>
+            </div>
+            <div class="tb-divider"></div>
+            <div class="tb-col">
+              <div class="tb-label">What we built instead</div>
+              <p>A pattern and recipe system on top of shared components. Slower to define, but it solved the real problem: how to design well for each use case.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- SCOPE -->
+<section class="section">
+  <div class="section-inner">
+    <div class="eyebrow">The Scope</div>
+    <h2 class="section-title">Not a component kit. A pattern system for three different experiences.</h2>
+    <p class="section-lead">The chat experiences weren't variations of one thing. They were three distinct use cases, each with its own interaction model. Treat them the same and all three break.</p>
+
+    <div class="use-case-grid">
+
+      <div class="uc-card">
+        <div class="uc-header" style="background:#011e60;">
+          <div class="uc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></div>
+          <div class="uc-type">AI Shopping Assistant</div>
+        </div>
+        <div class="uc-body">
+          <div class="uc-example">Shopping assistant, storefront</div>
+          <p class="uc-desc">Proactive. The bot initiates, surfaces products, handles rich media. Users are browsing.</p>
+          <div class="uc-patterns">
+            <div class="uc-pat-label">Patterns needed</div>
+            <div class="uc-chips">
+              <span class="uc-chip">Product carousel</span>
+              <span class="uc-chip">Image-rich bubbles</span>
+              <span class="uc-chip">Quick reply suggestions</span>
+              <span class="uc-chip">Persistent FAB launcher</span>
+              <span class="uc-chip">Click-to-play</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="uc-card">
+        <div class="uc-header" style="background:#1a3a5c;">
+          <div class="uc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg></div>
+          <div class="uc-type">AI Support Agent</div>
+        </div>
+        <div class="uc-body">
+          <div class="uc-example">Support center, customer care</div>
+          <p class="uc-desc">Resolution-focused. The user has a problem. Trust is lower, stakes are higher. Structure matters more than richness.</p>
+          <div class="uc-patterns">
+            <div class="uc-pat-label">Patterns needed</div>
+            <div class="uc-chips">
+              <span class="uc-chip">Structured response cards</span>
+              <span class="uc-chip">Feedback rail</span>
+              <span class="uc-chip">Escalation to agent</span>
+              <span class="uc-chip">Session header + collapse</span>
+              <span class="uc-chip">Disclaimer banners</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="uc-card">
+        <div class="uc-header" style="background:#0d3b2e;">
+          <div class="uc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+          <div class="uc-type">Person-to-Person Chat</div>
+        </div>
+        <div class="uc-body">
+          <div class="uc-example">Delivery chat, staff tools</div>
+          <p class="uc-desc">Two humans, not a bot. Real-time, presence-aware. Can't be treated as a variant of AI chat.</p>
+          <div class="uc-patterns">
+            <div class="uc-pat-label">Patterns needed</div>
+            <div class="uc-chips">
+              <span class="uc-chip">Typing indicator</span>
+              <span class="uc-chip">Read receipts</span>
+              <span class="uc-chip">Presence state</span>
+              <span class="uc-chip">Media attachment</span>
+              <span class="uc-chip">Dual-avatar header</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="scope-note">
+      All three share a base layer: bubbles, input bar, avatars, timestamps. The patterns and recipes on top are entirely different for each. The base had to be flexible. The recipe layer had to be specific.
+    </div>
+
+    <h3 class="subsection-head" style="margin-top:2.5rem;">And across three platforms</h3>
+    <p style="font-size:0.9rem;color:var(--muted);line-height:1.7;margin-top:0.6rem;margin-bottom:1.25rem;">Desktop web, native iOS and Android, and React Native. Each with a different token pipeline. A component that worked on web could break on native.</p>
+
+    <div class="platform-matrix">
+      <div class="pm-header">
+        <div class="pm-corner"></div>
+        <div class="pm-col-head">Desktop Web</div>
+        <div class="pm-col-head">Native iOS / Android</div>
+        <div class="pm-col-head">React Native</div>
+      </div>
+      <div class="pm-row">
+        <div class="pm-row-label">AI Shopping Assistant</div>
+        <div class="pm-cell pm-yes">Carousel · FAB · rich media</div>
+        <div class="pm-cell pm-yes">Full-screen · native SDK</div>
+        <div class="pm-cell pm-yes">React Native SDK</div>
+      </div>
+      <div class="pm-row">
+        <div class="pm-row-label">AI Support Agent</div>
+        <div class="pm-cell pm-yes">Widget · collapse pattern</div>
+        <div class="pm-cell pm-yes">Sheet · native SDK</div>
+        <div class="pm-cell pm-yes">React Native SDK</div>
+      </div>
+      <div class="pm-row">
+        <div class="pm-row-label">Person-to-Person</div>
+        <div class="pm-cell pm-yes">Full window · presence</div>
+        <div class="pm-cell pm-yes">Messaging UI · native</div>
+        <div class="pm-cell pm-partial">In scope · P2</div>
+      </div>
+      <div class="pm-row pm-row-infra">
+        <div class="pm-row-label">Token pipeline</div>
+        <div class="pm-cell pm-infra">Design system tokens</div>
+        <div class="pm-cell pm-infra">Platform SDK tokens</div>
+        <div class="pm-cell pm-infra">Engineering SDK path</div>
+      </div>
+    </div>
+
+    <div class="resolved" style="margin-top:1.75rem;">
+      <p><strong>The implication:</strong> every design decision had to hold across all three use cases and all three platforms. Not just the screen in front of you.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ALIGNMENT -->
+<section class="section">
+  <div class="section-inner">
+    <div class="eyebrow">Building the Team</div>
+    <h2 class="section-title">I didn't build this alone. That was the point.</h2>
+    <p class="section-lead">A system built by one person fails when that person leaves. So I built it to be owned by many: contributors I recruited from across the org, mentored on a new process, then handed to the standing teams to maintain.</p>
+
+    <div class="tension-timeline">
+      <div class="tt-item tt-friction">
+        <div class="tt-dot"></div>
+        <div class="tt-body">
+          <div class="tt-label">The starting conditions</div>
+          <p>The Core Design System and the platform were on separate timelines. Engineering was reconciling two sources of truth by hand. No shared process, no shared tooling. Design wasn't in the room yet.</p>
+        </div>
+      </div>
+      <div class="tt-item tt-friction">
+        <div class="tt-dot"></div>
+        <div class="tt-body">
+          <div class="tt-label">Being first had a cost</div>
+          <p>We were the first team to run end-to-end on the platform. There was no playbook for this process. We had to invent it, then teach it.</p>
+        </div>
+      </div>
+      <div class="tt-item tt-win">
+        <div class="tt-dot"></div>
+        <div class="tt-body">
+          <div class="tt-label">Contributors, not headcount</div>
+          <p>I didn't have a standing team. I recruited designers from across product teams to contribute to the work. I made the case to leadership for their time. Each brought product knowledge no central team could replicate.</p>
+        </div>
+      </div>
+      <div class="tt-item tt-win">
+        <div class="tt-dot"></div>
+        <div class="tt-body">
+          <div class="tt-label">Mentoring on a new process</div>
+          <p>None of the contributors had built a design system this way. I mentored them through it: the audit method, the pattern-and-recipe model, token discipline, and reviews. Leading through influence, not authority, since they didn't report to me.</p>
+        </div>
+      </div>
+      <div class="tt-item tt-win">
+        <div class="tt-dot"></div>
+        <div class="tt-body">
+          <div class="tt-label">Design leadership buy-in</div>
+          <p>I showed leadership that embedded expertise would build a better, more adopted system than a central team alone, and cost less in rework. They committed the contributors' time.</p>
+        </div>
+      </div>
+      <div class="tt-item tt-win">
+        <div class="tt-dot"></div>
+        <div class="tt-body">
+          <div class="tt-label">How we stayed coordinated</div>
+          <p>Weekly syncs with engineering and product. Batched reviews with the full team. A shared intake tracker. Clear ownership so decisions didn't require escalation.</p>
+        </div>
+      </div>
+      <div class="tt-item tt-win">
+        <div class="tt-dot"></div>
+        <div class="tt-body">
+          <div class="tt-label">Then I handed it off</div>
+          <p>Once the system was proven, I transferred maintenance to the standing engineering and design teams. I built it to be owned by them, not to depend on me. That was the goal from the start.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="resolved">
+      <p><strong>The leadership move:</strong> don't build the system yourself. Bring together the people who can, mentor them through a process no one had run before, then hand off ownership so it outlasts you.</p>
+    </div>
+
+    <div class="capture-ph" style="margin-top:1.75rem;">
+      <div class="cap-badge">Screenshot · Slide</div>
+      <div class="cap-title">Team structure</div>
+      <div class="cap-desc">The team map: contributors recruited from across product teams, the leadership commitment that resourced them, and the standing teams that took over maintenance.</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- THE PROCESS -->
+<section class="section alt">
+  <div class="section-inner">
+    <div class="eyebrow">The Process</div>
+    <h2 class="section-title">A repeatable loop, not a one-off.</h2>
+    <p class="section-lead">With alignment in place, the work followed a clear loop. Any team joining later can follow the same steps.</p>
+    <div class="journey">
+
+      <div class="journey-item mood-progress">
+        <div class="ji-left"><div class="ji-date">Audit</div><div class="ji-phase">Map what exists</div></div>
+        <div class="ji-mid"><div class="ji-dot"></div></div>
+        <div class="ji-right"><p class="ji-story">Audit existing chat screens across consumer, staff, and enterprise products. Build from what's real, not assumptions.</p></div>
+      </div>
+
+      <div class="journey-item mood-progress">
+        <div class="ji-left"><div class="ji-date">Recipes</div><div class="ji-phase">Find the repeating flows</div></div>
+        <div class="ji-mid"><div class="ji-dot"></div></div>
+        <div class="ji-right">
+          <p class="ji-story">Start from user flows to surface recipe patterns: the common interaction shapes every chatbot reuses. Break each recipe into element-level UI patterns.</p>
+          <div class="capture-ph capture-ph-sm">
+            <div class="cap-badge">Screenshot · Figma</div>
+            <div class="cap-title">Recipe output</div>
+            <div class="cap-desc">A generated recipe in Figma: entry point, setup screens, and native components pulled into a working file with instructions attached.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="journey-item mood-progress">
+        <div class="ji-left"><div class="ji-date">Analysis</div><div class="ji-phase">Group and prioritize</div></div>
+        <div class="ji-mid"><div class="ji-dot"></div></div>
+        <div class="ji-right">
+          <p class="ji-story">Group patterns in Airtable with effort levels, timelines, and designer ownership. Track actual progress, not just a wishlist.</p>
+          <div class="capture-ph capture-ph-sm">
+            <div class="cap-badge">Screenshot · Airtable</div>
+            <div class="cap-title">Pattern analysis tracker</div>
+            <div class="cap-desc">The build tracker during the analysis phase: patterns grouped by category, effort level, and priority before any component work begins.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="journey-item mood-win">
+        <div class="ji-left"><div class="ji-date">Review</div><div class="ji-phase">Test with the teams</div></div>
+        <div class="ji-mid"><div class="ji-dot"></div></div>
+        <div class="ji-right">
+          <p class="ji-story">Review components in batches with the contributor team: patterns, design system tokens, naming, accessibility, and engineering specs for the SDK.</p>
+          <div class="ji-win"><strong>Learned:</strong> reviews only work with full attendance. The shared review template made that consistent.</div>
+        </div>
+      </div>
+
+      <div class="journey-item mood-progress">
+        <div class="ji-left"><div class="ji-date">Build</div><div class="ji-phase">Assemble the hierarchy</div></div>
+        <div class="ji-mid"><div class="ji-dot"></div></div>
+        <div class="ji-right"><p class="ji-story">I set the architecture: the design system provides the atoms, the chat system extends upward into molecules, organisms, and templates. The team built the components against it, each named precisely so any team can navigate without asking.</p></div>
+      </div>
+
+      <div class="journey-item mood-progress">
+        <div class="ji-left"><div class="ji-date">Document</div><div class="ji-phase">Write it down</div></div>
+        <div class="ji-mid"><div class="ji-dot"></div></div>
+        <div class="ji-right">
+          <p class="ji-story">Design guidelines, token references, engineering specs, and accessibility annotations. Any designer or engineer on any team can pick up a component cold.</p>
+          <div class="ji-win"><strong>The multiplier:</strong> I designed the review template, onboarding structure, and contribution path so partner designers could contribute without me in the room.</div>
+          <div class="ji-note"><strong>Output:</strong> one unified payload, branched to engineering and versioned after handoff.</div>
+        </div>
+      </div>
+
+    </div>
+    <div class="ph">
+      <div class="illustrated-comp-doc">
+        <div class="cd-header">
+          <div class="cd-tag">[CHAT] Chat Header-collapsed</div>
+          <div class="cd-status">Published · Branched</div>
+        </div>
+        <div class="cd-body">
+          <div class="cd-col cd-anatomy">
+            <div class="cd-section-label">Anatomy</div>
+            <div class="cd-anatomy-diagram">
+              <div class="cd-bubble-wrap">
+                <div class="cd-callout ca1">1</div>
+                <div class="cd-mock-bubble">
+                  <div class="cd-avatar"></div>
+                  <div class="cd-bubble-body">
+                    <div class="cd-bubble-line long"></div>
+                    <div class="cd-bubble-line short"></div>
+                    <div class="cd-callout ca2">2</div>
+                    <div class="cd-callout ca3">3</div>
+                  </div>
+                </div>
+                <div class="cd-callout ca4">4</div>
+              </div>
+              <div class="cd-legend">
+                <div class="cd-leg-item"><span class="cd-num">1</span>Avatar · 32px</div>
+                <div class="cd-leg-item"><span class="cd-num">2</span>bubble/bg · color.fill token</div>
+                <div class="cd-leg-item"><span class="cd-num">3</span>Body/SM · text token</div>
+                <div class="cd-leg-item"><span class="cd-num">4</span>Timestamp · Caption</div>
+              </div>
+            </div>
+          </div>
+          <div class="cd-col cd-tokens">
+            <div class="cd-section-label">Tokens (design system taxonomy)</div>
+            <div class="cd-token-list">
+              <div class="cd-token"><div class="cd-swatch" style="background:#0052e2"></div><span>color.fill.brand</span></div>
+              <div class="cd-token"><div class="cd-swatch" style="background:#eef5ff"></div><span>color.background.subtle</span></div>
+              <div class="cd-token"><div class="cd-swatch" style="background:#e3e4e5"></div><span>color.border.subtle</span></div>
+            </div>
+            <div class="cd-section-label" style="margin-top:1rem">States</div>
+            <div class="cd-states">
+              <div class="cd-state">default</div>
+              <div class="cd-state active">selected</div>
+              <div class="cd-state">loading</div>
+              <div class="cd-state">error</div>
+            </div>
+            <div class="cd-a11y" style="margin-top:1rem;">
+              <div class="cd-a11y-label">A11y · Reviewed</div>
+              <div class="cd-a11y-item">role="log" on container</div>
+              <div class="cd-a11y-item">aria-label on avatar</div>
+              <div class="cd-a11y-item">4.5:1 contrast · all states</div>
+            </div>
+          </div>
+          <div class="cd-col cd-specs">
+            <div class="cd-section-label">Engineering specs · SDK</div>
+            <div class="cd-spec-block">
+              <div class="cd-spec-row"><span class="cd-spec-k">Padding</span><span class="cd-spec-v">12px 16px</span></div>
+              <div class="cd-spec-row"><span class="cd-spec-k">Radius</span><span class="cd-spec-v">16px / 4px</span></div>
+              <div class="cd-spec-row"><span class="cd-spec-k">Max-width</span><span class="cd-spec-v">72%</span></div>
+              <div class="cd-spec-row"><span class="cd-spec-k">Platform</span><span class="cd-spec-v">React · ReactNative</span></div>
+            </div>
+            <div class="cd-section-label" style="margin-top:0.9rem">Branch</div>
+            <div class="cd-spec-block">
+              <div class="cd-spec-row"><span class="cd-spec-k">Ticket</span><span class="cd-spec-v">#235 - Avatar-image</span></div>
+              <div class="cd-spec-row"><span class="cd-spec-k">Status</span><span class="cd-spec-v">Merged · archived</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="ph-caption">Every component ships with anatomy, design token references, engineering specs for the SDK, and accessibility annotations reviewed by the a11y team.</div>
+    </div>
+
+    <h3 class="subsection-head" style="margin-top:2.5rem;">How it fits into the Core Design System</h3>
+    <div class="ph">
+      <div class="illustrated-atomic">
+        <div class="atomic-label">How the chat system fits into the Core Design System stack</div>
+        <div class="atomic-row">
+          <div class="atomic-layer al-ld">
+            <div class="al-tag">Core Design System</div>
+            <div class="al-title">Atoms &amp; Foundations</div>
+            <div class="al-chips">
+              <span class="al-chip">Color tokens</span>
+              <span class="al-chip">Type scale</span>
+              <span class="al-chip">Spacing</span>
+              <span class="al-chip">Icon set</span>
+              <span class="al-chip">644 components</span>
+            </div>
+          </div>
+          <div class="atomic-arrow">+</div>
+          <div class="atomic-layer al-platform">
+            <div class="al-tag">Platform SDK</div>
+            <div class="al-title">Atoms &amp; Foundations</div>
+            <div class="al-chips">
+              <span class="al-chip">Platform tokens</span>
+              <span class="al-chip">Product themes</span>
+              <span class="al-chip">Accessibility base</span>
+            </div>
+          </div>
+          <div class="atomic-arrow">→</div>
+          <div class="atomic-layer al-uckit al-highlight">
+            <div class="al-tag">Conversational UI Kit</div>
+            <div class="al-title">Molecules → Organisms → Templates</div>
+            <div class="al-chips">
+              <span class="al-chip chip-bright">834 components</span>
+              <span class="al-chip chip-bright">50 variables</span>
+              <span class="al-chip">Chat Bubble</span>
+              <span class="al-chip">Input Bar</span>
+              <span class="al-chip">Headers</span>
+              <span class="al-chip">Avatars</span>
+              <span class="al-chip">Quick Replies</span>
+              <span class="al-chip">Carousels</span>
+            </div>
+          </div>
+          <div class="atomic-arrow">→</div>
+          <div class="atomic-layer al-recipes">
+            <div class="al-tag">Recipes</div>
+            <div class="al-title">Automated user flow outputs</div>
+            <div class="al-chips">
+              <span class="al-chip">Prompt-based</span>
+              <span class="al-chip">Detached on generation</span>
+              <span class="al-chip">Instructions included</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="ph-caption">The chat system extends the Core Design System upward, from atoms to full interaction templates, and bridges all the way to automated recipe outputs.</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- GOVERNANCE -->
+<section class="section">
+  <div class="section-inner">
+    <div class="eyebrow">Governance</div>
+    <h2 class="section-title">Owned, reviewed, open to contribute.</h2>
+    <p class="section-lead">The system only stays accurate if ownership is clear. I defined the governance model for that, now and as it scales.</p>
+
+    <h3 class="subsection-head">The naming taxonomy</h3>
+    <p style="font-size:0.9rem;color:var(--muted);line-height:1.7;margin-top:0.6rem;margin-bottom:1.25rem;">Every component name encodes its layer: whether it's in code, who owns it, and how it relates to others. That consistency makes automation possible and keeps the system navigable as more teams contribute.</p>
+    <div class="ph">
+      <div class="illustrated-hierarchy">
+        <div class="hier-label">Component naming taxonomy · How to read any component</div>
+        <div class="hier-levels">
+          <div class="hier-level hl-published">
+            <div class="hl-badge">Global · Published</div>
+            <div class="hl-title-wrap">
+              <div class="hl-title"><code>[CHAT]</code> Chat Header-collapsed</div>
+              <div class="hl-desc">Prefix in all caps · Title Case name · hyphen-variant · built in code · locked tokens</div>
+            </div>
+            <div class="hl-chips"><span class="hc">[CHAT] ChatBubble</span><span class="hc">[CHAT] InputBar</span><span class="hc">[CHAT] Avatar-image</span><span class="hc">[CHAT] ChatHeader-collapsed</span></div>
+          </div>
+          <div class="hier-arrow">↓ Reviewed &amp; merged by a second designer · archived in versioning</div>
+          <div class="hier-level hl-sub">
+            <div class="hl-badge">Subcomponent</div>
+            <div class="hl-title-wrap">
+              <div class="hl-title"><code>Action / Collapsible + Close-default</code></div>
+              <div class="hl-desc">No prefix · Parent / Slash / Name · not built in code · feeds into published components</div>
+            </div>
+            <div class="hl-chips"><span class="hc">Action / Collapsible + Close</span><span class="hc">Feedback / ThumbsUp &amp; Down</span><span class="hc">Input / SendButton</span></div>
+          </div>
+          <div class="hier-arrow">↓ Base building blocks</div>
+          <div class="hier-level hl-base">
+            <div class="hl-badge">Base</div>
+            <div class="hl-title-wrap">
+              <div class="hl-title"><code>.icon buttons-feedback</code></div>
+              <div class="hl-desc">Period prefix · lower case · never published · nested inside larger components</div>
+            </div>
+            <div class="hl-chips"><span class="hc">.icon buttons-feedback</span><span class="hc">.avatar-dot</span><span class="hc">.status-pill</span></div>
+          </div>
+          <div class="hier-arrow">↓ Foundation</div>
+          <div class="hier-level hl-atom">
+            <div class="hl-badge">Atoms · From design system</div>
+            <div class="hl-title-wrap">
+              <div class="hl-title"><code>[CORE] IconButton</code> &nbsp;/&nbsp; <code>[CHAT] IconButton/React-Native-inverse</code></div>
+              <div class="hl-desc">The chat kit only adds atoms when the Core Design System doesn't cover the gap (e.g. React Native + dark background support)</div>
+            </div>
+            <div class="hl-chips"><span class="hc">color tokens</span><span class="hc">Type scale</span><span class="hc">Spacing</span><span class="hc">Radius</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="subsection-head" style="margin-top:2.5rem;">How the system stays current</h3>
+    <div class="unlock-grid" style="margin-top:1rem;">
+      <div class="unlock"><h4>Intake and tracking</h4><p>Contributors and product teams submit requests via a shared tracker. Every component is logged with designer ownership, effort level, and design file links.</p></div>
+      <div class="unlock"><h4>Batched reviews</h4><p>The full contributor team reviews components in batches before anything merges. Domain expertise from each product team shapes every decision.</p></div>
+      <div class="unlock"><h4>Contribution path</h4><p>Any contributor can propose, build, and publish components. The path is documented so new contributors can join without needing to ask how.</p></div>
+      <div class="unlock"><h4>Handoff to standing teams</h4><p>The handoff defined clear decision rights and escalation paths, so ownership moved with the authority to run it, not just the workload.</p></div>
+    </div>
+
+    <h3 class="subsection-head" style="margin-top:2.5rem;">The tooling stack</h3>
+    <div class="tool-stack" style="margin-top:1rem;">
+      <div class="tool-card"><div class="tool-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="3" x2="9" y2="21"/></svg></div><div><h4>Airtable</h4><p>Component intake, build tracking, and documentation. One source of truth for what's in flight.</p></div></div>
+      <div class="tool-card"><div class="tool-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div><div><h4>Scripter + Automator</h4><p>Figma plugins that automate component builds, documentation exports, and recipe generation.</p></div></div>
+      <div class="tool-card"><div class="tool-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg></div><div><h4>Video documentation</h4><p>Screen recordings embedded directly in design files for onboarding and review sessions.</p></div></div>
+      <div class="tool-card"><div class="tool-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></div><div><h4>Figma branching</h4><p>Ticket-named branches for every component. Designs lock after engineering handoff.</p></div></div>
+    </div>
+
+    <h3 class="subsection-head" style="margin-top:2.5rem;">One place to track it all</h3>
+    <div class="ph">
+      <div class="illustrated-tracker">
+        <div class="tracker-header">
+          <div class="tracker-title">Subsystem Planning Base &nbsp;·&nbsp; Build Tracker</div>
+          <div class="tracker-meta">Build Tracker &nbsp;·&nbsp; Filtered by: Chat UI Kit</div>
+        </div>
+        <div class="tracker-table">
+          <div class="tracker-thead">
+            <div class="tc tc-name">Component Name</div>
+            <div class="tc tc-sub">Subsystem</div>
+            <div class="tc tc-acronym">Acronym</div>
+            <div class="tc tc-owner">Designer</div>
+            <div class="tc tc-status">Status</div>
+          </div>
+          <div class="tracker-row">
+            <div class="tc tc-name">[CHAT] Chat Header</div><div class="tc tc-sub">Chat Header</div><div class="tc tc-acronym">CHAT</div><div class="tc tc-owner">Designer</div><div class="tc tc-status"><span class="ts-chip ts-done">Published</span></div>
+          </div>
+          <div class="tracker-row">
+            <div class="tc tc-name">[CHAT] Chat Header-collapsed</div><div class="tc tc-sub">Chat Header-collapsed</div><div class="tc tc-acronym">CHAT</div><div class="tc tc-owner">Designer</div><div class="tc tc-status"><span class="ts-chip ts-done">Published</span></div>
+          </div>
+          <div class="tracker-row tracker-row-active">
+            <div class="tc tc-name">[CHAT] Avatar-initials</div><div class="tc tc-sub">Avatar-initials</div><div class="tc tc-acronym">CHAT</div><div class="tc tc-owner">Designer</div><div class="tc tc-status"><span class="ts-chip ts-review">In review</span></div>
+          </div>
+          <div class="tracker-row">
+            <div class="tc tc-name">[CHAT] Avatar-dynamic</div><div class="tc tc-sub">Avatar-dynamic</div><div class="tc tc-acronym">CHAT</div><div class="tc tc-owner">Designer</div><div class="tc tc-status"><span class="ts-chip ts-build">In build</span></div>
+          </div>
+          <div class="tracker-row">
+            <div class="tc tc-name">[CHAT] Avatar-button</div><div class="tc tc-sub">Avatar-button</div><div class="tc tc-acronym">CHAT</div><div class="tc tc-owner">Designer</div><div class="tc tc-status"><span class="ts-chip ts-queue">Queued</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="ph-caption">Airtable tracks every component from intake through published, with designer ownership, Figma links, and partner team access per role.</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- IMPACT -->
+<section class="section alt">
+  <div class="section-inner">
+    <div class="eyebrow">Impact</div>
+    <h2 class="section-title">What changed.</h2>
+    <p class="section-lead">The goal wasn't a design system. It was to change how product teams work, and to build something the org could reuse. These are the measures that matter.</p>
+
+    <div class="impact-grid">
+      <div class="impact-card">
+        <div class="impact-num">[ # ]</div>
+        <div class="impact-label">Product teams onboarded</div>
+        <div class="impact-desc">Teams who adopted the system and shipped from a shared foundation instead of building alone.</div>
+      </div>
+      <div class="impact-card">
+        <div class="impact-num">[ # ]</div>
+        <div class="impact-label">Components published</div>
+        <div class="impact-desc">Published, documented, and accessible to every team, covering all three use cases and platforms.</div>
+      </div>
+      <div class="impact-card">
+        <div class="impact-num">[ # ]</div>
+        <div class="impact-label">Engineering weeks saved</div>
+        <div class="impact-desc">Estimated reduction in duplicated component work across teams per new chatbot product shipped.</div>
+      </div>
+      <div class="impact-card">
+        <div class="impact-num">[ # ]</div>
+        <div class="impact-label">Designers grown</div>
+        <div class="impact-desc">Contributors I recruited and mentored on a process none had run before, then set up to continue the work independently.</div>
+      </div>
+    </div>
+
+    <div class="capture-ph" style="margin-top:1.75rem;">
+      <div class="cap-badge">Screenshot · Metrics</div>
+      <div class="cap-title">Impact dashboard or OKR summary</div>
+      <div class="cap-desc">Adoption metrics, engineering hours saved, or leadership reporting that captures the business value of the system.</div>
+    </div>
+
+    <div class="multiplier-block">
+      <div class="mb-label">How it scales without scaling the team</div>
+      <p>I recruited contributors, mentored them on a process none had run before, then transferred maintenance to the standing teams once it was proven. The goal from day one: build people and a process, not a dependency on me.</p>
+      <div class="mb-stats">
+        <div class="mb-stat"><span class="mb-num">[ # ]</span><span class="mb-text">Contributors I recruited and mentored on the process</span></div>
+        <div class="mb-stat"><span class="mb-num">[ # ]</span><span class="mb-text">Components shipped by the contributor team</span></div>
+        <div class="mb-stat"><span class="mb-num">✓</span><span class="mb-text">Maintenance handed to standing engineering and design teams</span></div>
+      </div>
+    </div>
+
+    <div class="framework-block">
+      <div class="fb-label">The biggest outcome: a reusable framework</div>
+      <p>The chat kit was the first, not the only. The process, taxonomy, and governance I built became the blueprint the org now uses to stand up new kits. Each new domain follows the same pattern.</p>
+      <div class="fb-kits">
+        <div class="fb-kit fb-kit-done">
+          <div class="fb-kit-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+          <div class="fb-kit-name">Conversational UI</div>
+          <div class="fb-kit-status">Shipped, the first kit</div>
+        </div>
+        <div class="fb-kit">
+          <div class="fb-kit-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></div>
+          <div class="fb-kit-name">Agent Canvas</div>
+          <div class="fb-kit-status">Built on the framework</div>
+        </div>
+        <div class="fb-kit">
+          <div class="fb-kit-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <div class="fb-kit-name">Maps</div>
+          <div class="fb-kit-status">Built on the framework</div>
+        </div>
+        <div class="fb-kit">
+          <div class="fb-kit-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
+          <div class="fb-kit-name">Data Tables</div>
+          <div class="fb-kit-status">Built on the framework</div>
+        </div>
+        <div class="fb-kit">
+          <div class="fb-kit-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg></div>
+          <div class="fb-kit-name">Recipes &amp; more</div>
+          <div class="fb-kit-status">Same pattern, new domains</div>
+        </div>
+      </div>
+      <p style="margin-top:1rem;">A one-off design system solves one problem. A framework for building design systems solves every problem of that shape. That was the real deliverable.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- CLOSING -->
+<section class="section dark">
+  <div class="section-inner">
+    <div class="eyebrow">What's Next</div>
+    <h2 class="section-title">Still a long way to go.</h2>
+    <p class="section-lead">The foundation is built and shipped. We're onboarding teams and running in maintenance mode. Next is scale.</p>
+
+    <div class="capture-ph" style="margin-bottom:2rem;">
+      <div class="cap-badge">Screenshot · Live product</div>
+      <div class="cap-title">In production</div>
+      <div class="cap-desc">The chat system components shipping in a live product experience: AI shopping assistant and support chat.</div>
+    </div>
+
+    <div style="margin-top:2rem;">
+      <div style="font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:0.9rem;">On the roadmap</div>
+      <div class="gen-journey four-step">
+        <div class="gj-step done"><div class="gj-num">1</div><div class="gj-title">Build the foundation</div><div class="gj-desc">Audit, build, document, and review the core chat patterns with partner teams.</div></div>
+        <div class="gj-step done"><div class="gj-num">2</div><div class="gj-title">Ship the SDK</div><div class="gj-desc">Engineering SDK P1-P2 in Q3/Q4. Native and React Native support.</div></div>
+        <div class="gj-step current"><div class="gj-badge">We are here</div><div class="gj-num">3</div><div class="gj-title">Onboard and maintain</div><div class="gj-desc">Onboarding teams onto the system. Formalized intake. In maintenance mode, with teams requesting contributions.</div></div>
+        <div class="gj-step"><div class="gj-num">4</div><div class="gj-title">Decentralize further</div><div class="gj-desc">Standing teams own maintenance. Next, expand contribution to every product team.</div></div>
+      </div>
+      <p style="font-size:0.8rem;color:rgba(255,255,255,0.5);margin-top:1.25rem;line-height:1.55;"><strong style="color:#fff;">Centralized, then decentralized.</strong> The goal is a system many teams own together.</p>
+    </div>
+    <div style="margin-top:2rem;padding:2rem;background:rgba(255,194,32,0.08);border:1px solid rgba(255,194,32,0.2);border-radius:8px;">
+      <p style="font-size:1.15rem;line-height:1.6;color:#fff;font-style:italic;font-family:var(--font-head);">The measure of a design system isn't what it ships. It's how many teams build better because it exists.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Amy Ha &nbsp;·&nbsp; Principal Product Designer</p>
+  <p style="margin-top:0.4rem;">Conversational UI Design System &nbsp;·&nbsp; Cross-team governance at scale</p>
+</footer>
+
+</body>
+</html>

@@ -6,44 +6,6 @@ const GREEN = "#00693C";
 const SEPARATOR = "var(--ld-semantic-color-separator, #e3e4e5)";
 
 /* -------------------------------------------------------------------------- */
-/* System layer list — the design system's layered architecture, grouped by  */
-/* how governed/reusable each layer is.                                       */
-/* -------------------------------------------------------------------------- */
-
-export interface SystemLayerGroup {
-  group: string;
-  items: { title: string; description: string }[];
-}
-
-export function SystemLayerList({ groups, accentColor = GREEN }: { groups: SystemLayerGroup[]; accentColor?: string }) {
-  return (
-    <div className="rounded-xl overflow-hidden" style={{ border: `1px solid ${SEPARATOR}` }}>
-      {groups.map((group, groupIndex) => (
-        <div key={group.group} style={{ borderTop: groupIndex === 0 ? undefined : `1px solid ${SEPARATOR}` }}>
-          <div className="px-6 pt-5 pb-1" style={{ background: "var(--ld-semantic-color-fill-subtle, #f8f8f8)" }}>
-            <Body as="p" size="small" weight="alt" color="subtlest" UNSAFE_className="uppercase tracking-[0.1em]" UNSAFE_style={{ fontSize: "10px" }}>
-              {group.group}
-            </Body>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3" style={{ background: "var(--ld-semantic-color-fill-subtle, #f8f8f8)" }}>
-            {group.items.map((item) => (
-              <div key={item.title} className="px-6 pb-6 pt-2">
-                <Body as="p" size="medium" weight="alt" UNSAFE_className="mb-1" UNSAFE_style={{ color: accentColor }}>
-                  {item.title}
-                </Body>
-                <Body as="p" size="small" color="subtlest" UNSAFE_className="leading-[1.6]">
-                  {item.description}
-                </Body>
-              </div>
-            ))}
-          </div>
-        </div>
-      ))}
-    </div>
-  );
-}
-
-/* -------------------------------------------------------------------------- */
 /* Hover-reveal card — flips from a plain wireframe placeholder to the real   */
 /* designed card. Used for both the "reskin" and "new" card-type galleries.   */
 /* -------------------------------------------------------------------------- */
@@ -215,64 +177,6 @@ export function ComponentAnatomySpec({
 }
 
 /* -------------------------------------------------------------------------- */
-/* Site map diagram — the IA tree, rendered as nested, connected clusters.    */
-/* Solid nodes are current-scope pages; dashed nodes are secondary/exploratory. */
-/* -------------------------------------------------------------------------- */
-
-export interface SiteMapNode {
-  label: string;
-  dashed?: boolean;
-  multi?: boolean;
-  children?: SiteMapNode[];
-}
-
-function SiteMapPill({ node }: { node: SiteMapNode }) {
-  return (
-    <div className="relative inline-block">
-      {node.multi && (
-        <>
-          <div className="absolute inset-0 translate-x-1.5 translate-y-1.5 rounded-lg bg-white" style={{ border: `1px solid ${SEPARATOR}` }} aria-hidden="true" />
-          <div className="absolute inset-0 translate-x-[3px] translate-y-[3px] rounded-lg bg-white" style={{ border: `1px solid ${SEPARATOR}` }} aria-hidden="true" />
-        </>
-      )}
-      <div
-        className="relative rounded-lg px-3 py-2 bg-white text-center"
-        style={{ border: `1.5px ${node.dashed ? "dashed" : "solid"} ${GREEN}` }}
-      >
-        <Body as="p" size="small" weight="alt" UNSAFE_style={{ color: GREEN, fontSize: "12px" }}>
-          {node.label}
-        </Body>
-      </div>
-    </div>
-  );
-}
-
-function SiteMapBranch({ node }: { node: SiteMapNode }) {
-  return (
-    <div className="flex flex-col items-start gap-2">
-      <SiteMapPill node={node} />
-      {node.children && node.children.length > 0 && (
-        <div className="flex flex-col gap-2 pl-4 ml-3" style={{ borderLeft: `1.5px dashed ${SEPARATOR}` }}>
-          {node.children.map((child) => (
-            <SiteMapBranch key={child.label} node={child} />
-          ))}
-        </div>
-      )}
-    </div>
-  );
-}
-
-export function SiteMapDiagram({ clusters }: { clusters: SiteMapNode[] }) {
-  return (
-    <div className="rounded-xl p-6 sm:p-8 flex flex-wrap gap-x-10 gap-y-8" style={{ background: "var(--ld-semantic-color-fill-subtle, #f8f8f8)" }}>
-      {clusters.map((cluster) => (
-        <SiteMapBranch key={cluster.label} node={cluster} />
-      ))}
-    </div>
-  );
-}
-
-/* -------------------------------------------------------------------------- */
 /* Page template grid — five-column spectrum from transactional to brand-led. */
 /* -------------------------------------------------------------------------- */
 
@@ -404,8 +308,10 @@ export function SyncedCompareSlider({
               className={`h-full overflow-y-auto overflow-x-hidden ${scrollbarHide}`}
               style={{ width: contentWidth }}
             >
-              {right}
-              {annotations?.map((annotation) => <AnnotationPin key={annotation.title} annotation={annotation} />)}
+              <div className="relative" style={{ width: contentWidth }}>
+                {right}
+                {annotations?.map((annotation) => <AnnotationPin key={annotation.title} annotation={annotation} />)}
+              </div>
             </div>
           </div>
 
@@ -554,6 +460,52 @@ export function RecyclingMockup({
           <MaterialChipRow label="Not accepted in your bin" materials={notAccepted} positive={false} />
         </div>
       </div>
+    </div>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+/* Side-by-side compare — two labeled columns in a bordered frame, each with  */
+/* its own fixed-height scroll. Same pattern as the other case studies' before/*/
+/* after comparisons, generalized to accept any content (image or component). */
+/* -------------------------------------------------------------------------- */
+
+export function SideBySideCompare({
+  leftLabel,
+  rightLabel,
+  left,
+  right,
+  height = 560,
+}: {
+  leftLabel: string;
+  rightLabel: string;
+  left: React.ReactNode;
+  right: React.ReactNode;
+  height?: number;
+}) {
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {[
+        { label: leftLabel, content: left },
+        { label: rightLabel, content: right },
+      ].map((col) => (
+        <div key={col.label} className="rounded-xl overflow-hidden" style={{ border: `1px solid ${SEPARATOR}` }}>
+          <div className="px-4 py-2" style={{ background: "#000000" }}>
+            <Body
+              as="p"
+              size="small"
+              weight="alt"
+              UNSAFE_className="uppercase tracking-[0.1em]"
+              UNSAFE_style={{ fontSize: "10px", color: "#ffffff" }}
+            >
+              {col.label}
+            </Body>
+          </div>
+          <div className="w-full overflow-y-auto" style={{ height }}>
+            {col.content}
+          </div>
+        </div>
+      ))}
     </div>
   );
 }

@@ -41,7 +41,7 @@ export function WmEmailContextSection() {
       <Lead>
         The Email Marketing team led the initial rebranding efforts in collaboration with the Digital Studio and
         the Brand Team. The goal: consolidate the email process by defining purpose, audience, and strategy
-        &mdash; to increase engagement and traffic to wm.com.
+        to increase engagement and traffic to wm.com.
       </Lead>
       <WmEmailTeamRow
         members={[
@@ -68,7 +68,7 @@ export function WmEmailApproachSection() {
       <Eyebrow>The Approach</Eyebrow>
       <SectionTitle>A research-led process from audit to toolkit</SectionTitle>
       <Lead>
-        The work followed a structured process &mdash; from heuristic analysis and competitive research through UX
+        The work followed a structured process, from heuristic analysis and competitive research through UX
         and UI design, ending with a documented Email Tool Kit ready for production teams.
       </Lead>
       <WmEmailApproachSteps
@@ -107,7 +107,7 @@ export function WmEmailResearchSection() {
           {
             icon: "Flash",
             lead: "How do we capture attention in an inbox full of emails?",
-            body: "Email is a competitive space — WM sends needed to earn the open, then earn the scroll.",
+            body: "Email is a competitive space. WM sends needed to earn the open, then earn the scroll.",
           },
           {
             icon: "CheckCircle",
@@ -117,12 +117,12 @@ export function WmEmailResearchSection() {
           {
             icon: "Eye",
             lead: "How do we keep users engaged the moment they open?",
-            body: "Research showed customers scan, not read — visual hierarchy had to do the heavy lifting.",
+            body: "Research showed customers scan, not read. Visual hierarchy had to do the heavy lifting.",
           },
           {
             icon: "Flag",
             lead: "How do we guide users to action and build a stronger partnership?",
-            body: "Clear, singular CTAs tied to business objectives — not friction-multiplying button clusters.",
+            body: "Clear, singular CTAs tied to business objectives, not friction-multiplying button clusters.",
           },
         ]}
       />
@@ -139,7 +139,7 @@ export function WmEmailResearchSection() {
         before={{
           label: "Problems found",
           items: [
-            "Text was overutilized — dense body copy with no visual breathing room",
+            "Text was overutilized, with dense body copy and no visual breathing room",
             "Too many CTAs or false interactable affordances diluting the intent of the email",
             "Visual hierarchy difficult to scan for email viewers",
             "No psychological design strategies applied to improve positive emotional response",
@@ -151,7 +151,7 @@ export function WmEmailResearchSection() {
             "One primary CTA per email, clearly differentiated from secondary actions",
             "Z-pattern and single-column layouts to guide the eye naturally downward",
             "Scannable hierarchy: headline → image → body → CTA",
-            "Psychological strategies — social proof, personalization, localization — integrated by design",
+            "Psychological strategies, including social proof, personalization, and localization, integrated by design",
           ],
         }}
       />
@@ -194,7 +194,7 @@ export function WmEmailCompetitiveSection() {
           {
             stat: "+26%",
             title: "Personalized subject lines",
-            description: "26% more likely to be opened. WM emails translated into 3 languages by native speakers — not translation services.",
+            description: "26% more likely to be opened. WM emails translated into 3 languages by native speakers, not translation services.",
           },
         ]}
       />
@@ -214,7 +214,7 @@ export function WmEmailCompetitiveSection() {
         <span className="font-bold">Competitive insight: </span>
         Optimizing content strategy, layout, and visual design with UX principles minimizes cognitive load and
         increases positive emotional responses. Copywriting should be concise and get to the point while
-        maintaining a friendly voice &mdash; minimal copy, minimal CTAs, maximum clarity.
+        maintaining a friendly voice. Minimal copy, minimal CTAs, maximum clarity.
       </Callout>
     </Section>
   );
@@ -226,7 +226,7 @@ export function WmEmailDesignSystemSection() {
       <Eyebrow>The Design Approach</Eyebrow>
       <SectionTitle>The Email Tool Kit: a modular system for every send</SectionTitle>
       <Lead>
-        The email library was built on color styles, type styles, and layer styles &mdash; foundational tokens
+        The email library was built on color styles, type styles, and layer styles. These foundational tokens were
         used to assemble atomic components and, from those, the full block system.
       </Lead>
       <ImageFull
@@ -237,11 +237,11 @@ export function WmEmailDesignSystemSection() {
       />
       <WmEmailBlockCategoryGrid
         items={[
-          { tag: "Basic Blocks", tagColor: "#006937", title: "Standard to email templates", description: "Styling existing SFMC blocks with WM brand colors, typography, and elements — the consistent baseline for every email." },
+          { tag: "Basic Blocks", tagColor: "#006937", title: "Standard to email templates", description: "Styling existing SFMC blocks with WM brand colors, typography, and elements. The consistent baseline for every email." },
           { tag: "Custom Blocks", tagColor: "#2B6CB0", title: "Special need or function", description: "Designed specifically for WM use cases: service change summaries, recycling guides, account dashboards." },
-          { tag: "Framework Blocks", tagColor: "#7B341E", title: "Branded shells", description: "Headers, social toolbars, footers, and standard disclaimers. Present in every email — always on-brand." },
+          { tag: "Framework Blocks", tagColor: "#7B341E", title: "Branded shells", description: "Headers, social toolbars, footers, and standard disclaimers. Present in every email and always on-brand." },
           { tag: "Ad Hoc Blocks", tagColor: "#3D35D8", title: "Campaign-specific", description: "Included in builds specific to one or a few emails. Built when needed for a particular campaign." },
-          { tag: "Combo Blocks", tagColor: "#0053e2", title: "Regularly used patterns", description: "Pre-assembled combinations — like hero sections — that speed up production for common layouts." },
+          { tag: "Combo Blocks", tagColor: "#0053e2", title: "Regularly used patterns", description: "Pre-assembled combinations, like hero sections, that speed up production for common layouts." },
           { tag: "Atomic Components", tagColor: "#C53030", title: "Foundation of everything", description: "Buttons, icons, text patterns, images. Atomic design means consistent, predictable output at every level." },
         ]}
       />
@@ -256,7 +256,7 @@ export function WmEmailFinalDesignsSection() {
       <Eyebrow>From Wireframes to Final Design</Eyebrow>
       <SectionTitle>Research translated directly into structure</SectionTitle>
       <Lead>
-        Wireframes incorporated every research insight before visual design began &mdash; resolving layout and
+        Wireframes incorporated every research insight before visual design began, resolving layout and
         hierarchy decisions so the high-fidelity phase focused on brand expression, not structural debates.
       </Lead>
       <ImageFull
@@ -266,7 +266,7 @@ export function WmEmailFinalDesignsSection() {
         caption="Six wireframe templates: Welcome/Onboarding, Service Change, Activate Account, Sign Up, Order Confirmation, Heads Up."
       />
       <Body as="p" size="medium" color="subtlest" UNSAFE_className="max-w-[660px] leading-[1.7]">
-        The final designs carried that structure straight through &mdash; a single primary CTA, a clear scan
+        The final designs carried that structure straight through: a single primary CTA, a clear scan
         path, and a footer of self-service tools repeated across every template (shown at the top of this page).
       </Body>
     </Section>
@@ -305,7 +305,7 @@ export function WmEmailResultsSection() {
       />
       <Callout tone="positive">
         <span className="font-bold">Additional impact: </span>
-        Increased customers opting in for text notifications &mdash; a key business objective from the start of
+        Increased customers opting in for text notifications, a key business objective from the start of
         the project. The modular system enabled personalized messaging for all lines of business at scale.
       </Callout>
     </Section>
@@ -319,15 +319,15 @@ export function WmEmailNextStepsSection() {
       <SectionTitle>A foundation built to grow</SectionTitle>
       <Lead>
         The rebrand made emails modular and consistent using the SFMC platform. The team continued adding ad-hoc
-        modules to the toolkit and working with business units to curate new templates &mdash; personalized
+        modules to the toolkit and working with business units to curate new templates, with personalized
         messaging as the next horizon.
       </Lead>
       <NextGrid
         items={[
           { when: "In Progress", title: "Personalized messaging at scale", description: "More effective and efficient email creation with personalized messaging for all lines of business through SFMC dynamic content." },
-          { when: "Ongoing", title: "Toolkit expansion", description: "Continue adding ad-hoc modules as new campaign types and business needs emerge — the block system grows with the business." },
-          { when: "Horizon", title: "Event trigger optimization", description: "Standardized event triggers already reduced costs — next phase optimizes trigger logic to surface the right template at the right lifecycle moment.", future: true },
-          { when: "Scale", title: "Partner self-service", description: "The toolkit was designed for both internal teams and external Salesforce partners — expanding self-service capability across the full WM ecosystem.", future: true },
+          { when: "Ongoing", title: "Toolkit expansion", description: "Continue adding ad-hoc modules as new campaign types and business needs emerge. The block system grows with the business." },
+          { when: "Horizon", title: "Event trigger optimization", description: "Standardized event triggers already reduced costs. Next phase optimizes trigger logic to surface the right template at the right lifecycle moment.", future: true },
+          { when: "Scale", title: "Partner self-service", description: "The toolkit was designed for both internal teams and external Salesforce partners, expanding self-service capability across the full WM ecosystem.", future: true },
         ]}
       />
     </Section>
@@ -341,8 +341,8 @@ export function WmEmailReflectionSection() {
       <SectionTitle>What this work taught me about systems-scale design</SectionTitle>
       <WmEmailReflectionGrid
         items={[
-          { icon: "Box", title: "Modularity is a strategic decision", description: "Defining five distinct block categories wasn't a technical detail — it was the architectural choice that made the entire system scalable." },
-          { icon: "Magic", title: "Psychology belongs in the design brief", description: "Grounding visual decisions in behavioral research — 50ms attention windows, scan patterns — turned design choices into defensible strategy." },
+          { icon: "Box", title: "Modularity is a strategic decision", description: "Defining five distinct block categories wasn't a technical detail. It was the architectural choice that made the entire system scalable." },
+          { icon: "Magic", title: "Psychology belongs in the design brief", description: "Grounding visual decisions in behavioral research, 50ms attention windows, and scan patterns turned design choices into defensible strategy." },
           { icon: "Notebook", title: "Documentation is part of the design", description: "The Email Digital Toolkit was a resource for external partners too. A system no one can use is just a pretty library." },
           { icon: "Globe", title: "Localization is a design constraint", description: "Supporting 3 languages required layouts that didn't assume English text length. Flexible containers made personalization possible at scale." },
         ]}

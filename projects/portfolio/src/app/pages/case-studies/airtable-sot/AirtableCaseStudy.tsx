@@ -64,7 +64,7 @@ export default function AirtableCaseStudy() {
         overviewClient="Walmart"
         overviewCategory="Design Tokens"
         overviewTitle={"The Quest for a\nSingle Source of Truth"}
-        overviewDescription="We went from 17+ teams maintaining their own copies of design tokens, manually, inconsistently, and constantly out of sync, to a single automated pipeline where a designer updates a value in Airtable and it's live in production in 10 minutes. Zero manual steps. Zero coordination. Zero errors."
+        overviewDescription="17+ teams were maintaining their own copies of design tokens manually, inconsistently, and constantly out of sync. I proposed a single automated pipeline as the fix and presented the plan to engineering leadership to secure approval and the support to build it, then extended that support into Figma and our design system kits. The result: a designer updates a value in Airtable and it's live in production in 10 minutes. Zero manual steps. Zero coordination. Zero errors."
         metaItems={[
           { label: "Role", value: "Principal Product Designer" },
           { label: "Team", value: "Partnered with product, engineering, design leadership" },

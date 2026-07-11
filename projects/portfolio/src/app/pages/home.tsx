@@ -12,6 +12,12 @@ import { CaseStudyHeroText } from "@/app/components/CaseStudyText/CaseStudyText"
 import { Body, Display, Heading } from "@/app/components/Text/Text";
 import { getFeaturedCaseStudiesByGroup } from "@/app/data/case-studies-config";
 
+const GROUP_TITLES: Record<"Design Systems" | "Branding" | "Product", string> = {
+  "Design Systems": "Platform Systems",
+  Branding: "Branding",
+  Product: "Product",
+};
+
 const GROUP_DESCRIPTIONS: Record<"Design Systems" | "Branding" | "Product", string> = {
   "Design Systems": "Shared infrastructure, tokens, and tooling that scale design across teams and platforms.",
   Branding: "Identity, strategy, and visual systems built to give a brand its own voice.",
@@ -154,7 +160,7 @@ export function Home() {
                   )}
                   <div className="mb-10 text-center">
                     <Display as="h2" size="small" weight="default">
-                      {group}
+                      {GROUP_TITLES[group]}
                     </Display>
                     <Body
                       as="p"

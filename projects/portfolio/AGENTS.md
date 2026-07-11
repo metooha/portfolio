@@ -25,6 +25,20 @@ For file naming: `.cursor/skills/portfolio-naming-convention/SKILL.md` (repo roo
 - Internal routes: `react-router-dom` `Link`; external URLs: LD `Link`
 - After UI changes: `pnpm run build` from `projects/portfolio/`
 
+## Case Study Skills
+
+Mirrored under `.cursor/skills/` and `.claude/skills/` (same content, both
+agents):
+
+| Skill | Use for |
+|-------|---------|
+| `case-study-create` | Building a new case study page in the real React app, from scratch |
+| `case-study-brief-handoff` | Implementing a case study from a brief pack (`manifest.yaml` / `content/*.md`) |
+| `case-study-html-draft` | Storyboarding/pitching a case study as a single static HTML/CSS file *before* any React build |
+
+Saved static-HTML drafts (built via `case-study-html-draft`) live under
+`references/case-studies/<slug>/` at the repo root, not in `src/`.
+
 ## Cursor Rules
 
 Scoped rules live in `.cursor/rules/`:

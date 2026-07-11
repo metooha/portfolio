@@ -35,7 +35,7 @@ function WmEmailHero() {
     <CaseStudyHero
       image={imgMockup}
       title={"Redesigning WM email from\nfragmented sends to a modular system"}
-      subtitle="How I led a collaborative rebranding of Waste Management's email program — defining purpose, audience strategy, and a 50+ block design system that made every email feel like WM."
+      subtitle="How I led a collaborative rebranding of Waste Management's email program, defining purpose, audience strategy, and a 50+ block design system that made every email feel on-brand."
       titleColor="#ffffff"
       imageFit="cover"
       imageClassName="opacity-25"
@@ -47,7 +47,7 @@ function WmEmailHero() {
 
 const OVERVIEW_TITLE = "From fragmented sends to a modular digital system, built for scale.";
 const OVERVIEW_DESCRIPTION =
-  "The Email Marketing team led the initial rebranding efforts in collaboration with the Digital Studio and the Brand Team. The goal: consolidate the email process by defining purpose, audience, and strategy — to increase engagement and traffic to wm.com.";
+  "The Email Marketing team led the initial rebranding efforts in collaboration with the Digital Studio and the Brand Team. The goal was to consolidate the email process by defining purpose, audience, and strategy to increase engagement and traffic to wm.com.";
 const OVERVIEW_META = [
   { label: "My Role", value: "Lead Product Designer, w/ team of 4" },
   { label: "Project Scope", value: "50+ Blocks · Documentation · Style Guide" },

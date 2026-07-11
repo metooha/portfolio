@@ -566,8 +566,8 @@ export function OportunDsGovernanceSection() {
       </div>
       <div className="w-full max-w-[1300px] flex flex-col gap-6">
         <EdsLead>
-          Governance only works when it is documented and teachable. I built the docs, contribution
-          guides, and onboarding syllabus that turned the system into something teams could learn
+          Governance only works when it is documented and teachable. I defined the docs, contribution
+          guides, and onboarding model that turned the system into something teams could learn
           and extend on their own.
         </EdsLead>
         <Carousel aria-label="Design system documentation and governance">

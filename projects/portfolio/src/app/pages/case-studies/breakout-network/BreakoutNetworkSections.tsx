@@ -185,12 +185,12 @@ export function BreakoutStrategySection() {
       <Eyebrow color={ACCENT}>Defining the strategy</Eyebrow>
       <BreakoutStrategySteps
         steps={[
-          { title: "Initial Assessment", description: "Audit product designs for gaps. Gather info from stakeholders, engineers, and designers." },
-          { title: "Platform: Voice and Tone", description: "To grasp and embody the brand's presence, define its purpose, attributes, voice, and messaging." },
-          { title: "Visual Identity", description: "Visual identity starts with logo and wordmark, complemented by styling and imagery usage." },
-          { title: "The brand in Use", description: "When the visual identity is defined, it's implemented and observed in tangible product assets." },
+          { title: "Initial assessment", description: "Audit product designs for gaps. Gather input from stakeholders, engineers, and designers." },
+          { title: "Voice and tone", description: "Define the brand's purpose, attributes, voice, and messaging so the product has a clear point of view." },
+          { title: "Visual identity", description: "Start with logo and wordmark, then extend the system through color, type, image, and layout rules." },
+          { title: "Brand in use", description: "Apply the identity to product and marketing assets so the system can be judged in context." },
           { title: "Brand Guidelines", description: "Comprehensive brand guidelines balance flexibility with clear guidance." },
-          { title: "Leverage Templates", description: "Templated files and consistent guideline alignment keep production streamlined and the brand cohesive." },
+          { title: "Reusable templates", description: "Templates keep production streamlined and help the brand stay cohesive as new assets are created." },
         ]}
       />
     </Section>

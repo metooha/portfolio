@@ -14,6 +14,7 @@ import imgLanguageCoverage from "@/app/assets/pages/case-study/everyday-sans/lan
 import imgLanguageFrench from "@/app/assets/pages/case-study/everyday-sans/language-french.jpg";
 import imgLanguageSpanish from "@/app/assets/pages/case-study/everyday-sans/language-spanish.jpg";
 import { Link } from "@/app/components/Link";
+import { Callout } from "@/app/components/CaseStudyPrimitives";
 import {
   EdsBeforeAfter,
   EdsEmbedFull,
@@ -151,9 +152,10 @@ export function EdsProblemSpaceSection() {
   return (
     <EdsSection id="tension">
       <EdsEyebrow>Problem Space</EdsEyebrow>
-      <EdsSectionTitle>The compromise we stopped making</EdsSectionTitle>
+      <EdsSectionTitle>The font problem was a platform tradeoff.</EdsSectionTitle>
       <EdsLead>
-        One file per weight. Every new weight cost a performance hit. Brand and Engineering were locked in a trade-off that blocked both sides.
+        Brand needed more hierarchy. Engineering needed fewer files. Accessibility needed clearer letterforms. The
+        work was defining one font strategy that could satisfy all three.
       </EdsLead>
       <EdsProblemGrid
         cards={[
@@ -171,8 +173,20 @@ export function EdsProblemSpaceSection() {
             description:
               "Adding Medium hit the web vitals threshold and was pulled mid-release. Each font file meant another HTTP request on every page load.",
           },
+          {
+            who: "Accessibility",
+            whoColor: "#3D35D8",
+            title: "Needed letterform clarity",
+            description:
+              "Several characters failed under magnification and real UI conditions. The font had to improve brand expression without reducing readability.",
+          },
         ]}
       />
+      <Callout tone="brand">
+        <strong>The pitch:</strong> when Brand asked for a Medium weight and Engineering said no on performance
+        grounds, I reframed the ask. Instead of negotiating one weight at a time, I proposed a variable font as
+        the permanent fix and made the case to Brand to fund the investment.
+      </Callout>
     </EdsSection>
   );
 }
@@ -182,7 +196,10 @@ export function EdsWeightScaleSection() {
     <EdsSection id="weight-scale" variant="mid">
       <EdsEyebrow>The Font</EdsEyebrow>
       <EdsSectionTitle>Everyday Sans: weight scale</EdsSectionTitle>
-      <EdsLead>Three new weights unlocked at zero additional performance cost.</EdsLead>
+      <EdsLead>
+        Adding weights wasn&rsquo;t the fix. Reframing a rejected feature request as an infrastructure investment
+        was. A variable font made brand expression, performance, and accessibility stop competing with each other.
+      </EdsLead>
       <EdsVideoFull src={videoWeightScale} alt="Everyday Sans weight scale, Light to Black" surface="subtle" />
       <EdsWeightScale />
     </EdsSection>
@@ -193,9 +210,10 @@ export function EdsTypeRampSection() {
   return (
     <EdsSection id="type-ramp">
       <EdsEyebrow>Type System</EdsEyebrow>
-      <EdsSectionTitle>Mapping EDS to the LD type ramp</EdsSectionTitle>
+      <EdsSectionTitle>Mapping the new font to the existing type ramp</EdsSectionTitle>
       <EdsLead>
-        The font needed to match Bogle&apos;s visual size and line height at every scale to avoid layout reflow on swap.
+        The font had to preserve layout behavior at every scale. I treated the type ramp as a migration contract,
+        not a visual preference.
       </EdsLead>
       <EdsImageFull
         src={imgTypeRamp}
@@ -210,9 +228,10 @@ export function EdsTechnicalFixesSection() {
   return (
     <EdsSection id="technical-fixes" variant="mid">
       <EdsEyebrow>Technical Fixes</EdsEyebrow>
-      <EdsSectionTitle>What the audit uncovered</EdsSectionTitle>
+      <EdsSectionTitle>The audit turned taste into requirements.</EdsSectionTitle>
       <EdsLead>
-        Platform audits across Android, iOS, and Web surfaced specific engineering blockers. Each required a fix in the font file itself.
+        Platform audits across Android, iOS, and Web surfaced the requirements the font file had to satisfy before
+        it could become infrastructure.
       </EdsLead>
       <div className="flex flex-col gap-6">
         <EdsImageFull
@@ -236,7 +255,7 @@ export function EdsTechnicalFixesSection() {
         <EdsImageFull
           src={imgUiTheming}
           alt="UI theming comparison"
-          caption="Theming comparison: Everyday Sans UI vs Bogle and Gibson across Walmart and Sam's Club surfaces."
+          caption="Theming comparison: Everyday Sans UI vs legacy brand fonts across Walmart and membership-club surfaces."
           surface="subtle"
         />
         <EdsImageFull
@@ -254,8 +273,11 @@ export function EdsRealPageTestingSection() {
   return (
     <EdsSection id="real-page-testing">
       <EdsEyebrow>Real-Page Testing</EdsEyebrow>
-      <EdsSectionTitle>Tested on live Walmart surfaces</EdsSectionTitle>
-      <EdsLead>Each version tested against real pages across multiple product categories before sign-off.</EdsLead>
+      <EdsSectionTitle>Tested on live commerce surfaces</EdsSectionTitle>
+      <EdsLead>
+        Each version was tested against live page types before sign-off, because a font that works in a specimen
+        can still fail in product.
+      </EdsLead>
       <EdsImageFull
         src={imgEdsUiVersions}
         alt="EDS UI versions"
@@ -277,7 +299,7 @@ export function EdsRealPageTestingSection() {
             src: imgThemingComparison,
             alt: "Theming comparison",
             label: "Theming comparison",
-            caption: "New EDS UI vs legacy Bodega and Sam's Club Gibson, with line height and visual weight aligned.",
+            caption: "New EDS UI vs legacy regional and membership-club fonts, with line height and visual weight aligned.",
             surface: "subtle",
           },
         ]}
@@ -383,8 +405,11 @@ export function EdsJourneySection() {
   return (
     <EdsSection id="journey" variant="mid">
       <EdsEyebrow>The Journey</EdsEyebrow>
-      <EdsSectionTitle>It wasn&apos;t a straight line.</EdsSectionTitle>
-      <EdsLead>18 months. Six versions. Three organizations learning to want the same thing.</EdsLead>
+      <EdsSectionTitle>Three organizations had to agree on one definition of “ready.”</EdsSectionTitle>
+      <EdsLead>
+        The work was an alignment problem across Brand, Engineering, Accessibility, and the foundry. Six versions
+        turned disagreement into a shared launch standard.
+      </EdsLead>
       <EdsJourneyTimeline items={JOURNEY_ITEMS} />
     </EdsSection>
   );
@@ -394,7 +419,7 @@ export function EdsOutcomeSection() {
   return (
     <EdsSection id="outcome" variant="dark">
       <EdsEyebrow onDark>The Outcome</EdsEyebrow>
-      <EdsSectionTitle onDark>The trade-off, removed.</EdsSectionTitle>
+      <EdsSectionTitle onDark>The tradeoff, removed.</EdsSectionTitle>
       <EdsStatsRow
         stats={[
           { value: "5→1", label: "Static files replaced by one variable font" },
@@ -432,7 +457,7 @@ export function EdsWhatsNextSection() {
   return (
     <EdsSection id="whats-next">
       <EdsEyebrow>What&apos;s Next</EdsEyebrow>
-      <EdsSectionTitle>The font is ready. The design system needs to catch up.</EdsSectionTitle>
+      <EdsSectionTitle>The font is ready. The platform now has a repeatable model.</EdsSectionTitle>
       <EdsNextGrid
         items={[
           { when: "FY27 Q3", title: "Web platforms", description: "Variable font implementation on Web platforms, file size within target, fast rollout." },
@@ -449,9 +474,11 @@ export function EdsSamsSansSection() {
   return (
     <EdsSection id="sams-sans" variant="mid">
       <EdsEyebrow>Extended Impact</EdsEyebrow>
-      <EdsSectionTitle>Sam&apos;s Sans: the same method, a new brand</EdsSectionTitle>
+      <EdsSectionTitle>The same method, a new brand</EdsSectionTitle>
       <EdsLead>
-        The variable font approach didn&apos;t stay at Walmart. In 2026, Sam&apos;s Club used the same infrastructure to ship Sam&apos;s Sans as a variable font as part of their full rebrand, proving the process was repeatable.
+        The variable font approach did not stay with the first brand. I made the same pitch to a second brand&rsquo;s
+        team, and they backed the investment. This time, the audit framework, comparison tool, and cross-platform
+        spec I&rsquo;d already built let them move faster on their own rebrand.
       </EdsLead>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div
@@ -462,13 +489,14 @@ export function EdsSamsSansSection() {
           }}
         >
           <Body as="p" size="small" weight="alt" color="brand" UNSAFE_className="uppercase tracking-[0.1em] mb-3" UNSAFE_style={{ fontSize: "10px" }}>
-            Walmart · FY25–26
+            First brand · FY25–26
           </Body>
           <Body as="p" size="medium" weight="alt" UNSAFE_className="mb-2" UNSAFE_style={{ color: "var(--ld-semantic-color-fill-brand-bold, #001e60)" }}>
             Everyday Sans UI
           </Body>
           <Body as="p" size="small" color="subtlest" UNSAFE_className="leading-[1.65] mb-4 pb-4">
-            18 months. First-ever variable font implementation for the Walmart platform. Established the process, the audit framework, and the cross-platform spec.
+            18 months. First-ever variable font implementation for the platform. Established the audit framework,
+            decision model, and cross-platform spec.
           </Body>
           <div className="flex flex-wrap gap-3">
             {["Web", "iOS", "Android", "React Native"].map((tag) => (
@@ -494,10 +522,10 @@ export function EdsSamsSansSection() {
           }}
         >
           <Body as="p" size="small" weight="alt" UNSAFE_className="uppercase tracking-[0.1em] mb-3" UNSAFE_style={{ fontSize: "10px", color: "var(--ld-primitive-color-spark-100, #ffc220)" }}>
-            Sam&apos;s Club · 2026 Rebrand
+            Second brand · 2026 rebrand
           </Body>
           <Body as="p" size="medium" weight="alt" color="inverse" UNSAFE_className="mb-2">
-            Sam&apos;s Sans
+            Sam&rsquo;s Sans
           </Body>
           <Body as="p" size="small" UNSAFE_className="leading-[1.65] mb-4 pb-4" UNSAFE_style={{ color: "rgba(255,255,255,0.65)" }}>
             The same variable font infrastructure, applied to an entirely new brand system. Same audit process, same cross-platform spec, same approach, shipping as part of a full rebrand in a fraction of the time.
@@ -529,7 +557,8 @@ export function EdsFontCompareSection() {
       <EdsEyebrow>Process Innovation</EdsEyebrow>
       <EdsSectionTitle>The Font Compare Tool: under 2 months instead of a year</EdsSectionTitle>
       <EdsLead>
-        The Walmart variable font took 18 months. For Sam&apos;s Sans, I built an internal Font Compare Tool that let teams evaluate fonts side by side (glyphs, paragraphs, real UI mocks, and metadata) in one place. It compressed the decision-making process from a year to under two months.
+        The first variable font took 18 months because the decision model had to be invented. For the next brand, I
+        created a Font Compare Tool that made the same evaluation repeatable in under two months.
       </EdsLead>
       <EdsEmbedFull
         src="https://metooha.github.io/font-compare/"
@@ -552,7 +581,7 @@ export function EdsFontCompareSection() {
       </Link>
       <EdsStatCards
         stats={[
-          { value: "< 2mo", label: "Sam's Sans evaluation and sign-off vs. 18 months for Walmart" },
+          { value: "< 2mo", label: "Second-brand evaluation and sign-off vs. 18 months for the first brand" },
           { value: "5", label: "Fonts compared simultaneously across glyphs, paragraphs, UI mocks, and metadata" },
           { value: "46", label: "Font variants available in the tool, with glyph coverage, CSS, and design token output" },
         ]}

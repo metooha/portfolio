@@ -4,7 +4,6 @@ import { ValuePropCard, ValuePropGrid } from "@/app/components/ValuePropCard";
 import {
   Callout,
   Eyebrow,
-  ImageCarousel,
   ImageFull,
   ImageGrid2,
   Lead,
@@ -16,18 +15,11 @@ import {
   ComponentAnatomySpec,
   PageTemplateGrid,
   RecyclingMockup,
-  SiteMapDiagram,
+  SideBySideCompare,
   SyncedCompareSlider,
-  SystemLayerList,
   TagTaxonomyGrid,
-  type SiteMapNode,
 } from "./WmRebrandBlocks";
-
-import imgImage7 from "@/app/assets/pages/case-study/wm-rebrand/wm-rebrand-asset-1d3a95ad.png";
-import imgImage8 from "@/app/assets/pages/case-study/wm-rebrand/wm-rebrand-asset-0056f1ef.png";
-import imgImage9 from "@/app/assets/pages/case-study/wm-rebrand/wm-rebrand-asset-d75491a4.png";
-import imgFormFields from "@/app/assets/pages/case-study/wm-rebrand/form-fields2-x1.png";
-import imgButtonsDesktop from "@/app/assets/pages/case-study/wm-rebrand/buttons-desktop1-x.png";
+import { DesignSystemsOverviewDiagram, SitemapWm } from "./WmRebrandOriginalDiagrams";
 
 import imgConfluenceSprint from "@/app/assets/pages/case-study/wm-rebrand/confluence-sprint-2-items.png";
 import imgDesignToolKit from "@/app/assets/pages/case-study/wm-rebrand/design-tool-kit.png";
@@ -88,30 +80,7 @@ export function WmProblemSpaceSection() {
         self-service experiences expanded, these inconsistencies created friction for users and increased
         maintenance costs for the organization.
       </Lead>
-      <Body as="p" size="small" weight="alt" color="subtlest" UNSAFE_className="uppercase tracking-[0.1em] -mb-3" UNSAFE_style={{ fontSize: "10px" }}>
-        System architecture: brand + IA principles
-      </Body>
-      <SystemLayerList
-        accentColor={ACCENT}
-        groups={[
-          {
-            group: "Shared foundations",
-            items: [
-              { title: "Design Tokens", description: "Color, type, spacing, effect, scale, and breakpoints." },
-              { title: "Atomic Components", description: "Button, checkbox, radio, text field." },
-              { title: "Molecular Components", description: "Navigation, cards, carousels, modules." },
-            ],
-          },
-          {
-            group: "Governed layers",
-            items: [{ title: "Page Templates", description: "E-commerce, marketing, accounts, services." }],
-          },
-          {
-            group: "Flexible outputs",
-            items: [{ title: "Surfaces", description: "Web, mobile, native, omni-channel." }],
-          },
-        ]}
-      />
+      <DesignSystemsOverviewDiagram />
     </Section>
   );
 }
@@ -135,16 +104,6 @@ export function WmGoalsSection() {
           description="Collaborate and execute with our product, brand, design, and engineering teams."
         />
       </ValuePropGrid>
-      <ImageCarousel
-        ariaLabel="Shipped design system pages"
-        images={[
-          { src: imgImage7, alt: "Shipped page template using the new design system" },
-          { src: imgImage8, alt: "Component library in use across a live page" },
-          { src: imgImage9, alt: "Another shipped page template" },
-          { src: imgFormFields, alt: "Form field components: default, filled, error, and dropdown states" },
-          { src: imgButtonsDesktop, alt: "Primary and secondary button components across states" },
-        ]}
-      />
     </Section>
   );
 }
@@ -444,83 +403,9 @@ export function WmComponentsSection() {
 /* Information Architecture                                                   */
 /* -------------------------------------------------------------------------- */
 
-const SITE_MAP: SiteMapNode[] = [
-  {
-    label: "WM Homepage",
-    children: [
-      { label: "Services for Home" },
-      { label: "Services for Business" },
-      {
-        label: "Recycle Right",
-        children: [{ label: "Recycle 101" }, { label: "Recycling Resources" }],
-      },
-    ],
-  },
-  {
-    label: "Utility & account",
-    children: [
-      { label: "Support" },
-      { label: "Pay My Bill" },
-      { label: "Drop Off Locations" },
-      { label: "Notifications" },
-      { label: "Log In" },
-    ],
-  },
-  {
-    label: "Inside WM",
-    dashed: true,
-    children: [
-      {
-        label: "Who We Are",
-        dashed: true,
-        children: [{ label: "Our Story", dashed: true }, { label: "Our Leadership", dashed: true }],
-      },
-    ],
-  },
-  {
-    label: "Sustainability",
-    dashed: true,
-    children: [
-      {
-        label: "Environmental Stewardship",
-        dashed: true,
-        children: [
-          { label: "Social Impact", dashed: true },
-          { label: "Sustainable Technology", dashed: true },
-          { label: "Sustainable Reporting", dashed: true },
-        ],
-      },
-      { label: "Inclusion & Diversity", dashed: true },
-    ],
-  },
-  {
-    label: "Company & careers",
-    children: [
-      { label: "WM Sustainability Forum" },
-      { label: "WM Phoenix Open" },
-      { label: "Careers" },
-      { label: "Investors" },
-      { label: "Media Room" },
-    ],
-  },
-  {
-    label: "Content hubs",
-    multi: true,
-    children: [
-      { label: "Services", multi: true },
-      { label: "Solutions", multi: true },
-      { label: "Topics", multi: true },
-      { label: "FAQs", multi: true, dashed: true },
-      { label: "Campaigns", multi: true, dashed: true },
-      { label: "Local Pages", multi: true, dashed: true },
-      { label: "Footer Links", multi: true },
-    ],
-  },
-];
-
 export function WmInformationArchitectureSection() {
   return (
-    <Section id="information-architecture">
+    <Section id="information-architecture" background="var(--ld-semantic-color-fill-subtle, #f8f8f8)">
       <Eyebrow color={ACCENT}>Information Architecture</Eyebrow>
       <SectionTitle>A flexible structure that scales without redesigning</SectionTitle>
       <Lead>
@@ -536,7 +421,7 @@ export function WmInformationArchitectureSection() {
           </Body>
           <Body as="p" size="small" color="subtlest" UNSAFE_className="leading-[1.6]">
             The site itself is simple with basic information, but hard to navigate to information like recycling
-            and self-service needs — its more branded pages live externally, on a different website.
+            and self-service needs. Its more branded pages live externally, on a different website.
           </Body>
           <ul className="list-disc pl-5 flex flex-col gap-1.5">
             {[
@@ -553,7 +438,13 @@ export function WmInformationArchitectureSection() {
             ))}
           </ul>
         </div>
-        <ImageFull src={imgFunctionOverForm} alt="Screenshot of the previous site's dense, hard-to-navigate layout" surface="subtle" />
+        <ImageFull
+          src={imgFunctionOverForm}
+          alt="Screenshot of the previous site's dense, hard-to-navigate layout"
+          surface="subtle"
+          fit="cover"
+          frameClassName="aspect-[4/5]"
+        />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
@@ -568,7 +459,13 @@ export function WmInformationArchitectureSection() {
             of our visual narrative.
           </Body>
         </div>
-        <ImageFull src={imgPhotographyInconsistent} alt="Screenshot showing inconsistent photography styles across landing pages" surface="subtle" />
+        <ImageFull
+          src={imgPhotographyInconsistent}
+          alt="Screenshot showing inconsistent photography styles across landing pages"
+          surface="subtle"
+          fit="cover"
+          frameClassName="aspect-[4/5]"
+        />
       </div>
 
       <div className="flex flex-col gap-4">
@@ -580,7 +477,7 @@ export function WmInformationArchitectureSection() {
           site map that identifies key areas for impactful branded pages and outlines the necessary components to
           improve each template.
         </Body>
-        <SiteMapDiagram clusters={SITE_MAP} />
+        <SitemapWm />
         <Body as="p" size="small" color="subtlest" UNSAFE_className="text-xs">
           Solid outline: current-scope page. Dashed outline: secondary or exploratory page. Stacked cards: multiple
           pages of that type.
@@ -627,31 +524,31 @@ export function WmDesignWalkthroughSection() {
         left={<img src={imgDsf1Landing2} alt="The finished landing page design" className="w-full h-auto" />}
         right={<img src={imgWireframe1} alt="The landing page wireframe" className="w-full h-auto" />}
         contentWidth={1180}
-        frameHeight={700}
+        frameHeight={1750}
         annotations={[
           {
             title: "Clear Sub-navigation",
-            text: "It's possible that a story will take more than one page. The subnav is meant to be placed beneath the hero and to stay on scroll — not as an anchor link, but as a link to a different page.",
-            top: "12%",
-            left: "30%",
+            text: "It's possible that a story will take more than one page. The subnav is meant to sit beneath the hero and stay on scroll, as a link to a different page rather than an anchor link.",
+            top: "12.6%",
+            left: "26%",
           },
           {
             title: "Primary CTA",
             text: "When these tales contain an action that you want users to do, make it easy for them to identify and understand the action.",
-            top: "24%",
-            left: "33%",
+            top: "24.2%",
+            left: "40%",
           },
           {
             title: "The Main Story",
             text: "There's lots of room to build the story you want to tell by combining current and new components.",
-            top: "37%",
-            left: "8%",
+            top: "36.8%",
+            left: "6%",
           },
           {
             title: "Pathing",
             text: "We can assure that there are no dead ends by using the Grids and Pathing components, so a user always has something new to investigate.",
-            top: "57%",
-            right: "5%",
+            top: "56.5%",
+            right: "4%",
           },
         ]}
       />
@@ -691,10 +588,10 @@ export function WmCompromisesSection() {
           Our recycling pages are highly branded and meant to be engaging and interactive, but due to time and dev
           constraints, we were left with a mix of old and new components and designs.
         </Body>
-        <SyncedCompareSlider
+        <SideBySideCompare
           leftLabel="Live site"
           rightLabel="Proposed"
-          left={<img src={imgDRecycling1011} alt="The live Recycling 101 page" className="w-full h-auto" />}
+          left={<img src={imgDRecycling1011} alt="The live Recycling 101 page" className="block w-full h-auto" />}
           right={
             <RecyclingMockup
               heroImage={imgBgImage}
@@ -707,8 +604,7 @@ export function WmCompromisesSection() {
               notAccepted={["Bagged Recyclables", "Plastic Bags", "Plastic Wrap & Film", "Flexible Packaging", "Cups with Wax or Plastic Coatings", "Polystyrene Foam and Plastic"]}
             />
           }
-          contentWidth={1180}
-          frameHeight={700}
+          height={640}
         />
       </div>
     </Section>
@@ -727,17 +623,17 @@ export function WmReflectionSection() {
         Although brand expression has shifted to focus on photography, the system rules remain unchanged to ensure
         that scaling does not affect performance.
       </Lead>
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <ImageFull src={imgSurface1} alt="The system applied to a mobile surface" fit="cover" frameClassName="aspect-[2/3]" />
-        <ImageFull src={imgSurface2} alt="The system applied to a tablet surface" fit="cover" frameClassName="aspect-[2/3]" />
-        <ImageFull src={imgSurface3} alt="The system applied to a native app surface" fit="cover" frameClassName="aspect-[2/3]" />
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 items-start">
+        <ImageFull src={imgSurface1} alt="The system applied to a mobile surface" />
+        <ImageFull src={imgSurface2} alt="The system applied to a tablet surface" />
+        <ImageFull src={imgSurface3} alt="The system applied to a native app surface" />
       </div>
 
       <Callout tone="neutral">
         <span className="font-bold">Reflections &amp; Takeaways: </span>
-        Reflecting on this ambitious project with its tight deadlines, I realize it taught me the importance of
-        being systematic. I learned how to implement strategies for quick scaling, but I also recognize that I
-        could have improved by compromising more effectively and delegating tasks better throughout the process.
+        Tight deadlines made the system strategy more important, not less. The strongest work came from defining
+        reusable patterns, making tradeoffs explicit, and giving teams a structure they could keep extending after
+        launch.
       </Callout>
     </Section>
   );

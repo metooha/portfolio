@@ -64,11 +64,11 @@ export default function EverydaySansCaseStudy() {
         hero={<EverydaySansHero />}
         overviewLogo={<EverydaySansOverviewLogo />}
         overviewClient="Walmart"
-        overviewCategory="Living Design, Typography"
+        overviewCategory="Core Design System, Typography"
         overviewTitle={"Brand and performance,\nwithout compromise"}
-        overviewDescription="Every new font weight came with a performance cost. So Brand held back. The result was visual hierarchy that never reached its potential, and a design system that had to make peace with compromise. The variable font ended that trade-off, permanently."
+        overviewDescription="When Brand asked for a new weight and Engineering said no on performance grounds, I proposed a variable font as the fix and made the case to Brand to fund it. That decision reframed the work as a platform tradeoff across Brand, Engineering, Accessibility, and the foundry, and I defined the audit framework and cross-platform spec that made the variable font safe to ship."
         metaItems={[
-          { label: "Role", value: "Principal Designer, Living Design" },
+          { label: "Role", value: "Principal Designer, Core Design System" },
           { label: "Timeline", value: "Jun 2024 – Dec 2025" },
           { label: "Scope", value: "Web, iOS, Android, React Native" },
           { label: "Foundry", value: "Commercial Type" },

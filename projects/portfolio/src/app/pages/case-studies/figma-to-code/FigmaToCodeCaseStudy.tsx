@@ -10,7 +10,9 @@ import {
   FigmaToCodeConnectSection,
   FigmaToCodeDemandSection,
   FigmaToCodeDiscoverySection,
+  FigmaToCodeFramingSection,
   FigmaToCodeKitSection,
+  FigmaToCodeOperatingModelSection,
   FigmaToCodePipelineSection,
   FigmaToCodeProblemSection,
   FigmaToCodeProjectSection,
@@ -22,12 +24,14 @@ const NAV = [
   { label: "Overview", href: "#overview" },
   { label: "The problem", href: "#problem" },
   { label: "Discovery", href: "#discovery" },
+  { label: "Framing", href: "#framing" },
   { label: "Real project", href: "#project" },
   { label: "The kit", href: "#kit" },
   { label: "The proof", href: "#proof" },
-  { label: "Walmart Connect", href: "#connect" },
+  { label: "First pilot", href: "#connect" },
   { label: "Going wide", href: "#conference" },
   { label: "The demand", href: "#demand" },
+  { label: "Operating model", href: "#operating-model" },
   { label: "The pipeline", href: "#pipeline" },
   { label: "The change", href: "#change" },
   { label: "Reflection", href: "#reflection" },
@@ -54,12 +58,12 @@ function FigmaToCodeHero() {
 
 const OVERVIEW_TITLE = "A pipeline that turns Figma specs into pull requests, not reinterpretations.";
 const OVERVIEW_DESCRIPTION =
-  "The design is done: every token, spacing value, and state already defined in Figma. Then it gets rebuilt by hand in code, thousands of times a year. This is the pipeline that closes that gap, trained on the Walmart Design System, validated on one component, and scaled into a company-wide pilot with real adoption demand.";
+  "The design is done: every token, spacing value, and state already defined in Figma. Then it gets rebuilt by hand in code, thousands of times a year. I framed the opportunity, secured the discovery partnership, defined the component lifecycle, and turned a one-component test into an org-wide pilot with real adoption demand.";
 const OVERVIEW_META = [
   { label: "Role", value: "Principal UX Designer" },
-  { label: "Platform", value: "Builder.io · Walmart Design System" },
+  { label: "Platform", value: "Builder.io · Core Design System" },
   { label: "Timeline", value: "Mar 2025 – Jan 2026" },
-  { label: "Focus", value: "Design-to-code automation, component lifecycle, adoption" },
+  { label: "Focus", value: "AI-assisted design-to-code, component lifecycle, adoption model" },
 ] as const;
 
 function FigmaToCodeOverviewLogo() {
@@ -82,7 +86,7 @@ export default function FigmaToCodeCaseStudy() {
         hero={<FigmaToCodeHero />}
         overviewLogo={<FigmaToCodeOverviewLogo />}
         overviewClient="Walmart"
-        overviewCategory="Walmart Design System, AI Tooling"
+        overviewCategory="Core Design System, Builder.io, AI Tooling"
         overviewTitle={OVERVIEW_TITLE}
         overviewDescription={OVERVIEW_DESCRIPTION}
         metaItems={[...OVERVIEW_META]}
@@ -94,12 +98,14 @@ export default function FigmaToCodeCaseStudy() {
         <div className="relative shrink-0 w-full overflow-x-hidden">
           <FigmaToCodeProblemSection />
           <FigmaToCodeDiscoverySection />
+          <FigmaToCodeFramingSection />
           <FigmaToCodeProjectSection />
           <FigmaToCodeKitSection />
           <FigmaToCodeProofSection />
           <FigmaToCodeConnectSection />
           <FigmaToCodeConferenceSection />
           <FigmaToCodeDemandSection />
+          <FigmaToCodeOperatingModelSection />
           <FigmaToCodePipelineSection />
           <FigmaToCodeChangeSection />
           <FigmaToCodeReflectionSection />

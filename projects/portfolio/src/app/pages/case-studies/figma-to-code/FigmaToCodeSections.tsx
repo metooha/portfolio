@@ -43,10 +43,10 @@ export function FigmaToCodeProblemSection() {
   return (
     <EdsSection id="problem">
       <EdsEyebrow>The problem</EdsEyebrow>
-      <EdsSectionTitle>Two teams. Same spec. Every time.</EdsSectionTitle>
+      <EdsSectionTitle>The handoff problem was really an infrastructure problem.</EdsSectionTitle>
       <EdsLead>
-        The design is done: every token, spacing value, and state defined in Figma. Then an engineer rebuilds
-        all of it by hand. That&rsquo;s the handoff, and it runs thousands of times a year.
+        Every token, spacing value, and state already existed in Figma. The organization was paying teams to
+        recreate that same source of truth in code, then reconcile the drift.
       </EdsLead>
       <ImageFull
         src={imgDesignEngineering}
@@ -55,8 +55,8 @@ export function FigmaToCodeProblemSection() {
         surface="subtle"
       />
       <FigmaCallout lead="The reframe:">
-        the spec already exists. What&rsquo;s missing is a system that carries it into code without a human
-        retyping it.
+        the spec already exists. The work was defining the architecture, rules, and review path that could carry
+        design intent into production without making engineering trust a black box.
       </FigmaCallout>
     </EdsSection>
   );
@@ -72,7 +72,7 @@ const DISCOVERY_ITEMS: EdsJourneyItem[] = [
       { label: "Design", variant: "brand" },
       { label: "Leadership", variant: "engineering" },
     ],
-    story: "Framed the cost of manual handoff and got the green light to run a hands-on discovery workshop with engineering and Builder.io.",
+    story: "Framed manual handoff as duplicated infrastructure, not design polish, and secured approval for a hands-on discovery workshop with engineering and Builder.io.",
     mood: "progress",
   },
   {
@@ -82,7 +82,7 @@ const DISCOVERY_ITEMS: EdsJourneyItem[] = [
       { label: "Design", variant: "brand" },
       { label: "Engineering", variant: "engineering" },
     ],
-    story: "Real components were broken into atomic pieces and scored, breakpoints, states, layout, custom styling, accessibility, to know exactly what automation would have to handle.",
+    story: "Real components were broken into atomic pieces and scored across breakpoints, states, layout, custom styling, and accessibility. That became the evaluation model for automation.",
     mood: "progress",
   },
   {
@@ -93,7 +93,7 @@ const DISCOVERY_ITEMS: EdsJourneyItem[] = [
       { label: "Engineering", variant: "engineering" },
       { label: "Builder.io", variant: "foundry" },
     ],
-    story: "Components were walked end to end, Figma to generated code, and the tooling split got settled: designers on the visual GUI, engineers on the CLI with delta updates.",
+    story: "Components were walked end to end, Figma to generated code, and I defined the tooling split: designers stay in the visual GUI, engineers own CLI review and delta updates.",
     win: "the full Figma-to-code path works on real components.",
     mood: "win",
   },
@@ -104,8 +104,8 @@ const DISCOVERY_ITEMS: EdsJourneyItem[] = [
       { label: "Design", variant: "brand" },
       { label: "Engineering", variant: "engineering" },
     ],
-    story: "The bar any automation had to clear got agreed: compatibility with existing tools, design fidelity, code integration, iteration speed, and team standards.",
-    win: "a shared component lifecycle that later became the pipeline.",
+    story: "The bar any automation had to clear became explicit: existing-tool compatibility, design fidelity, code integration, iteration speed, accessibility, and team standards.",
+    win: "a shared component lifecycle that could scale beyond the workshop.",
     mood: "win",
   },
 ];
@@ -114,13 +114,51 @@ export function FigmaToCodeDiscoverySection() {
   return (
     <EdsSection id="discovery" variant="mid">
       <EdsEyebrow>How it started</EdsEyebrow>
-      <EdsSectionTitle>First, it got figured out together.</EdsSectionTitle>
+      <EdsSectionTitle>First, the evaluation model had to be defined.</EdsSectionTitle>
       <EdsLead>
-        Before scaling anything, a six-week discovery phase ran with engineering and the Builder.io team:
-        pressure-testing feasibility, scoring component complexity, and agreeing on what getting design-to-code
-        right would actually take.
+        Before scaling anything, I structured a six-week discovery with engineering and Builder.io to pressure-test
+        feasibility, score component complexity, and define the bar for trustworthy design-to-code.
       </EdsLead>
       <EdsJourneyTimeline items={DISCOVERY_ITEMS} />
+    </EdsSection>
+  );
+}
+
+// ── 3 · Defining the work ───────────────────────────────────────────
+
+export function FigmaToCodeFramingSection() {
+  return (
+    <EdsSection id="framing">
+      <EdsEyebrow>Defining the work</EdsEyebrow>
+      <EdsSectionTitle>The hard call was making automation reviewable, not magical.</EdsSectionTitle>
+      <EdsLead>
+        The opportunity was not a demo that generated code once. I defined an operating model engineers could
+        trust, designers could use, and product teams could adopt without changing how they already worked.
+      </EdsLead>
+      <FigmaUnlockGrid
+        items={[
+          {
+            title: "Chose pull requests over handoff artifacts",
+            description: "The output had to land where engineering already worked: GitHub. A reviewable diff mattered more than a perfect first pass.",
+          },
+          {
+            title: "Kept designers in Figma",
+            description: "The workflow could not depend on designers learning a developer tool. Auto Layout, tokens, and annotations became the source of intent.",
+          },
+          {
+            title: "Made the seed file the contract",
+            description: "The structured data model became the bridge between design intent and generated code. It made the pipeline auditable and repeatable beyond one component.",
+          },
+          {
+            title: "Scaled through standards, not a vendor demo",
+            description: "The pilot had to respect existing tokens, repositories, theming, accessibility, and analytics. Every blocker became a Phase 2 requirement.",
+          },
+        ]}
+      />
+      <FigmaCallout lead="The takeaway:">
+        the defining decision was not whether AI could generate UI. It was how to make generated UI accountable
+        to the organization&rsquo;s design and engineering standards.
+      </FigmaCallout>
     </EdsSection>
   );
 }
@@ -142,7 +180,7 @@ export function FigmaToCodeProjectSection() {
         stats={[
           { value: "50–70%", label: "Target cut in design-to-code time" },
           { value: "70%", label: "Production-ready on generation" },
-          { value: "3", label: "Platforms: DWeb, MWeb, iOS/Android" },
+          { value: "3", label: "Platforms: web, mobile web, native apps" },
           { value: "3 mo", label: "Phase 1 timeline" },
         ]}
       />
@@ -177,21 +215,21 @@ export function FigmaToCodeKitSection() {
       <EdsEyebrow>The kit</EdsEyebrow>
       <EdsSectionTitle>Making it repeatable for any designer.</EdsSectionTitle>
       <EdsLead>
-        One component proved it worked. A kit made it repeatable: real components, ready to prototype in, with a
-        clean path to code.
+        One component proved the path. The kit made the behavior repeatable: real components, ready to prototype
+        in, with a clean path to code review.
       </EdsLead>
       <FigmaUnlockGrid
         items={[
           { title: "Rapid prototyping", description: "Ideate and test complex interactions instantly through the Figma and Chrome plugins." },
           { title: "Dynamic context", description: "Design with real CMS assets, conditional logic, and localization, not static screens." },
-          { title: "Walmart Design System integration", description: "AI and developers build against strict, on-brand component rules by default." },
+          { title: "Core Design System integration", description: "AI and developers build against strict, on-brand component rules by default." },
           { title: "Frictionless handoff", description: "Turn visual designs into production-ready blueprints, not specs to reinterpret." },
         ]}
       />
       <VideoFull
         src={videoB2bKit}
-        alt="Demo of the B2B kit inside Builder.io: the full component library and page templates for the kit"
-        caption="The B2B kit inside Builder.io. The full component library and guidelines, themed with real tokens, every project starts from a shared foundation."
+        alt="Demo of the business platform kit inside Builder.io: the full component library and page templates for the kit"
+        caption="The business platform kit inside Builder.io. The full component library and guidelines, themed with real tokens, every project starts from a shared foundation."
         surface="subtle"
         playback="controls"
       />
@@ -202,12 +240,12 @@ export function FigmaToCodeKitSection() {
           { lead: "Get connected.", description: "Desktop app, corporate VPN." },
           { lead: "Prep files.", description: "Figma assets exportable, Auto Layout on." },
           { lead: "Capture intent.", description: "Annotations for complex interactions." },
-          { lead: "Load the kit.", description: "Drop in the B2B kit, pre-approved components, instantly." },
+          { lead: "Load the kit.", description: "Drop in the business platform kit, pre-approved components, instantly." },
         ]}
       />
       <ImageFull
         src={imgDayZero}
-        alt="Builder.io's Smart Export panel exporting a Figma frame into a live project"
+        alt="Export panel moving a Figma frame into a live project"
         caption="Day Zero. Builder.io connects to the Figma source, then a component exports straight into a live project."
       />
       <FigmaDayCard
@@ -221,14 +259,14 @@ export function FigmaToCodeKitSection() {
       />
       <ImageFull
         src={imgDayOne}
-        alt="Walmart Connect Ad Center dashboard running as a live prototype in the browser"
-        caption="Day One. An AI agent reads the Figma designs and builds a working, high-fidelity Ad Center prototype from real components."
+        alt="Retail media dashboard running as a live prototype in the browser"
+        caption="Day One. An AI agent reads the Figma designs and builds a working, high-fidelity advertising dashboard from real components."
       />
       <EmbedFull
         src="https://metooha.github.io/px-sub-theme-editor/page-template"
-        title="B2B kit — live page template prototype"
+        title="Business platform kit: live page template prototype"
         label="Try it live"
-        caption="A live page template built from the B2B kit, running the same Walmart Design System components the pipeline generates against."
+        caption="A live page template built from the business platform kit, running the same Core Design System components the pipeline generates against."
         aspectRatio="16 / 10"
         bordered
       />
@@ -236,21 +274,21 @@ export function FigmaToCodeKitSection() {
   );
 }
 
-// ── 5 · Walmart Connect ────────────────────────────────────────────
+// ── 5 · First pilot ─────────────────────────────────────────────────
 
 export function FigmaToCodeConnectSection() {
   return (
     <EdsSection id="connect">
       <EdsEyebrow>First real test</EdsEyebrow>
-      <EdsSectionTitle>Walmart Connect, built live.</EdsSectionTitle>
+      <EdsSectionTitle>Retail media, built live.</EdsSectionTitle>
       <EdsLead>
-        The kit&rsquo;s first real test: co-designing a working Ad Center prototype with the Walmart Connect
+        The kit&rsquo;s first real test: co-designing a working advertising prototype with the retail media
         team, in real components, reviewed like a product, not a mockup.
       </EdsLead>
       <ImageFull
         src={imgMultiplayer}
-        alt="Builder.io editor with an AI agent chat fixing a runtime error and multiple named cursors editing the same file"
-        caption="Co-designed live, in the real build. Product, design, and engineering in the same Ad Center prototype at once, real components, live cursors, reviewed like a product instead of walked through as slides."
+        alt="AI prototyping editor with an agent chat fixing a runtime error and multiple named cursors editing the same file"
+        caption="Co-designed live, in the real build. Product, design, and engineering in the same advertising prototype at once, real components, live cursors, reviewed like a product instead of walked through as slides."
       />
       <FigmaCallout lead="Why it worked:">
         one shared URL replaced the static deck. Feedback happened on the actual build, and the AI agent
@@ -287,7 +325,10 @@ export function FigmaToCodeDemandSection() {
     <EdsSection id="demand">
       <EdsEyebrow>The demand</EdsEyebrow>
       <EdsSectionTitle>Teams weren&rsquo;t waiting to be sold.</EdsSectionTitle>
-      <EdsLead>The interest was already there, and it showed up as sign-ups.</EdsLead>
+      <EdsLead>
+        The pilot moved from technical proof to organizational demand. The strongest signal was who signed up:
+        product leaders, senior ICs, and teams with real prototyping gaps.
+      </EdsLead>
       <StatsRow
         variant="light"
         stats={[
@@ -314,7 +355,7 @@ export function FigmaToCodeDemandSection() {
             description: "Vibe-coding support and hands-on training to adopt the system at scale.",
           },
           {
-            quote: "When are you going to offer support for code-puppy?",
+            quote: "When will this support our internal code assistant?",
             attribution: "Staff, Product Management",
             label: "Signal 3",
             title: "AI-assisted workflows",
@@ -322,6 +363,54 @@ export function FigmaToCodeDemandSection() {
           },
         ]}
       />
+    </EdsSection>
+  );
+}
+
+// ── 8 · Operating model ─────────────────────────────────────────────
+
+export function FigmaToCodeOperatingModelSection() {
+  return (
+    <EdsSection id="operating-model">
+      <EdsEyebrow>Operating model</EdsEyebrow>
+      <EdsSectionTitle>Built to be owned by many, not managed by one.</EdsSectionTitle>
+      <EdsLead>
+        Demand made governance the product. I defined how design systems, engineering, Builder.io, and pilot teams
+        would share ownership as the workflow scaled.
+      </EdsLead>
+      <FigmaUnlockGrid
+        items={[
+          {
+            title: "Design systems owned the source of truth",
+            description: "Tokens, component rules, and Figma annotations stayed anchored in the system so generated work could inherit trusted standards.",
+          },
+          {
+            title: "Engineering owned review quality",
+            description: "Generated code landed as a pull request. Engineers reviewed, extended, and hardened it instead of rebuilding the design from scratch.",
+          },
+          {
+            title: "Pilot teams supplied real constraints",
+            description: "Each team brought production use cases, edge states, and adoption friction. Those findings shaped the next version of the pipeline.",
+          },
+          {
+            title: "Leadership got a repeatable adoption path",
+            description: "The conference booth, signup sheet, and enablement plan turned interest into a queue of teams ready to pilot the workflow.",
+          },
+        ]}
+      />
+      <StatsRow
+        variant="light"
+        stats={[
+          { value: "1", label: "Lifecycle from Figma to pull request" },
+          { value: "4", label: "Owner groups with clear decision rights" },
+          { value: "75+", label: "Teams informing pilot demand" },
+          { value: "~70%", label: "Generated code ready for review" },
+        ]}
+      />
+      <FigmaCallout lead="What this proves:">
+        the system was designed to create ownership, not dependency. My role was to set the model others could
+        run, improve, and adopt.
+      </FigmaCallout>
     </EdsSection>
   );
 }
@@ -334,23 +423,23 @@ export function FigmaToCodePipelineSection() {
       <EdsEyebrow>The pipeline</EdsEyebrow>
       <EdsSectionTitle>Then it got built to scale.</EdsSectionTitle>
       <EdsLead>
-        Demand meant one prototype wasn&rsquo;t enough. The pipeline made it repeatable: Figma to code, with a
-        data backbone that keeps design, content, and tokens in sync.
+        Demand meant one prototype was not enough. The pipeline made the workflow repeatable: Figma to code, with
+        a data backbone that keeps design, content, and tokens in sync.
       </EdsLead>
 
       <Body as="p" size="small" weight="alt" UNSAFE_className="uppercase tracking-[0.1em] m-0" UNSAFE_style={{ fontSize: "11px", color: BRAND }}>
         Library inheritance model
       </Body>
       <Body as="p" size="small" color="subtlest" UNSAFE_className="max-w-[660px] leading-[1.7] -mt-3">
-        The Walmart Design System provides the core tokens and components most products and teams need.
+        The Core Design System provides the core tokens and components most products and teams need.
         Subsystems can add tokens and components specific to their domain. Those libraries can use everything
         above them, with one caveat: their components carry content, details, and interactions specific to a
         team&rsquo;s features.
       </Body>
-      <FigmaTierChain tiers={["Core library", "Business pillar", "Tenant theme", "Product team"]} />
+      <FigmaTierChain tiers={["Core library", "Business unit", "Tenant theme", "Product team"]} />
       <ImageFull
         src={imgInheritance}
-        alt="Inheritance diagram: a core library of tokens and components branches into Customer, Internal, and B2B business pillars, then tenant brand themes, then product-team-specific components"
+        alt="Inheritance diagram: a core library of tokens and components branches into consumer, staff tools, and business platform libraries, then tenant brand themes, then product-team-specific components"
         caption="The system it has to respect. The core library cascades tokens and components down through business pillars, tenants, and product teams, so generation can't be a one-off. It has to honor the whole inheritance model."
         surface="subtle"
       />
@@ -364,8 +453,8 @@ export function FigmaToCodePipelineSection() {
       </Body>
       <ImageFull
         src={imgPipeline}
-        alt="Pipeline diagram: Figma input into a processor trained on the design system, generating code, refined by a fine-tuned LLM, output to GitHub and then DWeb, MWeb, native apps, and Tempo seed JSONs"
-        caption="Figma in, production code out. The processor knows the design system; the LLM refines the generated code; GitHub carries it to DWeb, MWeb, native apps, and Tempo seed JSONs."
+        alt="Pipeline diagram: Figma input into a processor trained on the design system, generating code, refined by a fine-tuned LLM, output to GitHub and then web, mobile web, native apps, and content seed JSONs"
+        caption="Figma in, production code out. The processor knows the design system; the LLM refines the generated code; GitHub carries it to web, mobile web, native apps, and content seed JSONs."
       />
 
       <Body as="p" size="small" color="subtlest" UNSAFE_className="max-w-[660px] leading-[1.7] mt-2">
@@ -385,7 +474,7 @@ export function FigmaToCodePipelineSection() {
       </Body>
       <Body as="p" size="small" color="subtlest" UNSAFE_className="max-w-[660px] leading-[1.7]">
         This inheritance tree is the same token infrastructure documented in{" "}
-        <RouterLink to="/case-study/6" style={{ color: BRAND, textDecoration: "underline" }}>
+        <RouterLink to="/case-study/3" style={{ color: BRAND, textDecoration: "underline" }}>
           A Quest for a Source of Truth
         </RouterLink>
         . This pipeline is one of the things it made possible.
@@ -407,8 +496,8 @@ export function FigmaToCodeProofSection() {
       </EdsLead>
       <ImageFull
         src={imgProof}
-        alt="Innovative builders using AI tools collaboratively to create prototypes, with quotes from an engineering manager and senior designers across customer, B2B, and internal product teams"
-        caption="Innovative builders, using AI collaboratively. Engineering and design across customer, B2B, and internal products, all prototyping faster on the same foundation."
+        alt="Innovative builders using AI tools collaboratively to create prototypes, with quotes from an engineering manager and senior designers across consumer, business platform, and staff-tool teams"
+        caption="Innovative builders, using AI collaboratively. Engineering and design across consumer, business platform, and staff products, all prototyping faster on the same foundation."
       />
     </EdsSection>
   );

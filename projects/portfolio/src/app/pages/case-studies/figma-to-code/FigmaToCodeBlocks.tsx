@@ -21,30 +21,23 @@ export function FigmaCallout({
   onDark?: boolean;
 }) {
   return (
-    <div
-      className="flex items-start gap-3 rounded-[10px] p-5"
-      style={{
-        background: onDark ? "rgba(120,140,255,0.14)" : "var(--ld-primitive-color-blue-5, #f0f5ff)",
-        border: `1px solid ${onDark ? "rgba(120,140,255,0.3)" : SEPARATOR}`,
-      }}
+    <Body
+      as="p"
+      size="small"
+      UNSAFE_className="m-0 leading-[1.65]"
+      UNSAFE_style={{ color: onDark ? "rgba(255,255,255,0.82)" : undefined }}
     >
-      <span
-        className="shrink-0 rounded-full mt-2"
-        style={{ width: "5px", height: "5px", background: onDark ? "#ffffff" : BRAND }}
-        aria-hidden="true"
-      />
       <Body
-        as="p"
+        as="span"
         size="small"
-        UNSAFE_className="m-0 leading-[1.65]"
-        UNSAFE_style={{ color: onDark ? "rgba(255,255,255,0.82)" : undefined }}
+        weight="alt"
+        UNSAFE_className="underline"
+        UNSAFE_style={{ color: onDark ? "#ffffff" : BRAND, textDecorationColor: onDark ? "#ffffff" : BRAND }}
       >
-        <Body as="span" size="small" weight="alt" UNSAFE_style={{ color: onDark ? "#ffffff" : BRAND }}>
-          {lead}{" "}
-        </Body>
-        {children}
+        {lead}{" "}
       </Body>
-    </div>
+      {children}
+    </Body>
   );
 }
 
@@ -170,15 +163,17 @@ export function FigmaSignalGrid({ items }: { items: FigmaSignal[] }) {
       {items.map((item) => (
         <div
           key={item.quote}
-          className="flex flex-col gap-4 rounded-[10px] p-6"
+          className="flex flex-col gap-4 rounded-[10px] p-6 h-full"
           style={{ background: SURFACE, border: `1px solid ${SEPARATOR}` }}
         >
-          <Body as="p" size="small" UNSAFE_className="m-0 leading-[1.6] italic" UNSAFE_style={{ color: INK }}>
-            &ldquo;{item.quote}&rdquo;
-          </Body>
-          <Body as="p" size="small" color="subtlest" UNSAFE_className="m-0" UNSAFE_style={{ fontSize: "12px" }}>
-            {item.attribution}
-          </Body>
+          <div className="flex flex-col gap-4 flex-1">
+            <Body as="p" size="small" UNSAFE_className="m-0 leading-[1.6] italic" UNSAFE_style={{ color: INK }}>
+              &ldquo;{item.quote}&rdquo;
+            </Body>
+            <Body as="p" size="small" color="subtlest" UNSAFE_className="m-0" UNSAFE_style={{ fontSize: "12px" }}>
+              {item.attribution}
+            </Body>
+          </div>
           <div className="pt-3 border-t" style={{ borderColor: SEPARATOR }}>
             <Body
               as="p"

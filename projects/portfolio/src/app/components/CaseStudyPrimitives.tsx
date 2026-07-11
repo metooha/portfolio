@@ -207,7 +207,7 @@ export function ImageFrame({
         border: bordered ? "1px solid var(--ld-semantic-color-separator, #e3e4e5)" : undefined,
       }}
     >
-      <div className={clipEdges ? "overflow-hidden -m-[3px] p-[3px]" : undefined}>
+      <div className={clipEdges ? "overflow-hidden -m-[3px] p-[3px] h-full" : "h-full"}>
         <img
           src={src}
           alt={alt}
@@ -479,7 +479,7 @@ export function VideoFrame({
         border: bordered ? "1px solid var(--ld-semantic-color-separator, #e3e4e5)" : undefined,
       }}
     >
-      <div className={clipEdges ? "overflow-hidden -m-[3px] p-[3px]" : undefined}>
+      <div className={clipEdges ? "overflow-hidden -m-[3px] p-[3px] h-full" : "h-full"}>
         {playback === "controls" ? (
           <video
             src={src}

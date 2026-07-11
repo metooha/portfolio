@@ -244,26 +244,53 @@ export function CaseStudyTemplate({
 
             {children}
 
-            {(prevProject || nextProject) && (
-              <div className="relative w-full shrink-0">
-                <div className="relative mx-auto w-full max-w-[1660px] px-4 sm:px-6 md:px-12 lg:px-[68px]">
-                  <div
-                    className="grid w-full grid-cols-1 items-stretch md:grid-cols-2"
-                    style={{ gap: "var(--ld-semantic-spacing-300, 1.5rem)" }}
-                  >
-                    {prevProject ? <NavCard direction="prev" project={prevProject} /> : <div />}
-                    {nextProject ? <NavCard direction="next" project={nextProject} /> : <div />}
+            {/* Always the default portfolio theme, regardless of the current case study's
+                brand scoping — this chrome links to other projects, not the current one.
+                The action-fill-primary and font-family tokens below are re-derived here
+                explicitly because they're declared only at :root in base-tokens.css (and
+                :root itself tracks whichever theme the current route applies), so nested
+                [data-ld-theme] scoping alone doesn't reach them — only the primitive color
+                and font scales get rescoped that way. */}
+            <div
+              data-ld-theme="Portfolio"
+              style={
+                {
+                  display: "contents",
+                  "--ld-semantic-color-action-fill-primary": "var(--ld-primitive-color-blue-100, #0053e2)",
+                  "--ld-semantic-color-action-fill-primary-hovered": "var(--ld-primitive-color-blue-110, #114ab6)",
+                  "--ld-semantic-color-action-fill-primary-focused": "var(--ld-primitive-color-blue-110, #114ab6)",
+                  "--ld-semantic-color-action-fill-primary-pressed": "var(--ld-primitive-color-blue-130, #002e99)",
+                  "--ld-semantic-font-heading-large-family": "var(--ld-primitive-font-family-sans, 'Everyday Sans UI', -apple-system, Roboto, sans-serif)",
+                  "--ld-semantic-font-heading-medium-family": "var(--ld-primitive-font-family-sans, 'Everyday Sans UI', -apple-system, Roboto, sans-serif)",
+                  "--ld-semantic-font-heading-small-family": "var(--ld-primitive-font-family-sans, 'Everyday Sans UI', -apple-system, Roboto, sans-serif)",
+                  "--ld-semantic-font-body-large-family": "var(--ld-primitive-font-family-sans, 'Everyday Sans UI', -apple-system, Roboto, sans-serif)",
+                  "--ld-semantic-font-body-medium-family": "var(--ld-primitive-font-family-sans, 'Everyday Sans UI', -apple-system, Roboto, sans-serif)",
+                  "--ld-semantic-font-body-small-family": "var(--ld-primitive-font-family-sans, 'Everyday Sans UI', -apple-system, Roboto, sans-serif)",
+                  "--ld-semantic-font-caption-family": "var(--ld-primitive-font-family-sans, 'Everyday Sans UI', -apple-system, Roboto, sans-serif)",
+                } as React.CSSProperties
+              }
+            >
+              {(prevProject || nextProject) && (
+                <div className="relative w-full shrink-0">
+                  <div className="relative mx-auto w-full max-w-[1660px] px-4 sm:px-6 md:px-12 lg:px-[68px]">
+                    <div
+                      className="grid w-full grid-cols-1 items-stretch md:grid-cols-2"
+                      style={{ gap: "var(--ld-semantic-spacing-300, 1.5rem)" }}
+                    >
+                      {prevProject ? <NavCard direction="prev" project={prevProject} /> : <div />}
+                      {nextProject ? <NavCard direction="next" project={nextProject} /> : <div />}
+                    </div>
                   </div>
                 </div>
-              </div>
-            )}
+              )}
 
-            <div className="flex justify-center">
-              <Link to="/" className="no-underline">
-                <Button variant="primary" size="medium">
-                  All Projects
-                </Button>
-              </Link>
+              <div className="flex justify-center">
+                <Link to="/" className="no-underline">
+                  <Button variant="primary" size="medium">
+                    All Projects
+                  </Button>
+                </Link>
+              </div>
             </div>
           </div>
         </div>

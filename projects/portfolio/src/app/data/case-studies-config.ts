@@ -14,6 +14,7 @@ import FigmaToCodeCaseStudy from "@/app/pages/case-studies/figma-to-code/FigmaTo
 import WmEmailCaseStudy from "@/app/pages/case-studies/wm-email-rebrand/WmEmailCaseStudy";
 import NiniJewelsCaseStudy from "@/app/pages/case-studies/nini-jewels/NiniJewelsCaseStudy";
 import BreakoutNetworkCaseStudy from "@/app/pages/case-studies/breakout-network/BreakoutNetworkCaseStudy";
+import UcUiKitCaseStudy, { UcUiKitHero } from "@/app/pages/case-studies/uc-uikit/UcUiKitCaseStudy";
 import { CaseStudyAcademyContent } from "@/app/pages/case-studies/academy/CaseStudyAcademyContent";
 import imgEverydaySansCover from "@/app/assets/pages/case-study/everyday-sans/cover.jpg";
 import { imgAirtableCoverPreview, imgAirtableCoverSource } from "@/app/assets/pages/case-study/airtable-sot/assets";
@@ -80,27 +81,29 @@ const CASE_STUDIES: CaseStudyConfig[] = [
     accessPassword: "Indigo",
     cardTitle: "Enabling AI-Assisted Prototyping",
     shortDescription:
-      "A Figma-to-code pipeline trained on the Walmart Design System, so what engineering receives is a pull request to review, not a Figma file to reinterpret.",
+      "A Figma-to-code pipeline trained on the Core Design System, turning design intent into a pull request engineering can review.",
     cardDescription:
-      "Validated across the Walmart Design System's component library, then scaled into a company-wide pilot with 150+ sign-ups across 75+ teams cutting design-to-code time in half.",
+      "Defined the component lifecycle, operating model, and AI-assisted workflow that scaled from one validated component into a company-wide pilot with 150+ sign-ups across 75+ teams.",
     fullDescription:
-      "The design is done: every token, spacing value, and state already defined in Figma. Then it gets rebuilt by hand in code, thousands of times a year. This case study covers a Figma-to-code pipeline trained on the Walmart Design System that closes that gap, from a single validated component to a company-wide pilot with real adoption demand.",
+      "Every token, spacing value, and state already existed in Figma, but the organization still rebuilt that source of truth by hand. I framed the opportunity as infrastructure, secured the discovery partnership, defined the component lifecycle, and turned a one-component test into an org-wide pilot with real adoption demand.",
     metaItems: [
       { label: "Role", value: "Principal UX Designer" },
-      { label: "Platform", value: "Builder.io · Walmart Design System" },
+      { label: "Platform", value: "Builder.io · Core Design System" },
       { label: "Timeline", value: "Mar 2025 – Jan 2026" },
-      { label: "Focus", value: "Design-to-code automation, component lifecycle, adoption" },
+      { label: "Focus", value: "Design-to-code infrastructure, component lifecycle, adoption" },
     ],
     navSections: [
       { label: "Overview", href: "#overview" },
       { label: "The problem", href: "#problem" },
       { label: "Discovery", href: "#discovery" },
+      { label: "Framing", href: "#framing" },
       { label: "Real project", href: "#project" },
       { label: "The kit", href: "#kit" },
       { label: "The proof", href: "#proof" },
-      { label: "Walmart Connect", href: "#connect" },
+      { label: "First pilot", href: "#connect" },
       { label: "Going wide", href: "#conference" },
       { label: "The demand", href: "#demand" },
+      { label: "Operating model", href: "#operating-model" },
       { label: "The pipeline", href: "#pipeline" },
       { label: "The change", href: "#change" },
       { label: "Reflection", href: "#reflection" },
@@ -112,27 +115,27 @@ const CASE_STUDIES: CaseStudyConfig[] = [
     thumbnail: imgFigmaToCodeCover,
     PageComponent: FigmaToCodeCaseStudy,
     overviewClient: "Walmart",
-    overviewCategory: "Walmart Design System, AI Tooling",
+    overviewCategory: "Core Design System, Builder.io, AI Tooling",
     homeGroup: "Design Systems",
   },
   {
     id: "2",
     path: "/case-study/2",
-    title: "Everyday Sans UI — Brand and performance, without compromise",
+    title: "Everyday Sans UI: Brand and performance, without compromise",
     defaultTheme: "Walmart",
     isPublished: true,
     cardTitle: "Everyday Sans UI",
     shortDescription:
-      "How a variable font ended the trade-off between brand hierarchy and web performance at Walmart.",
+      "When Engineering rejected a new font weight on performance grounds, I proposed a variable font and made the case to Brand to fund it.",
     cardDescription:
-      "Brand held back on font weights because each new file carried a performance cost. The variable font ended that compromise — permanently.",
+      "Proposed the variable font, then defined the audit framework, cross-platform spec, and repeatable evaluation model that let Brand, Engineering, Accessibility, and the foundry align on one launch-ready font.",
     fullDescription:
-      "Every new font weight came with a performance cost. So Brand held back. The result was visual hierarchy that never reached its potential, and a design system that had to make peace with compromise. The variable font ended that trade-off — permanently.",
+      "Every new font weight came with a performance cost, so Brand held back and product hierarchy stayed limited. When Engineering turned down a new weight request, I proposed a variable font as the fix and convinced Brand to fund it, reframing the work as a platform tradeoff across Brand, Engineering, Accessibility, and the foundry, then defined the audit framework and cross-platform spec that made it safe to ship.",
     metaItems: [
-      { label: "Role", value: "Lead Designer, Living Design" },
+      { label: "Role", value: "Lead Designer, Core Design System" },
       { label: "Timeline", value: "Jun 2024 – Dec 2025" },
       { label: "Scope", value: "Web, iOS, Android, Email" },
-      { label: "Focus", value: "Variable font adoption, design tokens, accessibility" },
+      { label: "Focus", value: "Variable font strategy, platform migration, accessibility" },
     ],
     navSections: [
       { label: "Overview", href: "#overview" },
@@ -150,7 +153,7 @@ const CASE_STUDIES: CaseStudyConfig[] = [
     thumbnail: imgEverydaySansCover,
     PageComponent: EverydaySansCaseStudy,
     overviewClient: "Walmart",
-    overviewCategory: "Living Design, Typography",
+    overviewCategory: "Core Design System, Typography",
     homeGroup: "Design Systems",
   },
   {
@@ -161,16 +164,16 @@ const CASE_STUDIES: CaseStudyConfig[] = [
     isPublished: true,
     cardTitle: "A Quest for a Source of Truth",
     shortDescription:
-      "How a shared token infrastructure cut deployment time from 3 days to 10 minutes.",
+      "I proposed a shared token pipeline and pitched it to engineering leadership, cutting deployment time from 3 days to 10 minutes.",
     cardDescription:
-      "From 17+ teams maintaining separate token copies to a single automated pipeline — zero coordination, zero errors.",
+      "Pitched the pipeline to engineering leadership to secure approval and support, then defined the bridge between Airtable and GitHub so 17+ teams could inherit shared tokens and ship without manual coordination.",
     fullDescription:
-      "We went from 17+ teams maintaining their own copies of design tokens — manually, inconsistently, and constantly out of sync — to a single automated pipeline where a designer updates a value in Airtable and it's live in production in 10 minutes.",
+      "The token problem was an ownership problem: designers needed Airtable, engineers needed GitHub, and brands needed inheritance instead of duplication. It was my idea to solve it with a single automated pipeline. I presented the plan to engineering leadership to secure approval and the support to build it, then extended that support into Figma and our design system kits.",
     metaItems: [
-      { label: "Role", value: "Lead Designer, Living Design" },
+      { label: "Role", value: "Lead Designer, Core Design System" },
       { label: "Timeline", value: "Aug 2024 – Nov 2025" },
       { label: "Scope", value: "17 brand themes · iOS · Android · Web" },
-      { label: "Focus", value: "Token infrastructure, automation, theme hierarchy" },
+      { label: "Focus", value: "Token contracts, automation, theme inheritance" },
     ],
     navSections: [
       { label: "Overview", href: "#overview" },
@@ -184,13 +187,13 @@ const CASE_STUDIES: CaseStudyConfig[] = [
       { label: "What's next", href: "#whats-next" },
     ],
     navAccentColor: "#0053e2",
-    tags: ["Design Tokens", "Design System", "Automation", "Living Design"],
+    tags: ["Design Tokens", "Design System", "Automation", "Core Design System"],
     heroType: "image",
     heroImage: imgAirtableCoverSource,
     thumbnail: imgAirtableCoverPreview,
     PageComponent: AirtableCaseStudy,
     overviewClient: "Walmart",
-    overviewCategory: "Living Design, Design Tokens",
+    overviewCategory: "Core Design System, Design Tokens",
     homeGroup: "Design Systems",
   },
   {
@@ -201,11 +204,11 @@ const CASE_STUDIES: CaseStudyConfig[] = [
     isPublished: true,
     cardTitle: "Oportun Design System",
     shortDescription:
-      "Rebranding and unifying Digit and Oportun under one design language — from foundations through adoption.",
+      "Rebranding and unifying Digit and Oportun under one design language, from foundations through adoption.",
     cardDescription:
       "Led the design system through a full rebrand: foundations, components, Storybook, documentation, and product validation across mobile and web.",
     fullDescription:
-      "Oportun's acquisition of Digit created an urgent need to rebrand and unify two distinct product experiences. I led the design systems work — defining strategy, building foundational libraries, shipping components in Storybook, and validating patterns through high-stakes product flows like the loan calculator.",
+      "Oportun's acquisition of Digit created an urgent need to rebrand and unify two distinct product experiences. I led the design systems work: defining strategy, building foundational libraries, shipping components in Storybook, and validating patterns through high-stakes product flows like the loan calculator.",
     metaItems: [
       { label: "Role", value: "Lead Product Designer, Design Systems" },
       { label: "Timeline", value: "July 2022 – Jan 2023" },
@@ -397,11 +400,11 @@ const CASE_STUDIES: CaseStudyConfig[] = [
     featuredOnHome: false,
     cardTitle: "WM Email Rebrand",
     shortDescription:
-      "A collaborative rebranding of Waste Management's email program — purpose, audience strategy, and a 50+ block design system that made every email feel like WM.",
+      "A collaborative rebranding of Waste Management's email program: purpose, audience strategy, and a 50+ block design system that made every email feel on-brand.",
     cardDescription:
-      "70 new templates and a 50+ block modular toolkit built on research into how people actually read email — 18.5M emails sent under the new system in 2021.",
+      "70 new templates and a 50+ block modular toolkit built on research into how people actually read email. 18.5M emails sent under the new system in 2021.",
     fullDescription:
-      "In 2021, Waste Management's Email Marketing team led a rebrand of the email program in collaboration with the Digital Studio and Brand Team. I led the design work: heuristic analysis, competitive research, and a modular Email Tool Kit — 50+ blocks across five categories — built on SFMC and grounded in the psychology of how people actually read email.",
+      "In 2021, Waste Management's Email Marketing team led a rebrand of the email program in collaboration with the Digital Studio and Brand Team. I led the design work: heuristic analysis, competitive research, and a modular Email Tool Kit with 50+ blocks across five categories, built on SFMC and grounded in the psychology of how people actually read email.",
     metaItems: [
       { label: "My Role", value: "Lead Product Designer, w/ team of 4" },
       { label: "Project Scope", value: "50+ Blocks · Documentation · Style Guide" },
@@ -500,6 +503,48 @@ const CASE_STUDIES: CaseStudyConfig[] = [
     heroGradientClass: "bg-gradient-to-br from-orange-50 to-red-50",
     thumbnail: imgAcademy,
     ContentComponent: CaseStudyAcademyContent,
+  },
+  {
+    id: "12",
+    path: "/case-study/12",
+    title:
+      "A conversational UI design system for Walmart, built across a platform migration and a market merger.",
+    defaultTheme: "Walmart",
+    isPublished: false,
+    featuredOnHome: false,
+    cardTitle: "Conversational UI Design System",
+    shortDescription:
+      "A shared, themeable chat and conversational AI system for Walmart's shopping assistant, support chat, and staff tools, built across a platform migration and a market merger.",
+    cardDescription:
+      "Six chat UIs, one system. A pattern and recipe system for Walmart's conversational AI products, built by a recruited contributor team and handed off to the standing teams to maintain.",
+    fullDescription:
+      "Product teams could no longer maintain their own chat UIs. Engineering and product brought the problem to design: define the system, build and mentor a contributor team, and hand it to the standing teams to maintain.",
+    metaItems: [
+      { label: "Role", value: "Principal Product Designer" },
+      { label: "Scope", value: "Strategy, Team, System, Governance" },
+      { label: "Products", value: "Sparky (AI shopping assistant), Support chat, Associate tools" },
+      { label: "Status", value: "In build, SDK shipping Q3/Q4" },
+    ],
+    navSections: [
+      { label: "Overview", href: "#overview" },
+      { label: "The Problem", href: "#problem" },
+      { label: "Defining the Work", href: "#defining" },
+      { label: "The Scope", href: "#scope" },
+      { label: "Building the Team", href: "#team" },
+      { label: "The Process", href: "#process" },
+      { label: "Governance", href: "#governance" },
+      { label: "Impact", href: "#impact" },
+      { label: "What's Next", href: "#next" },
+    ],
+    navAccentColor: "#0053e2",
+    tags: ["Design System", "Conversational AI", "Governance"],
+    heroType: "component",
+    HeroComponent: UcUiKitHero,
+    thumbnail: "",
+    PageComponent: UcUiKitCaseStudy,
+    overviewClient: "Walmart",
+    overviewCategory: "Conversational AI, Design Systems, Governance",
+    homeGroup: "Design Systems",
   },
 ];
 

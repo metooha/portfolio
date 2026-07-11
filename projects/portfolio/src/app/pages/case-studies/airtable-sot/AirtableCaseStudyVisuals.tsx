@@ -146,15 +146,15 @@ function AccentTopCard({
 }
 
 const BRAND_THEMES: { label: string; bg: string; color?: string }[] = [
-  { label: "Walmart US", bg: "#0053e2" },
-  { label: "Sam's Club", bg: "#0062ad" },
-  { label: "Walmart Legacy", bg: "#0071dc" },
-  { label: "Bodega", bg: "#2a8703" },
-  { label: "Walmart+", bg: "#ffc220", color: "#2e2f32" },
-  { label: "Walmart Business", bg: "#001e60" },
-  { label: "Member's Mark Community", bg: "#ffa030", color: "#001e60" },
-  { label: "Data Ventures", bg: "#6245b7" },
-  { label: "Cashi", bg: "#6212b2" },
+  { label: "Retail brand", bg: "#0053e2" },
+  { label: "Membership club", bg: "#0062ad" },
+  { label: "Legacy brand", bg: "#0071dc" },
+  { label: "Regional market", bg: "#2a8703" },
+  { label: "Subscription brand", bg: "#ffc220", color: "#2e2f32" },
+  { label: "Business brand", bg: "#001e60" },
+  { label: "Private-label brand", bg: "#ffa030", color: "#001e60" },
+  { label: "Data product", bg: "#6245b7" },
+  { label: "Payments brand", bg: "#6212b2" },
   { label: "+7 more", bg: "#4dbdf5", color: "#2e2f32" },
 ];
 
@@ -721,20 +721,20 @@ export function AirtablePipelineVisual() {
 const INHERITANCE_LAYERS = [
   {
     layer: "Layer 1",
-    title: "LD Base: 650+ Tokens",
+    title: "Core Base: 650+ Tokens",
     body: "Primitive + semantic tokens. Update once and all 17 brands receive the change automatically.",
     image: imgInheritanceLdBase,
   },
   {
     layer: "Layer 2",
-    title: "WCP Theme: Platform Overrides",
-    body: "Platform-specific overrides only. Inherits everything from LD Base automatically.",
+    title: "Platform Theme: Overrides",
+    body: "Platform-specific overrides only. Inherits everything from Core Base automatically.",
     image: imgInheritanceWcp,
   },
   {
     layer: "Layer 3",
     title: "Brand Themes: ~10% Overrides",
-    body: "Sam's Club, Walmart+, Bodega each define ~10% of tokens. 90% inherits automatically. Zero drift.",
+    body: "Membership club, subscription brand, and regional market themes each define ~10% of tokens. 90% inherits automatically. Zero drift.",
     image: imgInheritanceBrand,
   },
   {
@@ -794,8 +794,8 @@ export function AirtableInheritanceVisual() {
 }
 
 const SCALE_BRANDS = [
-  ["Walmart US", "Sam's Club", "Walmart+", "Cashi"],
-  ["International", "Bodega", "Data Ventures", "+14 brands"],
+  ["Retail brand", "Membership club", "Subscription brand", "Payments brand"],
+  ["International", "Regional market", "Data product", "+14 brands"],
 ] as const;
 
 export function AirtableScaleVisual() {
@@ -807,7 +807,7 @@ export function AirtableScaleVisual() {
           style={{ background: NAVY, color: SURFACE }}
         >
           <Heading as="p" size="small" weight="alt" UNSAFE_style={{ color: "inherit", fontSize: "clamp(20px, 2.5vw, 28px)" }}>
-            LD Base (650+)
+            Core Base (650+)
           </Heading>
           <Body as="p" size="small" UNSAFE_className="mt-1" UNSAFE_style={{ color: "inherit", opacity: 0.85 }}>
             Foundation tokens
@@ -818,7 +818,7 @@ export function AirtableScaleVisual() {
           >
             <FigmaIcon src={imgIconLightbulb} alt="" size={16} />
             <Body as="p" size="small" UNSAFE_className="leading-snug text-[13px]" UNSAFE_style={{ color: "inherit" }}>
-              When LD Base updates, all 17 downstream tenants receive the change automatically
+              When Core Base updates, all 17 downstream tenants receive the change automatically
             </Body>
           </div>
         </div>
@@ -882,8 +882,8 @@ export function AirtableValidationVisual() {
 
 const THEMED_BASKETS = [
   { label: "Walmart", image: imgCheckoutBasketWalmart },
-  { label: "Walmart Connect", image: imgCheckoutBasketConnect },
-  { label: "Bodega", image: imgCheckoutBasketBodega },
+  { label: "Retail media", image: imgCheckoutBasketConnect },
+  { label: "Regional market", image: imgCheckoutBasketBodega },
 ] as const;
 
 export function AirtableDynamicSvgsVisual() {

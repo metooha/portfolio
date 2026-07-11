@@ -1,5 +1,6 @@
 import {
   BeforeAfter as EdsBeforeAfter,
+  Callout,
   Eyebrow as EdsEyebrow,
   Lead as EdsLead,
   Section as EdsSection,
@@ -33,8 +34,8 @@ const PHASE_ITEMS: EdsJourneyItem[] = [
     ],
     mood: "progress",
     story:
-      "The first challenge was getting people to agree before anything was built. I mapped the full stakeholder landscape and ran structured working sessions. Partnered with Shawn (WCP engineering lead) on a proof of concept that demonstrated tokens could be pulled from Airtable via API.",
-    win: "Airtable established as SoT, token taxonomy and IA defined across all platforms, RACI model locked in.",
+      "The first challenge was alignment, not tooling. I proposed the single-pipeline model and presented it to engineering leadership to secure approval and staffing, then mapped the stakeholder landscape, ran structured working sessions, and built the first proof of concept pulling tokens from Airtable via API.",
+    win: "Airtable established as the authoring source, token taxonomy and IA defined across all platforms, RACI model locked in.",
   },
   {
     date: "Q1–Q2 2025",
@@ -45,8 +46,8 @@ const PHASE_ITEMS: EdsJourneyItem[] = [
     ],
     mood: "progress",
     story:
-      "Restructured the Airtable IA to remove legacy bloat and standardize naming conventions. Designed user flows for designer-friendly tenant onboarding. Worked with Zach to define an intermediate JSON representation.",
-    win: "Theme inheritance model defined: each tenant contains only overrides, with a hierarchy file providing inheritance rules (Sam's Club ← WCP ← LD Base).",
+      "Restructured the Airtable IA to remove legacy bloat and standardize naming conventions. Defined designer-friendly tenant onboarding and the intermediate JSON contract engineering needed.",
+    win: "Theme inheritance model defined: each tenant contains only overrides, with a hierarchy file providing inheritance rules (membership club ← platform theme ← core base).",
   },
   {
     date: "Q3–Q4 2025",
@@ -57,7 +58,7 @@ const PHASE_ITEMS: EdsJourneyItem[] = [
     ],
     mood: "win",
     story:
-      "Implemented a fully automated CI/CD pipeline: Airtable → Style Dictionary → GitHub Actions → Artifactory/npm. 347 automated tests run on every sync. Asset tokens (icons, SVGs, logos) were also brought into the pipeline.",
+      "The team shipped a fully automated CI/CD pipeline: Airtable → Style Dictionary → GitHub Actions → Artifactory/npm. 347 automated tests run on every sync. Asset tokens also moved into the same model.",
     win: "If a token breaks, the pipeline stops and designers get a Slack alert within 5 minutes.",
   },
 ];
@@ -185,9 +186,19 @@ export function AirtableSituationSection() {
   return (
     <EdsSection id="situation">
       <EdsEyebrow>Problem Space</EdsEyebrow>
-      <EdsSectionTitle>No shared source of truth. Everyone was working alone.</EdsSectionTitle>
+      <EdsSectionTitle>The token problem was an ownership problem.</EdsSectionTitle>
+      <EdsLead>
+        Every team had a rational local workflow. The system failed because no one owned the contract between
+        design decisions, platform code, and brand inheritance.
+      </EdsLead>
       <AirtableSituationVisual />
       <AirtableProblemGrid />
+      <Callout tone="brand">
+        <strong>The pitch:</strong> this wasn&rsquo;t an assignment, it was a proposal. I identified the ownership
+        gap, designed the Airtable-to-GitHub pipeline as the fix, and presented the plan to engineering leadership
+        to secure approval and the support to build it, then extended that support into Figma and our design
+        system kits.
+      </Callout>
     </EdsSection>
   );
 }
@@ -211,16 +222,17 @@ export function AirtableBridgeSection() {
     <EdsSection id="bridge">
       <EdsEyebrow>Designer Ease vs. Engineer Control</EdsEyebrow>
       <EdsSectionTitle>
-        {"Designers wanted Airtable. Engineers needed Git.\nWe built a bridge."}
+        {"Designers needed Airtable. Engineers needed Git.\nThe bridge was the product."}
       </EdsSectionTitle>
       <EdsLead>
-        Tool selection should follow team behavior. That&apos;s the core principle behind this architecture.
+        The decision was not to force one team into another team&rsquo;s tool. I defined the contract between
+        the tools so each group could keep its source of control.
       </EdsLead>
       <AirtableBridgeVisual />
       <EdsEyebrow>The Pivot</EdsEyebrow>
       <EdsLead>
-        The breakthrough was agreeing on a contract, a shared JSON schema, before building anything. A single
-        alignment decision eliminated almost all integration friction.
+        The breakthrough was agreeing on a shared JSON schema before building automation. That single architecture
+        decision turned a tooling disagreement into an integration model.
       </EdsLead>
       <AirtablePivotVisual />
     </EdsSection>
@@ -235,8 +247,8 @@ export function AirtableTheWorkSection() {
         {"Three phases. Eighteen months.\nOne source everyone could trust."}
       </EdsSectionTitle>
       <EdsLead>
-        Foundation first: alignment and proof of concept. Then automation and inheritance. Then a fully shipped
-        pipeline with guardrails.
+        The work moved from alignment to automation to governance. Each phase reduced one kind of risk: stakeholder
+        disagreement, technical drift, then operational trust.
       </EdsLead>
       <EdsJourneyTimeline items={PHASE_ITEMS} />
       <div className="mt-6 flex flex-col gap-3">
@@ -260,9 +272,10 @@ export function AirtableArchitectureSection() {
   return (
     <EdsSection id="architecture" variant="mid">
       <EdsEyebrow>Architecture</EdsEyebrow>
-      <EdsSectionTitle>The Inheritance Model</EdsSectionTitle>
+      <EdsSectionTitle>The architecture decision: inherit what is shared, override only what is different.</EdsSectionTitle>
       <EdsLead>
-        The key innovation was an inheritance model where each brand only specifies what differs from its parent.
+        The defining move was treating brand variation as inheritance, not duplication. Each brand specifies only
+        what differs from its parent.
       </EdsLead>
       <AirtableInheritanceVisual />
       <div className="flex flex-col gap-4 mt-10">
@@ -275,8 +288,8 @@ export function AirtableArchitectureSection() {
           Scale Without Duplication
         </Heading>
         <EdsLead>
-          Our branching architecture allows brand-specific overrides, while maintaining a core set of 650+
-          foundation tokens.
+          The branching architecture keeps 650+ foundation tokens stable while letting brand-specific overrides
+          travel independently.
         </EdsLead>
         <AirtableScaleVisual />
       </div>
@@ -290,8 +303,8 @@ export function AirtableResultsSection() {
       <EdsEyebrow>Results</EdsEyebrow>
       <EdsSectionTitle>One zip file. 17 platforms. Zero manual steps.</EdsSectionTitle>
       <EdsLead>
-        That&apos;s what a Single Source of Truth looks like in practice, and this is the system we built to make
-        it real.
+        The outcome was not just faster deployment. It was a system of trust: designers could edit safely,
+        engineers could review automatically, and teams could adopt without coordination.
       </EdsLead>
       <EdsStatsRow
         variant="light"
@@ -321,8 +334,8 @@ export function AirtableResultsSection() {
             347 Automated Tests Passed
           </Heading>
           <Body as="p" size="small" UNSAFE_className="mb-6 leading-[1.7]" UNSAFE_style={{ color: "rgba(255,255,255,0.75)" }}>
-            If a change breaks a platform, the pipeline &apos;fails fast and fails loud&apos;. This moved us from a
-            &apos;fear of breaking&apos; to absolute &apos;trust in the system&apos;.
+            If a change breaks a platform, the pipeline fails fast and fails loud. The system moved teams from
+            fear of breaking production to trust in the release path.
           </Body>
         </div>
         <AirtableValidationVisual />
@@ -375,8 +388,8 @@ export function AirtableWhatsNextSection() {
       <EdsEyebrow>What&apos;s Next</EdsEyebrow>
       <EdsSectionTitle>Dynamic SVGs and Beyond</EdsSectionTitle>
       <EdsLead>
-        Illustrations that inherit token values directly, ensuring accessibility and branding compliance is baked
-        into the asset itself.
+        The same inheritance model can apply beyond tokens. Illustrations can inherit token values directly, so
+        accessibility and brand compliance are built into the asset itself.
       </EdsLead>
       <AirtableDynamicSvgsVisual />
       <div className="flex flex-col gap-4 mt-10">

@@ -61,14 +61,17 @@ export default defineConfig(({ command, mode }) => ({
     },
   },
   server: {
-    host: 'localhost',
+    // `true` binds all interfaces (both IPv4 127.0.0.1 and IPv6 ::1) — binding
+    // to the 'localhost' hostname string instead can resolve to IPv6-only on
+    // some systems, which refuses IPv4 connections from preview/webview tooling.
+    host: true,
     port: 5173,
     strictPort: true,
     hmr: true,
     open: true,
   },
   preview: {
-    host: 'localhost',
+    host: true,
     port: 5173,
     strictPort: true,
   },
