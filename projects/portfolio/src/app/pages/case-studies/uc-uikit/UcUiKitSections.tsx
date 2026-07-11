@@ -67,11 +67,13 @@ export function ProblemSection() {
         </Callout>
       </div>
 
-      <ImageFull
-        src={imgFragmentation}
-        alt="Six chat UIs across Walmart products: Ask Sparky, Chat with Walmart, Chat with Bodega, Chat with Sam, a generic support assistant, and Merchant AI"
-        caption="Sparky, Walmart.com, Bodega Aurrera, Sam's Club, a support assistant, and Merchant AI. Six real implementations of the same interaction, all built in isolation."
-      />
+      <div className="mt-2 mb-2">
+        <ImageFull
+          src={imgFragmentation}
+          alt="Six chat UIs across Walmart products: Ask Sparky, Chat with Walmart, Chat with Bodega, Chat with Sam, a generic support assistant, and Merchant AI"
+          caption="Sparky, Walmart.com, Bodega Aurrera, Sam's Club, a support assistant, and Merchant AI. Six real implementations of the same interaction, all built in isolation."
+        />
+      </div>
 
       <TestimonialGrid
         quotes={[

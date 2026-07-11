@@ -1,5 +1,5 @@
-HEADNAV = open("part_head_nav_uc.html").read()
-FOOTER = open("part_footer_uc.html").read()
+HEADNAV = open("part_head_nav.html").read()
+FOOTER = open("part_footer.html").read()
 
 # ── ILLUSTRATED STAND-INS ─────────────────────────────────────────────────
 

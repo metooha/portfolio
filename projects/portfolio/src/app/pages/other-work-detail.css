@@ -1,0 +1,10 @@
+.other-work-back-link.ld-linkbutton-linkButton,
+.other-work-back-link.ld-linkbutton-linkButton:hover,
+.other-work-back-link.ld-linkbutton-linkButton:focus,
+.other-work-back-link.ld-linkbutton-linkButton:active {
+  text-decoration: none;
+}
+
+.other-work-back-link__text:hover {
+  text-decoration: underline;
+}

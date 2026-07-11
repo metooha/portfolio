@@ -510,7 +510,7 @@ const CASE_STUDIES: CaseStudyConfig[] = [
     title:
       "A conversational UI design system for Walmart, built across a platform migration and a market merger.",
     defaultTheme: "Walmart",
-    isPublished: false,
+    isPublished: true, // TEMP: on for local preview, ask Claude to flip back to false when done
     featuredOnHome: false,
     cardTitle: "Conversational UI Design System",
     shortDescription:
