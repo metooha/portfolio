@@ -1,41 +1,12 @@
 import React from "react";
 import { Body, Heading } from "@/app/components/Text/Text";
 import { Icon } from "@/app/components/Icons/Icons";
+import { Tag } from "@/app/components/Tag/Tag";
 
 const ACCENT = "#0053e2";
 const DARK = "#001e60";
 const SPARK = "#ffc220";
 const SEPARATOR = "var(--ld-semantic-color-separator, #e3e4e5)";
-const SUBTLE_FILL = "var(--ld-semantic-color-fill-brand-subtle, #e9f1fe)";
-
-/** Three testimonial-style quote cards, one per team starting position. */
-export function TestimonialGrid({
-  quotes,
-}: {
-  quotes: { quote: string; who: string; tag: string }[];
-}) {
-  return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-      {quotes.map((q) => (
-        <div
-          key={q.who}
-          className="rounded-[10px] p-6"
-          style={{ background: SUBTLE_FILL, border: `1px solid ${SEPARATOR}` }}
-        >
-          <Body as="p" size="small" UNSAFE_className="italic leading-[1.65] mb-4">
-            {q.quote}
-          </Body>
-          <Body as="p" size="small" weight="alt" UNSAFE_style={{ color: DARK }}>
-            {q.who}
-          </Body>
-          <Body as="p" size="small" UNSAFE_className="mt-0.5" UNSAFE_style={{ color: ACCENT }}>
-            {q.tag}
-          </Body>
-        </div>
-      ))}
-    </div>
-  );
-}
 
 /** Three use-case cards with a dark header, icon, and pattern chips. */
 export function UseCaseGrid({
@@ -84,13 +55,9 @@ export function UseCaseGrid({
               style={{ borderTop: `1px solid ${SEPARATOR}` }}
             >
               {item.patterns.map((p) => (
-                <span
-                  key={p}
-                  className="text-[11px] px-2 py-1 rounded"
-                  style={{ background: "var(--ld-semantic-color-fill-subtle, #f8f8f8)", color: DARK, border: `1px solid ${SEPARATOR}` }}
-                >
+                <Tag key={p} color="gray" size="small">
                   {p}
-                </span>
+                </Tag>
               ))}
             </div>
           </div>
@@ -176,11 +143,14 @@ export function NamingTaxonomy({
     connector?: string;
   }[];
 }) {
-  const TONE: Record<string, { bg: string; badgeBg: string; badgeColor: string; titleColor: string; descColor: string; chipBg: string; chipColor: string }> = {
-    published: { bg: DARK, badgeBg: SPARK, badgeColor: DARK, titleColor: "#ffffff", descColor: "rgba(255,255,255,0.78)", chipBg: "rgba(255,255,255,0.16)", chipColor: "rgba(255,255,255,0.92)" },
-    sub: { bg: "rgba(0,83,226,0.06)", badgeBg: ACCENT, badgeColor: "#ffffff", titleColor: DARK, descColor: "var(--ld-semantic-color-text-subtlest, #74767c)", chipBg: "rgba(0,83,226,0.1)", chipColor: ACCENT },
-    base: { bg: "rgba(78,189,245,0.1)", badgeBg: "#4ebdf5", badgeColor: DARK, titleColor: DARK, descColor: "var(--ld-semantic-color-text-subtlest, #74767c)", chipBg: "rgba(78,189,245,0.18)", chipColor: "#0369a1" },
-    atom: { bg: "#ffffff", badgeBg: SEPARATOR, badgeColor: "var(--ld-semantic-color-text-subtlest, #74767c)", titleColor: DARK, descColor: "var(--ld-semantic-color-text-subtlest, #74767c)", chipBg: "var(--ld-semantic-color-fill-subtle, #f8f8f8)", chipColor: "var(--ld-semantic-color-text-subtlest, #74767c)" },
+  const TONE: Record<
+    string,
+    { bg: string; titleColor: string; descColor: string; tagColor: React.ComponentProps<typeof Tag>["color"] }
+  > = {
+    published: { bg: DARK, titleColor: "#ffffff", descColor: "rgba(255,255,255,0.78)", tagColor: "spark" },
+    sub: { bg: "rgba(0,83,226,0.06)", titleColor: DARK, descColor: "var(--ld-semantic-color-text-subtlest, #74767c)", tagColor: "brand" },
+    base: { bg: "rgba(78,189,245,0.1)", titleColor: DARK, descColor: "var(--ld-semantic-color-text-subtlest, #74767c)", tagColor: "cyan" },
+    atom: { bg: "#ffffff", titleColor: DARK, descColor: "var(--ld-semantic-color-text-subtlest, #74767c)", tagColor: "gray" },
   };
 
   return (
@@ -193,12 +163,9 @@ export function NamingTaxonomy({
               className="rounded-lg p-5 flex flex-col gap-2.5"
               style={{ background: t.bg, border: level.tone === "atom" ? `1px solid ${SEPARATOR}` : level.tone === "sub" ? "1px solid rgba(0,83,226,0.15)" : level.tone === "base" ? "1px solid rgba(78,189,245,0.2)" : undefined }}
             >
-              <span
-                className="text-[10px] font-bold uppercase tracking-wide px-2 py-0.5 rounded-full self-start"
-                style={{ background: t.badgeBg, color: t.badgeColor }}
-              >
+              <Tag color={t.tagColor} size="small" UNSAFE_className="self-start">
                 {level.badge}
-              </span>
+              </Tag>
               <code className="text-[13px] font-bold" style={{ color: t.titleColor }}>
                 {level.title}
               </code>
@@ -207,13 +174,9 @@ export function NamingTaxonomy({
               </Body>
               <div className="flex flex-wrap gap-1.5">
                 {level.examples.map((ex) => (
-                  <code
-                    key={ex}
-                    className="text-[11px] font-semibold px-2 py-0.5 rounded"
-                    style={{ background: t.chipBg, color: t.chipColor }}
-                  >
-                    {ex}
-                  </code>
+                  <Tag key={ex} color={t.tagColor} variant="tertiary" size="small">
+                    <code className="font-semibold">{ex}</code>
+                  </Tag>
                 ))}
               </div>
             </div>
@@ -235,11 +198,11 @@ export function TrackerTable({
 }: {
   rows: { name: string; status: "Published" | "In review" | "In build" | "Queued" }[];
 }) {
-  const STATUS_STYLE: Record<string, { bg: string; color: string }> = {
-    Published: { bg: "rgba(0,83,226,0.1)", color: ACCENT },
-    "In review": { bg: "rgba(255,194,32,0.2)", color: "#92640a" },
-    "In build": { bg: "rgba(78,189,245,0.18)", color: "#0369a1" },
-    Queued: { bg: "var(--ld-semantic-color-fill-subtle, #f8f8f8)", color: "var(--ld-semantic-color-text-subtlest, #74767c)" },
+  const STATUS_TAG: Record<string, React.ComponentProps<typeof Tag>["color"]> = {
+    Published: "brand",
+    "In review": "warning",
+    "In build": "cyan",
+    Queued: "gray",
   };
   return (
     <div className="rounded-[10px] overflow-hidden" style={{ border: `1px solid ${SEPARATOR}` }}>
@@ -248,26 +211,20 @@ export function TrackerTable({
           Subsystem Planning Base &middot; Build Tracker
         </Body>
       </div>
-      {rows.map((row, i) => {
-        const s = STATUS_STYLE[row.status];
-        return (
-          <div
-            key={row.name}
-            className="flex items-center justify-between px-5 py-3"
-            style={{ background: i % 2 === 0 ? "#ffffff" : "var(--ld-semantic-color-fill-subtle, #f8f8f8)", borderTop: `1px solid ${SEPARATOR}` }}
-          >
-            <code className="text-[12px] font-semibold" style={{ color: DARK }}>
-              {row.name}
-            </code>
-            <span
-              className="text-[10px] font-bold uppercase tracking-wide px-2.5 py-0.5 rounded-full"
-              style={{ background: s.bg, color: s.color }}
-            >
-              {row.status}
-            </span>
-          </div>
-        );
-      })}
+      {rows.map((row, i) => (
+        <div
+          key={row.name}
+          className="flex items-center justify-between px-5 py-3"
+          style={{ background: i % 2 === 0 ? "#ffffff" : "var(--ld-semantic-color-fill-subtle, #f8f8f8)", borderTop: `1px solid ${SEPARATOR}` }}
+        >
+          <code className="text-[12px] font-semibold" style={{ color: DARK }}>
+            {row.name}
+          </code>
+          <Tag color={STATUS_TAG[row.status]} size="small">
+            {row.status}
+          </Tag>
+        </div>
+      ))}
     </div>
   );
 }

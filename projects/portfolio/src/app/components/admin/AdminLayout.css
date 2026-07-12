@@ -51,11 +51,38 @@
   width: auto;
 }
 
+.admin-nav__site-links {
+  align-items: center;
+  display: none;
+  gap: 1.5rem;
+  margin-left: auto;
+}
+
+.admin-nav__site-link {
+  color: inherit;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  text-decoration: none;
+}
+
+.admin-nav__site-link:hover {
+  text-decoration: underline;
+}
+
+@media (min-width: 48rem) {
+  .admin-nav__site-links {
+    display: flex;
+  }
+}
+
 .admin-page {
   background: var(--ld-semantic-color-surface, #ffffff);
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  height: 100vh;
   min-height: 100vh;
+  overflow: hidden;
   padding-top: var(--admin-nav-height);
 }
 
@@ -64,8 +91,7 @@
   flex: 1;
   flex-direction: column;
   min-height: 0;
-  overflow: auto;
-  padding-bottom: var(--ld-semantic-spacing-400, 2rem);
+  overflow: hidden;
   width: 100%;
 }
 
@@ -78,7 +104,6 @@
 .admin-page-header-band {
   background: var(--ld-semantic-color-fill-brand-subtle, #e9f1fe);
   flex-shrink: 0;
-  margin-bottom: var(--ld-semantic-spacing-400, 2rem);
   width: 100%;
 }
 
@@ -107,19 +132,36 @@
   flex: 1;
   flex-direction: column;
   gap: var(--ld-semantic-spacing-400, 2rem);
-  min-height: var(--admin-settings-min-height);
+  height: 100%;
+  min-height: 0;
   overflow: hidden;
   width: 100%;
+}
+
+.admin-settings-shell {
+  display: flex;
+  flex: 1;
+  height: calc(100vh - var(--admin-nav-height));
+  min-height: 0;
+  overflow: hidden;
+  width: 100%;
+}
+
+.admin-settings-main {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
 }
 
 .admin-settings-layout__nav {
   align-self: stretch;
   background: var(--ld-semantic-color-surface, #ffffff);
-  border: 1px solid var(--ld-semantic-color-separator, #e3e4e5);
-  border-radius: var(--ld-semantic-border-radius-200, 0.5rem);
   flex-shrink: 0;
+  height: 100%;
   overflow: hidden;
-  width: 100%;
+  width: 16rem;
 }
 
 .admin-settings-sidebar-provider {
@@ -128,9 +170,20 @@
 }
 
 .admin-settings-sidebar {
+  --ld-agentsidebar-width: 16rem;
+  --ld-agentsidebar-width-icon: 3.5625rem;
   border-right: none;
   height: 100%;
-  width: 100% !important;
+}
+
+.admin-settings-sidebar__title-icon {
+  display: block;
+  height: 1.5rem;
+  width: 1.5rem;
+}
+
+.admin-settings-sidebar .ld-agentsidebar__content {
+  overflow: hidden;
 }
 
 .admin-settings-layout__panel {
@@ -141,6 +194,7 @@
   min-height: 0;
   min-width: 0;
   overflow: hidden;
+  padding: 32px 66px;
   width: 100%;
 }
 
@@ -178,6 +232,7 @@
 .admin-pages-card {
   display: flex;
   flex-direction: column;
+  flex: 1;
   min-height: 0;
 }
 
@@ -191,11 +246,14 @@
 @media (min-width: 48rem) {
   .admin-settings-layout {
     align-items: stretch;
-    flex-direction: row;
   }
 
   .admin-settings-layout__nav {
     width: 16rem;
+  }
+
+  .admin-settings-layout__nav[data-collapsed="true"] {
+    width: 3.5625rem;
   }
 }
 
@@ -209,7 +267,7 @@
   flex: 1;
   flex-direction: column;
   margin: 0;
-  min-height: var(--admin-settings-min-height);
+  min-height: 0;
   overflow: auto;
   padding-inline: var(--ld-semantic-spacing-200, 1rem);
   padding-block: var(--ld-semantic-spacing-200, 1rem);
@@ -241,6 +299,10 @@
   list-style: none;
   margin: 0;
   padding: 0;
+}
+
+.admin-prototypes-card-content {
+  padding-inline: 0;
 }
 
 .admin-prototypes-list__item {

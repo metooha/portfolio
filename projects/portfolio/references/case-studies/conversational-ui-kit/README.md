@@ -49,8 +49,12 @@ captured.
 ## `rebuilt_uc.html` (original) — raw draft, first-person, not debranded
 
 Kept as-is for reference/audit trail. Built from `build_uc.py`, which
-depends on two partials (`part_head_nav_uc.html`, `part_footer_uc.html`)
-that were never captured, so it can't be re-run.
+depends on the shared partials (`part_head_nav.html`, `part_footer.html`)
+and can be regenerated with:
+
+```
+python3 build_uc.py
+```
 
 ## Not yet in the live portfolio
 

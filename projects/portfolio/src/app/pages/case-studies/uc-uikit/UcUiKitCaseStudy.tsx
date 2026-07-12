@@ -2,8 +2,8 @@ import React from "react";
 import { CaseStudyHero } from "@/app/components/CaseStudyHero";
 import { CaseStudyTemplate } from "@/app/components/CaseStudyTemplate";
 import { getAdjacentCaseStudies } from "@/app/data/case-studies-config";
-import { Icon } from "@/app/components/Icons/Icons";
 import { Logo } from "@/app/components/Logo/Logo";
+import imgUcUiKitCover from "@/app/assets/pages/case-study/uc-uikit/Coverpreview.png";
 import {
   ProblemSection,
   DefiningSection,
@@ -30,31 +30,19 @@ const NAV = [
   { label: "What's Next", href: "#next" },
 ] as const;
 
-/** Gradient panel standing in for a screenshot, used as both the hero background and the home-card thumbnail. */
+/** Full-bleed cover image used as both the case-study hero and the home-card thumbnail. */
 export function UcUiKitHero() {
   return (
-    <div
-      className="w-full h-full flex items-center justify-center relative overflow-hidden"
-      style={{ background: "linear-gradient(135deg, #001e60 0%, #0053e2 100%)" }}
-    >
-      <div
-        className="absolute -right-16 -top-16 rounded-full opacity-20"
-        style={{ width: 260, height: 260, background: "#ffc220" }}
-        aria-hidden="true"
-      />
-      <div
-        className="absolute -left-10 -bottom-16 rounded-full opacity-10"
-        style={{ width: 220, height: 220, background: "#4ebdf5" }}
-        aria-hidden="true"
-      />
-      <span className="relative" style={{ color: "#ffc220" }}>
-        <Icon name="Chat" size="large" decorative style={{ fontSize: "56px" }} />
-      </span>
-    </div>
+    <img
+      alt=""
+      className="block w-full h-full object-cover object-center"
+      src={imgUcUiKitCover}
+      decoding="async"
+    />
   );
 }
 
-const HERO_TITLE = "One system, many teams.";
+const HERO_TITLE = "A united kit for all";
 const OVERVIEW_TITLE =
   "A conversational UI design system for Walmart, built across a platform migration and a market merger.";
 const OVERVIEW_DESCRIPTION =
@@ -72,7 +60,7 @@ export default function UcUiKitCaseStudy() {
   return (
     <div data-ld-theme="Walmart" style={{ display: "contents" }}>
       <CaseStudyTemplate
-        hero={<CaseStudyHero background={<UcUiKitHero />} title={HERO_TITLE} titleColor="#ffffff" backgroundColor="#001e60" />}
+        hero={<CaseStudyHero background={<UcUiKitHero />} title={HERO_TITLE} titleColor="#001e60" backgroundColor="#001e60" />}
         overviewLogo={
           <div
             className="w-full h-full flex items-center justify-center"

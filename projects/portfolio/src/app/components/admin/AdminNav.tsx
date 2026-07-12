@@ -28,6 +28,13 @@ const ADMIN_PAGES: AdminPage[] = [
   "component-library",
 ];
 
+const publicLinks = [
+  { to: "/", label: "Home" },
+  { to: "/about", label: "About" },
+  { to: "/work", label: "Other Work" },
+  { to: "/contact", label: "Contact" },
+] as const;
+
 type AdminNavProps = {
   currentPage: AdminPage;
 };
@@ -126,6 +133,14 @@ export function AdminNav({ currentPage }: AdminNavProps) {
             </div>
           ) : null}
         </div>
+
+        <nav className="admin-nav__site-links" aria-label="Site pages">
+          {publicLinks.map((link) => (
+            <RouterLink key={link.to} to={link.to} className="admin-nav__site-link">
+              {link.label}
+            </RouterLink>
+          ))}
+        </nav>
       </div>
     </header>
   );

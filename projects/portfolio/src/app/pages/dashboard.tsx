@@ -1,17 +1,15 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, type ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { AdminNav } from "@/app/components/admin/AdminNav";
 import { Button, ButtonGroup } from "@/app/components/Button/Button";
 import {
-  Sidebar,
-  SidebarContent,
-  SidebarGroup,
-  SidebarGroupContent,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-  SidebarProvider,
-} from "@/app/components/patterns/Sidebar";
+  AgentSidebar,
+  AgentSidebarContent,
+  AgentSidebarHeader,
+  AgentSidebarItem,
+  AgentSidebarLockToggle,
+  AgentSidebarProvider,
+} from "@/app/components/patterns/AgentSidebar";
 import { Card, CardContent, CardHeader } from "@/app/components/Card/Card";
 import {
   DataTable,
@@ -22,8 +20,12 @@ import {
   DataTableRow,
 } from "@/app/components/DataTable/DataTable";
 import {
+  ArrowUpIcon,
   CheckCircleIcon,
+  Icon,
   LockIcon,
+  SettingsIcon,
+  StarIcon,
   TrashIcon,
 } from "@/app/components/Icons/Icons";
 import { IconButton } from "@/app/components/IconButton/IconButton";
@@ -64,6 +66,7 @@ import {
   type SitePage,
 } from "@/app/auth/page-protection";
 import { prototypes } from "@/app/data/prototypes-data";
+import imgSettingsSearch from "@/app/assets/walmart-assets/gifs/Search.gif";
 import {
   collectPublishedSiteConfig,
   downloadPublishedSiteConfig,
@@ -109,6 +112,15 @@ const SETTINGS_SECTIONS: Array<{
     description: "Interactive experiments and tools hosted outside the portfolio site.",
   },
 ];
+
+const SETTINGS_SECTION_ICONS: Record<SettingsSection, ReactNode> = {
+  account: <SettingsIcon decorative />,
+  publish: <ArrowUpIcon decorative />,
+  main: <StarIcon decorative />,
+  "case-study": <Icon name="Article" decorative />,
+  "other-work": <Icon name="Mobile" decorative />,
+  prototypes: <Icon name="Phone" decorative />,
+};
 
 function SitePageRow({ page }: { page: SitePage }) {
   const { addSnack } = useSnackbar();
@@ -468,7 +480,7 @@ function SiteSettingsPublishPanel() {
 function PrototypesPanel() {
   return (
     <Card size="small">
-      <CardContent>
+      <CardContent UNSAFE_className="admin-prototypes-card-content">
         <ul className="admin-prototypes-list">
           {prototypes.map((prototype) => (
             <li key={prototype.id} className="admin-prototypes-list__item">
@@ -675,6 +687,7 @@ function SettingsPanel({ section }: { section: SettingsSection }) {
 
 function DashboardContent() {
   const [activeSection, setActiveSection] = useState<SettingsSection>("account");
+  const [settingsNavCollapsed, setSettingsNavCollapsed] = useState(false);
   const currentSection =
     SETTINGS_SECTIONS.find((section) => section.id === activeSection) ?? SETTINGS_SECTIONS[0];
 
@@ -682,65 +695,68 @@ function DashboardContent() {
     <div className="admin-page">
       <AdminNav currentPage="dashboard" />
 
-      <div className="admin-page-header-band">
-        <PageContainer maxWidth="max-w-[1660px]">
-          <PageHeader
-            section="Admin"
-            title="Settings"
-            description="Manage your admin account, page passwords, and per-page themes."
-            UNSAFE_className="admin-page-header"
-          />
-        </PageContainer>
-      </div>
+      <div className="admin-settings-shell">
+        <div
+          className="admin-settings-layout__nav"
+          data-collapsed={settingsNavCollapsed}
+        >
+          <AgentSidebarProvider
+            collapsed={settingsNavCollapsed}
+            onCollapsedChange={setSettingsNavCollapsed}
+          >
+            <AgentSidebar UNSAFE_className="admin-settings-sidebar" aria-label="Settings">
+              <AgentSidebarHeader
+                logo={<img src={imgSettingsSearch} alt="" className="admin-settings-sidebar__title-icon" />}
+                title="Settings"
+              />
+              <AgentSidebarContent>
+                {SETTINGS_SECTIONS.map((section) => (
+                  <AgentSidebarItem
+                    key={section.id}
+                    leading={SETTINGS_SECTION_ICONS[section.id]}
+                    isCurrent={activeSection === section.id}
+                    onClick={() => setActiveSection(section.id)}
+                  >
+                    {section.label}
+                  </AgentSidebarItem>
+                ))}
+              </AgentSidebarContent>
+              <AgentSidebarLockToggle label="" />
+            </AgentSidebar>
+          </AgentSidebarProvider>
+        </div>
 
-      <PageContainer as="main" maxWidth="max-w-[1660px]" className="admin-page__content">
-        <div className="admin-settings-layout">
-          <div className="admin-settings-layout__nav">
-            <SidebarProvider className="admin-settings-sidebar-provider">
-              <Sidebar
-                collapsible="none"
-                className="admin-settings-sidebar"
-                aria-label="Settings"
-              >
-                <SidebarContent>
-                  <SidebarGroup>
-                    <SidebarGroupContent>
-                      <SidebarMenu>
-                        {SETTINGS_SECTIONS.map((section) => (
-                          <SidebarMenuItem key={section.id}>
-                            <SidebarMenuButton
-                              type="button"
-                              isActive={activeSection === section.id}
-                              aria-current={activeSection === section.id ? "page" : undefined}
-                              onClick={() => setActiveSection(section.id)}
-                            >
-                              {section.label}
-                            </SidebarMenuButton>
-                          </SidebarMenuItem>
-                        ))}
-                      </SidebarMenu>
-                    </SidebarGroupContent>
-                  </SidebarGroup>
-                </SidebarContent>
-              </Sidebar>
-            </SidebarProvider>
+        <div className="admin-settings-main">
+          <div className="admin-page-header-band">
+            <PageContainer maxWidth="max-w-[1660px]">
+              <PageHeader
+                section="Admin"
+                title="Settings"
+                description="Manage your admin account, page passwords, and per-page themes."
+                UNSAFE_className="admin-page-header"
+              />
+            </PageContainer>
           </div>
 
-          <section className="admin-settings-layout__panel">
-            <div className="admin-settings-layout__panel-intro">
-              <Heading as="h2" size="medium" weight="default">
-                {currentSection.label}
-              </Heading>
-              <Body as="p" size="small" color="subtle">
-                {currentSection.description}
-              </Body>
+          <PageContainer as="main" maxWidth="max-w-[1660px]" className="admin-page__content">
+            <div className="admin-settings-layout">
+              <section className="admin-settings-layout__panel">
+                <div className="admin-settings-layout__panel-intro">
+                  <Heading as="h2" size="medium" weight="default">
+                    {currentSection.label}
+                  </Heading>
+                  <Body as="p" size="small" color="subtle">
+                    {currentSection.description}
+                  </Body>
+                </div>
+                <div className="admin-settings-layout__panel-body">
+                  <SettingsPanel section={activeSection} />
+                </div>
+              </section>
             </div>
-            <div className="admin-settings-layout__panel-body">
-              <SettingsPanel section={activeSection} />
-            </div>
-          </section>
+          </PageContainer>
         </div>
-      </PageContainer>
+      </div>
     </div>
   );
 }

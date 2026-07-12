@@ -147,21 +147,21 @@ export function Home() {
                 <PageContainer maxWidth="max-w-[1660px]" className="py-16 md:py-20">
                   {groupIndex === 0 && (
                     <div className="mb-16">
-                      <Heading
+                      <Display
                         as="h1"
-                        size="large"
-                        weight="default"
+                        size="small"
+                        weight="alt"
                         color="brand"
-                        UNSAFE_className="text-[96px] leading-[1] text-center"
+                        UNSAFE_className="text-center"
                       >
                         Highlighted Projects
-                      </Heading>
+                      </Display>
                     </div>
                   )}
                   <div className="mb-10 text-center">
-                    <Display as="h2" size="small" weight="default">
+                    <Heading as="h2" size="large" weight="default">
                       {GROUP_TITLES[group]}
-                    </Display>
+                    </Heading>
                     <Body
                       as="p"
                       size="medium"

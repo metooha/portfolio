@@ -1104,6 +1104,56 @@ export function Callout({
   );
 }
 
+/** Dashed placeholder for a screenshot, photo, or other asset that hasn't been captured yet. */
+export function CapturePlaceholder({
+  badge,
+  title,
+  description,
+  size = "default",
+  className = "",
+}: {
+  badge: string;
+  title: string;
+  description: string;
+  size?: "default" | "small";
+  className?: string;
+}) {
+  return (
+    <div
+      className={`flex flex-col gap-2 rounded-lg border border-dashed ${size === "small" ? "p-4" : "p-6"} ${className}`}
+      style={{
+        borderColor: "var(--ld-semantic-color-separator-bold, #b8c7e0)",
+        background: "var(--ld-semantic-color-fill-subtle, #f7f9fc)",
+      }}
+    >
+      <Body
+        as="span"
+        size="small"
+        weight="alt"
+        color="brand"
+        UNSAFE_className="self-start rounded px-2 py-0.5 uppercase tracking-[0.1em]"
+        UNSAFE_style={{
+          fontSize: "10px",
+          background: "var(--ld-semantic-color-fill-brand-subtle, #e9f1fe)",
+        }}
+      >
+        {badge}
+      </Body>
+      <Body
+        as="p"
+        size="small"
+        weight="alt"
+        UNSAFE_style={{ color: "var(--ld-semantic-color-fill-brand-bold, #001e60)" }}
+      >
+        {title}
+      </Body>
+      <Body as="p" size="small" color="subtlest" UNSAFE_className="leading-[1.55]">
+        {description}
+      </Body>
+    </div>
+  );
+}
+
 export function BeforeAfter({
   before,
   after,

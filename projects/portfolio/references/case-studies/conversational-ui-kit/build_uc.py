@@ -1,5 +1,9 @@
-HEADNAV = open("part_head_nav.html").read()
-FOOTER = open("part_footer.html").read()
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent
+
+HEADNAV = (BASE_DIR / "part_head_nav.html").read_text(encoding="utf-8")
+FOOTER = (BASE_DIR / "part_footer.html").read_text(encoding="utf-8")
 
 # ── ILLUSTRATED STAND-INS ─────────────────────────────────────────────────
 
@@ -1760,5 +1764,5 @@ CLOSING = '''<!-- CLOSING -->
 body = "\n\n".join([HERO, PROBLEM, DEFINING, SCOPE, ALIGNMENT, PROCESS, GOVERNANCE, IMPACT, CLOSING])
 head = HEADNAV.replace("</style>", EXTRA_CSS + STYLE_PATCHES + "\n</style>")
 html = head + "\n" + body + "\n" + FOOTER
-open("rebuilt_uc.html", "w", encoding="utf-8").write(html)
+(BASE_DIR / "rebuilt_uc.html").write_text(html, encoding="utf-8")
 print("rebuilt_uc.html written:", len(html)//1024, "KB")

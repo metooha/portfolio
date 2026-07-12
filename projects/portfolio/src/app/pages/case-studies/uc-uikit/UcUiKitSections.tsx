@@ -11,16 +11,17 @@ import {
   QuoteBlock,
   NextGrid,
   JourneyTimeline,
+  TestimonialShowcase,
+  CapturePlaceholder,
 } from "@/app/components/CaseStudyPrimitives";
 import { Body, Heading } from "@/app/components/Text/Text";
 import { Icon } from "@/app/components/Icons/Icons";
 import imgFragmentation from "@/app/assets/pages/case-study/uc-uikit/different-chats.png";
+import imgConverseTool from "@/app/assets/pages/case-study/uc-uikit/converse-tool.jpg";
 import {
-  TestimonialGrid,
   UseCaseGrid,
   PlatformMatrix,
   NamingTaxonomy,
-  TrackerTable,
   FrameworkKits,
   LayerStack,
 } from "./UcUiKitBlocks";
@@ -37,10 +38,13 @@ export function ProblemSection() {
       <SectionTitle>The platform changed. The UI hadn&rsquo;t.</SectionTitle>
       <Lead>
         Two structural changes were happening at once. Neither could work without a shared UI
-        foundation that didn&rsquo;t exist yet.
+        foundation that didn&rsquo;t exist yet. The ask from engineering and product was clear: support multi-tenancy and theming at scale, and stop teams managing it alone. A system was needed, so what should it be?
+
+
       </Lead>
 
       <ProblemGrid
+        columns={3}
         cards={[
           {
             who: "Platform migration",
@@ -54,53 +58,66 @@ export function ProblemSection() {
             whoColor: "#0053e2",
             title: "Merging platforms built for separate markets",
             description:
-              "Walmart.com, Sam's Club, and Bodega Aurrera had each built their own chat UI. As the platforms merged, the UIs weren't just different, they were incompatible.",
+              "Multiple brands in different markets had each built their own chat UI. As the platforms merged, the UIs were so similar to justify different builds.",
+          },
+          {
+            who: "Cost of scale",
+            whoColor: "#1a3a5c",
+            title: "Every new chatbot carried duplicate design and engineering effort",
+            description:
+              "With 50+ chatbot flows generated through the AI Bot Generator, each custom UI path risked weeks of repeated design and engineering work. A reusable system created potential multi-million dollar savings as new experiences spun up.",
           },
         ]}
       />
-
-      <Body as="p" size="medium" UNSAFE_className="leading-[1.7]" UNSAFE_style={{ color: DARK }}>
-        The ask from engineering and product was clear: support multi-tenancy and theming at
-        scale, and stop teams managing it alone. A system was needed, so what should it be?
-        Six products had already answered that question on their own.
+      <Heading as="h3" size="small" weight="default" UNSAFE_className="pt-10 mb-2" UNSAFE_style={{ color: DARK }}>
+        Engineering had the engine. The UI layer needed a system.
+      </Heading>
+      <Body as="p" size="small" color="subtlest" UNSAFE_className="leading-snug" UNSAFE_style={{ marginBottom: 24 }}>
+        The internal tool powered conversation logic. The design challenge was turning those
+        flows into reusable UI patterns for shopping, support, and handoff experiences.
       </Body>
+      <ImageFull
+        src={imgConverseTool}
+        alt="Internal flow builder showing a chatbot conversation map with bot responses, API steps, and jump-to-project nodes connected across a canvas."
+        fit="natural"
+      />
 
       <div className="mt-2 mb-2">
+        <Body as="p" size="small" color="subtlest" UNSAFE_className="leading-snug" UNSAFE_style={{ marginBottom: 24 }}>
+          Different teams also had different levels of available resources, product complexity, and
+          UI development.
+        </Body>
         <ImageFull
           src={imgFragmentation}
           alt="Six chat UIs across Walmart products: Ask Sparky, Chat with Walmart, Chat with Bodega, Chat with Sam, a generic support assistant, and Merchant AI"
-          caption="Sparky, Walmart.com, Bodega Aurrera, Sam's Club, a support assistant, and Merchant AI. Six real implementations of the same interaction, all built in isolation."
         />
       </div>
 
-      <TestimonialGrid
-        quotes={[
+      <TestimonialShowcase
+        ariaLabel="What teams told design before the system existed"
+        statement="Six products, six different answers to the same problem."
+        testimonials={[
           {
+            role: "Small product teams",
+            team: "No design resources",
             quote:
               "We do not have the design resources to build our own chatbot UI. We want guidelines or tools to create the essentials quickly.",
-            who: "A small product team",
-            tag: "No design resources",
           },
           {
+            role: "Teams with its own UI",
+            team: "Not portable",
             quote:
               "We have our own design resources, but our components are unique. They are not built for other teams to borrow.",
-            who: "A team with its own UI",
-            tag: "Not portable",
           },
           {
+            role: "Teams facing a merger",
+            team: "Forced rebuild",
             quote:
               "Our tool is set to merge with another, but our UIs are inconsistent. When we merge, we would redo everything from scratch.",
-            who: "A team facing a merger",
-            tag: "Forced rebuild",
           },
         ]}
       />
 
-      <Body as="p" size="medium" UNSAFE_className="leading-[1.7]" UNSAFE_style={{ color: DARK }}>
-        <strong>This is where design came in.</strong> Engineering and product knew what was
-        needed: a shared, themeable, multi-tenant chat system. They did not know what it should
-        look like, how to govern it, or who should build it. That was the design problem.
-      </Body>
     </Section>
   );
 }
@@ -114,14 +131,24 @@ const DEFINE_STEPS = [
   },
   {
     title: "Map what existed and what the framework required",
-    body: "The Living Design system had the atoms. The new framework required tokens and theming at the system level, not team by team. Local components weren't token-compliant, and nothing was structured for what the framework now required.",
+    body: "The Core Design system had the atoms. The new framework required tokens and theming at the system level, not team by team. Local components weren't token-compliant, and nothing was structured for what the framework now required.",
+    capture: {
+      badge: "Screenshot · Figma",
+      title: "Audit spread",
+      description: "Side-by-side audit of existing chat UIs across products, annotated to show what was token-compliant, what needed migration, and what had to be rebuilt.",
+    },
   },
   {
     title: "Translate the technical mandate into design goals",
-    body: "Multi-tenancy and theming weren't optional features. They were requirements the framework imposed. The design goals had to start there and work outward: themeable from day one, remove duplication across merging markets, and give every team a clear starting point.",
+    body: "Since Multi-tenancy were requirements the framework imposed. The design goals had to start there and work outward: themeable from day one, remove duplication across merging markets, and give every team a clear starting point.",
+    capture: {
+      badge: "Screenshot · Planning doc",
+      title: "Project brief",
+      description: "The brief developed with engineering and PM: migration requirements, multi-tenancy scope, and what design owned versus what the platform would handle.",
+    },
   },
   {
-    title: "Make the hard call: patterns and recipes, not just components",
+    title: "Make the hard call: patterns and recipes paired with automation, not just components",
     body: "A component library was the obvious answer, faster to build and easier to scope. But it solves a delivery problem, not a design one. Teams didn't just need shared buttons. They needed shared thinking for each use case.",
   },
 ];
@@ -131,7 +158,9 @@ export function DefiningSection() {
     <Section id="defining" variant="mid">
       <Eyebrow>Defining the Work</Eyebrow>
       <SectionTitle>The problem was clear. The solution wasn&rsquo;t.</SectionTitle>
-      <Lead>The job was to turn a technical mandate into a system teams could actually adopt.</Lead>
+      <Lead>The job was to turn a technical mandate into a system teams could actually adopt. Engineering and product knew what was needed: a shared, themeable, multi-tenant chat system. They did not know what it should look like, how to govern it, or who should build it. That was the design problem.
+
+</Lead>
 
       <div className="flex flex-col">
         {DEFINE_STEPS.map((step, i) => (
@@ -150,6 +179,11 @@ export function DefiningSection() {
               <Body as="p" size="small" color="subtlest" UNSAFE_className="leading-[1.7]">
                 {step.body}
               </Body>
+              {step.capture && (
+                <div className="mt-4">
+                  <CapturePlaceholder {...step.capture} />
+                </div>
+              )}
             </div>
           </div>
         ))}
@@ -157,7 +191,10 @@ export function DefiningSection() {
 
       <div>
         <Body as="p" size="small" weight="alt" UNSAFE_className="mb-3" UNSAFE_style={{ color: DARK }}>
-          The tradeoff
+          <span style={{ display: "block", paddingBottom: 24 }}>
+            The tradeoff
+          </span>
+     
         </Body>
         <BeforeAfter
           before={[
@@ -188,18 +225,27 @@ export function ScopeSection() {
   return (
     <Section id="scope">
       <Eyebrow>The Scope</Eyebrow>
-      <SectionTitle>Not a component kit. A pattern system for three different experiences.</SectionTitle>
+      <SectionTitle>Not a component kit. A pattern system for many different experiences.</SectionTitle>
       <Lead>
-        The chat experiences weren&rsquo;t variations of one thing. They were three distinct use
-        cases, each with its own interaction model.
+        The scope was not generic chat. It was the ecommerce layer: the reusable patterns that
+        made AI-powered shopping, support, and handoff experiences feel product-ready.
       </Lead>
+
+      <Heading as="h3" size="small" weight="default" UNSAFE_className="mb-2" UNSAFE_style={{ color: DARK }}>
+        The chat experiences weren't variations of one thing.
+      </Heading>
+      <Body as="p" size="small" UNSAFE_className="leading-[1.7]" UNSAFE_style={{ color: "#7a7a7a" }}>
+        Ecommerce needed distinct patterns
+        for browsing, support, recommendations, handoffs, and staff workflows, each with its own
+        interaction model. All three share a base layer: bubbles, input bar, avatars, timestamps. The patterns and recipes on top are entirely different for each. The base had to be flexible, and the recipe layer could be specified to the exact need though autotmated tooling.
+      </Body>
 
       <UseCaseGrid
         items={[
           {
             icon: "Sparky",
             headerColor: DARK,
-            type: "AI Shopping Assistant (Sparky)",
+            type: "AI Shopping Assistant",
             example: "Sparky, Walmart.com storefront",
             description:
               "Proactive. The assistant initiates, surfaces products, and handles rich media. Shoppers are browsing.",
@@ -226,19 +272,16 @@ export function ScopeSection() {
         ]}
       />
 
-      <Body as="p" size="medium" UNSAFE_className="leading-[1.7]" UNSAFE_style={{ color: DARK }}>
-        All three share a base layer: bubbles, input bar, avatars, timestamps. The patterns and
-        recipes on top are entirely different for each. The base had to be flexible, and the
-        recipe layer had to be specific.
-      </Body>
-
       <div>
         <Heading as="h3" size="small" weight="default" UNSAFE_className="mb-2" UNSAFE_style={{ color: DARK }}>
-          And across three platforms
+          It also had to support across three platforms.
         </Heading>
         <Body as="p" size="small" color="subtlest" UNSAFE_className="mb-4 leading-[1.7]">
-          Desktop web, native iOS and Android, and React Native, each with a different token
-          pipeline. A component that worked on web could break on native.
+          <span style={{ display: "block", marginBottom: 24 }}>
+            Desktop web, native iOS and Android, and React Native, each with a different token
+            pipeline. A component that worked on web could break on native.
+          </span>
+     
         </Body>
         <PlatformMatrix
           columns={["Desktop Web", "Native iOS / Android", "React Native"]}
@@ -251,11 +294,6 @@ export function ScopeSection() {
         />
       </div>
 
-      <Body as="p" size="medium" UNSAFE_className="leading-[1.7]" UNSAFE_style={{ color: DARK }}>
-        <strong>The implication:</strong> every design decision had to
-        hold across all three use cases and all three platforms, not just the screen in front of
-        you.
-      </Body>
     </Section>
   );
 }
@@ -280,7 +318,7 @@ export function BuildingTeamSection() {
             date: "",
             phase: "The starting conditions",
             story:
-              "Living Design and the platform were on separate timelines. Engineering was reconciling two sources of truth by hand. No shared process, no shared tooling. Design wasn't in the room yet.",
+              "The core design system and the platform design sub-system were on separate timelines. Engineering was reconciling two sources of truth by hand. No shared process, no shared tooling. Design wasn't in the room yet.",
             mood: "friction",
           },
           {
@@ -328,11 +366,12 @@ export function BuildingTeamSection() {
         ]}
       />
 
-      <Body as="p" size="medium" UNSAFE_className="leading-[1.7]" UNSAFE_style={{ color: DARK }}>
-        <strong>The leadership move:</strong> don&rsquo;t build the
-        system alone. Bring together the people who can, mentor them through a process no one had
-        run before, then hand off ownership so it outlasts you.
-      </Body>
+
+      <CapturePlaceholder
+        badge="Screenshot · Slide"
+        title="Team structure"
+        description="The team map: contributors recruited from across product teams, the leadership commitment that resourced them, and the standing teams that took over maintenance."
+      />
     </Section>
   );
 }
@@ -390,14 +429,32 @@ export function ProcessSection() {
         ]}
       />
 
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <CapturePlaceholder
+          size="small"
+          badge="Screenshot · Figma"
+          title="Recipe output"
+          description="A generated recipe in Figma: entry point, setup screens, and native components pulled into a working file with instructions attached."
+        />
+        <CapturePlaceholder
+          size="small"
+          badge="Screenshot · Airtable"
+          title="Pattern analysis tracker"
+          description="The build tracker during the analysis phase: patterns grouped by category, effort level, and priority before any component work begins."
+        />
+      </div>
+
       <div>
         <Heading as="h3" size="small" weight="default" UNSAFE_className="mb-4" UNSAFE_style={{ color: DARK }}>
-          How it fits into Living Design
+          <span style={{ display: "block", marginBottom: 24, paddingTop: 40 }}>
+            How it fits into Design System's at Walmart
+          </span>
+     
         </Heading>
         <LayerStack
           layers={[
-            { title: "Living Design", detail: "Color tokens, type scale, spacing, icon set. 644 components." },
-            { title: "Platform SDK", detail: "Platform tokens, product themes, accessibility base." },
+            { title: "Core Design systemn", detail: "Color tokens, type scale, spacing, icon set. 644 components." },
+            { title: "Platform Sub-system", detail: "Platform tokens, product themes, accessibility base." },
             { title: "Conversational UI Kit", detail: "834 components, 50 variables: bubbles, input bar, headers, carousels.", highlight: true },
             { title: "Recipes", detail: "Automated, prompt-based user flow outputs, detached on generation." },
           ]}
@@ -435,16 +492,19 @@ export function GovernanceSection() {
           The naming taxonomy
         </Heading>
         <Body as="p" size="small" color="subtlest" UNSAFE_className="mb-4 leading-[1.7]">
-          Every component name encodes its layer: whether it's in code, who owns it, and how it
-          relates to others. That consistency keeps the system navigable as more teams contribute.
+          <span style={{ display: "block", marginBottom: 24 }}>
+            Every component name encodes its layer: whether it's in code, who owns it, and how it
+            relates to others. That consistency keeps the system navigable as more teams contribute.
+          </span>
+     
         </Body>
         <NamingTaxonomy
           levels={[
             {
               badge: "Global, Published",
-              title: "[CHAT] Chat Header-collapsed",
+              title: "[UI KIT] Chat Header-collapsed",
               description: "All-caps prefix, Title Case name, hyphen-variant. Built in code with locked tokens.",
-              examples: ["[CHAT] ChatBubble", "[CHAT] InputBar", "[CHAT] Avatar-image"],
+              examples: ["UI KIT] ChatBubble", "[CHAT] InputBar", "[CHAT] Avatar-image"],
               tone: "published",
             },
             {
@@ -475,6 +535,8 @@ export function GovernanceSection() {
       <div>
         <Heading as="h3" size="small" weight="default" UNSAFE_className="mb-4" UNSAFE_style={{ color: DARK }}>
           How the system stays current
+          <span style={{ display: "block", marginBottom: 24 }} />
+     
         </Heading>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {GOVERNANCE_CARDS.map((card) => (
@@ -491,9 +553,10 @@ export function GovernanceSection() {
       </div>
 
       <div>
-        <Heading as="h3" size="small" weight="default" UNSAFE_className="mb-4" UNSAFE_style={{ color: DARK }}>
+        <Heading as="h3" size="small" weight="default" UNSAFE_className="mt-10 mb-4" UNSAFE_style={{ color: DARK }}>
           The tooling stack
         </Heading>
+        <span style={{ display: "block", marginBottom: 24 }} />
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
           {TOOL_STACK.map((tool) => (
             <div key={tool.title} className="rounded-lg p-5 flex gap-3.5 items-start" style={{ background: "#ffffff", border: `1px solid ${SEPARATOR}` }}>
@@ -517,14 +580,11 @@ export function GovernanceSection() {
         <Heading as="h3" size="small" weight="default" UNSAFE_className="mb-4" UNSAFE_style={{ color: DARK }}>
           One place to track it all
         </Heading>
-        <TrackerTable
-          rows={[
-            { name: "[CHAT] Chat Header", status: "Published" },
-            { name: "[CHAT] Chat Header-collapsed", status: "Published" },
-            { name: "[CHAT] Avatar-initials", status: "In review" },
-            { name: "[CHAT] Avatar-dynamic", status: "In build" },
-            { name: "[CHAT] Avatar-button", status: "Queued" },
-          ]}
+        <span style={{ display: "block", marginBottom: 24 }} />
+        <CapturePlaceholder
+          badge="Screenshot · Airtable"
+          title="Build tracker"
+          description="Airtable tracking screenshot showing component requests, ownership, status, effort level, and links back to design files."
         />
       </div>
     </Section>
@@ -553,10 +613,16 @@ export function ImpactSection() {
         ]}
       />
 
+      <CapturePlaceholder
+        badge="Screenshot · Metrics"
+        title="Impact dashboard or OKR summary"
+        description="Adoption metrics, engineering hours saved, or leadership reporting that captures the business value of the system."
+      />
+
       <div className="rounded-lg p-6" style={{ background: "#ffffff", border: `1px solid ${SEPARATOR}`, borderLeft: "4px solid #0053e2" }}>
-        <Body as="p" size="small" weight="alt" UNSAFE_className="uppercase tracking-[0.1em] mb-2" UNSAFE_style={{ fontSize: "11px", color: "#0053e2" }}>
-          How it scales without scaling the team
-        </Body>
+        <div className="mb-2">
+          <Eyebrow>How it scales without scaling the team</Eyebrow>
+        </div>
         <Body as="p" size="small" UNSAFE_className="leading-[1.7] mb-4" UNSAFE_style={{ color: DARK }}>
           Contributors were recruited and mentored on a process none had run before, then
           maintenance transferred to the standing teams once it was proven. The goal from day
@@ -581,10 +647,10 @@ export function ImpactSection() {
       </div>
 
       <div className="rounded-lg p-6" style={{ background: DARK }}>
-        <Body as="p" size="small" weight="alt" UNSAFE_className="uppercase tracking-[0.1em] mb-3" UNSAFE_style={{ fontSize: "11px", color: "#ffc220" }}>
-          The biggest outcome: a reusable framework
-        </Body>
-        <Body as="p" size="small" UNSAFE_className="leading-[1.7] mb-5" UNSAFE_style={{ color: "rgba(255,255,255,0.78)" }}>
+        <div className="mb-3">
+          <Eyebrow onDark>The biggest outcome: a reusable framework</Eyebrow>
+        </div>
+        <Body as="p" size="small" UNSAFE_className="leading-[1.7] mt-6 mb-6" UNSAFE_style={{ color: "rgba(255,255,255,0.78)" }}>
           The chat kit was the first, not the only. The process, taxonomy, and governance built
           for it became the blueprint the org now uses to stand up new kits.
         </Body>
@@ -619,6 +685,12 @@ export function ClosingSection() {
           maintenance mode. Next is scale.
         </Lead>
 
+        <CapturePlaceholder
+          badge="Screenshot · Live product"
+          title="In production"
+          description="The chat system components shipping in a live product experience: AI shopping assistant and support chat."
+        />
+
         <NextGrid
           items={[
             { when: "Done", title: "Build the foundation", description: "Audit, build, document, and review the core chat patterns with partner teams." },
@@ -628,10 +700,7 @@ export function ClosingSection() {
           ]}
         />
       </Section>
-      <QuoteBlock
-        quote="The measure of a design system isn't what it ships. It's how many teams build better because it exists."
-        attribution="Principal Product Designer, Walmart"
-      />
+      
     </>
   );
 }
