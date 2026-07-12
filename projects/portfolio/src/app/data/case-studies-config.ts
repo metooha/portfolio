@@ -19,12 +19,17 @@ import { CaseStudyAcademyContent } from "@/app/pages/case-studies/academy/CaseSt
 import imgEverydaySansCover from "@/app/assets/pages/case-study/everyday-sans/cover.jpg";
 import { imgAirtableCoverPreview, imgAirtableCoverSource } from "@/app/assets/pages/case-study/airtable-sot/assets";
 import imgOportunDsCover from "@/app/assets/pages/case-study/oportun-ds/cover.jpg";
+import imgOportunDsLogo from "@/app/assets/pages/case-study/oportun-ds/logo.png";
 import imgCarbonCover from "@/app/assets/pages/case-study/carbon/design-engine.jpg";
+import imgCarbonLogo from "@/app/assets/pages/case-study/carbon/carbon-logo.png";
 import imgFigmaToCodeCover from "@/app/assets/pages/case-study/figma-to-code/optimized/cover.jpg";
 import imgWmEmailCover from "@/app/assets/pages/case-study/wm-email-rebrand/mockup-min.png";
 import imgNiniJewelsCover from "@/app/assets/pages/case-study/nini-jewels/nini-cover.jpg";
+import imgNiniJewelsLogo from "@/app/assets/pages/case-study/nini-jewels/nini-logo.png";
 import imgBreakoutCover from "@/app/assets/pages/case-study/breakout-network/cover.jpeg";
+import imgBreakoutLogo from "@/app/assets/pages/case-study/breakout-network/BNW-logo-new.png";
 import imgWalmartLogo from "@/app/assets/pages/case-study/everyday-sans/logo.png";
+import imgUcUiKitCover from "@/app/assets/pages/case-study/uc-uikit/Coverpreview.png";
 import type { ProjectLink } from "@/app/components/CaseStudyTemplate";
 import type { ThemeName } from "@/app/components/utils/Theming";
 
@@ -58,6 +63,8 @@ export interface CaseStudyConfig {
   heroGradientClass?: string;
   HeroComponent?: React.ComponentType;
   thumbnail: string;
+  thumbnailFit?: "cover" | "contain";
+  thumbnailBorder?: boolean;
   /** Body content for generic template pages */
   ContentComponent?: React.ComponentType;
   /** Full-page component for special routing (replaces template page) */
@@ -232,7 +239,8 @@ const CASE_STUDIES: CaseStudyConfig[] = [
     tags: ["Design System", "Rebrand", "Storybook", "Fintech"],
     heroType: "image",
     heroImage: imgOportunDsCover,
-    thumbnail: imgOportunDsCover,
+    thumbnail: imgOportunDsLogo,
+    thumbnailFit: "contain",
     PageComponent: OportunDsCaseStudy,
     overviewClient: "Oportun / Digit",
     overviewCategory: "Design Systems, Rebrand",
@@ -272,7 +280,9 @@ const CASE_STUDIES: CaseStudyConfig[] = [
     tags: ["Branding", "Brand Guidelines", "Art Direction"],
     heroType: "image",
     heroImage: imgBreakoutCover,
-    thumbnail: imgBreakoutCover,
+    thumbnail: imgBreakoutLogo,
+    thumbnailFit: "contain",
+    thumbnailBorder: true,
     PageComponent: BreakoutNetworkCaseStudy,
     overviewClient: "Breakout Athletic Network",
     overviewCategory: "Brand Identity, Guidelines",
@@ -315,7 +325,8 @@ const CASE_STUDIES: CaseStudyConfig[] = [
     tags: ["Product Design", "3D Printing", "Decision UI", "Manufacturing"],
     heroType: "image",
     heroImage: imgCarbonCover,
-    thumbnail: imgCarbonCover,
+    thumbnail: imgCarbonLogo,
+    thumbnailFit: "contain",
     PageComponent: CarbonAutoOrientationCaseStudy,
     overviewClient: "Carbon Inc.",
     overviewCategory: "Feature Design, Resin 3D Printing",
@@ -467,7 +478,8 @@ const CASE_STUDIES: CaseStudyConfig[] = [
     tags: ["Branding", "Web Design", "Front-End", "Illustration"],
     heroType: "image",
     heroImage: imgNiniJewelsCover,
-    thumbnail: imgNiniJewelsCover,
+    thumbnail: imgNiniJewelsLogo,
+    thumbnailFit: "contain",
     PageComponent: NiniJewelsCaseStudy,
     overviewClient: "Nini Jewels",
     overviewCategory: "Website Redesign, Build & Illustration",
@@ -541,7 +553,7 @@ const CASE_STUDIES: CaseStudyConfig[] = [
     tags: ["Design System", "Conversational AI", "Governance"],
     heroType: "component",
     HeroComponent: UcUiKitHero,
-    thumbnail: "",
+    thumbnail: imgUcUiKitCover,
     PageComponent: UcUiKitCaseStudy,
     overviewClient: "Walmart",
     overviewCategory: "Conversational AI, Design Systems, Governance",
@@ -600,6 +612,8 @@ function configToProjectLink(config: CaseStudyConfig): ProjectLink {
     description: config.shortDescription,
     image,
     thumbnail: config.overviewClient === "Walmart" ? imgWalmartLogo : config.thumbnail,
+    thumbnailFit: config.overviewClient === "Walmart" ? "cover" : config.thumbnailFit,
+    thumbnailBorder: config.thumbnailBorder,
   };
 }
 

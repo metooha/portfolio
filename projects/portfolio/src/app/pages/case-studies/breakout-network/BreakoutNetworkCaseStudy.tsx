@@ -59,7 +59,13 @@ export default function BreakoutNetworkCaseStudy() {
     <div data-ld-theme="Portfolio" style={{ display: "contents" }}>
       <CaseStudyTemplate
         hero={<BreakoutHero />}
-        overviewLogo={<img src={imgLogo} alt="Breakout Athletic Network logo" className="w-full h-full object-cover" />}
+        overviewLogo={
+          <img
+            src={imgLogo}
+            alt="Breakout Athletic Network logo"
+            className="w-full h-full object-cover border border-gray-300"
+          />
+        }
         overviewClient="Breakout Athletic Network"
         overviewCategory="Brand Identity, Guidelines"
         overviewTitle={OVERVIEW_TITLE}

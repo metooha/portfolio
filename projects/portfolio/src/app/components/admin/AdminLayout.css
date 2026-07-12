@@ -122,16 +122,15 @@
   width: 100%;
 }
 
-.admin-settings-nav-list {
-  display: grid;
-  gap: var(--ld-semantic-spacing-50, 0.25rem);
-  list-style: none;
-  margin: 0;
-  padding: var(--ld-semantic-spacing-100, 0.5rem);
+.admin-settings-sidebar-provider {
+  min-height: 0;
+  width: 100%;
 }
 
-.admin-settings-nav-button {
-  justify-content: flex-start;
+.admin-settings-sidebar {
+  border-right: none;
+  height: 100%;
+  width: 100% !important;
 }
 
 .admin-settings-layout__panel {

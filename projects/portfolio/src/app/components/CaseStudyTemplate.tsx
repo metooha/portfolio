@@ -15,6 +15,8 @@ export interface ProjectLink {
   description: string;
   image: React.ReactNode;
   thumbnail: string;
+  thumbnailFit?: "cover" | "contain";
+  thumbnailBorder?: boolean;
 }
 
 export interface CaseStudyTemplateProps {
@@ -54,6 +56,14 @@ function NavCard({
   project: ProjectLink;
 }) {
   const isPrev = direction === "prev";
+  const thumbnailClassName =
+    project.thumbnailFit === "contain"
+      ? "h-full w-full object-contain bg-white p-2"
+      : "h-full w-full object-cover";
+  const thumbnailFrameClassName = `relative size-12 shrink-0 overflow-hidden ${
+    project.thumbnailBorder ? "border border-gray-300" : ""
+  }`;
+
   return (
     <Link
       to={project.path}
@@ -89,10 +99,10 @@ function NavCard({
         style={{ gap: "var(--ld-semantic-spacing-150, 0.75rem)" }}
       >
         <div
-          className="relative size-12 shrink-0 overflow-hidden"
+          className={thumbnailFrameClassName}
           style={{ borderRadius: "var(--ld-primitive-scale-border-radius-200, 1rem)" }}
         >
-          <img src={project.thumbnail} alt="" className="h-full w-full object-cover" />
+          <img src={project.thumbnail} alt="" className={thumbnailClassName} />
         </div>
         <div
           className={`flex w-full flex-col ${isPrev ? "items-start" : "items-end"}`}

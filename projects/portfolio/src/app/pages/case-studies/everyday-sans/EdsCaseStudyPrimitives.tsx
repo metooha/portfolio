@@ -62,7 +62,7 @@ export function EdsWeightScale() {
       {WEIGHT_ROWS.map((row) => (
         <div
           key={row.weight}
-          className="flex flex-wrap items-center gap-3 md:gap-5 px-4 md:px-6 py-4 rounded-full"
+          className="flex flex-wrap items-center gap-3 md:gap-5 px-4 md:px-6 py-4 rounded-[16px]"
           style={{ background: row.gradient }}
         >
           <span className="text-[12px] font-bold w-[38px] shrink-0 tracking-wide" style={{ color: "rgba(255,255,255,0.45)" }}>

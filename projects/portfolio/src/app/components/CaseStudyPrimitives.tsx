@@ -254,11 +254,13 @@ export function TestimonialShowcase({
 
 export function ProblemGrid({
   cards,
+  columns = 2,
 }: {
   cards: { who: string; whoColor: string; title: string; description: string }[];
+  columns?: 2 | 3;
 }) {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div className={`grid grid-cols-1 ${columns === 3 ? "md:grid-cols-3" : "md:grid-cols-2"} gap-4`}>
       {cards.map((card) => (
         <div
           key={card.who}

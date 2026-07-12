@@ -2,6 +2,16 @@ import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { AdminNav } from "@/app/components/admin/AdminNav";
 import { Button, ButtonGroup } from "@/app/components/Button/Button";
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarGroup,
+  SidebarGroupContent,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+  SidebarProvider,
+} from "@/app/components/patterns/Sidebar";
 import { Card, CardContent, CardHeader } from "@/app/components/Card/Card";
 import {
   DataTable,
@@ -685,27 +695,36 @@ function DashboardContent() {
 
       <PageContainer as="main" maxWidth="max-w-[1660px]" className="admin-page__content">
         <div className="admin-settings-layout">
-          <aside className="admin-settings-layout__nav">
-            <nav aria-label="Settings">
-              <ul className="admin-settings-nav-list">
-                {SETTINGS_SECTIONS.map((section) => (
-                  <li key={section.id}>
-                    <Button
-                      type="button"
-                      variant={activeSection === section.id ? "secondary" : "tertiary"}
-                      size="small"
-                      isFullWidth
-                      aria-current={activeSection === section.id ? "page" : undefined}
-                      UNSAFE_className="admin-settings-nav-button"
-                      onClick={() => setActiveSection(section.id)}
-                    >
-                      {section.label}
-                    </Button>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-          </aside>
+          <div className="admin-settings-layout__nav">
+            <SidebarProvider className="admin-settings-sidebar-provider">
+              <Sidebar
+                collapsible="none"
+                className="admin-settings-sidebar"
+                aria-label="Settings"
+              >
+                <SidebarContent>
+                  <SidebarGroup>
+                    <SidebarGroupContent>
+                      <SidebarMenu>
+                        {SETTINGS_SECTIONS.map((section) => (
+                          <SidebarMenuItem key={section.id}>
+                            <SidebarMenuButton
+                              type="button"
+                              isActive={activeSection === section.id}
+                              aria-current={activeSection === section.id ? "page" : undefined}
+                              onClick={() => setActiveSection(section.id)}
+                            >
+                              {section.label}
+                            </SidebarMenuButton>
+                          </SidebarMenuItem>
+                        ))}
+                      </SidebarMenu>
+                    </SidebarGroupContent>
+                  </SidebarGroup>
+                </SidebarContent>
+              </Sidebar>
+            </SidebarProvider>
+          </div>
 
           <section className="admin-settings-layout__panel">
             <div className="admin-settings-layout__panel-intro">

@@ -10,10 +10,20 @@ import imgEdsMono from "@/app/assets/pages/case-study/everyday-sans/eds-mono-com
 import imgThemingComparison from "@/app/assets/pages/case-study/everyday-sans/theming-comparison.jpg";
 import imgEyeStrain from "@/app/assets/pages/case-study/everyday-sans/accessibility-eye-strain.jpg";
 import imgCharacterMisreads from "@/app/assets/pages/case-study/everyday-sans/accessibility-character-misreads.jpg";
-import imgLanguageCoverage from "@/app/assets/pages/case-study/everyday-sans/language-coverage.jpg";
 import imgLanguageFrench from "@/app/assets/pages/case-study/everyday-sans/language-french.jpg";
 import imgLanguageSpanish from "@/app/assets/pages/case-study/everyday-sans/language-spanish.jpg";
 import { Link } from "@/app/components/Link";
+import { Tag } from "@/app/components/Tag/Tag";
+import { CheckCircleIcon, CloseIcon } from "@/app/components/Icons/Icons";
+import {
+  DataTable,
+  DataTableBody,
+  DataTableCell,
+  DataTableCellStatus,
+  DataTableHead,
+  DataTableHeader,
+  DataTableRow,
+} from "@/app/components/DataTable/DataTable";
 import {
   EdsBeforeAfter,
   EdsEmbedFull,
@@ -30,7 +40,6 @@ import {
   EdsSection,
   EdsSectionTitle,
   EdsStatCards,
-  EdsStatsRow,
   EdsWeightScale,
   type EdsJourneyItem,
 } from "./EdsCaseStudyPrimitives";
@@ -157,6 +166,7 @@ export function EdsProblemSpaceSection() {
         work was defining one font strategy that could satisfy all three.
       </EdsLead>
       <EdsProblemGrid
+        columns={3}
         cards={[
           {
             who: "Brand",
@@ -366,6 +376,152 @@ export function EdsAccessibilityResearchSection() {
   );
 }
 
+const LANGUAGE_COVERAGE_ROWS: {
+  flag: string;
+  language: string;
+  status: "complete" | "missing";
+  statusLabel: string;
+  details: string;
+}[] = [
+  {
+    flag: "🇺🇸",
+    language: "English",
+    status: "complete",
+    statusLabel: "Complete",
+    details: "All letters, digits, and punctuation present (space is intentionally blank — that's normal)",
+  },
+  {
+    flag: "🇪🇸",
+    language: "Spanish",
+    status: "complete",
+    statusLabel: "Complete",
+    details: "All 16 extra characters present: Á É Í Ó Ú Ü Ñ á é í ó ú ü ñ ¿ ¡",
+  },
+  {
+    flag: "🇫🇷",
+    language: "French",
+    status: "missing",
+    statusLabel: "8 missing",
+    details: "Most accented chars present, but gaps exist in ligature and rare character support",
+  },
+];
+
+const FRENCH_MISSING_CHARS: { char: string; unicode: string; description: string }[] = [
+  { char: "«", unicode: "U+00AB", description: "Left guillemet (French quotation mark)" },
+  { char: "»", unicode: "U+00BB", description: "Right guillemet (French quotation mark)" },
+  { char: "Æ", unicode: "U+00C6", description: "AE ligature uppercase" },
+  { char: "æ", unicode: "U+00E6", description: "AE ligature lowercase" },
+  { char: "ÿ", unicode: "U+00FF", description: "y with diaeresis lowercase" },
+  { char: "Ÿ", unicode: "U+0178", description: "Y with diaeresis uppercase" },
+  { char: "Œ", unicode: "U+0152", description: "OE ligature uppercase" },
+  { char: "œ", unicode: "U+0153", description: "OE ligature lowercase" },
+];
+
+function EdsLanguageCoverageTables() {
+  return (
+    <div className="flex flex-col gap-8">
+      <div className="flex flex-col gap-4">
+        <Heading as="h3" size="small" weight="alt">
+          Language Coverage
+        </Heading>
+        <div
+          className="w-full overflow-x-auto rounded-[10px]"
+          style={{ border: "1px solid var(--ld-semantic-color-separator, #e3e4e5)" }}
+        >
+          <DataTable style={{ width: "100%" }}>
+            <DataTableHead>
+              <DataTableRow>
+                <DataTableHeader>Language</DataTableHeader>
+                <DataTableHeader>Coverage</DataTableHeader>
+                <DataTableHeader>Details</DataTableHeader>
+              </DataTableRow>
+            </DataTableHead>
+            <DataTableBody>
+              {LANGUAGE_COVERAGE_ROWS.map((row) => (
+                <DataTableRow key={row.language}>
+                  <DataTableCell>
+                    <Body as="span" size="small" weight="alt">
+                      <span aria-hidden="true">{row.flag} </span>
+                      {row.language}
+                    </Body>
+                  </DataTableCell>
+                  <DataTableCellStatus>
+                    <Tag
+                      color={row.status === "complete" ? "positive" : "negative"}
+                      variant="secondary"
+                      size="small"
+                      leading={
+                        row.status === "complete" ? (
+                          <CheckCircleIcon size="small" decorative />
+                        ) : (
+                          <CloseIcon size="small" decorative />
+                        )
+                      }
+                    >
+                      {row.statusLabel}
+                    </Tag>
+                  </DataTableCellStatus>
+                  <DataTableCell>
+                    <Body as="span" size="small" color="subtlest">
+                      {row.details}
+                    </Body>
+                  </DataTableCell>
+                </DataTableRow>
+              ))}
+            </DataTableBody>
+          </DataTable>
+        </div>
+      </div>
+
+      <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-1">
+          <Heading as="h3" size="small" weight="alt">
+            Missing French Characters
+          </Heading>
+          <Body as="p" size="small" color="subtlest">
+            Detailed audit of glyphs required for full French orthography support.
+          </Body>
+        </div>
+        <div
+          className="w-full overflow-x-auto rounded-[10px]"
+          style={{ border: "1px solid var(--ld-semantic-color-separator, #e3e4e5)" }}
+        >
+          <DataTable style={{ width: "100%" }}>
+            <DataTableHead>
+              <DataTableRow>
+                <DataTableHeader>Character</DataTableHeader>
+                <DataTableHeader>Unicode</DataTableHeader>
+                <DataTableHeader>Description</DataTableHeader>
+              </DataTableRow>
+            </DataTableHead>
+            <DataTableBody>
+              {FRENCH_MISSING_CHARS.map((row) => (
+                <DataTableRow key={row.unicode}>
+                  <DataTableCell>
+                    <Body as="span" size="small" weight="alt">
+                      {row.char}
+                    </Body>
+                  </DataTableCell>
+                  <DataTableCell>
+                    <Body as="span" size="small" isMonospace color="subtlest">
+                      {row.unicode}
+                    </Body>
+                  </DataTableCell>
+                  <DataTableCell>
+                    <Body as="span" size="small" color="subtlest">
+                      {row.description}
+                    </Body>
+                  </DataTableCell>
+                </DataTableRow>
+              ))}
+            </DataTableBody>
+          </DataTable>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function EdsLanguageSection() {
   return (
     <EdsSection id="language">
@@ -374,12 +530,7 @@ export function EdsLanguageSection() {
       <EdsLead>
         The variable font ships with full coverage for three languages. French had 8 missing glyphs identified in the audit, addressed in the final deliverable.
       </EdsLead>
-      <EdsImageFull
-        src={imgLanguageCoverage}
-        alt="Language coverage"
-        caption="English and Spanish complete. French had 8 missing characters including guillemets, AE and OE ligatures, all added to the final spec."
-        surface="subtle"
-      />
+      <EdsLanguageCoverageTables />
       <EdsImageGrid2
         stacked
         items={[
@@ -409,8 +560,52 @@ export function EdsJourneySection() {
         The work was an alignment problem across Brand, Engineering, Accessibility, and the foundry. Six versions
         turned disagreement into a shared launch standard.
       </EdsLead>
-      <EdsJourneyTimeline items={JOURNEY_ITEMS} />
+      <EdsJourneyTimeline items={JOURNEY_ITEMS} lineColor="var(--ld-semantic-color-fill-brand-bold, #001e60)" />
     </EdsSection>
+  );
+}
+
+/** Same fluid clamp as the case study hero title, so the number carries the same visual weight as the figma-to-code case study's metric cards. */
+const EDS_OUTCOME_STAT_VALUE_FONT_SIZE =
+  "clamp(var(--ld-semantic-font-case-study-hero-size-min, 2.25rem), 4vw + 1.25rem, var(--ld-semantic-font-case-study-hero-size-max, 8.75rem))";
+
+const EDS_OUTCOME_STAT_TONES = [
+  "rgba(255,255,255,0.06)",
+  "rgba(255,255,255,0.1)",
+  "rgba(255,255,255,0.14)",
+  "rgba(255,255,255,0.18)",
+];
+
+interface EdsOutcomeStatItem {
+  value: string;
+  label: string;
+  valueColor?: string;
+}
+
+function EdsOutcomeStatCards({ stats }: { stats: EdsOutcomeStatItem[] }) {
+  return (
+    <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      {stats.map((stat, index) => (
+        <div
+          key={stat.label}
+          className="rounded-[20px] p-6"
+          style={{ background: EDS_OUTCOME_STAT_TONES[index % EDS_OUTCOME_STAT_TONES.length] }}
+        >
+          <div
+            className="font-bold leading-[0.95] mb-2"
+            style={{
+              fontSize: EDS_OUTCOME_STAT_VALUE_FONT_SIZE,
+              color: stat.valueColor ?? "var(--ld-primitive-color-spark-100, #ffc220)",
+            }}
+          >
+            {stat.value}
+          </div>
+          <p className="m-0 leading-snug" style={{ fontSize: "15px", color: "rgba(255,255,255,0.75)" }}>
+            {stat.label}
+          </p>
+        </div>
+      ))}
+    </div>
   );
 }
 
@@ -419,7 +614,7 @@ export function EdsOutcomeSection() {
     <EdsSection id="outcome" variant="dark">
       <EdsEyebrow onDark>The Outcome</EdsEyebrow>
       <EdsSectionTitle onDark>The tradeoff, removed.</EdsSectionTitle>
-      <EdsStatsRow
+      <EdsOutcomeStatCards
         stats={[
           { value: "5→1", label: "Static files replaced by one variable font" },
           { value: "57%", label: "Smaller file size (70kb → 28kb)" },

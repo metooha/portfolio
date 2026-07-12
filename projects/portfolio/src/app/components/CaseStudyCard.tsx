@@ -27,13 +27,14 @@ export function CaseStudyCard({ caseStudy, priority = false }: CaseStudyCardProp
   const description = caseStudy.cardDescription ?? caseStudy.shortDescription;
   const isClickable = caseStudy.isPublished !== false;
   const isProtected = isPageProtected(caseStudy.path);
+  const coverImage = caseStudy.heroType === "image" ? (caseStudy.heroImage ?? caseStudy.thumbnail) : null;
 
   const heroContent =
     caseStudy.heroType === "component" && caseStudy.HeroComponent ? (
       <caseStudy.HeroComponent />
     ) : (
       <img
-        src={caseStudy.thumbnail}
+        src={coverImage ?? caseStudy.thumbnail}
         alt={title}
         className="block w-full h-full object-cover object-center"
         decoding={priority ? "sync" : "async"}
