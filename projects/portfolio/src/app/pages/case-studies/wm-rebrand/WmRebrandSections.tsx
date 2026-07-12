@@ -2,7 +2,6 @@ import React from "react";
 import { Body } from "@/app/components/Text/Text";
 import { ValuePropCard, ValuePropGrid } from "@/app/components/ValuePropCard";
 import {
-  Callout,
   Eyebrow,
   ImageFull,
   ImageGrid2,
@@ -629,12 +628,12 @@ export function WmReflectionSection() {
         <ImageFull src={imgSurface3} alt="The system applied to a native app surface" />
       </div>
 
-      <Callout tone="neutral">
+      <Body as="p" size="medium" UNSAFE_className="leading-[1.7]">
         <span className="font-bold">Reflections &amp; Takeaways: </span>
         Tight deadlines made the system strategy more important, not less. The strongest work came from defining
         reusable patterns, making tradeoffs explicit, and giving teams a structure they could keep extending after
         launch.
-      </Callout>
+      </Body>
     </Section>
   );
 }

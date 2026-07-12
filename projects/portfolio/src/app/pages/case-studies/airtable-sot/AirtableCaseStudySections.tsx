@@ -1,6 +1,5 @@
 import {
   BeforeAfter as EdsBeforeAfter,
-  Callout,
   Eyebrow as EdsEyebrow,
   Lead as EdsLead,
   Section as EdsSection,
@@ -193,12 +192,12 @@ export function AirtableSituationSection() {
       </EdsLead>
       <AirtableSituationVisual />
       <AirtableProblemGrid />
-      <Callout tone="brand">
+      <Body as="p" size="medium" UNSAFE_className="leading-[1.7]">
         <strong>The pitch:</strong> this wasn&rsquo;t an assignment, it was a proposal. I identified the ownership
         gap, designed the Airtable-to-GitHub pipeline as the fix, and presented the plan to engineering leadership
         to secure approval and the support to build it, then extended that support into Figma and our design
         system kits.
-      </Callout>
+      </Body>
     </EdsSection>
   );
 }

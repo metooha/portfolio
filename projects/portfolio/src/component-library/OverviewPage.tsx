@@ -53,9 +53,6 @@ import './OverviewPage.css';
 
 import {Slider} from '@/app/components/Slider/Slider';
 
-// Extra Component Imports
-import {Tree} from '@/app/components/SideNavigation/Tree';
-
 import {Avatar} from '@/app/components/Avatar/Avatar';
 import {Accordion, AccordionItem, AccordionHeader, AccordionPanel} from '@/app/components/patterns/Accordion/Accordion';
 import {SpinButton} from '@/app/components/SpinButton/SpinButton';
@@ -71,16 +68,13 @@ import {SearchBar} from '@/app/components/SearchBar/SearchBar';
 
 // WCP Pattern Preview Imports
 import {Header} from '@/app/components/patterns/Header/Header';
-import {AccountSideNav} from '@/app/components/patterns/AccountSideNav/AccountSideNav';
-import {OrderCard} from '@/app/components/patterns/OrderCard/OrderCard';
-import {OrderStatusBanner} from '@/app/components/patterns/OrderStatusBanner/OrderStatusBanner';
 import {QueueBanner} from '@/app/components/patterns/QueueBanner/QueueBanner';
 import {SearchResultsHeader} from '@/app/components/patterns/SearchResultsHeader/SearchResultsHeader';
 import {SearchFilterBar} from '@/app/components/patterns/SearchFilterBar/SearchFilterBar';
 import {Gauge} from '@/app/components/Gauge/Gauge';
-import {BottomNav} from '@/app/components/BottomNav/BottomNav';
 import {NewArrivalsCarousel} from '@/app/components/patterns/NewArrivalsCarousel/NewArrivalsCarousel';
 import {PRODUCT_IMAGES} from '@/app/components/common/productImages';
+import {TestimonialShowcase} from '@/app/components/CaseStudyPrimitives';
 
 
 /* ── Types ────────────────────────────────────────────────────── */
@@ -622,27 +616,6 @@ const extraComponentEntries: ComponentEntry[] = [
       </Tooltip>
     ),
   },
-  {
-    title: 'Tree',
-    description: 'Hierarchical tree view for displaying nested data with expand/collapse',
-    id: 'components-tree',
-    preview: (
-      <Tree
-        label="Files"
-        data={[
-          {id: 'components-1', label: 'Documents', children: [
-            {id: 'components-1-1', label: 'Reports'},
-            {id: 'components-1-2', label: 'Invoices'},
-          ]},
-          {id: 'components-2', label: 'Images', children: [
-            {id: 'components-2-1', label: 'Photos'},
-          ]},
-          {id: 'components-3', label: 'README.md'},
-        ]}
-        defaultExpandedIds={['1']}
-      />
-    ),
-  },
 ];
 
 /* ── WCP Component Entries ────────────────────────────────────── */
@@ -845,58 +818,12 @@ const wcpPatternEntries: ComponentEntry[] = [
     ),
   },
   {
-    title: 'Footer Patterns',
-    description: 'Desktop and mobile footer layouts with navigation links',
-    id: 'patterns-footer',
-    preview: (
-      <div style={{ borderRadius: '6px', overflow: 'hidden' }}>
-        <BottomNav contained />
-      </div>
-    ),
-  },
-  {
     title: 'Header',
     description: 'Mobile and desktop header patterns with search, nav, and delivery banners',
     id: 'patterns-header',
     preview: (
       <div style={{ borderRadius: '6px', overflow: 'hidden' }}>
           <Header mobileVariant="topnav-blue" />
-      </div>
-    ),
-  },
-  {
-    title: 'Order Card Patterns',
-    description: 'Order tracking cards for delivery, curbside, shipping, and auto care',
-    id: 'patterns-order-card',
-    preview: (
-      <div style={{ borderRadius: '6px', overflow: 'hidden' }}>
-        <OrderCard
-          orderType="delivery"
-          location="Carrollton Supercenter"
-          statusHeading="Arriving tomorrow by 8pm"
-          timelineStep="preparing"
-          timelineVariant="delivery"
-          products={[
-            { src: PRODUCT_IMAGES.milk, alt: 'Milk' },
-            { src: PRODUCT_IMAGES.eggs, alt: 'Eggs' },
-            { src: PRODUCT_IMAGES.bananas, alt: 'Bananas' },
-          ]}
-          actions={[
-            { label: 'Track order', variant: 'primary' },
-            { label: 'View details', variant: 'secondary' },
-          ]}
-          orderTotal="$85.00"
-        />
-      </div>
-    ),
-  },
-  {
-    title: 'Order Status Cards',
-    description: 'Order status banners and delayed delivery notification cards',
-    id: 'patterns-order-status',
-    preview: (
-      <div style={{ borderRadius: '6px', overflow: 'hidden' }}>
-        <OrderStatusBanner />
       </div>
     ),
   },
@@ -921,13 +848,75 @@ const wcpPatternEntries: ComponentEntry[] = [
       </div>
     ),
   },
+];
+
+/* ── Case Study Pattern Entries ───────────────────────────────── */
+
+const caseStudyPatternEntries: ComponentEntry[] = [
   {
-    title: 'Side Navigation',
-    description: 'Account side navigation with grouped sections and icons',
-    id: 'patterns-side-navigation',
+    title: 'Case Study Template',
+    description: 'Full case study shell with hero, overview, metadata, sticky section nav, and composed content sections.',
+    id: 'patterns-case-study-template',
     preview: (
-      <div style={{ borderRadius: '6px', overflow: 'hidden', maxHeight: '200px' }}>
-        <AccountSideNav />
+      <div style={{display: 'grid', gap: 8, padding: 4}}>
+        <div style={{height: 48, borderRadius: 8, background: 'var(--ld-semantic-color-fill-brand, #0053e2)'}} />
+        <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8}}>
+          <div style={{height: 28, borderRadius: 6, background: 'var(--ld-semantic-color-fill-brand-subtle, #e9f1fe)'}} />
+          <div style={{height: 28, borderRadius: 6, background: 'var(--ld-semantic-color-fill-subtle, #f7f7f8)'}} />
+        </div>
+      </div>
+    ),
+  },
+  {
+    title: 'Case Study Components',
+    description: 'Reusable hero, metadata, section heading, bullet list, value prop, and before/after components.',
+    id: 'patterns-case-study-components',
+    preview: (
+      <div style={{display: 'grid', gap: 8, padding: 4}}>
+        <div style={{height: 10, width: '42%', borderRadius: 999, background: 'var(--ld-semantic-color-fill-brand, #0053e2)'}} />
+        <div style={{height: 28, width: '82%', borderRadius: 6, background: 'var(--ld-semantic-color-fill-subtle, #f7f7f8)'}} />
+        <div style={{display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8}}>
+          {[0, 1, 2].map((item) => (
+            <div key={item} style={{height: 44, borderRadius: 8, border: '1px solid var(--ld-semantic-color-separator, #e3e4e5)'}} />
+          ))}
+        </div>
+      </div>
+    ),
+  },
+  {
+    title: 'Case Study Typography',
+    description: 'Fluid hero type, page titles, section headings, body copy, badge labels, and semantic color samples.',
+    id: 'patterns-case-study-typography',
+    preview: (
+      <div style={{display: 'grid', gap: 8, padding: 4}}>
+        <Display as="div" size="small" UNSAFE_style={{lineHeight: 0.95}}>Aa</Display>
+        <Body as="p" size="small" color="subtle">Hero, title, heading, body, and caption styles.</Body>
+      </div>
+    ),
+  },
+  {
+    title: 'Case Study Primitives',
+    description: 'Narrative blocks for testimonials, quotes, stats, comparisons, image frames, and roadmap cards.',
+    id: 'patterns-case-study-primitives',
+    preview: (
+      <div style={{transform: 'scale(0.62)', transformOrigin: 'top left', width: '161%', height: 120, overflow: 'hidden'}}>
+        <TestimonialShowcase
+          statement="Innovative builders using AI tools collaboratively."
+          testimonials={[
+            {
+              role: 'Sr. Designer',
+              team: 'B2B Product',
+              initials: 'SD',
+              quote: <><strong>Speeds up prototyping</strong> without starting from scratch.</>,
+            },
+            {
+              role: 'Engineering Manager',
+              team: 'Internal tools',
+              initials: 'EM',
+              quote: <>Turns Figma designs into code and accelerates workflows.</>,
+            },
+          ]}
+        />
       </div>
     ),
   },
@@ -1017,6 +1006,16 @@ export default function OverviewPage({navigate}: {navigate: (r: string) => void}
         gap: '24px',
       }}>
         {wcpComponentEntries.map(renderCard)}
+      </div>
+
+      {/* Case Study Patterns */}
+      <SectionDivider title="Case Study Patterns" count={caseStudyPatternEntries.length} />
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: `repeat(auto-fill, minmax(${gridMinmax}, 1fr))`,
+        gap: '24px',
+      }}>
+        {caseStudyPatternEntries.map(renderCard)}
       </div>
 
       {/* WCP Patterns */}

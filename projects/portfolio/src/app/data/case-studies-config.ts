@@ -24,6 +24,7 @@ import imgFigmaToCodeCover from "@/app/assets/pages/case-study/figma-to-code/opt
 import imgWmEmailCover from "@/app/assets/pages/case-study/wm-email-rebrand/mockup-min.png";
 import imgNiniJewelsCover from "@/app/assets/pages/case-study/nini-jewels/nini-cover.jpg";
 import imgBreakoutCover from "@/app/assets/pages/case-study/breakout-network/cover.jpeg";
+import imgWalmartLogo from "@/app/assets/pages/case-study/everyday-sans/logo.png";
 import type { ProjectLink } from "@/app/components/CaseStudyTemplate";
 import type { ThemeName } from "@/app/components/utils/Theming";
 
@@ -83,7 +84,7 @@ const CASE_STUDIES: CaseStudyConfig[] = [
     shortDescription:
       "A Figma-to-code pipeline trained on the Core Design System, turning design intent into a pull request engineering can review.",
     cardDescription:
-      "Defined the component lifecycle, operating model, and AI-assisted workflow that scaled from one validated component into a company-wide pilot with 150+ sign-ups across 75+ teams.",
+      "Set the direction when the path wasn't obvious: defined the component lifecycle and operating model, led engineering and Builder.io through discovery, and mentored pilot teams as ambiguity turned into a company-wide pilot with 150+ sign-ups across 75+ teams.",
     fullDescription:
       "Every token, spacing value, and state already existed in Figma, but the organization still rebuilt that source of truth by hand. I framed the opportunity as infrastructure, secured the discovery partnership, defined the component lifecycle, and turned a one-component test into an org-wide pilot with real adoption demand.",
     metaItems: [
@@ -109,13 +110,13 @@ const CASE_STUDIES: CaseStudyConfig[] = [
       { label: "Reflection", href: "#reflection" },
     ],
     navAccentColor: "#0053e2",
-    tags: ["AI", "Design Systems", "Prototyping", "Automation"],
+    tags: ["Platform", "Infrastructure", "Architecture", "Workflow Automation"],
     heroType: "image",
     heroImage: imgFigmaToCodeCover,
     thumbnail: imgFigmaToCodeCover,
     PageComponent: FigmaToCodeCaseStudy,
     overviewClient: "Walmart",
-    overviewCategory: "Core Design System, Builder.io, AI Tooling",
+    overviewCategory: "Platform Systems, AI Tooling & Acceleration",
     homeGroup: "Design Systems",
   },
   {
@@ -598,7 +599,7 @@ function configToProjectLink(config: CaseStudyConfig): ProjectLink {
     title: config.title,
     description: config.shortDescription,
     image,
-    thumbnail: config.thumbnail,
+    thumbnail: config.overviewClient === "Walmart" ? imgWalmartLogo : config.thumbnail,
   };
 }
 

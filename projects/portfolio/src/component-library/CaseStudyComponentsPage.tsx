@@ -71,7 +71,7 @@ export default function CaseStudyComponentsPage() {
   return (
     <PageWrapper
       title="Case Study Components"
-      category="Patterns"
+      category="Case Study Patterns"
       description="Reusable building blocks for portfolio case studies: hero, metadata, section headings, bullet lists, value props, and before/after comparison sliders."
     >
       <ExampleSection title="CaseStudyHero" description="Full-width hero with parallax image and fluid display title.">

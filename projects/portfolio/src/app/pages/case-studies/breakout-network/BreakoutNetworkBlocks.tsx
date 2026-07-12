@@ -49,13 +49,14 @@ export function BreakoutApproachDiagram({
   );
 
   const row = (labels: string[]) => (
-    <div className="flex flex-wrap items-center justify-center gap-2">
+    <div className="flex flex-col sm:flex-row sm:flex-wrap items-center justify-center gap-2">
       {labels.map((label, index) => (
         <React.Fragment key={label}>
           {step(label)}
           {index < labels.length - 1 && (
             <span style={{ color: ACCENT }} className="shrink-0">
-              <Icon name="ArrowRight" size="small" decorative />
+              <Icon name="ArrowDown" size="small" decorative className="sm:hidden" />
+              <Icon name="ArrowRight" size="small" decorative className="hidden sm:inline" />
             </span>
           )}
         </React.Fragment>

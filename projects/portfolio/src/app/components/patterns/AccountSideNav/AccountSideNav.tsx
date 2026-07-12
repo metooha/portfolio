@@ -1,6 +1,5 @@
 import * as React from 'react';
 const { useState } = React;
-import { SideNavigation, SideNavigationItem } from '@/app/components/SideNavigation';
 import { Divider } from '@/app/components/Divider';
 import { Tag } from '@/app/components/Tag/Tag';
 import { WPlusIcon } from '@/app/components/common/icons';
@@ -91,6 +90,44 @@ function NavItemContent({ item }: { item: NavItem }) {
   );
 }
 
+function AccountNavList({
+  label,
+  children,
+}: {
+  label: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <nav aria-label={label}>
+      <ul className="ld-wcp-account-side-nav-list">{children}</ul>
+    </nav>
+  );
+}
+
+function AccountNavItem({
+  item,
+  isCurrent,
+}: {
+  item: NavItem;
+  isCurrent: boolean;
+}) {
+  return (
+    <li>
+      <a
+        href="#"
+        aria-current={isCurrent ? 'page' : undefined}
+        className={cx(
+          'ld-wcp-account-side-nav-link',
+          isCurrent && 'ld-wcp-account-side-nav-link-current',
+        )}
+        onClick={(event) => event.preventDefault()}
+      >
+        <NavItemContent item={item} />
+      </a>
+    </li>
+  );
+}
+
 interface NavGroupProps {
   title: string;
   items: NavItem[];
@@ -103,18 +140,15 @@ function NavGroup({ title, items, currentPath }: NavGroupProps) {
       <h3 className="ld-wcp-account-side-nav-group-title">
         {title}
       </h3>
-      <SideNavigation aria-label={title}>
+      <AccountNavList label={title}>
         {items.map((item) => (
-          <SideNavigationItem
+          <AccountNavItem
             key={item.path}
-            href="#"
+            item={item}
             isCurrent={currentPath === item.path}
-            onClick={(e: React.MouseEvent<HTMLAnchorElement>) => e.preventDefault()}
-          >
-            <NavItemContent item={item} />
-          </SideNavigationItem>
+          />
         ))}
-      </SideNavigation>
+      </AccountNavList>
     </>
   );
 }
@@ -180,18 +214,15 @@ export function AccountSideNav() {
       />
       {accountOpen && (
         <div>
-          <SideNavigation aria-label="Account">
+          <AccountNavList label="Account">
             {accountItems.map((item) => (
-              <SideNavigationItem
+              <AccountNavItem
                 key={item.path}
-                href="#"
+                item={item}
                 isCurrent={hardcodedCurrentPath === item.path}
-                onClick={(e: React.MouseEvent<HTMLAnchorElement>) => e.preventDefault()}
-              >
-                <NavItemContent item={item} />
-              </SideNavigationItem>
+              />
             ))}
-          </SideNavigation>
+          </AccountNavList>
           <NavGroup title="My items" items={myItemsItems} currentPath={hardcodedCurrentPath} />
           <NavGroup title="My profile" items={myProfileItems} currentPath={hardcodedCurrentPath} />
           <NavGroup title="Other accounts" items={otherAccountsItems} currentPath={hardcodedCurrentPath} />
@@ -209,15 +240,12 @@ export function AccountSideNav() {
       />
       {settingsOpen && (
         <div>
-          <SideNavigation aria-label="Settings">
-            <SideNavigationItem
-              href="#"
+          <AccountNavList label="Settings">
+            <AccountNavItem
+              item={{label: 'Home', path: '/'}}
               isCurrent={hardcodedCurrentPath === '/'}
-              onClick={(e: React.MouseEvent<HTMLAnchorElement>) => e.preventDefault()}
-            >
-              Home
-            </SideNavigationItem>
-          </SideNavigation>
+            />
+          </AccountNavList>
           <NavGroup title="Personal information" items={settingsPersonalInfo} currentPath={hardcodedCurrentPath} />
           <NavGroup title="Communications and privacy" items={settingsComms} currentPath={hardcodedCurrentPath} />
           <NavGroup title="Shopping settings" items={settingsShopping} currentPath={hardcodedCurrentPath} />

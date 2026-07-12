@@ -3,6 +3,7 @@ import { CaseStudyHero } from "@/app/components/CaseStudyHero";
 import { CaseStudyTemplate } from "@/app/components/CaseStudyTemplate";
 import { getAdjacentCaseStudies } from "@/app/data/case-studies-config";
 import { Icon } from "@/app/components/Icons/Icons";
+import { Logo } from "@/app/components/Logo/Logo";
 import {
   ProblemSection,
   DefiningSection,
@@ -72,6 +73,14 @@ export default function UcUiKitCaseStudy() {
     <div data-ld-theme="Walmart" style={{ display: "contents" }}>
       <CaseStudyTemplate
         hero={<CaseStudyHero background={<UcUiKitHero />} title={HERO_TITLE} titleColor="#ffffff" backgroundColor="#001e60" />}
+        overviewLogo={
+          <div
+            className="w-full h-full flex items-center justify-center"
+            style={{ background: "#0053e2" }}
+          >
+            <Logo tenant="Walmart" size={26} a11yLabel="Walmart" />
+          </div>
+        }
         overviewClient="Walmart"
         overviewCategory="Conversational AI, Design Systems, Governance"
         overviewTitle={OVERVIEW_TITLE}

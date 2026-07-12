@@ -5,7 +5,6 @@ import {
   SectionTitle,
   Lead,
   ProblemGrid,
-  Callout,
   ImageFull,
   BeforeAfter,
   StatsRow,
@@ -60,12 +59,11 @@ export function ProblemSection() {
         ]}
       />
 
-      <div className="mt-2">
-        <Callout tone="warning">
-          The ask from engineering and product was clear: support multi-tenancy and theming at
-          scale, and stop teams managing it alone. A system was needed. What should it be?
-        </Callout>
-      </div>
+      <Body as="p" size="medium" UNSAFE_className="leading-[1.7]" UNSAFE_style={{ color: DARK }}>
+        The ask from engineering and product was clear: support multi-tenancy and theming at
+        scale, and stop teams managing it alone. A system was needed, so what should it be?
+        Six products had already answered that question on their own.
+      </Body>
 
       <div className="mt-2 mb-2">
         <ImageFull
@@ -98,12 +96,11 @@ export function ProblemSection() {
         ]}
       />
 
-      <Callout tone="neutral">
-        <strong style={{ color: DARK }}>This is where design came in.</strong> Engineering and
-        product knew what was needed: a shared, themeable, multi-tenant chat system. They did not
-        know what it should look like, how to govern it, or who should build it. That was the
-        design problem.
-      </Callout>
+      <Body as="p" size="medium" UNSAFE_className="leading-[1.7]" UNSAFE_style={{ color: DARK }}>
+        <strong>This is where design came in.</strong> Engineering and product knew what was
+        needed: a shared, themeable, multi-tenant chat system. They did not know what it should
+        look like, how to govern it, or who should build it. That was the design problem.
+      </Body>
     </Section>
   );
 }
@@ -143,7 +140,7 @@ export function DefiningSection() {
             className="grid grid-cols-[44px_1fr] gap-x-5 py-6"
             style={{ borderBottom: i < DEFINE_STEPS.length - 1 ? `1px solid ${SEPARATOR}` : undefined }}
           >
-            <div className="font-black leading-none" style={{ fontSize: "28px", color: SEPARATOR }}>
+            <div className="font-black leading-none" style={{ fontSize: "28px", color: "#a9bcdc" }}>
               {String(i + 1).padStart(2, "0")}
             </div>
             <div>
@@ -229,14 +226,14 @@ export function ScopeSection() {
         ]}
       />
 
-      <Callout tone="brand">
+      <Body as="p" size="medium" UNSAFE_className="leading-[1.7]" UNSAFE_style={{ color: DARK }}>
         All three share a base layer: bubbles, input bar, avatars, timestamps. The patterns and
         recipes on top are entirely different for each. The base had to be flexible, and the
         recipe layer had to be specific.
-      </Callout>
+      </Body>
 
       <div>
-        <Heading as="h3" size="small" weight="default" UNSAFE_className="mb-1" UNSAFE_style={{ color: DARK }}>
+        <Heading as="h3" size="small" weight="default" UNSAFE_className="mb-2" UNSAFE_style={{ color: DARK }}>
           And across three platforms
         </Heading>
         <Body as="p" size="small" color="subtlest" UNSAFE_className="mb-4 leading-[1.7]">
@@ -254,11 +251,11 @@ export function ScopeSection() {
         />
       </div>
 
-      <Callout tone="neutral">
-        <strong style={{ color: DARK }}>The implication:</strong> every design decision had to
+      <Body as="p" size="medium" UNSAFE_className="leading-[1.7]" UNSAFE_style={{ color: DARK }}>
+        <strong>The implication:</strong> every design decision had to
         hold across all three use cases and all three platforms, not just the screen in front of
         you.
-      </Callout>
+      </Body>
     </Section>
   );
 }
@@ -331,11 +328,11 @@ export function BuildingTeamSection() {
         ]}
       />
 
-      <Callout tone="brand">
-        <strong style={{ color: DARK }}>The leadership move:</strong> don&rsquo;t build the
+      <Body as="p" size="medium" UNSAFE_className="leading-[1.7]" UNSAFE_style={{ color: DARK }}>
+        <strong>The leadership move:</strong> don&rsquo;t build the
         system alone. Bring together the people who can, mentor them through a process no one had
         run before, then hand off ownership so it outlasts you.
-      </Callout>
+      </Body>
     </Section>
   );
 }
@@ -434,7 +431,7 @@ export function GovernanceSection() {
       <Lead>The system only stays accurate if ownership is clear, now and as it scales.</Lead>
 
       <div>
-        <Heading as="h3" size="small" weight="default" UNSAFE_className="mb-1" UNSAFE_style={{ color: DARK }}>
+        <Heading as="h3" size="small" weight="default" UNSAFE_className="mb-2" UNSAFE_style={{ color: DARK }}>
           The naming taxonomy
         </Heading>
         <Body as="p" size="small" color="subtlest" UNSAFE_className="mb-4 leading-[1.7]">
@@ -481,8 +478,8 @@ export function GovernanceSection() {
         </Heading>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {GOVERNANCE_CARDS.map((card) => (
-            <div key={card.title} className="rounded-lg p-5" style={{ background: "#ffffff", border: `1px solid ${SEPARATOR}`, borderLeft: "3px solid #0053e2" }}>
-              <Body as="p" size="small" weight="alt" UNSAFE_className="mb-1.5" UNSAFE_style={{ color: DARK }}>
+            <div key={card.title} className="rounded-lg p-6" style={{ background: "#ffffff", border: `1px solid ${SEPARATOR}`, borderLeft: "3px solid #0053e2" }}>
+              <Body as="p" size="small" weight="alt" UNSAFE_className="mb-2" UNSAFE_style={{ color: DARK }}>
                 {card.title}
               </Body>
               <Body as="p" size="small" color="subtlest" UNSAFE_className="leading-[1.6]">
@@ -499,12 +496,12 @@ export function GovernanceSection() {
         </Heading>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
           {TOOL_STACK.map((tool) => (
-            <div key={tool.title} className="rounded-lg p-4 flex gap-3 items-start" style={{ background: "#ffffff", border: `1px solid ${SEPARATOR}` }}>
+            <div key={tool.title} className="rounded-lg p-5 flex gap-3.5 items-start" style={{ background: "#ffffff", border: `1px solid ${SEPARATOR}` }}>
               <span style={{ color: "#0053e2" }}>
                 <Icon name={tool.icon} size="medium" decorative />
               </span>
               <div>
-                <Body as="p" size="small" weight="alt" UNSAFE_className="mb-0.5" UNSAFE_style={{ color: DARK }}>
+                <Body as="p" size="small" weight="alt" UNSAFE_className="mb-1.5" UNSAFE_style={{ color: DARK }}>
                   {tool.title}
                 </Body>
                 <Body as="p" size="small" color="subtlest" UNSAFE_className="leading-[1.55]">
@@ -587,7 +584,7 @@ export function ImpactSection() {
         <Body as="p" size="small" weight="alt" UNSAFE_className="uppercase tracking-[0.1em] mb-3" UNSAFE_style={{ fontSize: "11px", color: "#ffc220" }}>
           The biggest outcome: a reusable framework
         </Body>
-        <Body as="p" size="small" UNSAFE_className="leading-[1.7] mb-5" UNSAFE_style={{ color: "rgba(255,255,255,0.7)" }}>
+        <Body as="p" size="small" UNSAFE_className="leading-[1.7] mb-5" UNSAFE_style={{ color: "rgba(255,255,255,0.78)" }}>
           The chat kit was the first, not the only. The process, taxonomy, and governance built
           for it became the blueprint the org now uses to stand up new kits.
         </Body>
@@ -600,7 +597,7 @@ export function ImpactSection() {
             { icon: "Plus", name: "Recipes & more", status: "Same pattern, new domains" },
           ]}
         />
-        <Body as="p" size="small" UNSAFE_className="mt-5 leading-[1.7]" UNSAFE_style={{ color: "rgba(255,255,255,0.7)" }}>
+        <Body as="p" size="small" UNSAFE_className="mt-5 leading-[1.7]" UNSAFE_style={{ color: "rgba(255,255,255,0.78)" }}>
           A one-off design system solves one problem. A framework for building design systems
           solves every problem of that shape. That was the real deliverable.
         </Body>

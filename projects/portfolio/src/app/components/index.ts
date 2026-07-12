@@ -127,7 +127,6 @@ export * from './SegmentedControl';
 export * from './Select';
 export * from './SelectCard';
 export * from './SelectDropdown';
-export * from './SideNavigation';
 export * from './SignatureCapture';
 export * from './SignatureCaptureBottomSheet';
 export * from './SignatureCapturePanel';

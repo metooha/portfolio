@@ -6,7 +6,7 @@ export default function CaseStudyTypographyPage() {
   return (
     <PageWrapper
       title="Case Study Typography"
-      category="Patterns"
+      category="Case Study Patterns"
       description="Fluid hero type, page titles, section headings, body copy, and badge labels used across portfolio case studies. Tokens map to the Text styles panel in Theme Editor."
     >
       <ExampleSection

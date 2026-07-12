@@ -1,7 +1,6 @@
 import React from "react";
 import { Body } from "@/app/components/Text/Text";
 import {
-  Callout,
   Eyebrow,
   ImageFull,
   ImageGrid2,
@@ -210,12 +209,12 @@ export function WmEmailCompetitiveSection() {
         label="Social proof"
         caption="Social proof and value-prop blocks used across competitor examples."
       />
-      <Callout tone="brand">
+      <Body as="p" size="medium" UNSAFE_className="leading-[1.7]">
         <span className="font-bold">Competitive insight: </span>
         Optimizing content strategy, layout, and visual design with UX principles minimizes cognitive load and
         increases positive emotional responses. Copywriting should be concise and get to the point while
         maintaining a friendly voice. Minimal copy, minimal CTAs, maximum clarity.
-      </Callout>
+      </Body>
     </Section>
   );
 }
@@ -303,11 +302,11 @@ export function WmEmailResultsSection() {
           { value: "+12–14%", label: "1.8M AutoPay & paperless billing signups" },
         ]}
       />
-      <Callout tone="positive">
+      <Body as="p" size="medium" UNSAFE_className="leading-[1.7]" UNSAFE_style={{ color: "rgba(255,255,255,0.8)" }}>
         <span className="font-bold">Additional impact: </span>
         Increased customers opting in for text notifications, a key business objective from the start of
         the project. The modular system enabled personalized messaging for all lines of business at scale.
-      </Callout>
+      </Body>
     </Section>
   );
 }

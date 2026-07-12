@@ -1,7 +1,6 @@
 /* ========================================================================
    AgentSidebar — agent-canvas ("[AK] Sidebar") left rail.
-   Reuses the core SideNavigation `pageNav` design tokens so individual nav
-   items match the Living Design Side Navigation component.
+   Uses the shared `pageNav` design tokens for nav item states.
    ======================================================================== */
 
 .ld-agentsidebar {

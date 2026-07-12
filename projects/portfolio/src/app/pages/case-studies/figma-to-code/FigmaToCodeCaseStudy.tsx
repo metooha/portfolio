@@ -43,7 +43,7 @@ function FigmaToCodeHero() {
   return (
     <CaseStudyHero
       image={imgCover}
-      title={"Building the\nBridge."}
+      title="Building the Bridge."
       titleColor="#ffffff"
       imageWidth={1800}
       imageHeight={470}
@@ -86,7 +86,7 @@ export default function FigmaToCodeCaseStudy() {
         hero={<FigmaToCodeHero />}
         overviewLogo={<FigmaToCodeOverviewLogo />}
         overviewClient="Walmart"
-        overviewCategory="Core Design System, Builder.io, AI Tooling"
+        overviewCategory="Platform Systems, AI Tooling & Acceleration"
         overviewTitle={OVERVIEW_TITLE}
         overviewDescription={OVERVIEW_DESCRIPTION}
         metaItems={[...OVERVIEW_META]}

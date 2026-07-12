@@ -655,8 +655,32 @@ function PipelineLayerBadge({ label, styleKey }: { label: string; styleKey: keyo
 export function AirtablePipelineVisual() {
   return (
     <VisualFrame surface="none">
+      {/* Mobile: each stage stacks top to bottom, arrow rotated to point down. */}
+      <div className="flex flex-col items-stretch gap-3 lg:hidden">
+        {PIPELINE_STEPS.map((step) => (
+          <div key={step.title} className="flex flex-col items-stretch gap-3">
+            <PipelineStepCard title={step.title} body={step.body} icon={step.icon} variant={step.variant} />
+            <div className="flex justify-center">
+              <PipelineLayerBadge label={step.layer} styleKey={step.layerStyle} />
+            </div>
+            <div className="flex justify-center" aria-hidden="true">
+              <PipelineArrow>↓</PipelineArrow>
+            </div>
+          </div>
+        ))}
+        <div className="flex flex-col gap-3">
+          {DELIVERY_TARGETS.map((target) => (
+            <PipelineDeliveryCard key={target.title} {...target} />
+          ))}
+        </div>
+        <div className="flex justify-center">
+          <PipelineLayerBadge label="Delivery layer" styleKey="delivery" />
+        </div>
+      </div>
+
+      {/* Desktop: full pipeline in one row, layer badges aligned under each stage. */}
       <div
-        className="grid w-full items-stretch gap-x-2 gap-y-3"
+        className="hidden w-full items-stretch gap-x-2 gap-y-3 lg:grid"
         style={{
           gridTemplateColumns:
             "minmax(0,1fr) auto minmax(0,1fr) auto minmax(0,1fr) auto minmax(0,0.8fr)",
@@ -745,41 +769,56 @@ const INHERITANCE_LAYERS = [
   },
 ] as const;
 
+function InheritanceCard({ card }: { card: (typeof INHERITANCE_LAYERS)[number] }) {
+  return (
+    <div
+      className={`min-w-0 ${RADIUS_SM} overflow-hidden flex flex-col h-full`}
+      style={{
+        background: "var(--ld-semantic-color-fill, #ffffff)",
+        border: "1px solid var(--ld-semantic-color-separator, #e3e4e5)",
+      }}
+    >
+      <div className="h-36 flex items-center justify-center p-2 shrink-0">
+        <img src={card.image} alt="" className="max-h-full max-w-full object-contain" loading="lazy" decoding="async" />
+      </div>
+      <div className="p-4 flex-1 flex flex-col">
+        <Body as="p" size="small" weight="alt" color="brand" UNSAFE_className="uppercase tracking-wide mb-1 text-[11px]">
+          {card.layer}
+        </Body>
+        <Body as="p" size="small" weight="alt" UNSAFE_className="mb-2 leading-snug" UNSAFE_style={{ color: NAVY }}>
+          {card.title}
+        </Body>
+        <Body as="p" size="small" color="subtlest" UNSAFE_className="leading-[1.6] text-[13px] flex-1">
+          {card.body}
+        </Body>
+      </div>
+    </div>
+  );
+}
+
 export function AirtableInheritanceVisual() {
   return (
     <VisualFrame surface="none">
-      <div className="overflow-x-auto">
+      {/* Mobile: cards stack top to bottom, "inherits" arrow rotated to point down. */}
+      <div className="flex flex-col gap-2 lg:hidden">
+        {INHERITANCE_LAYERS.map((card, index) => (
+          <React.Fragment key={card.title}>
+            <InheritanceCard card={card} />
+            {index < INHERITANCE_LAYERS.length - 1 && (
+              <Body as="span" size="small" color="subtlest" UNSAFE_className="self-center text-[12px] whitespace-nowrap px-1">
+                inherits ↓
+              </Body>
+            )}
+          </React.Fragment>
+        ))}
+      </div>
+
+      {/* Desktop: full row, horizontal scroll only kicks in below the row's natural width. */}
+      <div className="hidden overflow-x-auto lg:block">
         <div className="grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)_auto_minmax(0,1fr)_auto_minmax(0,1fr)] items-stretch gap-2 min-w-[880px]">
           {INHERITANCE_LAYERS.map((card, index) => (
             <React.Fragment key={card.title}>
-              <div
-                className={`min-w-0 ${RADIUS_SM} overflow-hidden flex flex-col h-full`}
-                style={{
-                  background: "var(--ld-semantic-color-fill, #ffffff)",
-                  border: "1px solid var(--ld-semantic-color-separator, #e3e4e5)",
-                }}
-              >
-                <div className="h-36 flex items-center justify-center p-2 shrink-0">
-                  <img src={card.image} alt="" className="max-h-full max-w-full object-contain" loading="lazy" decoding="async" />
-                </div>
-                <div className="p-4 flex-1 flex flex-col">
-                  <Body
-                    as="p"
-                    size="small"
-                    weight="alt"
-                    color="brand"
-                    UNSAFE_className="uppercase tracking-wide mb-1 text-[11px]"
-                  >
-                    {card.layer}
-                  </Body>
-                  <Body as="p" size="small" weight="alt" UNSAFE_className="mb-2 leading-snug" UNSAFE_style={{ color: NAVY }}>
-                    {card.title}
-                  </Body>
-                  <Body as="p" size="small" color="subtlest" UNSAFE_className="leading-[1.6] text-[13px] flex-1">
-                    {card.body}
-                  </Body>
-                </div>
-              </div>
+              <InheritanceCard card={card} />
               {index < INHERITANCE_LAYERS.length - 1 && (
                 <Body as="span" size="small" color="subtlest" UNSAFE_className="shrink-0 self-center text-[12px] whitespace-nowrap px-1">
                   inherits →

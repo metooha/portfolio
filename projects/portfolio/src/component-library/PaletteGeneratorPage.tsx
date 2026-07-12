@@ -16,8 +16,6 @@ import {
   ScrollArea,
   SearchBar,
   SegmentedControl,
-  SideNavigation,
-  SideNavigationItem,
   TextField,
 } from '@/app/components';
 import './PaletteGeneratorPage.css';
@@ -439,22 +437,23 @@ function ThemeNavItem({
             }}
           />
         ) : (
-          <SideNavigationItem
+          <a
             href="#"
-            isCurrent={isCurrent}
-            leading={
-              swatchColors && swatchColors.length > 1
-                ? <SwatchMarkGrid colors={swatchColors} />
-                : <SwatchMark color={swatchColor ?? swatchColors?.[0] ?? resolveCssColor('--ld-semantic-color-separator', '#e6e6e8')} />
-            }
+            aria-current={isCurrent ? 'page' : undefined}
+            className="palette-generator__nav-link"
             onClick={(event) => {
               event.preventDefault();
               onSelect();
             }}
             title={compact ? label : undefined}
           >
+            <span className="palette-generator__nav-link-leading">
+              {swatchColors && swatchColors.length > 1
+                ? <SwatchMarkGrid colors={swatchColors} />
+                : <SwatchMark color={swatchColor ?? swatchColors?.[0] ?? resolveCssColor('--ld-semantic-color-separator', '#e6e6e8')} />}
+            </span>
             {!compact ? label : null}
-          </SideNavigationItem>
+          </a>
         )}
       </div>
       {!editing && !compact && (
@@ -586,7 +585,7 @@ function ThemesSidebar({
         )}
       </div>
       <ScrollArea a11yLabel="Themes and palettes" className="palette-generator__sidebar-scroll">
-        <SideNavigation aria-label="Theme and palette navigation">
+        <nav aria-label="Theme and palette navigation" className="palette-generator__nav-list">
           {!collapsed && (
             <Caption as="p" color="subtlest" UNSAFE_className="palette-generator__nav-section-label">
               Brand
@@ -628,7 +627,7 @@ function ThemesSidebar({
               onDelete={palette.isBuiltIn ? undefined : () => onDeleteCampaign(palette.id)}
             />
           ))}
-        </SideNavigation>
+        </nav>
       </ScrollArea>
       {!collapsed && (
         <Caption as="p" color="subtlest" UNSAFE_className="palette-generator__nav-footer">

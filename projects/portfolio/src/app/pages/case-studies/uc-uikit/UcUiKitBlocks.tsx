@@ -58,7 +58,7 @@ export function UseCaseGrid({
           className="rounded-[10px] overflow-hidden flex flex-col"
           style={{ border: `1px solid ${SEPARATOR}` }}
         >
-          <div className="p-5 flex flex-col gap-2" style={{ background: item.headerColor }}>
+          <div className="p-6 flex flex-col gap-3" style={{ background: item.headerColor }}>
             <span style={{ color: "#ffffff" }}>
               <Icon name={item.icon} size="medium" decorative />
             </span>
@@ -66,7 +66,7 @@ export function UseCaseGrid({
               {item.type}
             </Body>
           </div>
-          <div className="p-5 bg-white flex-1 flex flex-col gap-3">
+          <div className="p-6 bg-white flex-1 flex flex-col gap-4">
             <Body
               as="p"
               size="small"
@@ -116,13 +116,13 @@ export function PlatformMatrix({
       >
         <div />
         {columns.map((c) => (
-          <div key={c} className="px-3 py-3">
+          <div key={c} className="px-4 py-4">
             <Body
               as="p"
               size="small"
               weight="alt"
               UNSAFE_className="uppercase tracking-[0.08em]"
-              UNSAFE_style={{ fontSize: "10px", color: "rgba(255,255,255,0.6)" }}
+              UNSAFE_style={{ fontSize: "10px", color: "rgba(255,255,255,0.75)" }}
             >
               {c}
             </Body>
@@ -139,7 +139,7 @@ export function PlatformMatrix({
             background: row.infra ? "var(--ld-semantic-color-fill-subtle, #f8f8f8)" : "#ffffff",
           }}
         >
-          <div className="px-4 py-3 flex items-center" style={{ borderRight: `1px solid ${SEPARATOR}` }}>
+          <div className="px-4 py-4 flex items-center" style={{ borderRight: `1px solid ${SEPARATOR}` }}>
             <Body
               as="p"
               size="small"
@@ -151,7 +151,7 @@ export function PlatformMatrix({
             </Body>
           </div>
           {row.cells.map((cell, i) => (
-            <div key={i} className="px-3 py-3 flex items-center" style={{ borderLeft: `1px solid ${SEPARATOR}` }}>
+            <div key={i} className="px-4 py-4 flex items-center" style={{ borderLeft: `1px solid ${SEPARATOR}` }}>
               <Body as="p" size="small" UNSAFE_style={{ color: row.infra ? "var(--ld-semantic-color-text-subtlest, #74767c)" : DARK, fontSize: "13px" }}>
                 {cell}
               </Body>
@@ -177,7 +177,7 @@ export function NamingTaxonomy({
   }[];
 }) {
   const TONE: Record<string, { bg: string; badgeBg: string; badgeColor: string; titleColor: string; descColor: string; chipBg: string; chipColor: string }> = {
-    published: { bg: DARK, badgeBg: SPARK, badgeColor: DARK, titleColor: "#ffffff", descColor: "rgba(255,255,255,0.5)", chipBg: "rgba(255,255,255,0.1)", chipColor: "rgba(255,255,255,0.7)" },
+    published: { bg: DARK, badgeBg: SPARK, badgeColor: DARK, titleColor: "#ffffff", descColor: "rgba(255,255,255,0.78)", chipBg: "rgba(255,255,255,0.16)", chipColor: "rgba(255,255,255,0.92)" },
     sub: { bg: "rgba(0,83,226,0.06)", badgeBg: ACCENT, badgeColor: "#ffffff", titleColor: DARK, descColor: "var(--ld-semantic-color-text-subtlest, #74767c)", chipBg: "rgba(0,83,226,0.1)", chipColor: ACCENT },
     base: { bg: "rgba(78,189,245,0.1)", badgeBg: "#4ebdf5", badgeColor: DARK, titleColor: DARK, descColor: "var(--ld-semantic-color-text-subtlest, #74767c)", chipBg: "rgba(78,189,245,0.18)", chipColor: "#0369a1" },
     atom: { bg: "#ffffff", badgeBg: SEPARATOR, badgeColor: "var(--ld-semantic-color-text-subtlest, #74767c)", titleColor: DARK, descColor: "var(--ld-semantic-color-text-subtlest, #74767c)", chipBg: "var(--ld-semantic-color-fill-subtle, #f8f8f8)", chipColor: "var(--ld-semantic-color-text-subtlest, #74767c)" },
@@ -190,7 +190,7 @@ export function NamingTaxonomy({
         return (
           <React.Fragment key={level.title}>
             <div
-              className="rounded-lg p-4 flex flex-col gap-2"
+              className="rounded-lg p-5 flex flex-col gap-2.5"
               style={{ background: t.bg, border: level.tone === "atom" ? `1px solid ${SEPARATOR}` : level.tone === "sub" ? "1px solid rgba(0,83,226,0.15)" : level.tone === "base" ? "1px solid rgba(78,189,245,0.2)" : undefined }}
             >
               <span
@@ -283,19 +283,19 @@ export function FrameworkKits({
       {kits.map((kit) => (
         <div
           key={kit.name}
-          className="rounded-lg p-3.5 flex flex-col gap-2"
+          className="rounded-lg p-4 flex flex-col gap-2.5"
           style={{
             background: kit.done ? "rgba(255,194,32,0.14)" : "rgba(255,255,255,0.06)",
             border: kit.done ? "1px solid rgba(255,194,32,0.3)" : "1px solid rgba(255,255,255,0.1)",
           }}
         >
-          <span style={{ color: kit.done ? SPARK : "rgba(255,255,255,0.55)" }}>
+          <span style={{ color: kit.done ? SPARK : "rgba(255,255,255,0.75)" }}>
             <Icon name={kit.icon} size="medium" decorative />
           </span>
           <Body as="p" size="small" weight="alt" UNSAFE_style={{ color: "#ffffff", fontSize: "13px" }}>
             {kit.name}
           </Body>
-          <Body as="p" size="small" UNSAFE_style={{ color: kit.done ? SPARK : "rgba(255,255,255,0.45)", fontSize: "11px" }}>
+          <Body as="p" size="small" UNSAFE_style={{ color: kit.done ? SPARK : "rgba(255,255,255,0.72)", fontSize: "11px" }}>
             {kit.status}
           </Body>
         </div>
@@ -315,7 +315,7 @@ export function LayerStack({
       {layers.map((layer, i) => (
         <React.Fragment key={layer.title}>
           <div
-            className="flex-1 rounded-lg p-4"
+            className="flex-1 rounded-lg p-5"
             style={{
               background: layer.highlight ? "rgba(0,83,226,0.05)" : "#ffffff",
               border: layer.highlight ? `1px solid ${ACCENT}` : `1px solid ${SEPARATOR}`,
@@ -324,12 +324,12 @@ export function LayerStack({
             <Body as="p" size="small" weight="alt" UNSAFE_style={{ color: layer.highlight ? ACCENT : DARK, fontSize: "13px" }}>
               {layer.title}
             </Body>
-            <Body as="p" size="small" color="subtlest" UNSAFE_className="mt-1 leading-snug" UNSAFE_style={{ fontSize: "12px" }}>
+            <Body as="p" size="small" color="subtlest" UNSAFE_className="mt-2 leading-snug" UNSAFE_style={{ fontSize: "12px" }}>
               {layer.detail}
             </Body>
           </div>
           {i < layers.length - 1 && (
-            <div className="flex items-center justify-center shrink-0" style={{ color: SEPARATOR }}>
+            <div className="flex items-center justify-center shrink-0" style={{ color: "#9aa9c9" }}>
               <Icon name="ArrowRight" size="small" decorative />
             </div>
           )}

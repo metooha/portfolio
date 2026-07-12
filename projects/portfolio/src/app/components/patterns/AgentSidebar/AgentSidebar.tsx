@@ -3,9 +3,8 @@
 /**
  * AgentSidebar — the agent-canvas ("[AK] Sidebar") left rail.
  *
- * A compound sidebar built for agent-driven experiences. It extends the core
- * {@link SideNavigationItem} styling (the same `pageNav` design tokens) with
- * features the core Side Navigation doesn't have:
+ * A compound sidebar built for agent-driven experiences. It uses the shared
+ * `pageNav` design tokens with agent-specific behaviors:
  *
  *  - **Collapse to an icon-only rail** (300px ↔ 57px) via context.
  *  - **Editable app-name header** (click the title to rename).

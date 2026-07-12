@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {Body} from '@/app/components/Text/Text';
 import {Badge} from '@/app/components/Badge/Badge';
-import {SideNavigation, SideNavigationItem} from '@/app/components/SideNavigation/SideNavigation';
 import {ChevronDownIcon} from '@/app/components/Icons/Icons';
 import {THEME_PRESETS, THEME_FONT_CONFIG, getTheme, setTheme, getMegaMode, setMegaMode, MEGA_CHANGE_EVENT, getCustomThemeNames, getThemePrimaryColor} from '@/app/components/utils/themeManager';
 import {getCustomTheme, CUSTOM_THEMES_EVENT} from '@/app/components/utils/customThemes';
@@ -13,6 +12,59 @@ const SIDE_NAV_STORAGE_KEY = 'ld-kit-nav-sections';
 // Restrict route ids used in href to a safe, fragment-only character set.
 // Prevents any non-anchor characters from flowing into the href attribute.
 const sanitizeFragmentId = (id: string): string => id.replace(/[^a-zA-Z0-9_-]/g, '');
+
+function LibraryNavList({
+  label,
+  children,
+}: {
+  label: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <nav aria-label={label}>
+      <ul style={{display: 'grid', gap: '2px', listStyle: 'none', margin: 0, padding: 0}}>
+        {children}
+      </ul>
+    </nav>
+  );
+}
+
+function LibraryNavItem({
+  href,
+  isCurrent,
+  onClick,
+  children,
+}: {
+  href: string;
+  isCurrent: boolean;
+  onClick: (event: React.MouseEvent<HTMLAnchorElement>) => void;
+  children: React.ReactNode;
+}) {
+  return (
+    <li>
+      <a
+        href={href}
+        aria-current={isCurrent ? 'page' : undefined}
+        onClick={onClick}
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          minHeight: '32px',
+          borderRadius: '6px',
+          padding: '6px 12px',
+          color: isCurrent ? '#004f9a' : '#2E2F32',
+          background: isCurrent ? '#E6F1FC' : 'transparent',
+          fontSize: '13px',
+          fontWeight: isCurrent ? 700 : 500,
+          lineHeight: 1.3,
+          textDecoration: 'none',
+        }}
+      >
+        {children}
+      </a>
+    </li>
+  );
+}
 
 /* ── Extras menu (… overflow on the theme footer) ────────────────
  * Add new options by appending to `extrasOptions` inside AppNav.
@@ -335,18 +387,18 @@ export default function AppNav({currentRoute, navigate, topOffset = 0, isDrawer 
       }}>
         {filteredTopItems.length > 0 && (
           <div style={{ marginTop: '12px', marginBottom: filteredSections.length > 0 ? '20px' : '12px' }}>
-            <SideNavigation aria-label="Overview Navigation">
+            <LibraryNavList label="Overview Navigation">
               {filteredTopItems.map((item) => (
-                <SideNavigationItem
+                <LibraryNavItem
                   key={item.id}
                   href={`#${sanitizeFragmentId(item.id)}`}
                   isCurrent={currentRoute === item.id}
                   onClick={(e: React.MouseEvent<HTMLAnchorElement>) => handleNavClick(e, item.id)}
                 >
                   {item.name}
-                </SideNavigationItem>
+                </LibraryNavItem>
               ))}
-            </SideNavigation>
+            </LibraryNavList>
           </div>
         )}
         {filteredSections.map((section, sectionIndex) => {
@@ -391,18 +443,18 @@ export default function AppNav({currentRoute, navigate, topOffset = 0, isDrawer 
                 </span>
               </button>
               {openSections[section.id] && (
-                <SideNavigation aria-label={`${section.title} Navigation`}>
+                <LibraryNavList label={`${section.title} Navigation`}>
                   {section.items.map((item) => (
-                    <SideNavigationItem
+                    <LibraryNavItem
                       key={item.id}
                       href={`#${sanitizeFragmentId(item.id)}`}
                       isCurrent={currentRoute === item.id}
                       onClick={(e: React.MouseEvent<HTMLAnchorElement>) => handleNavClick(e, item.id)}
                     >
                       {item.name}
-                    </SideNavigationItem>
+                    </LibraryNavItem>
                   ))}
-                </SideNavigation>
+                </LibraryNavList>
               )}
             </div>
           );

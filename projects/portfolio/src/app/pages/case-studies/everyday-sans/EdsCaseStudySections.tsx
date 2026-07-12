@@ -14,7 +14,6 @@ import imgLanguageCoverage from "@/app/assets/pages/case-study/everyday-sans/lan
 import imgLanguageFrench from "@/app/assets/pages/case-study/everyday-sans/language-french.jpg";
 import imgLanguageSpanish from "@/app/assets/pages/case-study/everyday-sans/language-spanish.jpg";
 import { Link } from "@/app/components/Link";
-import { Callout } from "@/app/components/CaseStudyPrimitives";
 import {
   EdsBeforeAfter,
   EdsEmbedFull,
@@ -182,11 +181,11 @@ export function EdsProblemSpaceSection() {
           },
         ]}
       />
-      <Callout tone="brand">
+      <Body as="p" size="medium" UNSAFE_className="leading-[1.7]">
         <strong>The pitch:</strong> when Brand asked for a Medium weight and Engineering said no on performance
         grounds, I reframed the ask. Instead of negotiating one weight at a time, I proposed a variable font as
         the permanent fix and made the case to Brand to fund the investment.
-      </Callout>
+      </Body>
     </EdsSection>
   );
 }

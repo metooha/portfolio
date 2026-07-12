@@ -78,6 +78,37 @@
   padding: 12px 16px 4px;
 }
 
+.ld-wcp-account-side-nav-list {
+  display: grid;
+  gap: 2px;
+  list-style: none;
+  margin: 0;
+  padding: 0 8px;
+}
+
+.ld-wcp-account-side-nav-link {
+  align-items: center;
+  border-radius: 6px;
+  color: #2e2f32;
+  display: flex;
+  font-size: 14px;
+  font-weight: 500;
+  min-height: 36px;
+  padding: 8px;
+  text-decoration: none;
+}
+
+.ld-wcp-account-side-nav-link:hover {
+  background: #f7f7f8;
+  text-decoration: none;
+}
+
+.ld-wcp-account-side-nav-link-current {
+  background: #e6f1fc;
+  color: #004f9a;
+  font-weight: 700;
+}
+
 .ld-wcp-account-side-nav-nav-item-content {
   display: flex;
   align-items: center;

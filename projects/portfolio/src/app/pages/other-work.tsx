@@ -16,7 +16,7 @@ export function OtherWork() {
           A collection of visual design work: illustration, motion, branding, and portraits made
           alongside my product and systems work.
         </Body>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 gap-8">
           {otherWork.map((work) => (
             <Link
               key={work.id}
@@ -25,7 +25,12 @@ export function OtherWork() {
             >
               <Card size="small" UNSAFE_className="overflow-hidden shadow-md hover:shadow-xl transition-shadow h-full">
                 <CardMedia>
-                  <div className="aspect-video overflow-hidden bg-white">
+                  <div className="relative aspect-video overflow-hidden bg-white">
+                    <div className="absolute right-4 top-4 z-10">
+                      <Tag color="gray" size="small">
+                        {work.category}
+                      </Tag>
+                    </div>
                     {work.image ? (
                       <img
                         src={work.image}
@@ -41,11 +46,6 @@ export function OtherWork() {
                 <CardHeader
                   title={work.title}
                   headingLevel="h3"
-                  trailing={
-                    <Tag color="gray" size="small">
-                      {work.category}
-                    </Tag>
-                  }
                 />
                 <CardContent>
                   <Body as="p" size="small" color="subtle">

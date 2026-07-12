@@ -81,16 +81,12 @@ import {
   UploadImagePage,
   UploadFilePage,
   CarouselsAndGridsPage,
-  FooterPatternsPage,
-  OrderCardPatternsPage,
-  OrderStatusCardsPage,
   QueuePatternsPage,
   SearchResultsPage,
   SideNavPage,
   HeaderPage,
   SpinButtonPage,
   TooltipPage,
-  TreePage,
   SliderPage,
   AlertDialogPage,
   CommandPage,
@@ -106,11 +102,8 @@ import {
   DataVizPage,
   AgentCanvasPage,
   ProcessingTracePage,
-  // Ported from ax-px-migration
-  AssociatePatternsPage,
   AttributePage,
   ButtonGroupPage,
-  ClockingWidgetPage,
   DataTableConfigPanelPage,
   DatePickerCalendarPage,
   DateRangePickerPage,
@@ -123,10 +116,6 @@ import {
   ItemRecommendationPage,
   ItemTileCondensedPage,
   LanguageSelectorPage,
-  ListActionPage,
-  ListAssociatePage,
-  ListGoalPage,
-  ListMembersPage,
   LocationBreadcrumbPage,
   MenubarPage,
   MetricGroupPage,
@@ -136,10 +125,8 @@ import {
   PopoverPage,
   RatingDisplayPage,
   ResizablePage,
-  ScheduleWidgetPage,
   ScrimOverlayPage,
   SidebarPage,
-  SideNavigationPage,
   SnackbarPage,
   ToggleGroupPage,
   AspectRatioPage,
@@ -185,9 +172,6 @@ import {
   FlashDealsItemTilePage,
   AppHeaderPage,
   AxBottomNavPage,
-  MaintenanceHealthCardPage,
-  DelayedDeliveryCardPage,
-  AutoCareUpsellOfferCardPage,
   AgentSidebarPage,
   CaseStudyTemplatePage,
   CaseStudyComponentsPage,
@@ -261,10 +245,7 @@ function PageRouter({route, navigate}: {route: string; navigate: (r: string) => 
     case 'patterns-processing-trace': return <ProcessingTracePage />;
     case 'patterns-carousels-grids': return <CarouselsAndGridsPage />;
     case 'patterns-data-viz': return <DataVizPage />;
-    case 'patterns-footer': return <FooterPatternsPage />;
     case 'patterns-header': return <HeaderPage />;
-    case 'patterns-order-card': return <OrderCardPatternsPage />;
-    case 'patterns-order-status': return <OrderStatusCardsPage />;
     case 'patterns-queue': return <QueuePatternsPage />;
     case 'patterns-search-results': return <SearchResultsPage />;
     case 'patterns-side-navigation': return <SideNavPage />;
@@ -350,7 +331,6 @@ function PageRouter({route, navigate}: {route: string; navigate: (r: string) => 
     case 'components-timer-view': return <TimerViewPage />;
     case 'components-toggle': return <TogglePage />;
     case 'components-tooltip': return <TooltipPage />;
-    case 'components-tree': return <TreePage />;
     case 'components-upload-image': return <UploadImagePage />;
     case 'components-upload-file': return <UploadFilePage />;
 
@@ -379,7 +359,6 @@ function PageRouter({route, navigate}: {route: string; navigate: (r: string) => 
     case 'components-sidebar': return <SidebarPage />;
     case 'components-snackbar': return <SnackbarPage />;
     case 'components-toggle-group': return <ToggleGroupPage />;
-    case 'components-action-group-walmart': return <ButtonGroupPage />;
 
     // ── Component pages (waves 1–4) ──────────────────────────────
     case 'components-label': return <LabelPage />;
@@ -422,25 +401,14 @@ function PageRouter({route, navigate}: {route: string; navigate: (r: string) => 
     case 'patterns-flash-deals-item-tile': return <FlashDealsItemTilePage />;
     case 'patterns-app-header': return <AppHeaderPage />;
     case 'patterns-ax-bottom-nav': return <AxBottomNavPage />;
-    case 'patterns-maintenance-health-card': return <MaintenanceHealthCardPage />;
-    case 'patterns-delayed-delivery-card': return <DelayedDeliveryCardPage />;
-    case 'patterns-auto-care-upsell-offer-card': return <AutoCareUpsellOfferCardPage />;
     case 'patterns-agent-sidebar': return <AgentSidebarPage />;
     case 'patterns-case-study-template': return <CaseStudyTemplatePage />;
     case 'patterns-case-study-components': return <CaseStudyComponentsPage />;
     case 'patterns-case-study-typography': return <CaseStudyTypographyPage />;
     case 'patterns-case-study-primitives': return <CaseStudyPrimitivesPage />;
 
-    case 'patterns-associate': return <AssociatePatternsPage />;
-    case 'patterns-clocking-widget': return <ClockingWidgetPage />;
-    case 'patterns-list-action': return <ListActionPage />;
-    case 'patterns-list-associate': return <ListAssociatePage />;
-    case 'patterns-list-goal': return <ListGoalPage />;
-    case 'patterns-list-members': return <ListMembersPage />;
     case 'patterns-mobile-mega-nav': return <MobileMegaNavPage />;
     case 'patterns-native-navigation': return <NativeNavigationPage />;
-    case 'patterns-schedule-widget': return <ScheduleWidgetPage />;
-    case 'patterns-side-navigation-ax': return <SideNavigationPage />;
 
     default: return <OverviewPage navigate={navigate} />;
   }

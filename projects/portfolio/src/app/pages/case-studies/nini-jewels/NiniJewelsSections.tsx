@@ -1,7 +1,6 @@
 import React from "react";
 import { Body } from "@/app/components/Text/Text";
 import {
-  Callout,
   Eyebrow,
   ImageCarousel,
   ImageFull,
@@ -122,11 +121,11 @@ export function NiniTensionSection() {
           ],
         }}
       />
-      <Callout tone="neutral">
+      <Body as="p" size="medium" UNSAFE_className="leading-[1.7]">
         <span className="font-bold">How it resolved: </span>
         strip it back to a black-and-white stage, commit to one brand system, and rebuild the structure so the team
         can grow it themselves.
-      </Callout>
+      </Body>
     </Section>
   );
 }

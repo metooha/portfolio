@@ -6,7 +6,7 @@ export default function CaseStudyTemplatePage() {
   return (
     <PageWrapper
       title="Case Study Template"
-      category="Patterns"
+      category="Case Study Patterns"
       description="The full case study page shell: hero, overview, metadata, sticky section navigation, and content sections. Compose individual building blocks inside CaseStudyTemplate for new portfolio case studies."
     >
       <ExampleSection

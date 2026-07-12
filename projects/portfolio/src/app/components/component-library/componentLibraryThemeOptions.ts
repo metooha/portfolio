@@ -200,7 +200,6 @@ export const COMPONENT_NAMES = [
   "Select",
   "SelectCard",
   "SelectDropdown",
-  "SideNavigation",
   "SignatureCapture",
   "SignatureCaptureBottomSheet",
   "SignatureCapturePanel",

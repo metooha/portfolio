@@ -9,6 +9,7 @@ import {
   SectionTitle,
   StatCards,
   StatsRow,
+  TestimonialShowcase,
 } from '@/app/components/CaseStudyPrimitives';
 import { DocsCard, DocsGrid, ExampleSection, PageWrapper } from './shared';
 
@@ -25,7 +26,7 @@ export default function CaseStudyPrimitivesPage() {
   return (
     <PageWrapper
       title="Case Study Primitives"
-      category="Patterns"
+      category="Case Study Patterns"
       description="Shared building blocks for case study narrative sections: eyebrow + section title + lead copy, pull quotes, stat rows, and before/after comparisons. Used across the Everyday Sans, Airtable, Oportun, and Carbon Auto-Orientation case studies."
     >
       <ExampleSection title="Eyebrow + SectionTitle + Lead" description="The standard section-opening typography stack.">
@@ -46,6 +47,60 @@ export default function CaseStudyPrimitivesPage() {
           <QuoteBlock
             quote="The variable font ended that trade-off — permanently."
             attribution="Principal Designer, Living Design"
+          />
+        </DocsCard>
+      </ExampleSection>
+
+      <ExampleSection title="TestimonialShowcase" description="A statement panel plus testimonial cards for adoption, pilot feedback, and customer quotes.">
+        <DocsCard>
+          <TestimonialShowcase
+            statement={
+              <>
+                Innovative builders using AI tools collaboratively to create prototypes.
+              </>
+            }
+            testimonials={[
+              {
+                role: 'Engineering Manager',
+                team: 'Internal dev tools',
+                initials: 'EM',
+                quote: (
+                  <>
+                    Builder.io has significantly enhanced our team&apos;s productivity. <strong>Convert Figma designs into code</strong>, enabling us to accelerate our workflows.
+                  </>
+                ),
+              },
+              {
+                role: 'Sr. Designer',
+                team: 'Customer Product',
+                initials: 'SD',
+                quote: (
+                  <>
+                    It enables us to quickly create high-quality, data-driven prototypes that <strong>effectively showcase our commitment to customers.</strong>
+                  </>
+                ),
+              },
+              {
+                role: 'Sr. Designer',
+                team: 'B2B Product',
+                initials: 'SD',
+                quote: (
+                  <>
+                    Builder.io has been a game changer for our team... <strong>creates prototypes that closely mirror our Figma designs.</strong>
+                  </>
+                ),
+              },
+              {
+                role: 'Sr. Designer',
+                team: 'B2B Product',
+                initials: 'SD',
+                quote: (
+                  <>
+                    Builder.io has <strong>sped up Connect&apos;s prototyping process</strong> without starting from scratch.
+                  </>
+                ),
+              },
+            ]}
           />
         </DocsCard>
       </ExampleSection>

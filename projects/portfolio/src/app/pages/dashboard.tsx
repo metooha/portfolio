@@ -20,10 +20,6 @@ import { IconButton } from "@/app/components/IconButton/IconButton";
 import { PageContainer } from "@/app/components/layout";
 import { PageHeader } from "@/app/components/PageHeader/PageHeader";
 import { Select } from "@/app/components/Select/Select";
-import {
-  SideNavigation,
-  SideNavigationItem,
-} from "@/app/components/SideNavigation/SideNavigation";
 import { SnackbarProvider, useSnackbar } from "@/app/components/Snackbar/Snackbar";
 import { Tag } from "@/app/components/Tag/Tag";
 import { TextField } from "@/app/components/TextField/TextField";
@@ -690,21 +686,25 @@ function DashboardContent() {
       <PageContainer as="main" maxWidth="max-w-[1660px]" className="admin-page__content">
         <div className="admin-settings-layout">
           <aside className="admin-settings-layout__nav">
-            <SideNavigation aria-label="Settings">
-              {SETTINGS_SECTIONS.map((section) => (
-                <SideNavigationItem
-                  key={section.id}
-                  href="#"
-                  isCurrent={activeSection === section.id}
-                  onClick={(event) => {
-                    event.preventDefault();
-                    setActiveSection(section.id);
-                  }}
-                >
-                  {section.label}
-                </SideNavigationItem>
-              ))}
-            </SideNavigation>
+            <nav aria-label="Settings">
+              <ul className="admin-settings-nav-list">
+                {SETTINGS_SECTIONS.map((section) => (
+                  <li key={section.id}>
+                    <Button
+                      type="button"
+                      variant={activeSection === section.id ? "secondary" : "tertiary"}
+                      size="small"
+                      isFullWidth
+                      aria-current={activeSection === section.id ? "page" : undefined}
+                      UNSAFE_className="admin-settings-nav-button"
+                      onClick={() => setActiveSection(section.id)}
+                    >
+                      {section.label}
+                    </Button>
+                  </li>
+                ))}
+              </ul>
+            </nav>
           </aside>
 
           <section className="admin-settings-layout__panel">

@@ -9,9 +9,8 @@
  *   A data-driven, self-contained sidebar that renders a complete nav from
  *   a `menuItems` array with hover-to-expand, lock, resize, and submenus.
  *
- * Both variants use `SideNavigationItem` from core for individual nav items
- * and share the same `ld/semantic/color/pageNav/*` design tokens from the
- * Living Design system.
+ * Both variants share the `ld/semantic/color/pageNav/*` design tokens from
+ * the Living Design system.
  */
 import * as React from 'react';
 

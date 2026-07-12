@@ -130,6 +130,128 @@ export function Lead({
   );
 }
 
+export interface TestimonialItem {
+  name?: string;
+  role: string;
+  team?: string;
+  quote: React.ReactNode;
+  avatarSrc?: string;
+  avatarAlt?: string;
+  initials?: string;
+}
+
+export function TestimonialShowcase({
+  statement,
+  testimonials,
+  ariaLabel = "Testimonials",
+}: {
+  statement: React.ReactNode;
+  testimonials: TestimonialItem[];
+  ariaLabel?: string;
+}) {
+  return (
+    <section
+      aria-label={ariaLabel}
+      className="grid gap-5 rounded-[24px] p-4 md:grid-cols-3 md:p-6"
+      style={{
+        background: "var(--ld-semantic-color-fill-brand-subtle, #edf3ff)",
+      }}
+    >
+      <div
+        className="flex min-h-[230px] items-start rounded-[16px] p-7 md:row-span-2"
+        style={{
+          background: "var(--ld-semantic-color-fill-brand, #0053e2)",
+          boxShadow: "var(--ld-semantic-elevation-100, 0 1px 2px rgba(0,0,0,0.08))",
+        }}
+      >
+        <Heading
+          as="h3"
+          size="medium"
+          weight="default"
+          UNSAFE_className="leading-[1.12]"
+          UNSAFE_style={{
+            color: "var(--ld-semantic-color-text-inverse, #ffffff)",
+            fontSize: fluidSize(26, 38, 2.2),
+          }}
+        >
+          {statement}
+        </Heading>
+      </div>
+
+      {testimonials.map((testimonial, index) => {
+        const fallbackInitials =
+          testimonial.initials ??
+          testimonial.role
+            .split(/\s+/)
+            .filter(Boolean)
+            .slice(0, 2)
+            .map((word) => word[0]?.toUpperCase())
+            .join("");
+
+        return (
+          <article
+            key={`${testimonial.role}-${testimonial.team ?? "testimonial"}-${index}`}
+            className="flex flex-col rounded-[16px] p-6"
+            style={{
+              background: "var(--ld-semantic-color-surface, #ffffff)",
+              border: "1px solid var(--ld-semantic-color-separator, #d8dadd)",
+              boxShadow: "var(--ld-semantic-elevation-100, 0 1px 2px rgba(0,0,0,0.08))",
+            }}
+          >
+            <div className="flex items-start gap-4">
+              {testimonial.avatarSrc ? (
+                <img
+                  src={testimonial.avatarSrc}
+                  alt={testimonial.avatarAlt ?? ""}
+                  className="h-16 w-16 shrink-0 rounded-[10px] object-cover"
+                  loading="lazy"
+                  decoding="async"
+                />
+              ) : (
+                <div
+                  aria-hidden="true"
+                  className="flex h-16 w-16 shrink-0 items-center justify-center rounded-[10px] text-lg font-bold"
+                  style={{
+                    background: "var(--ld-primitive-color-blue-10, #e6f1fc)",
+                    color: "var(--ld-semantic-color-text-brand, #0053e2)",
+                  }}
+                >
+                  {fallbackInitials}
+                </div>
+              )}
+              <div className="min-w-0 pt-2">
+                {testimonial.name ? (
+                  <Body as="p" size="small" weight="alt" UNSAFE_className="mb-0.5">
+                    {testimonial.name}
+                  </Body>
+                ) : null}
+                <Body as="p" size="small" weight="alt" UNSAFE_className="mb-1 leading-tight">
+                  {testimonial.role}
+                </Body>
+                {testimonial.team ? (
+                  <Body as="p" size="small" color="subtlest" UNSAFE_className="leading-tight">
+                    {testimonial.team}
+                  </Body>
+                ) : null}
+              </div>
+            </div>
+            <blockquote className="m-0 mt-6">
+              <Body
+                as="p"
+                size="small"
+                UNSAFE_className="m-0 leading-[1.55]"
+                UNSAFE_style={{ color: "var(--ld-semantic-color-fill-brand-bold, #001e60)" }}
+              >
+                &ldquo;{testimonial.quote}&rdquo;
+              </Body>
+            </blockquote>
+          </article>
+        );
+      })}
+    </section>
+  );
+}
+
 export function ProblemGrid({
   cards,
 }: {
@@ -862,18 +984,34 @@ function journeyChipStyle(key: string) {
 export function JourneyTimeline({
   items,
   phaseColor,
+  lineColor,
 }: {
   items: JourneyItem[];
   /** Overrides the phase title's default brand color — use for a case study whose palette shouldn't inherit the site theme's brand hue. */
   phaseColor?: string;
+  /** Overrides the connecting line's default separator color — use on a colored/subtle section background where the default is too low-contrast. */
+  lineColor?: string;
 }) {
+  const resolvedLineColor = lineColor ?? "var(--ld-semantic-color-separator, #e3e4e5)";
   return (
     <div>
       {items.map((item) => (
-        <div key={`${item.date}-${item.phase}`} className="grid grid-cols-1 md:grid-cols-[180px_1fr]">
+        <div
+          key={`${item.date}-${item.phase}`}
+          className="relative grid grid-cols-1 pl-5 md:grid-cols-[180px_1fr] md:pl-0"
+        >
+          {/* Mobile-only connecting line + dot — the desktop version (right border + dot on the date column) doesn't exist in the single-column mobile layout, so this replaces it. */}
+          <div
+            className="md:hidden absolute left-0 top-0 bottom-0 w-px"
+            style={{ background: resolvedLineColor }}
+          />
+          <div
+            className="md:hidden absolute left-0 top-8 -translate-x-1/2 w-3 h-3 rounded-full border-2 border-white"
+            style={{ background: JOURNEY_MOOD_COLOR[item.mood], boxShadow: `0 0 0 2px ${JOURNEY_MOOD_COLOR[item.mood]}` }}
+          />
           <div
             className="relative py-7 pr-5 md:border-r-2"
-            style={{ borderColor: "var(--ld-semantic-color-separator, #e3e4e5)" }}
+            style={{ borderColor: resolvedLineColor }}
           >
             <div
               className="hidden md:block absolute -right-[7px] top-8 w-3 h-3 rounded-full border-2 border-white"
