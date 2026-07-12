@@ -38,9 +38,8 @@ export function ProblemSection() {
       <SectionTitle>The platform changed. The UI hadn&rsquo;t.</SectionTitle>
       <Lead>
         Two structural changes were happening at once. Neither could work without a shared UI
-        foundation that didn&rsquo;t exist yet. The ask from engineering and product was clear: support multi-tenancy and theming at scale, and stop teams managing it alone. A system was needed, so what should it be?
-
-
+        foundation that didn&rsquo;t exist yet. The ask from engineering and product was clear: support
+        multi-tenancy and theming at scale, and stop teams managing it alone.
       </Lead>
 
       <ProblemGrid
@@ -49,23 +48,23 @@ export function ProblemSection() {
           {
             who: "Platform migration",
             whoColor: DARK,
-            title: "Moving to a closed framework that requires tokens and theming",
+            title: "Moving to a closed framework to support tokens and theming",
             description:
-              "Walmart moved its products to a new closed framework requiring shared tokens and theming. Teams could no longer maintain their own UI, and everyone had to rebuild to spec.",
+              "Teams could no longer maintain their own UI, and everyone had to rebuild to spec.",
           },
           {
             who: "Market consolidation",
             whoColor: "#0053e2",
-            title: "Merging platforms built for separate markets",
+            title: "Merging platforms built for separate brands & markets",
             description:
-              "Multiple brands in different markets had each built their own chat UI. As the platforms merged, the UIs were so similar to justify different builds.",
+              "When the platforms merged, the chat UIs were nearly identical, too similar to justify separate builds.",
           },
           {
             who: "Cost of scale",
             whoColor: "#1a3a5c",
             title: "Every new chatbot carried duplicate design and engineering effort",
             description:
-              "With 50+ chatbot flows generated through the AI Bot Generator, each custom UI path risked weeks of repeated design and engineering work. A reusable system created potential multi-million dollar savings as new experiences spun up.",
+              "With over 50 chatbot generated through the AI Bot Generator, each custom UI path risked weeks of repeated design and engineering work.",
           },
         ]}
       />
@@ -80,18 +79,18 @@ export function ProblemSection() {
         src={imgConverseTool}
         alt="Internal flow builder showing a chatbot conversation map with bot responses, API steps, and jump-to-project nodes connected across a canvas."
         fit="natural"
+        surface="subtle"
+        frameClassName="p-6"
+        clipEdges={false}
       />
 
-      <div className="mt-2 mb-2">
-        <Body as="p" size="small" color="subtlest" UNSAFE_className="leading-snug" UNSAFE_style={{ marginBottom: 24 }}>
-          Different teams also had different levels of available resources, product complexity, and
-          UI development.
-        </Body>
-        <ImageFull
-          src={imgFragmentation}
-          alt="Six chat UIs across Walmart products: Ask Sparky, Chat with Walmart, Chat with Bodega, Chat with Sam, a generic support assistant, and Merchant AI"
-        />
-      </div>
+      <ImageFull
+        src={imgFragmentation}
+        alt="Six chat UIs across Walmart products: Ask Sparky, Chat with Walmart, Chat with Bodega, Chat with Sam, a generic support assistant, and Merchant AI"
+        surface="subtle"
+        frameClassName="p-10"
+        clipEdges={false}
+      />
 
       <TestimonialShowcase
         ariaLabel="What teams told design before the system existed"
@@ -127,11 +126,11 @@ export function ProblemSection() {
 const DEFINE_STEPS = [
   {
     title: "Understand each team's position in the migration",
-    body: "The migration hit everyone, but from different starting points, as the three teams above show. The system had to serve all of them at once, not just the best-resourced.",
+    body: "The migration hit everyone, but from different starting points. The system had to serve everyone all at once, not just the best-resourced.",
   },
   {
     title: "Map what existed and what the framework required",
-    body: "The Core Design system had the atoms. The new framework required tokens and theming at the system level, not team by team. Local components weren't token-compliant, and nothing was structured for what the framework now required.",
+    body: "The Core Design system had the atoms. The new framework required tokens and theming at the sub-system level, not team by team. Local components weren't token-compliant, and nothing was structured for what the framework now required.",
     capture: {
       badge: "Screenshot · Figma",
       title: "Audit spread",
@@ -140,7 +139,7 @@ const DEFINE_STEPS = [
   },
   {
     title: "Translate the technical mandate into design goals",
-    body: "Since Multi-tenancy were requirements the framework imposed. The design goals had to start there and work outward: themeable from day one, remove duplication across merging markets, and give every team a clear starting point.",
+    body: "Design goals had be themeable from day one, remove duplication across merging markets, and give every team a clear starting point.",
     capture: {
       badge: "Screenshot · Planning doc",
       title: "Project brief",
@@ -158,7 +157,7 @@ export function DefiningSection() {
     <Section id="defining" variant="mid">
       <Eyebrow>Defining the Work</Eyebrow>
       <SectionTitle>The problem was clear. The solution wasn&rsquo;t.</SectionTitle>
-      <Lead>The job was to turn a technical mandate into a system teams could actually adopt. Engineering and product knew what was needed: a shared, themeable, multi-tenant chat system. They did not know what it should look like, how to govern it, or who should build it. That was the design problem.
+      <Lead>The job was to turn a technical mandate into a system teams could actually adopt. Engineering and product knew what was needed, but  did not know what it should look like, how to govern it, or who should build it. That was the design problem.
 
 </Lead>
 
@@ -189,32 +188,7 @@ export function DefiningSection() {
         ))}
       </div>
 
-      <div>
-        <Body as="p" size="small" weight="alt" UNSAFE_className="mb-3" UNSAFE_style={{ color: DARK }}>
-          <span style={{ display: "block", paddingBottom: 24 }}>
-            The tradeoff
-          </span>
-     
-        </Body>
-        <BeforeAfter
-          before={[
-            {
-              who: "What wasn't built",
-              title: "A component library",
-              description:
-                "Fast to ship, but teams would still make the same design decisions alone. Fragmentation would just move up one layer.",
-            },
-          ]}
-          after={[
-            {
-              who: "What was built instead",
-              title: "A pattern and recipe system",
-              description:
-                "Slower to define, but it solved the real problem: how to design well for each use case, on top of shared components.",
-            },
-          ]}
-        />
-      </div>
+
     </Section>
   );
 }
@@ -225,7 +199,7 @@ export function ScopeSection() {
   return (
     <Section id="scope">
       <Eyebrow>The Scope</Eyebrow>
-      <SectionTitle>Not a component kit. A pattern system for many different experiences.</SectionTitle>
+      <SectionTitle>Not just a UI kit, but a pattern system for many different use cases.</SectionTitle>
       <Lead>
         The scope was not generic chat. It was the ecommerce layer: the reusable patterns that
         made AI-powered shopping, support, and handoff experiences feel product-ready.
@@ -235,9 +209,7 @@ export function ScopeSection() {
         The chat experiences weren't variations of one thing.
       </Heading>
       <Body as="p" size="small" UNSAFE_className="leading-[1.7]" UNSAFE_style={{ color: "#7a7a7a" }}>
-        Ecommerce needed distinct patterns
-        for browsing, support, recommendations, handoffs, and staff workflows, each with its own
-        interaction model. All three share a base layer: bubbles, input bar, avatars, timestamps. The patterns and recipes on top are entirely different for each. The base had to be flexible, and the recipe layer could be specified to the exact need though autotmated tooling.
+      While ecommerce requires distinct interaction models for browsing, support, recommendations, handoffs, and staff workflows, they all share the same foundation: speech bubbles, an input bar, avatars, and timestamps. On top of this flexible base layer, we use automated tooling to customize specific patterns and recipes for each unique use case.
       </Body>
 
       <UseCaseGrid
@@ -300,6 +272,49 @@ export function ScopeSection() {
 
 /* ── Building the Team ──────────────────────────────────────────── */
 
+const TEAM_MOOD_COLOR: Record<"friction" | "win", string> = {
+  friction: "var(--ld-semantic-color-text-negative, #ea1100)",
+  win: "var(--ld-semantic-color-text-positive, #2a8703)",
+};
+
+const TEAM_STEPS: { title: string; body: string; mood: "friction" | "win" }[] = [
+  {
+    title: "The starting conditions",
+    body: "The core design system and the platform design sub-system were on separate timelines. Engineering was reconciling two sources of truth by hand. No shared process, no shared tooling. Design wasn't in the room yet.",
+    mood: "friction",
+  },
+  {
+    title: "Being first had a cost",
+    body: "This was the first team to run end-to-end on the platform. There was no playbook for this process. It had to be invented, then taught.",
+    mood: "friction",
+  },
+  {
+    title: "Contributors, not headcount",
+    body: "There was no standing team. Designers were recruited from across product teams to contribute, with a case made to leadership for their time. Each brought product knowledge no central team could replicate.",
+    mood: "win",
+  },
+  {
+    title: "Mentoring on a new process",
+    body: "None of the contributors had built a design system this way. They were mentored through it: the audit method, the pattern-and-recipe model, token discipline, and reviews, leading through influence, not authority, since they didn't report in.",
+    mood: "win",
+  },
+  {
+    title: "Design leadership buy-in",
+    body: "The case to leadership: embedded expertise would build a better, more adopted system than a central team alone, and cost less in rework. Leadership committed the contributors' time.",
+    mood: "win",
+  },
+  {
+    title: "How the team stayed coordinated",
+    body: "Weekly syncs with engineering and product. Batched reviews with the full team. A shared intake tracker. Clear ownership so decisions didn't require escalation.",
+    mood: "win",
+  },
+  {
+    title: "Then it was handed off",
+    body: "Once the system was proven, maintenance transferred to the standing engineering and design teams. It was built to be owned by them, not to depend on any one person. That was the goal from the start.",
+    mood: "win",
+  },
+];
+
 export function BuildingTeamSection() {
   return (
     <Section id="team">
@@ -311,61 +326,34 @@ export function BuildingTeamSection() {
         handed to the standing teams to maintain.
       </Lead>
 
-      <JourneyTimeline
-        phaseColor={DARK}
-        items={[
-          {
-            date: "",
-            phase: "The starting conditions",
-            story:
-              "The core design system and the platform design sub-system were on separate timelines. Engineering was reconciling two sources of truth by hand. No shared process, no shared tooling. Design wasn't in the room yet.",
-            mood: "friction",
-          },
-          {
-            date: "",
-            phase: "Being first had a cost",
-            story:
-              "This was the first team to run end-to-end on the platform. There was no playbook for this process. It had to be invented, then taught.",
-            mood: "friction",
-          },
-          {
-            date: "",
-            phase: "Contributors, not headcount",
-            story:
-              "There was no standing team. Designers were recruited from across product teams to contribute, with a case made to leadership for their time. Each brought product knowledge no central team could replicate.",
-            mood: "win",
-          },
-          {
-            date: "",
-            phase: "Mentoring on a new process",
-            story:
-              "None of the contributors had built a design system this way. They were mentored through it: the audit method, the pattern-and-recipe model, token discipline, and reviews, leading through influence, not authority, since they didn't report in.",
-            mood: "win",
-          },
-          {
-            date: "",
-            phase: "Design leadership buy-in",
-            story:
-              "The case to leadership: embedded expertise would build a better, more adopted system than a central team alone, and cost less in rework. Leadership committed the contributors' time.",
-            mood: "win",
-          },
-          {
-            date: "",
-            phase: "How the team stayed coordinated",
-            story:
-              "Weekly syncs with engineering and product. Batched reviews with the full team. A shared intake tracker. Clear ownership so decisions didn't require escalation.",
-            mood: "win",
-          },
-          {
-            date: "",
-            phase: "Then it was handed off",
-            story:
-              "Once the system was proven, maintenance transferred to the standing engineering and design teams. It was built to be owned by them, not to depend on any one person. That was the goal from the start.",
-            mood: "win",
-          },
-        ]}
-      />
-
+      <div className="flex flex-col">
+        {TEAM_STEPS.map((step, i) => (
+          <div
+            key={step.title}
+            className="grid grid-cols-[44px_1fr] gap-x-5 py-6"
+            style={{ borderBottom: i < TEAM_STEPS.length - 1 ? `1px solid ${SEPARATOR}` : undefined }}
+          >
+            <div className="font-black leading-none" style={{ fontSize: "28px", color: "#a9bcdc" }}>
+              {String(i + 1).padStart(2, "0")}
+            </div>
+            <div>
+              <div className="flex items-center gap-2 mb-2">
+                <span
+                  aria-hidden="true"
+                  className="size-2 rounded-full shrink-0"
+                  style={{ background: TEAM_MOOD_COLOR[step.mood] }}
+                />
+                <Heading as="h3" size="small" weight="default" UNSAFE_style={{ color: DARK }}>
+                  {step.title}
+                </Heading>
+              </div>
+              <Body as="p" size="small" color="subtlest" UNSAFE_className="leading-[1.7]">
+                {step.body}
+              </Body>
+            </div>
+          </div>
+        ))}
+      </div>
 
       <CapturePlaceholder
         badge="Screenshot · Slide"
@@ -606,10 +594,10 @@ export function ImpactSection() {
       <StatsRow
         variant="light"
         stats={[
-          { value: "[ # ]", label: "Product teams onboarded" },
-          { value: "[ # ]", label: "Components published" },
-          { value: "[ # ]", label: "Engineering weeks saved per launch" },
-          { value: "[ # ]", label: "Designers grown as contributors" },
+          { value: "[ 10+ ]", label: "Product teams onboarded" },
+          { value: "[ 45+ ]", label: "Components & patterns published" },
+          { value: "[ 12+ ]", label: "Engineering weeks saved per launch" },
+          { value: "[ 6+ ]", label: "Designers grown as contributors" },
         ]}
       />
 
@@ -628,14 +616,16 @@ export function ImpactSection() {
           maintenance transferred to the standing teams once it was proven. The goal from day
           one: build people and a process, not a dependency on any one person.
         </Body>
+        <div style={{ height: 16 }} />
+   
         <div className="flex flex-col gap-2">
           <div className="flex items-baseline gap-2.5">
-            <span className="font-black" style={{ color: "#0053e2", fontSize: "15px" }}>[ # ]</span>
+            <span className="font-black" style={{ color: "#0053e2", fontSize: "15px" }}>[ 6+ ]</span>
             <Body as="p" size="small" UNSAFE_style={{ color: DARK }}>Contributors recruited and mentored on the process</Body>
           </div>
           <div className="flex items-baseline gap-2.5">
-            <span className="font-black" style={{ color: "#0053e2", fontSize: "15px" }}>[ # ]</span>
-            <Body as="p" size="small" UNSAFE_style={{ color: DARK }}>Components shipped by the contributor team</Body>
+            <span className="font-black" style={{ color: "#0053e2", fontSize: "15px" }}>[ 20 ]</span>
+            <Body as="p" size="small" UNSAFE_style={{ color: DARK }}>Components & patterns shipped by the contributor team</Body>
           </div>
           <div className="flex items-baseline gap-2.5">
             <span style={{ color: "#0053e2" }}>

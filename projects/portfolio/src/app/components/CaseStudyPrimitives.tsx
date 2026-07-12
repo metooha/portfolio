@@ -282,7 +282,7 @@ export function ProblemGrid({
           <Body as="p" size="medium" weight="alt" UNSAFE_className="mb-2" UNSAFE_style={{ color: "var(--ld-semantic-color-fill-brand-bold, #001e60)" }}>
             {card.title}
           </Body>
-          <Body as="p" size="small" color="subtlest" UNSAFE_className="leading-[1.65]">
+          <Body as="p" size="small" color="subtlest" UNSAFE_className="pt-4 leading-[1.65]">
             {card.description}
           </Body>
         </div>

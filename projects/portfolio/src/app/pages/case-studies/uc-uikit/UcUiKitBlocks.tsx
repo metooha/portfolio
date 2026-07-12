@@ -29,7 +29,7 @@ export function UseCaseGrid({
           className="rounded-[10px] overflow-hidden flex flex-col"
           style={{ border: `1px solid ${SEPARATOR}` }}
         >
-          <div className="p-6 flex flex-col gap-3" style={{ background: item.headerColor }}>
+          <div className="p-6 flex flex-row items-center gap-3" style={{ background: item.headerColor }}>
             <span style={{ color: "#ffffff" }}>
               <Icon name={item.icon} size="medium" decorative />
             </span>

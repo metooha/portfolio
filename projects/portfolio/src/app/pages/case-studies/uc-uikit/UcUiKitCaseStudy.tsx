@@ -42,7 +42,7 @@ export function UcUiKitHero() {
   );
 }
 
-const HERO_TITLE = "A united kit for all";
+const HERO_TITLE = "A United Kit";
 const OVERVIEW_TITLE =
   "A conversational UI design system for Walmart, built across a platform migration and a market merger.";
 const OVERVIEW_DESCRIPTION =
