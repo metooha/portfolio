@@ -225,7 +225,7 @@ const CASE_STUDIES: CaseStudyConfig[] = [
       { label: "Role", value: "Principal Product Designer" },
       { label: "Scope", value: "Strategy, Team, System, Governance" },
       { label: "Products", value: "Sparky (AI shopping assistant), Support chat, Associate tools" },
-      { label: "Status", value: "In build, SDK shipping Q3/Q4" },
+      { label: "Team", value: "2 Designers, iOS/Android/Web Engineers, 1 TMP" },
     ],
     navSections: [
       { label: "Overview", href: "#overview" },
