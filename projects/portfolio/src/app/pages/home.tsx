@@ -99,7 +99,7 @@ export function Home() {
           </CaseStudyHeroText>
         </div>
 
-        <div className="mb-16">
+        <div className="mx-auto max-w-[1300px] mb-16">
           <Heading
             as="h2"
             size="large"
