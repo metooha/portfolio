@@ -199,7 +199,7 @@ export function CaseStudyTemplate({
             <div id="overview" className="relative shrink-0 w-full">
               <div className="w-full max-w-[1660px] mx-auto px-4 sm:px-6 md:px-12 lg:px-[68px]">
                 <div
-                  className="content-stretch flex flex-1 flex-col items-start min-h-px min-w-0 w-full max-w-[1300px] pt-8 md:pt-16 lg:pt-0 relative"
+                  className="content-stretch flex flex-1 flex-col items-start min-h-px min-w-0 w-full max-w-[1300px] mx-auto pt-8 md:pt-16 lg:pt-0 relative"
                   style={{ gap: "var(--ld-semantic-spacing-400, 2rem)" }}
                 >
                   {overviewContent ?? (

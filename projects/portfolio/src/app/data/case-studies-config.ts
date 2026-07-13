@@ -213,7 +213,8 @@ const CASE_STUDIES: CaseStudyConfig[] = [
     title:
       "A conversational UI design system for Walmart, built across a platform migration and a market merger.",
     defaultTheme: "Walmart",
-    isPublished: true, // TEMP: on for local preview, ask Claude to flip back to false when done
+    isPublished: true,
+    accessPassword: "Sparky",
     cardTitle: "A Cross-Platform Pattern System for Conversational AI",
     shortDescription:
       "A shared, themeable chat and conversational AI system for Walmart's shopping assistant, support chat, and staff tools, built across a platform migration and a market merger.",
