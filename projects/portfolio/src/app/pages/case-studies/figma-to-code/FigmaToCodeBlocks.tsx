@@ -513,7 +513,7 @@ function CssEditorPanel() {
   );
 }
 
-/** The "Design specifies it in Figma / Engineering rebuilds it in code" comparison — built as real markup instead of a flattened screenshot, so the drift it illustrates isn't itself a static image. Breaks out to the full screen width since the two-panel layout reads as cramped inside the article's narrow reading column. */
+/** The "Design specifies it in Figma / Engineering rebuilds it in code" comparison — built as real markup instead of a flattened screenshot, so the drift it illustrates isn't itself a static image. Sized to fill the standard content column width, matching the rest of the case study's sections. */
 export function FigmaDesignEngineeringPanel() {
   return (
     <div
