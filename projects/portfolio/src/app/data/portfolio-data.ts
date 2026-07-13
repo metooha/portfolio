@@ -199,12 +199,12 @@ export const otherWork: OtherWork[] = [
     overview:
       "Beyond the design system work, I created the visual storytelling layer for WM's sustainability and national-accounts messaging: custom scenes, isometric process diagrams, and animated pieces for social and the app store. Everything stayed on-brand while making dense operational content feel approachable.",
     media: [
-      owMedia("wm/illustrations/National_Accounts-03.jpg", "National Accounts hero illustration", { wide: true }),
       owMedia("wm/illustrations/SustyForum-Hero3.svg", "Sustainability Forum hero", { wide: true }),
       owMedia("wm/illustrations/iosmetric-square-processes.jpg", "Isometric process diagram"),
       owMedia("wm/illustrations/iosmetric-triangle-processes.jpg", "Isometric process diagram"),
       owMedia("wm/illustrations/wm-1@2x-100.jpg", "Brand illustration"),
       owMedia("wm/illustrations/wm-2@2x-100.jpg", "Brand illustration"),
+      owMedia("wm/illustrations/National_Accounts-03.jpg", "National Accounts hero illustration"),
       owMedia("wm/illustrations/wm.5@2x-100.jpg", "Brand illustration"),
       owMedia("wm/illustrations/wm-7@2x-100.jpg", "Brand illustration"),
       owMedia("wm/illustrations/Earth-Day-Instagram.png", "Earth Day social post"),

@@ -44,7 +44,13 @@ function MediaGallery({ media }: { media: OtherWorkMedia[] }) {
   return (
     <>
       {heroMedia.length > 0 && (
-        <div className="space-y-8 mb-8">
+        <div
+          className={
+            heroMedia.length > 1
+              ? "grid grid-cols-1 sm:grid-cols-2 gap-8 mb-8"
+              : "space-y-8 mb-8"
+          }
+        >
           {heroMedia.map((item) => (
             <MediaFrame key={item.src} item={item} />
           ))}
