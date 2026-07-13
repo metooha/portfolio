@@ -291,11 +291,12 @@ export function ProblemGrid({
   );
 }
 
-export type ImageSurface = "white" | "subtle";
+export type ImageSurface = "white" | "subtle" | "dark";
 
 const IMAGE_SURFACE: Record<ImageSurface, string> = {
   white: "var(--ld-semantic-color-fill, #ffffff)",
   subtle: "var(--ld-semantic-color-fill-brand-subtle, #e9f1fe)",
+  dark: "#111111",
 };
 
 export function ImageFrame({
@@ -479,6 +480,7 @@ export function EmbedFrame({
   className = "",
   iframeClassName = "",
   aspectRatio = "16 / 10",
+  mobileAspectRatio,
   bordered = false,
   rounded = true,
   surface = "white",
@@ -488,10 +490,14 @@ export function EmbedFrame({
   className?: string;
   iframeClassName?: string;
   aspectRatio?: string;
+  /** Overrides `aspectRatio` below the `md` breakpoint — use a taller (smaller) ratio like "375 / 812" so the embed gets more vertical room on phones. */
+  mobileAspectRatio?: string;
   bordered?: boolean;
   rounded?: boolean;
   surface?: ImageSurface;
 }) {
+  const scopeId = React.useId().replace(/[:]/g, "");
+  const frameClass = `embed-frame-${scopeId}`;
   return (
     <div
       className={`w-full ${rounded ? "overflow-hidden rounded-xl" : "overflow-hidden"} ${className}`}
@@ -500,7 +506,18 @@ export function EmbedFrame({
         border: bordered ? "1px solid var(--ld-semantic-color-separator, #e3e4e5)" : undefined,
       }}
     >
-      <div className="relative w-full" style={{ aspectRatio }}>
+      {mobileAspectRatio && (
+        <style>{`
+          .${frameClass} { aspect-ratio: ${mobileAspectRatio}; }
+          @media (min-width: 768px) {
+            .${frameClass} { aspect-ratio: ${aspectRatio}; }
+          }
+        `}</style>
+      )}
+      <div
+        className={`relative w-full ${frameClass}`}
+        style={mobileAspectRatio ? undefined : { aspectRatio }}
+      >
         <iframe
           src={src}
           title={title}
@@ -521,8 +538,10 @@ export function EmbedFull({
   frameClassName = "",
   iframeClassName = "",
   aspectRatio = "16 / 10",
+  mobileAspectRatio,
   surface = "white",
   rounded = true,
+  bordered = true,
 }: {
   src: string;
   title: string;
@@ -532,8 +551,12 @@ export function EmbedFull({
   frameClassName?: string;
   iframeClassName?: string;
   aspectRatio?: string;
+  /** Overrides `aspectRatio` below the `md` breakpoint — use a taller (smaller) ratio like "375 / 812" so the embed gets more vertical room on phones. */
+  mobileAspectRatio?: string;
   surface?: ImageSurface;
   rounded?: boolean;
+  /** Light gray border around the embed frame. Defaults to true so live embeds read as a distinct, contained surface. */
+  bordered?: boolean;
 }) {
   return (
     <figure className={`m-0 flex flex-col gap-6 ${className}`}>
@@ -555,8 +578,10 @@ export function EmbedFull({
         className={frameClassName}
         iframeClassName={iframeClassName}
         aspectRatio={aspectRatio}
+        mobileAspectRatio={mobileAspectRatio}
         surface={surface}
         rounded={rounded}
+        bordered={bordered}
       />
       {caption && (
         <Body as="figcaption" size="small" color="subtlest" UNSAFE_className="leading-snug">
@@ -959,6 +984,17 @@ export interface JourneyItem {
   tension?: string;
   win?: string;
   mood: JourneyMood;
+  /** Optional capture placeholder(s) rendered under this timeline step's content. Pass `image`/`video` + `alt` once the real asset exists, otherwise it renders as a dashed placeholder. */
+  captures?: {
+    badge?: string;
+    title?: string;
+    description?: string;
+    size?: "default" | "small";
+    image?: string;
+    video?: string;
+    alt?: string;
+    fit?: "natural" | "cover" | "contain";
+  }[];
 }
 
 const JOURNEY_MOOD_COLOR: Record<JourneyMood, string> = {
@@ -1072,6 +1108,33 @@ export function JourneyTimeline({
                 {item.win}
               </div>
             )}
+            {item.captures && item.captures.length > 0 && (
+              <div className={item.captures.length > 1 ? "grid grid-cols-1 gap-3 mt-3" : "mt-3"}>
+                {item.captures.map((capture, i) =>
+                  capture.image || capture.video ? (
+                    <CaptureMedia
+                      key={capture.alt ?? capture.title ?? i}
+                      size={capture.size ?? "small"}
+                      badge={capture.badge}
+                      title={capture.title}
+                      description={capture.description}
+                      alt={capture.alt ?? capture.title ?? ""}
+                      image={capture.image}
+                      video={capture.video}
+                      fit={capture.fit}
+                    />
+                  ) : (
+                    <CapturePlaceholder
+                      key={capture.title ?? i}
+                      size={capture.size ?? "small"}
+                      badge={capture.badge ?? ""}
+                      title={capture.title ?? ""}
+                      description={capture.description ?? ""}
+                    />
+                  )
+                )}
+              </div>
+            )}
           </div>
         </div>
       ))}
@@ -1150,6 +1213,77 @@ export function CapturePlaceholder({
       <Body as="p" size="small" color="subtlest" UNSAFE_className="leading-[1.55]">
         {description}
       </Body>
+    </div>
+  );
+}
+
+/** Same chrome as CapturePlaceholder, but for a real screenshot/video capture that's been added — image or video renders above the badge/title/description. */
+export function CaptureMedia({
+  badge,
+  title,
+  description,
+  alt,
+  image,
+  video,
+  size = "default",
+  surface = "white",
+  fit = "natural",
+  mediaClassName = "",
+  className = "",
+}: {
+  badge?: string;
+  title?: string;
+  description?: string;
+  alt: string;
+  image?: string;
+  video?: string;
+  size?: "default" | "small";
+  surface?: ImageSurface;
+  fit?: "natural" | "cover" | "contain";
+  mediaClassName?: string;
+  className?: string;
+}) {
+  const hasCaption = badge || title || description;
+  return (
+    <div
+      className={`flex flex-col gap-3 rounded-lg border ${size === "small" ? "p-4" : "p-6"} ${className}`}
+      style={{
+        borderColor: "var(--ld-semantic-color-separator, #e3e4e5)",
+        background: "var(--ld-semantic-color-fill-subtle, #f7f9fc)",
+      }}
+    >
+      {image && (
+        <ImageFrame src={image} alt={alt} className={mediaClassName} fit={fit} surface={surface} />
+      )}
+      {video && (
+        <VideoFrame src={video} alt={alt} className={mediaClassName} fit={fit} surface={surface} playback="controls" />
+      )}
+      {hasCaption && (
+        <div className="flex flex-col gap-2">
+          {badge && (
+            <Body
+              as="span"
+              size="small"
+              weight="alt"
+              color="brand"
+              UNSAFE_className="self-start rounded px-2 py-0.5 uppercase tracking-[0.1em]"
+              UNSAFE_style={{ fontSize: "10px", background: "var(--ld-semantic-color-fill-brand-subtle, #e9f1fe)" }}
+            >
+              {badge}
+            </Body>
+          )}
+          {title && (
+            <Body as="p" size="small" weight="alt" UNSAFE_style={{ color: "var(--ld-semantic-color-fill-brand-bold, #001e60)" }}>
+              {title}
+            </Body>
+          )}
+          {description && (
+            <Body as="p" size="small" color="subtlest" UNSAFE_className="leading-[1.55]">
+              {description}
+            </Body>
+          )}
+        </div>
+      )}
     </div>
   );
 }

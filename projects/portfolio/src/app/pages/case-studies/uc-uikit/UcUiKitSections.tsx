@@ -12,12 +12,21 @@ import {
   NextGrid,
   JourneyTimeline,
   TestimonialShowcase,
-  CapturePlaceholder,
+  CaptureMedia,
+  VideoFull,
+  EmbedFull,
 } from "@/app/components/CaseStudyPrimitives";
 import { Body, Heading } from "@/app/components/Text/Text";
 import { Icon } from "@/app/components/Icons/Icons";
 import imgFragmentation from "@/app/assets/pages/case-study/uc-uikit/different-chats.png";
 import imgConverseTool from "@/app/assets/pages/case-study/uc-uikit/converse-tool.jpg";
+import imgTeamStructure from "@/app/assets/pages/case-study/uc-uikit/team-structure.png";
+import imgProjectBrief from "@/app/assets/pages/case-study/uc-uikit/project-brief.png";
+import imgAuditSpread from "@/app/assets/pages/case-study/uc-uikit/audit-spread.png";
+import imgPatternAnalysisTracker from "@/app/assets/pages/case-study/uc-uikit/pattern-analysis-tracker-1.png";
+import imgComponentBuild from "@/app/assets/pages/case-study/uc-uikit/component-build.png";
+import videoThemeValidation from "@/app/assets/pages/case-study/uc-uikit/theme-validation-script.mp4";
+import videoRecipeBuild from "@/app/assets/pages/case-study/uc-uikit/recipe-build.mp4";
 import {
   UseCaseGrid,
   PlatformMatrix,
@@ -88,7 +97,7 @@ export function ProblemSection() {
         src={imgFragmentation}
         alt="Six chat UIs across Walmart products: Ask Sparky, Chat with Walmart, Chat with Bodega, Chat with Sam, a generic support assistant, and Merchant AI"
         surface="subtle"
-        frameClassName="p-10"
+        frameClassName="py-10 px-[100px] h-[600px]"
         clipEdges={false}
       />
 
@@ -131,20 +140,10 @@ const DEFINE_STEPS = [
   {
     title: "Map what existed and what the framework required",
     body: "The Core Design system had the atoms. The new framework required tokens and theming at the sub-system level, not team by team. Local components weren't token-compliant, and nothing was structured for what the framework now required.",
-    capture: {
-      badge: "Screenshot · Figma",
-      title: "Audit spread",
-      description: "Side-by-side audit of existing chat UIs across products, annotated to show what was token-compliant, what needed migration, and what had to be rebuilt.",
-    },
   },
   {
     title: "Translate the technical mandate into design goals",
     body: "Design goals had be themeable from day one, remove duplication across merging markets, and give every team a clear starting point.",
-    capture: {
-      badge: "Screenshot · Planning doc",
-      title: "Project brief",
-      description: "The brief developed with engineering and PM: migration requirements, multi-tenancy scope, and what design owned versus what the platform would handle.",
-    },
   },
   {
     title: "Make the hard call: patterns and recipes paired with automation, not just components",
@@ -178,11 +177,6 @@ export function DefiningSection() {
               <Body as="p" size="small" color="subtlest" UNSAFE_className="leading-[1.7]">
                 {step.body}
               </Body>
-              {step.capture && (
-                <div className="mt-4">
-                  <CapturePlaceholder {...step.capture} />
-                </div>
-              )}
             </div>
           </div>
         ))}
@@ -205,12 +199,14 @@ export function ScopeSection() {
         made AI-powered shopping, support, and handoff experiences feel product-ready.
       </Lead>
 
-      <Heading as="h3" size="small" weight="default" UNSAFE_className="mb-2" UNSAFE_style={{ color: DARK }}>
-        The chat experiences weren't variations of one thing.
-      </Heading>
-      <Body as="p" size="small" UNSAFE_className="leading-[1.7]" UNSAFE_style={{ color: "#7a7a7a" }}>
-      While ecommerce requires distinct interaction models for browsing, support, recommendations, handoffs, and staff workflows, they all share the same foundation: speech bubbles, an input bar, avatars, and timestamps. On top of this flexible base layer, we use automated tooling to customize specific patterns and recipes for each unique use case.
-      </Body>
+      <div className="flex flex-col gap-2">
+        <Heading as="h3" size="small" weight="default" UNSAFE_style={{ color: DARK, paddingBottom: "0px" }}>
+          The chat experiences weren't variations of one thing.
+        </Heading>
+        <Body as="p" size="small" UNSAFE_className="leading-[1.7]" UNSAFE_style={{ color: "#7a7a7a" }}>
+          While ecommerce requires distinct interaction models offs, they all share the same foundation.
+        </Body>
+      </div>
 
       <UseCaseGrid
         items={[
@@ -355,10 +351,10 @@ export function BuildingTeamSection() {
         ))}
       </div>
 
-      <CapturePlaceholder
-        badge="Screenshot · Slide"
-        title="Team structure"
-        description="The team map: contributors recruited from across product teams, the leadership commitment that resourced them, and the standing teams that took over maintenance."
+      <CaptureMedia
+        image={imgTeamStructure}
+        alt="Team structure slide showing key stakeholders (decision makers, collaborators, informed) and design partners across Conversational Commerce, Help Center, AI Shopping Assistant, B2B AI Assistant, and Social Commerce teams"
+        surface="subtle"
       />
     </Section>
   );
@@ -369,30 +365,41 @@ export function BuildingTeamSection() {
 export function ProcessSection() {
   return (
     <Section id="process" variant="mid">
-      <Eyebrow>The Process</Eyebrow>
+      <Eyebrow>Defining Goverance</Eyebrow>
       <SectionTitle>A repeatable loop, not a one-off.</SectionTitle>
       <Lead>With alignment in place, the work followed a clear loop that any team joining later can follow.</Lead>
 
       <JourneyTimeline
         phaseColor={DARK}
+        lineColor="var(--ld-semantic-color-separator-bold, #b8c7e0)"
         items={[
           {
-            date: "Audit",
+            date: "Discovery",
             phase: "Map what exists",
             story: "Audit existing chat screens across consumer, staff, and enterprise products. Build from what's real, not assumptions.",
             mood: "progress",
-          },
-          {
-            date: "Recipes",
-            phase: "Find the repeating flows",
-            story: "Start from user flows to surface recipe patterns, the common interaction shapes every chatbot reuses. Break each recipe into element-level UI patterns.",
-            mood: "progress",
+            captures: [
+              {
+                image: imgProjectBrief,
+                alt: "Universal Chat UI Kit project brief showing the problem statement, key results, success criteria, and project goals",
+              },
+              {
+                image: imgAuditSpread,
+                alt: "Side-by-side audit of chat UI screens across products, annotated with header patterns and specimen breakdowns",
+              },
+            ],
           },
           {
             date: "Analysis",
             phase: "Group and prioritize",
             story: "Group patterns in Airtable with effort levels, timelines, and designer ownership. Track actual progress, not just a wishlist.",
             mood: "progress",
+            captures: [
+              {
+                image: imgPatternAnalysisTracker,
+                alt: "Project planning and progress tracker showing component names, build status, filter category, paired components, and priority/effort level",
+              },
+            ],
           },
           {
             date: "Review",
@@ -400,11 +407,23 @@ export function ProcessSection() {
             story: "Review components in batches with the contributor team: patterns, design tokens, naming, accessibility, and engineering specs for the SDK.",
             win: "Reviews only work with full attendance. A shared review template made that consistent.",
             mood: "win",
+            captures: [
+              {
+                video: videoRecipeBuild,
+                alt: "Screen recording of the recipe generator automation assembling a recipe in Figma",
+              },
+            ],
           },
           {
             date: "Build",
             phase: "Assemble the hierarchy",
             story: "The design system provides the atoms, the chat system extends upward into molecules, organisms, and templates. The team built the components against it, each named precisely so any team can navigate without asking.",
+            mood: "progress",
+          },
+          {
+            date: "Recipes",
+            phase: "Find the repeating flows",
+            story: "Start from user flows to surface recipe patterns, the common interaction shapes every chatbot reuses. Break each recipe into element-level UI patterns.",
             mood: "progress",
           },
           {
@@ -417,37 +436,6 @@ export function ProcessSection() {
         ]}
       />
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <CapturePlaceholder
-          size="small"
-          badge="Screenshot · Figma"
-          title="Recipe output"
-          description="A generated recipe in Figma: entry point, setup screens, and native components pulled into a working file with instructions attached."
-        />
-        <CapturePlaceholder
-          size="small"
-          badge="Screenshot · Airtable"
-          title="Pattern analysis tracker"
-          description="The build tracker during the analysis phase: patterns grouped by category, effort level, and priority before any component work begins."
-        />
-      </div>
-
-      <div>
-        <Heading as="h3" size="small" weight="default" UNSAFE_className="mb-4" UNSAFE_style={{ color: DARK }}>
-          <span style={{ display: "block", marginBottom: 24, paddingTop: 40 }}>
-            How it fits into Design System's at Walmart
-          </span>
-     
-        </Heading>
-        <LayerStack
-          layers={[
-            { title: "Core Design systemn", detail: "Color tokens, type scale, spacing, icon set. 644 components." },
-            { title: "Platform Sub-system", detail: "Platform tokens, product themes, accessibility base." },
-            { title: "Conversational UI Kit", detail: "834 components, 50 variables: bubbles, input bar, headers, carousels.", highlight: true },
-            { title: "Recipes", detail: "Automated, prompt-based user flow outputs, detached on generation." },
-          ]}
-        />
-      </div>
     </Section>
   );
 }
@@ -470,10 +458,29 @@ const TOOL_STACK = [
 
 export function GovernanceSection() {
   return (
-    <Section id="governance">
+    <Section id="The Playbook">
       <Eyebrow>Governance</Eyebrow>
       <SectionTitle>Owned, reviewed, open to contribute.</SectionTitle>
       <Lead>The system only stays accurate if ownership is clear, now and as it scales.</Lead>
+
+      <div>
+        <Heading as="h3" size="small" weight="default" UNSAFE_className="mb-4" UNSAFE_style={{ color: DARK, paddingBottom: "0px" }}>
+          How it fits into Design System's at Walmart
+        </Heading>
+        <Body as="p" size="small" color="subtlest" UNSAFE_className="mb-4 leading-[1.7]" UNSAFE_style={{ paddingBottom: "24px" }}>
+          The Conversational UI Kit doesn't replace the core system, it extends it. Each layer
+          inherits from the one below, so a token update at the core still flows through to every
+          chat surface without a manual re-sync.
+        </Body>
+        <LayerStack
+          layers={[
+            { title: "Core Design systemn", detail: "Color tokens, type scale, spacing, icon set. 644 components." },
+            { title: "Platform Sub-system", detail: "Platform tokens, product themes, accessibility base." },
+            { title: "Conversational UI Kit", detail: "834 components, 50 variables: bubbles, input bar, headers, carousels.", highlight: true },
+            { title: "Recipes", detail: "Automated, prompt-based user flow outputs, detached on generation." },
+          ]}
+        />
+      </div>
 
       <div>
         <Heading as="h3" size="small" weight="default" UNSAFE_className="mb-2" UNSAFE_style={{ color: DARK }}>
@@ -486,6 +493,14 @@ export function GovernanceSection() {
           </span>
      
         </Body>
+        <div className="mt-2 mb-2">
+          <ImageFull
+            src={imgComponentBuild}
+            alt="Chat Navigation component handoff documentation: usage guidelines, engineering specs, behaviors and specifications, and accessibility guidance"
+            surface="subtle"
+            frameClassName="p-6"
+          />
+        </div>
         <NamingTaxonomy
           levels={[
             {
@@ -566,14 +581,56 @@ export function GovernanceSection() {
 
       <div>
         <Heading as="h3" size="small" weight="default" UNSAFE_className="mb-4" UNSAFE_style={{ color: DARK }}>
-          One place to track it all
+          End results
         </Heading>
-        <span style={{ display: "block", marginBottom: 24 }} />
-        <CapturePlaceholder
-          badge="Screenshot · Airtable"
-          title="Build tracker"
-          description="Airtable tracking screenshot showing component requests, ownership, status, effort level, and links back to design files."
-        />
+        <Body as="p" size="small" color="subtlest" UNSAFE_className="mb-4 leading-[1.7]">
+          The automation closes the loop: the same tooling that keeps the system in sync also
+          builds the deliverables teams hand off to engineering.
+        </Body>
+        <div className="flex flex-col gap-8">
+          <div className="mt-2 mb-2">
+            <VideoFull
+              src={videoThemeValidation}
+              alt="Screen recording of a script running automated theme validation tests across the design system"
+              label="Theme validation"
+              caption="A script that runs automated checks across every theme, catching token drift before it ships."
+              playback="controls"
+              surface="subtle"
+            />
+          </div>
+          <div className="mt-2 mb-2">
+            <VideoFull
+              src={videoRecipeBuild}
+              alt="Screen recording of the recipe generator automation assembling a recipe in Figma"
+              label="Recipe generator"
+              caption="The Scripter automation that assembles a recipe from its component parts, pulling in components, tokens, and variant states automatically."
+              playback="controls"
+              surface="subtle"
+            />
+          </div>
+          <div className="mt-2 mb-2">
+            <EmbedFull
+              src="https://metooha.github.io/walmart-demo-app/walmart"
+              title="Conversational UI Kit: live demo site"
+              label="Try it live"
+              caption="Click the FAB at the bottom right and open the chat to test some of the components."
+              aspectRatio="16 / 10"
+              mobileAspectRatio="375 / 812"
+              surface="subtle"
+            />
+          </div>
+          <div className="mt-2 mb-2">
+            <EmbedFull
+              src="https://metooha.github.io/px-sub-theme-editor/campaign-dashboard"
+              title="B2B enterprise example: campaign dashboard"
+              label="Try it live"
+              caption="A B2B enterprise pattern with a moveable FAB that can dock into the masthead or a data table, just like the Marty example. Docked in the masthead, it opens as a side panel instead of a floating bubble."
+              aspectRatio="16 / 10"
+              mobileAspectRatio="375 / 812"
+              surface="subtle"
+            />
+          </div>
+        </div>
       </div>
     </Section>
   );
@@ -599,12 +656,6 @@ export function ImpactSection() {
           { value: "[ 12+ ]", label: "Engineering weeks saved per launch" },
           { value: "[ 6+ ]", label: "Designers grown as contributors" },
         ]}
-      />
-
-      <CapturePlaceholder
-        badge="Screenshot · Metrics"
-        title="Impact dashboard or OKR summary"
-        description="Adoption metrics, engineering hours saved, or leadership reporting that captures the business value of the system."
       />
 
       <div className="rounded-lg p-6" style={{ background: "#ffffff", border: `1px solid ${SEPARATOR}`, borderLeft: "4px solid #0053e2" }}>
@@ -640,7 +691,7 @@ export function ImpactSection() {
         <div className="mb-3">
           <Eyebrow onDark>The biggest outcome: a reusable framework</Eyebrow>
         </div>
-        <Body as="p" size="small" UNSAFE_className="leading-[1.7] mt-6 mb-6" UNSAFE_style={{ color: "rgba(255,255,255,0.78)" }}>
+        <Body as="p" size="small" UNSAFE_className="leading-[1.7] mt-6 mb-6 pb-6" UNSAFE_style={{ color: "rgba(255,255,255,0.78)" }}>
           The chat kit was the first, not the only. The process, taxonomy, and governance built
           for it became the blueprint the org now uses to stand up new kits.
         </Body>
@@ -653,7 +704,7 @@ export function ImpactSection() {
             { icon: "Plus", name: "Recipes & more", status: "Same pattern, new domains" },
           ]}
         />
-        <Body as="p" size="small" UNSAFE_className="mt-5 leading-[1.7]" UNSAFE_style={{ color: "rgba(255,255,255,0.78)" }}>
+        <Body as="p" size="small" UNSAFE_className="mt-5 py-4 leading-[1.7]" UNSAFE_style={{ color: "rgba(255,255,255,0.78)" }}>
           A one-off design system solves one problem. A framework for building design systems
           solves every problem of that shape. That was the real deliverable.
         </Body>
@@ -674,12 +725,6 @@ export function ClosingSection() {
           The foundation is built and shipped. The team is onboarding partners and running in
           maintenance mode. Next is scale.
         </Lead>
-
-        <CapturePlaceholder
-          badge="Screenshot · Live product"
-          title="In production"
-          description="The chat system components shipping in a live product experience: AI shopping assistant and support chat."
-        />
 
         <NextGrid
           items={[

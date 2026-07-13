@@ -29,19 +29,27 @@ export function CaseStudyCard({ caseStudy, priority = false }: CaseStudyCardProp
   const isProtected = isPageProtected(caseStudy.path);
   const coverImage = caseStudy.heroType === "image" ? (caseStudy.heroImage ?? caseStudy.thumbnail) : null;
 
-  const heroContent =
-    caseStudy.heroType === "component" && caseStudy.HeroComponent ? (
-      <caseStudy.HeroComponent />
-    ) : (
-      <img
-        src={coverImage ?? caseStudy.thumbnail}
-        alt={title}
-        className="block w-full h-full object-cover object-center"
-        decoding={priority ? "sync" : "async"}
-        loading={priority ? "eager" : "lazy"}
-        fetchPriority={priority ? "high" : "auto"}
-      />
-    );
+  const heroContent = caseStudy.cardImage ? (
+    <img
+      src={caseStudy.cardImage}
+      alt={title}
+      className="block w-full h-full object-cover object-center"
+      decoding={priority ? "sync" : "async"}
+      loading={priority ? "eager" : "lazy"}
+      fetchPriority={priority ? "high" : "auto"}
+    />
+  ) : caseStudy.heroType === "component" && caseStudy.HeroComponent ? (
+    <caseStudy.HeroComponent />
+  ) : (
+    <img
+      src={coverImage ?? caseStudy.thumbnail}
+      alt={title}
+      className="block w-full h-full object-cover object-center"
+      decoding={priority ? "sync" : "async"}
+      loading={priority ? "eager" : "lazy"}
+      fetchPriority={priority ? "high" : "auto"}
+    />
+  );
 
   const card = (
     <div
@@ -56,11 +64,8 @@ export function CaseStudyCard({ caseStudy, priority = false }: CaseStudyCardProp
           )}
         </div>
         <div className="bg-[rgb(241,241,241)] p-8 w-full h-full flex flex-col justify-between">
-          <div className="flex items-center justify-between gap-2 mb-2">
-            <p className="text-xs uppercase tracking-wider text-gray-600">
-              CASE STUDY {String(caseStudy.id).padStart(2, "0")}
-            </p>
-            {isProtected ? (
+          {isProtected ? (
+            <div className="flex items-center justify-end gap-2 mb-2">
               <Tag
                 color="warning"
                 variant="secondary"
@@ -69,8 +74,8 @@ export function CaseStudyCard({ caseStudy, priority = false }: CaseStudyCardProp
               >
                 Password protected
               </Tag>
-            ) : null}
-          </div>
+            </div>
+          ) : null}
           <h2 className="text-3xl font-bold mb-2">{title}</h2>
           <p className="text-gray-700 mb-4">{description}</p>
           <div className="flex gap-2 flex-wrap">

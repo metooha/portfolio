@@ -30,6 +30,7 @@ import imgBreakoutCover from "@/app/assets/pages/case-study/breakout-network/cov
 import imgBreakoutLogo from "@/app/assets/pages/case-study/breakout-network/BNW-logo-new.png";
 import imgWalmartLogo from "@/app/assets/pages/case-study/everyday-sans/logo.png";
 import imgUcUiKitCover from "@/app/assets/pages/case-study/uc-uikit/Coverpreview.png";
+import imgUcUiKitCoverCard from "@/app/assets/pages/case-study/uc-uikit/coverpreview-card.png";
 import type { ProjectLink } from "@/app/components/CaseStudyTemplate";
 import type { ThemeName } from "@/app/components/utils/Theming";
 
@@ -65,6 +66,8 @@ export interface CaseStudyConfig {
   thumbnail: string;
   thumbnailFit?: "cover" | "contain";
   thumbnailBorder?: boolean;
+  /** Overrides the home-page card image only, leaving heroImage/HeroComponent for the case study page. */
+  cardImage?: string;
   /** Body content for generic template pages */
   ContentComponent?: React.ComponentType;
   /** Full-page component for special routing (replaces template page) */
@@ -202,6 +205,48 @@ const CASE_STUDIES: CaseStudyConfig[] = [
     PageComponent: AirtableCaseStudy,
     overviewClient: "Walmart",
     overviewCategory: "Core Design System, Design Tokens",
+    homeGroup: "Design Systems",
+  },
+  {
+    id: "12",
+    path: "/case-study/12",
+    title:
+      "A conversational UI design system for Walmart, built across a platform migration and a market merger.",
+    defaultTheme: "Walmart",
+    isPublished: true, // TEMP: on for local preview, ask Claude to flip back to false when done
+    cardTitle: "A Cross-Platform Pattern System for Conversational AI",
+    shortDescription:
+      "A shared, themeable chat and conversational AI system for Walmart's shopping assistant, support chat, and staff tools, built across a platform migration and a market merger.",
+    cardDescription:
+      "Proposed a shared pattern and recipe system, then defined the taxonomy, process, and governance that let a recruited contributor team and Walmart's standing teams build every conversational surface from one system.",
+    fullDescription:
+      "Product teams could no longer maintain their own chat UIs. Engineering and product brought the problem to design: define the system, build and mentor a contributor team, and hand it to the standing teams to maintain.",
+    metaItems: [
+      { label: "Role", value: "Principal Product Designer" },
+      { label: "Scope", value: "Strategy, Team, System, Governance" },
+      { label: "Products", value: "Sparky (AI shopping assistant), Support chat, Associate tools" },
+      { label: "Status", value: "In build, SDK shipping Q3/Q4" },
+    ],
+    navSections: [
+      { label: "Overview", href: "#overview" },
+      { label: "The Problem", href: "#problem" },
+      { label: "Defining the Work", href: "#defining" },
+      { label: "The Scope", href: "#scope" },
+      { label: "Building the Team", href: "#team" },
+      { label: "The Process", href: "#process" },
+      { label: "Governance", href: "#governance" },
+      { label: "Impact", href: "#impact" },
+      { label: "What's Next", href: "#next" },
+    ],
+    navAccentColor: "#0053e2",
+    tags: ["Conversational AI", "Governance", "Platform", "Patterns & Recipes", "Automation", "Design System"],
+    heroType: "component",
+    HeroComponent: UcUiKitHero,
+    thumbnail: imgUcUiKitCover,
+    cardImage: imgUcUiKitCoverCard,
+    PageComponent: UcUiKitCaseStudy,
+    overviewClient: "Walmart",
+    overviewCategory: "Conversational AI, Design Systems, Governance",
     homeGroup: "Design Systems",
   },
   {
@@ -516,48 +561,6 @@ const CASE_STUDIES: CaseStudyConfig[] = [
     heroGradientClass: "bg-gradient-to-br from-orange-50 to-red-50",
     thumbnail: imgAcademy,
     ContentComponent: CaseStudyAcademyContent,
-  },
-  {
-    id: "12",
-    path: "/case-study/12",
-    title:
-      "A conversational UI design system for Walmart, built across a platform migration and a market merger.",
-    defaultTheme: "Walmart",
-    isPublished: true, // TEMP: on for local preview, ask Claude to flip back to false when done
-    featuredOnHome: false,
-    cardTitle: "Conversational UI Design System",
-    shortDescription:
-      "A shared, themeable chat and conversational AI system for Walmart's shopping assistant, support chat, and staff tools, built across a platform migration and a market merger.",
-    cardDescription:
-      "Six chat UIs, one system. A pattern and recipe system for Walmart's conversational AI products, built by a recruited contributor team and handed off to the standing teams to maintain.",
-    fullDescription:
-      "Product teams could no longer maintain their own chat UIs. Engineering and product brought the problem to design: define the system, build and mentor a contributor team, and hand it to the standing teams to maintain.",
-    metaItems: [
-      { label: "Role", value: "Principal Product Designer" },
-      { label: "Scope", value: "Strategy, Team, System, Governance" },
-      { label: "Products", value: "Sparky (AI shopping assistant), Support chat, Associate tools" },
-      { label: "Status", value: "In build, SDK shipping Q3/Q4" },
-    ],
-    navSections: [
-      { label: "Overview", href: "#overview" },
-      { label: "The Problem", href: "#problem" },
-      { label: "Defining the Work", href: "#defining" },
-      { label: "The Scope", href: "#scope" },
-      { label: "Building the Team", href: "#team" },
-      { label: "The Process", href: "#process" },
-      { label: "Governance", href: "#governance" },
-      { label: "Impact", href: "#impact" },
-      { label: "What's Next", href: "#next" },
-    ],
-    navAccentColor: "#0053e2",
-    tags: ["Design System", "Conversational AI", "Governance"],
-    heroType: "component",
-    HeroComponent: UcUiKitHero,
-    thumbnail: imgUcUiKitCover,
-    PageComponent: UcUiKitCaseStudy,
-    overviewClient: "Walmart",
-    overviewCategory: "Conversational AI, Design Systems, Governance",
-    homeGroup: "Design Systems",
   },
 ];
 

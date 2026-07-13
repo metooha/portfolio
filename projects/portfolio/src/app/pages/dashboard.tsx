@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState, type ReactNode } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { AdminNav } from "@/app/components/admin/AdminNav";
 import { Button, ButtonGroup } from "@/app/components/Button/Button";
@@ -118,9 +118,93 @@ const SETTINGS_SECTION_ICONS: Record<SettingsSection, ReactNode> = {
   publish: <ArrowUpIcon decorative />,
   main: <StarIcon decorative />,
   "case-study": <Icon name="Article" decorative />,
-  "other-work": <Icon name="Mobile" decorative />,
-  prototypes: <Icon name="Phone" decorative />,
+  "other-work": <Icon name="Notebook" decorative />,
+  prototypes: <Icon name="Mobile" decorative />,
 };
+
+/** Site pages table columns: default/min widths (px) so the Theme column's Apply/Use default
+ *  buttons always have room and never get clipped or covered when the table shrinks. */
+const SITE_TABLE_COLUMNS = ["Page", "Status", "Theme", "Password"] as const;
+const SITE_TABLE_DEFAULT_WIDTHS = [260, 140, 320, 280];
+const SITE_TABLE_MIN_WIDTHS = [180, 110, 220, 200];
+const SITE_TABLE_MAX_WIDTH = 640;
+
+/** Lets users drag column borders to expand/shrink the site pages table's columns. */
+function useResizableColumns(defaultWidths: number[], minWidths: number[], maxWidth: number) {
+  const [widths, setWidths] = useState<number[]>(defaultWidths);
+  const dragRef = useRef<{ index: number; startX: number; startWidth: number } | null>(null);
+
+  const handlePointerMove = useCallback(
+    (event: PointerEvent) => {
+      const drag = dragRef.current;
+      if (!drag) return;
+      const delta = event.clientX - drag.startX;
+      const min = minWidths[drag.index] ?? 80;
+      const next = Math.min(maxWidth, Math.max(min, drag.startWidth + delta));
+      setWidths((prev) => {
+        if (prev[drag.index] === next) return prev;
+        const updated = [...prev];
+        updated[drag.index] = next;
+        return updated;
+      });
+    },
+    [minWidths, maxWidth],
+  );
+
+  const stopDragging = useCallback(() => {
+    dragRef.current = null;
+    window.removeEventListener("pointermove", handlePointerMove);
+    window.removeEventListener("pointerup", stopDragging);
+  }, [handlePointerMove]);
+
+  useEffect(() => stopDragging, [stopDragging]);
+
+  const startResize = useCallback(
+    (index: number) => (event: React.PointerEvent<HTMLDivElement>) => {
+      event.preventDefault();
+      dragRef.current = { index, startX: event.clientX, startWidth: widths[index] };
+      window.addEventListener("pointermove", handlePointerMove);
+      window.addEventListener("pointerup", stopDragging);
+    },
+    [widths, handlePointerMove, stopDragging],
+  );
+
+  return { widths, startResize };
+}
+
+function ColumnResizeHandle({
+  label,
+  onPointerDown,
+}: {
+  label: string;
+  onPointerDown: (event: React.PointerEvent<HTMLDivElement>) => void;
+}) {
+  return (
+    <div
+      className="admin-pages-table__resize-handle"
+      onPointerDown={onPointerDown}
+      role="separator"
+      aria-orientation="vertical"
+      aria-label={`Resize ${label} column`}
+    />
+  );
+}
+
+/**
+ * DataTableHeader's children are typed as `string`, but it renders whatever node it's given.
+ * Casting lets us attach a drag handle to the header label without forking the shared component.
+ */
+function resizableHeaderLabel(
+  label: string,
+  onPointerDown?: (event: React.PointerEvent<HTMLDivElement>) => void,
+): string {
+  return (
+    <>
+      {label}
+      {onPointerDown ? <ColumnResizeHandle label={label} onPointerDown={onPointerDown} /> : null}
+    </>
+  ) as unknown as string;
+}
 
 function SitePageRow({ page }: { page: SitePage }) {
   const { addSnack } = useSnackbar();
@@ -514,6 +598,11 @@ function SitePagesPanel({ group }: { group: SitePage["group"] }) {
     () => getSitePages().filter((page) => page.group === group),
     [group],
   );
+  const { widths, startResize } = useResizableColumns(
+    SITE_TABLE_DEFAULT_WIDTHS,
+    SITE_TABLE_MIN_WIDTHS,
+    SITE_TABLE_MAX_WIDTH,
+  );
 
   if (pages.length === 0) {
     return (
@@ -530,13 +619,18 @@ function SitePagesPanel({ group }: { group: SitePage["group"] }) {
   return (
     <Card size="small" UNSAFE_className="admin-pages-card">
         <CardContent UNSAFE_className="admin-pages-table">
-          <DataTable UNSAFE_className="w-full text-left text-sm">
+          <DataTable UNSAFE_className="text-left text-sm" UNSAFE_style={{ tableLayout: "fixed" }}>
+            <colgroup>
+              {widths.map((width, index) => (
+                <col key={SITE_TABLE_COLUMNS[index]} style={{ width: `${width}px` }} />
+              ))}
+            </colgroup>
             <DataTableHead>
               <DataTableRow>
-                <DataTableHeader>Page</DataTableHeader>
-                <DataTableHeader>Status</DataTableHeader>
-                <DataTableHeader>Theme</DataTableHeader>
-                <DataTableHeader>Password</DataTableHeader>
+                <DataTableHeader>{resizableHeaderLabel("Page", startResize(0))}</DataTableHeader>
+                <DataTableHeader>{resizableHeaderLabel("Status", startResize(1))}</DataTableHeader>
+                <DataTableHeader>{resizableHeaderLabel("Theme", startResize(2))}</DataTableHeader>
+                <DataTableHeader>{resizableHeaderLabel("Password")}</DataTableHeader>
               </DataTableRow>
             </DataTableHead>
             <DataTableBody>
