@@ -516,33 +516,31 @@ function CssEditorPanel() {
 /** The "Design specifies it in Figma / Engineering rebuilds it in code" comparison — built as real markup instead of a flattened screenshot, so the drift it illustrates isn't itself a static image. Breaks out to the full screen width since the two-panel layout reads as cramped inside the article's narrow reading column. */
 export function FigmaDesignEngineeringPanel() {
   return (
-    <div className="w-screen ml-[calc(50%-50vw)] px-4 sm:px-8 md:px-12 lg:px-16">
-      <div
-        className="mx-auto grid max-w-[1944px] grid-cols-1 md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-stretch gap-6 md:gap-10 rounded-[24px] p-4 sm:p-6 md:p-10"
-        style={{ background: "#f5f6fa" }}
+    <div
+      className="w-full grid grid-cols-1 md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-stretch gap-6 md:gap-10 rounded-[24px] p-4 sm:p-6 md:p-10"
+      style={{ background: "#f5f6fa" }}
+    >
+      <DesignEngineeringPanel
+        eyebrow="DESIGN"
+        title="Specifies it in Figma"
+        body="Tokens, spacing, states are all precisely defined."
       >
-        <DesignEngineeringPanel
-          eyebrow="DESIGN"
-          title="Specifies it in Figma"
-          body="Tokens, spacing, states are all precisely defined."
-        >
-          <BrandVariablesTable />
-        </DesignEngineeringPanel>
-        <div
-          className="flex items-center justify-center self-center shrink-0 rotate-90 md:rotate-0"
-          style={{ width: "40px", height: "40px" }}
-          aria-hidden="true"
-        >
-          <Icon name="ArrowRight" style={{ fontSize: "24px", color: DESIGN_ENGINEERING_GRAY }} />
-        </div>
-        <DesignEngineeringPanel
-          eyebrow="ENGINEERING"
-          title="Rebuilds it in code"
-          body="Reads the file, re-implements every value. First pass rarely matches. Now the specs live in two places, and starts to drift."
-        >
-          <CssEditorPanel />
-        </DesignEngineeringPanel>
+        <BrandVariablesTable />
+      </DesignEngineeringPanel>
+      <div
+        className="flex items-center justify-center self-center shrink-0 rotate-90 md:rotate-0"
+        style={{ width: "40px", height: "40px" }}
+        aria-hidden="true"
+      >
+        <Icon name="ArrowRight" style={{ fontSize: "24px", color: DESIGN_ENGINEERING_GRAY }} />
       </div>
+      <DesignEngineeringPanel
+        eyebrow="ENGINEERING"
+        title="Rebuilds it in code"
+        body="Reads the file, re-implements every value. First pass rarely matches. Now the specs live in two places, and starts to drift."
+      >
+        <CssEditorPanel />
+      </DesignEngineeringPanel>
     </div>
   );
 }

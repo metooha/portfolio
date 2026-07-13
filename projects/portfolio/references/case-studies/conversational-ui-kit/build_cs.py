@@ -1,5 +1,9 @@
-HEADNAV = open("part_head_nav.html").read()
-FOOTER  = open("part_footer.html").read()
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent
+
+HEADNAV = (BASE_DIR / "part_head_nav.html").read_text(encoding="utf-8")
+FOOTER  = (BASE_DIR / "part_footer.html").read_text(encoding="utf-8")
 
 # Sections built from the audited, debranded, Distinguished-Principal-framed draft.
 # Illustrated stand-ins, capture placeholders, and inline SVG icons are already
@@ -824,5 +828,5 @@ CLOSING = r'''<!-- CLOSING -->
 
 body = "\n\n".join([HERO, PROBLEM, DEFINING, SCOPE, ALIGNMENT, PROCESS, GOVERNANCE, IMPACT, CLOSING])
 html = HEADNAV + "\n" + body + "\n" + FOOTER
-open("rebuilt.html", "w", encoding="utf-8").write(html)
+(BASE_DIR / "rebuilt.html").write_text(html, encoding="utf-8")
 print("rebuilt.html written:", len(html)//1024, "KB")
