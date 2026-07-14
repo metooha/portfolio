@@ -13,7 +13,7 @@ export function PageContainer({
   children: React.ReactNode;
   className?: string;
   as?: "div" | "main" | "section";
-  maxWidth?: "max-w-6xl" | "max-w-[1300px]" | "max-w-[1660px]" | "max-w-full";
+  maxWidth?: "max-w-6xl" | "max-w-[1100px]" | "max-w-[1660px]" | "max-w-full";
 }) {
   return (
     <Tag

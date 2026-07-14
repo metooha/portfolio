@@ -57,7 +57,7 @@ export function CaseStudyCard({ caseStudy, priority = false }: CaseStudyCardProp
         isClickable ? "hover:shadow-2xl" : "opacity-90"
       }`}
     >
-        <div className="relative aspect-[16/9] group">
+        <div className="relative aspect-[20/9] group">
           <div className="w-full h-full">{heroContent}</div>
           {isClickable && (
             <div className="absolute inset-0 bg-green-500 opacity-0 group-hover:opacity-40 transition-opacity duration-300" />

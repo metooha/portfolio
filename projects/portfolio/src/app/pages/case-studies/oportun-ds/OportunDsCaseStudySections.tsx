@@ -60,7 +60,7 @@ import {
 } from "@/app/assets/pages/case-study/oportun-ds/assets";
 
 const SECTION_OUTER = "w-full max-w-[1660px] mx-auto px-4 sm:px-6 md:px-12 lg:px-[68px]";
-const SECTION_INNER = "w-full max-w-[1300px] flex flex-col gap-6";
+const SECTION_INNER = "w-full max-w-[1100px] flex flex-col gap-6";
 
 const SURFACE = "var(--ld-semantic-color-fill, #ffffff)";
 const SURFACE_SUBTLE = "var(--ld-semantic-color-fill-subtle, #f0f1f2)";
@@ -413,10 +413,10 @@ export function OportunDsApproachSection() {
         title="Architecture first, components second."
         lead="Before any component was built, the team aligned on the token model, the roadmap, and the OKRs that would tell us the system was working."
       />
-      <div className="w-full max-w-[1300px]">
+      <div className="w-full max-w-[1100px]">
         <OportunArchitectureTimeline items={APPROACH_ITEMS} />
       </div>
-      <div className="w-full max-w-[1300px]">
+      <div className="w-full max-w-[1100px]">
         <Carousel aria-label="Design system planning and roadmapping">
           <CarouselContent>
             <CarouselItem cols={1}>
@@ -472,10 +472,10 @@ export function OportunDsTokenArchitectureSection() {
         title="Three-tier token system: one shared foundation."
         lead="Both brands share a single token hierarchy. Brand differentiation lives entirely at the semantic layer: one component file, two brand expressions, zero duplication."
       />
-      <div className="w-full max-w-[1300px]">
+      <div className="w-full max-w-[1100px]">
         <OportunTokenTierDiagram tiers={TOKEN_TIERS} />
       </div>
-      <div className="w-full max-w-[1300px] flex flex-col gap-10">
+      <div className="w-full max-w-[1100px] flex flex-col gap-10">
         <EdsImageFull
           src={imgTokenNaming}
           alt="Token naming convention diagram showing how #000000 resolves through gray900 → surface.primary.default → button.surface.primary.default"
@@ -509,7 +509,7 @@ export function OportunDsDecisionsSection() {
   return (
     <Section id="decisions" background={SURFACE_SUBTLE}>
       <SectionHeader eyebrow="Architecture decisions" title="The calls that determined scalability." />
-      <div className="w-full max-w-[1300px]">
+      <div className="w-full max-w-[1100px]">
         <OportunDecisionGrid cards={DECISION_CARDS} />
       </div>
     </Section>
@@ -547,7 +547,7 @@ export function OportunDsPipelineSection() {
         eyebrow="Design-to-code workflow"
         title="Tokens as the contract between Figma and production."
       />
-      <div className="w-full max-w-[1300px] flex flex-col gap-10">
+      <div className="w-full max-w-[1100px] flex flex-col gap-10">
         <OportunPipeline steps={PIPELINE_STEPS} />
       </div>
     </Section>
@@ -561,10 +561,10 @@ export function OportunDsGovernanceSection() {
         eyebrow="Governance model"
         title="Systems without governance become libraries."
       />
-      <div className="w-full max-w-[1300px]">
+      <div className="w-full max-w-[1100px]">
         <OportunGovernanceTable columns={GOVERNANCE_COLUMNS} rows={GOVERNANCE_ROWS} />
       </div>
-      <div className="w-full max-w-[1300px] flex flex-col gap-6">
+      <div className="w-full max-w-[1100px] flex flex-col gap-6">
         <EdsLead>
           Governance only works when it is documented and teachable. I defined the docs, contribution
           guides, and onboarding model that turned the system into something teams could learn
@@ -595,7 +595,7 @@ export function OportunDsInActionSection() {
         title="Validating the system in high-stakes flows."
         lead="The system wasn't validated in isolation. It was stress-tested against the most complex product flows first. The loan calculator and Transfer Money flows were among the first full surfaces built on the unified system, exposing real component gaps and token edge cases before wide adoption."
       />
-      <div className="w-full max-w-[1300px] flex flex-col gap-10">
+      <div className="w-full max-w-[1100px] flex flex-col gap-10">
         <div className="flex flex-col gap-4">
           <Body
             as="p"
@@ -636,7 +636,7 @@ export function OportunDsResultsSection() {
         title="From project assets to shared platform infrastructure."
         lead="The system gave teams a single source of truth for patterns, documentation, and implementation, accelerating delivery across web and mobile."
       />
-      <div className="w-full max-w-[1300px] flex flex-col gap-10">
+      <div className="w-full max-w-[1100px] flex flex-col gap-10">
         <EdsStatsRow
           variant="brand"
           cellBackground={SURFACE_SUBTLE}

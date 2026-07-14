@@ -53,7 +53,7 @@ export default function WmDesignSystemCaseStudy() {
       >
         <div className="relative shrink-0 w-full overflow-x-hidden">
           <div className="w-full max-w-[1660px] mx-auto px-4 sm:px-6 md:px-12 lg:px-[68px] py-12 md:py-16">
-            <div className="w-full max-w-[1300px] mx-auto">
+            <div className="w-full max-w-[1100px] mx-auto">
               <WmCaseStudyVisualGrid />
             </div>
           </div>

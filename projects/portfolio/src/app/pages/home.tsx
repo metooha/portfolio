@@ -64,7 +64,7 @@ export function Home() {
     <div data-ld-theme="Portfolio" style={{ display: "contents" }}>
       <div className="min-h-screen">
       <PageContainer className="pt-0" maxWidth="max-w-[1660px]">
-        <div className="mx-auto max-w-[1300px] py-6 md:py-8 mt-8 md:mt-10 mb-1 pb-8 md:pb-10">
+        <div className="mx-auto max-w-[1100px] py-6 md:py-8 mt-8 md:mt-10 mb-1 pb-8 md:pb-10">
           <CaseStudyHeroText
             as="p"
             UNSAFE_className="flex flex-wrap items-center gap-2 md:gap-3 w-full min-w-0"
@@ -93,13 +93,13 @@ export function Home() {
               className="min-w-0 max-w-full"
               style={{ color: "var(--ld-semantic-color-text)", overflowWrap: "break-word" }}
             >
-              who builds scalable products, with a focus on branding, usability, and workflow
+              who builds scalable products, with a focus on branding, platform systems, and workflow
               integrations.
             </span>
           </CaseStudyHeroText>
         </div>
 
-        <div className="mx-auto max-w-[1300px] mb-16">
+        <div className="mx-auto max-w-[1100px] mb-16">
           <Heading
             as="h2"
             size="large"
@@ -145,40 +145,42 @@ export function Home() {
                 }}
               >
                 <PageContainer maxWidth="max-w-[1660px]" className="py-16 md:py-20">
-                  {groupIndex === 0 && (
-                    <div className="mb-16">
-                      <Display
-                        as="h1"
-                        size="small"
-                        weight="alt"
-                        color="brand"
-                        UNSAFE_className="text-center"
+                  <div className="mx-auto max-w-[1100px]">
+                    {groupIndex === 0 && (
+                      <div className="mb-16">
+                        <Display
+                          as="h1"
+                          size="small"
+                          weight="alt"
+                          color="brand"
+                          UNSAFE_className="text-center"
+                        >
+                          Highlighted Projects
+                        </Display>
+                      </div>
+                    )}
+                    <div className="mb-10 text-center">
+                      <Heading as="h2" size="large" weight="default">
+                        {GROUP_TITLES[group]}
+                      </Heading>
+                      <Body
+                        as="p"
+                        size="medium"
+                        color="subtle"
+                        UNSAFE_className="mt-2 whitespace-nowrap"
                       >
-                        Highlighted Projects
-                      </Display>
+                        {GROUP_DESCRIPTIONS[group]}
+                      </Body>
                     </div>
-                  )}
-                  <div className="mb-10 text-center">
-                    <Heading as="h2" size="large" weight="default">
-                      {GROUP_TITLES[group]}
-                    </Heading>
-                    <Body
-                      as="p"
-                      size="medium"
-                      color="subtle"
-                      UNSAFE_className="mt-2 whitespace-nowrap"
-                    >
-                      {GROUP_DESCRIPTIONS[group]}
-                    </Body>
-                  </div>
-                  <div className="space-y-16">
-                    {caseStudies.map((caseStudy) => (
-                      <CaseStudyCard
-                        key={caseStudy.id}
-                        caseStudy={caseStudy}
-                        priority={cardIndex++ < 2}
-                      />
-                    ))}
+                    <div className="space-y-16">
+                      {caseStudies.map((caseStudy) => (
+                        <CaseStudyCard
+                          key={caseStudy.id}
+                          caseStudy={caseStudy}
+                          priority={cardIndex++ < 2}
+                        />
+                      ))}
+                    </div>
                   </div>
                 </PageContainer>
               </section>
