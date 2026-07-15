@@ -197,7 +197,7 @@ export function CaseStudyTemplate({
             }}
           >
             <div id="overview" className="relative shrink-0 w-full">
-              <div className="w-full max-w-[1660px] mx-auto px-4 sm:px-6 md:px-12 lg:px-[68px]">
+              <div className="w-full max-w-[1220px] mx-auto px-4 sm:px-6 md:px-12 lg:px-[68px]">
                 <div
                   className="content-stretch flex flex-1 flex-col items-start min-h-px min-w-0 w-full max-w-[1100px] mx-auto pt-8 md:pt-16 lg:pt-0 relative"
                   style={{ gap: "var(--ld-semantic-spacing-400, 2rem)" }}
@@ -282,7 +282,7 @@ export function CaseStudyTemplate({
             >
               {(prevProject || nextProject) && (
                 <div className="relative w-full shrink-0">
-                  <div className="relative mx-auto w-full max-w-[1660px] px-4 sm:px-6 md:px-12 lg:px-[68px]">
+                  <div className="relative mx-auto w-full max-w-[1220px] px-4 sm:px-6 md:px-12 lg:px-[68px]">
                     <div
                       className="grid w-full grid-cols-1 items-stretch md:grid-cols-2"
                       style={{ gap: "var(--ld-semantic-spacing-300, 1.5rem)" }}

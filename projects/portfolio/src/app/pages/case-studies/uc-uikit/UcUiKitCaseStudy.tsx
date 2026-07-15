@@ -44,7 +44,7 @@ export function UcUiKitHero() {
 
 const HERO_TITLE = "A United Kit";
 const OVERVIEW_TITLE =
-  "A conversational UI design system for Walmart, built across a platform migration and a market merger.";
+  "A conversational UI kit, built across a platform migration and a market merger.";
 const OVERVIEW_DESCRIPTION =
   "Product teams could no longer maintain their own chat UIs. Engineering and product brought the problem to design: define the system, build and mentor a contributor team, and hand it to the standing teams to maintain.";
 const OVERVIEW_META = [

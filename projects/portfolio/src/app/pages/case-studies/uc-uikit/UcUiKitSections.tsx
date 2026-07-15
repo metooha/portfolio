@@ -12,7 +12,6 @@ import {
   NextGrid,
   JourneyTimeline,
   TestimonialShowcase,
-  CaptureMedia,
   VideoFull,
   EmbedFull,
 } from "@/app/components/CaseStudyPrimitives";
@@ -20,19 +19,38 @@ import { Body, Heading } from "@/app/components/Text/Text";
 import { Icon } from "@/app/components/Icons/Icons";
 import imgFragmentation from "@/app/assets/pages/case-study/uc-uikit/different-chats.png";
 import imgConverseTool from "@/app/assets/pages/case-study/uc-uikit/converse-tool.jpg";
-import imgTeamStructure from "@/app/assets/pages/case-study/uc-uikit/team-structure.png";
 import imgProjectBrief from "@/app/assets/pages/case-study/uc-uikit/project-brief.png";
 import imgAuditSpread from "@/app/assets/pages/case-study/uc-uikit/audit-spread.png";
 import imgPatternAnalysisTracker from "@/app/assets/pages/case-study/uc-uikit/pattern-analysis-tracker-1.png";
 import imgComponentBuild from "@/app/assets/pages/case-study/uc-uikit/component-build.png";
 import videoThemeValidation from "@/app/assets/pages/case-study/uc-uikit/theme-validation-script.mp4";
 import videoRecipeBuild from "@/app/assets/pages/case-study/uc-uikit/recipe-build.mp4";
+import avatarKaiThornton from "@/app/assets/pages/case-study/uc-uikit/avatar-kai-thornton.png";
+import avatarLunaCox from "@/app/assets/pages/case-study/uc-uikit/avatar-luna-cox.png";
+import avatarCynthiaThornton from "@/app/assets/pages/case-study/uc-uikit/avatar-cynthia-thornton.png";
+import avatarZaraMedina from "@/app/assets/pages/case-study/uc-uikit/avatar-zara-medina.png";
+import avatarTheoPetrov from "@/app/assets/pages/case-study/uc-uikit/avatar-theo-petrov.png";
+import avatarMiraVasquez from "@/app/assets/pages/case-study/uc-uikit/avatar-mira-vasquez.png";
+import avatarFelixKimura from "@/app/assets/pages/case-study/uc-uikit/avatar-felix-kimura.png";
+import avatarNoaHaddad from "@/app/assets/pages/case-study/uc-uikit/avatar-noa-haddad.png";
+import avatarSorenBrennan from "@/app/assets/pages/case-study/uc-uikit/avatar-soren-brennan.png";
+import avatarScottOduya from "@/app/assets/pages/case-study/uc-uikit/avatar-scott-oduya.png";
+import avatarRenaJohansson from "@/app/assets/pages/case-study/uc-uikit/avatar-rena-johansson.png";
+import avatarSageMwangi from "@/app/assets/pages/case-study/uc-uikit/avatar-sage-mwangi.png";
+import avatarOrionDelacroix from "@/app/assets/pages/case-study/uc-uikit/avatar-orion-delacroix.png";
+import avatarVedaTanaka from "@/app/assets/pages/case-study/uc-uikit/avatar-veda-tanaka.png";
+import avatarAtlasCastillo from "@/app/assets/pages/case-study/uc-uikit/avatar-atlas-castillo.png";
+import avatarLyraNovak from "@/app/assets/pages/case-study/uc-uikit/avatar-lyra-novak.png";
+import avatarEzraIvarsson from "@/app/assets/pages/case-study/uc-uikit/avatar-ezra-ivarsson.png";
+import avatarCoraChandra from "@/app/assets/pages/case-study/uc-uikit/avatar-cora-chandra.png";
+import avatarJonMoreau from "@/app/assets/pages/case-study/uc-uikit/avatar-jon-moreau.png";
 import {
   UseCaseGrid,
   PlatformMatrix,
   NamingTaxonomy,
   FrameworkKits,
   LayerStack,
+  TeamStructureChart,
 } from "./UcUiKitBlocks";
 
 const DARK = "#001e60";
@@ -351,10 +369,72 @@ export function BuildingTeamSection() {
         ))}
       </div>
 
-      <CaptureMedia
-        image={imgTeamStructure}
-        alt="Team structure slide showing key stakeholders (decision makers, collaborators, informed) and design partners across Conversational Commerce, Help Center, AI Shopping Assistant, B2B AI Assistant, and Social Commerce teams"
-        surface="subtle"
+      <TeamStructureChart
+        title="Team & Stakeholders"
+        caption="An example of governance across multiple teams with different products."
+        decisionMakers={[
+          { name: "Kai Thornton", title: "Director, Core Design System", avatar: avatarKaiThornton },
+          { name: "Luna Cox", title: "Group Director", avatar: avatarLunaCox },
+        ]}
+        collaborators={[
+          { name: "Cynthia Thornton", title: "Sr. Manager, Engineering", avatar: avatarCynthiaThornton },
+          { name: "Zara Medina", title: "Sr. Manager, AR Design", avatar: avatarZaraMedina },
+        ]}
+        informed={[
+          { initials: "LD", team: "Core Design team", role: "Designers/Engineers" },
+          { initials: "GTP", team: "Conversational UI", role: "Engineers" },
+        ]}
+        designPartnerColumns={[
+          [
+            {
+              team: "Conversational Commerce",
+              people: [
+                { name: "Theo Petrov", title: "Sr. Manager", avatar: avatarTheoPetrov },
+                { name: "Mira Vasquez", title: "Principal UX Designer", avatar: avatarMiraVasquez },
+                { name: "Felix Kimura", title: "Sr. Manager", avatar: avatarFelixKimura },
+                { name: "Noa Haddad", title: "Sr. Manager", avatar: avatarNoaHaddad },
+                { name: "Soren Brennan", title: "Sr. UX Designer", avatar: avatarSorenBrennan },
+              ],
+            },
+          ],
+          [
+            {
+              team: "Help Center/Driver to Customer",
+              people: [
+                { name: "Scott Oduya", title: "Sr. Director", avatar: avatarScottOduya },
+                { name: "Rena Johansson", title: "UX Designer", avatar: avatarRenaJohansson },
+                { name: "Sage Mwangi", title: "Principal UX Designer", avatar: avatarSageMwangi },
+              ],
+            },
+          ],
+          [
+            {
+              team: "AI Shopping Assistant",
+              people: [
+                { name: "Orion Delacroix", title: "Sr. Director", avatar: avatarOrionDelacroix },
+                { name: "Veda Tanaka", title: "Principal UX Designer", avatar: avatarVedaTanaka },
+                { name: "Atlas Castillo", title: "Sr. UX Designer", avatar: avatarAtlasCastillo },
+              ],
+            },
+            {
+              team: "Social Commerce",
+              people: [{ name: "Lyra Novak", title: "Sr. Manager", avatar: avatarLyraNovak }],
+            },
+          ],
+          [
+            {
+              team: "B2B AI Assistant",
+              people: [
+                { name: "Ezra Ivarsson", title: "Director", avatar: avatarEzraIvarsson },
+                { name: "Cora Chandra", title: "UX Designer", avatar: avatarCoraChandra },
+              ],
+            },
+            {
+              team: "Internal AI Assistant",
+              people: [{ name: "Jon Moreau", title: "Director", avatar: avatarJonMoreau }],
+            },
+          ],
+        ]}
       />
     </Section>
   );

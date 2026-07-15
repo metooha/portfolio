@@ -8,7 +8,7 @@ import { otherWork } from "@/app/data/portfolio-data";
 export function OtherWork() {
   return (
     <div className="min-h-screen pt-16">
-      <PageContainer className="py-12" maxWidth="max-w-[1660px]">
+      <PageContainer className="py-12" maxWidth="max-w-[1220px]">
         <Heading as="h1" size="large" weight="default" UNSAFE_className="text-4xl md:text-5xl mb-4">
           Other Work
         </Heading>

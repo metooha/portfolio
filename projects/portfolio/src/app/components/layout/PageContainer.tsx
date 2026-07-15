@@ -8,12 +8,12 @@ export function PageContainer({
   children,
   className = "",
   as: Tag = "div",
-  maxWidth = "max-w-[1660px]",
+  maxWidth = "max-w-[1220px]",
 }: {
   children: React.ReactNode;
   className?: string;
   as?: "div" | "main" | "section";
-  maxWidth?: "max-w-6xl" | "max-w-[1100px]" | "max-w-[1660px]" | "max-w-full";
+  maxWidth?: "max-w-6xl" | "max-w-[1100px]" | "max-w-[1220px]" | "max-w-[1660px]" | "max-w-full";
 }) {
   return (
     <Tag

@@ -10,8 +10,8 @@ import {
   CarouselPrevious,
 } from "@/app/components/Carousel/Carousel";
 
-/** Matches CaseStudyTemplate overview shell (max-w-[1660px] + inner content width). */
-const CONTAINER_OUTER = "w-full max-w-[1660px] mx-auto px-4 sm:px-6 md:px-12 lg:px-[68px]";
+/** Matches CaseStudyTemplate overview shell (max-w-[1220px] + inner content width). */
+const CONTAINER_OUTER = "w-full max-w-[1220px] mx-auto px-4 sm:px-6 md:px-12 lg:px-[68px]";
 const CONTAINER_INNER = "w-full max-w-[1100px] mx-auto flex flex-col gap-6";
 
 export function Section({

@@ -261,6 +261,154 @@ export function FrameworkKits({
   );
 }
 
+type TeamPerson = { name: string; title: string; avatar: string };
+
+function ChartSectionLabel({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="flex flex-col gap-2">
+      <Heading as="h3" size="small" weight="default" UNSAFE_style={{ color: DARK }}>
+        {children}
+      </Heading>
+      <div style={{ width: "32px", height: "4px", borderRadius: "2px", background: SPARK }} />
+    </div>
+  );
+}
+
+function ColumnLabel({ children }: { children: React.ReactNode }) {
+  return (
+    <Body as="p" size="small" weight="alt" UNSAFE_style={{ color: ACCENT, fontSize: "13px" }}>
+      {children}
+    </Body>
+  );
+}
+
+function TeamPersonRow({ name, title, avatar }: TeamPerson) {
+  return (
+    <div className="flex items-center gap-3">
+      <img
+        src={avatar}
+        alt=""
+        className="rounded-full object-cover shrink-0"
+        style={{ width: "40px", height: "40px" }}
+      />
+      <div>
+        <Body as="p" size="small" weight="alt" UNSAFE_style={{ color: DARK, fontSize: "13px" }}>
+          {name}
+        </Body>
+        <Body as="p" size="small" color="subtlest" UNSAFE_style={{ fontSize: "12px" }}>
+          {title}
+        </Body>
+      </div>
+    </div>
+  );
+}
+
+function TeamInformedRow({ initials, team, role }: { initials: string; team: string; role: string }) {
+  return (
+    <div className="flex items-center gap-3">
+      <div
+        className="rounded-full flex items-center justify-center shrink-0 font-bold"
+        style={{
+          width: "40px",
+          height: "40px",
+          background: "var(--ld-semantic-color-fill-accent-pink-subtle, #fce9f5)",
+          color: "var(--ld-semantic-color-text-accent-pink-bold, #8c1e64)",
+          fontSize: "11px",
+        }}
+      >
+        {initials}
+      </div>
+      <div>
+        <Body as="p" size="small" weight="alt" UNSAFE_style={{ color: DARK, fontSize: "13px" }}>
+          {team}
+        </Body>
+        <Body as="p" size="small" color="subtlest" UNSAFE_style={{ fontSize: "12px" }}>
+          {role}
+        </Body>
+      </div>
+    </div>
+  );
+}
+
+/** Live team-structure chart: key stakeholders (decision makers, collaborators, informed) plus design partners grouped by product area, rendered as real markup with real avatars instead of a flattened screenshot. */
+export function TeamStructureChart({
+  title,
+  caption,
+  decisionMakers,
+  collaborators,
+  informed,
+  designPartnerColumns,
+}: {
+  title?: string;
+  caption?: string;
+  decisionMakers: TeamPerson[];
+  collaborators: TeamPerson[];
+  informed: { initials: string; team: string; role: string }[];
+  designPartnerColumns: { team: string; people: TeamPerson[] }[][];
+}) {
+  return (
+    <div className="flex flex-col gap-6">
+      {(title || caption) && (
+        <div className="flex flex-col gap-1.5">
+          {title && (
+            <Heading as="h3" size="medium" weight="default" UNSAFE_style={{ color: DARK }}>
+              {title}
+            </Heading>
+          )}
+          {caption && (
+            <Body as="p" size="small" color="subtlest">
+              {caption}
+            </Body>
+          )}
+        </div>
+      )}
+      <div className="rounded-[10px] p-6 sm:p-8" style={{ border: `1px solid ${SEPARATOR}`, background: "#ffffff" }}>
+        <ChartSectionLabel>Key Stakeholders</ChartSectionLabel>
+
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-x-8 gap-y-6 mt-6">
+          <div className="flex flex-col gap-4">
+            <ColumnLabel>Decision Makers</ColumnLabel>
+            {decisionMakers.map((p) => (
+              <TeamPersonRow key={p.name} {...p} />
+            ))}
+          </div>
+          <div className="flex flex-col gap-4">
+            <ColumnLabel>Collaborators</ColumnLabel>
+            {collaborators.map((p) => (
+              <TeamPersonRow key={p.name} {...p} />
+            ))}
+          </div>
+          <div className="flex flex-col gap-4">
+            <ColumnLabel>Informed</ColumnLabel>
+            {informed.map((g) => (
+              <TeamInformedRow key={g.team} {...g} />
+            ))}
+          </div>
+        </div>
+
+        <div className="my-8" style={{ borderTop: `1px solid ${SEPARATOR}` }} />
+
+        <ChartSectionLabel>Design Partners</ChartSectionLabel>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-8 mt-6">
+          {designPartnerColumns.map((column, i) => (
+            <div key={i} className="flex flex-col gap-6">
+              {column.map((group) => (
+                <div key={group.team} className="flex flex-col gap-4">
+                  <ColumnLabel>{group.team}</ColumnLabel>
+                  {group.people.map((p) => (
+                    <TeamPersonRow key={p.name} {...p} />
+                  ))}
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 /** Horizontal layer chips connected by arrows, showing where the kit sits in the design system stack. */
 export function LayerStack({
   layers,

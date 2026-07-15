@@ -22,7 +22,7 @@ const checkColor = "var(--ld-semantic-color-text-brand, #17d3b9)";
 
 export function CaseStudyXenseContent() {
   return (
-    <div className="w-full max-w-[1660px] mx-auto px-4 sm:px-6 md:px-12 lg:px-[68px]">
+    <div className="w-full max-w-[1220px] mx-auto px-4 sm:px-6 md:px-12 lg:px-[68px]">
       <div id="challenge" className="mb-20">
         <h2 className="text-3xl md:text-5xl font-bold mb-6">The Challenge</h2>
         <p className={bodyTextClass} style={bodyTextStyle}>

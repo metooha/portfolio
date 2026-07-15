@@ -59,7 +59,7 @@ import {
   imgTrainingGuidesOnboarding,
 } from "@/app/assets/pages/case-study/oportun-ds/assets";
 
-const SECTION_OUTER = "w-full max-w-[1660px] mx-auto px-4 sm:px-6 md:px-12 lg:px-[68px]";
+const SECTION_OUTER = "w-full max-w-[1220px] mx-auto px-4 sm:px-6 md:px-12 lg:px-[68px]";
 const SECTION_INNER = "w-full max-w-[1100px] flex flex-col gap-6";
 
 const SURFACE = "var(--ld-semantic-color-fill, #ffffff)";
