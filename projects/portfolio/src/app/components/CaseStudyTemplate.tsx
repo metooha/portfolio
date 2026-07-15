@@ -6,6 +6,7 @@ import { CaseStudyPageNav } from "@/app/components/CaseStudyPageNav";
 import { CaseStudyMeta } from "@/app/components/CaseStudyMeta";
 import { PageTitleText } from "@/app/components/CaseStudyText/CaseStudyText";
 import { Body, Heading } from "@/app/components/Text/Text";
+import type { BodyColor } from "@/app/components/Text/Text";
 import type { NavSection } from "@/app/components/CaseStudyPageNav";
 import type { MetaItem } from "@/app/components/CaseStudyMeta";
 
@@ -26,6 +27,8 @@ export interface CaseStudyTemplateProps {
   overviewCategory?: string;
   overviewTitle: string;
   overviewDescription: string;
+  /** When set, tints the overview description (e.g. subtlest for secondary body copy). */
+  overviewDescriptionColor?: BodyColor;
   metaItems: MetaItem[];
   /** Replaces the default overview block (logo, title, description, meta) when provided. */
   overviewContent?: React.ReactNode;
@@ -137,6 +140,7 @@ export function CaseStudyTemplate({
   overviewCategory,
   overviewTitle,
   overviewDescription,
+  overviewDescriptionColor,
   metaItems,
   overviewContent,
   navSections = [],
@@ -242,7 +246,12 @@ export function CaseStudyTemplate({
                       >
                         {overviewTitle}
                       </PageTitleText>
-                      <Body as="p" size="large" UNSAFE_className="max-w-[1100px] relative shrink-0 w-full">
+                      <Body
+                        as="p"
+                        size="large"
+                        color={overviewDescriptionColor}
+                        UNSAFE_className="max-w-[1100px] relative shrink-0 w-full"
+                      >
                         {overviewDescription}
                       </Body>
                       <CaseStudyMeta items={metaItems} />

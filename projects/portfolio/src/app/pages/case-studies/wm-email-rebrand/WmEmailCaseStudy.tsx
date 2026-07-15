@@ -1,13 +1,16 @@
+
 import React from "react";
 import { CaseStudyHero } from "@/app/components/CaseStudyHero";
 import { CaseStudyTemplate } from "@/app/components/CaseStudyTemplate";
 import { getAdjacentCaseStudies } from "@/app/data/case-studies-config";
-import imgMockup from "@/app/assets/pages/case-study/wm-email-rebrand/mockup-min.png";
+import imgWmEmailCover from "@/app/assets/pages/case-study/wm-email-rebrand/coverpreview-card.jpg";
+import imgWmLogo from "@/app/assets/pages/case-study/wm-email-rebrand/wm-logo.png";
 import {
   WmEmailApproachSection,
   WmEmailCompetitiveSection,
   WmEmailContextSection,
   WmEmailDesignSystemSection,
+  WmEmailExamplesSection,
   WmEmailFinalDesignsSection,
   WmEmailNextStepsSection,
   WmEmailReflectionSection,
@@ -21,38 +24,63 @@ const NAV = [
   { label: "The approach", href: "#approach" },
   { label: "Research & audit", href: "#research" },
   { label: "Competitive analysis", href: "#competitive" },
-  { label: "Design system", href: "#design-system" },
   { label: "Final designs", href: "#final-designs" },
+  { label: "Design system", href: "#design-system" },
+  { label: "Email examples", href: "#examples" },
   { label: "Results & impact", href: "#results" },
   { label: "Next steps", href: "#next-steps" },
   { label: "Reflections", href: "#reflection" },
 ] as const;
 
 const ACCENT = "#006B38";
+const HERO_TITLE = "Fragmented sends.\nOne modular system.";
+
+function WmEmailOverviewLogo() {
+  return (
+    <img
+      alt=""
+      className="block size-full object-cover"
+      src={imgWmLogo}
+      decoding="async"
+    />
+  );
+}
 
 function WmEmailHero() {
   return (
     <CaseStudyHero
-      image={imgMockup}
-      title={"Redesigning WM email from\nfragmented sends to a modular system"}
-      subtitle="How I led a collaborative rebranding of Waste Management's email program, defining purpose, audience strategy, and a 50+ block design system that made every email feel on-brand."
-      titleColor="#ffffff"
-      imageFit="cover"
-      imageClassName="opacity-25"
-      backgroundColor={ACCENT}
+      background={
+        <div className="relative w-full h-full">
+          <img
+            alt=""
+            className="absolute inset-0 w-full h-full object-cover object-center"
+            src={imgWmEmailCover}
+            decoding="async"
+          />
+          <div
+            className="absolute inset-0"
+            style={{ background: "rgba(255, 255, 255, 0.5)" }}
+            aria-hidden="true"
+          />
+        </div>
+      }
+      title={HERO_TITLE}
+      titleColor="#143526"
       className="max-w-[2048px] mx-auto"
     />
   );
 }
 
-const OVERVIEW_TITLE = "From fragmented sends to a modular digital system, built for scale.";
+const OVERVIEW_TITLE =
+  "An architecture, not a redesign: a modular block system built to scale past a single campaign.";
 const OVERVIEW_DESCRIPTION =
-  "The Email Marketing team led the initial rebranding efforts in collaboration with the Digital Studio and the Brand Team. The goal was to consolidate the email process by defining purpose, audience, and strategy to increase engagement and traffic to wm.com.";
+  "WM had rebranded, but the inbox was still a patchwork of one-off templates. I led the design work: heuristic audit, competitive research, and a modular Email Tool Kit on Salesforce Marketing Cloud. This enabled every send to feel on-brand and scale without starting from scratch.";
 const OVERVIEW_META = [
-  { label: "My Role", value: "Lead Product Designer, w/ team of 4" },
+  { label: "My Role", value: "Lead Product Designer" },
+  { label: "My Team", value: "1 UX Researcher1 Designer, 1 Content Writer 2 Sales Force Engineers" },
   { label: "Project Scope", value: "50+ Blocks · Documentation · Style Guide" },
   { label: "Tools", value: "Sketch · Salesforce CRM · Invision DSM / Prototyping" },
-  { label: "Platform", value: "Salesforce Marketing Cloud (SFMC)" },
+  { label: "Platform", value: "Salesforce Marketing Cloud" },
 ] as const;
 
 export default function WmEmailCaseStudy() {
@@ -62,10 +90,12 @@ export default function WmEmailCaseStudy() {
     <div data-ld-theme="WM" style={{ display: "contents" }}>
       <CaseStudyTemplate
         hero={<WmEmailHero />}
+        overviewLogo={<WmEmailOverviewLogo />}
         overviewClient="Waste Management"
-        overviewCategory="Email Design System, SFMC"
+        overviewCategory="Email Design System"
         overviewTitle={OVERVIEW_TITLE}
         overviewDescription={OVERVIEW_DESCRIPTION}
+        overviewDescriptionColor="subtlest"
         metaItems={[...OVERVIEW_META]}
         navSections={NAV}
         navAccentColor={ACCENT}
@@ -77,8 +107,9 @@ export default function WmEmailCaseStudy() {
           <WmEmailApproachSection />
           <WmEmailResearchSection />
           <WmEmailCompetitiveSection />
-          <WmEmailDesignSystemSection />
           <WmEmailFinalDesignsSection />
+          <WmEmailDesignSystemSection />
+          <WmEmailExamplesSection />
           <WmEmailResultsSection />
           <WmEmailNextStepsSection />
           <WmEmailReflectionSection />

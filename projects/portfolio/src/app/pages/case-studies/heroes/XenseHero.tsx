@@ -1,4 +1,4 @@
-import imgXense from "@/app/assets/pages/case-study/wm-rebrand/xense.png";
+import imgXense from "@/app/assets/pages/case-study/xense/xense.png";
 
 export default function XenseHero() {
   return (

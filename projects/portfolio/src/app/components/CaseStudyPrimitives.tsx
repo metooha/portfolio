@@ -419,6 +419,7 @@ export function ImageFull({
   caption,
   label,
   labelColor,
+  captionColor,
   className = "",
   frameClassName = "",
   imageClassName = "",
@@ -433,6 +434,8 @@ export function ImageFull({
   label?: string;
   /** Overrides the label's default brand color — use for a case study whose palette shouldn't inherit the site theme's brand hue. */
   labelColor?: string;
+  /** Overrides the caption's default subtlest color — use when caption should match body text on a case study. */
+  captionColor?: string;
   className?: string;
   frameClassName?: string;
   imageClassName?: string;
@@ -466,7 +469,13 @@ export function ImageFull({
         rounded={rounded}
       />
       {caption && (
-        <Body as="figcaption" size="small" color="subtlest" UNSAFE_className="leading-snug">
+        <Body
+          as="figcaption"
+          size="small"
+          color={captionColor ? undefined : "subtlest"}
+          UNSAFE_className="leading-snug"
+          UNSAFE_style={captionColor ? { color: captionColor } : undefined}
+        >
           {caption}
         </Body>
       )}

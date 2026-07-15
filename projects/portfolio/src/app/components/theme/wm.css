@@ -12,6 +12,12 @@
 
 [data-ld-theme="WM"] {
   --ld-primitive-font-family-sans: 'Maax', 'Inter', -apple-system, Roboto, sans-serif;
+  /* Maax has no native 700 text cut — use Medium (600) for display alt + headings instead of Black. */
+  --ld-semantic-font-display-large-weight-alt: 600;
+  --ld-semantic-font-display-small-weight-alt: 600;
+  --ld-semantic-font-heading-large-weight-default: 600;
+  --ld-semantic-font-heading-medium-weight-default: 600;
+  --ld-semantic-font-heading-small-weight-default: 600;
   /* === PRIMITIVE OVERRIDES (inherit LD Base for everything else) === */
   /* blue */
   --ld-primitive-color-blue-5: #f6fdfa;

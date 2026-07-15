@@ -1,6 +1,6 @@
 import React from "react";
 import imgDesign from "@/app/assets/pages/case-study/wm-rebrand/design.png";
-import imgXense from "@/app/assets/pages/case-study/wm-rebrand/xense.png";
+import imgXense from "@/app/assets/pages/case-study/xense/xense.png";
 import imgAcademy from "@/app/assets/pages/case-study/wm-rebrand/academy.png";
 import wmNewImage from "@/app/assets/pages/case-study/wm-rebrand/wm-new-image.png";
 import XenseCaseStudy from "@/app/pages/case-studies/xense/XenseCaseStudy";
@@ -23,7 +23,7 @@ import imgOportunDsLogo from "@/app/assets/pages/case-study/oportun-ds/logo.png"
 import imgCarbonCover from "@/app/assets/pages/case-study/carbon/design-engine.jpg";
 import imgCarbonLogo from "@/app/assets/pages/case-study/carbon/carbon-logo.png";
 import imgFigmaToCodeCover from "@/app/assets/pages/case-study/figma-to-code/optimized/cover.jpg";
-import imgWmEmailCover from "@/app/assets/pages/case-study/wm-email-rebrand/mockup-min.png";
+import imgWmEmailCover from "@/app/assets/pages/case-study/wm-email-rebrand/coverpreview-card.jpg";
 import imgNiniJewelsCover from "@/app/assets/pages/case-study/nini-jewels/nini-cover.jpg";
 import imgNiniJewelsLogo from "@/app/assets/pages/case-study/nini-jewels/nini-logo.png";
 import imgBreakoutCover from "@/app/assets/pages/case-study/breakout-network/cover.jpeg";
@@ -132,21 +132,21 @@ const CASE_STUDIES: CaseStudyConfig[] = [
   {
     id: "2",
     path: "/case-study/2",
-    title: "Everyday Sans UI: Brand and performance, without compromise",
+    title: "Unlocking Typographic Expression: When Brand Ambition Meets Platform Reality",
     defaultTheme: "Walmart",
     isPublished: true,
-    cardTitle: "Everyday Sans UI",
+    cardTitle: "Unlocking Typographic Expression",
     shortDescription:
-      "When Engineering rejected a new font weight on performance grounds, I proposed a variable font and made the case to Brand to fund it.",
+      "Resolved a brand-engineering deadlock by proposing and architecting a variable font strategy that unlocked typographic flexibility without performance compromise.",
     cardDescription:
-      "Proposed the variable font, then defined the audit framework, cross-platform spec, and repeatable evaluation model that let Brand, Engineering, Accessibility, and the foundry align on one launch-ready font.",
+      "Brand wanted broader hierarchy but performance constraints blocked progress. I proposed a variable font strategy, secured buy-in from Brand leadership, and defined the audit framework and cross-platform specification that enabled seamless consolidation—unblocking Brand's ability to express hierarchy and giving Engineering control over performance.",
     fullDescription:
-      "Every new font weight came with a performance cost, so Brand held back and product hierarchy stayed limited. When Engineering turned down a new weight request, I proposed a variable font as the fix and convinced Brand to fund it, reframing the work as a platform tradeoff across Brand, Engineering, Accessibility, and the foundry, then defined the audit framework and cross-platform spec that made it safe to ship.",
+      "Walmart Brand needed more typographic flexibility, but every new font weight came with a performance cost. When Engineering rejected a new weight request, I proposed a variable font as the solution and convinced Brand to fund it. The work required reframing the tradeoff between brand expression and platform constraints, then defining the audit framework and cross-platform spec that made it safe to ship across web, iOS, Android, and email.",
     metaItems: [
-      { label: "Role", value: "Lead Designer, Core Design System" },
+      { label: "Role", value: "Lead Designer, Branding & Platform Systems" },
       { label: "Timeline", value: "Jun 2024 – Dec 2025" },
       { label: "Scope", value: "Web, iOS, Android, Email" },
-      { label: "Focus", value: "Variable font strategy, platform migration, accessibility" },
+      { label: "Focus", value: "Branding strategy, variable font platform enablement, accessibility" },
     ],
     navSections: [
       { label: "Overview", href: "#overview" },
@@ -158,14 +158,14 @@ const CASE_STUDIES: CaseStudyConfig[] = [
       { label: "What's next", href: "#whats-next" },
     ],
     navAccentColor: "#207442",
-    tags: ["Typography", "Design System", "Performance", "Accessibility"],
+    tags: ["Branding", "Typography", "Platform Enablement", "Variable Font"],
     heroType: "image",
     heroImage: imgEverydaySansCover,
     thumbnail: imgEverydaySansCover,
     PageComponent: EverydaySansCaseStudy,
     overviewClient: "Walmart",
-    overviewCategory: "Core Design System, Typography",
-    homeGroup: "Design Systems",
+    overviewCategory: "Branding",
+    homeGroup: "Branding",
   },
   {
     id: "3",
@@ -253,21 +253,21 @@ const CASE_STUDIES: CaseStudyConfig[] = [
   {
     id: "4",
     path: "/case-study/4",
-    title: "Oportun Design System",
+    title: "One App, One Brand: De-Risking a Post-Acquisition Mobile Consolidation",
     defaultTheme: "Oportun",
     isPublished: true,
-    cardTitle: "Oportun Design System",
+    cardTitle: "One App, One Brand",
     shortDescription:
-      "Rebranding and unifying Digit and Oportun under one design language, from foundations through adoption.",
+      "Architected a mobile consolidation strategy that de-risked a post-acquisition merge, enabling rapid unification without product fragmentation or engineering rework.",
     cardDescription:
-      "Led the design system through a full rebrand: foundations, components, Storybook, documentation, and product validation across mobile and web.",
+      "Post-acquisition required merging two distinct mobile applications at speed. I built a design system that unified foundations, components, and mobile patterns—enabling the product and engineering teams to consolidate iOS and Android without rework while protecting brand consistency and shipping velocity.",
     fullDescription:
-      "Oportun's acquisition of Digit created an urgent need to rebrand and unify two distinct product experiences. I led the design systems work: defining strategy, building foundational libraries, shipping components in Storybook, and validating patterns through high-stakes product flows like the loan calculator.",
+      "Oportun's acquisition of Digit created an urgent need to merge two distinct mobile applications and rebrand under one design language. I led the platform systems work: defining strategy, building foundational libraries, shipping components in Storybook, and validating patterns through critical product flows like the loan calculator to ensure seamless mobile experience.",
     metaItems: [
       { label: "Role", value: "Lead Product Designer, Design Systems" },
       { label: "Timeline", value: "July 2022 – Jan 2023" },
-      { label: "Scope", value: "Mobile & Web · Figma · Storybook" },
-      { label: "Focus", value: "Rebrand, foundations, components, adoption" },
+      { label: "Scope", value: "Mobile App · iOS & Android · Figma · Storybook" },
+      { label: "Focus", value: "App merger, foundations, components, mobile unification" },
     ],
     navSections: [
       { label: "Overview", href: "#overview" },
@@ -282,14 +282,14 @@ const CASE_STUDIES: CaseStudyConfig[] = [
       { label: "Design system", href: "#design-system" },
     ],
     navAccentColor: "#00C859",
-    tags: ["Design System", "Rebrand", "Storybook", "Fintech"],
+    tags: ["Platform Systems", "Mobile App", "Design System", "Storybook"],
     heroType: "image",
     heroImage: imgOportunDsCover,
     thumbnail: imgOportunDsLogo,
     thumbnailFit: "contain",
     PageComponent: OportunDsCaseStudy,
     overviewClient: "Oportun / Digit",
-    overviewCategory: "Design Systems, Rebrand",
+    overviewCategory: "Platform Systems",
     homeGroup: "Design Systems",
   },
   {
@@ -414,21 +414,21 @@ const CASE_STUDIES: CaseStudyConfig[] = [
   {
     id: "8",
     path: "/case-study/8",
-    title: "Designing a scalable system for a digital rebrand",
+    title: "One System, Three Markets: Scaling Digital Consistency Without Fragmentation",
     defaultTheme: "WM",
     isPublished: true,
-    cardTitle: "Rebranding Waste Management",
+    cardTitle: "One System, Three Markets",
     shortDescription:
-      "Designing a scalable system for a digital rebrand. In 2021, Waste Management launched a company-wide rebrand alongside a broader digital transformation.",
+      "Transformed a rebrand into platform infrastructure that enabled rapid migration of 1,000+ pages, reduced maintenance overhead, and scaled consistency across markets.",
     cardDescription:
-      "A company-wide rebrand of WM.com, built on a new design system and 40+ AEM components that powered the migration of 1,000+ localized pages across the ecommerce site, marketing, and educational content in the US, France, and Mexico.",
+      "A company-wide rebrand risked fragmenting across platforms and markets. I architected a platform-first approach—designing 40+ reusable AEM components that enabled product teams to migrate 1,000+ localized pages across ecommerce, marketing, and content in three markets simultaneously, while dramatically reducing ongoing maintenance cost.",
     fullDescription:
-      "In 2021, Waste Management launched a company-wide rebrand alongside a broader digital transformation focused on improving customer self-service. I worked with the branding agency and led the systems work behind the rebrand, treating it as an opportunity to establish shared UX infrastructure rather than redesign individual pages.",
+      "In 2021, Waste Management launched a company-wide rebrand alongside a broader digital transformation focused on improving customer self-service. I worked with the branding agency and led the platform systems work behind the rebrand, building scalable UX infrastructure and shared component patterns on the AEM platform rather than redesigning individual pages.",
     metaItems: [
       { label: "Role", value: "Principal Product Designer" },
       { label: "Team", value: "Partnered with product, engineering, and brand leadership" },
-      { label: "Scope", value: "Company-wide rebrand across web platforms" },
-      { label: "Focus", value: "Platform UX patterns, information architecture, and shared systems" },
+      { label: "Scope", value: "Company-wide platform rebrand" },
+      { label: "Focus", value: "Platform UX patterns, information architecture, and component systems" },
     ],
     navSections: [
       { label: "Overview", href: "#overview" },
@@ -440,34 +440,33 @@ const CASE_STUDIES: CaseStudyConfig[] = [
       { label: "Compromises", href: "#compromises" },
     ],
     navAccentColor: "#207442",
-    tags: ["WEB", "Mobile App", "Design System", "Branding"],
+    tags: ["Platform Systems", "Design System", "AEM", "Web"],
     heroType: "image",
     heroImage: imgDesign,
     thumbnail: wmNewImage,
     PageComponent: WmDesignSystemCaseStudy,
     overviewClient: "Waste Management",
-    overviewCategory: "Design Systems, Branding",
-    homeGroup: "Branding",
+    overviewCategory: "Platform Systems",
+    homeGroup: "Design Systems",
   },
   {
     id: "9",
     path: "/case-study/9",
-    title: "Redesigning WM email from fragmented sends to a modular digital system",
+    title: "From Chaos to Strategy: Building Email as a Scalable Platform",
     defaultTheme: "WM",
-    isPublished: false,
-    featuredOnHome: false,
-    cardTitle: "WM Email Rebrand",
+    isPublished: true,
+    cardTitle: "From Chaos to Strategy",
     shortDescription:
-      "A collaborative rebranding of Waste Management's email program: purpose, audience strategy, and a 50+ block design system that made every email feel on-brand.",
+      "Delivered a 50+ block platform system that transformed email from fragmented, costly sends into strategic, personalized communication—enabling all business lines to reach customers at scale.",
     cardDescription:
-      "70 new templates and a 50+ block modular toolkit built on research into how people actually read email. 18.5M emails sent under the new system in 2021.",
+      "Waste Management's email program was fragmented across dozens of ad-hoc templates—costly to maintain and impossible to personalize. I architected a 50+ block modular system on Salesforce Marketing Cloud that enabled every business line to create on-brand, research-backed emails without rebuilding infrastructure. Outcome: 18.5M emails sent under the new system, with measurable increases in engagement and self-service adoption.",
     fullDescription:
-      "In 2021, Waste Management's Email Marketing team led a rebrand of the email program in collaboration with the Digital Studio and Brand Team. I led the design work: heuristic analysis, competitive research, and a modular Email Tool Kit with 50+ blocks across five categories, built on SFMC and grounded in the psychology of how people actually read email.",
+      "In 2021, Waste Management's Email Marketing team led a rebrand of the email program in collaboration with the Digital Studio and Brand Team. I led the platform systems work: heuristic analysis, competitive research, and a modular Email Toolkit with 50+ blocks across five categories, built on Salesforce Marketing Cloud and grounded in the psychology of how people actually read email.",
     metaItems: [
       { label: "My Role", value: "Lead Product Designer, w/ team of 4" },
       { label: "Project Scope", value: "50+ Blocks · Documentation · Style Guide" },
       { label: "Tools", value: "Sketch · Salesforce CRM · Invision DSM / Prototyping" },
-      { label: "Platform", value: "Salesforce Marketing Cloud (SFMC)" },
+      { label: "Platform", value: "Salesforce Marketing Cloud" },
     ],
     navSections: [
       { label: "Overview", href: "#overview" },
@@ -476,19 +475,20 @@ const CASE_STUDIES: CaseStudyConfig[] = [
       { label: "Research & audit", href: "#research" },
       { label: "Competitive analysis", href: "#competitive" },
       { label: "Design system", href: "#design-system" },
-      { label: "Final designs", href: "#final-designs" },
+      { label: "Email examples", href: "#examples" },
       { label: "Results & impact", href: "#results" },
       { label: "Next steps", href: "#next-steps" },
       { label: "Reflections", href: "#reflection" },
     ],
     navAccentColor: "#006B38",
-    tags: ["Email Design", "Design System", "SFMC", "Branding"],
+    tags: ["Platform Systems", "Design System", "Salesforce Marketing Cloud"],
     heroType: "image",
     heroImage: imgWmEmailCover,
     thumbnail: imgWmEmailCover,
     PageComponent: WmEmailCaseStudy,
     overviewClient: "Waste Management",
-    overviewCategory: "Email Design System, SFMC",
+    overviewCategory: "Platform Systems",
+    homeGroup: "Design Systems",
   },
   {
     id: "10",
