@@ -1,4 +1,3 @@
-import React from "react";
 import { Body, Heading } from "@/app/components/Text/Text";
 import {
   Eyebrow,
@@ -14,38 +13,25 @@ import {
 import {
   WmEmailAuditGrid,
   WmEmailBlockCategoryGrid,
+  WmEmailContentCompare,
   WmEmailMockupCarousel,
+  WmEmailOldGreenContent,
   WmEmailPsychCards,
   WmEmailQuestionList,
   WmEmailReflectionGrid,
-  WmEmailTeamRow,
-  WmEmailToolChips,
 } from "./WmEmailBlocks";
 import { WM_EMAIL_BLOCKS_CAROUSEL, WM_EMAIL_BRAND_GUIDELINES_CAROUSEL, WM_EMAIL_EXAMPLES_CAROUSEL } from "./WmEmailCarouselAssets";
-import imgEmailContent from "@/app/assets/pages/case-study/wm-email-rebrand/Email content-min.jpg";
 import imgOldEmailsComparison from "@/app/assets/pages/case-study/wm-email-rebrand/old emails comparrison-min.png";
-import imgOldEmailsCompetitive from "@/app/assets/pages/case-study/wm-email-rebrand/old emails competitve-min.png";
 import imgColorTheory from "@/app/assets/pages/case-study/wm-email-rebrand/color theory.png";
+import imgOldEmailActivatePhoto from "@/app/assets/pages/case-study/wm-email-rebrand/old-email-activate-photo.jpg";
 import imgPersonalization from "@/app/assets/pages/case-study/wm-email-rebrand/personalization.png";
 import imgSocialProofing from "@/app/assets/pages/case-study/wm-email-rebrand/social proofing.png";
 import imgLayoutVisual from "@/app/assets/pages/case-study/wm-email-rebrand/layout-visual.png";
 import imgMockup from "@/app/assets/pages/case-study/wm-email-rebrand/mockup-min.png";
 import imgWireframes from "@/app/assets/pages/case-study/wm-email-rebrand/wireframes-min.png";
 
-const TEXT = "var(--ld-semantic-color-text, #000000)";
-
-function CaseStudyLead({ children }: { children: React.ReactNode }) {
-  return (
-    <Body
-      as="p"
-      size="medium"
-      UNSAFE_className="max-w-[660px] leading-[1.7]"
-      UNSAFE_style={{ fontSize: "17px", color: TEXT }}
-    >
-      {children}
-    </Body>
-  );
-}
+const BRAND = "var(--ld-semantic-color-text-brand, #006937)";
+const SEPARATOR = "var(--ld-semantic-color-separator, #e3e4e5)";
 
 export function WmEmailContextSection() {
   return (
@@ -84,7 +70,7 @@ const APPROACH_STEPS = [
   },
   {
     title: "Visual Branding",
-    body: "Apply WM brand identity. Lock in color, typography, and imagery rules so they scale across the toolkit.",
+    body: "Apply the new brand identity. Lock in color, typography, and imagery rules so they scale across the toolkit.",
   },
   {
     title: "UI Designs",
@@ -97,17 +83,10 @@ const APPROACH_STEPS = [
 ];
 
 export function WmEmailApproachSection() {
-  const SEPARATOR = "var(--ld-semantic-color-separator, #e3e4e5)";
-  const ACCENT = "var(--wm-color-primary, #006B38)";
-
   return (
     <Section id="approach" variant="mid">
       <Eyebrow>The Approach</Eyebrow>
       <SectionTitle>A research-led process from audit to toolkit</SectionTitle>
-      <Body as="p" size="medium" UNSAFE_style={{ color: TEXT }} UNSAFE_className="leading-[1.7] mb-6">
-        The work followed a structured process, from heuristic analysis and competitive research through UX
-        and UI design, ending with a documented Email Tool Kit ready for production teams.
-      </Body>
 
       <div className="flex flex-col">
         {APPROACH_STEPS.map((step, i) => (
@@ -116,14 +95,14 @@ export function WmEmailApproachSection() {
             className="grid grid-cols-[44px_1fr] gap-x-5 px-6 py-6"
             style={{ borderBottom: i < APPROACH_STEPS.length - 1 ? `1px solid ${SEPARATOR}` : undefined }}
           >
-            <div className="font-black leading-none" style={{ fontSize: "28px", color: ACCENT }}>
+            <div className="font-black leading-none" style={{ fontSize: "28px", color: BRAND }}>
               {String(i + 1).padStart(2, "0")}
             </div>
             <div>
-              <Heading as="h3" size="small" weight="default" UNSAFE_className="mb-2" UNSAFE_style={{ color: TEXT }}>
+              <Heading as="h3" size="small" weight="default" UNSAFE_className="mb-2">
                 {step.title}
               </Heading>
-              <Body as="p" size="small" UNSAFE_style={{ color: TEXT }} UNSAFE_className="leading-[1.7]">
+              <Body as="p" size="small" color="subtlest" UNSAFE_className="leading-[1.7]">
                 {step.body}
               </Body>
             </div>
@@ -139,11 +118,8 @@ export function WmEmailResearchSection() {
     <Section id="research">
       <Eyebrow>Research & Audit</Eyebrow>
       <SectionTitle>Starting with the right questions</SectionTitle>
-      <Body as="p" size="small" color="subtlest" UNSAFE_className="leading-[1.7] mb-6">
-        The original emails were dense: long paragraphs, multiple competing CTAs, unclear priorities. The redesign started with one principle: each email answers one question and guides to one action. Reduced average body copy by 40%. One primary CTA per email, clearly differentiated from secondary actions. Removed decorative text that didn't drive understanding. Restructured every email in Z-pattern: headline → image → body → CTA.
-      </Body>
       <Lead>
-        During heuristic analysis, the team began with four core questions that shaped every design decision that
+      During heuristic analysis, the team began with four core questions that shaped every design decision that
         followed.
       </Lead>
       <WmEmailQuestionList
@@ -156,7 +132,7 @@ export function WmEmailResearchSection() {
           {
             icon: "CheckCircle",
             lead: "How do we instill trust?",
-            body: "WM customers receive service-critical communications. Every decision had to reinforce reliability and clarity.",
+            body: "Customers receive service-critical communications. Every decision had to reinforce reliability and clarity.",
           },
           {
             icon: "Eye",
@@ -171,20 +147,6 @@ export function WmEmailResearchSection() {
         ]}
       />
       <figure className="m-0 flex flex-col gap-6">
-        <Body
-          as="p"
-          size="small"
-          weight="alt"
-          color="brand"
-          UNSAFE_className="uppercase tracking-[0.1em]"
-          UNSAFE_style={{ fontSize: "10px" }}
-        >
-          Email content
-        </Body>
-        <Body as="p" size="medium" color="subtlest" UNSAFE_className="max-w-[660px] leading-[1.7]">
-          Copy writing should be concise, getting straight to the point while maintaining a friendly voice.
-        </Body>
-        <ImageFrame src={imgOldEmailsComparison} alt="Old email comparison" />
         <Body as="p" size="small" weight="alt" color="subtlest" UNSAFE_className="uppercase tracking-[0.1em]" UNSAFE_style={{ fontSize: "11px" }}>
           What the audit revealed
         </Body>
@@ -208,7 +170,25 @@ export function WmEmailResearchSection() {
             ],
           }}
         />
-        <ImageFrame src={imgEmailContent} alt="Existing WM email content before the rebrand" />
+        <Body
+          as="p"
+          size="small"
+          weight="alt"
+          color="brand"
+          UNSAFE_className="uppercase tracking-[0.1em]"
+          UNSAFE_style={{ fontSize: "10px" }}
+        >
+          Email content
+        </Body>
+        <Body as="p" size="medium" color="subtlest" UNSAFE_className="max-w-[660px] leading-[1.7]">
+          We concluded that copy writing should be concise, getting straight to the point while maintaining a friendly voice.
+        </Body>
+        <ImageFrame src={imgOldEmailsComparison} alt="Old email comparison" />
+        <Body as="p" size="medium" color="subtlest" UNSAFE_className="max-w-[660px] leading-[1.7]">
+          Dense paragraphs became short benefit lines, and competing links collapsed into one primary CTA. Word
+          count dropped over 60%, and the next action was unmistakable.
+        </Body>
+        <WmEmailContentCompare />
       </figure>
     </Section>
   );
@@ -219,10 +199,10 @@ export function WmEmailCompetitiveSection() {
     <Section id="competitive">
       <Eyebrow>Competitive Analysis & Psychology</Eyebrow>
       <SectionTitle>Designing for how people actually read email</SectionTitle>
-      <CaseStudyLead>
+      <Lead>
         By following perceptual UX strategies, the team aimed to minimize cognitive load and increase positive
         emotional responses. Research grounded every visual decision.
-      </CaseStudyLead>
+      </Lead>
       <WmEmailPsychCards
         cards={[
           {
@@ -275,7 +255,7 @@ export function WmEmailCompetitiveSection() {
           Social proof
         </Body>
         <Body as="p" size="medium" color="subtlest" UNSAFE_className="max-w-[660px] leading-[1.7]">
-          Copy writing should be concise, getting straight to the point while maintaining a friendly voice.
+          By providing clear values and benefits, we can help customers feel confident in their decisions.
         </Body>
         <ImageFrame src={imgSocialProofing} alt="Social proof block examples" />
       </figure>
@@ -291,7 +271,7 @@ export function WmEmailCompetitiveSection() {
           Layout &amp; Visual Design
         </Body>
         <Body as="p" size="medium" color="subtlest" UNSAFE_className="max-w-[660px] leading-[1.7]">
-          Layout should not overwhelm and help keep the user engaged to the material, guiding them to scroll all the
+          Layouts shouldn't overwhelm and help keep the user engaged to the material, guiding them to scroll all the
           way through.
         </Body>
         <ImageFrame src={imgLayoutVisual} alt="Layout and visual design examples from competitive email research" />
@@ -305,17 +285,26 @@ export function WmEmailCompetitiveSection() {
         >
           Color research
         </Body>
-        <Body as="p" size="medium" color="subtlest" UNSAFE_className="max-w-[660px] leading-[1.7]">
-          Color theory research grounding the case for intentional CTA color.
+        <Body
+          as="p"
+          size="medium"
+          color="subtlest"
+          UNSAFE_className="max-w-[660px] leading-[1.7]"
+          UNSAFE_style={{ color: "rgba(153, 153, 153, 1)" }}
+        >
+          Color theory research grounding the case for intentional CTA color. Using color should be intentional. The
+          example on the left uses the primary color too much and makes it lose its value.
         </Body>
-        <ImageFrame src={imgColorTheory} alt="Color theory research charts" />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
+          <WmEmailOldGreenContent photoSrc={imgOldEmailActivatePhoto} />
+          <ImageFrame
+            src={imgColorTheory}
+            alt="Color theory research charts"
+            className="h-full"
+            fit="contain"
+          />
+        </div>
       </figure>
-      <Body as="p" size="medium" UNSAFE_className="leading-[1.7]">
-        <span className="font-bold">Competitive insight: </span>
-        Optimizing content strategy, layout, and visual design with UX principles minimizes cognitive load and
-        increases positive emotional responses. Copywriting should be concise and get to the point while
-        maintaining a friendly voice. Minimal copy, minimal CTAs, maximum clarity.
-      </Body>
     </Section>
   );
 }
@@ -335,12 +324,12 @@ export function WmEmailDesignSystemSection() {
       />
       <WmEmailBlockCategoryGrid
         items={[
-          { tag: "Basic Blocks", tagColor: "#006937", title: "Standard to email templates", description: "Styling existing Salesforce Marketing Cloud blocks with WM brand colors, typography, and elements. The consistent baseline for every email." },
-          { tag: "Custom Blocks", tagColor: "#2B6CB0", title: "Special need or function", description: "Designed specifically for WM use cases: service change summaries, recycling guides, account dashboards." },
-          { tag: "Framework Blocks", tagColor: "#7B341E", title: "Branded shells", description: "Headers, social toolbars, footers, and standard disclaimers. Present in every email and always on-brand." },
-          { tag: "Ad Hoc Blocks", tagColor: "#3D35D8", title: "Campaign-specific", description: "Included in builds specific to one or a few emails. Built when needed for a particular campaign." },
-          { tag: "Combo Blocks", tagColor: "#0053e2", title: "Regularly used patterns", description: "Pre-assembled combinations, like hero sections, that speed up production for common layouts." },
-          { tag: "Atomic Components", tagColor: "#C53030", title: "Foundation of everything", description: "Buttons, icons, text patterns, images. Atomic design means consistent, predictable output at every level." },
+          { tag: "Basic Blocks", tagColor: "var(--ld-semantic-color-fill-brand, #006937)", title: "Standard to email templates", description: "Styling existing Salesforce Marketing Cloud blocks with WM brand colors, typography, and elements. The consistent baseline for every email." },
+          { tag: "Custom Blocks", tagColor: "var(--ld-semantic-color-fill-accent-cyan, #009bd9)", title: "Special need or function", description: "Designed specifically for WM use cases: service change summaries, recycling guides, account dashboards." },
+          { tag: "Framework Blocks", tagColor: "var(--ld-semantic-color-fill-accent-orange, #fc934d)", title: "Branded shells", description: "Headers, social toolbars, footers, and standard disclaimers. Present in every email and always on-brand." },
+          { tag: "Ad Hoc Blocks", tagColor: "var(--ld-semantic-color-fill-accent-purple, #63327e)", title: "Campaign-specific", description: "Included in builds specific to one or a few emails. Built when needed for a particular campaign." },
+          { tag: "Combo Blocks", tagColor: "var(--ld-semantic-color-fill-accent-teal, #00809e)", title: "Regularly used patterns", description: "Pre-assembled combinations, like hero sections, that speed up production for common layouts." },
+          { tag: "Atomic Components", tagColor: "var(--ld-semantic-color-fill-negative, #ea1100)", title: "Foundation of everything", description: "Buttons, icons, text patterns, images. Atomic design means consistent, predictable output at every level." },
         ]}
       />
       <Body
@@ -368,21 +357,17 @@ export function WmEmailFinalDesignsSection() {
     <Section id="final-designs" variant="mid">
       <Eyebrow>From Wireframes to Final Design</Eyebrow>
       <SectionTitle>Research translated directly into structure</SectionTitle>
-      <CaseStudyLead>
+      <Lead>
         Wireframes incorporated every research insight before visual design began, resolving layout and
         hierarchy decisions so the high-fidelity phase focused on brand expression, not structural debates.
-      </CaseStudyLead>
+      </Lead>
       <ImageFull
         src={imgWireframes}
         alt="Six wireframe templates: Welcome, Service Change, Activate Account, Sign Up, Order Confirmation, Heads Up"
         label="Wireframes"
         caption="Six wireframe templates: Welcome/Onboarding, Service Change, Activate Account, Sign Up, Order Confirmation, Heads Up."
-        captionColor={TEXT}
       />
-      <Body as="p" size="medium" UNSAFE_className="max-w-[660px] leading-[1.7]" UNSAFE_style={{ color: TEXT }}>
-        The final designs carried that structure straight through: a single primary CTA, a clear scan
-        path, and a footer of self-service tools repeated across every template.
-      </Body>
+
       <Body
         as="p"
         size="small"
@@ -420,11 +405,7 @@ export function WmEmailResultsSection() {
           { value: "+60%", label: "Self-service tool adoption increase" },
         ]}
       />
-      <Body as="p" size="medium" UNSAFE_className="leading-[1.7] mt-8" UNSAFE_style={{ color: "rgba(255,255,255,0.8)" }}>
-        <span className="font-bold">Key outcome: </span>
-        The modular system enabled personalized messaging for all lines of business at scale, and established a reusable toolkit
-        pattern that the organization continues to use for new email campaigns and channels.
-      </Body>
+
     </Section>
   );
 }
@@ -440,10 +421,10 @@ export function WmEmailNextStepsSection() {
       </Lead>
       <NextGrid
         items={[
-          { when: "Scale", title: "Personalized messaging at scale", description: "Implemented personalized messaging for all lines of business through Salesforce Marketing Cloud dynamic content, enabling targeted communication at volume." },
-          { when: "Scale", title: "Toolkit expansion", description: "Continuously adding new modules and blocks as campaign types and business needs evolve. The modular system grows with organizational demand." },
-          { when: "Scale", title: "Event trigger optimization", description: "Optimized event triggers to surface the right template at the right lifecycle moment, improving delivery efficiency and customer experience." },
-          { when: "Scale", title: "Partner self-service", description: "Extended toolkit access to Salesforce partners, expanding self-service capability across the full WM ecosystem and enabling external teams to maintain brand consistency." },
+          { when: "Completed", title: "Personalized messaging at scale", description: "Implemented personalized messaging for all lines of business through Salesforce Marketing Cloud dynamic content, enabling targeted communication at volume." },
+          { when: "Completed", title: "Toolkit expansion", description: "Continuously adding new modules and blocks as campaign types and business needs evolve. The modular system grows with organizational demand." },
+          { when: "Completed", title: "Event trigger optimization", description: "Optimized event triggers to surface the right template at the right lifecycle moment, improving delivery efficiency and customer experience." },
+          { when: "In Progress", title: "Partner self-service", description: "Extended toolkit access to Salesforce partners, expanding self-service capability across the full WM ecosystem and enabling external teams to maintain brand consistency.", future: true },
         ]}
       />
     </Section>

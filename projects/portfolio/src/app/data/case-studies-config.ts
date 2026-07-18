@@ -421,7 +421,7 @@ const CASE_STUDIES: CaseStudyConfig[] = [
     shortDescription:
       "Transformed a rebrand into platform infrastructure that enabled rapid migration of 1,000+ pages, reduced maintenance overhead, and scaled consistency across markets.",
     cardDescription:
-      "A company-wide rebrand risked fragmenting across platforms and markets. I architected a platform-first approach—designing 40+ reusable AEM components that enabled product teams to migrate 1,000+ localized pages across ecommerce, marketing, and content in three markets simultaneously, while dramatically reducing ongoing maintenance cost.",
+      "A platform-first approach to rebrand: 40+ reusable AEM components enabling product teams to migrate 1,000+ localized pages across three markets, while slashing maintenance overhead.",
     fullDescription:
       "In 2021, Waste Management launched a company-wide rebrand alongside a broader digital transformation focused on improving customer self-service. I worked with the branding agency and led the platform systems work behind the rebrand, building scalable UX infrastructure and shared component patterns on the AEM platform rather than redesigning individual pages.",
     metaItems: [
@@ -459,7 +459,7 @@ const CASE_STUDIES: CaseStudyConfig[] = [
     shortDescription:
       "Delivered a 50+ block platform system that transformed email from fragmented, costly sends into strategic, personalized communication—enabling all business lines to reach customers at scale.",
     cardDescription:
-      "Waste Management's email program was fragmented across dozens of ad-hoc templates—costly to maintain and impossible to personalize. I architected a 50+ block modular system on Salesforce Marketing Cloud that enabled every business line to create on-brand, research-backed emails without rebuilding infrastructure. Outcome: 18.5M emails sent under the new system, with measurable increases in engagement and self-service adoption.",
+      "A 50+ block modular system on Salesforce Marketing Cloud: enabled all business lines to send on-brand, personalized emails without rebuilding infrastructure. Result: 18.5M emails with measurable increases in engagement and adoption.",
     fullDescription:
       "In 2021, Waste Management's Email Marketing team led a rebrand of the email program in collaboration with the Digital Studio and Brand Team. I led the platform systems work: heuristic analysis, competitive research, and a modular Email Toolkit with 50+ blocks across five categories, built on Salesforce Marketing Cloud and grounded in the psychology of how people actually read email.",
     metaItems: [
@@ -481,7 +481,7 @@ const CASE_STUDIES: CaseStudyConfig[] = [
       { label: "Reflections", href: "#reflection" },
     ],
     navAccentColor: "#006B38",
-    tags: ["Platform Systems", "Design System", "Salesforce Marketing Cloud"],
+    tags: ["Salesforce Marketing Cloud", "Platform Systems", "Design System"],
     heroType: "image",
     heroImage: imgWmEmailCover,
     thumbnail: imgWmEmailCover,

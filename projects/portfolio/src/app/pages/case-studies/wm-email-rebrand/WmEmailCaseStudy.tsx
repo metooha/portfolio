@@ -32,7 +32,7 @@ const NAV = [
   { label: "Reflections", href: "#reflection" },
 ] as const;
 
-const ACCENT = "#006B38";
+const ACCENT = "var(--ld-semantic-color-text-brand, #006937)";
 const HERO_TITLE = "Fragmented sends.\nOne modular system.";
 
 function WmEmailOverviewLogo() {
@@ -59,13 +59,13 @@ function WmEmailHero() {
           />
           <div
             className="absolute inset-0"
-            style={{ background: "rgba(255, 255, 255, 0.5)" }}
+            style={{ background: "var(--ld-primitive-color-transparentLight-50, rgba(255, 255, 255, 0.5))" }}
             aria-hidden="true"
           />
         </div>
       }
       title={HERO_TITLE}
-      titleColor="#143526"
+      titleColor="var(--ld-semantic-color-fill-brand-bold, #003a14)"
       className="max-w-[2048px] mx-auto"
     />
   );
@@ -74,7 +74,7 @@ function WmEmailHero() {
 const OVERVIEW_TITLE =
   "An architecture, not a redesign: a modular block system built to scale past a single campaign.";
 const OVERVIEW_DESCRIPTION =
-  "WM had rebranded, but the inbox was still a patchwork of one-off templates. I led the design work: heuristic audit, competitive research, and a modular Email Tool Kit on Salesforce Marketing Cloud. This enabled every send to feel on-brand and scale without starting from scratch.";
+  "WM had rebranded, but the inbox was still a patchwork of one-off templates. I led the design work to create an Email Tool Kit. This enabled every send to feel on-brand and scale without starting from scratch.";
 const OVERVIEW_META = [
   { label: "My Role", value: "Lead Product Designer" },
   { label: "My Team", value: "1 UX Researcher1 Designer, 1 Content Writer 2 Sales Force Engineers" },

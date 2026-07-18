@@ -1,3 +1,4 @@
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import coffeeIllustration from "@/app/assets/pages/profile/shared/coffee-illustration.png";
 import sparklesIllustration from "@/app/assets/pages/profile/shared/sparkles-illustration.png";
@@ -173,13 +174,47 @@ export function Home() {
                       </Body>
                     </div>
                     <div className="space-y-16">
-                      {caseStudies.map((caseStudy) => (
-                        <CaseStudyCard
-                          key={caseStudy.id}
-                          caseStudy={caseStudy}
-                          priority={cardIndex++ < 2}
-                        />
-                      ))}
+                      {(() => {
+                        const cards: React.ReactNode[] = [];
+                        const isEven = caseStudies.length % 2 === 0;
+                        const largeCardCount = isEven ? 2 : 1;
+                        const startIndex = largeCardCount;
+
+                        // First 1 or 2 cards full width (1 if odd, 2 if even)
+                        for (let i = 0; i < largeCardCount && i < caseStudies.length; i++) {
+                          cards.push(
+                            <CaseStudyCard
+                              key={caseStudies[i].id}
+                              caseStudy={caseStudies[i]}
+                              priority={cardIndex++ < 2}
+                            />
+                          );
+                        }
+
+                        // Rest in 2 columns
+                        for (let i = startIndex; i < caseStudies.length; i += 2) {
+                          cards.push(
+                            <div key={`pair-${i}`} className="grid grid-cols-2 gap-16 auto-rows-max">
+                              <div className="h-full flex flex-col [&>*]:h-full">
+                                <CaseStudyCard
+                                  caseStudy={caseStudies[i]}
+                                  priority={cardIndex++ < 2}
+                                />
+                              </div>
+                              {caseStudies[i + 1] && (
+                                <div className="h-full flex flex-col [&>*]:h-full">
+                                  <CaseStudyCard
+                                    caseStudy={caseStudies[i + 1]}
+                                    priority={cardIndex++ < 2}
+                                  />
+                                </div>
+                              )}
+                            </div>
+                          );
+                        }
+
+                        return cards;
+                      })()}
                     </div>
                   </div>
                 </PageContainer>

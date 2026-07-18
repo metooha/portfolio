@@ -872,7 +872,7 @@ export function NextGrid({
           >
             {item.when}
           </span>
-          <Body as="h4" size="small" weight="alt" UNSAFE_className="mb-1.5" UNSAFE_style={{ color: "var(--ld-semantic-color-fill-brand-bold, #001e60)" }}>
+          <Body as="h4" size="medium" weight="alt" UNSAFE_className="mb-1.5" UNSAFE_style={{ color: "var(--ld-semantic-color-fill-brand-bold, #001e60)" }}>
             {item.title}
           </Body>
           <Body as="p" size="small" color="subtlest" UNSAFE_className="leading-[1.6]">
