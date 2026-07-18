@@ -194,15 +194,15 @@ export function Home() {
                         // Rest in 2 columns
                         for (let i = startIndex; i < caseStudies.length; i += 2) {
                           cards.push(
-                            <div key={`pair-${i}`} className="grid grid-cols-2 gap-16 auto-rows-max">
-                              <div className="h-full flex flex-col [&>*]:h-full">
+                            <div key={`pair-${i}`} className="grid grid-cols-2 gap-16 items-stretch">
+                              <div className="h-full min-h-0 flex flex-col [&>*]:h-full">
                                 <CaseStudyCard
                                   caseStudy={caseStudies[i]}
                                   priority={cardIndex++ < 2}
                                 />
                               </div>
                               {caseStudies[i + 1] && (
-                                <div className="h-full flex flex-col [&>*]:h-full">
+                                <div className="h-full min-h-0 flex flex-col [&>*]:h-full">
                                   <CaseStudyCard
                                     caseStudy={caseStudies[i + 1]}
                                     priority={cardIndex++ < 2}

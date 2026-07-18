@@ -53,31 +53,33 @@ export function CaseStudyCard({ caseStudy, priority = false }: CaseStudyCardProp
 
   const card = (
     <div
-      className={`bg-white rounded-3xl overflow-hidden shadow-lg transition-shadow duration-300 ${
+      className={`bg-white rounded-3xl overflow-hidden shadow-lg transition-shadow duration-300 h-full flex flex-col ${
         isClickable ? "hover:shadow-2xl" : "opacity-90"
       }`}
     >
-        <div className="relative aspect-[20/9] group">
+        <div className="relative aspect-[20/9] shrink-0 group">
           <div className="w-full h-full">{heroContent}</div>
           {isClickable && (
             <div className="absolute inset-0 bg-green-500 opacity-0 group-hover:opacity-40 transition-opacity duration-300" />
           )}
         </div>
-        <div className="bg-[rgb(241,241,241)] p-8 w-full h-full flex flex-col justify-between">
-          {isProtected ? (
-            <div className="flex items-center justify-end gap-2 mb-2">
-              <Tag
-                color="warning"
-                variant="secondary"
-                size="small"
-                leading={<LockIcon size="small" decorative />}
-              >
-                Password protected
-              </Tag>
-            </div>
-          ) : null}
-          <h2 className="text-3xl font-bold mb-2">{title}</h2>
-          <p className="text-gray-700 mb-4">{description}</p>
+        <div className="bg-[rgb(241,241,241)] p-8 w-full flex-1 flex flex-col justify-between min-h-0">
+          <div>
+            {isProtected ? (
+              <div className="flex items-center justify-end gap-2 mb-2">
+                <Tag
+                  color="warning"
+                  variant="secondary"
+                  size="small"
+                  leading={<LockIcon size="small" decorative />}
+                >
+                  Password protected
+                </Tag>
+              </div>
+            ) : null}
+            <h2 className="text-3xl font-bold mb-2">{title}</h2>
+            <p className="text-gray-700 mb-4">{description}</p>
+          </div>
           <div className="flex gap-2 flex-wrap">
             {caseStudy.tags.map((tag, idx) => {
               const color = TAG_PALETTE[idx % TAG_PALETTE.length];
@@ -97,11 +99,11 @@ export function CaseStudyCard({ caseStudy, priority = false }: CaseStudyCardProp
   );
 
   if (!isClickable) {
-    return <div className="block cursor-default">{card}</div>;
+    return <div className="block h-full cursor-default">{card}</div>;
   }
 
   return (
-    <Link to={caseStudy.path} className="block">
+    <Link to={caseStudy.path} className="block h-full">
       {card}
     </Link>
   );

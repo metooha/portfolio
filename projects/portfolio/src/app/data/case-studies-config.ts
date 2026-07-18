@@ -1,10 +1,9 @@
 import React from "react";
 import imgDesign from "@/app/assets/pages/case-study/wm-rebrand/design.png";
 import imgXense from "@/app/assets/pages/case-study/xense/xense.png";
-import imgAcademy from "@/app/assets/pages/case-study/wm-rebrand/academy.png";
+import imgAcademy from "@/app/assets/pages/case-study/academy-sports/hero-cover.jpg";
 import wmNewImage from "@/app/assets/pages/case-study/wm-rebrand/wm-new-image.png";
 import XenseCaseStudy from "@/app/pages/case-studies/xense/XenseCaseStudy";
-import AcademyHero from "@/app/pages/case-studies/heroes/AcademyHero";
 import WmDesignSystemCaseStudy from "@/app/pages/case-studies/wm-rebrand/WmDesignSystemCaseStudy";
 import EverydaySansCaseStudy from "@/app/pages/case-studies/everyday-sans/EverydaySansCaseStudy";
 import AirtableCaseStudy from "@/app/pages/case-studies/airtable-sot/AirtableCaseStudy";
@@ -15,7 +14,7 @@ import WmEmailCaseStudy from "@/app/pages/case-studies/wm-email-rebrand/WmEmailC
 import NiniJewelsCaseStudy from "@/app/pages/case-studies/nini-jewels/NiniJewelsCaseStudy";
 import BreakoutNetworkCaseStudy from "@/app/pages/case-studies/breakout-network/BreakoutNetworkCaseStudy";
 import UcUiKitCaseStudy, { UcUiKitHero } from "@/app/pages/case-studies/uc-uikit/UcUiKitCaseStudy";
-import { CaseStudyAcademyContent } from "@/app/pages/case-studies/academy/CaseStudyAcademyContent";
+import AcademyCaseStudy from "@/app/pages/case-studies/academy/AcademyCaseStudy";
 import imgEverydaySansCover from "@/app/assets/pages/case-study/everyday-sans/cover.jpg";
 import { imgAirtableCoverPreview, imgAirtableCoverSource } from "@/app/assets/pages/case-study/airtable-sot/assets";
 import imgOportunDsCover from "@/app/assets/pages/case-study/oportun-ds/cover.jpg";
@@ -535,19 +534,19 @@ const CASE_STUDIES: CaseStudyConfig[] = [
     id: "11",
     path: "/case-study/11",
     title: "Academy Sports + Outdoors Branding",
-    isPublished: false,
-    featuredOnHome: false,
+    isPublished: true,
+    featuredOnHome: true,
     shortDescription:
-      "Direct Mail catalogs are delivered every quarter at Academy Sports + Outdoors. The main categories are for sports such as golf, baseball/softball, football, athletics, fishing, and hunting.",
+      "Quarterly direct mail catalogs across golf, baseball, football, athletics, fishing, and hunting. From conception through print production, I created cohesive designs that maintained brand consistency while bringing each sport's story to life.",
     cardDescription:
-      "Direct Mail catalogs are delivered every quarter at Academy Sports + Outdoors. The main categories are for sports such as golf, baseball/softball, football, athletics, fishing, and hunting. I created these catalogs from conception to print production.",
+      "Quarterly catalog campaigns covering golf, baseball, football, athletics, fishing, and hunting. I led design from conception through print production, ensuring brand consistency and engaging visual storytelling.",
     fullDescription:
-      "Direct Mail catalogs are delivered every quarter at Academy Sports + Outdoors. The main categories are for sports such as golf, baseball/softball, football, athletics, fishing, and hunting. I created these catalogs from conception to print production, ensuring brand consistency and engaging visual storytelling.",
+      "Academy Sports + Outdoors needed quarterly direct mail catalogs spanning diverse sporting categories. From conception through print production, I created cohesive designs that maintained brand consistency while bringing each sport's unique story to life, delivering compelling campaigns that drove customer engagement.",
     metaItems: [
       { label: "Role", value: "Brand Designer" },
       { label: "Client", value: "Academy Sports + Outdoors" },
-      { label: "Tags", value: "Branding, Print, Digital, Campaigns" },
-      { label: "Focus", value: "Quarterly catalog design and brand campaigns" },
+      { label: "Scope", value: "Quarterly catalog design and production" },
+      { label: "Focus", value: "Print design, brand campaigns, seasonal storytelling" },
     ],
     navSections: [
       { label: "Overview", href: "#overview" },
@@ -555,13 +554,15 @@ const CASE_STUDIES: CaseStudyConfig[] = [
       { label: "The Solution", href: "#solution" },
       { label: "Impact", href: "#impact" },
     ],
-    navAccentColor: "#ea580c",
+    navAccentColor: "#0055A6",
     tags: ["Branding", "Print", "Digital", "Campaigns"],
-    heroType: "component",
-    HeroComponent: AcademyHero,
-    heroGradientClass: "bg-gradient-to-br from-orange-50 to-red-50",
+    heroType: "image",
+    heroImage: imgAcademy,
     thumbnail: imgAcademy,
-    ContentComponent: CaseStudyAcademyContent,
+    PageComponent: AcademyCaseStudy,
+    overviewClient: "Academy Sports + Outdoors",
+    overviewCategory: "Print Design, Brand Campaigns",
+    homeGroup: "Branding",
   },
 ];
 
