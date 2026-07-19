@@ -534,8 +534,8 @@ const CASE_STUDIES: CaseStudyConfig[] = [
     id: "11",
     path: "/case-study/11",
     title: "Academy Sports + Outdoors Branding",
-    isPublished: true,
-    featuredOnHome: true,
+    isPublished: false,
+    featuredOnHome: false,
     shortDescription:
       "Quarterly direct mail catalogs across golf, baseball, football, athletics, fishing, and hunting. From conception through print production, I created cohesive designs that maintained brand consistency while bringing each sport's story to life.",
     cardDescription:

@@ -31,10 +31,6 @@ export function AcademyChallengeSection() {
     <Section id="challenge">
       <Eyebrow color={ACCENT}>The Challenge</Eyebrow>
       <SectionTitle>Creating unified catalogs across sport categories</SectionTitle>
-      <Lead>
-        Academy Sports + Outdoors needed quarterly direct mail catalogs that would capture customer attention
-        across diverse sporting categories—from golf and baseball to fishing and hunting.
-      </Lead>
       <Body as="p" size="medium" color="subtlest" UNSAFE_className="max-w-[660px] leading-[1.7]">
         The challenge was maintaining brand consistency while showcasing each sport's unique characteristics,
         all while managing the complexity of coordinating design, production timelines, and delivering
@@ -55,9 +51,7 @@ export function AcademySolutionSection() {
         customers about Academy's product offerings across all their sporting interests.
       </Lead>
       <Body as="p" size="medium" color="subtlest" UNSAFE_className="max-w-[660px] leading-[1.7] mb-8">
-        The work spanned the full creative cycle: strategy development, visual design, content organization,
-        print specifications, and production management to ensure on-time delivery of compelling catalogs
-        that drove customer engagement.
+        The work spanned the full creative cycle:
       </Body>
 
       <div className="grid md:grid-cols-2 gap-6 max-w-[900px] mb-12">
@@ -82,7 +76,7 @@ export function AcademySolutionSection() {
             Cross-Channel Integration
           </h3>
           <p className="text-sm text-gray-700">
-            Seamless coordination between print and digital campaigns for unified customer experience.
+            Seamless coordination between print and digital campaigns for omnichannel experience.
           </p>
         </div>
         <div className="p-6 rounded-xl" style={{ backgroundColor: "#E8F1FB" }}>
@@ -155,32 +149,32 @@ export function AcademyImpactSection() {
       <Eyebrow color={ACCENT}>Impact</Eyebrow>
       <SectionTitle>Results</SectionTitle>
       <div className="space-y-4 max-w-[660px]">
-        <div className="flex items-start gap-4">
-          <span className="text-2xl mt-1" style={{ color: ACCENT }}>
+        <div className="flex items-center gap-4">
+          <span className="text-2xl" style={{ color: ACCENT }}>
             ✓
           </span>
           <Body as="p" size="medium" color="subtlest">
             Produced multiple quarterly catalogs across all major sport categories
           </Body>
         </div>
-        <div className="flex items-start gap-4">
-          <span className="text-2xl mt-1" style={{ color: ACCENT }}>
+        <div className="flex items-center gap-4">
+          <span className="text-2xl" style={{ color: ACCENT }}>
             ✓
           </span>
           <Body as="p" size="medium" color="subtlest">
             Managed complete production pipeline from concept through print delivery
           </Body>
         </div>
-        <div className="flex items-start gap-4">
-          <span className="text-2xl mt-1" style={{ color: ACCENT }}>
+        <div className="flex items-center gap-4">
+          <span className="text-2xl" style={{ color: ACCENT }}>
             ✓
           </span>
           <Body as="p" size="medium" color="subtlest">
             Maintained consistent brand experience across print and digital touchpoints
           </Body>
         </div>
-        <div className="flex items-start gap-4">
-          <span className="text-2xl mt-1" style={{ color: ACCENT }}>
+        <div className="flex items-center gap-4">
+          <span className="text-2xl" style={{ color: ACCENT }}>
             ✓
           </span>
           <Body as="p" size="medium" color="subtlest">

@@ -23,7 +23,7 @@ function AcademyHero() {
   return (
     <CaseStudyHero
       image={imgCover}
-      title="Unifying brand identity across sports categories through visual storytelling"
+      title="Branded Direct Mail Catalogs"
       titleColor="#ffffff"
       backgroundColor="#1a1a1a"
       className="max-w-[2048px] mx-auto"
@@ -33,11 +33,11 @@ function AcademyHero() {
 
 const OVERVIEW_TITLE = "Art direction that unifies brand voice across distinct sporting communities.";
 const OVERVIEW_DESCRIPTION =
-  "As art director, I stewarded Academy's quarterly catalog program across six major sporting categories. Each campaign required balancing a cohesive brand identity with authentic visual language unique to golf, fishing, hunting, and athletics. From strategic direction through print production, I ensured every catalog spoke to enthusiasts in their sport's visual dialect while reinforcing Academy's position as a trusted partner across all communities.";
+  "As brand designer, I worked on Academy's direct mail catalogs across sporting categories. Each campaign required balancing a cohesive brand identity with authentic visual language. From strategic direction through print production.";
 const OVERVIEW_META = [
-  { label: "Role", value: "Art Director, Brand Strategist" },
-  { label: "Scope", value: "Quarterly catalog program across 6 sport categories" },
-  { label: "Categories", value: "Golf, Fishing (fresh & saltwater), Hunting, Athletics" },
+  { label: "Role", value: "Sr. Brand Designer, Brand Strategist" },
+  { label: "Scope", value: "20+ Pages per catalog" },
+  { label: "Categories", value: "Golf, Fishing, Hunting, Athletics" },
   { label: "Focus", value: "Brand voice, visual identity systems, community-authentic storytelling" },
 ] as const;
 

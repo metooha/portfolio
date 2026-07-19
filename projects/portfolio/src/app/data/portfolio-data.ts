@@ -213,6 +213,63 @@ export const otherWork: OtherWork[] = [
     ],
   },
   {
+    id: "academy-catalogs",
+    title: "Academy Sports Catalog Design",
+    description:
+      "Quarterly direct mail catalogs across golf, fishing, and hunting—from concept through print production, balancing brand consistency with category-specific storytelling.",
+    image: owAsset("academy/catalogs/cover.jpg"),
+    category: "Print & Branding",
+    role: "Brand Designer",
+    year: "Academy Sports + Outdoors",
+    overview:
+      "Academy Sports + Outdoors needed quarterly direct mail catalogs spanning diverse sporting categories. I designed cohesive campaigns from conception through print production, maintaining brand consistency while bringing each sport's unique story to life.",
+    media: [
+      owMedia("academy/catalogs/golf/1.jpg", "Golf catalog cover", { section: "Golf", wide: true }),
+      owMedia("academy/catalogs/golf/2-3.jpg", "Golf catalog interior", { section: "Golf" }),
+      owMedia("academy/catalogs/golf/4-5.jpg", "Golf catalog spread", { section: "Golf" }),
+      owMedia("academy/catalogs/golf/6.jpg", "Golf catalog back", { section: "Golf" }),
+      owMedia("academy/catalogs/fresh-water/1.jpg", "Fresh water catalog cover", {
+        section: "Fresh Water Fishing",
+        wide: true,
+      }),
+      owMedia("academy/catalogs/fresh-water/2-3.jpg", "Fresh water catalog interior", {
+        section: "Fresh Water Fishing",
+      }),
+      owMedia("academy/catalogs/fresh-water/4-5.jpg", "Fresh water catalog spread", {
+        section: "Fresh Water Fishing",
+      }),
+      owMedia("academy/catalogs/fresh-water/6.jpg", "Fresh water catalog back", {
+        section: "Fresh Water Fishing",
+      }),
+      owMedia("academy/catalogs/saltwater/1.jpg", "Saltwater catalog cover", {
+        section: "Saltwater Fishing",
+        wide: true,
+      }),
+      owMedia("academy/catalogs/saltwater/2-3.jpg", "Saltwater catalog interior", {
+        section: "Saltwater Fishing",
+      }),
+      owMedia("academy/catalogs/saltwater/4-5.jpg", "Saltwater catalog spread", {
+        section: "Saltwater Fishing",
+      }),
+      owMedia("academy/catalogs/saltwater/6.jpg", "Saltwater catalog back", {
+        section: "Saltwater Fishing",
+      }),
+      owMedia("academy/catalogs/ducks-unlimited/1.jpg", "Ducks Unlimited cover", {
+        section: "Ducks Unlimited",
+        wide: true,
+      }),
+      owMedia("academy/catalogs/ducks-unlimited/2-3.jpg", "Ducks Unlimited interior", {
+        section: "Ducks Unlimited",
+      }),
+      owMedia("academy/catalogs/ducks-unlimited/4-5.jpg", "Ducks Unlimited spread", {
+        section: "Ducks Unlimited",
+      }),
+      owMedia("academy/catalogs/ducks-unlimited/6.jpg", "Ducks Unlimited back", {
+        section: "Ducks Unlimited",
+      }),
+    ],
+  },
+  {
     id: "academy-social",
     title: "Academy Sports Social & Infographics",
     description:
